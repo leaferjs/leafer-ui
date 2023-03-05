@@ -1,0 +1,25 @@
+{
+  "name": "leafer-ui",
+  "version": "1.0.0-alpha.1",
+  "main": "dist/index.js",
+  "author": "Leafer",
+  "license": "MIT",
+  "keywords": [
+    "leaferui",
+    "leaferjs",
+    "leafer",
+    "html5",
+    "canvas",
+    "2d",
+    "graphic",
+    "engine"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/leaferjs/ui"
+  },
+  "bugs": {
+    "url": "https://github.com/leaferjs/ui/issues"
+  },
+  "homepage": "https://github.com/leaferjs/ui#readme"
+}
