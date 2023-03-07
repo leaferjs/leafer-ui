@@ -5,7 +5,7 @@ import { IUI, IShadowEffect, IBlurEffect, IPaint, IStrokeAlign, IStrokeJoin, ISt
 import { effectType } from '@leafer-ui/decorator'
 
 import { UIData } from '@leafer-ui/data'
-import { UIBounds, UIHit, UIRender } from '@leafer-ui/module'
+import { UIBounds, UIHit, UIRender } from '@leafer-ui/display-module'
 
 
 @useModule(UIBounds)
@@ -79,6 +79,8 @@ export class UI extends Leaf implements IUI {
     @rotationType(0)
     public skewY: __Number
 
+    public draggable: __Boolean
+
     // ---
 
 
@@ -140,7 +142,7 @@ export class UI extends Leaf implements IUI {
     public cornerRadius: __Number
 
     @pathType()
-    public cornerSmoothing: __Number // 平滑圆角所对应的数值，范围从 0 到 1，常用的 iOS 规范为 0.6 
+    public cornerSmoothing: __Number
 
     // effect
 

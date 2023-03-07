@@ -1,6 +1,20 @@
 {
   "name": "@leafer-ui/miniapp",
-  "version": "1.0.0",
+  "version": "1.0.0-alpha.1",
+  "description": "@leafer-ui/miniapp",
+  "author": "Chao (Leafer) Wan",
+  "license": "MIT",
   "main": "src/index.ts",
-  "license": "MIT"
+  "files": ["src"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/leaferjs/ui.git"
+  },
+  "homepage": "https://github.com/leaferjs/ui/tree/main/packages/miniapp",
+  "bugs": "https://github.com/leaferjs/ui/issues",
+  "keywords": [
+    "leaferui",
+    "leafer-ui",
+    "leaferjs"
+  ]
 }

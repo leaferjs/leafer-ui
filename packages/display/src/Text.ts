@@ -3,7 +3,7 @@ import { Platform, boundsType, dataProcessor, registerUI, useModule } from '@lea
 
 import { IText, IFontWeight, ITextCase, ITextDecoration, IPercent, ITextData, ITextInputData } from '@leafer-ui/interface'
 import { TextData } from '@leafer-ui/data'
-import { TextRender } from '@leafer-ui/module'
+import { TextRender } from '@leafer-ui/display-module'
 
 import { UI } from './UI'
 

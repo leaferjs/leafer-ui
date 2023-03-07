@@ -3,7 +3,7 @@ import { dataProcessor, registerUI, useModule } from '@leafer/core'
 
 import { IRect, IRectInputData, IRectData } from '@leafer-ui/interface'
 import { RectData } from '@leafer-ui/data'
-import { RectRender } from '@leafer-ui/module'
+import { RectRender } from '@leafer-ui/display-module'
 
 import { UI } from './UI'
 

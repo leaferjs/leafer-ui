@@ -1,7 +1,7 @@
 {
-  "name": "@leafer-ui/decorator",
+  "name": "@leafer-ui/bounds",
   "version": "1.0.0-alpha.1",
-  "description": "@leafer-ui/decorator",
+  "description": "@leafer-ui/bounds",
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
   "main": "src/index.ts",
@@ -10,7 +10,7 @@
     "type": "git",
     "url": "https://github.com/leaferjs/ui.git"
   },
-  "homepage": "https://github.com/leaferjs/ui/tree/main/packages/decorator",
+  "homepage": "https://github.com/leaferjs/ui/tree/main/packages/bounds",
   "bugs": "https://github.com/leaferjs/ui/issues",
   "keywords": [
     "leaferui",
@@ -21,7 +21,6 @@
     "@leafer/core": "1.0.0-alpha.1"
   },
   "devDependencies": {
-     "@leafer/interface": "1.0.0-alpha.1",
      "@leafer-ui/interface": "1.0.0-alpha.1"
   }
 }

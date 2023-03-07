@@ -1,6 +1,30 @@
 {
   "name": "@leafer-ui/display",
-  "version": "1.0.0",
+  "version": "1.0.0-alpha.1",
+  "description": "@leafer-ui/display",
+  "author": "Chao (Leafer) Wan",
+  "license": "MIT",
   "main": "src/index.ts",
-  "license": "MIT"
+  "files": ["src"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/leaferjs/ui.git"
+  },
+  "homepage": "https://github.com/leaferjs/ui/tree/main/packages/display",
+  "bugs": "https://github.com/leaferjs/ui/issues",
+  "keywords": [
+    "leaferui",
+    "leafer-ui",
+    "leaferjs"
+  ],
+  "dependencies": {
+    "@leafer/core": "1.0.0-alpha.1",
+    "@leafer-ui/data": "1.0.0-alpha.1",
+    "@leafer-ui/module": "1.0.0-alpha.1",
+    "@leafer-ui/decorator": "1.0.0-alpha.1"
+  },
+  "devDependencies": {
+     "@leafer/interface": "1.0.0-alpha.1",
+     "@leafer-ui/interface": "1.0.0-alpha.1"
+  }
 }

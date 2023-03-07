@@ -3,7 +3,7 @@ import { BoundsHelper, dataProcessor, boundsType, rewrite, useModule, rewriteAbl
 
 import { IFrame, IFrameData, IFrameInputData } from '@leafer-ui/interface'
 import { FrameData } from '@leafer-ui/data'
-import { FrameRender } from '@leafer-ui/module'
+import { FrameRender } from '@leafer-ui/display-module'
 
 import { Group } from './Group'
 import { Rect } from './Rect'

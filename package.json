@@ -1,25 +1,30 @@
 {
   "name": "leafer-ui",
   "version": "1.0.0-alpha.1",
-  "main": "dist/index.js",
-  "author": "Leafer",
+  "author": "Chao (Leafer) Wan",
   "license": "MIT",
+  "main": "dist/index.js",
+  "types": "src/index.ts",
+  "files": ["src","dist"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/leaferjs/ui"
+  },
+  "homepage": "https://github.com/leaferjs/ui",
+  "bugs": "https://github.com/leaferjs/ui/issues",
   "keywords": [
     "leaferui",
+    "leafer-ui",
     "leaferjs",
     "leafer",
     "html5",
     "canvas",
     "2d",
     "graphic",
+    "renderer",
     "engine"
   ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/leaferjs/ui"
-  },
-  "bugs": {
-    "url": "https://github.com/leaferjs/ui/issues"
-  },
-  "homepage": "https://github.com/leaferjs/ui#readme"
+  "dependencies": {
+    "@leafer-ui/web": "1.0.0-alpha.1"
+  }
 }
