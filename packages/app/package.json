@@ -1,6 +1,6 @@
 {
   "name": "@leafer-ui/app",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.7",
   "description": "@leafer-ui/app",
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
@@ -13,16 +13,15 @@
   "homepage": "https://github.com/leaferjs/ui/tree/main/packages/app",
   "bugs": "https://github.com/leaferjs/ui/issues",
   "keywords": [
-    "leaferui",
     "leafer-ui",
     "leaferjs"
   ],
   "dependencies": {
-    "@leafer/core": "1.0.0-alpha.1",
-    "@leafer-ui/display": "1.0.0-alpha.1"
+    "@leafer/core": "1.0.0-alpha.7",
+    "@leafer-ui/display": "1.0.0-alpha.7"
   },
   "devDependencies": {
-     "@leafer/interface": "1.0.0-alpha.1",
-     "@leafer-ui/interface": "1.0.0-alpha.1"
+     "@leafer/interface": "1.0.0-alpha.7",
+     "@leafer-ui/interface": "1.0.0-alpha.7"
   }
 }

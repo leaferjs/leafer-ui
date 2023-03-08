@@ -56,7 +56,7 @@ export class Text extends UI implements IText {
 
     }
 
-    public __drawPathByData(drawer: ICanvasDrawPath, data: IPathCommandData): void {
+    public __drawPathByData(drawer: ICanvasDrawPath, _data: IPathCommandData): void {
         const { width, height } = this.__
         drawer.rect(0, 0, width, height)
     }

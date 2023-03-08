@@ -34,7 +34,7 @@ export class SuperLeafer extends Leafer implements IGroup {
         return leafer
     }
 
-    public __render(canvas: ILeaferCanvas, options: IRenderOptions): void {
+    public __render(canvas: ILeaferCanvas, _options: IRenderOptions): void {
         this.children.forEach(leafer => { canvas.copy(leafer.canvas) })
     }
 

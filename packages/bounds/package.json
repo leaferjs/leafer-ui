@@ -1,6 +1,6 @@
 {
   "name": "@leafer-ui/bounds",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.7",
   "description": "@leafer-ui/bounds",
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
@@ -13,14 +13,13 @@
   "homepage": "https://github.com/leaferjs/ui/tree/main/packages/bounds",
   "bugs": "https://github.com/leaferjs/ui/issues",
   "keywords": [
-    "leaferui",
     "leafer-ui",
     "leaferjs"
   ],
   "dependencies": {
-    "@leafer/core": "1.0.0-alpha.1"
+    "@leafer/core": "1.0.0-alpha.7"
   },
   "devDependencies": {
-     "@leafer-ui/interface": "1.0.0-alpha.1"
+     "@leafer-ui/interface": "1.0.0-alpha.7"
   }
 }

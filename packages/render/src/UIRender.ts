@@ -17,7 +17,7 @@ export const UIRender: IUIRenderModule = {
         }
     },
 
-    __drawFast(canvas: ILeaferCanvas, options: IRenderOptions): void {
+    __drawFast(canvas: ILeaferCanvas, _options: IRenderOptions): void {
         const { fill, stroke } = this.__
 
         this.__drawRenderPath(canvas)
@@ -26,7 +26,7 @@ export const UIRender: IUIRenderModule = {
         if (stroke) Paint.stroke(this, canvas, stroke)
     },
 
-    __draw(canvas: ILeaferCanvas, options: IRenderOptions): void {
+    __draw(canvas: ILeaferCanvas, _options: IRenderOptions): void {
         const { fill, stroke } = this.__
 
         this.__drawRenderPath(canvas)

@@ -1,6 +1,6 @@
 {
   "name": "@leafer-ui/display-module",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.7",
   "description": "@leafer-ui/display-module",
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
@@ -13,8 +13,12 @@
   "homepage": "https://github.com/leaferjs/ui/tree/main/packages/display-module",
   "bugs": "https://github.com/leaferjs/ui/issues",
   "keywords": [
-    "leaferui",
     "leafer-ui",
     "leaferjs"
-  ]
+  ],
+  "dependencies": {
+    "@leafer-ui/bounds": "1.0.0-alpha.7",
+    "@leafer-ui/hit": "1.0.0-alpha.7",
+    "@leafer-ui/render": "1.0.0-alpha.7"
+  }
 }

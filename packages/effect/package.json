@@ -1,6 +1,6 @@
 {
   "name": "@leafer-ui/effect",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.7",
   "description": "@leafer-ui/effect",
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
@@ -13,7 +13,6 @@
   "homepage": "https://github.com/leaferjs/ui/tree/main/packages/effect",
   "bugs": "https://github.com/leaferjs/ui/issues",
   "keywords": [
-    "leaferui",
     "leafer-ui",
     "leaferjs"
   ]

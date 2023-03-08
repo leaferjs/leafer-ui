@@ -1,4 +1,4 @@
-import { ILeaf, ILeafComputedData, ILeafData, ILeafInputData, ILeaferCanvas, IRenderOptions, ICanvasDrawPath, IPointData, Path2D, IPathCommandData, IBranch, ILeaferImageConfig, IMatrixData, IBoundsData } from '@leafer/interface'
+import { ILeaf, ILeafComputedData, ILeafData, ILeafInputData, ILeaferCanvas, IRenderOptions, ICanvasDrawPath, IPointData, IPath2D, IPathCommandData, IBranch, ILeaferImageConfig, IMatrixData, IBoundsData } from '@leafer/interface'
 
 import { IPathString, IVectorPathString } from './type/IStringType'
 import { IBlendMode, IWindingRule } from './type/IType'
@@ -191,7 +191,7 @@ export interface IUIData extends IUIComputedData, ILeafData {
     windingRule?: IWindingRule
 
     __renderPath?: IPathCommandData
-    __renderPath2D?: Path2D
+    __renderPath2D?: IPath2D
 
     __strokeOuterWidth?: number // boxBounds外面的笔触宽度
 }

@@ -21,7 +21,7 @@ export class Rect extends UI implements IRect {
 
     public __updatePath(): void { }
 
-    public __drawPathByData(drawer: ICanvasDrawPath, data: IPathCommandData): void {
+    public __drawPathByData(drawer: ICanvasDrawPath, _data: IPathCommandData): void {
         const { width, height, borderRadius } = this.__
         if (borderRadius) {
             drawer.roundRect(0, 0, width, height, borderRadius)

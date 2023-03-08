@@ -5,7 +5,7 @@ import { IRectRenderModule } from '@leafer-ui/interface'
 
 export const RectRender: IRectRenderModule = {
 
-    __drawFast(canvas: ILeaferCanvas, options: IRenderOptions): void {
+    __drawFast(canvas: ILeaferCanvas, _options: IRenderOptions): void {
 
         const { width, height, fill, stroke } = this.__
 

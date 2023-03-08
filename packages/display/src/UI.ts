@@ -192,6 +192,6 @@ export class UI extends Leaf implements IUI {
     }
 
     @rewrite(PathHelper.drawData)
-    public __drawPathByData(drawer: ICanvasDrawPath, data: IPathCommandData): void { }
+    public __drawPathByData(_drawer: ICanvasDrawPath, _data: IPathCommandData): void { }
 
 }

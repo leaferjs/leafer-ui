@@ -33,7 +33,7 @@ export class Frame extends Group implements IFrame {
     }
 
     @rewrite(rect.__drawPathByData)
-    public __drawPathByData(drawer: ICanvasDrawPath, data: IPathCommandData): void { }
+    public __drawPathByData(_drawer: ICanvasDrawPath, _data: IPathCommandData): void { }
 
     public __updateBoxBounds(): void {
         this.__updateRectBoxBounds()
@@ -76,9 +76,9 @@ export class Frame extends Group implements IFrame {
 
 
     @rewrite(rect.__render)
-    public __renderRect(canvas: ILeaferCanvas, options: IRenderOptions): void { }
+    public __renderRect(_canvas: ILeaferCanvas, _options: IRenderOptions): void { }
 
     @rewrite(group.__render)
-    public __renderGroup(canvas: ILeaferCanvas, options: IRenderOptions): void { }
+    public __renderGroup(_canvas: ILeaferCanvas, _options: IRenderOptions): void { }
 
 }

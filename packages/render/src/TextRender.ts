@@ -5,7 +5,7 @@ import { IUIRenderModule } from '@leafer-ui/interface'
 
 export const TextRender: IUIRenderModule = {
 
-    __drawFast(canvas: ILeaferCanvas, options: IRenderOptions): void {
+    __drawFast(canvas: ILeaferCanvas, _options: IRenderOptions): void {
 
         const { fill, stroke, content, __font } = this.__
 
