@@ -1,10 +1,10 @@
 {
   "name": "leafer-ui",
-  "version": "1.0.0-alpha.7",
+  "version": "1.0.0-alpha.8",
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
   "main": "dist/index.js",
-  "types": "src/index.ts",
+  "types": "src/index.d.ts",
   "files": ["src","dist"],
   "repository": {
     "type": "git",
