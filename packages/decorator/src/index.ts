@@ -1,1 +1,1 @@
-export { effectType, effectType__ } from './data'
+export { effectType } from './data'

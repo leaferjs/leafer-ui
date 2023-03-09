@@ -1,4 +1,4 @@
-import { __Number, IPointData, ITwoPointBoundsData } from '@leafer/interface'
+import { IPointData, ITwoPointBoundsData, __Number } from '@leafer/interface'
 import { PathCreator, PointHelper, TwoPointBoundsHelper, boundsType, dataProcessor, registerUI } from '@leafer/core'
 
 import { ILine, ILineData, ILineInputData } from '@leafer-ui/interface'
@@ -23,20 +23,17 @@ export class Line extends UI implements ILine {
     @boundsType()
     public rotation: __Number
 
-
-    protected __to: IPointData
+    protected __toPoint: IPointData
 
     public get toPoint(): IPointData {
-        if (this.__to && !this.__layout.boxBoundsChanged) return this.__to
+        if (this.__toPoint && !this.__layout.boxBoundsChanged) return this.__toPoint
 
-        const { width, height, rotation } = this.__
+        const { width, rotation } = this.__
         const to: IPointData = { x: 0, y: 0 }
 
         if (width) to.x = width
-        if (height) to.y = height
-
         if (rotation) rotate(to, rotation)
-        this.__to = to
+        this.__toPoint = to
 
         return to
     }
@@ -64,7 +61,7 @@ export class Line extends UI implements ILine {
 
     public __updateBoxBounds(): void {
         setPoint(pointBounds, 0, 0)
-        addPoint(pointBounds, this.__to.x, this.__to.y)
+        addPoint(pointBounds, this.__toPoint.x, this.__toPoint.y)
         toBounds(pointBounds, this.__layout.boxBounds)
     }
 

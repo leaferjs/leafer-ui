@@ -8,10 +8,10 @@ export const UIRender: IUIRenderModule = {
 
     __updateChange(): void {
         let data = this.__
-        let complex = data.__isFills || data.__isStrokes || data.borderRadius || data.__useEffect
+        let complex = data.__isFills || data.__isStrokes || data.cornerRadius || data.__useEffect
 
         if (complex) {
-            this.__complex || (this.__complex = true)
+            this.__complex = true
         } else {
             this.__complex && (this.__complex = false)
         }

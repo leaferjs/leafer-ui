@@ -14,8 +14,8 @@ export {
     IGroup, IGroupInputData, IGroupData,
     IUI, IUIInputData, IUIData
 } from './IUI'
-export { IBlendMode, IVectorPath, IWindingRule, IShadowEffect, IBlurEffect, IGrayscaleEffect, IStrokeAlign, IStrokeJoin, IStrokeCap, IColor, IPaint, IGradientPaint, IImagePaint, IImagePaintMode, IFontWeight, ITextCase, ITextDecoration } from './type/IType'
-export { IBorderRadiusString, IBorderWidthString, IPaintString, IShadowString, IPercent, IDashPatternString, IPathString, IVectorPathString, IStringColor } from './type/IStringType'
+export { IBlendMode, IVectorPath, IShadowEffect, IBlurEffect, IGrayscaleEffect, IStrokeAlign, IStrokeJoin, IStrokeCap, IColor, IPaint, IGradientPaint, IImagePaint, IImagePaintMode, IFontWeight, ITextCase, ITextDecoration } from './type/IType'
+export { ICornerRadiusString, IStrokeWidthString, IPaintString, IShadowString, IPercent, IDashPatternString, IPathString, IVectorPathString, IStringColor } from './type/IStringType'
 export { ILeafFill, ILeafPaint, ILeafPaintColor, ILeafStrokePaint, ILeafShadowEffect } from './type/IComputedType'
 
 export { IUIRenderModule, IRectRenderModule, IGroupRenderModule, IFrameRenderModule } from './module/IUIRender'

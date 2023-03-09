@@ -12,16 +12,8 @@ export class UIData extends LeafData implements IUIData {
     protected _fill?: __Value
     protected _stroke?: __Value
 
-    protected _borderWidth?: __Value
-    protected _strokeWidth?: number
-
     protected _shadow?: __Value
     protected _innerShadow?: __Value
-
-    protected setBorderWidth(value: __Value) {
-        if (typeof value === 'number') this._strokeWidth = value
-        this._borderWidth = value
-    }
 
     protected setFill(value: __Value) {
         if (typeof value === 'string') {

@@ -1,4 +1,4 @@
-import { ICanvasDrawPath, IPathCommandData } from '@leafer/interface'
+import { IPathDrawer, IPathCommandData, __Number } from '@leafer/interface'
 import { dataProcessor, registerUI, useModule } from '@leafer/core'
 
 import { IRect, IRectInputData, IRectData } from '@leafer-ui/interface'
@@ -19,12 +19,10 @@ export class Rect extends UI implements IRect {
         super(data)
     }
 
-    public __updatePath(): void { }
-
-    public __drawPathByData(drawer: ICanvasDrawPath, _data: IPathCommandData): void {
-        const { width, height, borderRadius } = this.__
-        if (borderRadius) {
-            drawer.roundRect(0, 0, width, height, borderRadius)
+    public __drawPathByData(drawer: IPathDrawer, _data: IPathCommandData): void {
+        const { width, height, cornerRadius } = this.__
+        if (cornerRadius) {
+            drawer.roundRect(0, 0, width, height, cornerRadius)
         } else {
             drawer.rect(0, 0, width, height)
         }

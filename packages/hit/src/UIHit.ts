@@ -5,13 +5,13 @@ import { IUIHitModule } from '@leafer-ui/interface'
 
 export const UIHit: IUIHitModule = {
 
-    __hit(innerPoint: IRadiusPointData): boolean {
+    __hit(local: IRadiusPointData): boolean {
 
         if (this.__.fill) {
-            if (this.__hitCanvas.hitPath(innerPoint, this.__.windingRule)) return true
+            if (this.__hitCanvas.hitPath(local, this.__.windingRule)) return true
         }
 
-        const strokeWidth = ((this.__.__strokeOuterWidth || 0) + innerPoint.radiusX) * 2
+        const strokeWidth = ((this.__.__strokeOuterWidth || 0) + local.radiusX) * 2
 
         if (strokeWidth) {
             const { __hitCanvas: c } = this
@@ -19,7 +19,7 @@ export const UIHit: IUIHitModule = {
                 c.strokeWidth = strokeWidth
                 c.stroke()
             }
-            if (c.hitStroke(innerPoint)) return true
+            if (c.hitStroke(local)) return true
         }
 
         return false

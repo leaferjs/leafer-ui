@@ -1,3 +1,4 @@
+import { __String } from '@leafer/interface'
 import { boundsType, dataProcessor, registerUI } from '@leafer/core'
 
 import { IImage, IImageInputData, IImageData } from '@leafer-ui/interface'
@@ -13,10 +14,10 @@ export class Image extends Rect implements IImage {
     public __: IImageData
 
     @boundsType('')
-    public url: string
+    public url: __String
 
     @boundsType('')
-    public thumb: string
+    public thumb: __String
 
     constructor(data?: IImageInputData) {
         super(data)

@@ -1,16 +1,16 @@
-import { ILeaf, ILeafComputedData, ILeafData, ILeafInputData, ILeaferCanvas, IRenderOptions, ICanvasDrawPath, IPointData, IPath2D, IPathCommandData, IBranch, ILeaferImageConfig, IMatrixData, IBoundsData } from '@leafer/interface'
+import { ILeaf, ILeafComputedData, ILeafData, ILeafInputData, ILeaferCanvas, IRenderOptions, IPathDrawer, IPointData, IPath2D, IPathCommandData, IWindingRule, IBranch, ILeaferImageConfig, IMatrixData, IBoundsData, __Number } from '@leafer/interface'
 
 import { IPathString, IVectorPathString } from './type/IStringType'
-import { IBlendMode, IWindingRule } from './type/IType'
+import { IBlendMode } from './type/IType'
 import { IVectorPath } from './type/IType'
 
 import {
     IFillAttrData, IFillInputData, IFillComputedData,
-    IBorderComputedData, IBorderInputData,
+    IBorderComputedData,
     ICornerRadiusAttrData, ICornerRadiusInputData, ICornerRadiusComputedData,
     IStrokeAttrData, IStrokeComputedData, IStrokeInputData,
     IEffectAttrData, IEffectInputData, IEffectComputedData,
-    ITextStyleAttrData, ITextStyleInputData, ITextStyleComputedData, IBorderAttrData
+    ITextStyleAttrData, ITextStyleInputData, ITextStyleComputedData
 } from './ICommonAttr'
 
 
@@ -165,7 +165,7 @@ export interface IGroupData extends IUIData { }
 export interface IGroupInputData extends IUIInputData { }
 
 // UI
-export interface IUI extends IFillAttrData, IBorderAttrData, IStrokeAttrData, ICornerRadiusAttrData, IEffectAttrData, ILeaf {
+export interface IUI extends IFillAttrData, IStrokeAttrData, ICornerRadiusAttrData, IEffectAttrData, ILeaf {
     __: IUIData
     root?: IGroup
     parent?: IGroup
@@ -173,7 +173,7 @@ export interface IUI extends IFillAttrData, IBorderAttrData, IStrokeAttrData, IC
     readonly relativeTransform: IMatrixData
     readonly worldBoxBounds: IBoundsData
     readonly worldRenderBounds: IBoundsData
-    __drawPathByData(drawer: ICanvasDrawPath, data: IPathCommandData): void
+    __drawPathByData(drawer: IPathDrawer, data: IPathCommandData): void
 }
 
 export interface IUIData extends IUIComputedData, ILeafData {
@@ -190,8 +190,8 @@ export interface IUIData extends IUIComputedData, ILeafData {
     path?: IPathCommandData
     windingRule?: IWindingRule
 
-    __renderPath?: IPathCommandData
-    __renderPath2D?: IPath2D
+    __pathForRender?: IPathCommandData
+    __path2DForRender?: IPath2D
 
     __strokeOuterWidth?: number // boxBounds外面的笔触宽度
 }
@@ -201,7 +201,7 @@ export interface IUIComputedData extends IFillComputedData, IBorderComputedData,
     locked?: boolean
 }
 
-export interface IUIInputData extends IFillInputData, IBorderInputData, IStrokeInputData, ICornerRadiusInputData, IEffectInputData, ILeafInputData {
+export interface IUIInputData extends IFillInputData, IStrokeInputData, ICornerRadiusInputData, IEffectInputData, ILeafInputData {
     blendMode?: IBlendMode
     mask?: boolean
     locked?: boolean

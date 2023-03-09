@@ -1,9 +1,11 @@
+import { __Number } from '@leafer/interface'
 import { PathCreator, OneRadian, dataProcessor, pathType, registerUI } from '@leafer/core'
 
 import { IEllipse, IEllipseInputData, IEllipseData } from '@leafer-ui/interface'
 import { EllipseData } from '@leafer-ui/data'
 
 import { UI } from './UI'
+
 
 
 const { PI } = Math
@@ -17,13 +19,13 @@ export class Ellipse extends UI implements IEllipse {
     public __: IEllipseData
 
     @pathType(0)
-    public innerRadius: number
+    public innerRadius: __Number
 
     @pathType(0)
-    public startAngle: number
+    public startAngle: __Number
 
     @pathType(0)
-    public endAngle: number
+    public endAngle: __Number
 
     constructor(data?: IEllipseInputData) {
         super(data)

@@ -1,14 +1,14 @@
 import { IPaint, IStrokeAlign, IStrokeCap, IStrokeJoin, IBlurEffect, IFontWeight, ITextCase, ITextDecoration, IShadowEffect, IGrayscaleEffect } from './type/IType'
 import { ILeafStrokePaint, ILeafShadowEffect, ILeafPaint } from './type/IComputedType'
-import { IPaintString, IDashPatternString, IPercent, IShadowString, IStringColor, IBorderWidthString, IBorderRadiusString } from './type/IStringType'
+import { IPaintString, IDashPatternString, IPercent, IShadowString, IStringColor, IStrokeWidthString, ICornerRadiusString } from './type/IStringType'
 
 // corner---
 export interface ICornerRadiusAttrData {
-    cornerRadius: number
+    cornerRadius: number | number[] | ICornerRadiusString
     cornerSmoothing: number
 }
 export interface ICornerRadiusInputData {
-    cornerRadius?: number
+    cornerRadius?: number | number[] | ICornerRadiusString
     cornerSmoothing?: number
 }
 export interface ICornerRadiusComputedData {
@@ -28,14 +28,6 @@ export interface IFillComputedData {
 }
 
 // border 
-export interface IBorderAttrData {
-    borderWidth: number | number[] | IBorderWidthString
-    borderRadius: number | number[] | IBorderRadiusString
-}
-export interface IBorderInputData {
-    borderWidth?: number | number[]
-    borderRadius?: number | number[]
-}
 export interface IBorderComputedData {
     borderWidth?: number | number[]
     borderRadius?: number | number[]
@@ -46,7 +38,7 @@ export interface IStrokeAttrData {
     stroke: IPaint | IPaint[] | IPaintString
 
     strokeAlign: IStrokeAlign
-    strokeWidth: number
+    strokeWidth: number | number[] | IStrokeWidthString
     strokeCap: IStrokeCap
     strokeJoin: IStrokeJoin
     dashPattern: number[] | IDashPatternString
@@ -57,7 +49,7 @@ export interface IStrokeInputData {
     stroke?: IPaint | IPaint[] | IPaintString
 
     strokeAlign?: IStrokeAlign
-    strokeWidth?: number
+    strokeWidth?: number | number[] | IStrokeWidthString
     strokeCap?: IStrokeCap
     strokeJoin?: IStrokeJoin
     dashPattern?: number[] | IDashPatternString

@@ -1,4 +1,4 @@
-import { ICanvasDrawPath, IPathCommandData } from '@leafer/interface'
+import { IPathDrawer, IPathCommandData, __Boolean, __Number, __String } from '@leafer/interface'
 import { Platform, boundsType, dataProcessor, registerUI, useModule } from '@leafer/core'
 
 import { IText, IFontWeight, ITextCase, ITextDecoration, IPercent, ITextData, ITextInputData } from '@leafer-ui/interface'
@@ -16,19 +16,19 @@ export class Text extends UI implements IText {
     public __: ITextData
 
     @boundsType('')
-    public content: string
+    public content: __String
 
     @boundsType('arial')
-    public fontFamily: string
+    public fontFamily: __String
 
     @boundsType(12)
-    public fontSize: number
+    public fontSize: __Number
 
     @boundsType('normal')
     public fontWeight: IFontWeight
 
     @boundsType(false)
-    public italic: boolean
+    public italic: __Boolean
 
     @boundsType('normal')
     public textCase: ITextCase
@@ -37,26 +37,22 @@ export class Text extends UI implements IText {
     public textDecoration: ITextDecoration
 
     @boundsType()
-    public letterSpacing: number | IPercent
+    public letterSpacing: __Number | IPercent
 
     @boundsType()
-    public lineHeight: number | IPercent
+    public lineHeight: __Number | IPercent
 
     @boundsType()
-    public paragraphIndent: number
+    public paragraphIndent: __Number
 
     @boundsType()
-    public paragraphSpacing: number
+    public paragraphSpacing: __Number
 
     constructor(data?: ITextInputData) {
         super(data)
     }
 
-    public __updatePath(): void {
-
-    }
-
-    public __drawPathByData(drawer: ICanvasDrawPath, _data: IPathCommandData): void {
+    public __drawPathByData(drawer: IPathDrawer, _data: IPathCommandData): void {
         const { width, height } = this.__
         drawer.rect(0, 0, width, height)
     }

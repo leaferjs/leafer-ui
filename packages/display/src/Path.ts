@@ -1,7 +1,7 @@
-import { ITwoPointBoundsData, ILeaferCanvas, IPathCommandData } from '@leafer/interface'
+import { ITwoPointBoundsData, ILeaferCanvas, IPathCommandData, IWindingRule } from '@leafer/interface'
 import { PathHelper, TwoPointBoundsHelper, dataProcessor, pathType, registerUI } from '@leafer/core'
 
-import { IPath, IPathData, IPathInputData, IWindingRule, IPathString } from '@leafer-ui/interface'
+import { IPath, IPathData, IPathInputData, IPathString } from '@leafer-ui/interface'
 import { PathData } from '@leafer-ui/data'
 
 import { UI } from './UI'

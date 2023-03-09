@@ -1,7 +1,7 @@
-import { ILeaferCanvas, ICanvasDrawPath, IPathCommandData, __Number, __Boolean, __String, IMatrixData, IBoundsData } from '@leafer/interface'
+import { ILeaferCanvas, IPathDrawer, IPathCommandData, IMatrixData, IBoundsData, __Number, __Boolean, __String } from '@leafer/interface'
 import { Leaf, PathHelper, affectEventBoundsType, surfaceType, dataType, positionType, boundsType, pathType, scaleType, rotationType, opacityType, sortType, dataProcessor, useModule, rewrite, rewriteAble } from '@leafer/core'
 
-import { IUI, IShadowEffect, IBlurEffect, IPaint, IStrokeAlign, IStrokeJoin, IStrokeCap, IBlendMode, IPaintString, IDashPatternString, IShadowString, IGrayscaleEffect, IUIData, IGroup, IBorderWidthString, IBorderRadiusString } from '@leafer-ui/interface'
+import { IUI, IShadowEffect, IBlurEffect, IPaint, IStrokeAlign, IStrokeJoin, IStrokeCap, IBlendMode, IPaintString, IDashPatternString, IShadowString, IGrayscaleEffect, IUIData, IGroup, IStrokeWidthString, ICornerRadiusString } from '@leafer-ui/interface'
 import { effectType } from '@leafer-ui/decorator'
 
 import { UIData } from '@leafer-ui/data'
@@ -100,15 +100,6 @@ export class UI extends Leaf implements IUI {
     @surfaceType()
     public fill: IPaint | IPaint[] | IPaintString
 
-    // border 
-
-    @pathType()
-    public borderRadius: __Number | __Number[] | IBorderRadiusString
-
-    @affectEventBoundsType(1)
-    public borderWidth: __Number | __Number[] | IBorderWidthString
-
-
     // stroke
 
     @affectEventBoundsType()
@@ -118,7 +109,7 @@ export class UI extends Leaf implements IUI {
     public strokeAlign: IStrokeAlign
 
     @affectEventBoundsType(1)
-    public strokeWidth: __Number
+    public strokeWidth: number | number[] | IStrokeWidthString
 
     @surfaceType('none')
     public strokeCap: IStrokeCap
@@ -139,7 +130,7 @@ export class UI extends Leaf implements IUI {
     // corner
 
     @pathType()
-    public cornerRadius: __Number
+    public cornerRadius: number | number[] | ICornerRadiusString
 
     @pathType()
     public cornerSmoothing: __Number
@@ -176,14 +167,15 @@ export class UI extends Leaf implements IUI {
 
 
     public __updateRenderPath(): void {
-        const { __: data } = this
-        const { cornerRadius, path } = data
-        data.__renderPath = cornerRadius && path ? PathHelper.applyCorner(path, cornerRadius, data.cornerSmoothing) : path
+        if (this.__.path) {
+            const { __: data } = this
+            data.__pathForRender = data.cornerRadius ? PathHelper.smoothCorner(data.path, data.cornerRadius, data.cornerSmoothing) : data.path
+        }
     }
 
     public __drawRenderPath(canvas: ILeaferCanvas): void {
         canvas.beginPath()
-        this.__drawPathByData(canvas, this.__.__renderPath)
+        this.__drawPathByData(canvas, this.__.__pathForRender)
     }
 
     public __drawPath(canvas: ILeaferCanvas): void {
@@ -192,6 +184,6 @@ export class UI extends Leaf implements IUI {
     }
 
     @rewrite(PathHelper.drawData)
-    public __drawPathByData(_drawer: ICanvasDrawPath, _data: IPathCommandData): void { }
+    public __drawPathByData(_drawer: IPathDrawer, _data: IPathCommandData): void { }
 
 }

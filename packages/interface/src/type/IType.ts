@@ -1,4 +1,4 @@
-import { IMatrixData, IPointData, IPathCommandData } from '@leafer/interface'
+import { IMatrixData, IPointData, IPathCommandData, IWindingRule } from '@leafer/interface'
 import { IStringColor } from './IStringType'
 
 export type IBlendMode =
@@ -118,8 +118,6 @@ export interface IVectorPath {
     rule?: IWindingRule,
     data: string | IPathCommandData
 }
-export type IWindingRule = 'nonzero' | 'evenodd'
-
 
 // 特效
 export interface IShadowEffect {

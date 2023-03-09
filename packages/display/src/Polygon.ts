@@ -1,3 +1,4 @@
+import { __Number } from '@leafer/interface'
 import { PathCreator, dataProcessor, pathType, registerUI } from '@leafer/core'
 
 import { IPolygon, IPolygonData, IPolygonInputData } from '@leafer-ui/interface'

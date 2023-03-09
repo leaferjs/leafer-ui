@@ -159,8 +159,8 @@ export class Leafer extends Group implements ILeafer {
         if (move) {
             const { MOVE } = MoveEvent
             const { ZOOM } = ZoomEvent
-            if (!this.hasEvent(MOVE)) this.__eventIds.push(this.on__(MOVE, (e: MoveEvent) => { LeafHelper.moveByWorld(this, e.moveX, e.moveY) }))
-            if (zoom && !this.hasEvent(ZOOM)) this.__eventIds.push(this.on__(ZOOM, (e: ZoomEvent) => { LeafHelper.zoomByWorld(this, e.scale, e) }))
+            if (!this.hasEvent(MOVE)) this.__eventIds.push(this.on__(MOVE, (e: MoveEvent) => { LeafHelper.moveOfWorld(this, e.moveX, e.moveY) }))
+            if (zoom && !this.hasEvent(ZOOM)) this.__eventIds.push(this.on__(ZOOM, (e: ZoomEvent) => { LeafHelper.zoomOfWorld(this, e.scale, e) }))
         }
     }
 

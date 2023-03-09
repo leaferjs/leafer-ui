@@ -21,12 +21,6 @@ export class Group extends UI implements IGroup {
         this.children = []
     }
 
-    public __updatePath(): void {
-
-    }
-
-    public add(_child: IUI, _index?: number): void { } // Branch rewrite
-
     public addAt(child: IUI, index: number): void {
         this.add(child, index)
     }
@@ -39,6 +33,10 @@ export class Group extends UI implements IGroup {
         this.add(child, this.children.indexOf(before))
     }
 
-    public remove(_child?: IUI): void { }  // Branch rewrite
+    // Branch rewrite
+
+    public add(_child: IUI, _index?: number): void { }
+
+    public remove(_child?: IUI): void { }
 
 }

@@ -1,4 +1,4 @@
-import { ILeaferCanvas, IRenderOptions, ICanvasDrawPath, IBoundsData, IPathCommandData } from '@leafer/interface'
+import { ILeaferCanvas, IRenderOptions, IPathDrawer, IBoundsData, IPathCommandData, __Boolean } from '@leafer/interface'
 import { BoundsHelper, dataProcessor, boundsType, rewrite, useModule, rewriteAble, registerUI } from '@leafer/core'
 
 import { IFrame, IFrameData, IFrameInputData } from '@leafer-ui/interface'
@@ -24,7 +24,7 @@ export class Frame extends Group implements IFrame {
     public __: IFrameData
 
     @boundsType(true)
-    public clip: boolean
+    public clip: __Boolean
 
     constructor(data?: IFrameInputData) {
         super(data)
@@ -33,7 +33,7 @@ export class Frame extends Group implements IFrame {
     }
 
     @rewrite(rect.__drawPathByData)
-    public __drawPathByData(_drawer: ICanvasDrawPath, _data: IPathCommandData): void { }
+    public __drawPathByData(_drawer: IPathDrawer, _data: IPathCommandData): void { }
 
     public __updateBoxBounds(): void {
         this.__updateRectBoxBounds()
