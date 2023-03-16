@@ -26,13 +26,21 @@ export const UIRender: IUIRenderModule = {
         if (stroke) Paint.stroke(this, canvas, stroke)
     },
 
-    __draw(canvas: ILeaferCanvas, _options: IRenderOptions): void {
-        const { fill, stroke } = this.__
+    __draw(canvas: ILeaferCanvas, options: IRenderOptions): void {
+        if (this.__complex) {
 
-        this.__drawRenderPath(canvas)
+            const { fill, stroke } = this.__
 
-        if (fill) this.__.__isFills ? Paint.fills(this, canvas, fill as ILeafPaint[]) : Paint.fill(this, canvas, fill)
-        if (stroke) this.__.__isStrokes ? Paint.strokes(this, canvas, stroke as ILeafStrokePaint[]) : Paint.stroke(this, canvas, stroke)
+            this.__drawRenderPath(canvas)
+
+            if (fill) this.__.__isFills ? Paint.fills(this, canvas, fill as ILeafPaint[]) : Paint.fill(this, canvas, fill)
+            if (stroke) this.__.__isStrokes ? Paint.strokes(this, canvas, stroke as ILeafStrokePaint[]) : Paint.stroke(this, canvas, stroke)
+
+        } else {
+
+            this.__drawFast(canvas, options)
+
+        }
     }
 
 }

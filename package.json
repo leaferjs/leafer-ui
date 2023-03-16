@@ -1,6 +1,6 @@
 {
   "name": "leafer-ui",
-  "version": "1.0.0-alpha.9",
+  "version": "1.0.0-alpha.10",
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
   "main": "dist/index.js",
@@ -25,8 +25,8 @@
     "engine"
   ],
   "dependencies": {
-    "@leafer-ui/web": "1.0.0-alpha.9",
-    "@leafer-ui/interface": "1.0.0-alpha.9",
-    "@leafer/interface": "1.0.0-alpha.9"
+    "@leafer-ui/web": "1.0.0-alpha.10",
+    "@leafer-ui/interface": "1.0.0-alpha.10",
+    "@leafer/interface": "1.0.0-alpha.10"
   }
 }

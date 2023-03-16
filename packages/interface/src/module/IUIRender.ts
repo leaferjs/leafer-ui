@@ -1,6 +1,6 @@
 import { ILeafRender, ILeaferCanvas, IRenderOptions, } from '@leafer/interface'
 
-import { IUI, IRect, IFrame, IGroup } from '../IUI'
+import { IUI, IRect, IImage, IFrame, IGroup } from '../IUI'
 
 export type IUIRenderModule = IUIRender & ThisType<IUI>
 
@@ -11,6 +11,12 @@ interface IUIRender extends ILeafRender {
 export type IRectRenderModule = IRectRender & ThisType<IRect>
 
 interface IRectRender extends IUIRender {
+
+}
+
+export type IImageRenderModule = IImageRender & ThisType<IImage>
+
+interface IImageRender extends IUIRender {
 
 }
 

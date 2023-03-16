@@ -18,7 +18,7 @@ export { IBlendMode, IVectorPath, IShadowEffect, IBlurEffect, IGrayscaleEffect, 
 export { ICornerRadiusString, IStrokeWidthString, IPaintString, IShadowString, IPercent, IDashPatternString, IPathString, IVectorPathString, IStringColor } from './type/IStringType'
 export { ILeafFill, ILeafPaint, ILeafPaintColor, ILeafStrokePaint, ILeafShadowEffect } from './type/IComputedType'
 
-export { IUIRenderModule, IRectRenderModule, IGroupRenderModule, IFrameRenderModule } from './module/IUIRender'
+export { IUIRenderModule, IRectRenderModule, IImageRenderModule, IGroupRenderModule, IFrameRenderModule } from './module/IUIRender'
 export { IUIBoundsModule } from './module/IUIBounds'
 export { IUIHitModule } from './module/IUIHit'
 

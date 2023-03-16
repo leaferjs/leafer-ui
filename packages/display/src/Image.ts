@@ -1,5 +1,5 @@
-import { __String } from '@leafer/interface'
-import { boundsType, dataProcessor, registerUI } from '@leafer/core'
+import { ILeaferImage, __String } from '@leafer/interface'
+import { boundsType, dataProcessor, registerUI, Creator } from '@leafer/core'
 
 import { IImage, IImageInputData, IImageData } from '@leafer-ui/interface'
 import { ImageData } from '@leafer-ui/data'
@@ -19,8 +19,21 @@ export class Image extends Rect implements IImage {
     @boundsType('')
     public thumb: __String
 
+    public __image: ILeaferImage
+
     constructor(data?: IImageInputData) {
         super(data)
     }
+
+    public __updateBoxBounds(): void {
+        this.__image = Creator.image(this)
+    }
+
+
+    public drawFill(): void {
+
+    }
+
+
 
 }

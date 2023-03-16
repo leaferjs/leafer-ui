@@ -1,19 +1,18 @@
-import { ILayouter, ILeafer, ILeaferCanvas, IRenderer, ICreator, ISelector, IWatcher, IInteraction, ILeaferConfig, ICanvasManager, IHitCanvasManager, IImageManager, IAutoBounds, IScreenSizeData, IResizeEvent, IObject, ILeaf, IEventListenerId, ITransformEventData } from '@leafer/interface'
-import { registerUI, AutoBounds, LayoutEvent, ResizeEvent, MoveEvent, ZoomEvent, CanvasManager, HitCanvasManager, ImageManager, DataHelper, LeafHelper, Creator } from '@leafer/core'
+import { IApp, ILeafer, ILeaferCanvas, IRenderer, ILayouter, ICreator, ISelector, IWatcher, IInteraction, ILeaferConfig, ICanvasManager, IHitCanvasManager, IImageManager, IAutoBounds, IScreenSizeData, IResizeEvent, IObject, ILeaf, IEventListenerId, ITransformEventData } from '@leafer/interface'
+import { AutoBounds, LayoutEvent, ResizeEvent, MoveEvent, ZoomEvent, CanvasManager, HitCanvasManager, ImageManager, DataHelper, LeafHelper, Creator, Run } from '@leafer/core'
 
 import { Group } from '@leafer-ui/display'
 
-import { SuperLeafer } from './SuperLeafer'
+import { App } from './App'
 
 
-@registerUI()
 export class Leafer extends Group implements ILeafer {
 
     public creator: ICreator
 
-    public get isSupperLeafer(): boolean { return false }
+    public get isApp(): boolean { return false }
 
-    public parent?: SuperLeafer
+    public parent?: App
 
     public running: boolean
 
@@ -56,45 +55,42 @@ export class Leafer extends Group implements ILeafer {
 
     protected __eventIds: IEventListenerId[] = []
 
-    constructor(userConfig?: ILeaferConfig, parentLeafer?: ILeafer) {
+    constructor(userConfig?: ILeaferConfig, app?: IApp) {
         super()
-
-        this.creator = Creator
-
-        const { config } = this
 
         this.__setAsLeafer()
         this.__setConfig(userConfig)
+
+        const { config } = this
+        this.creator = Creator
 
         // render
         this.canvas = Creator.canvas(config)
         this.renderer = Creator.renderer(this, this.canvas, config)
 
         // layout
-        if (this.isSupperLeafer) {
+        if (this.isApp) {
             this.__level = 1
         } else {
-
             this.watcher = Creator.watcher(this)
             this.layouter = Creator.layouter(this)
-
         }
 
         this.__checkAutoLayout(config)
 
         // interaction / manager
-        if (parentLeafer) {
+        if (app) {
 
-            parentLeafer.selector?.defaultPath.unshift(this)
+            app.selector?.defaultPath.unshift(this)
 
-            this.selector = parentLeafer.selector
-            this.interaction = parentLeafer.interaction
+            this.selector = app.selector
+            this.interaction = app.interaction
 
-            this.canvasManager = parentLeafer.canvasManager
-            this.hitCanvasManager = parentLeafer.hitCanvasManager
-            this.imageManager = parentLeafer.imageManager
+            this.canvasManager = app.canvasManager
+            this.hitCanvasManager = app.hitCanvasManager
+            this.imageManager = app.imageManager
 
-            if (parentLeafer.running) setTimeout(this.start.bind(this))
+            if (app.running) setTimeout(this.start.bind(this))
 
         } else {
 
@@ -104,7 +100,7 @@ export class Leafer extends Group implements ILeafer {
             this.canvasManager = new CanvasManager(this)
             this.hitCanvasManager = new HitCanvasManager(this)
             this.imageManager = new ImageManager(this, config)
-
+            Run.start('FullCreate')
             if (config.start) setTimeout(this.start.bind(this))
 
         }
@@ -135,6 +131,7 @@ export class Leafer extends Group implements ILeafer {
 
     public start(): void {
         if (!this.running) {
+            Run.endOfName('FullCreate')
             this.__interactiveWindow()
             this.interaction?.start()
             this.renderer.start()
@@ -197,24 +194,24 @@ export class Leafer extends Group implements ILeafer {
             }
 
             this.canvas.destroy()
-            this.canvas = undefined
+            this.canvas = null
 
-            this.creator = undefined
-            this.config = undefined
+            this.creator = null
+            this.config = null
 
-            this.interaction = undefined
-            this.selector = undefined
+            this.interaction = null
+            this.selector = null
 
 
-            this.renderer = undefined
-            this.watcher = undefined
-            this.layouter = undefined
+            this.renderer = null
+            this.watcher = null
+            this.layouter = null
 
-            this.canvasManager = undefined
-            this.hitCanvasManager = undefined
-            this.imageManager = undefined
+            this.canvasManager = null
+            this.hitCanvasManager = null
+            this.imageManager = null
 
-            this.zoomLayer = undefined
+            this.zoomLayer = null
             this.moveLayer = undefined
 
             this.parent = undefined

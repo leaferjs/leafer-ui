@@ -11,9 +11,9 @@ export const UIHit: IUIHitModule = {
             if (this.__hitCanvas.hitPath(local, this.__.windingRule)) return true
         }
 
-        const strokeWidth = ((this.__.__strokeOuterWidth || 0) + local.radiusX) * 2
+        if (this.__.__strokeOuterWidth) {
+            const strokeWidth = (this.__.__strokeOuterWidth + local.radiusX) * 2
 
-        if (strokeWidth) {
             const { __hitCanvas: c } = this
             if (c.strokeWidth !== strokeWidth) {
                 c.strokeWidth = strokeWidth
