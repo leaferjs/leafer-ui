@@ -1,6 +1,6 @@
 {
   "name": "leafer-ui",
-  "version": "1.0.0-alpha.13",
+  "version": "1.0.0-alpha.19",
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
   "main": "dist/index.js",

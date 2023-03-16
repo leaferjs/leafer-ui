@@ -34,6 +34,4 @@ export class Image extends Rect implements IImage {
 
     }
 
-
-
 }
