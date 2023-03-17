@@ -53,7 +53,7 @@ export class App extends Leafer implements IGroup {
     }
 
     public __render(canvas: ILeaferCanvas, _options: IRenderOptions): void {
-        this.children.forEach(leafer => { canvas.copy(leafer.canvas) })
+        this.children.forEach(leafer => { canvas.copyWorld(leafer.canvas) })
     }
 
     public __onResize(event: IResizeEvent): void {

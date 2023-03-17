@@ -36,7 +36,7 @@ export function stroke(ui: IUI, canvas: ILeaferCanvas, stroke: string | object):
             out.stroke()
 
             out.clip(options.windingRule)
-            out.clearBounds(ui.__layout.renderBounds)
+            out.clearWorld(ui.__layout.renderBounds)
 
             canvas.copyWorldToLocal(out, ui.__world, ui.__layout.renderBounds)
             out.recycle()
@@ -76,7 +76,7 @@ export function strokes(ui: IUI, canvas: ILeaferCanvas, strokes: ILeafPaint[]): 
             drawStrokesStyle(strokes, out)
 
             out.clip(options.windingRule)
-            out.clearBounds(renderBounds)
+            out.clearWorld(renderBounds)
 
             canvas.copyWorldToLocal(out, ui.__world, renderBounds)
             out.recycle()
