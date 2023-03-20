@@ -1,4 +1,4 @@
-import { ILeaferCanvas, IPathDrawer, IPathCommandData, IMatrixData, IBoundsData, __Number, __Boolean, __String } from '@leafer/interface'
+import { ILeaferCanvas, IPathDrawer, IPathCommandData, IMatrixData, IBoundsData, IHitType, __Number, __Boolean, __String } from '@leafer/interface'
 import { Leaf, PathHelper, affectEventBoundsType, surfaceType, dataType, positionType, boundsType, pathType, scaleType, rotationType, opacityType, sortType, dataProcessor, useModule, rewrite, rewriteAble } from '@leafer/core'
 
 import { IUI, IShadowEffect, IBlurEffect, IPaint, IStrokeAlign, IStrokeJoin, IStrokeCap, IBlendMode, IPaintString, IDashPatternString, IShadowString, IGrayscaleEffect, IUIData, IGroup, IStrokeWidthString, ICornerRadiusString } from '@leafer-ui/interface'
@@ -79,7 +79,19 @@ export class UI extends Leaf implements IUI {
     @rotationType(0)
     public skewY: __Number
 
+
+    @dataType(false)
     public draggable: __Boolean
+
+    // hit
+    @dataType(true)
+    public hitable: __Boolean
+
+    @dataType('visible')
+    public hitType: IHitType
+
+    @dataType(true)
+    public hitChildren: __Boolean
 
     // ---
 

@@ -29,6 +29,7 @@ export class Leafer extends Group implements ILeafer {
         zoom: true,
         move: true,
         start: true,
+        hitable: true,
         pixelRatio: devicePixelRatio
     }
 
@@ -95,7 +96,7 @@ export class Leafer extends Group implements ILeafer {
         } else {
 
             this.selector = Creator.selector(this)
-            this.interaction = Creator.interaction(this, this.canvas, this.selector, config)
+            if (config.hitable) this.interaction = Creator.interaction(this, this.canvas, this.selector, config)
 
             this.canvasManager = new CanvasManager(this)
             this.hitCanvasManager = new HitCanvasManager(this)
@@ -125,7 +126,7 @@ export class Leafer extends Group implements ILeafer {
     protected __checkAutoLayout(config: ILeaferConfig): void {
         if (!config.width || !config.height) {
             this.autoLayout = new AutoBounds(config)
-            this.canvas.autoLayout(this.autoLayout, this.__onResize.bind(this))
+            this.canvas.startAutoLayout(this.autoLayout, this.__onResize.bind(this))
         }
     }
 

@@ -1,20 +1,9 @@
-import { BoundsHelper, OneRadian } from '@leafer/core'
+import { OneRadian } from '@leafer/core'
 
 import { IUIBoundsModule } from "@leafer-ui/interface"
 
 
-const { copyAndSpread } = BoundsHelper
-
-
 export const UIBounds: IUIBoundsModule = {
-
-    __updateEventBounds(): void {
-        copyAndSpread(this.__layout.eventBounds, this.__layout.boxBounds, this.__layout.eventBoundsSpreadWidth)
-    },
-
-    __updateRenderBounds(): void {
-        copyAndSpread(this.__layout.renderBounds, this.__layout.eventBounds, this.__layout.renderBoundsSpreadWidth)
-    },
 
     __updateEventBoundsSpreadWidth(): number {
         let width: number = 0
