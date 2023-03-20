@@ -64,6 +64,7 @@ export class Leafer extends Group implements ILeafer {
 
         const { config } = this
         this.creator = Creator
+        this.hitable = config.hitable
 
         // render
         this.canvas = Creator.canvas(config)
@@ -85,7 +86,7 @@ export class Leafer extends Group implements ILeafer {
             app.selector?.defaultPath.unshift(this)
 
             this.selector = app.selector
-            this.interaction = app.interaction
+            if (config.hitable) this.interaction = app.interaction
 
             this.canvasManager = app.canvasManager
             this.hitCanvasManager = app.hitCanvasManager
@@ -133,8 +134,10 @@ export class Leafer extends Group implements ILeafer {
     public start(): void {
         if (!this.running) {
             Run.endOfName('FullCreate')
-            this.__interactiveWindow()
-            this.interaction?.start()
+            if (this.interaction) {
+                this.__interactiveWindow()
+                this.interaction.start()
+            }
             this.renderer.start()
             this.layouter.start()
             this.watcher.start()
@@ -144,7 +147,7 @@ export class Leafer extends Group implements ILeafer {
 
     public stop(): void {
         if (this.running) {
-            this.interaction?.stop()
+            if (this.interaction) this.interaction.stop()
             this.watcher.stop()
             this.layouter.stop()
             this.renderer.stop()
