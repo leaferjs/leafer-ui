@@ -1,12 +1,10 @@
-import { ILeaferConfig, IResizeEvent, ILeaferCanvas, IRenderOptions } from '@leafer/interface'
+import { ILeaferConfig, IResizeEvent, ILeaferCanvas, IRenderOptions, IApp } from '@leafer/interface'
 import { DataHelper, LayoutEvent, RenderEvent } from '@leafer/core'
-
-import { IGroup } from '@leafer-ui/interface'
 
 import { Leafer } from './Leafer'
 
 
-export class App extends Leafer implements IGroup {
+export class App extends Leafer implements IApp {
 
     public get isApp(): boolean { return true }
 
