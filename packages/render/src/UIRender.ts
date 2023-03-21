@@ -11,9 +11,9 @@ export const UIRender: IUIRenderModule = {
         let complex = data.__isFills || data.__isStrokes || data.cornerRadius || data.__useEffect
 
         if (complex) {
-            this.__complex = true
+            data.__complex = true
         } else {
-            this.__complex && (this.__complex = false)
+            data.__complex && (data.__complex = false)
         }
     },
 
@@ -27,7 +27,7 @@ export const UIRender: IUIRenderModule = {
     },
 
     __draw(canvas: ILeaferCanvas, options: IRenderOptions): void {
-        if (this.__complex) {
+        if (this.__.__complex) {
 
             const { fill, stroke } = this.__
 

@@ -85,7 +85,7 @@ export class UI extends Leaf implements IUI {
 
     // hit
     @dataType(true)
-    public hitable: __Boolean
+    public hittable: __Boolean
 
     @dataType('visible')
     public hitType: IHitType

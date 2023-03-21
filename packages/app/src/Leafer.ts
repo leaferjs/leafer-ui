@@ -26,10 +26,10 @@ export class Leafer extends Group implements ILeafer {
     public pixelRatio: number
 
     public config: ILeaferConfig = {
-        zoom: true,
-        move: true,
-        start: true,
-        hitable: true,
+        useZoom: true,
+        useMove: true,
+        autoStart: true,
+        hittable: true,
         pixelRatio: devicePixelRatio
     }
 
@@ -64,7 +64,7 @@ export class Leafer extends Group implements ILeafer {
 
         const { config } = this
         this.creator = Creator
-        this.hitable = config.hitable
+        this.hittable = config.hittable
 
         // render
         this.canvas = Creator.canvas(config)
@@ -86,7 +86,7 @@ export class Leafer extends Group implements ILeafer {
             app.selector?.defaultPath.unshift(this)
 
             this.selector = app.selector
-            if (config.hitable) this.interaction = app.interaction
+            if (config.hittable) this.interaction = app.interaction
 
             this.canvasManager = app.canvasManager
             this.hitCanvasManager = app.hitCanvasManager
@@ -97,13 +97,13 @@ export class Leafer extends Group implements ILeafer {
         } else {
 
             this.selector = Creator.selector(this)
-            if (config.hitable) this.interaction = Creator.interaction(this, this.canvas, this.selector, config)
+            if (config.hittable) this.interaction = Creator.interaction(this, this.canvas, this.selector, config)
 
             this.canvasManager = new CanvasManager(this)
             this.hitCanvasManager = new HitCanvasManager(this)
             this.imageManager = new ImageManager(this, config)
             Run.start('FullCreate')
-            if (config.start) setTimeout(this.start.bind(this))
+            if (config.autoStart) setTimeout(this.start.bind(this))
 
         }
 
@@ -156,12 +156,12 @@ export class Leafer extends Group implements ILeafer {
     }
 
     protected __interactiveWindow(): void {
-        const { zoom, move } = this.config
-        if (move) {
+        const { useZoom, useMove } = this.config
+        if (useMove) {
             const { MOVE } = MoveEvent
             const { ZOOM } = ZoomEvent
             if (!this.hasEvent(MOVE)) this.__eventIds.push(this.on__(MOVE, (e: MoveEvent) => { LeafHelper.moveOfWorld(this, e.moveX, e.moveY) }))
-            if (zoom && !this.hasEvent(ZOOM)) this.__eventIds.push(this.on__(ZOOM, (e: ZoomEvent) => { LeafHelper.zoomOfWorld(this, e.scale, e) }))
+            if (useZoom && !this.hasEvent(ZOOM)) this.__eventIds.push(this.on__(ZOOM, (e: ZoomEvent) => { LeafHelper.zoomOfWorld(this, e.scale, e) }))
         }
     }
 
