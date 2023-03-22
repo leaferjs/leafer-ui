@@ -1,4 +1,4 @@
-import { ILeaf, ILeafComputedData, ILeafData, ILeafInputData, ILeaferCanvas, IRenderOptions, IPathDrawer, IPointData, IPath2D, IPathCommandData, IWindingRule, IBranch, ILeaferImageConfig, IMatrixData, IBoundsData, __Number } from '@leafer/interface'
+import { ILeaf, ILeafComputedData, ILeafData, ILeafInputData, ILeaferCanvas, IRenderOptions, IPathDrawer, IPointData, IPath2D, IPathCommandData, IWindingRule, IBranch, ILeaferImageConfig, IMatrixData, IBoundsData, IObject, __Number } from '@leafer/interface'
 
 import { IPathString, IVectorPathString } from './type/IStringType'
 import { IBlendMode } from './type/IType'
@@ -205,4 +205,11 @@ export interface IUIInputData extends IFillInputData, IStrokeInputData, ICornerR
     blendMode?: IBlendMode
     mask?: boolean
     locked?: boolean
+}
+
+
+export type IUITag = 'Rect' | 'Ellipse' | 'Polygon' | 'Star' | 'Line' | 'Path' | 'Text' | 'Image' | 'Group' | 'Frame'
+
+export interface IUITagInputData extends IRectInputData, IEllipseInputData, IPolygonInputData, IStarInputData, ILineInputData, IPathInputData, ITextInputData, IImageInputData, IGroupInputData, IFrameInputData, IObject {
+
 }

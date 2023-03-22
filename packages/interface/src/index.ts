@@ -12,7 +12,8 @@ export {
     IImage, IImageInputData, IImageData,
     IFrame, IFrameInputData, IFrameData,
     IGroup, IGroupInputData, IGroupData,
-    IUI, IUIInputData, IUIData
+    IUI, IUIInputData, IUIData,
+    IUITag, IUITagInputData
 } from './IUI'
 export { IBlendMode, IVectorPath, IShadowEffect, IBlurEffect, IGrayscaleEffect, IStrokeAlign, IStrokeJoin, IStrokeCap, IColor, IPaint, IGradientPaint, IImagePaint, IImagePaintMode, IFontWeight, ITextCase, ITextDecoration } from './type/IType'
 export { ICornerRadiusString, IStrokeWidthString, IPaintString, IShadowString, IPercent, IDashPatternString, IPathString, IVectorPathString, IStringColor } from './type/IStringType'

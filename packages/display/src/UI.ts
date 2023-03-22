@@ -1,7 +1,7 @@
 import { ILeaferCanvas, IPathDrawer, IPathCommandData, IMatrixData, IBoundsData, IHitType, __Number, __Boolean, __String } from '@leafer/interface'
-import { Leaf, PathHelper, affectEventBoundsType, surfaceType, dataType, positionType, boundsType, pathType, scaleType, rotationType, opacityType, sortType, dataProcessor, useModule, rewrite, rewriteAble } from '@leafer/core'
+import { Leaf, PathHelper, affectEventBoundsType, surfaceType, dataType, positionType, boundsType, pathType, scaleType, rotationType, opacityType, sortType, dataProcessor, useModule, rewrite, rewriteAble, UICreator } from '@leafer/core'
 
-import { IUI, IShadowEffect, IBlurEffect, IPaint, IStrokeAlign, IStrokeJoin, IStrokeCap, IBlendMode, IPaintString, IDashPatternString, IShadowString, IGrayscaleEffect, IUIData, IGroup, IStrokeWidthString, ICornerRadiusString } from '@leafer-ui/interface'
+import { IUI, IShadowEffect, IBlurEffect, IPaint, IStrokeAlign, IStrokeJoin, IStrokeCap, IBlendMode, IPaintString, IDashPatternString, IShadowString, IGrayscaleEffect, IUIData, IGroup, IStrokeWidthString, ICornerRadiusString, IUITagInputData, IUITag } from '@leafer-ui/interface'
 import { effectType } from '@leafer-ui/decorator'
 
 import { UIData } from '@leafer-ui/data'
@@ -197,5 +197,8 @@ export class UI extends Leaf implements IUI {
 
     @rewrite(PathHelper.drawData)
     public __drawPathByData(_drawer: IPathDrawer, _data: IPathCommandData): void { }
+
+    @rewrite(UICreator.get)
+    static create(_tag: IUITag, _data: IUITagInputData, _x?: number, _y?: number, _width?: number, _height?: number): IUI { return undefined }
 
 }

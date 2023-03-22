@@ -1,5 +1,5 @@
 import { IApp, ILeafer, ILeaferCanvas, IRenderer, ILayouter, ICreator, ISelector, IWatcher, IInteraction, ILeaferConfig, ICanvasManager, IHitCanvasManager, IImageManager, IAutoBounds, IScreenSizeData, IResizeEvent, IObject, ILeaf, IEventListenerId, ITransformEventData } from '@leafer/interface'
-import { AutoBounds, LayoutEvent, ResizeEvent, MoveEvent, ZoomEvent, CanvasManager, HitCanvasManager, ImageManager, DataHelper, LeafHelper, Creator, Run } from '@leafer/core'
+import { AutoBounds, LayoutEvent, ResizeEvent, MoveEvent, ZoomEvent, LeaferEvent, CanvasManager, HitCanvasManager, ImageManager, DataHelper, LeafHelper, Creator, Run } from '@leafer/core'
 
 import { Group } from '@leafer-ui/display'
 
@@ -99,8 +99,8 @@ export class Leafer extends Group implements ILeafer {
             this.selector = Creator.selector(this)
             if (config.hittable) this.interaction = Creator.interaction(this, this.canvas, this.selector, config)
 
-            this.canvasManager = new CanvasManager(this)
-            this.hitCanvasManager = new HitCanvasManager(this)
+            this.canvasManager = new CanvasManager()
+            this.hitCanvasManager = new HitCanvasManager()
             this.imageManager = new ImageManager(this, config)
             Run.start('FullCreate')
             if (config.autoStart) setTimeout(this.start.bind(this))
@@ -113,7 +113,10 @@ export class Leafer extends Group implements ILeafer {
     }
 
     protected __listenEvents(): void {
-        this.once(LayoutEvent.END, this.__setAsRoot.bind(this))
+        this.once(LayoutEvent.END, () => {
+            this.__setAsRoot()
+            this.emit(LeaferEvent.READY)
+        })
     }
 
     protected __removeListenEvents(): void {
