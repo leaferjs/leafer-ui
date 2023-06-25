@@ -2,85 +2,103 @@ import { ILeaferCanvas } from '@leafer/interface'
 
 import { IUI, ILeafStrokePaint, ILeafPaint } from '@leafer-ui/interface'
 
+import { strokeText, strokesText } from './StrokeText'
+
 
 export function stroke(ui: IUI, canvas: ILeaferCanvas, stroke: string | object): void {
     const options = ui.__
-    const { strokeWidth, strokeAlign } = options
+    const { strokeWidth, strokeAlign, __font } = options
 
-    switch (strokeAlign) {
+    if (__font) {
 
-        case 'center':
-            canvas.setStroke(undefined, strokeWidth, options)
-            canvas.strokeStyle = stroke
-            canvas.stroke()
-            break
+        strokeText(ui, canvas, stroke)
 
-        case 'inside':
-            canvas.save()
-            canvas.setStroke(undefined, strokeWidth * 2, options)
-            canvas.clip(options.windingRule)
+    } else {
 
-            canvas.strokeStyle = stroke
-            canvas.stroke()
+        switch (strokeAlign) {
 
-            canvas.restore()
-            break
+            case 'center':
 
-        case 'outside':
-            const out = canvas.getSameCanvas(true)
-            ui.__drawRenderPath(out)
+                canvas.setStroke(stroke, strokeWidth, options)
+                canvas.stroke()
+                break
 
-            out.setStroke(undefined, strokeWidth * 2, ui.__)
+            case 'inside':
 
-            out.strokeStyle = stroke
-            out.stroke()
+                canvas.save()
+                canvas.setStroke(stroke, strokeWidth * 2, options)
 
-            out.clip(options.windingRule)
-            out.clearWorld(ui.__layout.renderBounds)
+                canvas.clip(options.windingRule)
+                canvas.stroke()
 
-            canvas.copyWorldToLocal(out, ui.__world, ui.__layout.renderBounds)
-            out.recycle()
-            break
+                canvas.restore()
+
+                break
+
+            case 'outside':
+                const out = canvas.getSameCanvas(true)
+                out.setStroke(stroke, strokeWidth * 2, ui.__)
+
+                ui.__drawRenderPath(out)
+
+                out.stroke()
+
+                out.clip(options.windingRule)
+                out.clearWorld(ui.__layout.renderBounds)
+
+                canvas.copyWorldToInner(out, ui.__world, ui.__layout.renderBounds)
+                out.recycle()
+
+                break
+        }
+
     }
-
 }
 
 export function strokes(ui: IUI, canvas: ILeaferCanvas, strokes: ILeafPaint[]): void {
     const options = ui.__
-    const { strokeWidth, strokeAlign } = options
+    const { strokeWidth, strokeAlign, __font } = options
 
-    switch (strokeAlign) {
+    if (__font) {
 
-        case 'center':
-            canvas.setStroke(undefined, strokeWidth, options)
-            drawStrokesStyle(strokes, canvas)
-            break
+        strokesText(ui, canvas, strokes)
 
-        case 'inside':
-            canvas.save()
-            canvas.setStroke(undefined, strokeWidth * 2, options)
-            canvas.clip(options.windingRule)
+    } else {
 
-            drawStrokesStyle(strokes, canvas)
+        switch (strokeAlign) {
 
-            canvas.restore()
-            break
+            case 'center':
+                canvas.setStroke(undefined, strokeWidth, options)
+                drawStrokesStyle(strokes, canvas)
+                break
 
-        case 'outside':
-            const { renderBounds } = ui.__layout
-            const out = canvas.getSameCanvas(true)
-            ui.__drawRenderPath(out)
+            case 'inside':
+                canvas.save()
+                canvas.setStroke(undefined, strokeWidth * 2, options)
+                canvas.clip(options.windingRule)
 
-            out.setStroke(undefined, strokeWidth * 2, ui.__)
+                drawStrokesStyle(strokes, canvas)
 
-            drawStrokesStyle(strokes, out)
+                canvas.restore()
+                break
 
-            out.clip(options.windingRule)
-            out.clearWorld(renderBounds)
+            case 'outside':
+                const { renderBounds } = ui.__layout
+                const out = canvas.getSameCanvas(true)
+                ui.__drawRenderPath(out)
 
-            canvas.copyWorldToLocal(out, ui.__world, renderBounds)
-            out.recycle()
-            break
+                out.setStroke(undefined, strokeWidth * 2, ui.__)
+
+                drawStrokesStyle(strokes, out)
+
+                out.clip(options.windingRule)
+                out.clearWorld(renderBounds)
+
+                canvas.copyWorldToInner(out, ui.__world, renderBounds)
+                out.recycle()
+                break
+        }
+
     }
 
 }
@@ -88,6 +106,14 @@ export function strokes(ui: IUI, canvas: ILeaferCanvas, strokes: ILeafPaint[]): 
 function drawStrokesStyle(strokes: ILeafStrokePaint[], canvas: ILeaferCanvas): void {
     strokes.forEach((item: ILeafStrokePaint) => {
         canvas.strokeStyle = item.style
-        canvas.stroke()
+
+        if (item.blendMode) {
+            canvas.saveBlendMode(item.blendMode)
+            canvas.stroke()
+            canvas.restoreBlendMode()
+        } else {
+            canvas.stroke()
+        }
+
     })
 }

@@ -12,7 +12,13 @@ export class PathData extends UIData {
     protected _path: IPathCommandData
 
     protected setPath(value: IPathCommandData | IPathString) {
-        this._path = (typeof value === 'string') ? parse(value) : value
+        if (typeof value === 'string') {
+            this.__setInput('path', value)
+            this._path = parse(value)
+        } else {
+            if (this.__input) this.__removeInput('path')
+            this._path = value
+        }
     }
 
 }

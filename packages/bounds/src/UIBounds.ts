@@ -5,27 +5,27 @@ import { IUIBoundsModule } from "@leafer-ui/interface"
 
 export const UIBounds: IUIBoundsModule = {
 
-    __updateEventBoundsSpreadWidth(): number {
-        let width: number = 0
-        const { stroke, strokeAlign } = this.__
+    __updateStrokeSpread(): number {
+        let width = 0, boxWidth = 0
+        const { stroke, hitStroke, strokeAlign, strokeWidth } = this.__
 
-        if (stroke && strokeAlign !== 'inside') {
+        if ((stroke || hitStroke === 'all') && strokeWidth && strokeAlign !== 'inside') {
+            boxWidth = width = strokeAlign === 'center' ? strokeWidth / 2 : strokeWidth
 
-            const { strokeWidth, miterLimit, path } = this.__
-            const miterLength = path ? 1 / Math.sin(miterLimit * OneRadian / 2) * Math.sqrt(strokeWidth) : 0 // miterlimit 导致增加的长度
-            width = strokeAlign === 'center' ? strokeWidth / 2 : strokeWidth
-            this.__.__strokeOuterWidth = width
-
-            if (miterLength) width += (miterLength - width)
-
+            if (!this.__.__boxStroke) {
+                const { miterLimit, strokeCap } = this.__
+                const miterLimitAddWidth = this.__tag !== 'Line' ? 1 / Math.sin(miterLimit * OneRadian / 2) * Math.sqrt(strokeWidth) - width : 0
+                const storkeCapAddWidth = strokeCap === 'none' ? 0 : strokeWidth
+                width += Math.max(miterLimitAddWidth, storkeCapAddWidth)
+            }
         }
 
-        if (!width) this.__.__strokeOuterWidth = 0
+        this.__layout.strokeBoxSpread = boxWidth
 
         return width
     },
 
-    __updateRenderBoundsSpreadWidth(): number {
+    __updateRenderSpread(): number {
         let width: number = 0
         const { shadow, innerShadow, blur, backgroundBlur } = this.__
 
@@ -35,15 +35,15 @@ export const UIBounds: IUIBoundsModule = {
 
         if (blur) width = Math.max(width, blur)
 
-
-        let other = width = Math.ceil(width)
+        let shapeWidth = width = Math.ceil(width)
 
         if (innerShadow) innerShadow.forEach(item => {
-            other = Math.max(other, Math.max(Math.abs(item.y), Math.abs(item.x)) + (item.spread < 0 ? -item.spread : 0) + item.blur * 1.5)
+            shapeWidth = Math.max(shapeWidth, Math.max(Math.abs(item.y), Math.abs(item.x)) + (item.spread < 0 ? -item.spread : 0) + item.blur * 1.5)
         })
 
-        if (backgroundBlur) other = Math.max(other, backgroundBlur)
-        this.__layout.renderShapeBoundsSpreadWidth = other
+        if (backgroundBlur) shapeWidth = Math.max(shapeWidth, backgroundBlur)
+
+        this.__layout.renderShapeSpread = shapeWidth
 
         return width
     }

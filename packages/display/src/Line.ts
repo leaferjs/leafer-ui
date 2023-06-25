@@ -1,13 +1,13 @@
 import { IPointData, ITwoPointBoundsData, __Number } from '@leafer/interface'
-import { PathCreator, PointHelper, TwoPointBoundsHelper, boundsType, dataProcessor, registerUI } from '@leafer/core'
+import { PathCommandDataHelper, PointHelper, TwoPointBoundsHelper, boundsType, affectStrokeBoundsType, dataProcessor, registerUI } from '@leafer/core'
 
-import { ILine, ILineData, ILineInputData } from '@leafer-ui/interface'
+import { ILine, ILineData, ILineInputData, IStrokeAlign } from '@leafer-ui/interface'
 import { LineData } from '@leafer-ui/data'
 
 import { UI } from './UI'
 
 
-const { begin, moveTo, lineTo, end } = PathCreator
+const { moveTo, lineTo } = PathCommandDataHelper
 const { rotate, getAngle, getDistance, defaultPoint } = PointHelper
 const { setPoint, addPoint, toBounds } = TwoPointBoundsHelper
 
@@ -17,16 +17,21 @@ const pointBounds = {} as ITwoPointBoundsData
 @registerUI()
 export class Line extends UI implements ILine {
 
+    public get __tag() { return 'Line' }
+
     @dataProcessor(LineData)
     public __: ILineData
 
     @boundsType()
     public rotation: __Number
 
+    @affectStrokeBoundsType('center')
+    public strokeAlign: IStrokeAlign
+
     protected __toPoint: IPointData
 
     public get toPoint(): IPointData {
-        if (this.__toPoint && !this.__layout.boxBoundsChanged) return this.__toPoint
+        if (this.__toPoint && !this.__layout.boxChanged) return this.__toPoint
 
         const { width, rotation } = this.__
         const to: IPointData = { x: 0, y: 0 }
@@ -51,12 +56,11 @@ export class Line extends UI implements ILine {
 
     public __updatePath(): void {
 
-        begin(this.__.path = [])
-        moveTo(0, 0)
+        const path: number[] = this.__.path = []
+        moveTo(path, 0, 0)
 
         const to = this.toPoint
-        lineTo(to.x, to.y)
-        end()
+        lineTo(path, to.x, to.y)
     }
 
     public __updateBoxBounds(): void {

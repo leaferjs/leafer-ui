@@ -1,8 +1,6 @@
-import { ILeaf, ILeafComputedData, ILeafData, ILeafInputData, ILeaferCanvas, IRenderOptions, IPathDrawer, IPointData, IPath2D, IPathCommandData, IWindingRule, IBranch, ILeaferImageConfig, IMatrixData, IBoundsData, IObject, __Number } from '@leafer/interface'
+import { ILeaf, ILeafComputedData, ILeafData, ILeafInputData, ILeaferCanvas, IRenderOptions, IPathDrawer, IPointData, IPath2D, IPathCommandData, IWindingRule, ILeaferImageConfig, IBoundsData, IObject, __Number, IPathString, ILeaferImage } from '@leafer/interface'
 
-import { IPathString, IVectorPathString } from './type/IStringType'
-import { IBlendMode } from './type/IType'
-import { IVectorPath } from './type/IType'
+import { IOverflow, IVectorPath } from './type/IType'
 
 import {
     IFillAttrData, IFillInputData, IFillComputedData,
@@ -20,7 +18,9 @@ export interface ILine extends IUI {
     toPoint: IPointData
 }
 export interface ILineData extends IUIData { }
-export interface ILineInputData extends IUIInputData { }
+export interface ILineInputData extends IUIInputData {
+    toPoint?: IPointData
+}
 
 
 // Rect
@@ -88,73 +88,163 @@ export interface IPathInputData extends IUIInputData {
     windingRule?: IWindingRule
 }
 
+// Pen
 
-// Vector
-export interface IVector extends IUI {
-    __: IVectorData
-    paths: IVectorPath[] | IVectorPathString
+export interface IPen extends IGroup {
+    __: IPenData
+    path: IPath
+    pathStyle: IPathInputData
+    pathData: IPathCommandData
+
+    moveTo(x: number, y: number): IPen
+    lineTo(x: number, y: number): IPen
+    bezierCurveTo(x1: number, y1: number, x2: number, y2: number, x: number, y: number): IPen
+    quadraticCurveTo(x1: number, y1: number, x: number, y: number): IPen
+
+    rect(x: number, y: number, width: number, height: number): IPen
+    roundRect(x: number, y: number, width: number, height: number, cornerRadius: number | number[]): IPen
+    ellipse(x: number, y: number, radiusX: number, radiusY: number, rotation?: number, startAngle?: number, endAngle?: number, anticlockwise?: boolean): IPen
+    arc(x: number, y: number, radius: number, startAngle?: number, endAngle?: number, anticlockwise?: boolean): IPen
+    arcTo(x1: number, y1: number, x2: number, y2: number, radius: number): IPen
+
+    close(): IPen
+    clear(): IPen
+
+    paint(): void
 }
-export interface IVectorData extends IUIData {
-    paths?: IVectorPath[]
-}
-export interface IVectorInputData extends IUIInputData {
-    paths?: IVectorPath[] | IVectorPathString
-}
+
+export interface IPenData extends IGroupData { }
+export interface IPenInputData extends IGroupInputData { }
 
 
 // Text
 export interface IText extends ITextStyleAttrData, IUI {
     __: ITextData
-    content: string
+    text: string
 }
 interface ITextAttrData {
-    content?: string
+    text?: string
 }
+
 export interface ITextData extends ITextAttrData, ITextStyleComputedData, IUIData {
-    __font?: string
+    __baseLine?: number
+    __lineHeight?: number
+    __letterSpacing?: number
 }
 export interface ITextInputData extends ITextAttrData, ITextStyleInputData, IUIInputData {
 
 }
 
+export interface ITextRowData {
+    x?: number
+    y?: number
+    width?: number
+    height?: number
+    text?: string
+    data?: ITextCharData[]
+    words?: ITextWordData[]
+
+    paraStart?: boolean // paragraph start
+    paraEnd?: boolean // paragraph end
+    isOverflow?: boolean
+}
+
+export interface ITextWordData {
+    x?: number
+    y?: number
+    width?: number
+    height?: number
+    data?: ITextCharData[]
+}
+
+export interface ITextCharData {
+    x?: number
+    y?: number
+    width?: number
+    height?: number
+    char?: string
+}
+
+export interface ITextDrawData {
+    bounds: IBoundsData
+    rows: ITextRowData[]
+    paraNumber: number
+    font: string
+    decorationY?: number
+    decorationHeight?: number
+    overflow?: number // overflowed row number, not index
+}
 
 // Image
 export interface IImage extends IRect, ILeaferImageConfig {
     __: IImageData
     url: string
-    thumb: string
+    ready: boolean
+    image?: ILeaferImage
 }
 interface IImageAttrData {
     url?: string
-    thumb?: string
 }
 export interface IImageData extends IImageAttrData, IRectData { }
 export interface IImageInputData extends IImageAttrData, IUIInputData { }
 
+export interface ICanvas extends IRect {
+    __: ICanvasData
+    pixelRatio: number
+    smooth: boolean
+    canvas: ILeaferCanvas
+    __updateSize(): void
+}
+interface ICanvasAttrData {
+    pixelRatio?: number
+    smooth?: boolean
+}
+export interface ICanvasData extends ICanvasAttrData, IRectData { }
+export interface ICanvasInputData extends ICanvasAttrData, IUIInputData { }
+
+
+// Leafer
+export interface ILeaferData extends IGroupData {
+    pixelRatio?: number
+}
+
+export interface ILeaferInputData extends IGroupInputData {
+    pixelRatio?: number
+}
+
+
 // Frame
-export interface IFrame extends IGroup {
+export interface IFrame extends IBox {
     __: IFrameData
-    clip: boolean
-    __updateRectBoxBounds(): void
-    __updateRectEventBounds(): void
+}
+export interface IFrameData extends IBoxData {
+
+}
+export interface IFrameInputData extends IBoxInputData {
+
+}
+
+
+// Box
+export interface IBox extends IGroup {
+    __: IBoxData
+    overflow: IOverflow
     __updateRectRenderBounds(): void
-    __renderRect(canvas: ILeaferCanvas, options: IRenderOptions): void
     __renderGroup(canvas: ILeaferCanvas, options: IRenderOptions): void
 }
-export interface IFrameData extends IGroupData {
-    clip?: boolean
+export interface IBoxData extends IGroupData {
+    overflow?: IOverflow
 }
-export interface IFrameInputData extends IGroupInputData {
-    clip?: boolean
+export interface IBoxInputData extends IGroupInputData {
+    overflow?: IOverflow
 }
 
 
 // Group
-export interface IGroup extends IBranch, IUI {
+export interface IGroup extends IUI {
     __: IGroupData
-    root?: IGroup
-    parent?: IGroup
     children: IUI[]
+    mask?: IUI
     add(child: IUI, index?: number): void
     remove(child?: IUI): void
     addAt(child: IUI, index: number): void
@@ -167,19 +257,29 @@ export interface IGroupInputData extends IUIInputData { }
 // UI
 export interface IUI extends IFillAttrData, IStrokeAttrData, ICornerRadiusAttrData, IEffectAttrData, ILeaf {
     __: IUIData
-    root?: IGroup
     parent?: IGroup
-    readonly worldTransform: IMatrixData
-    readonly relativeTransform: IMatrixData
-    readonly worldBoxBounds: IBoundsData
-    readonly worldRenderBounds: IBoundsData
+
+    set(data: IUITagInputData): void
+    get(): IUITagInputData
+
+    getPath(curve?: boolean): IPathCommandData
+    getPathString(curve?: boolean): IPathString
+
     __drawPathByData(drawer: IPathDrawer, data: IPathCommandData): void
+    __drawAfterFill?(canvas: ILeaferCanvas, options: IRenderOptions): void
 }
 
 export interface IUIData extends IUIComputedData, ILeafData {
+
+    padding?: number | number[]
+    locked?: boolean
+
     // 非数据属性, 自动计算的缓存数据
     __isFills?: boolean
     __isStrokes?: boolean
+    __drawAfterFill?: boolean
+    __isOverflow?: boolean
+    __blendLayer?: boolean
 
     __isTranslucentFill?: boolean  // 半透明的
     __isTranslucentStroke?: boolean
@@ -193,23 +293,40 @@ export interface IUIData extends IUIComputedData, ILeafData {
     __pathForRender?: IPathCommandData
     __path2DForRender?: IPath2D
 
-    __strokeOuterWidth?: number // boxBounds外面的笔触宽度
+    __boxStroke?: boolean
+
+    // text
+    __font?: string
+    __textDrawData?: ITextDrawData
+
 }
-export interface IUIComputedData extends IFillComputedData, IBorderComputedData, IStrokeComputedData, ICornerRadiusComputedData, IEffectComputedData, ILeafComputedData {
-    blendMode?: IBlendMode
-    mask?: boolean
+export interface IUIComputedData extends IFillComputedData, IBorderComputedData, IStrokeComputedData, ITextStyleComputedData, ICornerRadiusComputedData, IEffectComputedData, ILeafComputedData {
+    padding?: number | number[]
     locked?: boolean
 }
 
-export interface IUIInputData extends IFillInputData, IStrokeInputData, ICornerRadiusInputData, IEffectInputData, ILeafInputData {
-    blendMode?: IBlendMode
-    mask?: boolean
+export interface IUIInputData extends IFillInputData, IStrokeInputData, ITextStyleInputData, ICornerRadiusInputData, IEffectInputData, ILeafInputData {
+    padding?: number | number[]
     locked?: boolean
 }
 
 
-export type IUITag = 'Rect' | 'Ellipse' | 'Polygon' | 'Star' | 'Line' | 'Path' | 'Text' | 'Image' | 'Group' | 'Frame'
+export type IUITag =
+    | 'Rect'
+    | 'Ellipse'
+    | 'Polygon'
+    | 'Star'
+    | 'Line'
+    | 'Path'
+    | 'Pen'
+    | 'Text'
+    | 'Image'
+    | 'Canvas'
+    | 'Group'
+    | 'Frame'
+    | 'Box'
+
 
 export interface IUITagInputData extends IRectInputData, IEllipseInputData, IPolygonInputData, IStarInputData, ILineInputData, IPathInputData, ITextInputData, IImageInputData, IGroupInputData, IFrameInputData, IObject {
-
+    tagName?: IUITag
 }

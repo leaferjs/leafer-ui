@@ -1,34 +1,40 @@
-import { ILeafRender, ILeaferCanvas, IRenderOptions, } from '@leafer/interface'
+import { ILeafRender, ILeaferCanvas, IRenderOptions } from '@leafer/interface'
 
-import { IUI, IRect, IImage, IFrame, IGroup } from '../IUI'
+import { IUI, IRect, IImage, IText, IFrame, IGroup } from '../IUI'
 
 export type IUIRenderModule = IUIRender & ThisType<IUI>
 
-interface IUIRender extends ILeafRender {
-    __renderShape?(canvas: ILeaferCanvas, options: IRenderOptions): void
+export interface IUIRender extends ILeafRender {
+    __drawAfterFill?(canvas: ILeaferCanvas, options: IRenderOptions): void
 }
 
 export type IRectRenderModule = IRectRender & ThisType<IRect>
 
-interface IRectRender extends IUIRender {
+export interface IRectRender extends IUIRender {
 
 }
 
 export type IImageRenderModule = IImageRender & ThisType<IImage>
 
-interface IImageRender extends IUIRender {
+export interface IImageRender extends IUIRender {
+
+}
+
+export type ITextRenderModule = ITextRender & ThisType<IText>
+
+export interface ITextRender extends IUIRender {
 
 }
 
 export type IGroupRenderModule = IGroupRender & ThisType<IGroup>
 
-interface IGroupRender extends IUIRender {
+export interface IGroupRender extends IUIRender {
 
 }
 
 export type IFrameRenderModule = IFrameRender & ThisType<IFrame>
 
-interface IFrameRender extends IGroupRender {
+export interface IFrameRender extends IGroupRender {
 
 }
 

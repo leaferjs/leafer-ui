@@ -3,31 +3,40 @@ import { IRadiusPointData } from '@leafer/interface'
 import { IUIHitModule } from '@leafer-ui/interface'
 
 
-const fillVisibleType = ['visible', 'fill-visible']
-const fillType = ['all', 'fill']
-const strokeVisibleType = ['visible', 'stroke-visible']
-const strokeType = ['all', 'stroke']
-
 export const UIHit: IUIHitModule = {
 
-    __hit(local: IRadiusPointData): boolean {
+    __updateHitCanvas(): void {
+        if (!this.__hitCanvas) this.__hitCanvas = this.leafer.hitCanvasManager.getPathType(this)
+        this.__drawHitPath(this.__hitCanvas)
+        this.__hitCanvas.setStrokeOptions(this.__)
+    },
+
+    __hit(inner: IRadiusPointData): boolean {
         const { __hitCanvas: h } = this
 
-        const { fill, hitType } = this.__
-        const hitFill = (fill && fillVisibleType.includes(hitType)) || fillType.includes(hitType)
-        if (hitFill && h.hitPath(local, this.__.windingRule)) return true
+        const { fill, hitFill, windingRule } = this.__
+        const needHitFill = (fill && hitFill === 'path') || hitFill === 'all'
+        if (needHitFill && h.hitFill(inner, windingRule)) return true
 
-        const { stroke, __strokeOuterWidth: outerWidth } = this.__
-        const hitStroke = (stroke && strokeVisibleType.includes(hitType)) || strokeType.includes(hitType)
-        if (!hitFill && !hitStroke) return false
+        const { stroke, hitStroke, strokeWidth, strokeAlign } = this.__
+        const needHitStroke = (stroke && hitStroke === 'path') || hitStroke === 'all'
+        const radiusWidth = inner.radiusX * 2
+        let hitWidth = (needHitStroke ? (strokeAlign === 'center' ? strokeWidth / 2 : strokeWidth) : 0) * 2 + radiusWidth
+        if (!hitWidth) return false
 
-        const strokeWidth = ((hitStroke ? (outerWidth || 0) : 0) + local.radiusX) * 2
-        if (h.strokeWidth !== strokeWidth) {
-            h.strokeWidth = strokeWidth
-            h.stroke()
+        switch (strokeAlign) {
+            case 'inside':
+                if (!needHitFill && (h.hitFill(inner, windingRule) && h.hitStroke(inner, hitWidth))) return true
+                hitWidth = radiusWidth
+                break
+            case 'outside':
+                if (!needHitFill) {
+                    if (!h.hitFill(inner, windingRule) && h.hitStroke(inner, hitWidth)) return true
+                    hitWidth = radiusWidth
+                }
         }
 
-        return h.hitStroke(local)
+        return hitWidth ? h.hitStroke(inner, hitWidth) : false
     }
 
 }

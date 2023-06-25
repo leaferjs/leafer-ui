@@ -10,14 +10,27 @@ import { UI } from './UI'
 @registerUI()
 export class Group extends UI implements IGroup {
 
+    public get __tag() { return 'Group' }
+
     @dataProcessor(GroupData)
     public __: IGroupData
 
     public children: IUI[]
 
+    public set mask(child: IUI) {
+        if (this.__hasMask) this.__removeMask()
+        if (child) {
+            child.isMask = true
+            this.addAt(child, 0)
+        }
+    }
+    public get mask(): IUI {
+        return this.children.find(item => item.isMask)
+    }
+
     constructor(data?: IGroupInputData) {
         super(data)
-        this.__isBranch = true
+        this.isBranch = true
         this.children = []
     }
 

@@ -4,5 +4,5 @@ import { UIData } from "./UIData"
 
 
 export class RectData extends UIData implements IRectData {
-
+    get __boxStroke(): boolean { return true }
 }

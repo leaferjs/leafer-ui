@@ -1,15 +1,15 @@
-import { IPointData } from '@leafer/interface'
+import { IBlendMode, IMatrixData } from '@leafer/interface'
 
-import { IStringColor } from './IStringType'
-import { IBlendMode, IStrokeAlign, IStrokeJoin, IStrokeCap } from './IType'
+import { IColorString } from './IStringType'
+import { IStrokeAlign, IStrokeJoin, IStrokeCap } from './IType'
 import { IPaintType } from './IType'
 
-export type ILeafPaintColor = IStringColor | CanvasGradient | CanvasPattern
+export type ILeafPaintColor = IColorString | CanvasGradient | CanvasPattern
 
 export interface ILeafPaint {
     type: IPaintType
     style: ILeafPaintColor
-    scale?: IPointData
+    transform?: IMatrixData
     blendMode?: IBlendMode
     opacity?: number
 }
@@ -30,7 +30,7 @@ export interface ILeafShadowEffect {
     y: number
     blur: number
     spread?: number
-    color: IStringColor
+    color: IColorString
     blendMode?: IBlendMode
-    showBehind?: boolean // 仅用于 DropShadow
+    box?: boolean
 }

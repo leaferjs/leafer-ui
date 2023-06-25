@@ -5,14 +5,16 @@ import { IRectRenderModule } from '@leafer-ui/interface'
 
 export const RectRender: IRectRenderModule = {
 
-    __drawFast(canvas: ILeaferCanvas, _options: IRenderOptions): void {
+    __drawFast(canvas: ILeaferCanvas, options: IRenderOptions): void {
 
-        const { width, height, fill, stroke } = this.__
+        const { width, height, fill, stroke, __drawAfterFill } = this.__
 
         if (fill) {
             canvas.fillStyle = fill
             canvas.fillRect(0, 0, width, height)
         }
+
+        if (__drawAfterFill) this.__drawAfterFill(canvas, options)
 
         if (stroke) {
 

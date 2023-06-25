@@ -1,8 +1,8 @@
 import { IImageData } from '@leafer-ui/interface'
 
-import { UIData } from "./UIData"
+import { RectData } from './RectData'
 
 
-export class ImageData extends UIData implements IImageData {
+export class ImageData extends RectData implements IImageData {
 
 }

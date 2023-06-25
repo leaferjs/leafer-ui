@@ -1,25 +1,10 @@
-import { IMatrixData, IPointData, IPathCommandData, IWindingRule } from '@leafer/interface'
-import { IStringColor } from './IStringType'
+import { IPointData, IPathCommandData, IWindingRule, IBlendMode } from '@leafer/interface'
+import { IColorString } from './IStringType'
 
-export type IBlendMode =
-    | 'pass-through'
-    | 'normal'
-    | 'multiply'
-    | 'screen'
-    | 'overlay'
-    | 'darken'
-    | 'lighten'
-    | 'color-dodge'
-    | 'color-burn'
-    | 'hard-light'
-    | 'soft-light'
-    | 'difference'
-    | 'exclusion'
-    | 'hue'
-    | 'saturation'
-    | 'color'
-    | 'luminosity'
-
+export interface IUnitData {
+    type: 'percent' | 'px'
+    value: number
+}
 
 export type IPaint = ISolidPaint | IGradientPaint | IImagePaint
 
@@ -37,10 +22,9 @@ export type IPaintType =
     | IGradientType
 
 export type IGradientType =
-    | 'gradient-linear'
-    | 'gradient-radial'
-    | 'gradient-angular'
-    | 'gradient-diamond'
+    | 'linear'
+    | 'radial'
+    | 'angular'
 
 // ---   
 export interface ISolidPaint extends IPaintBase {
@@ -48,11 +32,12 @@ export interface ISolidPaint extends IPaintBase {
     color: IColor
 }
 
-export type IColor = IStringColor // | RGB | RGBA
+export type IColor = IColorString | IRGB | IRGBA
 export interface IRGB {
     r: number
     g: number
     b: number
+    a?: number
 }
 export interface IRGBA extends IRGB {
     a: number
@@ -61,8 +46,8 @@ export interface IRGBA extends IRGB {
 // ---
 export interface IGradientPaint extends IPaintBase {
     type: IGradientType
-    from: IPointData
-    to: IPointData
+    from?: IPointData
+    to?: IPointData
     stretch?: number
     stops: IColorStop[]
 }
@@ -75,11 +60,13 @@ export interface IColorStop {
 export interface IImagePaint extends IPaintBase {
     type: "image"
     url: string
-    mode: IImagePaintMode
-    transform?: IMatrixData
-    scale?: number
-    rotation?: number
+    mode?: IImagePaintMode
+
     filters?: IImageFilters
+
+    offset?: IPointData
+    scale?: number | IPointData
+    rotation?: number
 }
 export interface IImageFilters {
     exposure?: number // 曝光
@@ -90,7 +77,7 @@ export interface IImageFilters {
     highlights?: number // 高光
     shadows?: number // 阴影
 }
-export type IImagePaintMode = 'fill' | 'fit' | 'tile' | 'crop'
+export type IImagePaintMode = 'cover' | 'fit' | 'strench' | 'clip' | 'repeat'
 
 // 描边
 export type IStrokeAlign = 'inside' | 'outside' | 'center'
@@ -98,9 +85,11 @@ export type IStrokeCap = 'none' | 'round' | 'square' | 'arrow-lines' | 'arrow-eq
 export type IStrokeJoin = 'bevel' | 'round' | 'miter'
 
 // 文本
-export type ITextCase = 'upper' | 'lower' | 'title' | 'original' | 'small-caps' | 'small-caps-forced'
-export type IFontWeight = IFontWeightNumerical | IFontWeightString
-export type IFontWeightNumerical = 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
+export type ITextAlign = 'left' | 'center' | 'right' | 'justify'
+export type IVerticalAlign = 'top' | 'middle' | 'bottom'
+export type ITextCase = | 'upper' | 'lower' | 'title' | 'none' | 'small-caps'
+export type IFontWeight = IFontWeightNumer | IFontWeightString
+export type IFontWeightNumer = 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
 export type IFontWeightString =
     | 'thin'
     | 'extra-light'
@@ -111,7 +100,7 @@ export type IFontWeightString =
     | 'bold'
     | 'extra-bold'
     | 'black'
-export type ITextDecoration = 'none' | 'strikethrough' | 'underline'
+export type ITextDecoration = 'none' | 'under' | 'delete'
 
 // 路径
 export interface IVectorPath {
@@ -125,10 +114,10 @@ export interface IShadowEffect {
     y: number
     blur: number
     spread?: number
-    color: IStringColor | IColor
+    color: IColorString | IColor
     blendMode?: IBlendMode
     visible?: boolean
-    showBehind?: boolean // 仅用于 DropShadow
+    box?: boolean
 }
 
 export interface IBlurEffect {
@@ -140,3 +129,5 @@ export interface IGrayscaleEffect {
     grayscale: number
     visible?: boolean
 }
+
+export type IOverflow = 'show' | 'hide'

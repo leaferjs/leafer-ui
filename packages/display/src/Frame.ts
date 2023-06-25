@@ -1,84 +1,25 @@
-import { ILeaferCanvas, IRenderOptions, IPathDrawer, IBoundsData, IPathCommandData, __Boolean } from '@leafer/interface'
-import { BoundsHelper, dataProcessor, boundsType, rewrite, useModule, rewriteAble, registerUI } from '@leafer/core'
+import { __Boolean } from '@leafer/interface'
+import { dataProcessor, registerUI, affectRenderBoundsType } from '@leafer/core'
 
-import { IFrame, IFrameData, IFrameInputData } from '@leafer-ui/interface'
+import { IFrame, IFrameData, IFrameInputData, IOverflow } from '@leafer-ui/interface'
 import { FrameData } from '@leafer-ui/data'
-import { FrameRender } from '@leafer-ui/display-module'
 
-import { Group } from './Group'
-import { Rect } from './Rect'
+import { Box } from './Box'
 
 
-const rect = Rect.prototype
-const group = Group.prototype
-const bounds = {} as IBoundsData
-const { copy, add } = BoundsHelper
-
-
-@useModule(FrameRender)
-@rewriteAble()
 @registerUI()
-export class Frame extends Group implements IFrame {
+export class Frame extends Box implements IFrame {
+
+    public get __tag() { return 'Frame' }
 
     @dataProcessor(FrameData)
     public __: IFrameData
 
-    @boundsType(true)
-    public clip: __Boolean
+    @affectRenderBoundsType('hide')
+    public overflow: IOverflow
 
     constructor(data?: IFrameInputData) {
         super(data)
-        if (!this.fill) this.fill = '#FFFFFF'
-        this.__isBranchLeaf = true
+        if (!this.__.fill) this.__.fill = '#FFFFFF'
     }
-
-    @rewrite(rect.__drawPathByData)
-    public __drawPathByData(_drawer: IPathDrawer, _data: IPathCommandData): void { }
-
-    public __updateBoxBounds(): void {
-        this.__updateRectBoxBounds()
-        if (!this.__.clip) {
-            const { boxBounds } = this.__layout
-            copy(bounds, boxBounds)
-            super.__updateBoxBounds()
-            add(boxBounds, bounds)
-        }
-    }
-
-    public __updateEventBounds(): void {
-        this.__updateRectEventBounds()
-        if (!this.__.clip) {
-            const { eventBounds } = this.__layout
-            copy(bounds, eventBounds)
-            super.__updateEventBounds()
-            add(eventBounds, bounds)
-        }
-    }
-
-    public __updateRenderBounds(): void {
-        this.__updateRectRenderBounds()
-        if (!this.__.clip) {
-            const { renderBounds } = this.__layout
-            copy(bounds, renderBounds)
-            super.__updateRenderBounds()
-            add(renderBounds, bounds)
-        }
-    }
-
-    @rewrite(rect.__updateBoxBounds)
-    public __updateRectBoxBounds(): void { }
-
-    @rewrite(rect.__updateEventBounds)
-    public __updateRectEventBounds(): void { }
-
-    @rewrite(rect.__updateRenderBounds)
-    public __updateRectRenderBounds(): void { }
-
-
-    @rewrite(rect.__render)
-    public __renderRect(_canvas: ILeaferCanvas, _options: IRenderOptions): void { }
-
-    @rewrite(group.__render)
-    public __renderGroup(_canvas: ILeaferCanvas, _options: IRenderOptions): void { }
-
 }

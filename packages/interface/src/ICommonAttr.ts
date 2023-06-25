@@ -1,6 +1,6 @@
-import { IPaint, IStrokeAlign, IStrokeCap, IStrokeJoin, IBlurEffect, IFontWeight, ITextCase, ITextDecoration, IShadowEffect, IGrayscaleEffect } from './type/IType'
+import { IPaint, IStrokeAlign, IStrokeCap, IStrokeJoin, IBlurEffect, IFontWeight, ITextCase, ITextDecoration, IShadowEffect, IGrayscaleEffect, ITextAlign, IVerticalAlign, IOverflow, IUnitData } from './type/IType'
 import { ILeafStrokePaint, ILeafShadowEffect, ILeafPaint } from './type/IComputedType'
-import { IPaintString, IDashPatternString, IPercent, IShadowString, IStringColor, IStrokeWidthString, ICornerRadiusString } from './type/IStringType'
+import { IPaintString, IDashPatternString, IShadowString, IColorString, IStrokeWidthString, ICornerRadiusString } from './type/IStringType'
 
 // corner---
 export interface ICornerRadiusAttrData {
@@ -24,7 +24,7 @@ export interface IFillInputData {
     fill?: IPaint | IPaint[] | IPaintString
 }
 export interface IFillComputedData {
-    fill?: IStringColor | ILeafPaint[]
+    fill?: IColorString | ILeafPaint[]
 }
 
 // border 
@@ -57,7 +57,7 @@ export interface IStrokeInputData {
     miterLimit?: number
 }
 export interface IStrokeComputedData {
-    stroke?: IStringColor | ILeafStrokePaint[]
+    stroke?: IColorString | ILeafStrokePaint[]
 
     strokeAlign?: IStrokeAlign
     strokeWidth?: number
@@ -77,10 +77,16 @@ export interface ITextStyleAttrData {
     italic: boolean
     textCase: ITextCase
     textDecoration: ITextDecoration
-    letterSpacing: number | IPercent
-    lineHeight: number | IPercent
-    paragraphIndent: number
-    paragraphSpacing: number
+    letterSpacing: number | IUnitData
+    lineHeight: number | IUnitData
+
+    paraIndent: number
+    paraSpacing: number
+
+    textAlign: ITextAlign
+    verticalAlign: IVerticalAlign
+
+    textOverflow: IOverflow | string
 }
 export interface ITextStyleInputData {
     fontFamily?: string
@@ -89,10 +95,16 @@ export interface ITextStyleInputData {
     italic?: boolean
     textCase?: ITextCase
     textDecoration?: ITextDecoration
-    letterSpacing?: number | IPercent
-    lineHeight?: number | IPercent
-    paragraphIndent?: number
-    paragraphSpacing?: number
+    letterSpacing?: number | IUnitData
+    lineHeight?: number | IUnitData
+
+    paraIndent?: number
+    paraSpacing?: number
+
+    textAlign?: ITextAlign
+    verticalAlign?: IVerticalAlign
+
+    textOverflow?: IOverflow | string
 }
 export interface ITextStyleComputedData {
     fontFamily?: string
@@ -104,8 +116,12 @@ export interface ITextStyleComputedData {
     letterSpacing?: number
     lineHeight?: number
 
-    paragraphIndent?: number
-    paragraphSpacing?: number
+    paraIndent?: number
+    paraSpacing?: number
+
+    textAlign?: ITextAlign
+    verticalAlign?: IVerticalAlign
+    textOverflow?: IOverflow
 }
 
 // effect---

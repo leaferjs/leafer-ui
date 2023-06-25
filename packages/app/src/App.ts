@@ -1,53 +1,78 @@
-import { ILeaferConfig, IResizeEvent, ILeaferCanvas, IRenderOptions, IApp } from '@leafer/interface'
-import { DataHelper, LayoutEvent, RenderEvent } from '@leafer/core'
+import { ILeaferConfig, IResizeEvent, ILeaferCanvas, IRenderOptions, IApp, __Value } from '@leafer/interface'
+import { DataHelper, Debug, LayoutEvent, PropertyEvent, RenderEvent, canvasSizeAttrs, registerUI } from '@leafer/core'
 
 import { Leafer } from './Leafer'
 
 
+@registerUI()
 export class App extends Leafer implements IApp {
+
+    public get __tag() { return 'App' }
 
     public get isApp(): boolean { return true }
 
     public children: Leafer[] = []
 
-    constructor(userConfig?: ILeaferConfig) {
-        super(userConfig)
+    public realCanvas: boolean
+
+    protected __setApp(): void {
+        const { canvas } = this
+        const { realCanvas, view } = this.config
+        if (realCanvas || view === this.canvas.view || !canvas.parentView) {
+            this.realCanvas = true
+        } else {
+            canvas.unrealCanvas()
+        }
+
+        this.leafer = this
+        this.watcher.disable()
+        this.layouter.disable()
+
+        this.__eventIds.push(
+            this.on_(PropertyEvent.CHANGE, () => {
+                if (Debug.showHitView) this.children.forEach(leafer => { leafer.forceUpdate('blendMode') })
+            })
+        )
     }
 
     public start(): void {
+        super.start()
         this.children.forEach(leafer => { leafer.start() })
-        this.renderer.start()
-        this.running = true
     }
 
     public stop(): void {
         this.children.forEach(leafer => { leafer.stop() })
-        this.renderer.stop()
-        this.running = false
+        super.stop()
     }
 
     public addLeafer(merge?: ILeaferConfig): Leafer {
-        const leafer = new Leafer(this.__getChildConfig(merge), this)
+        const leafer = new Leafer(merge)
         this.add(leafer)
-
-        const { renderer } = this
-
-        this.__eventIds.push(
-            leafer.on__(LayoutEvent.END, this.__onChildLayoutEnd, this),
-            leafer.on__(RenderEvent.END, renderer.update, renderer),
-            this.on__(LayoutEvent.REQUEST, renderer.mergeBlocks, renderer),
-        )
-
         return leafer
     }
 
-    protected __onChildLayoutEnd(event: LayoutEvent): void {
-        const { renderer } = this
-        if ((event.current as Leafer).config.usePartRender) {
-            event.data.map(item => renderer.addBlock(item.updatedBounds))
-        } else {
-            renderer.addBlock(renderer.canvas.bounds)
+    public add(leafer: Leafer): void {
+        if (!leafer.view) leafer.init(this.__getChildConfig(leafer.userConfig), this)
+        super.add(leafer)
+
+        leafer.once(LayoutEvent.END, () => {
+            if (!this.ready && this.children.every(child => child.ready)) this.__onReady()
+        })
+
+        leafer.once(RenderEvent.END, () => {
+            if (!this.viewReady && this.children.every(child => child.viewReady)) this.__onViewReady()
+        })
+
+        if (this.realCanvas) {
+            this.__eventIds.push(
+                leafer.on_(RenderEvent.END, this.__onChildRenderEnd, this),
+            )
         }
+    }
+
+    protected __onChildRenderEnd(e: RenderEvent): void {
+        this.renderer.addBlock(e.renderBounds)
+        if (this.viewReady) this.renderer.update()
     }
 
     public __render(canvas: ILeaferCanvas, _options: IRenderOptions): void {
@@ -55,30 +80,27 @@ export class App extends Leafer implements IApp {
     }
 
     public __onResize(event: IResizeEvent): void {
-        this.emitEvent(event)
         this.children.forEach(leafer => { leafer.resize(event) })
+        super.__onResize(event)
+    }
+
+    protected __checkUpdateLayout(): void {
+        this.children.forEach(leafer => { leafer.__layout.checkUpdate() })
     }
 
     protected __getChildConfig(userConfig?: ILeaferConfig): ILeaferConfig {
-        let old = { ...this.config }
-        userConfig = userConfig ? DataHelper.default(userConfig, old) : old
-        userConfig.view = null
-        if (this.autoLayout) {
-            userConfig.width = this.width
-            userConfig.height = this.height
-            userConfig.pixelRatio = this.pixelRatio
-        }
-        return userConfig
+        let config = { ...this.config }
+        if (userConfig) DataHelper.assign(config, userConfig)
+        config.view = this.realCanvas ? undefined : this.view
+        config.fill = config.hittable = config.realCanvas = undefined
+        if (this.autoLayout) DataHelper.copyAttrs(config, this, canvasSizeAttrs)
+        return config
     }
 
     public destory(): void {
+        this.children.forEach(leafer => { leafer.destory() })
+        this.children.length = 0
         super.destory()
-
-        const { children } = this
-        if (children.length) {
-            children.forEach(leafer => leafer.destory())
-            children.length = 0
-        }
     }
 
 }

@@ -1,42 +1,38 @@
-import { IApp, ILeafer, ILeaferCanvas, IRenderer, ILayouter, ICreator, ISelector, IWatcher, IInteraction, ILeaferConfig, ICanvasManager, IHitCanvasManager, IImageManager, IAutoBounds, IScreenSizeData, IResizeEvent, IObject, ILeaf, IEventListenerId, ITransformEventData } from '@leafer/interface'
-import { AutoBounds, LayoutEvent, ResizeEvent, MoveEvent, ZoomEvent, LeaferEvent, CanvasManager, HitCanvasManager, ImageManager, DataHelper, LeafHelper, Creator, Run } from '@leafer/core'
+import { IApp, ILeafer, ILeaferCanvas, IRenderer, ILayouter, ISelector, IWatcher, IInteraction, ILeaferConfig, ICanvasManager, IHitCanvasManager, IImageManager, IAutoBounds, IScreenSizeData, IResizeEvent, ILeaf, IEventListenerId, ITransformEventData, ITimer, __Value, IObject, IControl } from '@leafer/interface'
+import { AutoBounds, LayoutEvent, ResizeEvent, LeaferEvent, CanvasManager, HitCanvasManager, ImageManager, DataHelper, Creator, Run, Debug, RenderEvent, registerUI, boundsType, canvasSizeAttrs, dataProcessor } from '@leafer/core'
 
+import { ILeaferInputData, ILeaferData } from '@leafer-ui/interface'
+import { LeaferData } from '@leafer-ui/data'
 import { Group } from '@leafer-ui/display'
 
 import { App } from './App'
+import { LeaferType } from './type/LeaferType'
 
 
+const debug = Debug.get('Leafer')
+
+@registerUI()
 export class Leafer extends Group implements ILeafer {
 
-    public creator: ICreator
+    public get __tag() { return 'Leafer' }
+
+    @dataProcessor(LeaferData)
+    public __: ILeaferData
+
+    @boundsType()
+    public pixelRatio: number
 
     public get isApp(): boolean { return false }
 
     public parent?: App
 
     public running: boolean
+    public ready: boolean
+    public viewReady: boolean
 
-    @resizeType()
-    public width: number
-
-    @resizeType()
-    public height: number
-
-    @resizeType()
-    public pixelRatio: number
-
-    public config: ILeaferConfig = {
-        useZoom: true,
-        useMove: true,
-        autoStart: true,
-        hittable: true,
-        pixelRatio: devicePixelRatio
-    }
-
-    public autoLayout?: IAutoBounds
+    public view: unknown
 
     //  manager
-
     public canvas: ILeaferCanvas
     public renderer: IRenderer
 
@@ -50,81 +46,145 @@ export class Leafer extends Group implements ILeafer {
     public hitCanvasManager?: IHitCanvasManager
     public imageManager: IImageManager
 
-    public zoomLayer?: ILeaf
-    public moveLayer?: ILeaf
+    public zoomLayer: ILeaf = this
+    public moveLayer: ILeaf = this
     public transformData?: ITransformEventData
 
-    protected __eventIds: IEventListenerId[] = []
-
-    constructor(userConfig?: ILeaferConfig, app?: IApp) {
-        super()
-
-        this.__setAsLeafer()
-        this.__setConfig(userConfig)
-
-        const { config } = this
-        this.creator = Creator
-        this.hittable = config.hittable
-
-        // render
-        this.canvas = Creator.canvas(config)
-        this.renderer = Creator.renderer(this, this.canvas, config)
-
-        // layout
-        if (this.isApp) {
-            this.__level = 1
-        } else {
-            this.watcher = Creator.watcher(this)
-            this.layouter = Creator.layouter(this)
+    public userConfig: ILeaferConfig
+    public config: ILeaferConfig = {
+        type: 'design',
+        start: true,
+        hittable: true,
+        zoom: {
+            min: 0.02,
+            max: 256
+        },
+        move: {
+            dragOut: true,
+            autoDistance: 2
         }
+    }
 
+    public autoLayout?: IAutoBounds
+
+    public __eventIds: IEventListenerId[] = []
+    protected __startTimer: ITimer
+    protected __controllers: IControl[] = []
+
+    constructor(userConfig?: ILeaferConfig, data?: ILeaferInputData) {
+        super(data)
+        this.userConfig = userConfig
+        if (userConfig?.view) this.init(userConfig)
+    }
+
+    public init(userConfig?: ILeaferConfig, parentApp?: IApp): void {
+        if (this.canvas) return
+
+        this.__setLeafer(this)
+        if (userConfig) DataHelper.assign(this.config, userConfig)
+
+        let start: boolean
+        const { config } = this
+        LeaferType.run(config.type, this)
+
+        // render / layout
+        this.canvas = Creator.canvas(config)
+        this.__controllers.push(
+            this.renderer = Creator.renderer(this, this.canvas, config),
+            this.watcher = Creator.watcher(this, config),
+            this.layouter = Creator.layouter(this, config)
+        )
+
+        if (this.isApp) this.__setApp()
         this.__checkAutoLayout(config)
+        this.view = this.canvas.view
 
         // interaction / manager
-        if (app) {
-
-            app.selector?.defaultPath.unshift(this)
-
-            this.selector = app.selector
-            if (config.hittable) this.interaction = app.interaction
-
-            this.canvasManager = app.canvasManager
-            this.hitCanvasManager = app.hitCanvasManager
-            this.imageManager = app.imageManager
-
-            if (app.running) setTimeout(this.start.bind(this))
-
+        if (parentApp) {
+            this.__bindApp(parentApp)
+            start = parentApp.running
         } else {
-
             this.selector = Creator.selector(this)
-            if (config.hittable) this.interaction = Creator.interaction(this, this.canvas, this.selector, config)
+            this.__controllers.unshift(this.interaction = Creator.interaction(this, this.canvas, this.selector, config))
 
             this.canvasManager = new CanvasManager()
             this.hitCanvasManager = new HitCanvasManager()
             this.imageManager = new ImageManager(this, config)
-            Run.start('FullCreate')
-            if (config.autoStart) setTimeout(this.start.bind(this))
 
+            start = config.start
         }
 
+        this.hittable = config.hittable
+        this.fill = config.fill
         this.canvasManager.add(this.canvas)
+
         this.__listenEvents()
 
+        if (start) this.__startTimer = setTimeout(this.start.bind(this))
     }
 
-    protected __listenEvents(): void {
-        this.once(LayoutEvent.END, () => {
-            this.__setAsRoot()
-            this.emit(LeaferEvent.READY)
-        })
+    public start(): void {
+        clearTimeout(this.__startTimer)
+        if (!this.running && this.canvas) {
+            this.ready ? this.emitLeafer(LeaferEvent.RESTART) : this.emitLeafer(LeaferEvent.START)
+            this.__controllers.forEach(item => item.start())
+            if (!this.isApp) this.renderer.render()
+            this.running = true
+        }
     }
 
-    protected __removeListenEvents(): void {
-        this.off__(this.__eventIds)
+    public stop(): void {
+        clearTimeout(this.__startTimer)
+        if (this.running && this.canvas) {
+            this.__controllers.forEach(item => item.stop())
+            this.running = false
+            this.emitLeafer(LeaferEvent.STOP)
+        }
     }
 
-    protected __setConfig(userConfig?: ILeaferConfig): void {
-        if (userConfig) this.config = DataHelper.default(userConfig, this.config)
+    public resize(size: IScreenSizeData): void {
+        const data = DataHelper.copyAttrs({}, size, canvasSizeAttrs)
+        Object.keys(data).forEach(key => (this as any)[key] = data[key])
+    }
+
+    public forceFullRender(): void {
+        this.renderer.addBlock(this.canvas.bounds)
+        if (this.viewReady) this.renderer.update()
+    }
+
+    protected __doResize(size: IScreenSizeData): void {
+        if (!this.canvas || this.canvas.isSameSize(size)) return
+        const old = DataHelper.copyAttrs({}, this.canvas, canvasSizeAttrs) as IScreenSizeData
+        this.canvas.resize(size)
+        this.__onResize(new ResizeEvent(size, old))
+    }
+
+    protected __onResize(event: IResizeEvent): void {
+        this.emitEvent(event)
+        DataHelper.copyAttrs(this.__, event, canvasSizeAttrs)
+        setTimeout(() => { if (this.canvasManager) this.canvasManager.clearRecycled() }, 0)
+    }
+
+    protected __setApp(): void { }
+
+    protected __bindApp(app: IApp): void {
+        this.selector = app.selector
+        this.interaction = app.interaction
+
+        this.canvasManager = app.canvasManager
+        this.hitCanvasManager = app.hitCanvasManager
+        this.imageManager = app.imageManager
+    }
+
+    public __setLeafer(leafer: ILeafer): void {
+        this.leafer = leafer
+        this.isLeafer = !!leafer
+        this.__level = 1
+    }
+
+    public setZoomLayer(zoomLayer: ILeaf, moveLayer?: ILeaf): void {
+        this.zoomLayer = zoomLayer
+        this.moveLayer = moveLayer || zoomLayer
     }
 
     protected __checkAutoLayout(config: ILeaferConfig): void {
@@ -134,111 +194,98 @@ export class Leafer extends Group implements ILeafer {
         }
     }
 
-    public start(): void {
-        if (!this.running) {
-            Run.endOfName('FullCreate')
-            if (this.interaction) {
-                this.__interactiveWindow()
-                this.interaction.start()
+    public __setAttr(attrName: string, newValue: __Value): void {
+        if (this.canvas) {
+            if (canvasSizeAttrs.includes(attrName)) {
+                this.__changeCanvasSize(attrName, newValue as number)
+            } else if (attrName === 'fill') {
+                this.__changeFill(newValue as string)
+            } else if (attrName === 'hittable') {
+                this.canvas.setHittable(newValue as boolean)
             }
-            this.renderer.start()
-            this.layouter.start()
-            this.watcher.start()
-            this.running = true
+        }
+        super.__setAttr(attrName, newValue)
+    }
+
+    public __getAttr(attrName: string): __Value {
+        if (this.canvas && canvasSizeAttrs.includes(attrName)) return this.canvas[attrName]
+        return super.__getAttr(attrName)
+    }
+
+    protected __changeCanvasSize(attrName: string, newValue: number): void {
+        const data = DataHelper.copyAttrs({}, this.canvas, canvasSizeAttrs)
+        data[attrName] = (this.config as IObject)[attrName] = newValue
+        if (newValue) this.canvas.stopAutoLayout()
+        this.__doResize(data as IScreenSizeData)
+    }
+
+    protected __changeFill(newValue: string): void {
+        this.config.fill = newValue as string
+        if (this.canvas.allowBackgroundColor) {
+            this.canvas.setBackgroundColor(newValue as string)
+        } else {
+            this.forceFullRender()
         }
     }
 
-    public stop(): void {
-        if (this.running) {
-            if (this.interaction) this.interaction.stop()
-            this.watcher.stop()
-            this.layouter.stop()
-            this.renderer.stop()
-            this.running = false
-        }
+    protected __onReady(): void {
+        if (this.ready) return
+        this.ready = true
+        this.emitLeafer(LeaferEvent.BEFORE_READY)
+        this.emitLeafer(LeaferEvent.READY)
+        this.emitLeafer(LeaferEvent.AFTER_READY)
     }
 
-    protected __interactiveWindow(): void {
-        const { useZoom, useMove } = this.config
-        if (useMove) {
-            const { MOVE } = MoveEvent
-            const { ZOOM } = ZoomEvent
-            if (!this.hasEvent(MOVE)) this.__eventIds.push(this.on__(MOVE, (e: MoveEvent) => { LeafHelper.moveOfWorld(this, e.moveX, e.moveY) }))
-            if (useZoom && !this.hasEvent(ZOOM)) this.__eventIds.push(this.on__(ZOOM, (e: ZoomEvent) => { LeafHelper.zoomOfWorld(this, e.scale, e) }))
-        }
+    protected __onViewReady(): void {
+        if (this.viewReady) return
+        this.viewReady = true
+        this.emitLeafer(LeaferEvent.VIEW_READY)
     }
 
-    public resize(size: IScreenSizeData): void {
-        if (this.canvas.isSameSize(size)) return
-        const { width, height, pixelRatio } = this.canvas
-        const oldSize = { width, height, pixelRatio }
-        this.canvas.resize(size)
-        this.__onResize(new ResizeEvent(size, oldSize))
+    protected __checkUpdateLayout(): void {
+        this.__layout.checkUpdate()
     }
 
-    protected __onResize(event: IResizeEvent): void {
-        this.emitEvent(event)
-        setTimeout(() => { this.canvasManager.clearRecycled() }, 0)
+    protected emitLeafer(type: string): void {
+        this.emitEvent(new LeaferEvent(type, this))
+    }
+
+    protected __listenEvents(): void {
+        const runId = Run.start('FirstCreate ' + this.innerName)
+        this.once(LeaferEvent.START, () => Run.end(runId))
+        this.once(LayoutEvent.END, () => this.__onReady())
+        this.once(RenderEvent.END, () => this.__onViewReady())
+        this.on(LayoutEvent.CHECK_UPDATE, () => this.__checkUpdateLayout())
+    }
+
+    protected __removeListenEvents(): void {
+        this.off_(this.__eventIds)
     }
 
     public destory(): void {
         if (this.canvas) {
-            super.destroy()
+            try {
+                this.stop()
+                this.emitEvent(new LeaferEvent(LeaferEvent.END, this))
+                this.__removeListenEvents()
 
-            this.__removeListenEvents()
+                this.__controllers.forEach(item => item.destroy())
+                this.__controllers.length = 0
 
-            if (!this.parent) {
-                this.interaction?.destroy()
                 this.selector.destroy()
-
-                this.renderer.destroy()
-                this.watcher.destroy()
-                this.layouter.destroy()
-
                 this.canvasManager.destory()
                 this.hitCanvasManager.destory()
                 this.imageManager.destory()
-            }
 
-            this.canvas.destroy()
-            this.canvas = null
+                this.canvas.destroy()
+                this.canvas = null
 
-            this.creator = null
-            this.config = null
+                this.config = this.userConfig = this.view = null
 
-            this.interaction = null
-            this.selector = null
-
-
-            this.renderer = null
-            this.watcher = null
-            this.layouter = null
-
-            this.canvasManager = null
-            this.hitCanvasManager = null
-            this.imageManager = null
-
-            this.zoomLayer = null
-            this.moveLayer = undefined
-
-            this.parent = undefined
-        }
-    }
-}
-
-function resizeType() {
-    return (target: Leafer, key: string) => {
-        const property: IObject & ThisType<Leafer> = {
-            get() {
-                return (this.canvas as IObject)[key]
-            },
-            set(value: number) {
-                const { width, height, pixelRatio } = this.canvas
-                const data = { width, height, pixelRatio } as IObject
-                data[key] = value
-                this.resize(data as IScreenSizeData)
+                super.destroy()
+            } catch (e) {
+                debug.error(e)
             }
         }
-        Object.defineProperty(target, key, property)
     }
 }

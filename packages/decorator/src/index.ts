@@ -1,1 +1,1 @@
-export { effectType } from './data'
+export { effectType, resizeType } from './data'

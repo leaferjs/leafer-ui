@@ -1,0 +1,22 @@
+{
+  "name": "@leafer-ui/color",
+  "version": "1.0.0-beta",
+  "description": "@leafer-ui/color",
+  "author": "Chao (Leafer) Wan",
+  "license": "MIT",
+  "main": "src/index.ts",
+  "files": ["src"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/leaferjs/ui.git"
+  },
+  "homepage": "https://github.com/leaferjs/ui/tree/main/packages/color",
+  "bugs": "https://github.com/leaferjs/ui/issues",
+  "keywords": [
+    "leafer-ui",
+    "leaferjs"
+  ],
+  "devDependencies": {
+     "@leafer-ui/interface": "1.0.0-beta"
+  }
+}

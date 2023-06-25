@@ -1,11 +1,13 @@
-import { ILeaferCanvas, IPathDrawer, IPathCommandData, IMatrixData, IBoundsData, IHitType, __Number, __Boolean, __String } from '@leafer/interface'
-import { Leaf, PathHelper, affectEventBoundsType, surfaceType, dataType, positionType, boundsType, pathType, scaleType, rotationType, opacityType, sortType, dataProcessor, useModule, rewrite, rewriteAble, UICreator } from '@leafer/core'
+import { ILeaferCanvas, IPathDrawer, IPathCommandData, IHitType, __Number, __Boolean, __String, IPathString } from '@leafer/interface'
+import { Leaf, PathDrawer, surfaceType, dataType, positionType, boundsType, pathType, scaleType, rotationType, opacityType, sortType, maskType, dataProcessor, useModule, rewrite, rewriteAble, UICreator, PathCorner, hitType, strokeType, PathConvert } from '@leafer/core'
 
-import { IUI, IShadowEffect, IBlurEffect, IPaint, IStrokeAlign, IStrokeJoin, IStrokeCap, IBlendMode, IPaintString, IDashPatternString, IShadowString, IGrayscaleEffect, IUIData, IGroup, IStrokeWidthString, ICornerRadiusString, IUITagInputData, IUITag } from '@leafer-ui/interface'
+import { IUI, IShadowEffect, IBlurEffect, IPaint, IStrokeAlign, IStrokeJoin, IStrokeCap, IBlendMode, IPaintString, IDashPatternString, IShadowString, IGrayscaleEffect, IUIData, IGroup, IStrokeWidthString, ICornerRadiusString, IUITagInputData, IUIInputData } from '@leafer-ui/interface'
 import { effectType } from '@leafer-ui/decorator'
 
 import { UIData } from '@leafer-ui/data'
 import { UIBounds, UIHit, UIRender } from '@leafer-ui/display-module'
+
+import { Paint } from '@leafer-ui/external'
 
 
 @useModule(UIBounds)
@@ -14,11 +16,9 @@ import { UIBounds, UIHit, UIRender } from '@leafer-ui/display-module'
 @rewriteAble()
 export class UI extends Leaf implements IUI {
 
-
     @dataProcessor(UIData)
     public __: IUIData
 
-    public root?: IGroup
     public parent?: IGroup
 
     // ---
@@ -35,14 +35,23 @@ export class UI extends Leaf implements IUI {
 
 
     // layer
+    @surfaceType('pass-through')
+    public blendMode: IBlendMode
+
     @opacityType(1)
     public opacity: __Number
 
     @opacityType(true)
     public visible: __Boolean
 
+    @maskType(false)
+    public isMask: __Boolean
+
     @sortType(0)
     public zIndex: __Number
+
+    @dataType()
+    public locked: __Boolean
 
 
     // position
@@ -84,28 +93,23 @@ export class UI extends Leaf implements IUI {
     public draggable: __Boolean
 
     // hit
-    @dataType(true)
+    @hitType(true)
     public hittable: __Boolean
 
-    @dataType('visible')
-    public hitType: IHitType
+    @hitType('path')
+    public hitFill: IHitType
 
-    @dataType(true)
+    @strokeType('path')
+    public hitStroke: IHitType
+
+    @hitType(true)
     public hitChildren: __Boolean
+
+    @hitType(true)
+    public hitSelf: __Boolean
 
     // ---
 
-
-    // layer
-
-    @surfaceType() // "pass-through"
-    public blendMode: IBlendMode
-
-    @boundsType()
-    public mask: __Boolean
-
-    @dataType()
-    public locked: __Boolean
 
     // fill
 
@@ -114,28 +118,28 @@ export class UI extends Leaf implements IUI {
 
     // stroke
 
-    @affectEventBoundsType()
+    @strokeType()
     public stroke: IPaint | IPaint[] | IPaintString
 
-    @affectEventBoundsType('center')
+    @strokeType('inside')
     public strokeAlign: IStrokeAlign
 
-    @affectEventBoundsType(1)
+    @strokeType(1)
     public strokeWidth: number | number[] | IStrokeWidthString
 
-    @surfaceType('none')
+    @strokeType('none')
     public strokeCap: IStrokeCap
 
-    @surfaceType('miter')
+    @strokeType('miter')
     public strokeJoin: IStrokeJoin
 
-    @surfaceType()
+    @strokeType()
     public dashPattern: __Number[] | IDashPatternString
 
-    @surfaceType()
+    @strokeType()
     public dashOffset: __Number
 
-    @surfaceType(10)
+    @strokeType(10)
     public miterLimit: __Number
 
 
@@ -165,23 +169,43 @@ export class UI extends Leaf implements IUI {
     public grayscale: __Number | IGrayscaleEffect
 
 
-    // now transform
+    constructor(data?: IUIInputData) {
+        super(data)
+    }
 
-    public get worldTransform(): IMatrixData { return this.__layout.getTransform('world') }
 
-    public get relativeTransform(): IMatrixData { return this.__layout.getTransform('relative') }
+    public set(data: IUITagInputData): void {
+        Object.assign(this, data)
+    }
 
-    // now bounds
+    public get(): IUITagInputData {
+        return this.__.__getInputData()
+    }
 
-    public get worldBoxBounds(): IBoundsData { return this.__layout.getBounds('world', 'box') }
 
-    public get worldRenderBounds(): IBoundsData { return this.__layout.getBounds('world', 'render') }
+    public getPath(curve?: boolean): IPathCommandData {
+        const path = this.__.path
+        if (!path) return []
+        return curve ? PathConvert.toCanvasData(path, true) : path
+    }
 
+    public getPathString(curve?: boolean): IPathString {
+        return PathConvert.stringify(this.getPath(curve))
+    }
+
+
+    public __onUpdateSize(): void {
+        if (this.__.__input) {
+            const { fill, stroke } = this.__.__input
+            if (fill) Paint.computeFill(this)
+            if (stroke) Paint.computeStroke(this)
+        }
+    }
 
     public __updateRenderPath(): void {
         if (this.__.path) {
             const { __: data } = this
-            data.__pathForRender = data.cornerRadius ? PathHelper.smoothCorner(data.path, data.cornerRadius, data.cornerSmoothing) : data.path
+            data.__pathForRender = data.cornerRadius ? PathCorner.smooth(data.path, data.cornerRadius, data.cornerSmoothing) : data.path
         }
     }
 
@@ -195,10 +219,11 @@ export class UI extends Leaf implements IUI {
         this.__drawPathByData(canvas, this.__.path)
     }
 
-    @rewrite(PathHelper.drawData)
+    @rewrite(PathDrawer.drawPathByData)
     public __drawPathByData(_drawer: IPathDrawer, _data: IPathCommandData): void { }
 
-    @rewrite(UICreator.get)
-    static create(_tag: IUITag, _data: IUITagInputData, _x?: number, _y?: number, _width?: number, _height?: number): IUI { return undefined }
+    static one(data: IUITagInputData, x?: number, y?: number, width?: number, height?: number): IUI {
+        return UICreator.get(data.tag || this.prototype.__tag, data, x, y, width, height) as IUI
+    }
 
 }

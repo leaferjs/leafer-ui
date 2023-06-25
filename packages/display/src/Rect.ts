@@ -12,6 +12,8 @@ import { UI } from './UI'
 @registerUI()
 export class Rect extends UI implements IRect {
 
+    public get __tag() { return 'Rect' }
+
     @dataProcessor(RectData)
     public __: IRectData
 

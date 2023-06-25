@@ -1,6 +1,6 @@
 {
   "name": "@leafer-ui/node",
-  "version": "1.0.0-alpha.21",
+  "version": "1.0.0-beta",
   "description": "@leafer-ui/node",
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
@@ -10,10 +10,14 @@
     "type": "git",
     "url": "https://github.com/leaferjs/ui.git"
   },
-  "homepage": "https://github.com/leaferjs/ui/tree/main/packages/node",
+  "homepage": "https://github.com/leaferjs/ui/tree/main/packages/platform/node",
   "bugs": "https://github.com/leaferjs/ui/issues",
   "keywords": [
     "leafer-ui",
     "leaferjs"
-  ]
+  ],
+  "dependencies": {
+    "@leafer/node": "1.0.0-beta",
+    "@leafer-ui/core": "1.0.0-beta"
+  }
 }

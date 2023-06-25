@@ -7,19 +7,22 @@ export {
     IPolygon, IPolygonInputData, IPolygonData,
     IStar, IStarInputData, IStarData,
     IPath, IPathInputData, IPathData,
-    IVector, IVectorInputData, IVectorData,
-    IText, ITextInputData, ITextData,
+    IPen, IPenInputData, IPenData,
+    IText, ITextInputData, ITextData, ITextRowData, ITextWordData, ITextCharData, ITextDrawData,
     IImage, IImageInputData, IImageData,
+    ICanvas, ICanvasInputData, ICanvasData,
     IFrame, IFrameInputData, IFrameData,
+    IBox, IBoxInputData, IBoxData,
     IGroup, IGroupInputData, IGroupData,
+    ILeaferInputData, ILeaferData,
     IUI, IUIInputData, IUIData,
     IUITag, IUITagInputData
 } from './IUI'
-export { IBlendMode, IVectorPath, IShadowEffect, IBlurEffect, IGrayscaleEffect, IStrokeAlign, IStrokeJoin, IStrokeCap, IColor, IPaint, IGradientPaint, IImagePaint, IImagePaintMode, IFontWeight, ITextCase, ITextDecoration } from './type/IType'
-export { ICornerRadiusString, IStrokeWidthString, IPaintString, IShadowString, IPercent, IDashPatternString, IPathString, IVectorPathString, IStringColor } from './type/IStringType'
+export { IUnitData, IVectorPath, IShadowEffect, IBlurEffect, IGrayscaleEffect, IStrokeAlign, IStrokeJoin, IStrokeCap, IRGB, IRGBA, IColor, IColorStop, IPaint, IGradientPaint, IImagePaint, IImagePaintMode, IFontWeight, ITextCase, ITextDecoration, ITextAlign, IVerticalAlign, IOverflow } from './type/IType'
+export { ICornerRadiusString, IStrokeWidthString, IPaintString, IShadowString, IPercent, IDashPatternString, IColorString as IStringColor } from './type/IStringType'
 export { ILeafFill, ILeafPaint, ILeafPaintColor, ILeafStrokePaint, ILeafShadowEffect } from './type/IComputedType'
 
-export { IUIRenderModule, IRectRenderModule, IImageRenderModule, IGroupRenderModule, IFrameRenderModule } from './module/IUIRender'
+export { IUIRenderModule, IRectRenderModule, IImageRenderModule, ITextRenderModule, IGroupRenderModule, IFrameRenderModule } from './module/IUIRender'
 export { IUIBoundsModule } from './module/IUIBounds'
 export { IUIHitModule } from './module/IUIHit'
 

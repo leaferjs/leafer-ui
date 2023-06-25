@@ -1,8 +1,8 @@
 import { IFrameData } from '@leafer-ui/interface'
 
-import { GroupData } from "./GroupData"
+import { BoxData } from './BoxData'
 
 
-export class FrameData extends GroupData implements IFrameData {
+export class FrameData extends BoxData implements IFrameData {
 
 }

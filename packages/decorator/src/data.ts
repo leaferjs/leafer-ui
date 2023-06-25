@@ -1,19 +1,29 @@
 import { __Value } from '@leafer/interface'
-import { defineDataProcessor, defineKey } from '@leafer/core'
+import { defineLeafAttr } from '@leafer/core'
 
-import { IUI } from '@leafer-ui/interface'
+import { ICanvas, IUI } from '@leafer-ui/interface'
 
 
 export function effectType(defaultValue?: __Value) {
     return (target: IUI, key: string) => {
-        defineKey(target, key, {
-            get() { return this.__get(key) },
+        defineLeafAttr(target, key, defaultValue, {
             set(value: __Value) {
-                this.__set(key, value)
-                this.__.__useEffect = true
-                this.__layout.renderBoundsChanged || this.__layout.renderBoundsChange()
+                this.__setAttr(key, value)
+                if (value) this.__.__useEffect = true
+                this.__layout.renderChanged || this.__layout.renderChange()
             }
         })
-        defineDataProcessor(target, key, defaultValue)
+    }
+}
+
+export function resizeType(defaultValue?: __Value) {
+    return (target: IUI, key: string) => {
+        defineLeafAttr(target, key, defaultValue, {
+            set(value: __Value) {
+                this.__setAttr(key, value)
+                this.__layout.boxChanged || this.__layout.boxChange();
+                (this as ICanvas).__updateSize()
+            }
+        })
     }
 }

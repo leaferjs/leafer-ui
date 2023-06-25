@@ -1,5 +1,5 @@
 import { __Number } from '@leafer/interface'
-import { PathCreator, dataProcessor, pathType, registerUI } from '@leafer/core'
+import { PathCommandDataHelper, dataProcessor, pathType, registerUI } from '@leafer/core'
 
 import { IStar, IStarData, IStarInputData } from '@leafer-ui/interface'
 import { StarData } from '@leafer-ui/data'
@@ -8,11 +8,13 @@ import { UI } from './UI'
 
 
 const { sin, cos, PI } = Math
-const { begin, moveTo, lineTo, close } = PathCreator
+const { moveTo, lineTo, closePath } = PathCommandDataHelper
 
 
 @registerUI()
 export class Star extends UI implements IStar {
+
+    public get __tag() { return 'Star' }
 
     @dataProcessor(StarData)
     public __: IStarData
@@ -20,7 +22,7 @@ export class Star extends UI implements IStar {
     @pathType(5)
     public points: __Number
 
-    @pathType(0.38)
+    @pathType(0.382)
     public innerRadius: __Number
 
     constructor(data?: IStarInputData) {
@@ -32,14 +34,14 @@ export class Star extends UI implements IStar {
         const { width, height, points, innerRadius } = this.__
         const rx = width / 2, ry = height / 2
 
-        begin(this.__.path = [])
-        moveTo(rx, 0)
+        const path: number[] = this.__.path = []
+        moveTo(path, rx, 0)
 
         for (let i = 1; i < points * 2; i++) {
-            lineTo(rx + (i % 2 === 0 ? rx : rx * innerRadius) * sin((i * PI) / points), ry - (i % 2 === 0 ? ry : ry * innerRadius) * cos((i * PI) / points))
+            lineTo(path, rx + (i % 2 === 0 ? rx : rx * innerRadius) * sin((i * PI) / points), ry - (i % 2 === 0 ? ry : ry * innerRadius) * cos((i * PI) / points))
         }
 
-        close()
+        closePath(path)
 
     }
 

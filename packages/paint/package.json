@@ -1,6 +1,6 @@
 {
   "name": "@leafer-ui/paint",
-  "version": "1.0.0-alpha.21",
+  "version": "1.0.0-beta",
   "description": "@leafer-ui/paint",
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
@@ -16,8 +16,12 @@
     "leafer-ui",
     "leaferjs"
   ],
+  "dependencies": {
+    "@leafer/core": "1.0.0-beta",
+    "@leafer-ui/color": "1.0.0-beta"
+  },
   "devDependencies": {
-     "@leafer/interface": "1.0.0-alpha.21",
-     "@leafer-ui/interface": "1.0.0-alpha.21"
+     "@leafer/interface": "1.0.0-beta",
+     "@leafer-ui/interface": "1.0.0-beta"
   }
 }
