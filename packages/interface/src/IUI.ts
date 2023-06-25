@@ -1,6 +1,6 @@
 import { ILeaf, ILeafComputedData, ILeafData, ILeafInputData, ILeaferCanvas, IRenderOptions, IPathDrawer, IPointData, IPath2D, IPathCommandData, IWindingRule, ILeaferImageConfig, IBoundsData, IObject, __Number, IPathString, ILeaferImage } from '@leafer/interface'
 
-import { IOverflow, IVectorPath } from './type/IType'
+import { IOverflow } from './type/IType'
 
 import {
     IFillAttrData, IFillInputData, IFillComputedData,
