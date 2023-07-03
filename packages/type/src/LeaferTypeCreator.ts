@@ -6,9 +6,9 @@ import { user } from './user'
 import { design } from './design'
 
 
-const debug = Debug.get('LeaferType')
+const debug = Debug.get('LeaferTypeCreator')
 
-export const LeaferType = {
+export const LeaferTypeCreator = {
 
     list: {} as ILeaferTypeList,
 
@@ -21,7 +21,7 @@ export const LeaferType = {
     },
 
     run(name: string, leafer: ILeafer): void {
-        const fn = LeaferType.list[name]
+        const fn = LeaferTypeCreator.list[name]
         if (fn) {
             fn(leafer)
         } else {
@@ -31,7 +31,7 @@ export const LeaferType = {
 
 }
 
-const { list } = LeaferType
+const { list } = LeaferTypeCreator
 
-LeaferType.register('user', user)
-LeaferType.register('design', design)
+LeaferTypeCreator.register('user', user)
+LeaferTypeCreator.register('design', design)

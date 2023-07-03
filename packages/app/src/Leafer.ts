@@ -2,11 +2,11 @@ import { IApp, ILeafer, ILeaferCanvas, IRenderer, ILayouter, ISelector, IWatcher
 import { AutoBounds, LayoutEvent, ResizeEvent, LeaferEvent, CanvasManager, HitCanvasManager, ImageManager, DataHelper, Creator, Run, Debug, RenderEvent, registerUI, boundsType, canvasSizeAttrs, dataProcessor } from '@leafer/core'
 
 import { ILeaferInputData, ILeaferData } from '@leafer-ui/interface'
+import { LeaferTypeCreator } from '@leafer-ui/type'
 import { LeaferData } from '@leafer-ui/data'
 import { Group } from '@leafer-ui/display'
 
 import { App } from './App'
-import { LeaferType } from './type/LeaferType'
 
 
 const debug = Debug.get('Leafer')
@@ -85,7 +85,7 @@ export class Leafer extends Group implements ILeafer {
 
         let start: boolean
         const { config } = this
-        LeaferType.run(config.type, this)
+        LeaferTypeCreator.run(config.type, this)
 
         // render / layout
         this.canvas = Creator.canvas(config)
