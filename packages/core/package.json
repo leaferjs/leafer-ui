@@ -18,6 +18,7 @@
   ],
   "dependencies": {
     "@leafer-ui/app": "1.0.0-beta.2",
+    "@leafer-ui/type": "1.0.0-beta.2",
     "@leafer-ui/display": "1.0.0-beta.2",
     "@leafer-ui/decorator": "1.0.0-beta.2",
     "@leafer-ui/display-module": "1.0.0-beta.2",
