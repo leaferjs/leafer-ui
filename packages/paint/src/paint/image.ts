@@ -14,7 +14,8 @@ export function image(ui: IUI, attrName: string, paint: IImagePaint, box: IBound
         style: 'rgba(255,255,255,0)'
     }
 
-    const image = ui.leafer.imageManager.get(paint)
+    const { imageManager } = ui.leafer
+    const image = imageManager.get(paint)
 
     if (image.ready) {
 
@@ -47,14 +48,17 @@ export function image(ui: IUI, attrName: string, paint: IImagePaint, box: IBound
 
     } else {
 
-        image.load(() => {
-            if (!ui.__.__getInput('width')) ui.width = image.width
-            if (!ui.__.__getInput('height')) ui.height = image.height
-            ui.forceUpdate('width')
-            ui.emitEvent(new ImageEvent(ImageEvent.LOADED, ui, image, attrName, paint))
-        }, (error) => {
-            ui.emitEvent(new ImageEvent(ImageEvent.ERROR, ui, image, attrName, paint, error))
-        })
+        imageManager.load(image,
+            () => {
+                if (!ui.__.__getInput('width')) ui.width = image.width
+                if (!ui.__.__getInput('height')) ui.height = image.height
+                ui.forceUpdate('width')
+                ui.emitEvent(new ImageEvent(ImageEvent.LOADED, ui, image, attrName, paint))
+            },
+            (error) => {
+                ui.emitEvent(new ImageEvent(ImageEvent.ERROR, ui, image, attrName, paint, error))
+            }
+        )
 
     }
 

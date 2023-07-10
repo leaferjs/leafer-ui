@@ -1,6 +1,6 @@
 {
   "name": "@leafer-ui/external",
-  "version": "1.0.0-beta.2",
+  "version": "1.0.0-beta.5",
   "description": "@leafer-ui/external",
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
@@ -17,10 +17,10 @@
     "leaferjs"
   ],
   "dependencies": {
-    "@leafer-ui/paint": "1.0.0-beta.2",
-    "@leafer-ui/effect": "1.0.0-beta.2"
+    "@leafer-ui/paint": "1.0.0-beta.5",
+    "@leafer-ui/effect": "1.0.0-beta.5"
   },
   "devDependencies": {
-     "@leafer-ui/interface": "1.0.0-beta.2"
+     "@leafer-ui/interface": "1.0.0-beta.5"
   }
 }

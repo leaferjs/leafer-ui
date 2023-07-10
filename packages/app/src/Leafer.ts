@@ -201,7 +201,7 @@ export class Leafer extends Group implements ILeafer {
             } else if (attrName === 'fill') {
                 this.__changeFill(newValue as string)
             } else if (attrName === 'hittable') {
-                this.canvas.setHittable(newValue as boolean)
+                this.canvas.hittable = newValue as boolean
             }
         }
         super.__setAttr(attrName, newValue)
@@ -222,7 +222,7 @@ export class Leafer extends Group implements ILeafer {
     protected __changeFill(newValue: string): void {
         this.config.fill = newValue as string
         if (this.canvas.allowBackgroundColor) {
-            this.canvas.setBackgroundColor(newValue as string)
+            this.canvas.backgroundColor = newValue as string
         } else {
             this.forceFullRender()
         }

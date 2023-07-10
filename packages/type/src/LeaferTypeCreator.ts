@@ -12,9 +12,10 @@ export const LeaferTypeCreator = {
 
     list: {} as ILeaferTypeList,
 
+
     register(name: string, fn: ILeaferTypeFunction): void {
         if (list[name]) {
-            debug.error('repeat:', name)
+            debug.repeat(name)
         } else {
             list[name] = fn
         }
