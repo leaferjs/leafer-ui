@@ -24,9 +24,9 @@ export class UIData extends LeafData implements IUIData {
     protected setBlendMode(value: IBlendMode) {
         this._blendMode = value
         if (value === 'pass-through' || !value) {
-            if (this.__blendLayer) this.__blendLayer = false
+            if (this.__single) this.__single = false
         } else {
-            this.__blendLayer = true
+            this.__single = true
         }
     }
 

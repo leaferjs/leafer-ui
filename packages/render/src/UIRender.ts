@@ -14,7 +14,7 @@ export const UIRender: IUIRenderModule = {
             data.__useEffect = !!(shadow || innerShadow || blur || backgroundBlur)
         }
 
-        let complex = data.__isFills || data.__isStrokes || data.cornerRadius || data.__useEffect || (data.blendMode && data.blendMode !== 'pass-through')
+        let complex = data.__isFills || data.__isStrokes || data.cornerRadius || data.__useEffect || data.__single
 
         if (complex) {
             data.__complex = true
@@ -37,14 +37,7 @@ export const UIRender: IUIRenderModule = {
 
         if (this.__.__complex) {
 
-            const { fill, stroke, __drawAfterFill, __blendLayer } = this.__
-
-            let orginCanvas: ILeaferCanvas
-
-            if (__blendLayer) {
-                orginCanvas = canvas
-                canvas = canvas.getSameCanvas(true)
-            }
+            const { fill, stroke, __drawAfterFill } = this.__
 
             this.__drawRenderPath(canvas)
 
@@ -73,11 +66,6 @@ export const UIRender: IUIRenderModule = {
                 if (__drawAfterFill) this.__drawAfterFill(canvas, options)
                 if (stroke) this.__.__isStrokes ? Paint.strokes(this, canvas, stroke as ILeafStrokePaint[]) : Paint.stroke(this, canvas, stroke)
 
-            }
-
-            if (orginCanvas) {
-                orginCanvas.copyWorldToInner(canvas, this.__world, this.__layout.renderBounds, this.__.blendMode)
-                canvas.recycle()
             }
 
 
