@@ -1,10 +1,9 @@
 {
   "name": "leafer-ui",
-  "version": "1.0.0-beta.5",
+  "version": "1.0.0-beta.6",
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
-  "browser": "dist/index.js",
-  "main": "dist/node.js",
+  "main": "dist/index.js",
   "types": "src/index.d.ts",
   "unpkg": "dist/global.js",
   "files": ["src","dist"],
@@ -27,8 +26,8 @@
     "engine"
   ],
   "dependencies": {
-    "@leafer-ui/web": "1.0.0-beta.5",
-    "@leafer-ui/interface": "1.0.0-beta.5",
-    "@leafer/interface": "1.0.0-beta.5"
+    "@leafer-ui/web": "1.0.0-beta.6",
+    "@leafer-ui/interface": "1.0.0-beta.6",
+    "@leafer/interface": "1.0.0-beta.6"
   }
 }
