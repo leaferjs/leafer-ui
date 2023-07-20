@@ -148,6 +148,10 @@ export class Leafer extends Group implements ILeafer {
         Object.keys(data).forEach(key => (this as any)[key] = data[key])
     }
 
+    public forceLayout(): void {
+        this.__layout.checkUpdate(true)
+    }
+
     public forceFullRender(): void {
         this.renderer.addBlock(this.canvas.bounds)
         if (this.viewReady) this.renderer.update()
