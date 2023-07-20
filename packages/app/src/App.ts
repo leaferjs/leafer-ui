@@ -96,10 +96,13 @@ export class App extends Leafer implements IApp {
 
     protected __getChildConfig(userConfig?: ILeaferConfig): ILeaferConfig {
         let config = { ...this.config }
+        config.hittable = config.realCanvas = undefined
         if (userConfig) DataHelper.assign(config, userConfig)
-        config.view = this.realCanvas ? undefined : this.view
-        config.fill = config.hittable = config.realCanvas = undefined
+
+        // reset
         if (this.autoLayout) DataHelper.copyAttrs(config, this, canvasSizeAttrs)
+        config.view = this.realCanvas ? undefined : this.view
+        config.fill = undefined
         return config
     }
 
