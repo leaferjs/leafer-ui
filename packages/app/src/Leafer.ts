@@ -1,7 +1,7 @@
 import { IApp, ILeafer, ILeaferCanvas, IRenderer, ILayouter, ISelector, IWatcher, IInteraction, ILeaferConfig, ICanvasManager, IHitCanvasManager, IImageManager, IAutoBounds, IScreenSizeData, IResizeEvent, ILeaf, IEventListenerId, ITransformEventData, ITimer, __Value, IObject, IControl } from '@leafer/interface'
-import { AutoBounds, LayoutEvent, ResizeEvent, LeaferEvent, CanvasManager, HitCanvasManager, ImageManager, DataHelper, Creator, Run, Debug, RenderEvent, registerUI, boundsType, canvasSizeAttrs, dataProcessor } from '@leafer/core'
+import { AutoBounds, LayoutEvent, ResizeEvent, LeaferEvent, CanvasManager, HitCanvasManager, ImageManager, DataHelper, Creator, Run, Debug, RenderEvent, registerUI, boundsType, canvasSizeAttrs, dataProcessor, Platform } from '@leafer/core'
 
-import { ILeaferInputData, ILeaferData } from '@leafer-ui/interface'
+import { ILeaferInputData, ILeaferData, IFunction } from '@leafer-ui/interface'
 import { LeaferTypeCreator } from '@leafer-ui/type'
 import { LeaferData } from '@leafer-ui/data'
 import { Group } from '@leafer-ui/display'
@@ -29,6 +29,7 @@ export class Leafer extends Group implements ILeafer {
     public running: boolean
     public ready: boolean
     public viewReady: boolean
+    public get viewLoaded(): boolean { return this.viewReady && !this.watcher.changed && this.imageManager.tasker.isComplete }
 
     public view: unknown
 
@@ -74,7 +75,7 @@ export class Leafer extends Group implements ILeafer {
     constructor(userConfig?: ILeaferConfig, data?: ILeaferInputData) {
         super(data)
         this.userConfig = userConfig
-        if (userConfig?.view) this.init(userConfig)
+        if (userConfig && (userConfig.view || userConfig.width)) this.init(userConfig)
     }
 
     public init(userConfig?: ILeaferConfig, parentApp?: IApp): void {
@@ -185,6 +186,19 @@ export class Leafer extends Group implements ILeafer {
     public setZoomLayer(zoomLayer: ILeaf, moveLayer?: ILeaf): void {
         this.zoomLayer = zoomLayer
         this.moveLayer = moveLayer || zoomLayer
+    }
+
+    public waitViewLoaded(fun: IFunction): void {
+        let id: IEventListenerId
+        const check = () => {
+            if (this.viewLoaded) {
+                if (id) this.off_(id)
+                Platform.requestRender(fun)
+            }
+        }
+        if (!this.running) this.start()
+        check()
+        if (!this.viewLoaded) id = this.on_('render.after', check)
     }
 
     protected __checkAutoLayout(config: ILeaferConfig): void {

@@ -1,13 +1,13 @@
-import { ILeaferCanvas, IPathDrawer, IPathCommandData, IHitType, __Number, __Boolean, __String, IPathString } from '@leafer/interface'
-import { Leaf, PathDrawer, surfaceType, dataType, positionType, boundsType, pathType, scaleType, rotationType, opacityType, sortType, maskType, dataProcessor, useModule, rewrite, rewriteAble, UICreator, PathCorner, hitType, strokeType, PathConvert } from '@leafer/core'
+import { ILeaferCanvas, IPathDrawer, IPathCommandData, IHitType, __Number, __Boolean, __String, IPathString, IExportFileType } from '@leafer/interface'
+import { Leaf, PathDrawer, surfaceType, dataType, positionType, boundsType, pathType, scaleType, rotationType, opacityType, sortType, maskType, dataProcessor, useModule, rewrite, rewriteAble, UICreator, PathCorner, hitType, strokeType, PathConvert, eraserType } from '@leafer/core'
 
-import { IUI, IShadowEffect, IBlurEffect, IPaint, IStrokeAlign, IStrokeJoin, IStrokeCap, IBlendMode, IPaintString, IDashPatternString, IShadowString, IGrayscaleEffect, IUIData, IGroup, IStrokeWidthString, ICornerRadiusString, IUITagInputData, IUIInputData } from '@leafer-ui/interface'
+import { IUI, IShadowEffect, IBlurEffect, IPaint, IStrokeAlign, IStrokeJoin, IStrokeCap, IBlendMode, IPaintString, IDashPatternString, IShadowString, IGrayscaleEffect, IUIData, IGroup, IStrokeWidthString, ICornerRadiusString, IUITagInputData, IUIInputData, IExportOptions, IExportResult } from '@leafer-ui/interface'
 import { effectType } from '@leafer-ui/decorator'
 
 import { UIData } from '@leafer-ui/data'
 import { UIBounds, UIHit, UIRender } from '@leafer-ui/display-module'
 
-import { Paint } from '@leafer-ui/external'
+import { Export, Paint } from '@leafer-ui/external'
 
 
 @useModule(UIBounds)
@@ -47,6 +47,9 @@ export class UI extends Leaf implements IUI {
     @maskType(false)
     public isMask: __Boolean
 
+    @eraserType(false)
+    public isEraser?: __Boolean
+
     @sortType(0)
     public zIndex: __Number
 
@@ -68,14 +71,12 @@ export class UI extends Leaf implements IUI {
     @boundsType(100)
     public height: __Number
 
-
     // scale
     @scaleType(1)
     public scaleX: __Number
 
     @scaleType(1)
     public scaleY: __Number
-
 
     // rotate
     @rotationType(0)
@@ -221,6 +222,10 @@ export class UI extends Leaf implements IUI {
 
     @rewrite(PathDrawer.drawPathByData)
     public __drawPathByData(_drawer: IPathDrawer, _data: IPathCommandData): void { }
+
+    public export(filename: IExportFileType | string, options?: IExportOptions | number | boolean): Promise<IExportResult> {
+        return Export.export(this, filename, options)
+    }
 
     static one(data: IUITagInputData, x?: number, y?: number, width?: number, height?: number): IUI {
         return UICreator.get(data.tag || this.prototype.__tag, data, x, y, width, height) as IUI

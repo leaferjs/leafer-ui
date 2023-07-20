@@ -1,4 +1,4 @@
-import { ILeaf, ILeafComputedData, ILeafData, ILeafInputData, ILeaferCanvas, IRenderOptions, IPathDrawer, IPointData, IPath2D, IPathCommandData, IWindingRule, ILeaferImageConfig, IBoundsData, IObject, __Number, IPathString, ILeaferImage } from '@leafer/interface'
+import { ILeaf, ILeafComputedData, ILeafData, ILeafInputData, ILeaferCanvas, IRenderOptions, IPathDrawer, IPointData, IPath2D, IPathCommandData, IWindingRule, ILeaferImageConfig, IBoundsData, IObject, __Number, IPathString, ILeaferImage, IBlob } from '@leafer/interface'
 
 import { IOverflow } from './type/IType'
 
@@ -10,6 +10,7 @@ import {
     IEffectAttrData, IEffectInputData, IEffectComputedData,
     ITextStyleAttrData, ITextStyleInputData, ITextStyleComputedData
 } from './ICommonAttr'
+import { IExportOptions } from './module/IExport'
 
 
 // Line
@@ -267,6 +268,8 @@ export interface IUI extends IFillAttrData, IStrokeAttrData, ICornerRadiusAttrDa
 
     __drawPathByData(drawer: IPathDrawer, data: IPathCommandData): void
     __drawAfterFill?(canvas: ILeaferCanvas, options: IRenderOptions): void
+
+    export(filename: string, options?: IExportOptions | number): Promise<IBlob | string | boolean>
 }
 
 export interface IUIData extends IUIComputedData, ILeafData {

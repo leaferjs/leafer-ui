@@ -1,4 +1,4 @@
-import { IBlendMode, __Value } from '@leafer/interface'
+import { __Value } from '@leafer/interface'
 import { LeafData } from '@leafer/core'
 
 import { IShadowEffect, IUI, IUIData, IUnitData } from '@leafer-ui/interface'
@@ -10,7 +10,6 @@ export class UIData extends LeafData implements IUIData {
     public __leaf: IUI
 
     public __blendLayer?: boolean
-    public _blendMode: string
 
     public __isFills?: boolean
     public __isStrokes?: boolean
@@ -21,14 +20,6 @@ export class UIData extends LeafData implements IUIData {
     protected _shadow?: __Value
     protected _innerShadow?: __Value
 
-    protected setBlendMode(value: IBlendMode) {
-        this._blendMode = value
-        if (value === 'pass-through' || !value) {
-            if (this.__single) this.__single = false
-        } else {
-            this.__single = true
-        }
-    }
 
     protected setFill(value: __Value) {
         if (typeof value === 'string' || !value) {

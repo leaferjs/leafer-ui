@@ -4,7 +4,12 @@
   "description": "@leafer-ui/node",
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
-  "main": "src/index.ts",
+  "main": "dist/index.js",
+  "types": "src/index.d.ts",
+  "exports": {
+    "import": "./dist/index.mjs",
+    "require": "./dist/index.js"
+  },
   "files": ["src"],
   "repository": {
     "type": "git",
@@ -18,6 +23,8 @@
   ],
   "dependencies": {
     "@leafer/node": "1.0.0-beta.5",
-    "@leafer-ui/core": "1.0.0-beta.5"
+    "@leafer-ui/core": "1.0.0-beta.5",
+    "@leafer-ui/interface": "1.0.0-beta.5",
+    "@leafer/interface": "1.0.0-beta.5"
   }
 }

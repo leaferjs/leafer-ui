@@ -7,14 +7,16 @@ import { Paint, Effect } from '@leafer-ui/external'
 export const UIRender: IUIRenderModule = {
 
     __updateChange(): void {
-        let data = this.__
+        const data = this.__
 
         if (data.__useEffect) {
             const { shadow, innerShadow, blur, backgroundBlur } = this.__
             data.__useEffect = !!(shadow || innerShadow || blur || backgroundBlur)
         }
 
-        let complex = data.__isFills || data.__isStrokes || data.cornerRadius || data.__useEffect || data.__single
+        data.__checkSingle()
+
+        const complex = data.__isFills || data.__isStrokes || data.cornerRadius || data.__useEffect
 
         if (complex) {
             data.__complex = true

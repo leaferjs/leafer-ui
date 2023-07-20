@@ -1,5 +1,5 @@
-import { ILeaferConfig, IResizeEvent, ILeaferCanvas, IRenderOptions, IApp, __Value } from '@leafer/interface'
-import { DataHelper, Debug, LayoutEvent, PropertyEvent, RenderEvent, canvasSizeAttrs, registerUI } from '@leafer/core'
+import { ILeaferConfig, IResizeEvent, ILeaferCanvas, IRenderOptions, IApp, __Value, IFunction } from '@leafer/interface'
+import { DataHelper, Debug, LayoutEvent, Platform, PropertyEvent, RenderEvent, canvasSizeAttrs, registerUI } from '@leafer/core'
 
 import { Leafer } from './Leafer'
 
@@ -68,6 +68,12 @@ export class App extends Leafer implements IApp {
                 leafer.on_(RenderEvent.END, this.__onChildRenderEnd, this),
             )
         }
+    }
+
+    public waitViewLoaded(fun: IFunction): void {
+        const wait = () => { if (this.children.every(item => item.viewLoaded)) Platform.requestRender(fun) }
+        this.children.forEach(leafer => { leafer.waitViewLoaded(wait) })
+        if (!this.running) this.start()
     }
 
     protected __onChildRenderEnd(e: RenderEvent): void {
