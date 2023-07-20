@@ -4,7 +4,7 @@ import { Platform, MatrixHelper, ImageEvent } from '@leafer/core'
 import { IUI, IImagePaint, ILeafPaint, IMatrixData, IImagePaintMode, IPointData } from '@leafer-ui/interface'
 
 
-const { get, rotateOf, translate, scaleOf, scale: scaleHelper, rotate } = MatrixHelper
+const { get, rotateOfOuter, translate, scaleOfOuter, scale: scaleHelper, rotate } = MatrixHelper
 
 export function image(ui: IUI, attrName: string, paint: IImagePaint, box: IBoundsData): ILeafPaint {
     let { type, blendMode } = paint
@@ -75,7 +75,7 @@ function getFillOrFitTransform(mode: IImagePaintMode, box: IBoundsData, width: n
     const y = box.y + (box.height - height * scale) / 2
     translate(transform, x, y)
     scaleHelper(transform, scale)
-    if (rotation) rotateOf(transform, { x: box.x + box.width / 2, y: box.y + box.height / 2 }, rotation)
+    if (rotation) rotateOfOuter(transform, { x: box.x + box.width / 2, y: box.y + box.height / 2 }, rotation)
     return transform
 }
 
@@ -106,7 +106,7 @@ function getRepeatTransform(box: IBoundsData, width: number, height: number, sca
         }
     }
     translate(transform, box.x, box.y)
-    if (scale) scaleOf(transform, box, scale)
+    if (scale) scaleOfOuter(transform, box, scale)
     return transform
 }
 

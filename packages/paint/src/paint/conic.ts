@@ -7,7 +7,7 @@ import { applyStops } from './linear'
 
 
 const { set, getAngle, getDistance } = PointHelper
-const { get, rotateOf, scaleOf } = MatrixHelper
+const { get, rotateOfOuter, scaleOfOuter } = MatrixHelper
 
 const defaultFrom = { x: 0.5, y: 0.5 }
 const defaultTo = { x: 0.5, y: 1 }
@@ -31,11 +31,11 @@ export function conicGradient(paint: IGradientPaint, box: IBoundsData): ILeafPai
     const angle = getAngle(realFrom, realTo)
 
     if (Platform.conicGradientRotate90) {
-        scaleOf(transform, realFrom, width / height * (stretch || 1), 1)
-        rotateOf(transform, realFrom, angle + 90)
+        scaleOfOuter(transform, realFrom, width / height * (stretch || 1), 1)
+        rotateOfOuter(transform, realFrom, angle + 90)
     } else {
-        scaleOf(transform, realFrom, 1, width / height * (stretch || 1))
-        rotateOf(transform, realFrom, angle)
+        scaleOfOuter(transform, realFrom, 1, width / height * (stretch || 1))
+        rotateOfOuter(transform, realFrom, angle)
     }
 
     const style = Platform.conicGradientSupport ? Platform.canvas.createConicGradient(0, realFrom.x, realFrom.y) : Platform.canvas.createRadialGradient(realFrom.x, realFrom.y, 0, realFrom.x, realFrom.y, getDistance(realFrom, realTo))

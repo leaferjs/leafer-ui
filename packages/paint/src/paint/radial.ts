@@ -7,7 +7,7 @@ import { applyStops } from './linear'
 
 
 const { set, getAngle, getDistance } = PointHelper
-const { get, rotateOf, scaleOf } = MatrixHelper
+const { get, rotateOfOuter, scaleOfOuter } = MatrixHelper
 
 const defaultFrom = { x: 0.5, y: 0.5 }
 const defaultTo = { x: 0.5, y: 1 }
@@ -30,8 +30,8 @@ export function radialGradient(paint: IGradientPaint, box: IBoundsData): ILeafPa
 
     if (width !== height || stretch) {
         transform = get()
-        scaleOf(transform, realFrom, width / height * (stretch || 1), 1)
-        rotateOf(transform, realFrom, getAngle(realFrom, realTo) + 90)
+        scaleOfOuter(transform, realFrom, width / height * (stretch || 1), 1)
+        rotateOfOuter(transform, realFrom, getAngle(realFrom, realTo) + 90)
     }
 
     const style = Platform.canvas.createRadialGradient(realFrom.x, realFrom.y, 0, realFrom.x, realFrom.y, getDistance(realFrom, realTo))
