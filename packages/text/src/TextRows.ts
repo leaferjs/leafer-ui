@@ -103,7 +103,7 @@ export function createRows(drawData: ITextDrawData, content: string, style: ITex
         if (wordWidth) addWord()
         if (rowWidth) addRow()
 
-        rows[rows.length - 1].paraEnd = true
+        rows.length > 0 && (rows[rows.length - 1].paraEnd = true)
 
     } else {
 
