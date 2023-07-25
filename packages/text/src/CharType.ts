@@ -3,8 +3,8 @@ import { IBooleanMap } from '@leafer-ui/interface'
 const money = '¥￥＄€£￡¢￠'
 const letter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz'
 
-const langBefore = '《（「〈『〖【〔｛┌＜’“＝' + money
-const langAfter = '》）」〉』〗】〕｝┐＞’“！？，、。：；‰'
+const langBefore = '《（「〈『〖【〔｛┌＜‘“＝' + money
+const langAfter = '》）」〉』〗】〕｝┐＞’”！？，、。：；‰'
 const langSymbol = '≮≯≈≠＝…'
 const langBreak = '—／～｜┆·'
 
