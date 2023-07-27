@@ -247,10 +247,11 @@ export interface IGroup extends IUI {
     children: IUI[]
     mask?: IUI
     add(child: IUI, index?: number): void
-    remove(child?: IUI): void
     addAt(child: IUI, index: number): void
     addAfter(child: IUI, after: IUI): void
     addBefore(child: IUI, before: IUI): void
+    remove(child?: IUI): void
+    removeAll(): void
 }
 export interface IGroupData extends IUIData { }
 export interface IGroupInputData extends IUIInputData { }

@@ -52,4 +52,6 @@ export class Group extends UI implements IGroup {
 
     public remove(_child?: IUI): void { }
 
+    public removeAll(): void { }
+
 }
