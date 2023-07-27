@@ -8,11 +8,8 @@ const { get, rotateOfOuter, translate, scaleOfOuter, scale: scaleHelper, rotate 
 
 export function image(ui: IUI, attrName: string, paint: IImagePaint, box: IBoundsData): ILeafPaint {
     const { type, blendMode } = paint
-    let leaferPaint: ILeafPaint = {
-        type,
-        blendMode,
-        style: 'rgba(255,255,255,0)'
-    }
+    let leaferPaint: ILeafPaint = { type, style: 'rgba(255,255,255,0)' }
+    if (blendMode) leaferPaint.blendMode = blendMode
 
     const { imageManager } = ui.leafer
     const image = imageManager.get(paint)
