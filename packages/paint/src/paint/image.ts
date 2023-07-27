@@ -1,4 +1,4 @@
-import { IBoundsData } from '@leafer/interface'
+import { IBoundsData, ISizeData } from '@leafer/interface'
 import { Platform, MatrixHelper, ImageEvent } from '@leafer/core'
 
 import { IUI, IImagePaint, ILeafPaint, IMatrixData, IImagePaintMode, IPointData } from '@leafer-ui/interface'
@@ -7,7 +7,7 @@ import { IUI, IImagePaint, ILeafPaint, IMatrixData, IImagePaintMode, IPointData 
 const { get, rotateOfOuter, translate, scaleOfOuter, scale: scaleHelper, rotate } = MatrixHelper
 
 export function image(ui: IUI, attrName: string, paint: IImagePaint, box: IBoundsData): ILeafPaint {
-    let { type, blendMode } = paint
+    const { type, blendMode } = paint
     let leaferPaint: ILeafPaint = {
         type,
         blendMode,
@@ -19,41 +19,45 @@ export function image(ui: IUI, attrName: string, paint: IImagePaint, box: IBound
 
     if (image.ready) {
 
-        let transform: IMatrixData
-        let { opacity, mode, offset, scale, rotation } = paint
-        let { width, height } = image
-        const sameBox = box.width === width && box.height === height
+        if (!autoSize(ui, image)) {
 
-        switch (mode) {
-            case 'strench':
-                if (!sameBox) width = box.width, height = box.height
-                if (box.x || box.y) {
-                    transform = get()
-                    translate(transform, box.x, box.y)
-                }
-                break
-            case 'clip':
-                if (offset || scale || rotation) transform = getClipTransform(box, offset, scale, rotation)
-                break
-            case 'repeat':
-                if (!sameBox || scale || rotation) transform = getRepeatTransform(box, width, height, scale as number, rotation)
-                break
-            case 'fit':
-            case 'cover':
-            default:
-                if (!sameBox || rotation) transform = getFillOrFitTransform(mode, box, width, height, rotation)
+            let transform: IMatrixData
+            let { opacity, mode, offset, scale, rotation } = paint
+            let { width, height } = image
+            const sameBox = box.width === width && box.height === height
+
+            switch (mode) {
+                case 'strench':
+                    if (!sameBox) width = box.width, height = box.height
+                    if (box.x || box.y) {
+                        transform = get()
+                        translate(transform, box.x, box.y)
+                    }
+                    break
+                case 'clip':
+                    if (offset || scale || rotation) transform = getClipTransform(box, offset, scale, rotation)
+                    break
+                case 'repeat':
+                    if (!sameBox || scale || rotation) transform = getRepeatTransform(box, width, height, scale as number, rotation)
+                    break
+                case 'fit':
+                case 'cover':
+                default:
+                    if (!sameBox || rotation) transform = getFillOrFitTransform(mode, box, width, height, rotation)
+            }
+
+            leaferPaint.style = createPattern(image.getCanvas(width, height, opacity), transform, mode === 'repeat')
+
         }
-
-        leaferPaint.style = createPattern(image.getCanvas(width, height, opacity), transform, mode === 'repeat')
 
     } else {
 
         imageManager.load(image,
             () => {
-                if (!ui.__.__getInput('width')) ui.width = image.width
-                if (!ui.__.__getInput('height')) ui.height = image.height
-                ui.forceUpdate('width')
-                ui.emitEvent(new ImageEvent(ImageEvent.LOADED, ui, image, attrName, paint))
+                if (ui.leafer) {
+                    if (!autoSize(ui, image)) ui.forceUpdate('width')
+                    ui.emitEvent(new ImageEvent(ImageEvent.LOADED, ui, image, attrName, paint))
+                }
             },
             (error) => {
                 ui.emitEvent(new ImageEvent(ImageEvent.ERROR, ui, image, attrName, paint, error))
@@ -63,6 +67,22 @@ export function image(ui: IUI, attrName: string, paint: IImagePaint, box: IBound
     }
 
     return leaferPaint
+}
+
+function autoSize(ui: IUI, image: ISizeData): boolean {
+    let auto: boolean
+    const { __: data } = ui
+    if (data) {
+        if (!data.__getInput('width')) {
+            auto = true
+            ui.width = image.width
+        }
+        if (!data.__getInput('height')) {
+            auto = true
+            ui.height = image.height
+        }
+    }
+    return auto
 }
 
 function getFillOrFitTransform(mode: IImagePaintMode, box: IBoundsData, width: number, height: number, rotation: number): IMatrixData {
