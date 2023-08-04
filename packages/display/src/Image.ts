@@ -40,8 +40,6 @@ export class Image extends Rect implements IImage {
         }
 
         if (update) {
-            this.__.__naturalWidth = undefined
-            this.__.__naturalHeight = undefined
             if (this.image) this.image = null
             this.fill = { type: 'image', mode: 'strench', url }
             this.once(ImageEvent.LOADED, (e) => this.image = e.image)

@@ -16,7 +16,7 @@ export function image(ui: IUI, attrName: string, paint: IImagePaint, box: IBound
 
     if (image.ready) {
 
-        if (hasSize(ui, image)) {
+        if (hasSize(ui, attrName, image)) {
 
             let transform: IMatrixData
             let { opacity, mode, offset, scale, rotation } = paint
@@ -52,7 +52,7 @@ export function image(ui: IUI, attrName: string, paint: IImagePaint, box: IBound
         imageManager.load(image,
             () => {
                 if (ui.leafer) {
-                    if (hasSize(ui, image)) ui.forceUpdate('width')
+                    if (hasSize(ui, attrName, image)) ui.forceUpdate('width')
                     ui.emitEvent(new ImageEvent(ImageEvent.LOADED, ui, image, attrName, paint))
                 }
             },
@@ -66,9 +66,10 @@ export function image(ui: IUI, attrName: string, paint: IImagePaint, box: IBound
     return leaferPaint
 }
 
-function hasSize(ui: IUI, image: ISizeData): boolean {
+function hasSize(ui: IUI, attrName: string, image: ISizeData): boolean {
     const { __: data } = ui
-    if (data) {
+
+    if (attrName === 'fill' && data) {
         if (!data.__naturalWidth || !data.__naturalHeight) {
             data.__naturalWidth = image.width
             data.__naturalHeight = image.height

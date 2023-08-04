@@ -31,6 +31,7 @@ export class UIData extends LeafData implements IUIData {
             this.__leaf.__layout.boxChanged ? this._fill = value : Paint.computeFill(this.__leaf)
             this.__isFills = true
         }
+        if (this.__naturalWidth) this.__naturalWidth = this.__naturalHeight = undefined
     }
 
     protected setStroke(value: __Value) {
