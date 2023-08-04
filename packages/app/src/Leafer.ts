@@ -56,6 +56,7 @@ export class Leafer extends Group implements ILeafer {
         type: 'design',
         start: true,
         hittable: true,
+        smooth: true,
         zoom: {
             min: 0.02,
             max: 256
