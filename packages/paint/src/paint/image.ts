@@ -16,7 +16,7 @@ export function image(ui: IUI, attrName: string, paint: IImagePaint, box: IBound
 
     if (image.ready) {
 
-        if (!autoSize(ui, image)) {
+        if (hasSize(ui, image)) {
 
             let transform: IMatrixData
             let { opacity, mode, offset, scale, rotation } = paint
@@ -52,7 +52,7 @@ export function image(ui: IUI, attrName: string, paint: IImagePaint, box: IBound
         imageManager.load(image,
             () => {
                 if (ui.leafer) {
-                    if (!autoSize(ui, image)) ui.forceUpdate('width')
+                    if (hasSize(ui, image)) ui.forceUpdate('width')
                     ui.emitEvent(new ImageEvent(ImageEvent.LOADED, ui, image, attrName, paint))
                 }
             },
@@ -66,20 +66,20 @@ export function image(ui: IUI, attrName: string, paint: IImagePaint, box: IBound
     return leaferPaint
 }
 
-function autoSize(ui: IUI, image: ISizeData): boolean {
-    let auto: boolean
+function hasSize(ui: IUI, image: ISizeData): boolean {
     const { __: data } = ui
     if (data) {
-        if (!data.__getInput('width')) {
-            auto = true
-            ui.width = image.width
-        }
-        if (!data.__getInput('height')) {
-            auto = true
-            ui.height = image.height
+        if (!data.__naturalWidth || !data.__naturalHeight) {
+            data.__naturalWidth = image.width
+            data.__naturalHeight = image.height
+            if (!data.__getInput('width') || !data.__getInput('height')) {
+                ui.forceUpdate('width')
+                return false
+            }
         }
     }
-    return auto
+
+    return true
 }
 
 function getFillOrFitTransform(mode: IImagePaintMode, box: IBoundsData, width: number, height: number, rotation: number): IMatrixData {
