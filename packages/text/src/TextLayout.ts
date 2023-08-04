@@ -53,6 +53,8 @@ export function layoutText(drawData: ITextDrawData, style: ITextData): void {
             row.isOverflow = true
             drawData.overflow = i + 1
         }
+
+        if (row.width > bounds.width) bounds.width = row.width
     }
 
     bounds.y = y

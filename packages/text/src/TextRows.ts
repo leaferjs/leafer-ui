@@ -23,7 +23,7 @@ export function createRows(drawData: ITextDrawData, content: string, style: ITex
     const { __letterSpacing, paraIndent, textCase } = style
     const { canvas } = Platform
     const { width, height } = bounds
-    const charMode = width || height || __letterSpacing || textCase
+    const charMode = width || height || __letterSpacing || (textCase !== 'none')
 
     if (charMode) {
 
@@ -136,9 +136,8 @@ function addRow(): void {
         paraStart = false
     }
     row.width = rowWidth
-    trimRight(row)
+    if (bounds.width) trimRight(row)
     rows.push(row)
-    if (row.width > bounds.width) bounds.width = row.width
     row = { words: [] }
     rowWidth = 0
 }
