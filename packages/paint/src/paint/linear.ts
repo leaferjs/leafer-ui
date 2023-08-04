@@ -18,11 +18,9 @@ export function linearGradient(paint: IGradientPaint, box: IBoundsData): ILeafPa
     const style = Platform.canvas.createLinearGradient(box.x + from.x * box.width, box.y + from.y * box.height, box.x + to.x * box.width, box.y + to.y * box.height)
     applyStops(style, paint.stops, opacity)
 
-    return {
-        type,
-        blendMode,
-        style
-    }
+    const data: ILeafPaint = { type, style }
+    if (blendMode) data.blendMode = blendMode
+    return data
 
 }
 

@@ -205,6 +205,10 @@ export class Leafer extends Group implements ILeafer {
         if (!this.viewLoaded) id = this.on_('render.after', check)
     }
 
+    public receiveEvent(event: IObject): void {
+        if (this.interaction) this.interaction.receive(event)
+    }
+
     protected __checkAutoLayout(config: ILeaferConfig): void {
         if (!config.width || !config.height) {
             this.autoLayout = new AutoBounds(config)

@@ -37,11 +37,8 @@ export function radialGradient(paint: IGradientPaint, box: IBoundsData): ILeafPa
     const style = Platform.canvas.createRadialGradient(realFrom.x, realFrom.y, 0, realFrom.x, realFrom.y, getDistance(realFrom, realTo))
     applyStops(style, paint.stops, opacity)
 
-    return {
-        type,
-        blendMode,
-        style,
-        transform
-    }
+    const data: ILeafPaint = { type, style, transform }
+    if (blendMode) data.blendMode = blendMode
+    return data
 
 }

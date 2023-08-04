@@ -41,11 +41,8 @@ export function conicGradient(paint: IGradientPaint, box: IBoundsData): ILeafPai
     const style = Platform.conicGradientSupport ? Platform.canvas.createConicGradient(0, realFrom.x, realFrom.y) : Platform.canvas.createRadialGradient(realFrom.x, realFrom.y, 0, realFrom.x, realFrom.y, getDistance(realFrom, realTo))
     applyStops(style, paint.stops, opacity)
 
-    return {
-        type,
-        blendMode,
-        style,
-        transform
-    }
+    const data: ILeafPaint = { type, style, transform }
+    if (blendMode) data.blendMode = blendMode
+    return data
 
 }
