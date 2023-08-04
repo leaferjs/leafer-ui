@@ -37,7 +37,14 @@ export function shape(ui: IUI, current: ILeaferCanvas, options: IRenderOptions):
 
     } else {
 
-        bounds = shapeBounds = __world
+        if (options.matrix) {
+            scaleX *= options.matrix.a
+            scaleY *= options.matrix.d
+            bounds = shapeBounds = getOuterOf(__world, options.matrix)
+        } else {
+            bounds = shapeBounds = __world
+        }
+
         worldCanvas = canvas
     }
 

@@ -1,4 +1,4 @@
-import { IBoundsData, ILeaferCanvas, IMatrixWithBoundsData, IOffsetBoundsData } from '@leafer/interface'
+import { IBoundsData, ILeaferCanvas, IMatrixWithBoundsData, IOffsetBoundsData, IRenderOptions } from '@leafer/interface'
 import { BoundsHelper } from '@leafer/core'
 
 import { IUI, ICachedShape } from '@leafer-ui/interface'
@@ -9,7 +9,7 @@ import { drawWorldShadow } from './Shadow'
 const { toOffsetOutBounds } = BoundsHelper
 const offsetOutBounds = {} as IOffsetBoundsData
 
-export function innerShadow(ui: IUI, current: ILeaferCanvas, shape: ICachedShape): void {
+export function innerShadow(ui: IUI, current: ILeaferCanvas, shape: ICachedShape, _options: IRenderOptions): void {
 
     let copyBounds: IBoundsData, spreadScale: number
 

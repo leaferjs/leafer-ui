@@ -49,13 +49,13 @@ export const UIRender: IUIRenderModule = {
 
                 const { shadow, innerShadow } = this.__
 
-                if (shadow) Effect.shadow(this, canvas, shape)
+                if (shadow) Effect.shadow(this, canvas, shape, options)
 
                 if (fill) this.__.__isFills ? Paint.fills(this, canvas, fill as ILeafPaint[]) : Paint.fill(this, canvas, fill)
 
                 if (__drawAfterFill) this.__drawAfterFill(canvas, options)
 
-                if (innerShadow) Effect.innerShadow(this, canvas, shape)
+                if (innerShadow) Effect.innerShadow(this, canvas, shape, options)
 
                 if (stroke) this.__.__isStrokes ? Paint.strokes(this, canvas, stroke as ILeafStrokePaint[]) : Paint.stroke(this, canvas, stroke)
 

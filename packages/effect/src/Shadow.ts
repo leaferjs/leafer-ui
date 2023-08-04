@@ -1,4 +1,4 @@
-import { IBoundsData, ILeaferCanvas, IMatrixWithBoundsData, IOffsetBoundsData } from '@leafer/interface'
+import { IBoundsData, ILeaferCanvas, IMatrixWithBoundsData, IOffsetBoundsData, IRenderOptions } from '@leafer/interface'
 import { BoundsHelper, Platform } from '@leafer/core'
 
 import { IUI, ICachedShape } from '@leafer-ui/interface'
@@ -8,7 +8,7 @@ const { copy, toOffsetOutBounds } = BoundsHelper
 const tempBounds = {} as IBoundsData
 const offsetOutBounds = {} as IOffsetBoundsData
 
-export function shadow(ui: IUI, current: ILeaferCanvas, shape: ICachedShape): void {
+export function shadow(ui: IUI, current: ILeaferCanvas, shape: ICachedShape, _options: IRenderOptions): void {
 
     let copyBounds: IBoundsData, spreadScale: number
 
