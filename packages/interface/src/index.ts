@@ -25,7 +25,7 @@ export { ILeafFill, ILeafPaint, ILeafPaintColor, ILeafStrokePaint, ILeafShadowEf
 export { IUIRenderModule, IRectRenderModule, IImageRenderModule, ITextRenderModule, IGroupRenderModule, IFrameRenderModule } from './module/IUIRender'
 export { IUIBoundsModule } from './module/IUIBounds'
 export { IUIHitModule } from './module/IUIHit'
-export { IExportModule, IExportOptions, IExportResult } from './module/IExport'
+export { IExportModule, IExportOptions, IExportResult, IExportResultFunction } from './module/IExport'
 
 export { IPaintModule } from './module/IPaint'
 export { IEffectModule } from './module/IEffect'
