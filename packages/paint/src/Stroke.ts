@@ -8,6 +8,7 @@ import { strokeText, strokesText } from './StrokeText'
 export function stroke(ui: IUI, canvas: ILeaferCanvas, stroke: string | object): void {
     const options = ui.__
     const { strokeWidth, strokeAlign, __font } = options
+    if (!strokeWidth) return
 
     if (__font) {
 
@@ -58,6 +59,7 @@ export function stroke(ui: IUI, canvas: ILeaferCanvas, stroke: string | object):
 export function strokes(ui: IUI, canvas: ILeaferCanvas, strokes: ILeafPaint[]): void {
     const options = ui.__
     const { strokeWidth, strokeAlign, __font } = options
+    if (!strokeWidth) return
 
     if (__font) {
 
