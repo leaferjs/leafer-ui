@@ -106,10 +106,10 @@ export class App extends Leafer implements IApp {
         return config
     }
 
-    public destory(): void {
-        this.children.forEach(leafer => { leafer.destory() })
+    public destroy(): void {
+        this.children.forEach(leafer => { leafer.destroy() })
         this.children.length = 0
-        super.destory()
+        super.destroy()
     }
 
 }

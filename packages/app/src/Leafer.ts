@@ -287,7 +287,7 @@ export class Leafer extends Group implements ILeafer {
         this.off_(this.__eventIds)
     }
 
-    public destory(): void {
+    public destroy(): void {
         if (this.canvas) {
             try {
                 this.stop()
@@ -298,9 +298,9 @@ export class Leafer extends Group implements ILeafer {
                 this.__controllers.length = 0
 
                 this.selector.destroy()
-                this.canvasManager.destory()
-                this.hitCanvasManager.destory()
-                this.imageManager.destory()
+                this.canvasManager.destroy()
+                this.hitCanvasManager.destroy()
+                this.imageManager.destroy()
 
                 this.canvas.destroy()
                 this.canvas = null
