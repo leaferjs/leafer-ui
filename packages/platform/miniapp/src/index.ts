@@ -4,4 +4,4 @@ import { PluginManager, useCanvas } from './miniapp'
 import * as power from './miniapp'
 
 PluginManager.power = power
-useCanvas('wx')
+useCanvas('wx', wx)
