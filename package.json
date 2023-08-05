@@ -1,6 +1,6 @@
 {
   "name": "leafer-ui",
-  "version": "1.0.0-beta.7",
+  "version": "1.0.0-beta.8",
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
   "main": "dist/index.js",
@@ -26,8 +26,8 @@
     "engine"
   ],
   "dependencies": {
-    "@leafer-ui/web": "1.0.0-beta.7",
-    "@leafer-ui/interface": "1.0.0-beta.7",
-    "@leafer/interface": "1.0.0-beta.7"
+    "@leafer-ui/web": "1.0.0-beta.8",
+    "@leafer-ui/interface": "1.0.0-beta.8",
+    "@leafer/interface": "1.0.0-beta.8"
   }
 }

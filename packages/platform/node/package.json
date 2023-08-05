@@ -1,6 +1,6 @@
 {
   "name": "@leafer-ui/node",
-  "version": "1.0.0-beta.7",
+  "version": "1.0.0-beta.8",
   "description": "@leafer-ui/node",
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
@@ -10,7 +10,7 @@
     "import": "./dist/index.mjs",
     "require": "./dist/index.js"
   },
-  "files": ["src"],
+  "files": ["src","dist"],
   "repository": {
     "type": "git",
     "url": "https://github.com/leaferjs/ui.git"
@@ -22,9 +22,9 @@
     "leaferjs"
   ],
   "dependencies": {
-    "@leafer/node": "1.0.0-beta.7",
-    "@leafer-ui/core": "1.0.0-beta.7",
-    "@leafer/interface": "1.0.0-beta.7",
-    "@leafer-ui/interface": "1.0.0-beta.7"
+    "@leafer/node": "1.0.0-beta.8",
+    "@leafer-ui/core": "1.0.0-beta.8",
+    "@leafer/interface": "1.0.0-beta.8",
+    "@leafer-ui/interface": "1.0.0-beta.8"
   }
 }
