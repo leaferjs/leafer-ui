@@ -205,7 +205,7 @@ export class Leafer extends Group implements ILeafer {
         }
         if (!this.running) this.start()
         check()
-        if (!this.viewLoaded) id = this.on_('render.after', check)
+        if (!this.viewLoaded) id = this.on_(RenderEvent.AFTER, check)
     }
 
     public receiveEvent(event: IObject): void {

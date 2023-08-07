@@ -74,7 +74,11 @@ export function createRows(drawData: ITextDrawData, content: string, style: ITex
 
                 }
 
-                if (!(char === ' ' && (rowWidth + wordWidth) === 0)) {
+                if (char === ' ' && paraStart !== true && (rowWidth + wordWidth) === 0) {
+
+                    // trim space
+
+                } else {
 
                     if (charType === Break) {
 
