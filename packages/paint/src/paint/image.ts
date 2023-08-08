@@ -43,7 +43,7 @@ export function image(ui: IUI, attrName: string, paint: IImagePaint, box: IBound
                     if (!sameBox || rotation) transform = getFillOrFitTransform(mode, box, width, height, rotation)
             }
 
-            leaferPaint.style = createPattern(image.getCanvas(width, height, opacity), transform, mode === 'repeat')
+            createPattern(leaferPaint, image.getCanvas(width, height, opacity), transform, mode === 'repeat')
 
         }
 
@@ -53,11 +53,11 @@ export function image(ui: IUI, attrName: string, paint: IImagePaint, box: IBound
             () => {
                 if (ui.leafer) {
                     if (hasSize(ui, attrName, image)) ui.forceUpdate('width')
-                    ui.emitEvent(new ImageEvent(ImageEvent.LOADED, ui, image, attrName, paint))
+                    if (ui.hasEvent(ImageEvent.LOADED)) ui.emitEvent(new ImageEvent(ImageEvent.LOADED, ui, image, attrName, paint))
                 }
             },
             (error) => {
-                ui.emitEvent(new ImageEvent(ImageEvent.ERROR, ui, image, attrName, paint, error))
+                if (ui.hasEvent(ImageEvent.ERROR)) ui.emitEvent(new ImageEvent(ImageEvent.ERROR, ui, image, attrName, paint, error))
             }
         )
 
@@ -129,11 +129,8 @@ function getRepeatTransform(box: IBoundsData, width: number, height: number, sca
 }
 
 
-function createPattern(canvas: any, transform?: IMatrixData, repeat?: boolean,): CanvasPattern {
+function createPattern(paint: ILeafPaint, canvas: any, transform?: IMatrixData, repeat?: boolean): void {
     let style = Platform.canvas.createPattern(canvas, repeat ? 'repeat' : 'no-repeat')
-    if (transform) {
-        const { a, b, c, d, e, f } = transform
-        style.setTransform(new DOMMatrix([a, b, c, d, e, f]))
-    }
-    return style
+    if (transform) !style.setTransform ? style.setTransform(transform) : paint.transform = transform
+    paint.style = style
 }
