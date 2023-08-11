@@ -15,13 +15,14 @@ export function fills(ui: IUI, canvas: ILeaferCanvas, fills: ILeafPaint[]): void
     const { windingRule, __font } = ui.__
     for (let i = 0, len = fills.length; i < len; i++) {
         item = fills[i]
+
         canvas.fillStyle = item.style
 
         if (item.transform) {
             canvas.save()
 
-            const { a, b, c, d, e, f } = item.transform
-            canvas.transform(a, b, c, d, e, f)
+            const t = item.transform
+            canvas.transform(t.a, t.b, t.c, t.d, t.e, t.f)
 
             if (item.blendMode) canvas.blendMode = item.blendMode
 
