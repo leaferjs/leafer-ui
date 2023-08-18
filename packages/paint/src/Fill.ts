@@ -16,30 +16,33 @@ export function fills(ui: IUI, canvas: ILeaferCanvas, fills: ILeafPaint[]): void
     for (let i = 0, len = fills.length; i < len; i++) {
         item = fills[i]
 
-        canvas.fillStyle = item.style
+        if (item.style) {
 
-        if (item.transform) {
-            canvas.save()
+            canvas.fillStyle = item.style
 
-            const t = item.transform
-            canvas.transform(t.a, t.b, t.c, t.d, t.e, t.f)
+            if (item.transform) {
+                canvas.save()
 
-            if (item.blendMode) canvas.blendMode = item.blendMode
+                const t = item.transform
+                canvas.transform(t.a, t.b, t.c, t.d, t.e, t.f)
 
-            __font ? drawText(ui, canvas) : (windingRule ? canvas.fill(windingRule) : canvas.fill())
-
-            canvas.restore()
-        } else {
-            if (item.blendMode) {
-                canvas.saveBlendMode(item.blendMode)
+                if (item.blendMode) canvas.blendMode = item.blendMode
 
                 __font ? drawText(ui, canvas) : (windingRule ? canvas.fill(windingRule) : canvas.fill())
 
-                canvas.restoreBlendMode()
+                canvas.restore()
             } else {
+                if (item.blendMode) {
+                    canvas.saveBlendMode(item.blendMode)
 
-                __font ? drawText(ui, canvas) : (windingRule ? canvas.fill(windingRule) : canvas.fill())
+                    __font ? drawText(ui, canvas) : (windingRule ? canvas.fill(windingRule) : canvas.fill())
 
+                    canvas.restoreBlendMode()
+                } else {
+
+                    __font ? drawText(ui, canvas) : (windingRule ? canvas.fill(windingRule) : canvas.fill())
+
+                }
             }
         }
 

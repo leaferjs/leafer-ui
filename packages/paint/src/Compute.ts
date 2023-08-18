@@ -1,4 +1,4 @@
-import { IUI, IPaint, ILeafPaint, IRGB } from '@leafer-ui/interface'
+import { IUI, IPaint, ILeafPaint, IRGB, IBooleanMap } from '@leafer-ui/interface'
 import { ColorConvert } from '@leafer-ui/color'
 
 import { image } from "./paint/image"
@@ -7,27 +7,25 @@ import { radialGradient } from "./paint/radial"
 import { conicGradient } from "./paint/conic"
 
 
-export function computeFill(ui: IUI): void {
-    compute(ui, 'fill')
-}
+let recycleMap: IBooleanMap
 
-export function computeStroke(ui: IUI): void {
-    compute(ui, 'stroke')
-}
-
-function compute(ui: IUI, attrName: string): void {
+export function compute(ui: IUI, attrName: string): void {
+    const value: ILeafPaint[] = []
+    let item: ILeafPaint
     let paints = ui.__.__input[attrName] as IPaint[]
 
-    let item: ILeafPaint
-    const value: ILeafPaint[] = []
     if (!(paints instanceof Array)) paints = [paints]
+
+    recycleMap = ui.__.__recycleImage(attrName)
 
     for (let i = 0, len = paints.length; i < len; i++) {
         item = getLeafPaint(ui, paints[i], attrName)
         if (item) value.push(item)
     }
+
     ui.__['_' + attrName] = value.length ? value : undefined
 }
+
 
 function getLeafPaint(ui: IUI, paint: IPaint, attrName: string): ILeafPaint {
     if (typeof paint !== 'object' || paint.visible === false || paint.opacity === 0) return undefined
@@ -38,7 +36,7 @@ function getLeafPaint(ui: IUI, paint: IPaint, attrName: string): ILeafPaint {
             let { type, blendMode, color, opacity } = paint
             return { type, blendMode, style: ColorConvert.string(color, opacity) }
         case 'image':
-            return image(ui, attrName, paint, boxBounds)
+            return image(ui, attrName, paint, boxBounds, !recycleMap || !recycleMap[paint.url])
         case 'linear':
             return linearGradient(paint, boxBounds)
         case 'radial':

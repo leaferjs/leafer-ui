@@ -5,8 +5,7 @@ import { IUI } from '../IUI'
 import { ICachedShape } from '../ICachedShape'
 
 export interface IPaintModule {
-    computeFill?(ui: IUI): void
-    computeStroke?(ui: IUI): void
+    compute?(ui: IUI, attrName: 'fill' | 'stroke'): void
 
     fill?(ui: IUI, canvas: ILeaferCanvas, fill: string | object): void
     fills?(ui: IUI, canvas: ILeaferCanvas, fills: ILeafPaint[]): void

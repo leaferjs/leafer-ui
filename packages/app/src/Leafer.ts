@@ -1,4 +1,4 @@
-import { IApp, ILeafer, ILeaferCanvas, IRenderer, ILayouter, ISelector, IWatcher, IInteraction, ILeaferConfig, ICanvasManager, IHitCanvasManager, IImageManager, IAutoBounds, IScreenSizeData, IResizeEvent, ILeaf, IEventListenerId, ITransformEventData, ITimer, __Value, IObject, IControl } from '@leafer/interface'
+import { IApp, ILeafer, ILeaferCanvas, IRenderer, ILayouter, ISelector, IWatcher, IInteraction, ILeaferConfig, ICanvasManager, IHitCanvasManager, IAutoBounds, IScreenSizeData, IResizeEvent, ILeaf, IEventListenerId, ITransformEventData, ITimer, __Value, IObject, IControl } from '@leafer/interface'
 import { AutoBounds, LayoutEvent, ResizeEvent, LeaferEvent, CanvasManager, HitCanvasManager, ImageManager, DataHelper, Creator, Run, Debug, RenderEvent, registerUI, boundsType, canvasSizeAttrs, dataProcessor, Platform, PluginManager } from '@leafer/core'
 
 import { ILeaferInputData, ILeaferData, IFunction } from '@leafer-ui/interface'
@@ -29,7 +29,7 @@ export class Leafer extends Group implements ILeafer {
     public running: boolean
     public ready: boolean
     public viewReady: boolean
-    public get viewLoaded(): boolean { return this.viewReady && !this.watcher.changed && this.imageManager.tasker.isComplete }
+    public get viewLoaded(): boolean { return this.viewReady && !this.watcher.changed && ImageManager.tasker.isComplete }
 
     public view: unknown
 
@@ -45,7 +45,6 @@ export class Leafer extends Group implements ILeafer {
 
     public canvasManager: ICanvasManager
     public hitCanvasManager?: IHitCanvasManager
-    public imageManager: IImageManager
 
     public zoomLayer: ILeaf = this
     public moveLayer: ILeaf = this
@@ -111,7 +110,6 @@ export class Leafer extends Group implements ILeafer {
 
             this.canvasManager = new CanvasManager()
             this.hitCanvasManager = new HitCanvasManager()
-            this.imageManager = new ImageManager(this, config)
 
             start = config.start
         }
@@ -181,7 +179,6 @@ export class Leafer extends Group implements ILeafer {
 
         this.canvasManager = app.canvasManager
         this.hitCanvasManager = app.hitCanvasManager
-        this.imageManager = app.imageManager
     }
 
     public __setLeafer(leafer: ILeafer): void {
@@ -296,7 +293,6 @@ export class Leafer extends Group implements ILeafer {
                 this.selector.destroy()
                 this.canvasManager.destroy()
                 this.hitCanvasManager.destroy()
-                this.imageManager.destroy()
 
                 this.canvas.destroy()
                 this.canvas = null

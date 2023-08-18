@@ -106,16 +106,20 @@ export function strokes(ui: IUI, canvas: ILeaferCanvas, strokes: ILeafPaint[]): 
 }
 
 function drawStrokesStyle(strokes: ILeafStrokePaint[], canvas: ILeaferCanvas): void {
-    strokes.forEach((item: ILeafStrokePaint) => {
-        canvas.strokeStyle = item.style
+    let item: ILeafStrokePaint
+    for (let i = 0, len = strokes.length; i < len; i++) {
+        item = strokes[i]
 
-        if (item.blendMode) {
-            canvas.saveBlendMode(item.blendMode)
-            canvas.stroke()
-            canvas.restoreBlendMode()
-        } else {
-            canvas.stroke()
+        if (item.style) {
+            canvas.strokeStyle = item.style
+
+            if (item.blendMode) {
+                canvas.saveBlendMode(item.blendMode)
+                canvas.stroke()
+                canvas.restoreBlendMode()
+            } else {
+                canvas.stroke()
+            }
         }
-
-    })
+    }
 }

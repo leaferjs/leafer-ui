@@ -1,6 +1,4 @@
-import { ILeaf, ILeafComputedData, ILeafData, ILeafInputData, ILeaferCanvas, IRenderOptions, IPathDrawer, IPointData, IPath2D, IPathCommandData, IWindingRule, ILeaferImageConfig, IBoundsData, IObject, __Number, IPathString, ILeaferImage, IBlob } from '@leafer/interface'
-
-import { IOverflow } from './type/IType'
+import { ILeaf, ILeafComputedData, ILeafData, ILeafInputData, ILeaferCanvas, IRenderOptions, IPathDrawer, IPointData, IPath2D, IPathCommandData, IWindingRule, ILeaferImageConfig, IBoundsData, IObject, __Number, IPathString, ILeaferImage, IBlob, IBooleanMap } from '@leafer/interface'
 
 import {
     IFillAttrData, IFillInputData, IFillComputedData,
@@ -10,6 +8,7 @@ import {
     IEffectAttrData, IEffectInputData, IEffectComputedData,
     ITextStyleAttrData, ITextStyleInputData, ITextStyleComputedData
 } from './ICommonAttr'
+import { IOverflow } from './type/IType'
 import { IExportOptions } from './module/IExport'
 
 
@@ -302,6 +301,8 @@ export interface IUIData extends IUIComputedData, ILeafData {
     // text
     __font?: string
     __textDrawData?: ITextDrawData
+
+    __recycleImage(attrName: string): IBooleanMap
 
 }
 export interface IUIComputedData extends IFillComputedData, IBorderComputedData, IStrokeComputedData, ITextStyleComputedData, ICornerRadiusComputedData, IEffectComputedData, ILeafComputedData {

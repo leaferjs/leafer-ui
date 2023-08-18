@@ -1,8 +1,7 @@
-import { __Value } from '@leafer/interface'
-import { LeafData } from '@leafer/core'
+import { IBooleanMap, ILeaferImage, __Value } from '@leafer/interface'
+import { ImageManager, LeafData } from '@leafer/core'
 
-import { IShadowEffect, IUI, IUIData, IUnitData } from '@leafer-ui/interface'
-import { Paint } from '@leafer-ui/external'
+import { IShadowEffect, IUI, IUIData, IUnitData, ILeafPaint } from '@leafer-ui/interface'
 
 
 export class UIData extends LeafData implements IUIData {
@@ -22,26 +21,32 @@ export class UIData extends LeafData implements IUIData {
 
 
     protected setFill(value: __Value) {
+        if (this.__naturalWidth) this.__naturalWidth = this.__naturalHeight = undefined
         if (typeof value === 'string' || !value) {
+            if (this.__isFills) {
+                this.__removeInput('fill')
+                this.__recycleImage('fill')
+                this.__isFills = false
+            }
             this._fill = value
-            if (this.__input) this.__removeInput('fill')
-            this.__isFills && (this.__isFills = false)
         } else if (typeof value === 'object') {
             this.__setInput('fill', value)
-            this.__leaf.__layout.boxChanged ? this._fill = value : Paint.computeFill(this.__leaf)
+            this.__leaf.__layout.boxChanged || this.__leaf.__layout.boxChange()
             this.__isFills = true
         }
-        if (this.__naturalWidth) this.__naturalWidth = this.__naturalHeight = undefined
     }
 
     protected setStroke(value: __Value) {
         if (typeof value === 'string' || !value) {
+            if (this.__isStrokes) {
+                this.__removeInput('stroke')
+                this.__recycleImage('stroke')
+                this.__isStrokes = false
+            }
             this._stroke = value
-            if (this.__input) this.__removeInput('stroke')
-            this.__isStrokes && (this.__isStrokes = false)
         } else if (typeof value === 'object') {
             this.__setInput('stroke', value)
-            this.__leaf.__layout.boxChanged ? this._stroke = value : Paint.computeStroke(this.__leaf)
+            this.__leaf.__layout.boxChanged || this.__leaf.__layout.boxChange()
             this.__isStrokes = true
         }
     }
@@ -68,6 +73,31 @@ export class UIData extends LeafData implements IUIData {
         } else {
             this._innerShadow = null
         }
+    }
+
+    public __recycleImage(attrName: string): IBooleanMap {
+        const paints = (attrName === 'fill' ? this._fill : this._stroke) as ILeafPaint[]
+        if (paints instanceof Array) {
+            let image: ILeaferImage, map: IBooleanMap
+            for (let i = 0, len = paints.length; i < len; i++) {
+                image = paints[i].image
+                if (image) {
+                    const { url } = image
+                    if (!map) map = {}
+                    map[url] = true
+                    ImageManager.recycle(image)
+
+                    // stop load
+                    if (image.loading) {
+                        const p = this.__input && this.__input[attrName]
+                        const hasSame = p && (p instanceof Array ? p.some(item => item.url === url) : p.url === url)
+                        if (!hasSame) image.unload(paints[i].loadId)
+                    }
+                }
+            }
+            return map
+        }
+        return null
     }
 
 }
