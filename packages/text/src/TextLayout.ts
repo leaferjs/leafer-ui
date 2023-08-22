@@ -11,21 +11,19 @@ export function layoutText(drawData: ITextDrawData, style: ITextData): void {
 
     // verticalAlign
 
-    if (height) {
-        if (textOverflow !== 'show' && realHeight > height) {
-            realHeight = Math.max(height, __lineHeight)
-            drawData.overflow = rows.length
-        } else {
-            switch (verticalAlign) {
-                case 'middle':
-                    y += (height - realHeight) / 2
-                    break
-                case 'bottom':
-                    y += (height - realHeight)
-            }
+    if (textOverflow !== 'show' && realHeight > height) {
+        realHeight = Math.max(height, __lineHeight)
+        drawData.overflow = rows.length
+    } else {
+        switch (verticalAlign) {
+            case 'middle':
+                y += (height - realHeight) / 2
+                break
+            case 'bottom':
+                y += (height - realHeight)
         }
-        starY += y
     }
+    starY += y
 
     // textAlign
 
@@ -54,6 +52,7 @@ export function layoutText(drawData: ITextDrawData, style: ITextData): void {
             drawData.overflow = i + 1
         }
 
+        if (row.x < bounds.x) bounds.x = row.x
         if (row.width > bounds.width) bounds.width = row.width
     }
 
