@@ -156,6 +156,11 @@ function getRepeatTransform(box: IBoundsData, width: number, height: number, sca
 
 function createPattern(paint: ILeafPaint, canvas: any, transform?: IMatrixData, repeat?: boolean): void {
     let style = Platform.canvas.createPattern(canvas, repeat ? 'repeat' : 'no-repeat')
-    if (transform) style.setTransform ? style.setTransform(transform) : paint.transform = transform
+    try {
+        if (transform) style.setTransform ? style.setTransform(transform) : paint.transform = transform
+    } catch (e) {
+        paint.transform = transform
+    }
+
     paint.style = style
 }

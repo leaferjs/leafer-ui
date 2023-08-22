@@ -4,6 +4,7 @@ import { ImageManager, LeafData } from '@leafer/core'
 import { IShadowEffect, IUI, IUIData, IUnitData, ILeafPaint } from '@leafer-ui/interface'
 
 
+const emptyPaint: ILeafPaint = {}
 export class UIData extends LeafData implements IUIData {
 
     public __leaf: IUI
@@ -33,6 +34,7 @@ export class UIData extends LeafData implements IUIData {
             this.__setInput('fill', value)
             this.__leaf.__layout.boxChanged || this.__leaf.__layout.boxChange()
             this.__isFills = true
+            this._fill || (this._fill = emptyPaint)
         }
     }
 
@@ -48,6 +50,7 @@ export class UIData extends LeafData implements IUIData {
             this.__setInput('stroke', value)
             this.__leaf.__layout.boxChanged || this.__leaf.__layout.boxChange()
             this.__isStrokes = true
+            this._stroke || (this._stroke = emptyPaint)
         }
     }
 

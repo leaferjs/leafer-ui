@@ -7,7 +7,7 @@ import { IPaintType } from './IType'
 export type ILeafPaintColor = IColorString | CanvasGradient | CanvasPattern
 
 export interface ILeafPaint {
-    type: IPaintType
+    type?: IPaintType
     style?: ILeafPaintColor
     transform?: IMatrixData
     blendMode?: IBlendMode
