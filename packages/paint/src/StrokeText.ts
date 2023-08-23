@@ -2,6 +2,7 @@ import { ILeaferCanvas } from '@leafer/interface'
 
 import { IUI, ITextRowData, ILeafStrokePaint, ILeafPaint, IStrokeAlign } from '@leafer-ui/interface'
 
+import { checkImage } from './paint/image'
 import { drawText } from './FillText'
 
 
@@ -74,18 +75,25 @@ function drawAlignStrokes(ui: IUI, canvas: ILeaferCanvas, strokes: ILeafPaint[],
 
 
 function drawStrokesStyle(ui: IUI, strokes: ILeafStrokePaint[], canvas: ILeaferCanvas): void {
-    strokes.forEach((item: ILeafStrokePaint) => {
-        canvas.strokeStyle = item.style
+    let item: ILeafStrokePaint
+    for (let i = 0, len = strokes.length; i < len; i++) {
+        item = strokes[i]
 
-        if (item.blendMode) {
-            canvas.saveBlendMode(item.blendMode)
-            drawTextStroke(ui, canvas)
-            canvas.restoreBlendMode()
-        } else {
-            drawTextStroke(ui, canvas)
+        if (item.style) {
+            if (item.image && checkImage(ui, canvas, item, false)) continue
+
+            canvas.strokeStyle = item.style
+
+            if (item.blendMode) {
+                canvas.saveBlendMode(item.blendMode)
+                drawTextStroke(ui, canvas)
+                canvas.restoreBlendMode()
+            } else {
+                drawTextStroke(ui, canvas)
+            }
         }
 
-    })
+    }
 }
 
 export function drawTextStroke(ui: IUI, canvas: ILeaferCanvas): void {

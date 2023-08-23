@@ -2,6 +2,7 @@ import { ILeaferCanvas } from '@leafer/interface'
 
 import { ILeafPaint, IUI } from '@leafer-ui/interface'
 
+import { checkImage } from './paint/image'
 import { drawText } from './FillText'
 
 
@@ -18,13 +19,14 @@ export function fills(ui: IUI, canvas: ILeaferCanvas, fills: ILeafPaint[]): void
 
         if (item.style) {
 
+            if (item.image && checkImage(ui, canvas, item, !__font)) continue
+
             canvas.fillStyle = item.style
 
             if (item.transform) {
                 canvas.save()
 
-                const t = item.transform
-                canvas.transform(t.a, t.b, t.c, t.d, t.e, t.f)
+                canvas.transform(item.transform)
 
                 if (item.blendMode) canvas.blendMode = item.blendMode
 
@@ -48,3 +50,4 @@ export function fills(ui: IUI, canvas: ILeaferCanvas, fills: ILeafPaint[]): void
 
     }
 }
+

@@ -1,7 +1,7 @@
 import { IBlendMode, ILeaferImage, IMatrixData } from '@leafer/interface'
 
 import { IColorString } from './IStringType'
-import { IStrokeAlign, IStrokeJoin, IStrokeCap } from './IType'
+import { IStrokeAlign, IStrokeJoin, IStrokeCap, IImagePaintMode } from './IType'
 import { IPaintType } from './IType'
 
 export type ILeafPaintColor = IColorString | CanvasGradient | CanvasPattern
@@ -14,6 +14,16 @@ export interface ILeafPaint {
     opacity?: number
     image?: ILeaferImage
     loadId?: number
+    patternId?: number
+    data?: ILeafPaintPatternData
+}
+
+interface ILeafPaintPatternData {
+    width: number
+    height: number
+    opacity?: number
+    transform?: IMatrixData
+    mode?: IImagePaintMode
 }
 
 export type ILeafFill = ILeafPaint

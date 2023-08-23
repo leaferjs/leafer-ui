@@ -2,6 +2,7 @@ import { ILeaferCanvas } from '@leafer/interface'
 
 import { IUI, ILeafStrokePaint, ILeafPaint } from '@leafer-ui/interface'
 
+import { checkImage } from './paint/image'
 import { strokeText, strokesText } from './StrokeText'
 
 
@@ -71,7 +72,7 @@ export function strokes(ui: IUI, canvas: ILeaferCanvas, strokes: ILeafPaint[]): 
 
             case 'center':
                 canvas.setStroke(undefined, strokeWidth, options)
-                drawStrokesStyle(strokes, canvas)
+                drawStrokesStyle(ui, strokes, canvas)
                 break
 
             case 'inside':
@@ -79,7 +80,7 @@ export function strokes(ui: IUI, canvas: ILeaferCanvas, strokes: ILeafPaint[]): 
                 canvas.setStroke(undefined, strokeWidth * 2, options)
                 canvas.clip(options.windingRule)
 
-                drawStrokesStyle(strokes, canvas)
+                drawStrokesStyle(ui, strokes, canvas)
 
                 canvas.restore()
                 break
@@ -91,7 +92,7 @@ export function strokes(ui: IUI, canvas: ILeaferCanvas, strokes: ILeafPaint[]): 
 
                 out.setStroke(undefined, strokeWidth * 2, ui.__)
 
-                drawStrokesStyle(strokes, out)
+                drawStrokesStyle(ui, strokes, out)
 
                 out.clip(options.windingRule)
                 out.clearWorld(renderBounds)
@@ -105,12 +106,15 @@ export function strokes(ui: IUI, canvas: ILeaferCanvas, strokes: ILeafPaint[]): 
 
 }
 
-function drawStrokesStyle(strokes: ILeafStrokePaint[], canvas: ILeaferCanvas): void {
+function drawStrokesStyle(ui: IUI, strokes: ILeafStrokePaint[], canvas: ILeaferCanvas): void {
     let item: ILeafStrokePaint
     for (let i = 0, len = strokes.length; i < len; i++) {
         item = strokes[i]
 
         if (item.style) {
+
+            if (item.image && checkImage(ui, canvas, item, false)) continue
+
             canvas.strokeStyle = item.style
 
             if (item.blendMode) {
