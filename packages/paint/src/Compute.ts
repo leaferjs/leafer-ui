@@ -1,7 +1,7 @@
 import { IUI, IPaint, ILeafPaint, IRGB, IBooleanMap } from '@leafer-ui/interface'
 import { ColorConvert } from '@leafer-ui/color'
 
-import { image } from "./paint/image"
+import { image } from "./paint/image/image"
 import { linearGradient } from './paint/linear'
 import { radialGradient } from "./paint/radial"
 import { conicGradient } from "./paint/conic"

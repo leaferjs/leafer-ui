@@ -11,15 +11,16 @@ export function fill(ui: IUI, canvas: ILeaferCanvas, fill: string): void {
     ui.__.__font ? fillText(ui, canvas) : (ui.__.windingRule ? canvas.fill(ui.__.windingRule) : canvas.fill())
 }
 
+
 export function fills(ui: IUI, canvas: ILeaferCanvas, fills: ILeafPaint[]): void {
     let item: ILeafPaint
     const { windingRule, __font } = ui.__
     for (let i = 0, len = fills.length; i < len; i++) {
         item = fills[i]
 
-        if (item.style) {
+        if (item.image && checkImage(ui, canvas, item, !__font)) continue
 
-            if (item.image && checkImage(ui, canvas, item, !__font)) continue
+        if (item.style) {
 
             canvas.fillStyle = item.style
 
@@ -50,4 +51,3 @@ export function fills(ui: IUI, canvas: ILeaferCanvas, fills: ILeafPaint[]): void
 
     }
 }
-

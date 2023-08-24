@@ -29,7 +29,7 @@ export class Leafer extends Group implements ILeafer {
     public running: boolean
     public ready: boolean
     public viewReady: boolean
-    public get viewLoaded(): boolean { return this.viewReady && !this.watcher.changed && ImageManager.tasker.isComplete }
+    public get viewLoaded(): boolean { return this.viewReady && !this.watcher.changed && ImageManager.isComplete }
 
     public view: unknown
 

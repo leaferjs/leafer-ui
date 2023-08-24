@@ -66,9 +66,9 @@ export function drawStrokesStyle(ui: IUI, strokes: ILeafStrokePaint[], canvas: I
     for (let i = 0, len = strokes.length; i < len; i++) {
         item = strokes[i]
 
-        if (item.style) {
+        if (item.image && checkImage(ui, canvas, item, false)) continue
 
-            if (item.image && checkImage(ui, canvas, item, false)) continue
+        if (item.style) {
 
             canvas.strokeStyle = item.style
 
