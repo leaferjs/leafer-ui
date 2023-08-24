@@ -3,12 +3,12 @@ import { ILeaferCanvas } from '@leafer/interface'
 import { ILeafPaint, IUI } from '@leafer-ui/interface'
 
 import { checkImage } from './paint/image'
-import { drawText } from './FillText'
+import { fillText } from './FillText'
 
 
-export function fill(ui: IUI, canvas: ILeaferCanvas, fill: string | object): void {
+export function fill(ui: IUI, canvas: ILeaferCanvas, fill: string): void {
     canvas.fillStyle = fill
-    ui.__.__font ? drawText(ui, canvas) : (ui.__.windingRule ? canvas.fill(ui.__.windingRule) : canvas.fill())
+    ui.__.__font ? fillText(ui, canvas) : (ui.__.windingRule ? canvas.fill(ui.__.windingRule) : canvas.fill())
 }
 
 export function fills(ui: IUI, canvas: ILeaferCanvas, fills: ILeafPaint[]): void {
@@ -30,19 +30,19 @@ export function fills(ui: IUI, canvas: ILeaferCanvas, fills: ILeafPaint[]): void
 
                 if (item.blendMode) canvas.blendMode = item.blendMode
 
-                __font ? drawText(ui, canvas) : (windingRule ? canvas.fill(windingRule) : canvas.fill())
+                __font ? fillText(ui, canvas) : (windingRule ? canvas.fill(windingRule) : canvas.fill())
 
                 canvas.restore()
             } else {
                 if (item.blendMode) {
                     canvas.saveBlendMode(item.blendMode)
 
-                    __font ? drawText(ui, canvas) : (windingRule ? canvas.fill(windingRule) : canvas.fill())
+                    __font ? fillText(ui, canvas) : (windingRule ? canvas.fill(windingRule) : canvas.fill())
 
                     canvas.restoreBlendMode()
                 } else {
 
-                    __font ? drawText(ui, canvas) : (windingRule ? canvas.fill(windingRule) : canvas.fill())
+                    __font ? fillText(ui, canvas) : (windingRule ? canvas.fill(windingRule) : canvas.fill())
 
                 }
             }

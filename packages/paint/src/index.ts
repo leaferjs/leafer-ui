@@ -1,6 +1,6 @@
 export { fill, fills } from './Fill'
-export { drawText } from './FillText'
+export { fillText } from './FillText'
 export { stroke, strokes } from './Stroke'
-export { strokeText, strokesText, drawTextStroke } from './StrokeText'
+export { strokeText, drawTextStroke } from './StrokeText'
 export { shape } from './Shape'
 export { compute } from './Compute'

@@ -3,7 +3,7 @@ import { ILeaferCanvas } from '@leafer/interface'
 import { IUI, ITextRowData } from '@leafer-ui/interface'
 
 
-export function drawText(ui: IUI, canvas: ILeaferCanvas): void {
+export function fillText(ui: IUI, canvas: ILeaferCanvas): void {
 
     let row: ITextRowData
     const { rows, decorationY, decorationHeight } = ui.__.__textDrawData

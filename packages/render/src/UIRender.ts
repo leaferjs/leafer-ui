@@ -30,9 +30,9 @@ export const UIRender: IUIRenderModule = {
 
         this.__drawRenderPath(canvas)
 
-        if (fill) Paint.fill(this, canvas, fill)
+        if (fill) Paint.fill(this, canvas, fill as string)
         if (__drawAfterFill) this.__drawAfterFill(canvas, options)
-        if (stroke) Paint.stroke(this, canvas, stroke)
+        if (stroke) Paint.stroke(this, canvas, stroke as string)
     },
 
     __draw(canvas: ILeaferCanvas, options: IRenderOptions): void {
@@ -51,22 +51,22 @@ export const UIRender: IUIRenderModule = {
 
                 if (shadow) Effect.shadow(this, canvas, shape, options)
 
-                if (fill) this.__.__isFills ? Paint.fills(this, canvas, fill as ILeafPaint[]) : Paint.fill(this, canvas, fill)
+                if (fill) this.__.__isFills ? Paint.fills(this, canvas, fill as ILeafPaint[]) : Paint.fill(this, canvas, fill as string)
 
                 if (__drawAfterFill) this.__drawAfterFill(canvas, options)
 
                 if (innerShadow) Effect.innerShadow(this, canvas, shape, options)
 
-                if (stroke) this.__.__isStrokes ? Paint.strokes(this, canvas, stroke as ILeafStrokePaint[]) : Paint.stroke(this, canvas, stroke)
+                if (stroke) this.__.__isStrokes ? Paint.strokes(this, canvas, stroke as ILeafStrokePaint[]) : Paint.stroke(this, canvas, stroke as string)
 
                 if (shape.worldCanvas) shape.worldCanvas.recycle()
                 shape.canvas.recycle()
 
             } else {
 
-                if (fill) this.__.__isFills ? Paint.fills(this, canvas, fill as ILeafPaint[]) : Paint.fill(this, canvas, fill)
+                if (fill) this.__.__isFills ? Paint.fills(this, canvas, fill as ILeafPaint[]) : Paint.fill(this, canvas, fill as string)
                 if (__drawAfterFill) this.__drawAfterFill(canvas, options)
-                if (stroke) this.__.__isStrokes ? Paint.strokes(this, canvas, stroke as ILeafStrokePaint[]) : Paint.stroke(this, canvas, stroke)
+                if (stroke) this.__.__isStrokes ? Paint.strokes(this, canvas, stroke as ILeafStrokePaint[]) : Paint.stroke(this, canvas, stroke as string)
 
             }
 

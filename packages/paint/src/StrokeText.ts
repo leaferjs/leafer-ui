@@ -1,99 +1,43 @@
 import { ILeaferCanvas } from '@leafer/interface'
 
-import { IUI, ITextRowData, ILeafStrokePaint, ILeafPaint, IStrokeAlign } from '@leafer-ui/interface'
+import { IUI, ITextRowData, ILeafPaint, IStrokeAlign, ILeafStrokePaint } from '@leafer-ui/interface'
 
+import { fillText } from './FillText'
 import { checkImage } from './paint/image'
-import { drawText } from './FillText'
 
 
-export function strokeText(ui: IUI, canvas: ILeaferCanvas, stroke: string | object): void {
+export function strokeText(ui: IUI, canvas: ILeaferCanvas, stroke: string | ILeafPaint[]): void {
     const { strokeAlign } = ui.__
+    const isStrokes = typeof stroke !== 'string'
     switch (strokeAlign) {
         case 'center':
-            canvas.setStroke(stroke, ui.__.strokeWidth, ui.__)
-            drawTextStroke(ui, canvas)
+            canvas.setStroke(isStrokes ? undefined : stroke, ui.__.strokeWidth, ui.__)
+            isStrokes ? drawStrokesStyle(ui, stroke as ILeafPaint[], canvas, true) : drawTextStroke(ui, canvas)
             break
         case 'inside':
-            drawAlignStroke(ui, canvas, stroke, 'inside')
+            drawAlignStroke(ui, canvas, stroke, 'inside', isStrokes)
             break
         case 'outside':
-            drawAlignStroke(ui, canvas, stroke, 'outside')
+            drawAlignStroke(ui, canvas, stroke, 'outside', isStrokes)
             break
     }
 }
 
-function drawAlignStroke(ui: IUI, canvas: ILeaferCanvas, stroke: string | object, align: IStrokeAlign): void {
+function drawAlignStroke(ui: IUI, canvas: ILeaferCanvas, stroke: string | ILeafPaint[], align: IStrokeAlign, isStrokes?: boolean): void {
     const { strokeWidth, __font } = ui.__
 
     const out = canvas.getSameCanvas(true)
-    out.setStroke(stroke, strokeWidth * 2, ui.__)
+    out.setStroke(isStrokes ? undefined : stroke, strokeWidth * 2, ui.__)
 
     out.font = __font
-    drawTextStroke(ui, out)
+    isStrokes ? drawStrokesStyle(ui, stroke as ILeafPaint[], out, true) : drawTextStroke(ui, out)
 
     out.blendMode = align === 'outside' ? 'destination-out' : 'destination-in'
-    drawText(ui, out)
+    fillText(ui, out)
     out.blendMode = 'normal'
 
     canvas.copyWorldToInner(out, ui.__world, ui.__layout.renderBounds)
     out.recycle()
-}
-
-export function strokesText(ui: IUI, canvas: ILeaferCanvas, strokes: ILeafPaint[]): void {
-    const { strokeAlign } = ui.__
-    switch (strokeAlign) {
-        case 'center':
-            canvas.setStroke(undefined, ui.__.strokeWidth, ui.__)
-            drawStrokesStyle(ui, strokes, canvas)
-            break
-        case 'inside':
-            drawAlignStroke(ui, canvas, strokes, 'inside')
-            break
-        case 'outside':
-            drawAlignStrokes(ui, canvas, strokes, 'outside')
-            break
-    }
-}
-
-
-function drawAlignStrokes(ui: IUI, canvas: ILeaferCanvas, strokes: ILeafPaint[], align: IStrokeAlign): void {
-    const { strokeWidth, __font } = ui.__
-
-    const out = canvas.getSameCanvas(true)
-    out.setStroke(undefined, strokeWidth * 2, ui.__)
-
-    out.font = __font
-    drawStrokesStyle(ui, strokes, out)
-
-    out.blendMode = align === 'outside' ? 'destination - out' : 'destination -in '
-    drawText(ui, out)
-    out.blendMode = 'normal'
-
-    canvas.copyWorldToInner(out, ui.__world, ui.__layout.renderBounds)
-    out.recycle()
-}
-
-
-function drawStrokesStyle(ui: IUI, strokes: ILeafStrokePaint[], canvas: ILeaferCanvas): void {
-    let item: ILeafStrokePaint
-    for (let i = 0, len = strokes.length; i < len; i++) {
-        item = strokes[i]
-
-        if (item.style) {
-            if (item.image && checkImage(ui, canvas, item, false)) continue
-
-            canvas.strokeStyle = item.style
-
-            if (item.blendMode) {
-                canvas.saveBlendMode(item.blendMode)
-                drawTextStroke(ui, canvas)
-                canvas.restoreBlendMode()
-            } else {
-                drawTextStroke(ui, canvas)
-            }
-        }
-
-    }
 }
 
 export function drawTextStroke(ui: IUI, canvas: ILeaferCanvas): void {
@@ -115,4 +59,26 @@ export function drawTextStroke(ui: IUI, canvas: ILeaferCanvas): void {
         if (decorationY) canvas.strokeRect(row.x, row.y + decorationY, row.width, decorationHeight)
     }
 
+}
+
+export function drawStrokesStyle(ui: IUI, strokes: ILeafStrokePaint[], canvas: ILeaferCanvas, isText?: boolean): void {
+    let item: ILeafStrokePaint
+    for (let i = 0, len = strokes.length; i < len; i++) {
+        item = strokes[i]
+
+        if (item.style) {
+
+            if (item.image && checkImage(ui, canvas, item, false)) continue
+
+            canvas.strokeStyle = item.style
+
+            if (item.blendMode) {
+                canvas.saveBlendMode(item.blendMode)
+                isText ? drawTextStroke(ui, canvas) : canvas.stroke()
+                canvas.restoreBlendMode()
+            } else {
+                isText ? drawTextStroke(ui, canvas) : canvas.stroke()
+            }
+        }
+    }
 }

@@ -1,12 +1,11 @@
 import { ILeaferCanvas } from '@leafer/interface'
 
-import { IUI, ILeafStrokePaint, ILeafPaint } from '@leafer-ui/interface'
+import { IUI, ILeafPaint } from '@leafer-ui/interface'
 
-import { checkImage } from './paint/image'
-import { strokeText, strokesText } from './StrokeText'
+import { strokeText, drawStrokesStyle } from './StrokeText'
 
 
-export function stroke(ui: IUI, canvas: ILeaferCanvas, stroke: string | object): void {
+export function stroke(ui: IUI, canvas: ILeaferCanvas, stroke: string): void {
     const options = ui.__
     const { strokeWidth, strokeAlign, __font } = options
     if (!strokeWidth) return
@@ -64,7 +63,7 @@ export function strokes(ui: IUI, canvas: ILeaferCanvas, strokes: ILeafPaint[]): 
 
     if (__font) {
 
-        strokesText(ui, canvas, strokes)
+        strokeText(ui, canvas, strokes)
 
     } else {
 
@@ -104,26 +103,4 @@ export function strokes(ui: IUI, canvas: ILeaferCanvas, strokes: ILeafPaint[]): 
 
     }
 
-}
-
-function drawStrokesStyle(ui: IUI, strokes: ILeafStrokePaint[], canvas: ILeaferCanvas): void {
-    let item: ILeafStrokePaint
-    for (let i = 0, len = strokes.length; i < len; i++) {
-        item = strokes[i]
-
-        if (item.style) {
-
-            if (item.image && checkImage(ui, canvas, item, false)) continue
-
-            canvas.strokeStyle = item.style
-
-            if (item.blendMode) {
-                canvas.saveBlendMode(item.blendMode)
-                canvas.stroke()
-                canvas.restoreBlendMode()
-            } else {
-                canvas.stroke()
-            }
-        }
-    }
 }

@@ -7,15 +7,15 @@ import { ICachedShape } from '../ICachedShape'
 export interface IPaintModule {
     compute?(ui: IUI, attrName: 'fill' | 'stroke'): void
 
-    fill?(ui: IUI, canvas: ILeaferCanvas, fill: string | object): void
+    fill?(ui: IUI, canvas: ILeaferCanvas, fill: string): void
     fills?(ui: IUI, canvas: ILeaferCanvas, fills: ILeafPaint[]): void
 
-    drawText?(ui: IUI, canvas: ILeaferCanvas): void
+    fillText?(ui: IUI, canvas: ILeaferCanvas): void
 
-    stroke?(ui: IUI, canvas: ILeaferCanvas, stroke: string | object): void
+    stroke?(ui: IUI, canvas: ILeaferCanvas, stroke: string): void
     strokes?(ui: IUI, canvas: ILeaferCanvas, strokes: ILeafPaint[]): void
 
-    strokeText?(ui: IUI, canvas: ILeaferCanvas, stroke: string | object): void
+    strokeText?(ui: IUI, canvas: ILeaferCanvas, stroke: string): void
     strokesText?(ui: IUI, canvas: ILeaferCanvas, strokes: ILeafPaint[]): void
 
     drawTextStroke?(ui: IUI, canvas: ILeaferCanvas): void
