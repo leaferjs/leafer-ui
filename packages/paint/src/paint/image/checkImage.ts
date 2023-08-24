@@ -8,18 +8,26 @@ import { createPattern } from './createPattern'
 
 
 export function checkImage(ui: IUI, canvas: ILeaferCanvas, paint: ILeafPaint, allowPaint?: boolean): boolean {
-    const { width, height } = ui.__world
+    let { width, height } = ui.__world
 
     if (!paint.image.ready || paint.patternId === width + height) {
         return false
     } else {
 
-        const { data } = paint
-        const max = 4096
+        if (allowPaint) {
+            if (paint.image.isSVG && paint.data.mode !== 'repeat') {
+                width *= canvas.pixelRatio
+                height *= canvas.pixelRatio
+                allowPaint = width > 4096 || height > 4096
+            } else {
+                allowPaint = false
+            }
+        }
 
-        if (allowPaint && (width * canvas.pixelRatio > max || height * canvas.pixelRatio > max) && data.mode !== 'repeat') {
+        if (allowPaint) {
             canvas.save()
             canvas.clip()
+            const { data } = paint
             if (data.opacity) canvas.opacity *= data.opacity
             if (data.transform) canvas.transform(data.transform)
             canvas.drawImage(paint.image.view as any, 0, 0, data.width, data.height)
