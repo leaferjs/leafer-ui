@@ -4,7 +4,7 @@ import { ImageManager } from '@leafer/core'
 
 import { IUI, ILeafPaint } from '@leafer-ui/interface'
 
-import { createPattern } from './createPattern'
+import { createPattern } from './pattern'
 
 
 export function checkImage(ui: IUI, canvas: ILeaferCanvas, paint: ILeafPaint, allowPaint?: boolean): boolean {

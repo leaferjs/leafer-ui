@@ -18,9 +18,11 @@ export interface ILeafPaint {
     data?: ILeafPaintPatternData
 }
 
-interface ILeafPaintPatternData {
-    width: number
-    height: number
+export interface ILeafPaintPatternData {
+    width?: number
+    height?: number
+    scaleX?: number
+    scaleY?: number
     opacity?: number
     transform?: IMatrixData
     mode?: IImagePaintMode

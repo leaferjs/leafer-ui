@@ -12,14 +12,14 @@ export function createPattern(ui: IUI, paint: ILeafPaint, pixelRatio: number): v
 
         paint.patternId = id
 
-        let scale: number, matrix: IMatrixData, { a, d } = ui.__world, { width, height, opacity, transform, mode } = paint.data
+        let scale: number, matrix: IMatrixData, { a, d } = ui.__world, { width, height, scaleX, scaleY, opacity, transform, mode } = paint.data
 
-        if (transform) {
+        if (scaleX) {
             matrix = get()
             copy(matrix, transform)
-            scaleHelper(matrix, 1 / transform.a, 1 / transform.d)
-            a *= transform.a
-            d *= transform.d
+            scaleHelper(matrix, 1 / scaleX, 1 / scaleY)
+            a *= scaleX
+            d *= scaleY
         }
 
         a *= pixelRatio
@@ -40,12 +40,16 @@ export function createPattern(ui: IUI, paint: ILeafPaint, pixelRatio: number): v
             height /= scale
         }
 
-        if (a !== 1 || d !== 1) {
-            if (transform) {
-                a /= transform.a
-                d /= transform.d
+        if (scaleX) {
+            a /= scaleX
+            d /= scaleY
+        }
+
+        if (transform || a !== 1 || d !== 1) {
+            if (!matrix) {
+                matrix = get()
+                if (transform) copy(matrix, transform)
             }
-            if (!matrix) matrix = get()
             scaleHelper(matrix, 1 / a, 1 / d)
         }
 

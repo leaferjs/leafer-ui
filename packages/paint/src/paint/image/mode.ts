@@ -1,12 +1,12 @@
 import { IBoundsData } from '@leafer/interface'
 import { MatrixHelper } from '@leafer/core'
 
-import { IMatrixData, IImagePaintMode, IPointData } from '@leafer-ui/interface'
+import { IMatrixData, IImagePaintMode, IPointData, ILeafPaintPatternData } from '@leafer-ui/interface'
 
 
 const { get, rotateOfOuter, translate, scaleOfOuter, scale: scaleHelper, rotate } = MatrixHelper
 
-export function getFillOrFitTransform(mode: IImagePaintMode, box: IBoundsData, width: number, height: number, rotation: number): IMatrixData {
+export function fillOrFitMode(data: ILeafPaintPatternData, mode: IImagePaintMode, box: IBoundsData, width: number, height: number, rotation: number): void {
     const transform: IMatrixData = get()
     const swap = rotation && rotation !== 180
     const sw = box.width / (swap ? height : width)
@@ -17,21 +17,26 @@ export function getFillOrFitTransform(mode: IImagePaintMode, box: IBoundsData, w
     translate(transform, x, y)
     scaleHelper(transform, scale)
     if (rotation) rotateOfOuter(transform, { x: box.x + box.width / 2, y: box.y + box.height / 2 }, rotation)
-    return transform
+    data.scaleX = data.scaleY = scale
+    data.transform = transform
 }
 
 
-export function getClipTransform(box: IBoundsData, offset: IPointData, scale: number | IPointData, rotation: number): IMatrixData {
+export function clipMode(data: ILeafPaintPatternData, box: IBoundsData, offset: IPointData, scale: number | IPointData, rotation: number): void {
     const transform: IMatrixData = get()
     translate(transform, box.x, box.y)
     if (offset) translate(transform, offset.x, offset.y)
-    if (scale) typeof scale === 'number' ? scaleHelper(transform, scale) : scaleHelper(transform, scale.x, scale.y)
+    if (scale) {
+        typeof scale === 'number' ? scaleHelper(transform, scale) : scaleHelper(transform, scale.x, scale.y)
+        data.scaleX = transform.a
+        data.scaleY = transform.d
+    }
     if (rotation) rotate(transform, rotation)
-    return transform
+    data.transform = transform
 }
 
 
-export function getRepeatTransform(box: IBoundsData, width: number, height: number, scale: number, rotation: number): IMatrixData {
+export function repeatMode(data: ILeafPaintPatternData, box: IBoundsData, width: number, height: number, scale: number, rotation: number): void {
     const transform = get()
 
     if (rotation) {
@@ -49,6 +54,9 @@ export function getRepeatTransform(box: IBoundsData, width: number, height: numb
         }
     }
     translate(transform, box.x, box.y)
-    if (scale) scaleOfOuter(transform, box, scale)
-    return transform
+    if (scale) {
+        scaleOfOuter(transform, box, scale)
+        data.scaleX = data.scaleY = scale
+    }
+    data.transform = transform
 }

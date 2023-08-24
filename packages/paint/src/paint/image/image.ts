@@ -3,7 +3,7 @@ import { ImageEvent, ImageManager } from '@leafer/core'
 
 import { IUI, IImagePaint, ILeafPaint } from '@leafer-ui/interface'
 
-import { createData } from './createData'
+import { createData } from './data'
 
 
 export function image(ui: IUI, attrName: string, attrValue: IImagePaint, box: IBoundsData, first: boolean): ILeafPaint {
