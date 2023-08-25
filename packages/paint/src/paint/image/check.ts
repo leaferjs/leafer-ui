@@ -10,7 +10,7 @@ import { createPattern } from './pattern'
 export function checkImage(ui: IUI, canvas: ILeaferCanvas, paint: ILeafPaint, allowPaint?: boolean): boolean {
     let { width, height } = ui.__world
 
-    if (!paint.image.ready || paint.patternId === width + height) {
+    if (!paint.data || paint.patternId === width + height) {
         return false
     } else {
 

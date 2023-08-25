@@ -1,14 +1,15 @@
 import { IBoundsData, ILeaferImage } from '@leafer/interface'
 import { MatrixHelper } from '@leafer/core'
 
-import { IImagePaint, ILeafPaint, ILeafPaintPatternData } from '@leafer-ui/interface'
+import { IUI, IImagePaint, ILeafPaint, ILeafPaintPatternData } from '@leafer-ui/interface'
 
 import { clipMode, fillOrFitMode, repeatMode } from './mode'
+import { createPattern } from './pattern'
 
 
 const { get, translate } = MatrixHelper
 
-export function createData(leafPaint: ILeafPaint, image: ILeaferImage, paint: IImagePaint, box: IBoundsData): void {
+export function createData(ui: IUI, leafPaint: ILeafPaint, image: ILeaferImage, paint: IImagePaint, box: IBoundsData): void {
     let { width, height } = image
 
     const { opacity, mode, offset, scale, rotation, blendMode } = paint
@@ -40,4 +41,7 @@ export function createData(leafPaint: ILeafPaint, image: ILeaferImage, paint: II
     data.width = width
     data.height = height
     if (opacity) data.opacity = opacity
+
+    const canvas = ui.leafer && ui.leafer.canvas
+    if (canvas && canvas.bounds.hit(ui.__world)) createPattern(ui, leafPaint, canvas.pixelRatio)
 }

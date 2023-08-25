@@ -1,5 +1,5 @@
 import { IApp, ILeafer, ILeaferCanvas, IRenderer, ILayouter, ISelector, IWatcher, IInteraction, ILeaferConfig, ICanvasManager, IHitCanvasManager, IAutoBounds, IScreenSizeData, IResizeEvent, ILeaf, IEventListenerId, ITransformEventData, ITimer, __Value, IObject, IControl } from '@leafer/interface'
-import { AutoBounds, LayoutEvent, ResizeEvent, LeaferEvent, CanvasManager, HitCanvasManager, ImageManager, DataHelper, Creator, Run, Debug, RenderEvent, registerUI, boundsType, canvasSizeAttrs, dataProcessor, Platform, PluginManager } from '@leafer/core'
+import { AutoBounds, LayoutEvent, ResizeEvent, LeaferEvent, CanvasManager, HitCanvasManager, ImageManager, DataHelper, Creator, Run, Debug, RenderEvent, registerUI, boundsType, canvasSizeAttrs, dataProcessor, Platform, PluginManager, AnimateEvent } from '@leafer/core'
 
 import { ILeaferInputData, ILeaferData, IFunction } from '@leafer-ui/interface'
 import { LeaferTypeCreator } from '@leafer-ui/type'
@@ -202,7 +202,7 @@ export class Leafer extends Group implements ILeafer {
         }
         if (!this.running) this.start()
         check()
-        if (!this.viewLoaded) id = this.on_(RenderEvent.AFTER, check)
+        if (!this.viewLoaded) id = this.on_(AnimateEvent.FRAME, check)
     }
 
     protected __checkAutoLayout(config: ILeaferConfig): void {

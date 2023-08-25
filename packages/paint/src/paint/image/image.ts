@@ -10,7 +10,7 @@ export function image(ui: IUI, attrName: string, attrValue: IImagePaint, box: IB
     const leafPaint: ILeafPaint = { type: attrValue.type }
     const image = leafPaint.image = ImageManager.get(attrValue)
 
-    if (image.ready && hasNaturalSize(ui, attrName, image)) createData(leafPaint, image, attrValue, box)
+    if (image.ready && hasNaturalSize(ui, attrName, image)) createData(ui, leafPaint, image, attrValue, box)
 
     if (first) {
 
@@ -36,7 +36,7 @@ export function image(ui: IUI, attrName: string, attrValue: IImagePaint, box: IB
                     if (ui.__) {
 
                         if (hasNaturalSize(ui, attrName, image)) {
-                            createData(leafPaint, image, attrValue, box)
+                            createData(ui, leafPaint, image, attrValue, box)
                             ui.forceUpdate('surface')
                         }
 
