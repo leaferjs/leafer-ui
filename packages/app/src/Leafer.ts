@@ -281,28 +281,36 @@ export class Leafer extends Group implements ILeafer {
     }
 
     public destroy(): void {
-        if (this.canvas) {
-            try {
-                this.stop()
-                this.emitEvent(new LeaferEvent(LeaferEvent.END, this))
-                this.__removeListenEvents()
+        setTimeout(() => {
+            if (this.canvas) {
+                try {
+                    this.stop()
+                    this.emitEvent(new LeaferEvent(LeaferEvent.END, this))
+                    this.__removeListenEvents()
 
-                this.__controllers.forEach(item => item.destroy())
-                this.__controllers.length = 0
+                    this.__controllers.forEach(item => {
+                        if (!(this.parent && item === this.interaction)) item.destroy()
+                    })
+                    this.__controllers.length = 0
 
-                this.selector.destroy()
-                this.canvasManager.destroy()
-                this.hitCanvasManager.destroy()
+                    if (!this.parent) {
+                        this.selector.destroy()
+                        this.canvasManager.destroy()
+                        this.hitCanvasManager.destroy()
+                    }
 
-                this.canvas.destroy()
-                this.canvas = null
+                    this.canvas.destroy()
 
-                this.config = this.userConfig = this.view = null
+                    this.config = this.userConfig = this.canvas = this.view = null
+                    this.selector = this.interaction = this.canvasManager = this.hitCanvasManager = null
 
-                super.destroy()
-            } catch (e) {
-                debug.error(e)
+                    super.destroy()
+
+                    setTimeout(() => { ImageManager.clearRecycled() }, 100)
+                } catch (e) {
+                    debug.error(e)
+                }
             }
-        }
+        }, 0)
     }
 }

@@ -41,7 +41,7 @@ export class Image extends Rect implements IImage {
 
         if (update) {
             if (this.image) this.image = null
-            this.fill = { type: 'image', mode: 'strench', url }
+            this.fill = url ? { type: 'image', mode: 'strench', url } : undefined
             this.once(ImageEvent.LOADED, (e) => this.image = e.image)
         }
 

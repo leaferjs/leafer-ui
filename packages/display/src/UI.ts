@@ -231,4 +231,9 @@ export class UI extends Leaf implements IUI {
         return UICreator.get(data.tag || this.prototype.__tag, data, x, y, width, height) as IUI
     }
 
+    public destroy(): void {
+        this.fill = this.stroke = null
+        super.destroy()
+    }
+
 }

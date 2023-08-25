@@ -50,8 +50,8 @@ export class Group extends UI implements IGroup {
 
     public add(_child: IUI, _index?: number): void { }
 
-    public remove(_child?: IUI): void { }
+    public remove(_child?: IUI, _destroy?: boolean): void { }
 
-    public removeAll(): void { }
+    public removeAll(_destroy?: boolean): void { }
 
 }
