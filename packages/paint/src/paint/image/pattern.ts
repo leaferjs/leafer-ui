@@ -53,7 +53,7 @@ export function createPattern(ui: IUI, paint: ILeafPaint, pixelRatio: number): v
             scaleHelper(matrix, 1 / a, 1 / d)
         }
 
-        const style = Platform.canvas.createPattern(paint.image.getCanvas(width, height, opacity) as any, mode === 'repeat' ? 'repeat' : 'no-repeat')
+        const style = Platform.canvas.createPattern(paint.image.getCanvas(width, height, opacity) as any, mode === 'repeat' ? 'repeat' : (Platform.origin.noRepeat || 'no-repeat'))
 
         paint.transform = null
 
