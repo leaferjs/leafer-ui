@@ -8,16 +8,17 @@ import { createPattern } from './pattern'
 
 
 export function checkImage(ui: IUI, canvas: ILeaferCanvas, paint: ILeafPaint, allowPaint?: boolean): boolean {
-    let { width, height } = ui.__world
+    const { scaleX, scaleY } = ui.__world
 
-    if (!paint.data || paint.patternId === width + height) {
+    if (!paint.data || paint.patternId === scaleX + scaleY) {
         return false
     } else {
 
         if (allowPaint) {
             if (paint.image.isSVG && paint.data.mode !== 'repeat') {
-                width *= canvas.pixelRatio
-                height *= canvas.pixelRatio
+                let { width, height } = paint.data
+                width *= scaleX * canvas.pixelRatio
+                height *= scaleY * canvas.pixelRatio
                 allowPaint = width > 4096 || height > 4096
             } else {
                 allowPaint = false
@@ -36,10 +37,7 @@ export function checkImage(ui: IUI, canvas: ILeaferCanvas, paint: ILeafPaint, al
             return true
         } else {
             ImageManager.patternTasker.addParallel(() => {
-                if (canvas.bounds.hit(ui.__world)) {
-                    createPattern(ui, paint, canvas.pixelRatio)
-                    ui.forceUpdate('surface')
-                }
+                if (canvas.bounds.hit(ui.__world) && createPattern(ui, paint, canvas.pixelRatio)) ui.forceUpdate('surface')
             }, null, true)
             return false
         }
