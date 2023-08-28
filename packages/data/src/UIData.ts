@@ -84,7 +84,7 @@ export class UIData extends LeafData implements IUIData {
             let image: ILeaferImage, map: IBooleanMap
             for (let i = 0, len = paints.length; i < len; i++) {
                 image = paints[i].image
-                if (image) {
+                if (image && image.url) {
                     const { url } = image
                     if (!map) map = {}
                     map[url] = true
