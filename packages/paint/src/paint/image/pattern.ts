@@ -36,7 +36,7 @@ export function createPattern(ui: IUI, paint: ILeafPaint, pixelRatio: number): b
         if (width > maxWidth || height > maxHeight) {
             scale = Math.max(width / maxWidth, height / maxHeight)
         } else if (width < 32 || height < 32) {
-            scale = Math.min(width / 16, height / 16)
+            scale = Math.min(width / 32, height / 32)
         }
 
         if (scale) {

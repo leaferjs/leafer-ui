@@ -36,9 +36,13 @@ export function checkImage(ui: IUI, canvas: ILeaferCanvas, paint: ILeafPaint, al
             canvas.restore()
             return true
         } else {
-            ImageManager.patternTasker.addParallel(() => {
-                if (canvas.bounds.hit(ui.__world) && createPattern(ui, paint, canvas.pixelRatio)) ui.forceUpdate('surface')
-            }, null, true)
+            if (!paint.style) {
+                createPattern(ui, paint, canvas.pixelRatio)
+            } else {
+                ImageManager.patternTasker.add(async () => {
+                    if (canvas.bounds.hit(ui.__world) && createPattern(ui, paint, canvas.pixelRatio)) ui.forceUpdate('surface')
+                }, 300)
+            }
             return false
         }
     }

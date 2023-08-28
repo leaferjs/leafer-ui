@@ -76,6 +76,6 @@ function addTask(task: IFunction): Promise<IExportResult> {
     if (!tasker) tasker = new TaskProcessor()
 
     return new Promise((resolve: IExportResultFunction) => {
-        tasker.add(async () => await task(resolve), null, true)
+        tasker.add(async () => await task(resolve), { parallel: false })
     })
 }
