@@ -81,24 +81,24 @@ export class UIData extends LeafData implements IUIData {
     public __recycleImage(attrName: string): IBooleanMap {
         const paints = (attrName === 'fill' ? this._fill : this._stroke) as ILeafPaint[]
         if (paints instanceof Array) {
-            let image: ILeaferImage, map: IBooleanMap
+            let image: ILeaferImage, recycleMap: IBooleanMap, url: string
             for (let i = 0, len = paints.length; i < len; i++) {
                 image = paints[i].image
-                if (image && image.url) {
-                    const { url } = image
-                    if (!map) map = {}
-                    map[url] = true
+                url = image && image.url
+                if (url) {
+                    if (!recycleMap) recycleMap = {}
+                    recycleMap[url] = true
                     ImageManager.recycle(image)
 
                     // stop load
                     if (image.loading) {
                         const p = this.__input && this.__input[attrName]
                         const hasSame = p && (p instanceof Array ? p.some(item => item.url === url) : p.url === url)
-                        if (!hasSame) image.unload(paints[i].loadId)
+                        image.unload(paints[i].loadId, !hasSame)
                     }
                 }
             }
-            return map
+            return recycleMap
         }
         return null
     }

@@ -10,47 +10,47 @@ export function image(ui: IUI, attrName: string, attrValue: IImagePaint, box: IB
     const leafPaint: ILeafPaint = { type: attrValue.type }
     const image = leafPaint.image = ImageManager.get(attrValue)
 
-    if (image.ready && hasNaturalSize(ui, attrName, image)) createData(ui, leafPaint, image, attrValue, box)
+    if (image.ready && hasNaturalSize(ui, attrName, image)) createData(leafPaint, image, attrValue, box)
 
-    if (first) {
+    const event: IImageEvent = { target: ui, image, attrName, attrValue }
 
-        const event: IImageEvent = { target: ui, image, attrName, attrValue }
+    if (image.ready) {
 
-        if (image.ready) {
-
+        if (first) {
             emit(ImageEvent.LOAD, event)
             emit(ImageEvent.LOADED, event)
+        }
 
-        } else if (image.error) {
+    } else if (image.error) {
 
+        if (first) {
             ui.forceUpdate('surface')
             event.error = image.error
             emit(ImageEvent.ERROR, event)
-
-        } else {
-
-            emit(ImageEvent.LOAD, event)
-
-            leafPaint.loadId = image.load(
-                () => {
-                    if (!ui.destroyed) {
-
-                        if (hasNaturalSize(ui, attrName, image)) {
-                            createData(ui, leafPaint, image, attrValue, box)
-                            ui.forceUpdate('surface')
-                        }
-
-                        emit(ImageEvent.LOADED, event)
-                    }
-                },
-                (error) => {
-                    ui.forceUpdate('surface')
-                    event.error = error
-                    emit(ImageEvent.ERROR, event)
-                }
-            )
-
         }
+
+    } else {
+
+        if (first) emit(ImageEvent.LOAD, event)
+
+        leafPaint.loadId = image.load(
+            () => {
+                if (!ui.destroyed) {
+
+                    if (hasNaturalSize(ui, attrName, image)) {
+                        createData(leafPaint, image, attrValue, box)
+                        ui.forceUpdate('surface')
+                    }
+
+                    emit(ImageEvent.LOADED, event)
+                }
+            },
+            (error) => {
+                ui.forceUpdate('surface')
+                event.error = error
+                emit(ImageEvent.ERROR, event)
+            }
+        )
 
     }
 

@@ -62,7 +62,7 @@ export function createPattern(ui: IUI, paint: ILeafPaint, pixelRatio: number): b
         const style = Platform.canvas.createPattern(image.getCanvas(width, height, opacity) as any, mode === 'repeat' ? 'repeat' : (Platform.origin.noRepeat || 'no-repeat'))
 
         try {
-            paint.transform = null
+            if (paint.transform) paint.transform = null
             if (matrix) style.setTransform ? style.setTransform(matrix) : paint.transform = matrix
         } catch (e) {
             paint.transform = matrix
