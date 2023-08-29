@@ -11,7 +11,7 @@ export function createPattern(ui: IUI, paint: ILeafPaint, pixelRatio: number): b
 
     const id = scaleX + scaleY
 
-    if (paint.patternId !== id) {
+    if (paint.patternId !== id && !ui.destroyed) {
 
         paint.patternId = id
 

@@ -278,11 +278,12 @@ export class Leafer extends Group implements ILeafer {
 
     protected __removeListenEvents(): void {
         this.off_(this.__eventIds)
+        this.__eventIds.length = 0
     }
 
     public destroy(): void {
         setTimeout(() => {
-            if (this.canvas) {
+            if (!this.destroyed) {
                 try {
                     this.stop()
                     this.emitEvent(new LeaferEvent(LeaferEvent.END, this))
@@ -301,8 +302,7 @@ export class Leafer extends Group implements ILeafer {
 
                     this.canvas.destroy()
 
-                    this.config = this.userConfig = this.canvas = this.view = null
-                    this.selector = this.interaction = this.canvasManager = this.hitCanvasManager = null
+                    this.config.view = this.userConfig.view = this.view = null
 
                     super.destroy()
 
@@ -312,5 +312,6 @@ export class Leafer extends Group implements ILeafer {
                 }
             }
         }, 0)
+
     }
 }

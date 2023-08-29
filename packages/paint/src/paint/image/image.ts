@@ -33,7 +33,7 @@ export function image(ui: IUI, attrName: string, attrValue: IImagePaint, box: IB
 
             leafPaint.loadId = image.load(
                 () => {
-                    if (ui.__) {
+                    if (!ui.destroyed) {
 
                         if (hasNaturalSize(ui, attrName, image)) {
                             createData(ui, leafPaint, image, attrValue, box)
