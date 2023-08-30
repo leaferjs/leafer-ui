@@ -46,7 +46,7 @@ export const Export: IExportModule = {
                         } else if (blob) {
                             data = await canvas.toBlob(filename, quality)
                         } else {
-                            data = canvas.toDataURL(filename, quality)
+                            data = await canvas.toDataURL(filename, quality)
                         }
 
                         success({ data })

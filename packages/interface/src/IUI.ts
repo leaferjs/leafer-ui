@@ -1,4 +1,4 @@
-import { ILeaf, ILeafComputedData, ILeafData, ILeafInputData, ILeaferCanvas, IRenderOptions, IPathDrawer, IPointData, IPath2D, IPathCommandData, IWindingRule, ILeaferImageConfig, IBoundsData, IObject, __Number, IPathString, ILeaferImage, IBlob, IBooleanMap } from '@leafer/interface'
+import { ILeaf, ILeafComputedData, ILeafData, ILeafInputData, ILeaferCanvas, IRenderOptions, IPathDrawer, IPointData, IPath2D, IPathCommandData, IWindingRule, ILeaferImageConfig, IBoundsData, IObject, __Number, IPathString, ILeaferImage, IBlob } from '@leafer/interface'
 
 import {
     IFillAttrData, IFillInputData, IFillComputedData,
