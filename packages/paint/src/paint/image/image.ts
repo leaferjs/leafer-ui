@@ -6,24 +6,24 @@ import { IUI, IImagePaint, ILeafPaint } from '@leafer-ui/interface'
 import { createData } from './data'
 
 
-export function image(ui: IUI, attrName: string, attrValue: IImagePaint, box: IBoundsData, first: boolean): ILeafPaint {
+export function image(ui: IUI, attrName: string, attrValue: IImagePaint, box: IBoundsData, firstUse: boolean): ILeafPaint {
     const leafPaint: ILeafPaint = { type: attrValue.type }
     const image = leafPaint.image = ImageManager.get(attrValue)
 
-    if (image.ready && hasNaturalSize(ui, attrName, image)) createData(leafPaint, image, attrValue, box)
-
-    const event: IImageEvent = { target: ui, image, attrName, attrValue }
+    const event: IImageEvent = (firstUse || image.loading) && { target: ui, image, attrName, attrValue }
 
     if (image.ready) {
 
-        if (first) {
+        if (hasNaturalSize(ui, attrName, image)) createData(leafPaint, image, attrValue, box)
+
+        if (firstUse) {
             emit(ImageEvent.LOAD, event)
             emit(ImageEvent.LOADED, event)
         }
 
     } else if (image.error) {
 
-        if (first) {
+        if (firstUse) {
             ui.forceUpdate('surface')
             event.error = image.error
             emit(ImageEvent.ERROR, event)
@@ -31,7 +31,7 @@ export function image(ui: IUI, attrName: string, attrValue: IImagePaint, box: IB
 
     } else {
 
-        if (first) emit(ImageEvent.LOAD, event)
+        if (firstUse) emit(ImageEvent.LOAD, event)
 
         leafPaint.loadId = image.load(
             () => {

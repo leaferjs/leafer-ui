@@ -1,7 +1,7 @@
-import { ILeaferCanvas, IRenderOptions } from '@leafer/interface'
+import { ILeaferCanvas, IRenderOptions, IBooleanMap } from '@leafer/interface'
 
 import { ILeafPaint } from '../type/IComputedType'
-import { IUI } from '../IUI'
+import { IUI, IUIData } from '../IUI'
 import { ICachedShape } from '../ICachedShape'
 
 export interface IPaintModule {
@@ -21,4 +21,6 @@ export interface IPaintModule {
     drawTextStroke?(ui: IUI, canvas: ILeaferCanvas): void
 
     shape?(ui: IUI, current: ILeaferCanvas, options: IRenderOptions): ICachedShape
+
+    recycleImage?(data: IUIData, attrName: string): IBooleanMap
 }

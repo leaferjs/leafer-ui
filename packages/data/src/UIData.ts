@@ -1,7 +1,8 @@
-import { IBooleanMap, ILeaferImage, __Value } from '@leafer/interface'
-import { ImageManager, LeafData } from '@leafer/core'
+import { __Value } from '@leafer/interface'
+import { LeafData } from '@leafer/core'
 
 import { IShadowEffect, IUI, IUIData, IUnitData, ILeafPaint } from '@leafer-ui/interface'
+import { Paint } from '@leafer-ui/external'
 
 
 const emptyPaint: ILeafPaint = {}
@@ -26,7 +27,7 @@ export class UIData extends LeafData implements IUIData {
         if (typeof value === 'string' || !value) {
             if (this.__isFills) {
                 this.__removeInput('fill')
-                this.__recycleImage('fill')
+                Paint.recycleImage(this, 'fill')
                 this.__isFills = false
             }
             this._fill = value
@@ -42,7 +43,7 @@ export class UIData extends LeafData implements IUIData {
         if (typeof value === 'string' || !value) {
             if (this.__isStrokes) {
                 this.__removeInput('stroke')
-                this.__recycleImage('stroke')
+                Paint.recycleImage(this, 'stroke')
                 this.__isStrokes = false
             }
             this._stroke = value
@@ -76,31 +77,6 @@ export class UIData extends LeafData implements IUIData {
         } else {
             this._innerShadow = null
         }
-    }
-
-    public __recycleImage(attrName: string): IBooleanMap {
-        const paints = (attrName === 'fill' ? this._fill : this._stroke) as ILeafPaint[]
-        if (paints instanceof Array) {
-            let image: ILeaferImage, recycleMap: IBooleanMap, url: string
-            for (let i = 0, len = paints.length; i < len; i++) {
-                image = paints[i].image
-                url = image && image.url
-                if (url) {
-                    if (!recycleMap) recycleMap = {}
-                    recycleMap[url] = true
-                    ImageManager.recycle(image)
-
-                    // stop load
-                    if (image.loading) {
-                        const p = this.__input && this.__input[attrName]
-                        const hasSame = p && (p instanceof Array ? p.some(item => item.url === url) : p.url === url)
-                        image.unload(paints[i].loadId, !hasSame)
-                    }
-                }
-            }
-            return recycleMap
-        }
-        return null
     }
 
 }

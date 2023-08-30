@@ -302,8 +302,6 @@ export interface IUIData extends IUIComputedData, ILeafData {
     __font?: string
     __textDrawData?: ITextDrawData
 
-    __recycleImage(attrName: string): IBooleanMap
-
 }
 export interface IUIComputedData extends IFillComputedData, IBorderComputedData, IStrokeComputedData, ITextStyleComputedData, ICornerRadiusComputedData, IEffectComputedData, ILeafComputedData {
     padding?: number | number[]

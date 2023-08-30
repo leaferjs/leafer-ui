@@ -5,6 +5,7 @@ import { image } from "./paint/image/image"
 import { linearGradient } from './paint/linear'
 import { radialGradient } from "./paint/radial"
 import { conicGradient } from "./paint/conic"
+import { recycleImage } from './paint/image'
 
 
 let recycleMap: IBooleanMap
@@ -16,7 +17,7 @@ export function compute(ui: IUI, attrName: string): void {
 
     if (!(paints instanceof Array)) paints = [paints]
 
-    recycleMap = ui.__.__recycleImage(attrName)
+    recycleMap = recycleImage(ui.__, attrName)
 
     for (let i = 0, len = paints.length; i < len; i++) {
         item = getLeafPaint(ui, paints[i], attrName)
