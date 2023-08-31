@@ -20,7 +20,7 @@ export class Star extends UI implements IStar {
     public __: IStarData
 
     @pathType(5)
-    public points: __Number
+    public corners: __Number
 
     @pathType(0.382)
     public innerRadius: __Number
@@ -31,14 +31,14 @@ export class Star extends UI implements IStar {
 
     public __updatePath() {
 
-        const { width, height, points, innerRadius } = this.__
+        const { width, height, corners, innerRadius } = this.__
         const rx = width / 2, ry = height / 2
 
         const path: number[] = this.__.path = []
         moveTo(path, rx, 0)
 
-        for (let i = 1; i < points * 2; i++) {
-            lineTo(path, rx + (i % 2 === 0 ? rx : rx * innerRadius) * sin((i * PI) / points), ry - (i % 2 === 0 ? ry : ry * innerRadius) * cos((i * PI) / points))
+        for (let i = 1; i < corners * 2; i++) {
+            lineTo(path, rx + (i % 2 === 0 ? rx : rx * innerRadius) * sin((i * PI) / corners), ry - (i % 2 === 0 ? ry : ry * innerRadius) * cos((i * PI) / corners))
         }
 
         closePath(path)

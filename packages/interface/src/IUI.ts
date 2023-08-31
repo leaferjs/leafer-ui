@@ -16,10 +16,14 @@ import { IExportOptions } from './module/IExport'
 export interface ILine extends IUI {
     __: ILineData
     toPoint: IPointData
+    points: number[]
+    curve: number
 }
 export interface ILineData extends IUIData { }
 export interface ILineInputData extends IUIInputData {
     toPoint?: IPointData
+    points?: number[]
+    curve?: number
 }
 
 
@@ -51,9 +55,13 @@ export interface IEllipseInputData extends IEllipseAttrData, IUIInputData { }
 export interface IPolygon extends IUI {
     __: IPolygonData
     sides: number
+    points: number[]
+    curve: number
 }
 interface IPolygonAttrData {
     sides?: number
+    points?: number[]
+    curve?: number
 }
 export interface IPolygonData extends IPolygonAttrData, IUIData { }
 export interface IPolygonInputData extends IPolygonAttrData, IUIInputData { }
@@ -62,11 +70,11 @@ export interface IPolygonInputData extends IPolygonAttrData, IUIInputData { }
 // Star
 export interface IStar extends IUI {
     __: IStarData
-    points: number
+    corners: number
     innerRadius: number
 }
 interface IStarAttrData {
-    points?: number
+    corners?: number
     innerRadius?: number
 }
 

@@ -1,5 +1,5 @@
-import { IPointData, ITwoPointBoundsData, __Number } from '@leafer/interface'
-import { PathCommandDataHelper, PointHelper, TwoPointBoundsHelper, boundsType, affectStrokeBoundsType, dataProcessor, registerUI } from '@leafer/core'
+import { IPointData, __Number } from '@leafer/interface'
+import { PathBounds, PathCommandDataHelper, PointHelper, boundsType, pathType, affectStrokeBoundsType, dataProcessor, registerUI } from '@leafer/core'
 
 import { ILine, ILineData, ILineInputData, IStrokeAlign } from '@leafer-ui/interface'
 import { LineData } from '@leafer-ui/data'
@@ -7,11 +7,9 @@ import { LineData } from '@leafer-ui/data'
 import { UI } from './UI'
 
 
-const { moveTo, lineTo } = PathCommandDataHelper
+const { moveTo, lineTo, points } = PathCommandDataHelper
 const { rotate, getAngle, getDistance, defaultPoint } = PointHelper
-const { setPoint, addPoint, toBounds } = TwoPointBoundsHelper
-
-const pointBounds = {} as ITwoPointBoundsData
+const { toBounds } = PathBounds
 
 
 @registerUI()
@@ -27,6 +25,12 @@ export class Line extends UI implements ILine {
 
     @affectStrokeBoundsType('center')
     public strokeAlign: IStrokeAlign
+
+    @pathType()
+    points: number[]
+
+    @pathType()
+    curve: number
 
     protected __toPoint: IPointData
 
@@ -57,16 +61,22 @@ export class Line extends UI implements ILine {
     public __updatePath(): void {
 
         const path: number[] = this.__.path = []
-        moveTo(path, 0, 0)
 
-        const to = this.toPoint
-        lineTo(path, to.x, to.y)
+        if (this.__.points) {
+
+            points(path, this.__.points, this.__.curve)
+
+        } else {
+
+            const to = this.toPoint
+            moveTo(path, 0, 0)
+            lineTo(path, to.x, to.y)
+        }
+
     }
 
     public __updateBoxBounds(): void {
-        setPoint(pointBounds, 0, 0)
-        addPoint(pointBounds, this.__toPoint.x, this.__toPoint.y)
-        toBounds(pointBounds, this.__layout.boxBounds)
+        toBounds(this.__.path, this.__layout.boxBounds)
     }
 
 }
