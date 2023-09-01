@@ -98,27 +98,13 @@ export interface IPathInputData extends IUIInputData {
 
 // Pen
 
-export interface IPen extends IGroup {
+export interface IPen extends IGroup, IPathDrawer {
     __: IPenData
-    path: IPath
+    pathElement: IPath
     pathStyle: IPathInputData
-    pathData: IPathCommandData
-
-    moveTo(x: number, y: number): IPen
-    lineTo(x: number, y: number): IPen
-    bezierCurveTo(x1: number, y1: number, x2: number, y2: number, x: number, y: number): IPen
-    quadraticCurveTo(x1: number, y1: number, x: number, y: number): IPen
-
-    rect(x: number, y: number, width: number, height: number): IPen
-    roundRect(x: number, y: number, width: number, height: number, cornerRadius: number | number[]): IPen
-    ellipse(x: number, y: number, radiusX: number, radiusY: number, rotation?: number, startAngle?: number, endAngle?: number, anticlockwise?: boolean): IPen
-    arc(x: number, y: number, radius: number, startAngle?: number, endAngle?: number, anticlockwise?: boolean): IPen
-    arcTo(x1: number, y1: number, x2: number, y2: number, radius: number): IPen
-
-    close(): IPen
-    clear(): IPen
-
+    path: IPathCommandData
     paint(): void
+    clear(): void
 }
 
 export interface IPenData extends IGroupData { }

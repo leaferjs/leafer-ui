@@ -7,7 +7,7 @@ import { LineData } from '@leafer-ui/data'
 import { UI } from './UI'
 
 
-const { moveTo, lineTo, points } = PathCommandDataHelper
+const { moveTo, lineTo, drawPoints } = PathCommandDataHelper
 const { rotate, getAngle, getDistance, defaultPoint } = PointHelper
 const { toBounds } = PathBounds
 
@@ -64,7 +64,7 @@ export class Line extends UI implements ILine {
 
         if (this.__.points) {
 
-            points(path, this.__.points, this.__.curve)
+            drawPoints(path, this.__.points, this.__.curve)
 
         } else {
 

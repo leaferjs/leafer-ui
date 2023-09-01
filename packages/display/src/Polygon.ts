@@ -8,7 +8,7 @@ import { UI } from './UI'
 
 
 const { sin, cos, PI } = Math
-const { moveTo, lineTo, closePath, points } = PathCommandDataHelper
+const { moveTo, lineTo, closePath, drawPoints } = PathCommandDataHelper
 const { toBounds } = PathBounds
 
 @registerUI()
@@ -38,7 +38,7 @@ export class Polygon extends UI implements IPolygon {
 
         if (this.__.points) {
 
-            points(path, this.__.points, this.__.curve, true)
+            drawPoints(path, this.__.points, this.__.curve, true)
 
         } else {
 
