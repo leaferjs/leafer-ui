@@ -29,8 +29,8 @@ export class Line extends UI implements ILine {
     @pathType()
     points: number[]
 
-    @pathType()
-    curve: number
+    @pathType(0)
+    curve: boolean | number
 
     protected __toPoint: IPointData
 

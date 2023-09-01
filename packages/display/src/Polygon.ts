@@ -25,8 +25,8 @@ export class Polygon extends UI implements IPolygon {
     @pathType()
     points: number[]
 
-    @pathType()
-    curve: number
+    @pathType(0)
+    curve: boolean | number
 
     constructor(data?: IPolygonInputData) {
         super(data)
@@ -38,7 +38,7 @@ export class Polygon extends UI implements IPolygon {
 
         if (this.__.points) {
 
-            points(path, this.__.points, this.__.curve)
+            points(path, this.__.points, this.__.curve, true)
 
         } else {
 

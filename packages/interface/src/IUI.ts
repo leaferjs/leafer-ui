@@ -17,13 +17,13 @@ export interface ILine extends IUI {
     __: ILineData
     toPoint: IPointData
     points: number[]
-    curve: number
+    curve: boolean | number
 }
 export interface ILineData extends IUIData { }
 export interface ILineInputData extends IUIInputData {
     toPoint?: IPointData
     points?: number[]
-    curve?: number
+    curve?: boolean | number
 }
 
 
@@ -56,12 +56,12 @@ export interface IPolygon extends IUI {
     __: IPolygonData
     sides: number
     points: number[]
-    curve: number
+    curve: boolean | number
 }
 interface IPolygonAttrData {
     sides?: number
     points?: number[]
-    curve?: number
+    curve?: boolean | number
 }
 export interface IPolygonData extends IPolygonAttrData, IUIData { }
 export interface IPolygonInputData extends IPolygonAttrData, IUIInputData { }
