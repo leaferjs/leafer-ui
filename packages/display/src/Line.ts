@@ -64,7 +64,7 @@ export class Line extends UI implements ILine {
 
         if (this.__.points) {
 
-            drawPoints(path, this.__.points, this.__.curve)
+            drawPoints(path, this.__.points, false)
 
         } else {
 
@@ -73,6 +73,14 @@ export class Line extends UI implements ILine {
             lineTo(path, to.x, to.y)
         }
 
+    }
+
+    public __updateRenderPath(): void {
+        if (this.__.points && this.__.curve) {
+            drawPoints(this.__.__pathForRender = [], this.__.points, this.__.curve, false)
+        } else {
+            super.__updateRenderPath()
+        }
     }
 
     public __updateBoxBounds(): void {

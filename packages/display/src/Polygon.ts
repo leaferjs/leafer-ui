@@ -38,7 +38,7 @@ export class Polygon extends UI implements IPolygon {
 
         if (this.__.points) {
 
-            drawPoints(path, this.__.points, this.__.curve, true)
+            drawPoints(path, this.__.points, false, true)
 
         } else {
 
@@ -54,6 +54,15 @@ export class Polygon extends UI implements IPolygon {
         }
 
         closePath(path)
+    }
+
+
+    public __updateRenderPath(): void {
+        if (this.__.points && this.__.curve) {
+            drawPoints(this.__.__pathForRender = [], this.__.points, this.__.curve, true)
+        } else {
+            super.__updateRenderPath()
+        }
     }
 
     public __updateBoxBounds(): void {
