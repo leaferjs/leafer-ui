@@ -113,6 +113,9 @@ export class UI extends Leaf implements IUI {
     @hitType(true)
     public hitSelf: __Boolean
 
+    @hitType(true)
+    public hitRadius: __Number
+
     @dataType()
     public cursor: ICursorType
 
