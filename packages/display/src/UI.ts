@@ -180,6 +180,21 @@ export class UI extends Leaf implements IUI {
     public grayscale: __Number | IGrayscaleEffect
 
 
+    public set scale(value: __Number | IPointData) {
+        if (typeof value === 'number') {
+            this.scaleX = this.scaleY = value
+        } else {
+            this.scaleX = value.x
+            this.scaleY = value.y
+        }
+    }
+
+    public get scale(): __Number | IPointData {
+        const { scaleX, scaleY } = this
+        return scaleX !== scaleY ? { x: scaleX, y: scaleY } : scaleX
+    }
+
+
     constructor(data?: IUIInputData) {
         super(data)
     }
