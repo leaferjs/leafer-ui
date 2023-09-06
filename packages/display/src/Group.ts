@@ -50,7 +50,7 @@ export class Group extends UI implements IGroup {
 
     public add(_child: IUI, _index?: number): void { }
 
-    public addList(_list: IUI[]): void { }
+    public addMany(..._children: IUI[]): void { }
 
     public remove(_child?: IUI, _destroy?: boolean): void { }
 
