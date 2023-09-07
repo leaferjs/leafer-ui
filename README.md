@@ -12,7 +12,7 @@ Leafer UI 是基于 Leafer 开发的一套绚丽多彩的 UI 绘图框架，可�
 
 ###
 
-<img src="https://leaferjs.com/image/qrcode/wg.jpg?d=0901" alt="技术交流群" style="width:110px;"/>
+<img src="https://leaferjs.com/image/qrcode/wg.jpg?d=0908" alt="技术交流群" style="width:110px;"/>
 
 ## 使命与愿景
 
