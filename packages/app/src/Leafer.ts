@@ -159,7 +159,10 @@ export class Leafer extends Group implements ILeafer {
     }
 
     public updateCursor(): void {
-        if (this.interaction) this.interaction.updateCursor()
+        if (this.interaction) {
+            this.interaction.updateHoverData()
+            this.interaction.updateCursor()
+        }
     }
 
     protected __doResize(size: IScreenSizeData): void {
