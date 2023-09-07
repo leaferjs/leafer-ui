@@ -158,6 +158,10 @@ export class Leafer extends Group implements ILeafer {
         if (this.viewReady) this.renderer.update()
     }
 
+    public updateCursor(): void {
+        if (this.interaction) this.interaction.updateCursor()
+    }
+
     protected __doResize(size: IScreenSizeData): void {
         if (!this.canvas || this.canvas.isSameSize(size)) return
         const old = DataHelper.copyAttrs({}, this.canvas, canvasSizeAttrs) as IScreenSizeData
