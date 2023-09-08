@@ -252,6 +252,11 @@ export class UI extends Leaf implements IUI {
         return Export.export(this, filename, options)
     }
 
+    public clone(): IUI {
+        const data = this.json()
+        return UICreator.get(data.tag, data) as IUI
+    }
+
     static one(data: IUITagInputData, x?: number, y?: number, width?: number, height?: number): IUI {
         return UICreator.get(data.tag || this.prototype.__tag, data, x, y, width, height) as IUI
     }

@@ -264,6 +264,7 @@ export interface IUI extends IFillAttrData, IStrokeAttrData, ICornerRadiusAttrDa
     __drawAfterFill?(canvas: ILeaferCanvas, options: IRenderOptions): void
 
     export(filename: string, options?: IExportOptions | number): Promise<IBlob | string | boolean>
+    clone(): IUI
 }
 
 export interface IUIData extends IUIComputedData, ILeafData {
