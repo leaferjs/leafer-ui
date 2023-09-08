@@ -305,6 +305,7 @@ export interface IUIComputedData extends IFillComputedData, IBorderComputedData,
 export interface IUIInputData extends IFillInputData, IStrokeInputData, ITextStyleInputData, ICornerRadiusInputData, IEffectInputData, ILeafInputData {
     padding?: number | number[]
     locked?: boolean
+    children?: IUITagInputData[]
 }
 
 
@@ -324,6 +325,6 @@ export type IUITag =
     | 'Box'
 
 
-export interface IUITagInputData extends IRectInputData, IEllipseInputData, IPolygonInputData, IStarInputData, ILineInputData, IPathInputData, ITextInputData, IImageInputData, IGroupInputData, IFrameInputData, IObject {
-    tagName?: IUITag
+export interface IUITagInputData extends IUIInputData, IRectInputData, IEllipseInputData, IPolygonInputData, IStarInputData, ILineInputData, IPathInputData, ITextInputData, IImageInputData, IGroupInputData, IFrameInputData, IObject {
+    tag?: IUITag
 }

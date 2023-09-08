@@ -1,9 +1,10 @@
 import { Branch, useModule, dataProcessor, registerUI } from '@leafer/core'
 
-import { IGroup, IGroupData, IGroupInputData, IUI } from '@leafer-ui/interface'
+import { IGroup, IGroupData, IGroupInputData, IUI, IUITagInputData } from '@leafer-ui/interface'
 import { GroupData } from '@leafer-ui/data'
 
 import { UI } from './UI'
+import { IObject } from '@leafer/interface'
 
 
 @useModule(Branch)
@@ -31,7 +32,7 @@ export class Group extends UI implements IGroup {
     constructor(data?: IGroupInputData) {
         super(data)
         this.isBranch = true
-        this.children = []
+        if (!this.children) this.children = []
     }
 
     public addAt(child: IUI, index: number): void {
@@ -55,5 +56,7 @@ export class Group extends UI implements IGroup {
     public remove(_child?: IUI, _destroy?: boolean): void { }
 
     public removeAll(_destroy?: boolean): void { }
+
+    public json(_data?: IUITagInputData): IObject { return undefined }
 
 }
