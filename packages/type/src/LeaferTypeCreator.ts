@@ -34,5 +34,6 @@ export const LeaferTypeCreator = {
 
 const { list } = LeaferTypeCreator
 
+LeaferTypeCreator.register('draw', user)
 LeaferTypeCreator.register('user', user)
 LeaferTypeCreator.register('design', design)

@@ -20,7 +20,7 @@ export interface ILine extends IUI {
     curve: boolean | number
 }
 export interface ILineData extends IUIData { }
-export interface ILineInputData extends IUIInputData {
+export interface ILineInputData extends IUIBaseInputData {
     toPoint?: IPointData
     points?: number[]
     curve?: boolean | number
@@ -32,7 +32,7 @@ export interface IRect extends IUI {
     __: IRectData
 }
 export interface IRectData extends IUIData { }
-export interface IRectInputData extends IUIInputData { }
+export interface IRectInputData extends IUIBaseInputData { }
 
 
 // Ellipse
@@ -48,7 +48,7 @@ interface IEllipseAttrData {
     innerRadius?: number
 }
 export interface IEllipseData extends IEllipseAttrData, IUIData { }
-export interface IEllipseInputData extends IEllipseAttrData, IUIInputData { }
+export interface IEllipseInputData extends IEllipseAttrData, IUIBaseInputData { }
 
 
 // Polygon
@@ -64,7 +64,7 @@ interface IPolygonAttrData {
     curve?: boolean | number
 }
 export interface IPolygonData extends IPolygonAttrData, IUIData { }
-export interface IPolygonInputData extends IPolygonAttrData, IUIInputData { }
+export interface IPolygonInputData extends IPolygonAttrData, IUIBaseInputData { }
 
 
 // Star
@@ -79,7 +79,7 @@ interface IStarAttrData {
 }
 
 export interface IStarData extends IStarAttrData, IUIData { }
-export interface IStarInputData extends IStarAttrData, IUIInputData { }
+export interface IStarInputData extends IStarAttrData, IUIBaseInputData { }
 
 // Path
 export interface IPath extends IUI {
@@ -91,7 +91,7 @@ export interface IPathData extends IUIData {
     path?: IPathCommandData
     windingRule?: IWindingRule
 }
-export interface IPathInputData extends IUIInputData {
+export interface IPathInputData extends IUIBaseInputData {
     path?: IPathCommandData | IPathString
     windingRule?: IWindingRule
 }
@@ -125,7 +125,7 @@ export interface ITextData extends ITextAttrData, ITextStyleComputedData, IUIDat
     __lineHeight?: number
     __letterSpacing?: number
 }
-export interface ITextInputData extends ITextAttrData, ITextStyleInputData, IUIInputData {
+export interface ITextInputData extends ITextAttrData, ITextStyleInputData, IUIBaseInputData {
 
 }
 
@@ -180,7 +180,7 @@ interface IImageAttrData {
     url?: string
 }
 export interface IImageData extends IImageAttrData, IRectData { }
-export interface IImageInputData extends IImageAttrData, IUIInputData { }
+export interface IImageInputData extends IImageAttrData, IUIBaseInputData { }
 
 export interface ICanvas extends IRect {
     __: ICanvasData
@@ -194,7 +194,7 @@ interface ICanvasAttrData {
     smooth?: boolean
 }
 export interface ICanvasData extends ICanvasAttrData, IRectData { }
-export interface ICanvasInputData extends ICanvasAttrData, IUIInputData { }
+export interface ICanvasInputData extends ICanvasAttrData, IUIBaseInputData { }
 
 
 // Leafer
@@ -247,15 +247,15 @@ export interface IGroup extends IUI {
     removeAll(): void
 }
 export interface IGroupData extends IUIData { }
-export interface IGroupInputData extends IUIInputData { }
+export interface IGroupInputData extends IUIBaseInputData { }
 
 // UI
 export interface IUI extends IFillAttrData, IStrokeAttrData, ICornerRadiusAttrData, IEffectAttrData, ILeaf {
     __: IUIData
     parent?: IGroup
 
-    set(data: IUITagInputData): void
-    get(): IUITagInputData
+    set(data: IUIInputData): void
+    get(): IUIInputData
 
     getPath(curve?: boolean): IPathCommandData
     getPathString(curve?: boolean): IPathString
@@ -265,6 +265,8 @@ export interface IUI extends IFillAttrData, IStrokeAttrData, ICornerRadiusAttrDa
 
     export(filename: string, options?: IExportOptions | number): Promise<IBlob | string | boolean>
     clone(): IUI
+
+    json(data?: IUIBaseInputData): IObject
 }
 
 export interface IUIData extends IUIComputedData, ILeafData {
@@ -300,17 +302,20 @@ export interface IUIData extends IUIComputedData, ILeafData {
 }
 export interface IUIComputedData extends IFillComputedData, IBorderComputedData, IStrokeComputedData, ITextStyleComputedData, ICornerRadiusComputedData, IEffectComputedData, ILeafComputedData {
     padding?: number | number[]
+
     locked?: boolean
 }
 
-export interface IUIInputData extends IFillInputData, IStrokeInputData, ITextStyleInputData, ICornerRadiusInputData, IEffectInputData, ILeafInputData {
+export interface IUIBaseInputData extends IFillInputData, IStrokeInputData, ITextStyleInputData, ICornerRadiusInputData, IEffectInputData, ILeafInputData {
     padding?: number | number[]
     locked?: boolean
-    children?: IUITagInputData[]
+    children?: IUIBaseInputData[]
 }
 
 
 export type IUITag =
+    | 'App'
+    | 'Leafer'
     | 'Rect'
     | 'Ellipse'
     | 'Polygon'
@@ -326,6 +331,6 @@ export type IUITag =
     | 'Box'
 
 
-export interface IUITagInputData extends IUIInputData, IRectInputData, IEllipseInputData, IPolygonInputData, IStarInputData, ILineInputData, IPathInputData, ITextInputData, IImageInputData, IGroupInputData, IFrameInputData, IObject {
-    tag?: IUITag
+export interface IUIInputData extends IRectInputData, IEllipseInputData, IPolygonInputData, IStarInputData, ILineInputData, IPathInputData, ITextInputData, IImageInputData, IGroupInputData, IFrameInputData, IUIBaseInputData, IObject {
+
 }

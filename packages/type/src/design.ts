@@ -4,6 +4,7 @@ import { MoveEvent, ZoomEvent, LeafHelper } from '@leafer/core'
 
 
 export function design(leafer: ILeafer): void {
+    if (leafer.isApp) return
     const { MOVE } = MoveEvent
     const { ZOOM } = ZoomEvent
     leafer.__eventIds.push(

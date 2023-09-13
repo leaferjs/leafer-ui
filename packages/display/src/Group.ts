@@ -1,10 +1,10 @@
-import { Branch, useModule, dataProcessor, registerUI } from '@leafer/core'
+import { Branch, useModule, dataProcessor, registerUI, dataType, UICreator } from '@leafer/core'
 
-import { IGroup, IGroupData, IGroupInputData, IUI, IUITagInputData } from '@leafer-ui/interface'
+import { IGroup, IGroupData, IGroupInputData, IUI, IUIInputData } from '@leafer-ui/interface'
 import { GroupData } from '@leafer-ui/data'
 
 import { UI } from './UI'
-import { IObject } from '@leafer/interface'
+import { IResizeMode } from '@leafer/interface'
 
 
 @useModule(Branch)
@@ -15,6 +15,9 @@ export class Group extends UI implements IGroup {
 
     @dataProcessor(GroupData)
     public __: IGroupData
+
+    @dataType('scale')
+    public resizeMode?: IResizeMode
 
     public children: IUI[]
 
@@ -34,6 +37,36 @@ export class Group extends UI implements IGroup {
         this.isBranch = true
         if (!this.children) this.children = []
     }
+
+    // data
+
+    public set(data: IUIInputData): void {
+        if (data.children) {
+            const { children } = data
+            delete data.children
+
+            super.set(data)
+
+            let child: IUI
+            children.forEach(childData => {
+                child = UICreator.get(childData.tag, childData) as IUI
+                this.add(child)
+            })
+
+            data.children = children
+
+        } else {
+            super.set(data)
+        }
+    }
+
+    public json(): IUIInputData {
+        const data = super.json()
+        data.children = this.children.map(child => child.json())
+        return data
+    }
+
+    // add
 
     public addAt(child: IUI, index: number): void {
         this.add(child, index)
@@ -56,7 +89,5 @@ export class Group extends UI implements IGroup {
     public remove(_child?: IUI, _destroy?: boolean): void { }
 
     public removeAll(_destroy?: boolean): void { }
-
-    public json(_data?: IUITagInputData): IObject { return undefined }
 
 }
