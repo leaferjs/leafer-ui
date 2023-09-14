@@ -52,8 +52,16 @@ export function layoutText(drawData: ITextDrawData, style: ITextData): void {
             drawData.overflow = i + 1
         }
 
-        if (row.x < bounds.x) bounds.x = row.x
-        if (row.width > bounds.width) bounds.width = row.width
+        if (row.width < 0) { // letterSpacing < 0
+            const charWidth = row.words[0].data[0].width
+            const rowX = row.x + row.width
+            if (rowX < bounds.x) bounds.x = rowX - charWidth
+            if (-row.width > bounds.width) bounds.width = -row.width + style.fontSize + charWidth
+        } else {
+            if (row.x < bounds.x) bounds.x = row.x
+            if (row.width > bounds.width) bounds.width = row.width
+        }
+
     }
 
     bounds.y = y
