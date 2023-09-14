@@ -1,11 +1,12 @@
-import { __Value } from '@leafer/interface'
-import { LeafData } from '@leafer/core'
+import { __Number, __Value } from '@leafer/interface'
+import { LeafData, Debug } from '@leafer/core'
 
 import { IShadowEffect, IUI, IUIData, IUnitData, ILeafPaint } from '@leafer-ui/interface'
 import { Paint } from '@leafer-ui/external'
 
 
 const emptyPaint: ILeafPaint = {}
+const debug = Debug.get('UIData')
 export class UIData extends LeafData implements IUIData {
 
     public __leaf: IUI
@@ -15,11 +16,35 @@ export class UIData extends LeafData implements IUIData {
     public __isFills?: boolean
     public __isStrokes?: boolean
 
+    protected _width?: __Number
+    protected _height?: __Number
+
     protected _fill?: __Value
     protected _stroke?: __Value
 
     protected _shadow?: __Value
     protected _innerShadow?: __Value
+
+
+    protected setWidth(value: __Number) {
+        if (value < 0) {
+            this._width = -value
+            this.__leaf.scaleX *= -1
+            debug.warn('width < 0, instead -scaleX ', this)
+        } else {
+            this._width = value
+        }
+    }
+
+    protected setHeight(value: __Number) {
+        if (value < 0) {
+            this._height = -value
+            this.__leaf.scaleY *= -1
+            debug.warn('height < 0, instead -scaleY', this)
+        } else {
+            this._height = value
+        }
+    }
 
 
     protected setFill(value: __Value) {
@@ -54,6 +79,7 @@ export class UIData extends LeafData implements IUIData {
             this._stroke || (this._stroke = emptyPaint)
         }
     }
+
 
     protected setShadow(value: __Value) {
         this.__setInput('shadow', value)
