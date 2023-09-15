@@ -1,5 +1,5 @@
-import { IPathCommandData, IWindingRule } from '@leafer/interface'
-import { PathBounds, dataProcessor, pathType, affectStrokeBoundsType, registerUI } from '@leafer/core'
+import { IPathCommandData, IWindingRule, IResizeMode } from '@leafer/interface'
+import { PathBounds, dataProcessor, pathType, affectStrokeBoundsType, registerUI, dataType } from '@leafer/core'
 
 import { IPath, IPathData, IPathInputData, IPathString, IStrokeAlign } from '@leafer-ui/interface'
 import { PathData } from '@leafer-ui/data'
@@ -25,6 +25,9 @@ export class Path extends UI implements IPath {
 
     @affectStrokeBoundsType('center')
     public strokeAlign: IStrokeAlign
+
+    @dataType('scale')
+    public resizeMode?: IResizeMode
 
     constructor(data?: IPathInputData) {
         super(data)

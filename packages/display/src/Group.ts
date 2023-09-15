@@ -60,9 +60,9 @@ export class Group extends UI implements IGroup {
         }
     }
 
-    public json(): IUIInputData {
-        const data = super.json()
-        data.children = this.children.map(child => child.json())
+    public toJSON(): IUIInputData {
+        const data = super.toJSON()
+        data.children = this.children.map(child => child.toJSON())
         return data
     }
 

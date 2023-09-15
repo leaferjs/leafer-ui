@@ -1,4 +1,4 @@
-import { ILeaferCanvas, IPathDrawer, IPathCommandData, IHitType, __Number, __Boolean, __String, IPathString, IExportFileType, IPointData, ICursorType, IResizeMode } from '@leafer/interface'
+import { ILeaferCanvas, IPathDrawer, IPathCommandData, IHitType, __Number, __Boolean, __String, IPathString, IExportFileType, IPointData, ICursorType, IResizeMode, IAround } from '@leafer/interface'
 import { Leaf, PathDrawer, surfaceType, dataType, positionType, boundsType, pathType, scaleType, rotationType, opacityType, sortType, maskType, dataProcessor, useModule, rewrite, rewriteAble, UICreator, PathCorner, hitType, strokeType, PathConvert, eraserType, cursorType } from '@leafer/core'
 
 import { IUI, IShadowEffect, IBlurEffect, IPaint, IStrokeAlign, IStrokeJoin, IStrokeCap, IBlendMode, IPaintString, IDashPatternString, IShadowString, IGrayscaleEffect, IUIData, IGroup, IStrokeWidthString, ICornerRadiusString, IUIInputData, IUIBaseInputData, IExportOptions, IExportResult } from '@leafer-ui/interface'
@@ -91,7 +91,7 @@ export class UI extends Leaf implements IUI {
 
 
     @positionType()
-    public fromCenter: __Boolean | IPointData
+    public around: IAround
 
     @dataType('size')
     public resizeMode?: IResizeMode
@@ -255,7 +255,7 @@ export class UI extends Leaf implements IUI {
     }
 
     public clone(): IUI {
-        const data = this.json()
+        const data = this.toJSON()
         return UICreator.get(data.tag, data) as IUI
     }
 

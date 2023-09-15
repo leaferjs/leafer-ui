@@ -255,7 +255,7 @@ export interface IUI extends IFillAttrData, IStrokeAttrData, ICornerRadiusAttrDa
     parent?: IGroup
 
     set(data: IUIInputData): void
-    get(): IUIInputData
+    toJSON(): IUIInputData
 
     getPath(curve?: boolean): IPathCommandData
     getPathString(curve?: boolean): IPathString
@@ -266,7 +266,6 @@ export interface IUI extends IFillAttrData, IStrokeAttrData, ICornerRadiusAttrDa
     export(filename: string, options?: IExportOptions | number): Promise<IBlob | string | boolean>
     clone(): IUI
 
-    json(data?: IUIBaseInputData): IObject
 }
 
 export interface IUIData extends IUIComputedData, ILeafData {
