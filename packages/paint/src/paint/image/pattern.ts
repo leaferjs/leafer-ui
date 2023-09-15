@@ -9,11 +9,14 @@ export function createPattern(ui: IUI, paint: ILeafPaint, pixelRatio: number): b
 
     let { scaleX, scaleY } = ui.__world
 
-    const id = scaleX + scaleY
+    const id = scaleX + '-' + scaleY
 
     if (paint.patternId !== id && !ui.destroyed) {
 
         paint.patternId = id
+
+        scaleX = Math.abs(scaleX) // maybe -1
+        scaleY = Math.abs(scaleY)
 
         const { image, data } = paint
         const maxWidth = image.isSVG ? 4096 : Math.min(image.width, 4096)

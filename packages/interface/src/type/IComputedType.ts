@@ -14,7 +14,7 @@ export interface ILeafPaint {
     opacity?: number
     image?: ILeaferImage
     loadId?: number
-    patternId?: number
+    patternId?: string
     data?: ILeafPaintPatternData
 }
 

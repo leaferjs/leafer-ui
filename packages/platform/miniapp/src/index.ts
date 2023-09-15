@@ -8,4 +8,3 @@ PluginManager.power = power
 try {
     useCanvas('wx', wx)
 } catch { }
-

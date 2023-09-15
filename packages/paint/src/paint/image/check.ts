@@ -10,7 +10,7 @@ import { createPattern } from './pattern'
 export function checkImage(ui: IUI, canvas: ILeaferCanvas, paint: ILeafPaint, allowPaint?: boolean): boolean {
     const { scaleX, scaleY } = ui.__world
 
-    if (!paint.data || paint.patternId === scaleX + scaleY) {
+    if (!paint.data || paint.patternId === scaleX + '-' + scaleY) {
         return false
     } else {
 
