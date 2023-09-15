@@ -29,7 +29,7 @@ export function stroke(ui: IUI, canvas: ILeaferCanvas, stroke: string): void {
                 canvas.save()
                 canvas.setStroke(stroke, strokeWidth * 2, options)
 
-                canvas.clip(options.windingRule)
+                options.windingRule ? canvas.clip(options.windingRule) : canvas.clip()
                 canvas.stroke()
 
                 canvas.restore()
@@ -44,7 +44,7 @@ export function stroke(ui: IUI, canvas: ILeaferCanvas, stroke: string): void {
 
                 out.stroke()
 
-                out.clip(options.windingRule)
+                options.windingRule ? out.clip(options.windingRule) : out.clip()
                 out.clearWorld(ui.__layout.renderBounds)
 
                 canvas.copyWorldToInner(out, ui.__world, ui.__layout.renderBounds)
@@ -78,7 +78,7 @@ export function strokes(ui: IUI, canvas: ILeaferCanvas, strokes: ILeafPaint[]): 
             case 'inside':
                 canvas.save()
                 canvas.setStroke(undefined, strokeWidth * 2, options)
-                canvas.clip(options.windingRule)
+                options.windingRule ? canvas.clip(options.windingRule) : canvas.clip()
 
                 drawStrokesStyle(ui, strokes, canvas)
 
@@ -94,7 +94,7 @@ export function strokes(ui: IUI, canvas: ILeaferCanvas, strokes: ILeafPaint[]): 
 
                 drawStrokesStyle(ui, strokes, out)
 
-                out.clip(options.windingRule)
+                options.windingRule ? out.clip(options.windingRule) : out.clip()
                 out.clearWorld(renderBounds)
 
                 canvas.copyWorldToInner(out, ui.__world, renderBounds)

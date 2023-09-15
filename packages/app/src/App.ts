@@ -52,7 +52,14 @@ export class App extends Leafer implements IApp {
     }
 
     public add(leafer: Leafer): void {
-        if (!leafer.view) leafer.init(this.__getChildConfig(leafer.userConfig), this)
+        if (!leafer.view) {
+            if (this.realCanvas && !this.canvas.bounds) {
+                setTimeout(() => this.add(leafer), 10)
+                return
+            }
+            leafer.init(this.__getChildConfig(leafer.userConfig), this)
+        }
+
         super.add(leafer)
 
         leafer.once(LayoutEvent.END, () => {
