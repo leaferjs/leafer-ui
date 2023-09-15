@@ -1,7 +1,7 @@
 import { IApp, ILeafer, ILeaferCanvas, IRenderer, ILayouter, ISelector, IWatcher, IInteraction, ILeaferConfig, ICanvasManager, IHitCanvasManager, IAutoBounds, IScreenSizeData, IResizeEvent, ILeaf, IEventListenerId, ITransformEventData, ITimer, __Value, IObject, IControl } from '@leafer/interface'
 import { AutoBounds, LayoutEvent, ResizeEvent, LeaferEvent, CanvasManager, HitCanvasManager, ImageManager, DataHelper, Creator, Run, Debug, RenderEvent, registerUI, boundsType, canvasSizeAttrs, dataProcessor, Platform, PluginManager, AnimateEvent } from '@leafer/core'
 
-import { ILeaferInputData, ILeaferData, IFunction } from '@leafer-ui/interface'
+import { ILeaferInputData, ILeaferData, IFunction, IUIInputData } from '@leafer-ui/interface'
 import { LeaferTypeCreator } from '@leafer-ui/type'
 import { LeaferData } from '@leafer-ui/data'
 import { Group } from '@leafer-ui/display'
@@ -123,6 +123,16 @@ export class Leafer extends Group implements ILeafer {
         if (start) this.__startTimer = setTimeout(this.start.bind(this))
 
         PluginManager.onLeafer(this)
+    }
+
+    public set(data: IUIInputData): void {
+        if (!this.children) {
+            setTimeout(() => {
+                super.set(data)
+            })
+        } else {
+            super.set(data)
+        }
     }
 
     public start(): void {

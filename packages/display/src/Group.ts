@@ -34,6 +34,10 @@ export class Group extends UI implements IGroup {
 
     constructor(data?: IGroupInputData) {
         super(data)
+        this.__setBranch()
+    }
+
+    public __setBranch(): void {
         this.isBranch = true
         if (!this.children) this.children = []
     }
@@ -44,6 +48,8 @@ export class Group extends UI implements IGroup {
         if (data.children) {
             const { children } = data
             delete data.children
+
+            if (!this.children) this.__setBranch()
 
             super.set(data)
 

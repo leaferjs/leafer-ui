@@ -255,8 +255,7 @@ export class UI extends Leaf implements IUI {
     }
 
     public clone(): IUI {
-        const data = this.toJSON()
-        return UICreator.get(data.tag, data) as IUI
+        return UI.one(this.toJSON())
     }
 
     static one(data: IUIInputData, x?: number, y?: number, width?: number, height?: number): IUI {
