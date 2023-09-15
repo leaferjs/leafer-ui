@@ -4,11 +4,11 @@
   "description": "@leafer-ui/node",
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
-  "main": "dist/index.js",
+  "main": "dist/ui.js",
   "types": "src/index.d.ts",
   "exports": {
-    "import": "./dist/index.mjs",
-    "require": "./dist/index.js"
+    "import": "./dist/ui.mjs",
+    "require": "./dist/ui.js"
   },
   "files": ["src","dist"],
   "repository": {

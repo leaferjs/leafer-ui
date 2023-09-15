@@ -306,7 +306,8 @@ export class Leafer extends Group implements ILeafer {
 
                     this.canvas.destroy()
 
-                    this.config.view = this.userConfig.view = this.view = null
+                    this.config.view = this.view = null
+                    if (this.userConfig) this.userConfig.view = null
 
                     super.destroy()
 
@@ -315,7 +316,7 @@ export class Leafer extends Group implements ILeafer {
                     debug.error(e)
                 }
             }
-        }, 0)
+        })
 
     }
 }

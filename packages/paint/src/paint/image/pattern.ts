@@ -64,7 +64,7 @@ export function createPattern(ui: IUI, paint: ILeafPaint, pixelRatio: number): b
         try {
             if (paint.transform) paint.transform = null
             if (matrix) style.setTransform ? style.setTransform(matrix) : paint.transform = matrix
-        } catch (e) {
+        } catch {
             paint.transform = matrix
         }
 

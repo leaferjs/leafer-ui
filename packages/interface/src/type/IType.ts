@@ -1,4 +1,4 @@
-import { IPointData, IPathCommandData, IWindingRule, IBlendMode } from '@leafer/interface'
+import { IPointData, IPathCommandData, IWindingRule, IBlendMode, IExportFileType } from '@leafer/interface'
 import { IColorString } from './IStringType'
 
 export interface IUnitData {
@@ -61,6 +61,7 @@ export interface IImagePaint extends IPaintBase {
     type: "image"
     url: string
     mode?: IImagePaintMode
+    format?: IExportFileType
 
     filters?: IImageFilters
 
