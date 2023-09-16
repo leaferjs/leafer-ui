@@ -5,11 +5,9 @@ import { MoveEvent, ZoomEvent, LeafHelper } from '@leafer/core'
 
 export function design(leafer: ILeafer): void {
     if (leafer.isApp) return
-    const { MOVE } = MoveEvent
-    const { ZOOM } = ZoomEvent
     leafer.__eventIds.push(
-        leafer.on_(MOVE, (e: MoveEvent) => { LeafHelper.moveWorld(leafer.moveLayer, e.moveX, e.moveY) }),
-        leafer.on_(ZOOM, (e: ZoomEvent) => {
+        leafer.on_(MoveEvent.BEFORE_MOVE, (e: MoveEvent) => { LeafHelper.moveWorld(leafer.moveLayer, e.moveX, e.moveY) }),
+        leafer.on_(ZoomEvent.BEFORE_ZOOM, (e: ZoomEvent) => {
             const { scaleX } = leafer.zoomLayer.__, { min, max } = leafer.config.zoom
             let { scale } = e
             if (scale * scaleX < min) scale = min / scaleX

@@ -53,7 +53,7 @@ export class App extends Leafer implements IApp {
 
     public add(leafer: Leafer): void {
         if (!leafer.view) {
-            if (this.realCanvas && !this.canvas.bounds) {
+            if (this.realCanvas && !this.canvas.bounds) { // wait miniapp select canvas
                 setTimeout(() => this.add(leafer), 10)
                 return
             }

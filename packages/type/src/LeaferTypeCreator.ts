@@ -2,7 +2,7 @@ import { ILeafer, ILeaferTypeList, ILeaferTypeFunction } from '@leafer/interface
 
 import { Debug } from '@leafer/core'
 
-import { user } from './user'
+import { draw } from './draw'
 import { design } from './design'
 
 
@@ -34,6 +34,6 @@ export const LeaferTypeCreator = {
 
 const { list } = LeaferTypeCreator
 
-LeaferTypeCreator.register('draw', user)
-LeaferTypeCreator.register('user', user)
+LeaferTypeCreator.register('draw', draw)
+LeaferTypeCreator.register('user', draw)
 LeaferTypeCreator.register('design', design)
