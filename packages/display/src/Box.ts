@@ -1,7 +1,7 @@
 import { ILeaferCanvas, IRenderOptions, IPathDrawer, IBoundsData, IPathCommandData, __Boolean } from '@leafer/interface'
 import { rewrite, rewriteAble, registerUI, BoundsHelper, dataProcessor, affectRenderBoundsType, dataType } from '@leafer/core'
 
-import { IBox, IBoxData, IBoxInputData, IOverflow, IResizeMode } from '@leafer-ui/interface'
+import { IBox, IBoxData, IBoxInputData, IOverflow, IResizeType } from '@leafer-ui/interface'
 
 import { Group } from './Group'
 import { Rect } from './Rect'
@@ -26,7 +26,7 @@ export class Box extends Group implements IBox {
     public overflow: IOverflow
 
     @dataType('size')
-    public resizeMode?: IResizeMode
+    public resizeType?: IResizeType
 
     constructor(data?: IBoxInputData) {
         super(data)

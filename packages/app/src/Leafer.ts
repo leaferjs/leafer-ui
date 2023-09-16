@@ -1,5 +1,5 @@
 import { IApp, ILeafer, ILeaferCanvas, IRenderer, ILayouter, ISelector, IWatcher, IInteraction, ILeaferConfig, ICanvasManager, IHitCanvasManager, IAutoBounds, IScreenSizeData, IResizeEvent, ILeaf, IEventListenerId, ITransformEventData, ITimer, __Value, IObject, IControl } from '@leafer/interface'
-import { AutoBounds, LayoutEvent, ResizeEvent, LeaferEvent, CanvasManager, HitCanvasManager, ImageManager, DataHelper, Creator, Run, Debug, RenderEvent, registerUI, boundsType, canvasSizeAttrs, dataProcessor, Platform, PluginManager, AnimateEvent } from '@leafer/core'
+import { AutoBounds, LayoutEvent, ResizeEvent, LeaferEvent, CanvasManager, HitCanvasManager, ImageManager, DataHelper, Creator, Run, Debug, RenderEvent, registerUI, boundsType, canvasSizeAttrs, dataProcessor, PluginManager, WaitHelper } from '@leafer/core'
 
 import { ILeaferInputData, ILeaferData, IFunction, IUIInputData } from '@leafer-ui/interface'
 import { LeaferTypeCreator } from '@leafer-ui/type'
@@ -27,9 +27,10 @@ export class Leafer extends Group implements ILeafer {
     public parent?: App
 
     public running: boolean
+    public created: boolean
     public ready: boolean
     public viewReady: boolean
-    public get viewLoaded(): boolean { return this.viewReady && !this.watcher.changed && ImageManager.isComplete }
+    public viewCompleted: boolean
 
     public view: unknown
 
@@ -71,6 +72,10 @@ export class Leafer extends Group implements ILeafer {
     public __eventIds: IEventListenerId[] = []
     protected __startTimer: ITimer
     protected __controllers: IControl[] = []
+
+    protected __readyWait?: IFunction[] = []
+    protected __viewReadyWait?: IFunction[] = []
+    protected __viewCompletedWait?: IFunction[] = []
 
     constructor(userConfig?: ILeaferConfig, data?: ILeaferInputData) {
         super(data)
@@ -206,19 +211,6 @@ export class Leafer extends Group implements ILeafer {
         this.moveLayer = moveLayer || zoomLayer
     }
 
-    public waitViewLoaded(fun: IFunction): void {
-        let id: IEventListenerId
-        const check = () => {
-            if (this.viewLoaded) {
-                if (id) this.off_(id)
-                Platform.requestRender(fun)
-            }
-        }
-        if (!this.running) this.start()
-        check()
-        if (!this.viewLoaded) id = this.on_(AnimateEvent.FRAME, check)
-    }
-
     protected __checkAutoLayout(config: ILeaferConfig): void {
         if (!config.width || !config.height) {
             this.autoLayout = new AutoBounds(config)
@@ -260,18 +252,59 @@ export class Leafer extends Group implements ILeafer {
         }
     }
 
+    protected __onCreated(): void {
+        this.created = true
+    }
+
     protected __onReady(): void {
         if (this.ready) return
         this.ready = true
         this.emitLeafer(LeaferEvent.BEFORE_READY)
         this.emitLeafer(LeaferEvent.READY)
         this.emitLeafer(LeaferEvent.AFTER_READY)
+        WaitHelper.run(this.__readyWait)
     }
 
     protected __onViewReady(): void {
         if (this.viewReady) return
         this.viewReady = true
         this.emitLeafer(LeaferEvent.VIEW_READY)
+        WaitHelper.run(this.__viewReadyWait)
+    }
+
+    protected __onRenderEnd(_e: RenderEvent): void {
+        if (!this.viewReady) this.__onViewReady()
+        const completed = this.__checkViewCompleted()
+        if (completed) this.__onViewCompleted()
+        this.viewCompleted = completed
+    }
+
+    protected __checkViewCompleted(): boolean {
+        return this.viewReady && !this.watcher.changed && ImageManager.isComplete
+    }
+
+    protected __onViewCompleted(): void {
+        if (!this.viewCompleted) {
+            this.emitLeafer(LeaferEvent.VIEW_COMPLETED)
+            WaitHelper.run(this.__viewCompletedWait)
+        }
+    }
+
+    public waitReady(item: IFunction): void {
+        this.ready ? item() : this.__readyWait.push(item)
+    }
+
+    public waitViewReady(item: IFunction): void {
+        this.viewReady ? item() : this.__viewReadyWait.push(item)
+    }
+
+    public waitViewCompleted(item: IFunction): void {
+        if (this.viewCompleted) {
+            item()
+        } else {
+            this.__viewCompletedWait.push(item)
+            if (!this.running) this.start()
+        }
     }
 
     protected __checkUpdateLayout(): void {
@@ -286,8 +319,11 @@ export class Leafer extends Group implements ILeafer {
         const runId = Run.start('FirstCreate ' + this.innerName)
         this.once(LeaferEvent.START, () => Run.end(runId))
         this.once(LayoutEvent.END, () => this.__onReady())
-        this.once(RenderEvent.END, () => this.__onViewReady())
-        this.on(LayoutEvent.CHECK_UPDATE, () => this.__checkUpdateLayout())
+        this.once(RenderEvent.START, () => this.__onCreated())
+        this.__eventIds.push(
+            this.on_(RenderEvent.END, this.__onRenderEnd, this),
+            this.on_(LayoutEvent.CHECK_UPDATE, this.__checkUpdateLayout, this)
+        )
     }
 
     protected __removeListenEvents(): void {

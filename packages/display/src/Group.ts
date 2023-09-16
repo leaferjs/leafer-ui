@@ -4,7 +4,7 @@ import { IGroup, IGroupData, IGroupInputData, IUI, IUIInputData } from '@leafer-
 import { GroupData } from '@leafer-ui/data'
 
 import { UI } from './UI'
-import { IResizeMode } from '@leafer/interface'
+import { IResizeType } from '@leafer/interface'
 
 
 @useModule(Branch)
@@ -17,7 +17,7 @@ export class Group extends UI implements IGroup {
     public __: IGroupData
 
     @dataType('scale')
-    public resizeMode?: IResizeMode
+    public resizeType?: IResizeType
 
     public children: IUI[]
 

@@ -15,7 +15,7 @@ export const Export: IExportModule = {
                 const { leafer } = leaf
                 if (leafer) {
 
-                    leafer.waitViewLoaded(async () => {
+                    leafer.waitViewCompleted(async () => {
 
                         let quality, blob: boolean
                         let { canvas } = leafer

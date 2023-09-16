@@ -1,5 +1,5 @@
-import { ILeaferConfig, IResizeEvent, ILeaferCanvas, IRenderOptions, IApp, __Value, IFunction } from '@leafer/interface'
-import { DataHelper, Debug, LayoutEvent, Platform, PropertyEvent, RenderEvent, canvasSizeAttrs, registerUI } from '@leafer/core'
+import { ILeaferConfig, IResizeEvent, ILeaferCanvas, IRenderOptions, IApp, __Value, ILeafer } from '@leafer/interface'
+import { DataHelper, Debug, LayoutEvent, PropertyEvent, RenderEvent, canvasSizeAttrs, registerUI } from '@leafer/core'
 
 import { Leafer } from './Leafer'
 
@@ -28,11 +28,7 @@ export class App extends Leafer implements IApp {
         this.watcher.disable()
         this.layouter.disable()
 
-        this.__eventIds.push(
-            this.on_(PropertyEvent.CHANGE, () => {
-                if (Debug.showHitView) this.children.forEach(leafer => { leafer.forceUpdate('blendMode') })
-            })
-        )
+        this.__eventIds.push(this.on_(PropertyEvent.CHANGE, this.__onPropertyChange, this))
     }
 
     public start(): void {
@@ -61,26 +57,27 @@ export class App extends Leafer implements IApp {
         }
 
         super.add(leafer)
-
-        leafer.once(LayoutEvent.END, () => {
-            if (!this.ready && this.children.every(child => child.ready)) this.__onReady()
-        })
-
-        leafer.once(RenderEvent.END, () => {
-            if (!this.viewReady && this.children.every(child => child.viewReady)) this.__onViewReady()
-        })
-
-        if (this.realCanvas) {
-            this.__eventIds.push(
-                leafer.on_(RenderEvent.END, this.__onChildRenderEnd, this),
-            )
-        }
+        this.__listenChildEvents(leafer)
     }
 
-    public waitViewLoaded(fun: IFunction): void {
-        const wait = () => { if (this.children.every(item => item.viewLoaded)) Platform.requestRender(fun) }
-        this.children.forEach(leafer => { leafer.waitViewLoaded(wait) })
-        if (!this.running) this.start()
+    protected __onPropertyChange(): void {
+        if (Debug.showHitView) this.children.forEach(leafer => { leafer.forceUpdate('surface') })
+    }
+
+    protected __onCreated(): void {
+        this.created = this.children.every(child => child.created)
+    }
+
+    protected __onReady(): void {
+        if (this.children.every(child => child.ready)) super.__onReady()
+    }
+
+    protected __onViewReady(): void {
+        if (this.children.every(child => child.viewReady)) super.__onViewReady()
+    }
+
+    protected __checkViewCompleted(): boolean {
+        return this.children.every(item => item.viewCompleted)
     }
 
     protected __onChildRenderEnd(e: RenderEvent): void {
@@ -111,6 +108,12 @@ export class App extends Leafer implements IApp {
         config.view = this.realCanvas ? undefined : this.view
         config.fill = undefined
         return config
+    }
+
+    protected __listenChildEvents(leafer: ILeafer): void {
+        leafer.once(LayoutEvent.END, () => this.__onReady())
+        leafer.once(RenderEvent.START, () => this.__onCreated())
+        if (this.realCanvas) this.__eventIds.push(leafer.on_(RenderEvent.END, this.__onChildRenderEnd, this))
     }
 
 }
