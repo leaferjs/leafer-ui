@@ -2,7 +2,7 @@ import { IObject, IBoundsData } from '@leafer/interface'
 import { Platform } from '@leafer/core'
 
 import { IGradientPaint, ILeafPaint, IColorStop } from '@leafer-ui/interface'
-import { ColorConvert } from '@leafer-ui/color'
+import { ColorConvert } from '@leafer-ui/core'
 
 
 const defaultFrom = { x: 0.5, y: 0 }

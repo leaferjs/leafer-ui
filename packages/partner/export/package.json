@@ -1,7 +1,7 @@
 {
-  "name": "@leafer-ui/data",
+  "name": "@leafer-ui/export",
   "version": "1.0.0-beta.12",
-  "description": "@leafer-ui/data",
+  "description": "@leafer-ui/export",
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
   "main": "src/index.ts",
@@ -10,7 +10,7 @@
     "type": "git",
     "url": "https://github.com/leaferjs/ui.git"
   },
-  "homepage": "https://github.com/leaferjs/ui/tree/main/packages/data",
+  "homepage": "https://github.com/leaferjs/ui/tree/main/packages/export",
   "bugs": "https://github.com/leaferjs/ui/issues",
   "keywords": [
     "leafer-ui",

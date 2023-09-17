@@ -15,5 +15,12 @@
   "keywords": [
     "leafer-ui",
     "leaferjs"
-  ]
+  ],
+  "dependencies": {
+    "@leafer/core": "1.0.0-beta.12"
+  },
+  "devDependencies": {
+     "@leafer/interface": "1.0.0-beta.12",
+     "@leafer-ui/interface": "1.0.0-beta.12"
+  }
 }

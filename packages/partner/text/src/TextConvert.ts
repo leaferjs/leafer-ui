@@ -1,6 +1,6 @@
 import { MathHelper, Platform } from '@leafer/core'
 
-import { ITextData, ITextDrawData } from '@leafer-ui/interface'
+import { ITextConvertModule, ITextData, ITextDrawData } from '@leafer-ui/interface'
 
 import { createRows } from './TextRows'
 import { layoutChar } from './CharLayout'
@@ -9,7 +9,7 @@ import { clipText } from './TextClip'
 import { decorationText } from './TextDecoration'
 
 
-export const TextConvert = {
+export const TextConvert: ITextConvertModule = {
 
     getDrawData(content: string, style: ITextData): ITextDrawData {
 

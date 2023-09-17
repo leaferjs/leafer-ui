@@ -4,7 +4,7 @@
   "description": "@leafer-ui/miniapp",
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
-  "main": "dist/ui.js",
+  "main": "dist/ui.min.js",
   "types": "src/index.d.ts",
   "files": ["src","dist"],
   "repository": {
@@ -20,6 +20,7 @@
   "dependencies": {
     "@leafer/miniapp": "1.0.0-beta.12",
     "@leafer-ui/core": "1.0.0-beta.12",
+    "@leafer-ui/partner": "1.0.0-beta.12",
     "@leafer/interface": "1.0.0-beta.12",
     "@leafer-ui/interface": "1.0.0-beta.12"
   }

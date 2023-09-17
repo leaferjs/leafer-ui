@@ -19,9 +19,9 @@
   "dependencies": {
     "@leafer/core": "1.0.0-beta.12",
     "@leafer-ui/data": "1.0.0-beta.12",
-    "@leafer-ui/text": "1.0.0-beta.12",
     "@leafer-ui/display-module": "1.0.0-beta.12",
-    "@leafer-ui/decorator": "1.0.0-beta.12"
+    "@leafer-ui/decorator": "1.0.0-beta.12",
+    "@leafer-ui/external": "1.0.0-beta.12"
   },
   "devDependencies": {
      "@leafer/interface": "1.0.0-beta.12",

@@ -3,7 +3,8 @@ import { BoundsHelper, boundsType, dataProcessor, registerUI, affectStrokeBounds
 
 import { IText, IFontWeight, ITextCase, ITextDecoration, ITextData, ITextInputData, ITextAlign, IVerticalAlign, ITextDrawData, IOverflow, IUnitData, IStrokeAlign } from '@leafer-ui/interface'
 import { TextData, UnitConvert } from '@leafer-ui/data'
-import { TextConvert } from '@leafer-ui/text'
+
+import { TextConvert } from '@leafer-ui/external'
 
 import { UI } from './UI'
 

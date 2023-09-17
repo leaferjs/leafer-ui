@@ -1,13 +1,14 @@
-export { Effect } from './Effect'
-export { Paint } from './Paint'
+// Implemented in partner
+import { IPaintModule, IEffectModule, ITextConvertModule, IExportModule, IColorConvertModule } from "@leafer-ui/interface"
 
-export { Animate } from './Animate'
-export { Export } from './Export'
+export const Effect: IEffectModule = {}
 
-import { Effect } from './Effect'
-import { Paint } from './Paint'
-import * as UIEffect from '@leafer-ui/effect'
-import * as UIPaint from '@leafer-ui/paint'
+export const Paint: IPaintModule = {}
 
-Object.assign(Effect, UIEffect)
-Object.assign(Paint, UIPaint)
+export const Animate = {}
+
+export const TextConvert: ITextConvertModule = {}
+
+export const ColorConvert: IColorConvertModule = {}
+
+export const Export: IExportModule = {}

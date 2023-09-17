@@ -25,9 +25,11 @@ export { ILeafFill, ILeafPaint, ILeafPaintPatternData, ILeafPaintColor, ILeafStr
 export { IUIRenderModule, IRectRenderModule, IImageRenderModule, ITextRenderModule, IGroupRenderModule, IFrameRenderModule } from './module/IUIRender'
 export { IUIBoundsModule } from './module/IUIBounds'
 export { IUIHitModule } from './module/IUIHit'
+export { ITextConvertModule } from './module/ITextConvert'
+export { IColorConvertModule } from './module/IColorConvert'
 export { IExportModule, IExportOptions, IExportResult, IExportResultFunction } from './module/IExport'
+
 
 export { IPaintModule } from './module/IPaint'
 export { IEffectModule } from './module/IEffect'
 export { ICachedShape } from './ICachedShape'
-
