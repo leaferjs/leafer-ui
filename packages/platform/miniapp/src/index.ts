@@ -1,11 +1,8 @@
-export * from './miniapp'
+export * from '@leafer/miniapp'
+export * from '@leafer-ui/core'
+export * from '@leafer-ui/partner'
 
-import { useCanvas } from './miniapp'
-import * as power from './miniapp'
-
-import { PluginManager } from '@leafer-ui/core'
-
-PluginManager.power = power
+import { useCanvas } from '@leafer/miniapp'
 
 try {
     useCanvas('wx', wx)

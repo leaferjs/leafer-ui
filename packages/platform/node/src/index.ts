@@ -1,7 +1,3 @@
-export * from './node'
-
-import { PluginManager } from '@leafer-ui/core'
-
-import * as power from './node'
-
-PluginManager.power = power
+export * from '@leafer/node'
+export * from '@leafer-ui/core'
+export * from '@leafer-ui/partner'

@@ -6,6 +6,7 @@
   "license": "MIT",
   "type": "module",
   "types": "src/index.ts",
+  "main": "dist/core.esm.js",
   "exports": {
     "import": "./dist/core.esm.js",
     "require": "./dist/core.cjs"

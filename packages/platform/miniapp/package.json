@@ -5,7 +5,7 @@
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
   "main": "dist/miniapp.esm.js",
-  "types": "src/index.d.ts",
+  "types": "types/index.d.ts",
   "files": ["src","dist"],
   "repository": {
     "type": "git",

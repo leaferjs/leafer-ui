@@ -1,9 +1,7 @@
-export * from './web'
+export * from '@leafer/web'
+export * from '@leafer-ui/core'
+export * from '@leafer-ui/partner'
 
-import { useCanvas } from './web'
-import * as power from './web'
+import { useCanvas } from '@leafer/web'
 
-import { PluginManager } from '@leafer-ui/core'
-
-PluginManager.power = power
 useCanvas('canvas')

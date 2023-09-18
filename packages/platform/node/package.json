@@ -5,7 +5,8 @@
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
   "type": "module",
-  "types": "src/index.d.ts",
+  "types": "types/index.d.ts",
+  "main": "dist/core.esm.js",
   "exports": {
     "import": "./dist/node.esm.js",
     "require": "./dist/node.cjs"
