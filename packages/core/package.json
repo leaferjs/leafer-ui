@@ -14,6 +14,7 @@
   "homepage": "https://github.com/leaferjs/ui/tree/main/packages/core",
   "bugs": "https://github.com/leaferjs/ui/issues",
   "keywords": [
+    "leafer core",
     "leafer-ui",
     "leaferjs"
   ],
