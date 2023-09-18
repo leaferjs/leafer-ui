@@ -4,8 +4,12 @@
   "description": "@leafer-ui/core",
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
-  "main": "src/core.esm.js",
+  "type": "module",
   "types": "src/index.ts",
+  "exports": {
+    "import": "./dist/core.esm.js",
+    "require": "./dist/core.cjs"
+  },
   "files": ["src","dist"],
   "repository": {
     "type": "git",

@@ -4,11 +4,11 @@
   "description": "@leafer-ui/node",
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
-  "main": "dist/node.cjs.js",
+  "type": "module",
   "types": "src/index.d.ts",
   "exports": {
     "import": "./dist/node.esm.js",
-    "require": "./dist/node.cjs.js"
+    "require": "./dist/node.cjs"
   },
   "files": ["src","dist"],
   "repository": {

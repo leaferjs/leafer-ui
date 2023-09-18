@@ -113,6 +113,7 @@ export class App extends Leafer implements IApp {
     protected __listenChildEvents(leafer: ILeafer): void {
         leafer.once(LayoutEvent.END, () => this.__onReady())
         leafer.once(RenderEvent.START, () => this.__onCreated())
+        leafer.once(RenderEvent.END, (e) => this.__onRenderEnd(e))
         if (this.realCanvas) this.__eventIds.push(leafer.on_(RenderEvent.END, this.__onChildRenderEnd, this))
     }
 
