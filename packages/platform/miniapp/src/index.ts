@@ -1,7 +1,9 @@
 export * from './miniapp'
 
-import { PluginManager, useCanvas } from './miniapp'
+import { useCanvas } from './miniapp'
 import * as power from './miniapp'
+
+import { PluginManager } from '@leafer-ui/core'
 
 PluginManager.power = power
 

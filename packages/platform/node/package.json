@@ -4,11 +4,11 @@
   "description": "@leafer-ui/node",
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
-  "main": "dist/ui.js",
+  "main": "dist/node.cjs.js",
   "types": "src/index.d.ts",
   "exports": {
-    "import": "./dist/ui.mjs",
-    "require": "./dist/ui.js"
+    "import": "./dist/node.esm.js",
+    "require": "./dist/node.cjs.js"
   },
   "files": ["src","dist"],
   "repository": {
@@ -18,6 +18,8 @@
   "homepage": "https://github.com/leaferjs/ui/tree/main/packages/platform/node",
   "bugs": "https://github.com/leaferjs/ui/issues",
   "keywords": [
+    "leafer node",
+    "leafer-node",
     "leafer-ui",
     "leaferjs"
   ],

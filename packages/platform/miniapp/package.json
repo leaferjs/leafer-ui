@@ -4,7 +4,7 @@
   "description": "@leafer-ui/miniapp",
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
-  "main": "dist/ui.min.js",
+  "main": "dist/miniapp.esm.js",
   "types": "src/index.d.ts",
   "files": ["src","dist"],
   "repository": {
@@ -14,6 +14,8 @@
   "homepage": "https://github.com/leaferjs/ui/tree/main/packages/platform/miniapp",
   "bugs": "https://github.com/leaferjs/ui/issues",
   "keywords": [
+    "leafer miniapp",
+    "leafer-miniapp",
     "leafer-ui",
     "leaferjs"
   ],
