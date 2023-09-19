@@ -5,13 +5,13 @@
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
   "type": "module",
-  "types": "src/index.ts",
   "main": "dist/core.esm.js",
   "exports": {
     "import": "./dist/core.esm.js",
     "require": "./dist/core.cjs"
   },
-  "files": ["src","dist"],
+  "types": "types/index.d.ts",
+  "files": ["types","dist"],
   "repository": {
     "type": "git",
     "url": "https://github.com/leaferjs/ui.git"

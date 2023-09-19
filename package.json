@@ -4,10 +4,10 @@
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
   "main": "dist/web.esm.js",
-  "types": "src/index.d.ts",
   "unpkg": "dist/web.js",
   "jsdelivr": "dist/web.js",
-  "files": ["src","dist"],
+  "types": "types/index.d.ts",
+  "files": ["types","dist"],
   "repository": {
     "type": "git",
     "url": "https://github.com/leaferjs/ui"

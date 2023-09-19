@@ -11,7 +11,8 @@
     "import": "./dist/node.esm.js",
     "require": "./dist/node.cjs"
   },
-  "files": ["src","dist"],
+"types": "types/index.d.ts",
+  "files": ["types","dist"],
   "repository": {
     "type": "git",
     "url": "https://github.com/leaferjs/ui.git"

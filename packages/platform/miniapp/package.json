@@ -6,7 +6,7 @@
   "license": "MIT",
   "main": "dist/miniapp.esm.js",
   "types": "types/index.d.ts",
-  "files": ["src","dist"],
+  "files": ["types","dist"],
   "repository": {
     "type": "git",
     "url": "https://github.com/leaferjs/ui.git"

@@ -5,7 +5,8 @@
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
   "main": "src/index.ts",
-  "files": ["src"],
+  "types": "types/index.d.ts",
+  "files": ["types","dist"],
   "repository": {
     "type": "git",
     "url": "https://github.com/leaferjs/ui.git"
