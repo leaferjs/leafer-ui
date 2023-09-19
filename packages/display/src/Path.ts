@@ -24,7 +24,7 @@ export class Path extends UI implements IPath {
     public windingRule: IWindingRule
 
     @affectStrokeBoundsType('center')
-    public strokeAlign: IStrokeAlign
+    declare public strokeAlign: IStrokeAlign
 
     public get hasSize(): boolean { return false }
 

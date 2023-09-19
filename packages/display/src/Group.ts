@@ -15,7 +15,7 @@ export class Group extends UI implements IGroup {
     @dataProcessor(GroupData)
     declare public __: IGroupData
 
-    public children: IUI[]
+    declare public children: IUI[]
 
     public get hasSize(): boolean { return false }
 

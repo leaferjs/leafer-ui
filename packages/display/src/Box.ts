@@ -23,7 +23,7 @@ export class Box extends Group implements IBox {
     declare public __: IBoxData
 
     @affectRenderBoundsType('show')
-    public overflow: IOverflow
+    declare public overflow: IOverflow
 
     public get hasSize(): boolean { return true }
 

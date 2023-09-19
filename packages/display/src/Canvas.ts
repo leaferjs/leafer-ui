@@ -17,10 +17,10 @@ export class Canvas extends Rect implements ICanvas {
     declare public __: ICanvasData
 
     @resizeType(100)
-    public width: __Number
+    declare public width: __Number
 
     @resizeType(100)
-    public height: __Number
+    declare public height: __Number
 
     @resizeType(Platform.devicePixelRatio)
     public pixelRatio: __Number
@@ -29,7 +29,7 @@ export class Canvas extends Rect implements ICanvas {
     public smooth: boolean
 
     @hitType('all')
-    public hitFill: IHitType
+    declare public hitFill: IHitType
 
     public canvas: ILeaferCanvas
 

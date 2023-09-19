@@ -21,10 +21,10 @@ export class Line extends UI implements ILine {
     declare public __: ILineData
 
     @boundsType()
-    public rotation: __Number
+    declare public rotation: __Number
 
     @affectStrokeBoundsType('center')
-    public strokeAlign: IStrokeAlign
+    declare public strokeAlign: IStrokeAlign
 
     @pathType()
     points: number[]

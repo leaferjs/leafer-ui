@@ -21,16 +21,16 @@ export class Text extends UI implements IText {
 
     // size
     @boundsType(0)
-    public width: __Number
+    declare public width: __Number
 
     @boundsType(0)
-    public height: __Number
+    declare public height: __Number
 
     @boundsType(0)
     public padding: number | number[]
 
     @affectStrokeBoundsType('outside')
-    public strokeAlign: IStrokeAlign
+    declare public strokeAlign: IStrokeAlign
 
     @boundsType('')
     public text: __String

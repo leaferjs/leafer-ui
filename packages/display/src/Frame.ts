@@ -16,7 +16,7 @@ export class Frame extends Box implements IFrame {
     declare public __: IFrameData
 
     @affectRenderBoundsType('hide')
-    public overflow: IOverflow
+    declare public overflow: IOverflow
 
     constructor(data?: IFrameInputData) {
         super(data)
