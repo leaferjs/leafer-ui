@@ -9,7 +9,7 @@ const emptyPaint: ILeafPaint = {}
 const debug = Debug.get('UIData')
 export class UIData extends LeafData implements IUIData {
 
-    public __leaf: IUI
+    declare public __leaf: IUI
 
     public __blendLayer?: boolean
 

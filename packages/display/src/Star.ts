@@ -17,7 +17,7 @@ export class Star extends UI implements IStar {
     public get __tag() { return 'Star' }
 
     @dataProcessor(StarData)
-    public __: IStarData
+    declare public __: IStarData
 
     @pathType(5)
     public corners: __Number

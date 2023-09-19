@@ -15,7 +15,7 @@ export class Rect extends UI implements IRect {
     public get __tag() { return 'Rect' }
 
     @dataProcessor(RectData)
-    public __: IRectData
+    declare public __: IRectData
 
     constructor(data?: IRectInputData) {
         super(data)

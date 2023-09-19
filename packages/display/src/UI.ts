@@ -17,9 +17,9 @@ import { Export, Paint } from '@leafer-ui/external'
 export class UI extends Leaf implements IUI {
 
     @dataProcessor(UIData)
-    public __: IUIData
+    declare public __: IUIData
 
-    public parent?: IGroup
+    declare public parent?: IGroup
 
     // ---
 

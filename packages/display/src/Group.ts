@@ -14,7 +14,7 @@ export class Group extends UI implements IGroup {
     public get __tag() { return 'Group' }
 
     @dataProcessor(GroupData)
-    public __: IGroupData
+    declare public __: IGroupData
 
     @dataType('scale')
     public resizeType?: IResizeType

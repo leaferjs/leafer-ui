@@ -15,7 +15,7 @@ export class Ellipse extends UI implements IEllipse {
     public get __tag() { return 'Ellipse' }
 
     @dataProcessor(EllipseData)
-    public __: IEllipseData
+    declare public __: IEllipseData
 
     @pathType(0)
     public innerRadius: __Number

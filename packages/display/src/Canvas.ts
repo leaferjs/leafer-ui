@@ -14,7 +14,7 @@ export class Canvas extends Rect implements ICanvas {
     public get __tag() { return 'Canvas' }
 
     @dataProcessor(ImageData)
-    public __: ICanvasData
+    declare public __: ICanvasData
 
     @resizeType(100)
     public width: __Number

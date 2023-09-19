@@ -13,7 +13,7 @@ export class Image extends Rect implements IImage {
     public get __tag() { return 'Image' }
 
     @dataProcessor(ImageData)
-    public __: IImageData
+    declare public __: IImageData
 
     @boundsType('')
     public url: __String

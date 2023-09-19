@@ -15,7 +15,7 @@ export class Path extends UI implements IPath {
     public get __tag() { return 'Path' }
 
     @dataProcessor(PathData)
-    public __: IPathData
+    declare public __: IPathData
 
     @pathType()
     public path: IPathCommandData | IPathString

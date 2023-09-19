@@ -11,7 +11,7 @@ export class App extends Leafer implements IApp {
 
     public get isApp(): boolean { return true }
 
-    public children: Leafer[] = []
+    declare public children: Leafer[]
 
     public realCanvas: boolean
 

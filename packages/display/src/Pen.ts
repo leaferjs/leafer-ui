@@ -14,7 +14,7 @@ export class Pen extends Group implements IPen {
     public get __tag() { return 'Pen' }
 
     @dataProcessor(PenData)
-    public __: IPenData
+    declare public __: IPenData
 
     public pathElement: IPath
     public pathStyle: IPathInputData

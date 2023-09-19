@@ -18,7 +18,7 @@ export class Line extends UI implements ILine {
     public get __tag() { return 'Line' }
 
     @dataProcessor(LineData)
-    public __: ILineData
+    declare public __: ILineData
 
     @boundsType()
     public rotation: __Number

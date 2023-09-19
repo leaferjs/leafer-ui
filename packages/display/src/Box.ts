@@ -20,7 +20,7 @@ export class Box extends Group implements IBox {
     public get __tag() { return 'Box' }
 
     @dataProcessor(BoxData)
-    public __: IBoxData
+    declare public __: IBoxData
 
     @affectRenderBoundsType('show')
     public overflow: IOverflow

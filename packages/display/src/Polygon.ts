@@ -17,7 +17,7 @@ export class Polygon extends UI implements IPolygon {
     public get __tag() { return 'Polygon' }
 
     @dataProcessor(PolygonData)
-    public __: IPolygonData
+    declare public __: IPolygonData
 
     @pathType(3)
     sides: number

@@ -17,14 +17,14 @@ export class Leafer extends Group implements ILeafer {
     public get __tag() { return 'Leafer' }
 
     @dataProcessor(LeaferData)
-    public __: ILeaferData
+    declare public __: ILeaferData
 
     @boundsType()
     public pixelRatio: number
 
     public get isApp(): boolean { return false }
 
-    public parent?: App
+    declare public parent?: App
 
     public running: boolean
     public created: boolean

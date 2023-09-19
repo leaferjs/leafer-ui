@@ -17,7 +17,7 @@ export class Text extends UI implements IText {
     public get __tag() { return 'Text' }
 
     @dataProcessor(TextData)
-    public __: ITextData
+    declare public __: ITextData
 
     // size
     @boundsType(0)

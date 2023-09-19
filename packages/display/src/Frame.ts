@@ -13,7 +13,7 @@ export class Frame extends Box implements IFrame {
     public get __tag() { return 'Frame' }
 
     @dataProcessor(FrameData)
-    public __: IFrameData
+    declare public __: IFrameData
 
     @affectRenderBoundsType('hide')
     public overflow: IOverflow
