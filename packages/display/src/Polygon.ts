@@ -28,6 +28,8 @@ export class Polygon extends UI implements IPolygon {
     @pathType(0)
     curve: boolean | number
 
+    public get hasSize(): boolean { return !this.points }
+
     constructor(data?: IPolygonInputData) {
         super(data)
     }

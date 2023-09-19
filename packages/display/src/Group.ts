@@ -1,10 +1,9 @@
-import { Branch, useModule, dataProcessor, registerUI, dataType, UICreator } from '@leafer/core'
+import { Branch, useModule, dataProcessor, registerUI, UICreator } from '@leafer/core'
 
 import { IGroup, IGroupData, IGroupInputData, IUI, IUIInputData } from '@leafer-ui/interface'
 import { GroupData } from '@leafer-ui/data'
 
 import { UI } from './UI'
-import { IResizeType } from '@leafer/interface'
 
 
 @useModule(Branch)
@@ -16,10 +15,9 @@ export class Group extends UI implements IGroup {
     @dataProcessor(GroupData)
     declare public __: IGroupData
 
-    @dataType('scale')
-    public resizeType?: IResizeType
-
     public children: IUI[]
+
+    public get hasSize(): boolean { return false }
 
     public set mask(child: IUI) {
         if (this.__hasMask) this.__removeMask()

@@ -32,6 +32,8 @@ export class Line extends UI implements ILine {
     @pathType(0)
     curve: boolean | number
 
+    public get hasSize(): boolean { return !this.points }
+
     protected __toPoint: IPointData
 
     public get toPoint(): IPointData {
