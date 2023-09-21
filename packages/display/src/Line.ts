@@ -20,31 +20,27 @@ export class Line extends UI implements ILine {
     @dataProcessor(LineData)
     declare public __: ILineData
 
-    @boundsType()
-    declare public rotation: __Number
-
     @affectStrokeBoundsType('center')
     declare public strokeAlign: IStrokeAlign
 
+    @boundsType(0)
+    public height: __Number
+
     @pathType()
-    points: number[]
+    public points: number[]
 
     @pathType(0)
-    curve: boolean | number
+    public curve: boolean | number
 
     public get hasSize(): boolean { return !this.points }
 
-    protected __toPoint: IPointData
 
     public get toPoint(): IPointData {
-        if (this.__toPoint && !this.__layout.boxChanged) return this.__toPoint
-
         const { width, rotation } = this.__
         const to: IPointData = { x: 0, y: 0 }
 
         if (width) to.x = width
         if (rotation) rotate(to, rotation)
-        this.__toPoint = to
 
         return to
     }
@@ -70,9 +66,8 @@ export class Line extends UI implements ILine {
 
         } else {
 
-            const to = this.toPoint
             moveTo(path, 0, 0)
-            lineTo(path, to.x, to.y)
+            lineTo(path, this.width, 0)
         }
 
     }
@@ -86,7 +81,11 @@ export class Line extends UI implements ILine {
     }
 
     public __updateBoxBounds(): void {
-        toBounds(this.__.path, this.__layout.boxBounds)
+        if (this.points) {
+            toBounds(this.__.path, this.__layout.boxBounds)
+        } else {
+            super.__updateBoxBounds()
+        }
     }
 
 }

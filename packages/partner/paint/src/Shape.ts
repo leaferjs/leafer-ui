@@ -13,12 +13,14 @@ export function shape(ui: IUI, current: ILeaferCanvas, options: IRenderOptions):
     let worldCanvas: ILeaferCanvas
 
     const { __world } = ui
-    let { a: scaleX, d: scaleY } = __world
+    let { scaleX, scaleY } = __world
+    if (scaleX < 0) scaleX = -scaleX
+    if (scaleY < 0) scaleY = -scaleY
 
     if (!current.bounds.includes(__world, options.matrix)) {
 
         const { renderShapeSpread: spread } = ui.__layout
-        const worldClipBounds = getIntersectData(spread ? getSpread(current.bounds, spread * scaleX) : current.bounds, __world, options.matrix)
+        const worldClipBounds = getIntersectData(spread ? getSpread(current.bounds, spread * scaleX, spread * scaleY) : current.bounds, __world, options.matrix)
         matrix = current.bounds.getFitMatrix(worldClipBounds)
 
         if (matrix.a < 1) {
