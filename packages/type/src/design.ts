@@ -10,8 +10,8 @@ export function design(leafer: ILeafer): void {
         leafer.on_(ZoomEvent.BEFORE_ZOOM, (e: ZoomEvent) => {
             const { scaleX } = leafer.zoomLayer.__, { min, max } = leafer.config.zoom
             let { scale } = e
-            if (scale * scaleX < min) scale = min / scaleX
-            else if (scale * scaleX > max) scale = max / scaleX
+            if (scale * Math.abs(scaleX) < min) scale = min / scaleX
+            else if (scale * Math.abs(scaleX) > max) scale = max / scaleX
             if (scale !== 1) LeafHelper.zoomOfWorld(leafer.zoomLayer, e, scale)
         })
     )

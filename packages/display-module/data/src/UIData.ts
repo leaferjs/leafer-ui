@@ -1,4 +1,4 @@
-import { __Number, __Value } from '@leafer/interface'
+import { __Number, __Value, __Boolean } from '@leafer/interface'
 import { LeafData, Debug } from '@leafer/core'
 
 import { IShadowEffect, IUI, IUIData, IUnitData, ILeafPaint } from '@leafer-ui/interface'
@@ -16,6 +16,8 @@ export class UIData extends LeafData implements IUIData {
     public __isFills?: boolean
     public __isStrokes?: boolean
 
+    protected _visible?: __Boolean
+
     protected _width?: __Number
     protected _height?: __Number
 
@@ -25,6 +27,11 @@ export class UIData extends LeafData implements IUIData {
     protected _shadow?: __Value
     protected _innerShadow?: __Value
 
+
+    protected setVisible(value: __Boolean) {
+        if (this.__leaf.leafer) this.__leaf.leafer.watcher.hasVisible = true
+        this._visible = value
+    }
 
     protected setWidth(value: __Number) {
         if (value < 0) {

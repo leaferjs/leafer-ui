@@ -44,10 +44,8 @@ export function shadow(ui: IUI, current: ILeaferCanvas, shape: ICachedShape, _op
             worldCanvas ? other.copyWorld(worldCanvas, __world, __world, 'destination-out') : other.copyWorld(shape.canvas, shapeBounds, bounds, 'destination-out')
         }
 
-        if (__world.scaleX < 0 || __world.scaleY < 0) {
-            current.resetTransform()
-            current.copyWorld(other, copyBounds, __world, item.blendMode)
-            current.useWorldTransform()
+        if (ui.__hasMirror) {
+            current.copyWorldByReset(other, copyBounds, __world, item.blendMode)
         } else {
             current.copyWorldToInner(other, copyBounds as IMatrixWithBoundsData, __layout.renderBounds, item.blendMode)
         }

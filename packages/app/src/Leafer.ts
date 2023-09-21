@@ -1,5 +1,5 @@
 import { IApp, ILeafer, ILeaferCanvas, IRenderer, ILayouter, ISelector, IWatcher, IInteraction, ILeaferConfig, ICanvasManager, IHitCanvasManager, IAutoBounds, IScreenSizeData, IResizeEvent, ILeaf, IEventListenerId, ITransformEventData, ITimer, __Value, IObject, IControl } from '@leafer/interface'
-import { AutoBounds, LayoutEvent, ResizeEvent, LeaferEvent, CanvasManager, HitCanvasManager, ImageManager, DataHelper, Creator, Run, Debug, RenderEvent, registerUI, boundsType, canvasSizeAttrs, dataProcessor, PluginManager, WaitHelper } from '@leafer/core'
+import { AutoBounds, LayoutEvent, ResizeEvent, LeaferEvent, CanvasManager, HitCanvasManager, ImageManager, DataHelper, Creator, Run, Debug, RenderEvent, registerUI, boundsType, canvasSizeAttrs, dataProcessor, PluginManager, WaitHelper, WatchEvent } from '@leafer/core'
 
 import { ILeaferInputData, ILeaferData, IFunction, IUIInputData } from '@leafer-ui/interface'
 import { LeaferTypeCreator } from '@leafer-ui/type'
@@ -73,9 +73,10 @@ export class Leafer extends Group implements ILeafer {
     protected __startTimer: ITimer
     protected __controllers: IControl[] = []
 
-    protected __readyWait?: IFunction[] = []
-    protected __viewReadyWait?: IFunction[] = []
-    protected __viewCompletedWait?: IFunction[] = []
+    protected __readyWait: IFunction[] = []
+    protected __viewReadyWait: IFunction[] = []
+    protected __viewCompletedWait: IFunction[] = []
+    public __renderWait: IFunction[] = []
 
     constructor(userConfig?: ILeaferConfig, data?: ILeaferInputData) {
         super(data)
@@ -277,6 +278,7 @@ export class Leafer extends Group implements ILeafer {
         const completed = this.__checkViewCompleted()
         if (completed) this.__onViewCompleted()
         this.viewCompleted = completed
+        WaitHelper.run(this.__renderWait)
     }
 
     protected __checkViewCompleted(): boolean {
@@ -287,6 +289,12 @@ export class Leafer extends Group implements ILeafer {
         if (!this.viewCompleted) {
             this.emitLeafer(LeaferEvent.VIEW_COMPLETED)
             WaitHelper.run(this.__viewCompletedWait)
+        }
+    }
+
+    protected __onWatchData(): void {
+        if (this.watcher.childrenChanged && this.interaction) {
+            this.waitRender(() => this.interaction.pointerMove())
         }
     }
 
@@ -307,6 +315,14 @@ export class Leafer extends Group implements ILeafer {
         }
     }
 
+    public waitRender(item: IFunction): void {
+        if (this.watcher && !this.watcher.changed) {
+            item()
+        } else {
+            this.__renderWait.push(item)
+        }
+    }
+
     protected __checkUpdateLayout(): void {
         this.__layout.checkUpdate()
     }
@@ -321,6 +337,7 @@ export class Leafer extends Group implements ILeafer {
         this.once(LayoutEvent.END, () => this.__onReady())
         this.once(RenderEvent.START, () => this.__onCreated())
         this.__eventIds.push(
+            this.on_(WatchEvent.DATA, this.__onWatchData, this),
             this.on_(RenderEvent.END, this.__onRenderEnd, this),
             this.on_(LayoutEvent.CHECK_UPDATE, this.__checkUpdateLayout, this)
         )
