@@ -295,7 +295,7 @@ export class Leafer extends Group implements ILeafer {
 
     protected __onWatchData(): void {
         if (this.watcher.childrenChanged && this.interaction) {
-            this.waitRender(() => this.interaction.pointerMove())
+            this.waitRender(() => this.interaction.updateCursor())
         }
     }
 
