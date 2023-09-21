@@ -23,6 +23,7 @@ export class Leafer extends Group implements ILeafer {
     public pixelRatio: number
 
     public get isApp(): boolean { return false }
+    public get app(): ILeafer { return this.parent || this }
 
     declare public parent?: App
 

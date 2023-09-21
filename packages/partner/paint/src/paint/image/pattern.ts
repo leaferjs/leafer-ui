@@ -38,8 +38,6 @@ export function createPattern(ui: IUI, paint: ILeafPaint, pixelRatio: number): b
 
         if (width > maxWidth || height > maxHeight) {
             scale = Math.max(width / maxWidth, height / maxHeight)
-        } else if (width < 32 || height < 32) {
-            scale = Math.min(width / 32, height / 32)
         }
 
         if (scale) {
@@ -62,7 +60,7 @@ export function createPattern(ui: IUI, paint: ILeafPaint, pixelRatio: number): b
             scaleHelper(matrix, 1 / scaleX, 1 / scaleY)
         }
 
-        const style = Platform.canvas.createPattern(image.getCanvas(width, height, opacity) as any, mode === 'repeat' ? 'repeat' : (Platform.origin.noRepeat || 'no-repeat'))
+        const style = Platform.canvas.createPattern(image.getCanvas(width < 1 ? 1 : width, height < 1 ? 1 : height, opacity) as any, mode === 'repeat' ? 'repeat' : (Platform.origin.noRepeat || 'no-repeat'))
 
         try {
             if (paint.transform) paint.transform = null
