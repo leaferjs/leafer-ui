@@ -1,6 +1,6 @@
 {
   "name": "@leafer-ui/worker",
-  "version": "1.0.0-beta.12",
+  "version": "1.0.0-rc.2",
   "description": "@leafer-ui/worker",
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
@@ -8,7 +8,7 @@
   "unpkg": "dist/worker.js",
   "jsdelivr": "dist/worker.js",
   "types": "types/index.d.ts",
-  "files": ["types","dist"],
+  "files": ["src","types","dist"],
   "repository": {
     "type": "git",
     "url": "https://github.com/leaferjs/ui.git"
@@ -22,10 +22,10 @@
     "leaferjs"
   ],
   "dependencies": {
-    "@leafer/worker": "1.0.0-beta.12",
-    "@leafer-ui/core": "1.0.0-beta.12",
-    "@leafer-ui/partner": "1.0.0-beta.12",
-    "@leafer/interface": "1.0.0-beta.12",
-    "@leafer-ui/interface": "1.0.0-beta.12"
+    "@leafer/worker": "1.0.0-rc.2",
+    "@leafer-ui/core": "1.0.0-rc.2",
+    "@leafer-ui/partner": "1.0.0-rc.2",
+    "@leafer-ui/interface": "1.0.0-rc.2",
+    "leafer-in": "1.0.0-rc.2"
   }
 }

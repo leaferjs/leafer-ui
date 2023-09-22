@@ -78,7 +78,7 @@ export class Leafer extends Group implements ILeafer {
     protected __readyWait: IFunction[] = []
     protected __viewReadyWait: IFunction[] = []
     protected __viewCompletedWait: IFunction[] = []
-    public __renderWait: IFunction[] = []
+    public __nextRenderWait: IFunction[] = []
 
     constructor(userConfig?: ILeaferConfig, data?: ILeaferInputData) {
         super(data)
@@ -280,7 +280,7 @@ export class Leafer extends Group implements ILeafer {
         const completed = this.__checkViewCompleted()
         if (completed) this.__onViewCompleted()
         this.viewCompleted = completed
-        WaitHelper.run(this.__renderWait)
+        WaitHelper.run(this.__nextRenderWait)
     }
 
     protected __checkViewCompleted(): boolean {
@@ -296,7 +296,7 @@ export class Leafer extends Group implements ILeafer {
 
     protected __onWatchData(): void {
         if (this.watcher.childrenChanged && this.interaction) {
-            this.waitRender(() => this.interaction.updateCursor())
+            this.nextRender(() => this.interaction.updateCursor())
         }
     }
 
@@ -317,11 +317,11 @@ export class Leafer extends Group implements ILeafer {
         }
     }
 
-    public waitRender(item: IFunction): void {
+    public nextRender(item: IFunction): void {
         if (this.watcher && !this.watcher.changed) {
             item()
         } else {
-            this.__renderWait.push(item)
+            this.__nextRenderWait.push(item)
         }
     }
 

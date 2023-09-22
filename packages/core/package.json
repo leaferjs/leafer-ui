@@ -1,6 +1,6 @@
 {
   "name": "@leafer-ui/core",
-  "version": "1.0.0-beta.12",
+  "version": "1.0.0-rc.2",
   "description": "@leafer-ui/core",
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
@@ -11,7 +11,7 @@
     "require": "./dist/core.cjs"
   },
   "types": "types/index.d.ts",
-  "files": ["types","dist"],
+  "files": ["src","types","dist"],
   "repository": {
     "type": "git",
     "url": "https://github.com/leaferjs/ui.git"
@@ -24,15 +24,15 @@
     "leaferjs"
   ],
   "dependencies": {
-    "@leafer/core": "1.0.0-beta.12",
+    "@leafer/core": "1.0.0-rc.2",
 
-    "@leafer-ui/app": "1.0.0-beta.12",
+    "@leafer-ui/app": "1.0.0-rc.2",
 
-    "@leafer-ui/display": "1.0.0-beta.12",
-    "@leafer-ui/decorator": "1.0.0-beta.12",
-    "@leafer-ui/display-module": "1.0.0-beta.12",
+    "@leafer-ui/display": "1.0.0-rc.2",
+    "@leafer-ui/decorator": "1.0.0-rc.2",
+    "@leafer-ui/display-module": "1.0.0-rc.2",
     
-    "@leafer-ui/external": "1.0.0-beta.12",
-    "@leafer-ui/type": "1.0.0-beta.12"
+    "@leafer-ui/external": "1.0.0-rc.2",
+    "@leafer-ui/type": "1.0.0-rc.2"
   }
 }
