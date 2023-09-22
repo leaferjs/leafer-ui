@@ -116,7 +116,7 @@ export class UI extends Leaf implements IUI {
     @hitType()
     public hitRadius: __Number
 
-    @cursorType()
+    @cursorType('default')
     public cursor: ICursorType | ICursorType[]
 
     // ---
