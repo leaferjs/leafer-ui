@@ -25,7 +25,7 @@ export class Box extends Group implements IBox {
     @affectRenderBoundsType('show')
     declare public overflow: IOverflow
 
-    public get hasSize(): boolean { return true }
+    public get resizeable(): boolean { return true }
 
     constructor(data?: IBoxInputData) {
         super(data)

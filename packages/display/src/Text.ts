@@ -114,7 +114,7 @@ export class Text extends UI implements IText {
 
         const data = this.__
         const layout = this.__layout
-        const { width, height, lineHeight, letterSpacing, fontFamily, fontSize, fontWeight, italic, textCase } = data
+        const { lineHeight, letterSpacing, fontFamily, fontSize, fontWeight, italic, textCase } = data
 
         // compute
 
@@ -130,6 +130,9 @@ export class Text extends UI implements IText {
 
         if (data.__lineHeight < fontSize) spread(bounds, fontSize / 2)
 
+        const width = data.__getInput('width')
+        const height = data.__getInput('height')
+
         if (width && height) {
             super.__updateBoxBounds()
         } else {
@@ -137,6 +140,7 @@ export class Text extends UI implements IText {
             b.y = height ? 0 : bounds.y
             b.width = width ? width : bounds.width
             b.height = height ? height : bounds.height
+            this.__updateNaturalSize()
         }
 
         const contentBounds = includes(b, bounds) ? b : bounds

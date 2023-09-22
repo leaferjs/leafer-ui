@@ -17,7 +17,7 @@ export class Group extends UI implements IGroup {
 
     declare public children: IUI[]
 
-    public get hasSize(): boolean { return false }
+    public get resizeable(): boolean { return false }
 
     public set mask(child: IUI) {
         if (this.__hasMask) this.__removeMask()

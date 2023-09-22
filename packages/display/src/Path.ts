@@ -26,7 +26,7 @@ export class Path extends UI implements IPath {
     @affectStrokeBoundsType('center')
     declare public strokeAlign: IStrokeAlign
 
-    public get hasSize(): boolean { return false }
+    public get resizeable(): boolean { return false }
 
     constructor(data?: IPathInputData) {
         super(data)
@@ -34,6 +34,7 @@ export class Path extends UI implements IPath {
 
     public __updateBoxBounds(): void {
         toBounds(this.__.path, this.__layout.boxBounds)
+        this.__updateNaturalSize()
     }
 
 }

@@ -24,7 +24,7 @@ export class Line extends UI implements ILine {
     declare public strokeAlign: IStrokeAlign
 
     @boundsType(0)
-    public height: __Number
+    declare public height: __Number
 
     @pathType()
     public points: number[]
@@ -32,7 +32,7 @@ export class Line extends UI implements ILine {
     @pathType(0)
     public curve: boolean | number
 
-    public get hasSize(): boolean { return !this.points }
+    public get resizeable(): boolean { return !this.points }
 
 
     public get toPoint(): IPointData {
@@ -83,6 +83,7 @@ export class Line extends UI implements ILine {
     public __updateBoxBounds(): void {
         if (this.points) {
             toBounds(this.__.path, this.__layout.boxBounds)
+            this.__updateNaturalSize()
         } else {
             super.__updateBoxBounds()
         }

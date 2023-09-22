@@ -28,7 +28,7 @@ export class Polygon extends UI implements IPolygon {
     @pathType(0)
     curve: boolean | number
 
-    public get hasSize(): boolean { return !this.points }
+    public get resizeable(): boolean { return !this.points }
 
     constructor(data?: IPolygonInputData) {
         super(data)
@@ -62,6 +62,7 @@ export class Polygon extends UI implements IPolygon {
     public __updateRenderPath(): void {
         if (this.__.points && this.__.curve) {
             drawPoints(this.__.__pathForRender = [], this.__.points, this.__.curve, true)
+            this.__updateNaturalSize()
         } else {
             super.__updateRenderPath()
         }
