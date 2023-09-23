@@ -16,7 +16,12 @@ export const TextConvert: ITextConvertModule = {
         if (typeof content !== 'string') content = String(content)
 
         let x = 0, y = 0
-        let { width, height, padding } = style
+
+        let width = style.__getInput('width')
+        let height = style.__getInput('height')
+
+        let { padding } = style
+
         const { textDecoration, textOverflow, __font } = style
         if (!width) width = 0
 
