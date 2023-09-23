@@ -82,7 +82,7 @@ export class Line extends UI implements ILine {
 
     public __updateBoxBounds(): void {
         if (this.points) {
-            toBounds(this.__.path, this.__layout.boxBounds)
+            toBounds(this.__.__pathForRender, this.__layout.boxBounds)
             this.__updateNaturalSize()
         } else {
             super.__updateBoxBounds()

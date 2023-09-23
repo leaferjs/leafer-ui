@@ -62,14 +62,18 @@ export class Polygon extends UI implements IPolygon {
     public __updateRenderPath(): void {
         if (this.__.points && this.__.curve) {
             drawPoints(this.__.__pathForRender = [], this.__.points, this.__.curve, true)
-            this.__updateNaturalSize()
         } else {
             super.__updateRenderPath()
         }
     }
 
     public __updateBoxBounds(): void {
-        this.__.points ? toBounds(this.__.path, this.__layout.boxBounds) : super.__updateBoxBounds()
+        if (this.__.points) {
+            toBounds(this.__.__pathForRender, this.__layout.boxBounds)
+            this.__updateNaturalSize()
+        } else {
+            super.__updateBoxBounds()
+        }
     }
 
 }
