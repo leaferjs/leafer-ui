@@ -138,6 +138,9 @@ export interface ITextRowData {
     data?: ITextCharData[]
     words?: ITextWordData[]
 
+    startCharSize?: number
+    endCharSize?: number
+
     paraStart?: boolean // paragraph start
     paraEnd?: boolean // paragraph end
     isOverflow?: boolean

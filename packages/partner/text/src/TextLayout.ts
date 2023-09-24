@@ -4,7 +4,7 @@ import { ITextData, ITextDrawData, ITextRowData } from '@leafer-ui/interface'
 export function layoutText(drawData: ITextDrawData, style: ITextData): void {
 
     const { rows, bounds } = drawData
-    const { __lineHeight, __baseLine, textAlign, verticalAlign, paraSpacing, textOverflow } = style
+    const { __lineHeight, __baseLine, __letterSpacing, textAlign, verticalAlign, paraSpacing, textOverflow } = style
 
     let { x, y, width, height } = bounds, realHeight = __lineHeight * rows.length + (paraSpacing ? paraSpacing * (drawData.paraNumber - 1) : 0)
     let starY: number = __baseLine
@@ -27,7 +27,7 @@ export function layoutText(drawData: ITextDrawData, style: ITextData): void {
 
     // textAlign
 
-    let row: ITextRowData
+    let row: ITextRowData, rowWidth: number
 
     for (let i = 0, len = rows.length; i < len; i++) {
         row = rows[i]
@@ -52,14 +52,19 @@ export function layoutText(drawData: ITextDrawData, style: ITextData): void {
             drawData.overflow = i + 1
         }
 
-        if (row.width < 0) { // letterSpacing < 0
-            const charWidth = row.words[0].data[0].width
-            const rowX = row.x + row.width
-            if (rowX < bounds.x) bounds.x = rowX - charWidth
-            if (-row.width > bounds.width) bounds.width = -row.width + style.fontSize + charWidth
+        if (row.width < 0) { // letterSpacing < 0, like -20% -100%
+            rowWidth = -row.width + row.endCharSize + __letterSpacing
+            const rowX = row.x - rowWidth
+            rowWidth += row.startCharSize
+
+            if (rowX < bounds.x) bounds.x = rowX
+            if (rowWidth > bounds.width) bounds.width = rowWidth
         } else {
+            rowWidth = row.width
+            if (__letterSpacing < 0) rowWidth -= __letterSpacing
+
             if (row.x < bounds.x) bounds.x = row.x
-            if (row.width > bounds.width) bounds.width = row.width
+            if (rowWidth > bounds.width) bounds.width = rowWidth
         }
 
     }

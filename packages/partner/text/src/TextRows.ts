@@ -11,7 +11,7 @@ const { trimRight } = TextRowHelper
 const { Letter, Single, Before, After, Symbol, Break } = CharType
 
 let word: ITextWordData, row: ITextRowData, wordWidth: number, rowWidth: number, realWidth: number
-let char: string, charWidth: number, charType: CharType, lastCharType: CharType, langBreak: boolean, afterBreak: boolean, paraStart: boolean
+let char: string, charWidth: number, startCharSize: number, charSize: number, charType: CharType, lastCharType: CharType, langBreak: boolean, afterBreak: boolean, paraStart: boolean
 let textDrawData: ITextDrawData, rows: ITextRowData[] = [], bounds: IBoundsData
 
 export function createRows(drawData: ITextDrawData, content: string, style: ITextData): void {
@@ -29,7 +29,7 @@ export function createRows(drawData: ITextDrawData, content: string, style: ITex
 
         paraStart = true
         lastCharType = null
-        wordWidth = rowWidth = 0
+        startCharSize = charWidth = charSize = wordWidth = rowWidth = 0
         word = { data: [] }, row = { words: [] }
 
         for (let i = 0, len = content.length; i < len; i++) {
@@ -51,7 +51,10 @@ export function createRows(drawData: ITextDrawData, content: string, style: ITex
                 if (charType === Letter && textCase !== 'none') char = getTextCase(char, textCase, !wordWidth)
 
                 charWidth = canvas.measureText(char).width
-                if (__letterSpacing) charWidth += __letterSpacing
+                if (__letterSpacing) {
+                    if (__letterSpacing < 0) charSize = charWidth
+                    charWidth += __letterSpacing
+                }
 
                 langBreak = (charType === Single && (lastCharType === Single || lastCharType === Letter)) || (lastCharType === Single && charType !== After) // break  U字 文字 or 字U  字（  字*  exclude 字。
                 afterBreak = ((charType === Before || charType === Single) && (lastCharType === Symbol || lastCharType === After)) // split >(  =文 。哈  ;文
@@ -123,6 +126,8 @@ export function createRows(drawData: ITextDrawData, content: string, style: ITex
 function addChar(char: string, width: number): void {
     word.data.push({ char, width })
     wordWidth += width
+
+    if (charSize && !startCharSize) startCharSize = charSize
 }
 
 function addWord(): void {
@@ -139,9 +144,16 @@ function addRow(): void {
         row.paraStart = true
         paraStart = false
     }
+
     row.width = rowWidth
     if (bounds.width) trimRight(row)
     rows.push(row)
     row = { words: [] }
     rowWidth = 0
+
+    if (charSize) { // letterSpacing < 0, like -20% -100%
+        row.startCharSize = startCharSize
+        row.endCharSize = charSize
+        startCharSize = 0
+    }
 }
