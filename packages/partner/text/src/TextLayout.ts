@@ -57,9 +57,9 @@ export function layoutText(drawData: ITextDrawData, style: ITextData): void {
 
         if (__letterSpacing < 0) { // letterSpacing < 0, like -20% -100%
             if (row.width < 0) {
-                rowWidth = -row.width + row.endCharSize + __letterSpacing
+                rowWidth = -row.width + style.fontSize + __letterSpacing
                 rowX -= rowWidth
-                rowWidth += row.startCharSize
+                rowWidth += style.fontSize
             } else {
                 rowWidth -= __letterSpacing
             }
