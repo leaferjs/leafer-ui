@@ -124,10 +124,9 @@ export function createRows(drawData: ITextDrawData, content: string, style: ITex
 
 
 function addChar(char: string, width: number): void {
+    if (charSize && !startCharSize) startCharSize = charSize
     word.data.push({ char, width })
     wordWidth += width
-
-    if (charSize && !startCharSize) startCharSize = charSize
 }
 
 function addWord(): void {
@@ -145,15 +144,15 @@ function addRow(): void {
         paraStart = false
     }
 
-    row.width = rowWidth
-    if (bounds.width) trimRight(row)
-    rows.push(row)
-    row = { words: [] }
-    rowWidth = 0
-
     if (charSize) { // letterSpacing < 0, like -20% -100%
         row.startCharSize = startCharSize
         row.endCharSize = charSize
         startCharSize = 0
     }
+
+    row.width = rowWidth
+    if (bounds.width) trimRight(row)
+    rows.push(row)
+    row = { words: [] }
+    rowWidth = 0
 }

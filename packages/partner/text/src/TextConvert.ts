@@ -17,13 +17,10 @@ export const TextConvert: ITextConvertModule = {
 
         let x = 0, y = 0
 
-        let width = style.__getInput('width')
-        let height = style.__getInput('height')
+        let width = style.__getInput('width') || 0
+        let height = style.__getInput('height') || 0
 
-        let { padding } = style
-
-        const { textDecoration, textOverflow, __font } = style
-        if (!width) width = 0
+        const { textDecoration, textOverflow, __font, padding } = style
 
         if (padding) {
             const [top, right, bottom, left] = MathHelper.fourNumber(padding)

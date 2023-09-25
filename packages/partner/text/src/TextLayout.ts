@@ -27,7 +27,7 @@ export function layoutText(drawData: ITextDrawData, style: ITextData): void {
 
     // textAlign
 
-    let row: ITextRowData, rowWidth: number
+    let row: ITextRowData, rowX: number, rowWidth: number
 
     for (let i = 0, len = rows.length; i < len; i++) {
         row = rows[i]
@@ -52,20 +52,21 @@ export function layoutText(drawData: ITextDrawData, style: ITextData): void {
             drawData.overflow = i + 1
         }
 
-        if (row.width < 0) { // letterSpacing < 0, like -20% -100%
-            rowWidth = -row.width + row.endCharSize + __letterSpacing
-            const rowX = row.x - rowWidth
-            rowWidth += row.startCharSize
+        rowX = row.x
+        rowWidth = row.width
 
-            if (rowX < bounds.x) bounds.x = rowX
-            if (rowWidth > bounds.width) bounds.width = rowWidth
-        } else {
-            rowWidth = row.width
-            if (__letterSpacing < 0) rowWidth -= __letterSpacing
-
-            if (row.x < bounds.x) bounds.x = row.x
-            if (rowWidth > bounds.width) bounds.width = rowWidth
+        if (__letterSpacing < 0) { // letterSpacing < 0, like -20% -100%
+            if (row.width < 0) {
+                rowWidth = -row.width + row.endCharSize + __letterSpacing
+                rowX -= rowWidth
+                rowWidth += row.startCharSize
+            } else {
+                rowWidth -= __letterSpacing
+            }
         }
+
+        if (rowX < bounds.x) bounds.x = rowX
+        if (rowWidth > bounds.width) bounds.width = rowWidth
 
     }
 
