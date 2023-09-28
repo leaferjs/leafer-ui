@@ -5,22 +5,22 @@ import { IUI, IUIData } from '../IUI'
 import { ICachedShape } from '../ICachedShape'
 
 export interface IPaintModule {
-    compute?(ui: IUI, attrName: 'fill' | 'stroke'): void
+    compute?(attrName: 'fill' | 'stroke', ui: IUI): void
 
-    fill?(ui: IUI, canvas: ILeaferCanvas, fill: string): void
-    fills?(ui: IUI, canvas: ILeaferCanvas, fills: ILeafPaint[]): void
+    fill?(fill: string, ui: IUI, canvas: ILeaferCanvas,): void
+    fills?(fills: ILeafPaint[], ui: IUI, canvas: ILeaferCanvas): void
 
     fillText?(ui: IUI, canvas: ILeaferCanvas): void
 
-    stroke?(ui: IUI, canvas: ILeaferCanvas, stroke: string): void
-    strokes?(ui: IUI, canvas: ILeaferCanvas, strokes: ILeafPaint[]): void
+    stroke?(stroke: string, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void
+    strokes?(strokes: ILeafPaint[], ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void
 
-    strokeText?(ui: IUI, canvas: ILeaferCanvas, stroke: string): void
-    strokesText?(ui: IUI, canvas: ILeaferCanvas, strokes: ILeafPaint[]): void
+    strokeText?(stroke: string, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void
+    strokesText?(strokes: ILeafPaint[], ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void
 
     drawTextStroke?(ui: IUI, canvas: ILeaferCanvas): void
 
-    shape?(ui: IUI, current: ILeaferCanvas, options: IRenderOptions): ICachedShape
+    shape?(ui: IUI, current: ILeaferCanvas, renderOptions: IRenderOptions): ICachedShape
 
-    recycleImage?(data: IUIData, attrName: string): IBooleanMap
+    recycleImage?(attrName: 'fill' | 'stroke', data: IUIData): IBooleanMap
 }

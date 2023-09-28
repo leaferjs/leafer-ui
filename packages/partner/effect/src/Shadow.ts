@@ -8,7 +8,7 @@ const { copy, toOffsetOutBounds } = BoundsHelper
 const tempBounds = {} as IBoundsData
 const offsetOutBounds = {} as IOffsetBoundsData
 
-export function shadow(ui: IUI, current: ILeaferCanvas, shape: ICachedShape, _options: IRenderOptions): void {
+export function shadow(ui: IUI, current: ILeaferCanvas, shape: ICachedShape, renderOptions: IRenderOptions): void {
 
     let copyBounds: IBoundsData, spreadScale: number
 
@@ -44,7 +44,7 @@ export function shadow(ui: IUI, current: ILeaferCanvas, shape: ICachedShape, _op
             worldCanvas ? other.copyWorld(worldCanvas, __world, __world, 'destination-out') : other.copyWorld(shape.canvas, shapeBounds, bounds, 'destination-out')
         }
 
-        if (ui.__hasMirror) {
+        if (ui.__hasMirror || renderOptions.matrix) {
             current.copyWorldByReset(other, copyBounds, __world, item.blendMode)
         } else {
             current.copyWorldToInner(other, copyBounds as IMatrixWithBoundsData, __layout.renderBounds, item.blendMode)

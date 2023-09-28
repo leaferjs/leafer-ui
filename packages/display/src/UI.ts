@@ -223,8 +223,8 @@ export class UI extends Leaf implements IUI {
     public __onUpdateSize(): void {
         if (this.__.__input) {
             const { fill, stroke } = this.__.__input
-            if (fill) Paint.compute(this, 'fill')
-            if (stroke) Paint.compute(this, 'stroke')
+            if (fill) Paint.compute('fill', this)
+            if (stroke) Paint.compute('stroke', this)
         }
     }
 

@@ -59,7 +59,7 @@ export class UIData extends LeafData implements IUIData {
         if (typeof value === 'string' || !value) {
             if (this.__isFills) {
                 this.__removeInput('fill')
-                Paint.recycleImage(this, 'fill')
+                Paint.recycleImage('fill', this)
                 this.__isFills = false
             }
             this._fill = value
@@ -75,7 +75,7 @@ export class UIData extends LeafData implements IUIData {
         if (typeof value === 'string' || !value) {
             if (this.__isStrokes) {
                 this.__removeInput('stroke')
-                Paint.recycleImage(this, 'stroke')
+                Paint.recycleImage('stroke', this)
                 this.__isStrokes = false
             }
             this._stroke = value

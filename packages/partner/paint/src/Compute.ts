@@ -10,17 +10,17 @@ import { recycleImage } from './paint/image'
 
 let recycleMap: IBooleanMap
 
-export function compute(ui: IUI, attrName: string): void {
+export function compute(attrName: 'fill' | 'stroke', ui: IUI): void {
     const value: ILeafPaint[] = []
     let item: ILeafPaint
     let paints = ui.__.__input[attrName] as IPaint[]
 
     if (!(paints instanceof Array)) paints = [paints]
 
-    recycleMap = recycleImage(ui.__, attrName)
+    recycleMap = recycleImage(attrName, ui.__)
 
     for (let i = 0, len = paints.length; i < len; i++) {
-        item = getLeafPaint(ui, paints[i], attrName)
+        item = getLeafPaint(attrName, paints[i], ui,)
         if (item) value.push(item)
     }
 
@@ -28,7 +28,7 @@ export function compute(ui: IUI, attrName: string): void {
 }
 
 
-function getLeafPaint(ui: IUI, paint: IPaint, attrName: string): ILeafPaint {
+function getLeafPaint(attrName: string, paint: IPaint, ui: IUI,): ILeafPaint {
     if (typeof paint !== 'object' || paint.visible === false || paint.opacity === 0) return undefined
     const { boxBounds } = ui.__layout
 

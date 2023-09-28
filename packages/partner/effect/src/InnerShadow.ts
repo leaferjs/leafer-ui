@@ -9,7 +9,7 @@ import { drawWorldShadow } from './Shadow'
 const { toOffsetOutBounds } = BoundsHelper
 const offsetOutBounds = {} as IOffsetBoundsData
 
-export function innerShadow(ui: IUI, current: ILeaferCanvas, shape: ICachedShape, _options: IRenderOptions): void {
+export function innerShadow(ui: IUI, current: ILeaferCanvas, shape: ICachedShape, renderOptions: IRenderOptions): void {
 
     let copyBounds: IBoundsData, spreadScale: number
 
@@ -45,7 +45,7 @@ export function innerShadow(ui: IUI, current: ILeaferCanvas, shape: ICachedShape
 
         other.fillWorld(copyBounds, item.color, 'source-in')
 
-        if (ui.__hasMirror) {
+        if (ui.__hasMirror || renderOptions.matrix) {
             current.copyWorldByReset(other, copyBounds, __world, item.blendMode)
         } else {
             current.copyWorldToInner(other, copyBounds as IMatrixWithBoundsData, __layout.renderBounds, item.blendMode)

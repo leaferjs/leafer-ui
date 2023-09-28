@@ -6,13 +6,13 @@ import { checkImage } from './paint/image'
 import { fillText } from './FillText'
 
 
-export function fill(ui: IUI, canvas: ILeaferCanvas, fill: string): void {
+export function fill(fill: string, ui: IUI, canvas: ILeaferCanvas): void {
     canvas.fillStyle = fill
     ui.__.__font ? fillText(ui, canvas) : (ui.__.windingRule ? canvas.fill(ui.__.windingRule) : canvas.fill())
 }
 
 
-export function fills(ui: IUI, canvas: ILeaferCanvas, fills: ILeafPaint[]): void {
+export function fills(fills: ILeafPaint[], ui: IUI, canvas: ILeaferCanvas): void {
     let item: ILeafPaint
     const { windingRule, __font } = ui.__
     for (let i = 0, len = fills.length; i < len; i++) {
