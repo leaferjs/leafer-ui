@@ -49,7 +49,6 @@ export class Leafer extends Group implements ILeafer {
     public hitCanvasManager?: IHitCanvasManager
 
     public zoomLayer: ILeaf = this
-    public moveLayer: ILeaf = this
 
     public userConfig: ILeaferConfig
     public config: ILeaferConfig = {
@@ -211,9 +210,8 @@ export class Leafer extends Group implements ILeafer {
         this.__level = 1
     }
 
-    public setZoomLayer(zoomLayer: ILeaf, moveLayer?: ILeaf): void {
+    public setZoomLayer(zoomLayer: ILeaf): void {
         this.zoomLayer = zoomLayer
-        this.moveLayer = moveLayer || zoomLayer
     }
 
     protected __checkAutoLayout(config: ILeaferConfig): void {
