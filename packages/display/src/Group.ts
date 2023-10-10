@@ -47,7 +47,11 @@ export class Group extends UI implements IGroup {
             const { children } = data
             delete data.children
 
-            if (!this.children) this.__setBranch()
+            if (!this.children) {
+                this.__setBranch()
+            } else {
+                this.removeAll(true)
+            }
 
             super.set(data)
 
