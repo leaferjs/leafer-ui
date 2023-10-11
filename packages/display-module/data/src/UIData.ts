@@ -16,6 +16,9 @@ export class UIData extends LeafData implements IUIData {
     public __isFills?: boolean
     public __isStrokes?: boolean
 
+    public __pixelFill?: boolean // png / svg / webp
+    public __pixelStroke?: boolean
+
     protected _visible?: __Boolean
 
     protected _width?: __Number
@@ -61,6 +64,7 @@ export class UIData extends LeafData implements IUIData {
                 this.__removeInput('fill')
                 Paint.recycleImage('fill', this)
                 this.__isFills = false
+                if (this.__pixelFill) this.__pixelFill = false
             }
             this._fill = value
         } else if (typeof value === 'object') {
@@ -77,6 +81,7 @@ export class UIData extends LeafData implements IUIData {
                 this.__removeInput('stroke')
                 Paint.recycleImage('stroke', this)
                 this.__isStrokes = false
+                if (this.__pixelStroke) this.__pixelStroke = false
             }
             this._stroke = value
         } else if (typeof value === 'object') {

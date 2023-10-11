@@ -1,5 +1,5 @@
-import { IUI, IPaint, ILeafPaint, IRGB, IBooleanMap } from '@leafer-ui/interface'
-import { ColorConvert } from '@leafer-ui/core'
+import { IUI, IPaint, ILeafPaint, IRGB, IBooleanMap, IImagePaint } from '@leafer-ui/interface'
+import { ColorConvert, ImageManager } from '@leafer-ui/core'
 
 import { image } from "./paint/image/image"
 import { linearGradient } from './paint/linear'
@@ -12,19 +12,35 @@ let recycleMap: IBooleanMap
 
 export function compute(attrName: 'fill' | 'stroke', ui: IUI): void {
     const value: ILeafPaint[] = []
+    const data = ui.__
+
     let item: ILeafPaint
-    let paints = ui.__.__input[attrName] as IPaint[]
+    let paints = data.__input[attrName] as IPaint[]
 
     if (!(paints instanceof Array)) paints = [paints]
 
-    recycleMap = recycleImage(attrName, ui.__)
+    recycleMap = recycleImage(attrName, data)
 
     for (let i = 0, len = paints.length; i < len; i++) {
-        item = getLeafPaint(attrName, paints[i], ui,)
+        item = getLeafPaint(attrName, paints[i], ui)
         if (item) value.push(item)
     }
 
-    ui.__['_' + attrName] = value.length ? value : undefined
+    data['_' + attrName] = value.length ? value : undefined
+
+    // check png / svg / webp
+
+    let isPixel
+    if (paints.length === 1) {
+        const paint = paints[0] as IImagePaint
+        if (paint.type === 'image') isPixel = ImageManager.isPixel(paint)
+    }
+
+    if (attrName === 'fill') {
+        data.__pixelFill = isPixel
+    } else {
+        data.__pixelStroke = isPixel
+    }
 }
 
 

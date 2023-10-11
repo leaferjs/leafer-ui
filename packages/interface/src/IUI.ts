@@ -281,12 +281,16 @@ export interface IUIData extends IUIComputedData, ILeafData {
     // 非数据属性, 自动计算的缓存数据
     __isFills?: boolean
     __isStrokes?: boolean
+
+    __pixelFill?: boolean // png / svg / webp
+    __pixelStroke?: boolean
+
+    __opacityFill?: boolean  // 半透明的
+    __opacityStroke?: boolean
+
     __drawAfterFill?: boolean
     __isOverflow?: boolean
     __blendLayer?: boolean
-
-    __isTranslucentFill?: boolean  // 半透明的
-    __isTranslucentStroke?: boolean
 
     __useEffect?: boolean
 

@@ -87,8 +87,8 @@ export const UIRender: IUIRenderModule = {
 
         this.__drawRenderPath(canvas)
 
-        if (fill) Paint.fill('#000000', this, canvas)
-        if (stroke) Paint.stroke('#000000', this, canvas, renderOptions)
+        if (fill) this.__.__pixelFill ? Paint.fills(fill as ILeafPaint[], this, canvas) : Paint.fill('#000000', this, canvas)
+        if (stroke) this.__.__pixelStroke ? Paint.strokes(stroke as ILeafStrokePaint[], this, canvas, renderOptions) : Paint.stroke('#000000', this, canvas, renderOptions)
     }
 
 }
