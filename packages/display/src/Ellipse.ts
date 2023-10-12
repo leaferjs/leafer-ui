@@ -1,5 +1,5 @@
 import { __Number } from '@leafer/interface'
-import { PathCommandDataHelper, dataProcessor, pathType, registerUI } from '@leafer/core'
+import { PathCommandDataHelper, PathConvert, Platform, dataProcessor, pathType, registerUI } from '@leafer/core'
 
 import { IEllipse, IEllipseInputData, IEllipseData } from '@leafer-ui/interface'
 import { EllipseData } from '@leafer-ui/data'
@@ -48,8 +48,11 @@ export class Ellipse extends UI implements IEllipse {
                     ellipse(path, rx, ry, rx * innerRadius, ry * innerRadius)
                     moveTo(path, width, ry)
                 }
-                ellipse(path, rx, ry, rx, ry, 0, 0, 360, true)
+                ellipse(path, rx, ry, rx, ry, 0, 360, 0, true)
             }
+
+            // fix node
+            if (Platform.name === 'node') this.__.path = PathConvert.toCanvasData(path, true)
 
         } else {
 
