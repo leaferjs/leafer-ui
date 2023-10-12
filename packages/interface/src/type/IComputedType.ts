@@ -1,4 +1,4 @@
-import { IBlendMode, ILeaferImage, IMatrixData } from '@leafer/interface'
+import { IBlendMode, ILeaferImage, IMatrixData, ITaskItem } from '@leafer/interface'
 
 import { IColorString } from './IStringType'
 import { IStrokeAlign, IStrokeJoin, IStrokeCap, IImagePaintMode } from './IType'
@@ -15,6 +15,7 @@ export interface ILeafPaint {
     image?: ILeaferImage
     loadId?: number
     patternId?: string
+    patternTask?: ITaskItem
     data?: ILeafPaintPatternData
 }
 
