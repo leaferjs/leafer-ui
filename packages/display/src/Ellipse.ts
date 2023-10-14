@@ -52,7 +52,7 @@ export class Ellipse extends UI implements IEllipse {
             }
 
             // fix node
-            if (Platform.name === 'node') this.__.path = PathConvert.toCanvasData(path, true)
+            if (Platform.ellipseToCurve) this.__.path = PathConvert.toCanvasData(path, true)
 
         } else {
 
