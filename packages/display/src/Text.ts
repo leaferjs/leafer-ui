@@ -1,7 +1,7 @@
 import { ILeaferCanvas, IPathDrawer, IPathCommandData, __Boolean, __Number, __String } from '@leafer/interface'
-import { BoundsHelper, boundsType, dataProcessor, registerUI, affectStrokeBoundsType } from '@leafer/core'
+import { BoundsHelper, boundsType, dataProcessor, registerUI, affectStrokeBoundsType, hitType } from '@leafer/core'
 
-import { IText, IFontWeight, ITextCase, ITextDecoration, ITextData, ITextInputData, ITextAlign, IVerticalAlign, ITextDrawData, IOverflow, IUnitData, IStrokeAlign } from '@leafer-ui/interface'
+import { IText, IFontWeight, ITextCase, ITextDecoration, ITextData, ITextInputData, ITextAlign, IVerticalAlign, ITextDrawData, IOverflow, IUnitData, IStrokeAlign, IHitType } from '@leafer-ui/interface'
 import { TextData, UnitConvert } from '@leafer-ui/data'
 
 import { TextConvert } from '@leafer-ui/external'
@@ -31,6 +31,9 @@ export class Text extends UI implements IText {
 
     @affectStrokeBoundsType('outside')
     declare public strokeAlign: IStrokeAlign
+
+    @hitType('all')
+    declare public hitFill: IHitType
 
     @boundsType('')
     public text: __String
