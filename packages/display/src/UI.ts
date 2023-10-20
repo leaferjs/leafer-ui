@@ -1,4 +1,4 @@
-import { ILeaferCanvas, IPathDrawer, IPathCommandData, IHitType, __Number, __Boolean, __String, IPathString, IExportFileType, IPointData, ICursorType, IAround } from '@leafer/interface'
+import { ILeaferCanvas, IPathDrawer, IPathCommandData, IHitType, __Number, __Boolean, __String, IPathString, IExportFileType, IPointData, ICursorType, IAround, ILeafDataOptions } from '@leafer/interface'
 import { Leaf, PathDrawer, surfaceType, dataType, positionType, boundsType, pathType, scaleType, rotationType, opacityType, sortType, maskType, dataProcessor, useModule, rewrite, rewriteAble, UICreator, PathCorner, hitType, strokeType, PathConvert, eraserType, cursorType } from '@leafer/core'
 
 import { IUI, IShadowEffect, IBlurEffect, IPaint, IStrokeAlign, IStrokeJoin, IStrokeCap, IBlendMode, IPaintString, IDashPatternString, IShadowString, IGrayscaleEffect, IUIData, IGroup, IStrokeWidthString, ICornerRadiusString, IUIInputData, IExportOptions, IExportResult } from '@leafer-ui/interface'
@@ -18,6 +18,8 @@ export class UI extends Leaf implements IUI {
 
     @dataProcessor(UIData)
     declare public __: IUIData
+
+    declare public proxyData?: IUIInputData
 
     declare public parent?: IGroup
 
@@ -203,8 +205,8 @@ export class UI extends Leaf implements IUI {
         Object.assign(this, data)
     }
 
-    public get(): IUIInputData {
-        return this.__.__getInputData()
+    public get(options?: ILeafDataOptions): IUIInputData {
+        return this.__.__getInputData(options)
     }
 
 
