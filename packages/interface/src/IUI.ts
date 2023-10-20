@@ -1,4 +1,4 @@
-import { ILeaf, ILeafComputedData, ILeafData, ILeafInputData, ILeaferCanvas, IRenderOptions, IPathDrawer, IPointData, IPath2D, IPathCommandData, IWindingRule, ILeaferImageConfig, IBoundsData, IObject, __Number, IPathString, ILeaferImage, IBlob, IPathCreator } from '@leafer/interface'
+import { ILeaf, ILeafComputedData, ILeafData, ILeafDataOptions, ILeafInputData, ILeaferCanvas, IRenderOptions, IPathDrawer, IPointData, IPath2D, IPathCommandData, IWindingRule, ILeaferImageConfig, IBoundsData, IObject, __Number, IPathString, ILeaferImage, IBlob, IPathCreator } from '@leafer/interface'
 
 import {
     IFillAttrData, IFillInputData, IFillComputedData,
@@ -257,10 +257,15 @@ export interface IUI extends IFillAttrData, IStrokeAttrData, ICornerRadiusAttrDa
     __: IUIData
     parent?: IGroup
 
+    proxyData?: IUIInputData
+
     reset(_data?: IUIInputData): void
 
     set(data: IUIInputData): void
     toJSON(): IUIInputData
+
+    get(options?: ILeafDataOptions): IUIInputData
+    getProxyData(): IUIInputData
 
     getPath(curve?: boolean): IPathCommandData
     getPathString(curve?: boolean): IPathString

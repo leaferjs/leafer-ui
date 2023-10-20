@@ -209,6 +209,8 @@ export class UI extends Leaf implements IUI {
         return this.__.__getInputData(options)
     }
 
+    public getProxyData(): IUIInputData { return undefined }
+
 
     public getPath(curve?: boolean): IPathCommandData {
         const path = this.__.path
