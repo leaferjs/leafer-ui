@@ -1,4 +1,4 @@
-import { ILeaferCanvas, IPathDrawer, IPathCommandData, IHitType, __Number, __Boolean, __String, IPathString, IExportFileType, IPointData, ICursorType, IAround, ILeafDataOptions } from '@leafer/interface'
+import { ILeaferCanvas, IPathDrawer, IPathCommandData, IHitType, __Number, __Boolean, __String, IPathString, IExportFileType, IPointData, ICursorType, IAround, ILeafDataOptions, IFindMethod } from '@leafer/interface'
 import { Leaf, PathDrawer, surfaceType, dataType, positionType, boundsType, pathType, scaleType, rotationType, opacityType, sortType, maskType, dataProcessor, useModule, rewrite, rewriteAble, UICreator, PathCorner, hitType, strokeType, PathConvert, eraserType, cursorType } from '@leafer/core'
 
 import { IUI, IShadowEffect, IBlurEffect, IPaint, IStrokeAlign, IStrokeJoin, IStrokeCap, IBlendMode, IPaintString, IDashPatternString, IShadowString, IGrayscaleEffect, IUIData, IGroup, IStrokeWidthString, ICornerRadiusString, IUIInputData, IExportOptions, IExportResult } from '@leafer-ui/interface'
@@ -200,6 +200,8 @@ export class UI extends Leaf implements IUI {
     }
 
 
+    // data
+
     @rewrite(Leaf.prototype.reset)
     public reset(_data?: IUIInputData): void { }
 
@@ -214,6 +216,19 @@ export class UI extends Leaf implements IUI {
 
     public getProxyData(): IUIInputData { return undefined }
 
+
+    // find
+
+    public find(condition: number | string | IFindMethod): IUI[] {
+        return this.leafer ? this.leafer.selector.getBy(condition, this) as IUI[] : []
+    }
+
+    public findOne(condition: number | string | IFindMethod): IUI {
+        return this.leafer ? this.leafer.selector.getBy(condition, this, true) as IUI : null
+    }
+
+
+    // path
 
     public getPath(curve?: boolean): IPathCommandData {
         const path = this.__.path
@@ -254,6 +269,9 @@ export class UI extends Leaf implements IUI {
     @rewrite(PathDrawer.drawPathByData)
     public __drawPathByData(_drawer: IPathDrawer, _data: IPathCommandData): void { }
 
+
+    // create
+
     public export(filename: IExportFileType | string, options?: IExportOptions | number | boolean): Promise<IExportResult> {
         return Export.export(this, filename, options)
     }
@@ -265,6 +283,7 @@ export class UI extends Leaf implements IUI {
     static one(data: IUIInputData, x?: number, y?: number, width?: number, height?: number): IUI {
         return UICreator.get(data.tag || this.prototype.__tag, data, x, y, width, height) as IUI
     }
+
 
     public destroy(): void {
         this.fill = this.stroke = null
