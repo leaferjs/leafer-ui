@@ -4,14 +4,14 @@ import { ITextData, ITextDrawData, ITextRowData } from '@leafer-ui/interface'
 export function layoutText(drawData: ITextDrawData, style: ITextData): void {
 
     const { rows, bounds } = drawData
-    const { __lineHeight, __baseLine, __letterSpacing, textAlign, verticalAlign, paraSpacing, textOverflow } = style
+    const { __lineHeight, __baseLine, __letterSpacing, __clipText, textAlign, verticalAlign, paraSpacing } = style
 
     let { x, y, width, height } = bounds, realHeight = __lineHeight * rows.length + (paraSpacing ? paraSpacing * (drawData.paraNumber - 1) : 0)
     let starY: number = __baseLine
 
     // verticalAlign
 
-    if (textOverflow !== 'show' && realHeight > height) {
+    if (__clipText && realHeight > height) {
         realHeight = Math.max(height, __lineHeight)
         drawData.overflow = rows.length
     } else {
@@ -68,6 +68,11 @@ export function layoutText(drawData: ITextDrawData, style: ITextData): void {
         if (rowX < bounds.x) bounds.x = rowX
         if (rowWidth > bounds.width) bounds.width = rowWidth
 
+        // clip nowrap
+        if (__clipText && width && width < rowWidth) {
+            row.isOverflow = true
+            if (!drawData.overflow) drawData.overflow = rows.length
+        }
     }
 
     bounds.y = y

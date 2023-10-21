@@ -1,9 +1,9 @@
-import { ITextCharData, ITextData, ITextDrawData } from '@leafer-ui/interface'
+import { ITextCharData, ITextData, ITextDrawData, ITextRowData } from '@leafer-ui/interface'
 
 
 const CharMode = 0 // data: [{char:'a', x: 0}, {char:'b', x: 5}, {char:'d', x:20}]
 const WordMode = 1 // data: [{ char:'ab', x: 0}, { char:'d', x:20}]
-const RowMode = 2 // text: 'ab  c'
+const TextMode = 2 // text: 'ab  c'
 
 export function layoutChar(drawData: ITextDrawData, style: ITextData, width: number, _height: number): void {
 
@@ -16,18 +16,13 @@ export function layoutChar(drawData: ITextDrawData, style: ITextData, width: num
 
             indentWidth = paraIndent && row.paraStart ? paraIndent : 0
             addWordWidth = (width && textAlign === 'justify' && row.words.length > 1) ? (width - row.width - indentWidth) / (row.words.length - 1) : 0
-            mode = (letterSpacing || row.isOverflow) ? CharMode : (addWordWidth > 0.01 ? WordMode : RowMode)
+            mode = (letterSpacing || row.isOverflow) ? CharMode : (addWordWidth > 0.01 ? WordMode : TextMode)
+            if (row.isOverflow && !letterSpacing) row.textMode = true
 
-            if (mode === RowMode) {
+            if (mode === TextMode) {
 
-                row.text = ''
                 row.x += indentWidth
-
-                row.words.forEach(word => {
-                    word.data.forEach(char => {
-                        row.text += char.char
-                    })
-                })
+                toTextChar(row)
 
             } else {
 
@@ -61,6 +56,15 @@ export function layoutChar(drawData: ITextDrawData, style: ITextData, width: num
         }
     })
 
+}
+
+function toTextChar(row: ITextRowData): void {
+    row.text = ''
+    row.words.forEach(word => {
+        word.data.forEach(char => {
+            row.text += char.char
+        })
+    })
 }
 
 function toWordChar(data: ITextCharData[], charX: number, wordChar: ITextCharData): number {

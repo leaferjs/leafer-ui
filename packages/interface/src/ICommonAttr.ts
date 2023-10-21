@@ -125,7 +125,7 @@ export interface ITextStyleComputedData {
     verticalAlign?: IVerticalAlign
 
     textWrap?: ITextWrap
-    textOverflow?: IOverflow
+    textOverflow?: IOverflow | string
 }
 
 // effect---

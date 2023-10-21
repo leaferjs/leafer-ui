@@ -124,6 +124,8 @@ export interface ITextData extends ITextAttrData, ITextStyleComputedData, IUIDat
     __baseLine?: number
     __lineHeight?: number
     __letterSpacing?: number
+    __clipText?: boolean
+    __textBoxBounds?: IBoundsData
 }
 export interface ITextInputData extends ITextAttrData, ITextStyleInputData, IUIBaseInputData {
 
@@ -144,6 +146,7 @@ export interface ITextRowData {
     paraStart?: boolean // paragraph start
     paraEnd?: boolean // paragraph end
     isOverflow?: boolean
+    textMode?: boolean
 }
 
 export interface ITextWordData {

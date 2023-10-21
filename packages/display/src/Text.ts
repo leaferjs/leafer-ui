@@ -1,4 +1,4 @@
-import { ILeaferCanvas, IPathDrawer, IPathCommandData, __Boolean, __Number, __String } from '@leafer/interface'
+import { ILeaferCanvas, IPathDrawer, IPathCommandData, __Boolean, __Number, __String, IBoundsData } from '@leafer/interface'
 import { BoundsHelper, boundsType, dataProcessor, registerUI, affectStrokeBoundsType, hitType } from '@leafer/core'
 
 import { IText, IFontWeight, ITextCase, ITextDecoration, ITextData, ITextInputData, ITextAlign, IVerticalAlign, ITextDrawData, IOverflow, IUnitData, IStrokeAlign, IHitType, ITextWrap } from '@leafer-ui/interface'
@@ -9,7 +9,7 @@ import { TextConvert } from '@leafer-ui/external'
 import { UI } from './UI'
 
 
-const { copyAndSpread, includes, spread } = BoundsHelper
+const { copyAndSpread, includes, spread, setByList } = BoundsHelper
 
 @registerUI()
 export class Text extends UI implements IText {
@@ -120,7 +120,10 @@ export class Text extends UI implements IText {
 
         const data = this.__
         const layout = this.__layout
-        const { lineHeight, letterSpacing, fontFamily, fontSize, fontWeight, italic, textCase } = data
+        const { lineHeight, letterSpacing, fontFamily, fontSize, fontWeight, italic, textCase, textOverflow } = data
+
+        const width = data.__getInput('width')
+        const height = data.__getInput('height')
 
         // compute
 
@@ -128,6 +131,7 @@ export class Text extends UI implements IText {
         data.__letterSpacing = UnitConvert.number(letterSpacing, fontSize)
         data.__baseLine = data.__lineHeight - (data.__lineHeight - fontSize * 0.7) / 2
         data.__font = `${italic ? 'italic ' : ''}${textCase === 'small-caps' ? 'small-caps ' : ''}${fontWeight !== 'normal' ? fontWeight + ' ' : ''}${fontSize}px ${fontFamily}`
+        data.__clipText = textOverflow !== 'show' && (width || height)
 
         this.__updateTextDrawData()
 
@@ -135,9 +139,6 @@ export class Text extends UI implements IText {
         const b = layout.boxBounds
 
         if (data.__lineHeight < fontSize) spread(bounds, fontSize / 2)
-
-        const width = data.__getInput('width')
-        const height = data.__getInput('height')
 
         if (width && height) {
             super.__updateBoxBounds()
@@ -153,6 +154,9 @@ export class Text extends UI implements IText {
         if (contentBounds !== layout.contentBounds) {
             layout.contentBounds = contentBounds
             layout.renderChanged = true
+            setByList(data.__textBoxBounds = {} as IBoundsData, [b, bounds])
+        } else {
+            data.__textBoxBounds = contentBounds
         }
 
     }
@@ -164,7 +168,7 @@ export class Text extends UI implements IText {
     }
 
     public __updateRenderBounds(): void {
-        copyAndSpread(this.__layout.renderBounds, this.__layout.contentBounds, this.__layout.renderSpread)
+        copyAndSpread(this.__layout.renderBounds, this.__.__textBoxBounds, this.__layout.renderSpread)
     }
 
 }

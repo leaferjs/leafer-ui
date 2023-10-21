@@ -20,7 +20,7 @@ export const TextConvert: ITextConvertModule = {
         let width = style.__getInput('width') || 0
         let height = style.__getInput('height') || 0
 
-        const { textDecoration, textOverflow, __font, padding } = style
+        const { textDecoration, __font, padding } = style
 
         if (padding) {
             const [top, right, bottom, left] = MathHelper.fourNumber(padding)
@@ -47,7 +47,7 @@ export const TextConvert: ITextConvertModule = {
 
         layoutChar(drawData, style, width, height) // set char.x
 
-        if (drawData.overflow) clipText(drawData, textOverflow)
+        if (drawData.overflow) clipText(drawData, style)
 
         if (textDecoration !== 'none') decorationText(drawData, style)
 
