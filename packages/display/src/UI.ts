@@ -109,6 +109,9 @@ export class UI extends Leaf implements IUI {
     @strokeType('path')
     public hitStroke: IHitType
 
+    @hitType(false)
+    public hitBox: __Boolean
+
     @hitType(true)
     public hitChildren: __Boolean
 
