@@ -1,4 +1,4 @@
-import { ILeaf, ILeafComputedData, ILeafData, ILeafDataOptions, ILeafInputData, ILeaferCanvas, IRenderOptions, IPathDrawer, IPointData, IPath2D, IPathCommandData, IWindingRule, ILeaferImageConfig, IBoundsData, IObject, __Number, IPathString, ILeaferImage, IBlob, IPathCreator } from '@leafer/interface'
+import { ILeaf, ILeafComputedData, ILeafData, ILeafDataOptions, ILeafInputData, ILeaferCanvas, IRenderOptions, IPathDrawer, IPointData, IPath2D, IPathCommandData, IWindingRule, ILeaferImageConfig, IBoundsData, IObject, __Number, IPathString, ILeaferImage, IBlob, IPathCreator, IFindMethod } from '@leafer/interface'
 
 import {
     IFillAttrData, IFillInputData, IFillComputedData,
@@ -269,6 +269,9 @@ export interface IUI extends IFillAttrData, IStrokeAttrData, ICornerRadiusAttrDa
 
     get(options?: ILeafDataOptions): IUIInputData
     getProxyData(): IUIInputData
+
+    find(condition: number | string | IFindMethod): IUI[]
+    findOne(condition: number | string | IFindMethod): IUI
 
     getPath(curve?: boolean): IPathCommandData
     getPathString(curve?: boolean): IPathString
