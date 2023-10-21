@@ -102,6 +102,7 @@ export type IFontWeightString =
     | 'extra-bold'
     | 'black'
 export type ITextDecoration = 'none' | 'under' | 'delete'
+export type ITextWrap = 'normal' | 'none' | 'break'
 
 // 路径
 export interface IVectorPath {

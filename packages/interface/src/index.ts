@@ -18,7 +18,7 @@ export {
     IUI, IUIBaseInputData, IUIData,
     IUITag, IUIInputData
 } from './IUI'
-export { IUnitData, IVectorPath, IShadowEffect, IBlurEffect, IGrayscaleEffect, IStrokeAlign, IStrokeJoin, IStrokeCap, IRGB, IRGBA, IColor, IColorStop, IPaint, IGradientPaint, IImagePaint, IImagePaintMode, IFontWeight, ITextCase, ITextDecoration, ITextAlign, IVerticalAlign, IOverflow } from './type/IType'
+export { IUnitData, IVectorPath, IShadowEffect, IBlurEffect, IGrayscaleEffect, IStrokeAlign, IStrokeJoin, IStrokeCap, IRGB, IRGBA, IColor, IColorStop, IPaint, IGradientPaint, IImagePaint, IImagePaintMode, IFontWeight, ITextCase, ITextDecoration, ITextAlign, IVerticalAlign, IOverflow, ITextWrap } from './type/IType'
 export { ICornerRadiusString, IStrokeWidthString, IPaintString, IShadowString, IPercent, IDashPatternString, IColorString as IStringColor } from './type/IStringType'
 export { ILeafFill, ILeafPaint, ILeafPaintPatternData, ILeafPaintColor, ILeafStrokePaint, ILeafShadowEffect } from './type/IComputedType'
 

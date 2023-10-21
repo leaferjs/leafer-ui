@@ -1,4 +1,4 @@
-import { IPaint, IStrokeAlign, IStrokeCap, IStrokeJoin, IBlurEffect, IFontWeight, ITextCase, ITextDecoration, IShadowEffect, IGrayscaleEffect, ITextAlign, IVerticalAlign, IOverflow, IUnitData } from './type/IType'
+import { IPaint, IStrokeAlign, IStrokeCap, IStrokeJoin, IBlurEffect, IFontWeight, ITextCase, ITextDecoration, IShadowEffect, IGrayscaleEffect, ITextAlign, IVerticalAlign, IOverflow, IUnitData, ITextWrap } from './type/IType'
 import { ILeafStrokePaint, ILeafShadowEffect, ILeafPaint } from './type/IComputedType'
 import { IPaintString, IDashPatternString, IShadowString, IColorString, IStrokeWidthString, ICornerRadiusString } from './type/IStringType'
 
@@ -86,6 +86,7 @@ export interface ITextStyleAttrData {
     textAlign: ITextAlign
     verticalAlign: IVerticalAlign
 
+    textWrap: ITextWrap
     textOverflow: IOverflow | string
 }
 export interface ITextStyleInputData {
@@ -104,6 +105,7 @@ export interface ITextStyleInputData {
     textAlign?: ITextAlign
     verticalAlign?: IVerticalAlign
 
+    textWrap?: ITextWrap
     textOverflow?: IOverflow | string
 }
 export interface ITextStyleComputedData {
@@ -121,6 +123,8 @@ export interface ITextStyleComputedData {
 
     textAlign?: ITextAlign
     verticalAlign?: IVerticalAlign
+
+    textWrap?: ITextWrap
     textOverflow?: IOverflow
 }
 

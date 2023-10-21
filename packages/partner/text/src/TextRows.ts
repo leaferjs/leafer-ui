@@ -27,6 +27,9 @@ export function createRows(drawData: ITextDrawData, content: string, style: ITex
 
     if (charMode) {
 
+        const wrap = style.textWrap !== 'none'
+        const breakAll = style.textWrap === 'break'
+
         paraStart = true
         lastCharType = null
         startCharSize = charWidth = charSize = wordWidth = rowWidth = 0
@@ -61,18 +64,25 @@ export function createRows(drawData: ITextDrawData, content: string, style: ITex
 
                 realWidth = paraStart && paraIndent ? width - paraIndent : width
 
-                if (width && rowWidth + wordWidth + charWidth > realWidth) { // wrap
+                if (wrap && (width && rowWidth + wordWidth + charWidth > realWidth)) { // wrap
 
-                    if (!afterBreak) afterBreak = charType === Letter && lastCharType == After // split ，S  
-
-                    if (langBreak || afterBreak || charType === Break || charType === Before || charType === Single || (wordWidth + charWidth > realWidth)) {
+                    if (breakAll) {
 
                         if (wordWidth) addWord() // break
                         addRow()
 
                     } else {
+                        if (!afterBreak) afterBreak = charType === Letter && lastCharType == After // split ，S  
 
-                        addRow()
+                        if (langBreak || afterBreak || charType === Break || charType === Before || charType === Single || (wordWidth + charWidth > realWidth)) {
+
+                            if (wordWidth) addWord() // break
+                            addRow()
+
+                        } else {
+
+                            addRow()
+                        }
                     }
 
                 }
