@@ -20,6 +20,7 @@ export class Frame extends Box implements IFrame {
 
     constructor(data?: IFrameInputData) {
         super(data)
+        this.isFrame = true
         if (!this.__.fill) this.__.fill = '#FFFFFF'
     }
 }

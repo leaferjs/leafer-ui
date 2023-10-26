@@ -15,7 +15,7 @@ export {
     IBox, IBoxInputData, IBoxData,
     IGroup, IGroupInputData, IGroupData,
     ILeaferInputData, ILeaferData,
-    IUI, IUIBaseInputData, IUIData,
+    IUI, IUIBaseInputData, IUIData, IFindUIMethod,
     IUITag, IUIInputData
 } from './IUI'
 export { IUnitData, IVectorPath, IShadowEffect, IBlurEffect, IGrayscaleEffect, IFill, IStroke, IStrokeAlign, IStrokeJoin, IStrokeCap, IRGB, IRGBA, IColor, IColorStop, IPaint, IGradientPaint, IImagePaint, IImagePaintMode, IFontWeight, ITextCase, ITextDecoration, ITextAlign, IVerticalAlign, IOverflow, ITextWrap } from './type/IType'

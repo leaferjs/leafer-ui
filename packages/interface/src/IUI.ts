@@ -1,4 +1,4 @@
-import { ILeaf, ILeafComputedData, ILeafData, ILeafDataOptions, ILeafInputData, ILeaferCanvas, IRenderOptions, IPathDrawer, IPointData, IPath2D, IPathCommandData, IWindingRule, ILeaferImageConfig, IBoundsData, IObject, __Number, IPathString, ILeaferImage, IBlob, IPathCreator, IFindMethod } from '@leafer/interface'
+import { ILeaf, ILeafComputedData, ILeafData, ILeafDataOptions, ILeafInputData, ILeaferCanvas, IRenderOptions, IPathDrawer, IPointData, IPath2D, IPathCommandData, IWindingRule, ILeaferImageConfig, IBoundsData, IObject, __Number, IPathString, ILeaferImage, IBlob, IPathCreator, AnswerType } from '@leafer/interface'
 
 import {
     IFillAttrData, IFillInputData, IFillComputedData,
@@ -259,6 +259,7 @@ export interface IGroupInputData extends IUIBaseInputData { }
 export interface IUI extends IFillAttrData, IStrokeAttrData, ICornerRadiusAttrData, IEffectAttrData, ILeaf {
     __: IUIData
     parent?: IGroup
+    isFrame?: boolean
 
     proxyData?: IUIInputData
 
@@ -270,8 +271,8 @@ export interface IUI extends IFillAttrData, IStrokeAttrData, ICornerRadiusAttrDa
     get(options?: ILeafDataOptions): IUIInputData
     getProxyData(): IUIInputData
 
-    find(condition: number | string | IFindMethod): IUI[]
-    findOne(condition: number | string | IFindMethod): IUI
+    find(condition: number | string | IFindUIMethod): IUI[]
+    findOne(condition: number | string | IFindUIMethod): IUI
 
     getPath(curve?: boolean): IPathCommandData
     getPathString(curve?: boolean): IPathString
@@ -282,6 +283,10 @@ export interface IUI extends IFillAttrData, IStrokeAttrData, ICornerRadiusAttrDa
     export(filename: string, options?: IExportOptions | number): Promise<IBlob | string | boolean>
     clone(): IUI
 
+}
+
+export interface IFindUIMethod {
+    (leaf: IUI, options?: any): AnswerType
 }
 
 export interface IUIData extends IUIComputedData, ILeafData {
