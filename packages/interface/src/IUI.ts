@@ -249,6 +249,7 @@ export interface IGroup extends IUI {
     addAt(child: IUI, index: number): void
     addAfter(child: IUI, after: IUI): void
     addBefore(child: IUI, before: IUI): void
+    addMany(...children: ILeaf[]): void
     remove(child?: IUI): void
     removeAll(): void
 }
@@ -271,8 +272,8 @@ export interface IUI extends IFillAttrData, IStrokeAttrData, ICornerRadiusAttrDa
     get(options?: ILeafDataOptions): IUIInputData
     getProxyData(): IUIInputData
 
-    find(condition: number | string | IFindUIMethod): IUI[]
-    findOne(condition: number | string | IFindUIMethod): IUI
+    find(condition: number | string | IFindUIMethod, options?: any): IUI[]
+    findOne(condition: number | string | IFindUIMethod, options?: any): IUI
 
     getPath(curve?: boolean): IPathCommandData
     getPathString(curve?: boolean): IPathString

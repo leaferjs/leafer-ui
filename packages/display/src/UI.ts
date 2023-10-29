@@ -224,19 +224,19 @@ export class UI extends Leaf implements IUI {
 
     // find
 
-    public find(condition: number | string | IFindUIMethod): IUI[] {
-        return this.leafer ? this.leafer.selector.getBy(condition as IFindMethod, this) as IUI[] : []
+    public find(condition: number | string | IFindUIMethod, options?: any): IUI[] {
+        return this.leafer ? this.leafer.selector.getBy(condition as IFindMethod, this, false, options) as IUI[] : []
     }
 
-    public findOne(condition: number | string | IFindUIMethod): IUI {
-        return this.leafer ? this.leafer.selector.getBy(condition as IFindMethod, this, true) as IUI : null
+    public findOne(condition: number | string | IFindUIMethod, options?: any): IUI {
+        return this.leafer ? this.leafer.selector.getBy(condition as IFindMethod, this, true, options) as IUI : null
     }
 
 
     // path
 
     public getPath(curve?: boolean): IPathCommandData {
-        const path = this.__.path
+        const { path } = this.__
         if (!path) return []
         return curve ? PathConvert.toCanvasData(path, true) : path
     }

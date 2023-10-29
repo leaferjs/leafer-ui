@@ -1,3 +1,4 @@
+import { IPathDrawer, IPathCommandData } from '@leafer/interface'
 import { Branch, useModule, dataProcessor, registerUI, UICreator } from '@leafer/core'
 
 import { IGroup, IGroupData, IGroupInputData, IUI, IUIInputData } from '@leafer-ui/interface'
@@ -72,6 +73,11 @@ export class Group extends UI implements IGroup {
         const data = super.toJSON()
         data.children = this.children.map(child => child.toJSON())
         return data
+    }
+
+    public __drawPathByData(drawer: IPathDrawer, _data: IPathCommandData): void {
+        const { x, y, width, height } = this.__layout.boxBounds
+        drawer.rect(x, y, width, height)
     }
 
     // add
