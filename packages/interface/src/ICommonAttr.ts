@@ -1,6 +1,6 @@
-import { IPaint, IStrokeAlign, IStrokeCap, IStrokeJoin, IBlurEffect, IFontWeight, ITextCase, ITextDecoration, IShadowEffect, IGrayscaleEffect, ITextAlign, IVerticalAlign, IOverflow, IUnitData, ITextWrap } from './type/IType'
+import { IStrokeAlign, IStrokeCap, IStrokeJoin, IBlurEffect, IFontWeight, ITextCase, ITextDecoration, IShadowEffect, IGrayscaleEffect, ITextAlign, IVerticalAlign, IOverflow, IUnitData, ITextWrap, IStroke, IFill } from './type/IType'
 import { ILeafStrokePaint, ILeafShadowEffect, ILeafPaint } from './type/IComputedType'
-import { IPaintString, IDashPatternString, IShadowString, IColorString, IStrokeWidthString, ICornerRadiusString } from './type/IStringType'
+import { IDashPatternString, IShadowString, IColorString, IStrokeWidthString, ICornerRadiusString } from './type/IStringType'
 
 // corner---
 export interface ICornerRadiusAttrData {
@@ -18,10 +18,10 @@ export interface ICornerRadiusComputedData {
 
 // fill---
 export interface IFillAttrData {
-    fill: IPaint | IPaint[] | IPaintString
+    fill: IFill
 }
 export interface IFillInputData {
-    fill?: IPaint | IPaint[] | IPaintString
+    fill?: IFill
 }
 export interface IFillComputedData {
     fill?: IColorString | ILeafPaint[]
@@ -35,7 +35,7 @@ export interface IBorderComputedData {
 
 // stroke---
 export interface IStrokeAttrData {
-    stroke: IPaint | IPaint[] | IPaintString
+    stroke: IStroke
 
     strokeAlign: IStrokeAlign
     strokeWidth: number | number[] | IStrokeWidthString
@@ -46,7 +46,7 @@ export interface IStrokeAttrData {
     miterLimit: number
 }
 export interface IStrokeInputData {
-    stroke?: IPaint | IPaint[] | IPaintString
+    stroke?: IStroke
 
     strokeAlign?: IStrokeAlign
     strokeWidth?: number | number[] | IStrokeWidthString

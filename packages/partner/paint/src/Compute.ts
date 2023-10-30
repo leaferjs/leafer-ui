@@ -1,4 +1,4 @@
-import { IUI, IPaint, ILeafPaint, IRGB, IBooleanMap, IImagePaint } from '@leafer-ui/interface'
+import { IUI, IPaint, ILeafPaint, IRGB, IBooleanMap, IImagePaint, IObject } from '@leafer-ui/interface'
 import { ColorConvert, ImageManager } from '@leafer-ui/core'
 
 import { image } from "./paint/image/image"
@@ -26,7 +26,7 @@ export function compute(attrName: 'fill' | 'stroke', ui: IUI): void {
         if (item) value.push(item)
     }
 
-    data['_' + attrName] = value.length ? value : undefined
+    (data as IObject)['_' + attrName] = value.length ? value : undefined
 
     // check png / svg / webp
 

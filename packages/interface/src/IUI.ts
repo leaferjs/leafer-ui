@@ -19,12 +19,14 @@ export interface ILine extends IUI {
     points: number[]
     curve: boolean | number
 }
-export interface ILineData extends IUIData { }
-export interface ILineInputData extends IUIBaseInputData {
+
+interface ILineAttrData {
     toPoint?: IPointData
     points?: number[]
     curve?: boolean | number
 }
+export interface ILineData extends ILineAttrData, IUIData { }
+export interface ILineInputData extends ILineAttrData, IUIBaseInputData { }
 
 
 // Rect

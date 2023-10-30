@@ -9,7 +9,7 @@ export function effectType(defaultValue?: __Value) {
         defineLeafAttr(target, key, defaultValue, {
             set(value: __Value) {
                 this.__setAttr(key, value)
-                if (value) this.__.__useEffect = true
+                if (value) (this as IUI).__.__useEffect = true
                 this.__layout.renderChanged || this.__layout.renderChange()
             }
         })

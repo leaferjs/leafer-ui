@@ -1,9 +1,9 @@
-import { ILeafer } from '@leafer/interface'
+import { ILeaferBase } from '@leafer/interface'
 
 import { MoveEvent, ZoomEvent, LeafHelper } from '@leafer/core'
 
 
-export function design(leafer: ILeafer): void {
+export function design(leafer: ILeaferBase): void {
     if (leafer.isApp) return
     leafer.__eventIds.push(
         leafer.on_(MoveEvent.BEFORE_MOVE, (e: MoveEvent) => { LeafHelper.moveWorld(leafer.zoomLayer, e.moveX, e.moveY) }),

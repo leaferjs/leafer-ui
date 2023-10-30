@@ -205,6 +205,11 @@ export class UI extends Leaf implements IUI {
     }
 
 
+    constructor(data?: IUIInputData) {
+        super(data)
+    }
+
+
     // data
 
     @rewrite(Leaf.prototype.reset)

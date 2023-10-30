@@ -1,7 +1,7 @@
-import { ILeafer } from '@leafer/interface'
+import { ILeaferBase } from '@leafer/interface'
 
 
-export function draw(leafer: ILeafer): void {
+export function draw(leafer: ILeaferBase): void {
     const { config } = leafer
     config.move.dragOut = false
 }

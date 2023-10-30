@@ -1,5 +1,7 @@
-import { ILeaferConfig, IResizeEvent, ILeaferCanvas, IRenderOptions, IApp, __Value, ILeafer } from '@leafer/interface'
+import { ILeaferConfig, IResizeEvent, ILeaferCanvas, IRenderOptions, __Value, ILeaferBase } from '@leafer/interface'
 import { DataHelper, Debug, LayoutEvent, PropertyEvent, RenderEvent, canvasSizeAttrs, registerUI } from '@leafer/core'
+
+import { IApp, ILeafer } from '@leafer-ui/interface'
 
 import { Leafer } from './Leafer'
 
@@ -11,7 +13,7 @@ export class App extends Leafer implements IApp {
 
     public get isApp(): boolean { return true }
 
-    declare public children: Leafer[]
+    declare public children: ILeafer[]
 
     public realCanvas: boolean
 
@@ -110,7 +112,7 @@ export class App extends Leafer implements IApp {
         return config
     }
 
-    protected __listenChildEvents(leafer: ILeafer): void {
+    protected __listenChildEvents(leafer: ILeaferBase): void {
         leafer.once(LayoutEvent.END, () => this.__onReady())
         leafer.once(RenderEvent.START, () => this.__onCreated())
         leafer.once(RenderEvent.END, (e) => this.__onRenderEnd(e))

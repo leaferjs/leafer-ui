@@ -1,12 +1,10 @@
-import { IApp, ILeafer, ILeaferCanvas, IRenderer, ILayouter, ISelector, IWatcher, IInteraction, ILeaferConfig, ICanvasManager, IHitCanvasManager, IAutoBounds, IScreenSizeData, IResizeEvent, ILeaf, IEventListenerId, ITimer, __Value, IObject, IControl, IPointData } from '@leafer/interface'
+import { IAppBase, ILeaferBase, ILeaferCanvas, IRenderer, ILayouter, ISelector, IWatcher, IInteraction, ILeaferConfig, ICanvasManager, IHitCanvasManager, IAutoBounds, IScreenSizeData, IResizeEvent, ILeaf, IEventListenerId, ITimer, __Value, IObject, IControl, IPointData } from '@leafer/interface'
 import { AutoBounds, LayoutEvent, ResizeEvent, LeaferEvent, CanvasManager, HitCanvasManager, ImageManager, DataHelper, Creator, Run, Debug, RenderEvent, registerUI, boundsType, canvasSizeAttrs, dataProcessor, PluginManager, WaitHelper, WatchEvent } from '@leafer/core'
 
-import { ILeaferInputData, ILeaferData, IFunction, IUIInputData } from '@leafer-ui/interface'
+import { ILeaferInputData, ILeaferData, IFunction, IUIInputData, ILeafer, IGroup, IApp } from '@leafer-ui/interface'
 import { LeaferTypeCreator } from '@leafer-ui/type'
 import { LeaferData } from '@leafer-ui/data'
 import { Group } from '@leafer-ui/display'
-
-import { App } from './App'
 
 
 const debug = Debug.get('Leafer')
@@ -25,7 +23,7 @@ export class Leafer extends Group implements ILeafer {
     public get isApp(): boolean { return false }
     public get app(): ILeafer { return this.parent || this }
 
-    declare public parent?: App
+    declare public parent?: IApp
 
     public running: boolean
     public created: boolean
@@ -48,7 +46,7 @@ export class Leafer extends Group implements ILeafer {
     public canvasManager: ICanvasManager
     public hitCanvasManager?: IHitCanvasManager
 
-    public zoomLayer: ILeaf = this
+    public zoomLayer: IGroup = this
 
     public userConfig: ILeaferConfig
     public config: ILeaferConfig = {
@@ -87,7 +85,7 @@ export class Leafer extends Group implements ILeafer {
         if (userConfig && (userConfig.view || userConfig.width)) this.init(userConfig)
     }
 
-    public init(userConfig?: ILeaferConfig, parentApp?: IApp): void {
+    public init(userConfig?: ILeaferConfig, parentApp?: IAppBase): void {
         if (this.canvas) return
 
         this.__setLeafer(this)
@@ -168,7 +166,7 @@ export class Leafer extends Group implements ILeafer {
         Object.keys(data).forEach(key => (this as any)[key] = data[key])
     }
 
-    public forceLayout(): void {
+    public updateLayout(): void {
         this.__layout.checkUpdate(true)
     }
 
@@ -196,7 +194,7 @@ export class Leafer extends Group implements ILeafer {
 
     protected __setApp(): void { }
 
-    protected __bindApp(app: IApp): void {
+    protected __bindApp(app: IAppBase): void {
         this.selector = app.selector
         this.interaction = app.interaction
 
@@ -204,14 +202,14 @@ export class Leafer extends Group implements ILeafer {
         this.hitCanvasManager = app.hitCanvasManager
     }
 
-    public __setLeafer(leafer: ILeafer): void {
+    public __setLeafer(leafer: ILeaferBase): void {
         this.leafer = leafer
         this.isLeafer = !!leafer
         this.__level = 1
     }
 
     public setZoomLayer(zoomLayer: ILeaf): void {
-        this.zoomLayer = zoomLayer
+        this.zoomLayer = zoomLayer as IGroup
     }
 
     protected __checkAutoLayout(config: ILeaferConfig): void {

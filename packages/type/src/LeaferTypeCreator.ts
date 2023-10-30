@@ -1,4 +1,4 @@
-import { ILeafer, ILeaferTypeList, ILeaferTypeFunction } from '@leafer/interface'
+import { ILeaferBase, ILeaferTypeList, ILeaferTypeFunction } from '@leafer/interface'
 
 import { Debug } from '@leafer/core'
 
@@ -21,7 +21,7 @@ export const LeaferTypeCreator = {
         }
     },
 
-    run(name: string, leafer: ILeafer): void {
+    run(name: string, leafer: ILeaferBase): void {
         const fn = LeaferTypeCreator.list[name]
         if (fn) {
             fn(leafer)
