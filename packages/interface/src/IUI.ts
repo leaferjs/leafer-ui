@@ -266,7 +266,7 @@ export interface IUI extends IFillAttrData, IStrokeAttrData, ICornerRadiusAttrDa
 
     proxyData?: IUIInputData
 
-    reset(_data?: IUIInputData): void
+    reset(data?: IUIInputData): void
 
     set(data: IUIInputData): void
     toJSON(): IUIInputData
