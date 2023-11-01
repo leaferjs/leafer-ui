@@ -43,7 +43,7 @@ export class Canvas extends Rect implements ICanvas {
     }
 
     public draw(ui: IUI, offset?: IPointData, scale?: number | IPointData, rotation?: number): void {
-        ui.__layout.checkUpdate()
+        ui.__layout.update()
 
         const matrix = new Matrix(ui.__world)
         matrix.invert()

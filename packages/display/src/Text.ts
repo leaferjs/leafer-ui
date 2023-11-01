@@ -81,7 +81,7 @@ export class Text extends UI implements IText {
     public textOverflow: IOverflow | string
 
     public get textDrawData(): ITextDrawData {
-        this.__layout.checkUpdate()
+        this.__layout.update()
         return this.__.__textDrawData
     }
 

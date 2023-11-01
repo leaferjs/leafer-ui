@@ -45,7 +45,7 @@ export function innerShadow(ui: IUI, current: ILeaferCanvas, shape: ICachedShape
 
         other.fillWorld(copyBounds, item.color, 'source-in')
 
-        if (ui.__hasMirror || renderOptions.matrix) {
+        if (ui.__worldFliped || renderOptions.matrix) {
             current.copyWorldByReset(other, copyBounds, __world, item.blendMode)
         } else {
             current.copyWorldToInner(other, copyBounds as IMatrixWithBoundsData, __layout.renderBounds, item.blendMode)

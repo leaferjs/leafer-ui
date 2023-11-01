@@ -97,7 +97,7 @@ export class App extends Leafer implements IApp {
     }
 
     protected __checkUpdateLayout(): void {
-        this.children.forEach(leafer => { leafer.__layout.checkUpdate() })
+        this.children.forEach(leafer => { leafer.__layout.update() })
     }
 
     protected __getChildConfig(userConfig?: ILeaferConfig): ILeaferConfig {

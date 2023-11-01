@@ -167,7 +167,7 @@ export class Leafer extends Group implements ILeafer {
     }
 
     public updateLayout(): void {
-        this.__layout.checkUpdate(true)
+        this.__layout.update(true)
     }
 
     public forceFullRender(): void {
@@ -324,7 +324,7 @@ export class Leafer extends Group implements ILeafer {
     }
 
     protected __checkUpdateLayout(): void {
-        this.__layout.checkUpdate()
+        this.__layout.update()
     }
 
     protected emitLeafer(type: string): void {
