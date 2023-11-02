@@ -52,7 +52,7 @@ export class Canvas extends Rect implements ICanvas {
         if (offset) m.translate(offset.x, offset.y)
         if (scale) typeof scale === 'number' ? m.scale(scale) : m.scale(scale.x, scale.y)
         if (rotation) m.rotate(rotation)
-        matrix.preMultiply(m)
+        matrix.multiplyParent(m)
 
         ui.__render(this.canvas, { matrix })
         this.paint()
