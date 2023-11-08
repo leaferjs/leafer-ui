@@ -9,7 +9,7 @@ import { TextConvert } from '@leafer-ui/external'
 import { UI } from './UI'
 
 
-const { copyAndSpread, includes, spread, setByList } = BoundsHelper
+const { copyAndSpread, includes, spread, setList } = BoundsHelper
 
 @registerUI()
 export class Text extends UI implements IText {
@@ -154,7 +154,7 @@ export class Text extends UI implements IText {
         if (contentBounds !== layout.contentBounds) {
             layout.contentBounds = contentBounds
             layout.renderChanged = true
-            setByList(data.__textBoxBounds = {} as IBoundsData, [b, bounds])
+            setList(data.__textBoxBounds = {} as IBoundsData, [b, bounds])
         } else {
             data.__textBoxBounds = contentBounds
         }
