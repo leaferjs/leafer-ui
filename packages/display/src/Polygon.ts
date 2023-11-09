@@ -1,16 +1,18 @@
 import { __Number } from '@leafer/interface'
-import { PathBounds, PathCommandDataHelper, dataProcessor, pathType, registerUI } from '@leafer/core'
+import { PathCommandDataHelper, dataProcessor, pathType, registerUI, rewrite, rewriteAble } from '@leafer/core'
 
 import { IPolygon, IPolygonData, IPolygonInputData } from '@leafer-ui/interface'
 import { PolygonData } from '@leafer-ui/data'
 
 import { UI } from './UI'
+import { Line } from './Line'
 
 
 const { sin, cos, PI } = Math
 const { moveTo, lineTo, closePath, drawPoints } = PathCommandDataHelper
-const { toBounds } = PathBounds
+const line = Line.prototype
 
+@rewriteAble()
 @registerUI()
 export class Polygon extends UI implements IPolygon {
 
@@ -27,8 +29,6 @@ export class Polygon extends UI implements IPolygon {
 
     @pathType(0)
     curve: boolean | number
-
-    public get resizeable(): boolean { return !this.points }
 
     constructor(data?: IPolygonInputData) {
         super(data)
@@ -58,22 +58,13 @@ export class Polygon extends UI implements IPolygon {
         closePath(path)
     }
 
+    @rewrite(line.__updateRenderPath)
+    public __updateRenderPath(): void { }
 
-    public __updateRenderPath(): void {
-        if (this.__.points && this.__.curve) {
-            drawPoints(this.__.__pathForRender = [], this.__.points, this.__.curve, true)
-        } else {
-            super.__updateRenderPath()
-        }
-    }
+    @rewrite(line.__updateBoxBounds)
+    public __updateBoxBounds(): void { }
 
-    public __updateBoxBounds(): void {
-        if (this.__.points) {
-            toBounds(this.__.__pathForRender, this.__layout.boxBounds)
-            this.__updateNaturalSize()
-        } else {
-            super.__updateBoxBounds()
-        }
-    }
+    @rewrite(line.__scaleResize)
+    public __scaleResize(_scaleX: number, _scaleY: number): void { }
 
 }

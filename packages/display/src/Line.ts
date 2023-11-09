@@ -1,5 +1,5 @@
 import { IPointData, __Number } from '@leafer/interface'
-import { PathBounds, PathCommandDataHelper, PointHelper, boundsType, pathType, affectStrokeBoundsType, dataProcessor, registerUI } from '@leafer/core'
+import { PathBounds, PathCommandDataHelper, PointHelper, boundsType, pathType, affectStrokeBoundsType, dataProcessor, registerUI, PathScaler } from '@leafer/core'
 
 import { ILine, ILineData, ILineInputData, IStrokeAlign } from '@leafer-ui/interface'
 import { LineData } from '@leafer-ui/data'
@@ -31,9 +31,6 @@ export class Line extends UI implements ILine {
 
     @pathType(0)
     public curve: boolean | number
-
-    public get resizeable(): boolean { return !this.points }
-
 
     public get toPoint(): IPointData {
         const { width, rotation } = this.__
@@ -74,7 +71,7 @@ export class Line extends UI implements ILine {
 
     public __updateRenderPath(): void {
         if (this.__.points && this.__.curve) {
-            drawPoints(this.__.__pathForRender = [], this.__.points, this.__.curve, false)
+            drawPoints(this.__.__pathForRender = [], this.__.points, this.__.curve, this.__tag !== 'Line')
         } else {
             super.__updateRenderPath()
         }
@@ -86,6 +83,15 @@ export class Line extends UI implements ILine {
             this.__updateNaturalSize()
         } else {
             super.__updateBoxBounds()
+        }
+    }
+
+    public __scaleResize(scaleX: number, scaleY: number): void {
+        if (this.points) {
+            PathScaler.scalePoints(this.__.points, scaleX, scaleY)
+            this.points = this.__.points
+        } else {
+            super.__scaleResize(scaleX, scaleY)
         }
     }
 
