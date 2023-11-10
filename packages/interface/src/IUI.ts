@@ -10,6 +10,7 @@ import {
 } from './ICommonAttr'
 import { IOverflow } from './type/IType'
 import { IExportOptions } from './module/IExport'
+import { ILeafer } from './app/ILeafer'
 
 
 // Line
@@ -261,6 +262,7 @@ export interface IGroupInputData extends IUIBaseInputData { }
 // UI
 export interface IUI extends IFillAttrData, IStrokeAttrData, ICornerRadiusAttrData, IEffectAttrData, ILeaf {
     __: IUIData
+    leafer?: ILeafer
     parent?: IGroup
     isFrame?: boolean
 
