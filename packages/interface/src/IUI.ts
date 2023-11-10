@@ -262,6 +262,8 @@ export interface IGroupInputData extends IUIBaseInputData { }
 // UI
 export interface IUI extends IFillAttrData, IStrokeAttrData, ICornerRadiusAttrData, IEffectAttrData, ILeaf {
     __: IUIData
+
+    readonly app: ILeafer
     leafer?: ILeafer
     parent?: IGroup
     isFrame?: boolean

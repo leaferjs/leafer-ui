@@ -1,7 +1,7 @@
 import { ILeaferCanvas, IPathDrawer, IPathCommandData, IHitType, __Number, __Boolean, __String, IPathString, IExportFileType, IPointData, ICursorType, IAround, ILeafDataOptions, IFindMethod } from '@leafer/interface'
 import { Leaf, PathDrawer, surfaceType, dataType, positionType, boundsType, pathType, scaleType, rotationType, opacityType, sortType, maskType, dataProcessor, useModule, rewrite, rewriteAble, UICreator, PathCorner, hitType, strokeType, PathConvert, eraserType, cursorType } from '@leafer/core'
 
-import { IUI, IShadowEffect, IBlurEffect, IStrokeAlign, IStrokeJoin, IStrokeCap, IBlendMode, IDashPatternString, IShadowString, IGrayscaleEffect, IUIData, IGroup, IStrokeWidthString, ICornerRadiusString, IUIInputData, IExportOptions, IExportResult, IFill, IStroke, IFindUIMethod, IEditSize, ILeafer } from '@leafer-ui/interface'
+import { IUI, IShadowEffect, IBlurEffect, IStrokeAlign, IStrokeJoin, IStrokeCap, IBlendMode, IDashPatternString, IShadowString, IGrayscaleEffect, IUIData, IGroup, IStrokeWidthString, ICornerRadiusString, IUIInputData, IExportOptions, IExportResult, IFill, IStroke, IFindUIMethod, IEditSize, ILeafer, IApp } from '@leafer-ui/interface'
 import { effectType } from '@leafer-ui/decorator'
 
 import { UIData } from '@leafer-ui/data'
@@ -20,6 +20,8 @@ export class UI extends Leaf implements IUI {
     declare public __: IUIData
 
     declare public proxyData?: IUIInputData
+
+    public get app(): ILeafer { return this.leafer && this.leafer.app }
 
     declare public leafer?: ILeafer
     declare public parent?: IGroup

@@ -1,4 +1,4 @@
-import { IAppBase, ILeaferBase, ILeaferCanvas, IRenderer, ILayouter, ISelector, IWatcher, IInteraction, ILeaferConfig, ICanvasManager, IHitCanvasManager, IAutoBounds, IScreenSizeData, IResizeEvent, ILeaf, IEventListenerId, ITimer, __Value, IObject, IControl, IPointData } from '@leafer/interface'
+import { ILeaferCanvas, IRenderer, ILayouter, ISelector, IWatcher, IInteraction, ILeaferConfig, ICanvasManager, IHitCanvasManager, IAutoBounds, IScreenSizeData, IResizeEvent, ILeaf, IEventListenerId, ITimer, __Value, IObject, IControl, IPointData, IRenderOptions } from '@leafer/interface'
 import { AutoBounds, LayoutEvent, ResizeEvent, LeaferEvent, CanvasManager, HitCanvasManager, ImageManager, DataHelper, Creator, Run, Debug, RenderEvent, registerUI, boundsType, canvasSizeAttrs, dataProcessor, PluginManager, WaitHelper, WatchEvent } from '@leafer/core'
 
 import { ILeaferInputData, ILeaferData, IFunction, IUIInputData, ILeafer, IGroup, IApp } from '@leafer-ui/interface'
@@ -85,7 +85,7 @@ export class Leafer extends Group implements ILeafer {
         if (userConfig && (userConfig.view || userConfig.width)) this.init(userConfig)
     }
 
-    public init(userConfig?: ILeaferConfig, parentApp?: IAppBase): void {
+    public init(userConfig?: ILeaferConfig, parentApp?: IApp): void {
         if (this.canvas) return
 
         this.__setLeafer(this)
@@ -194,7 +194,7 @@ export class Leafer extends Group implements ILeafer {
 
     protected __setApp(): void { }
 
-    protected __bindApp(app: IAppBase): void {
+    protected __bindApp(app: IApp): void {
         this.selector = app.selector
         this.interaction = app.interaction
 
@@ -202,7 +202,7 @@ export class Leafer extends Group implements ILeafer {
         this.hitCanvasManager = app.hitCanvasManager
     }
 
-    public __setLeafer(leafer: ILeaferBase): void {
+    public __setLeafer(leafer: ILeafer): void {
         this.leafer = leafer
         this.isLeafer = !!leafer
         this.__level = 1
