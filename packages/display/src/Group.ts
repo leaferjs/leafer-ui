@@ -81,11 +81,6 @@ export class Group extends UI implements IGroup {
         for (let i = 0; i < children.length; i++) children[i].transform(matrix, true)
     }
 
-    public __drawPathByData(drawer: IPathDrawer, _data: IPathCommandData): void {
-        const { x, y, width, height } = this.__layout.boxBounds
-        drawer.rect(x, y, width, height)
-    }
-
     // add
 
     public addAt(child: IUI, index: number): void {

@@ -287,6 +287,11 @@ export class UI extends Leaf implements IUI {
     @rewrite(PathDrawer.drawPathByData)
     public __drawPathByData(_drawer: IPathDrawer, _data: IPathCommandData): void { }
 
+    public __drawPathByBox(drawer: IPathDrawer): void {
+        const { x, y, width, height } = this.__layout.boxBounds
+        drawer.rect(x, y, width, height)
+    }
+
 
     // create
 

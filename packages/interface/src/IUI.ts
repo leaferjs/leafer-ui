@@ -285,11 +285,11 @@ export interface IUI extends IFillAttrData, IStrokeAttrData, ICornerRadiusAttrDa
     getPathString(curve?: boolean): IPathString
 
     __drawPathByData(drawer: IPathDrawer, data: IPathCommandData): void
+    __drawPathByBox(drawer: IPathDrawer): void
     __drawAfterFill?(canvas: ILeaferCanvas, options: IRenderOptions): void
 
     export(filename: string, options?: IExportOptions | number): Promise<IBlob | string | boolean>
     clone(): IUI
-
 }
 
 export interface IFindUIMethod {
