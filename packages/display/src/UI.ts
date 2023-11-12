@@ -289,7 +289,11 @@ export class UI extends Leaf implements IUI {
 
     public __drawPathByBox(drawer: IPathDrawer): void {
         const { x, y, width, height } = this.__layout.boxBounds
-        drawer.rect(x, y, width, height)
+        if (this.__.cornerRadius) {
+            drawer.roundRect(x, y, width, height, this.__.cornerRadius)
+        } else {
+            drawer.rect(x, y, width, height)
+        }
     }
 
 

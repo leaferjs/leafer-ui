@@ -1,5 +1,5 @@
 import { IPathDrawer, IPathCommandData, __Number } from '@leafer/interface'
-import { dataProcessor, registerUI, useModule } from '@leafer/core'
+import { dataProcessor, registerUI, rewrite, rewriteAble, useModule } from '@leafer/core'
 
 import { IRect, IRectInputData, IRectData } from '@leafer-ui/interface'
 import { RectData } from '@leafer-ui/data'
@@ -9,6 +9,7 @@ import { UI } from './UI'
 
 
 @useModule(RectRender)
+@rewriteAble()
 @registerUI()
 export class Rect extends UI implements IRect {
 
@@ -21,12 +22,7 @@ export class Rect extends UI implements IRect {
         super(data)
     }
 
-    public __drawPathByData(drawer: IPathDrawer, _data: IPathCommandData): void {
-        const { width, height, cornerRadius } = this.__
-        if (cornerRadius) {
-            drawer.roundRect(0, 0, width, height, cornerRadius)
-        } else {
-            drawer.rect(0, 0, width, height)
-        }
-    }
+    @rewrite(UI.prototype.__drawPathByBox)
+    public __drawPathByData(_drawer: IPathDrawer, _data: IPathCommandData): void { }
+
 }
