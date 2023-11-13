@@ -1,11 +1,13 @@
 
 import { ILeaferCanvas } from '@leafer/interface'
-import { ImageManager } from '@leafer/core'
+import { ImageManager, Platform } from '@leafer/core'
 
 import { IUI, ILeafPaint } from '@leafer-ui/interface'
+import { Export } from '@leafer-ui/external'
 
 import { createPattern } from './pattern'
 
+const { abs } = Math
 
 export function checkImage(ui: IUI, canvas: ILeaferCanvas, paint: ILeafPaint, allowPaint?: boolean): boolean {
     const { scaleX, scaleY } = ui.__world
@@ -15,11 +17,11 @@ export function checkImage(ui: IUI, canvas: ILeaferCanvas, paint: ILeafPaint, al
     } else {
 
         if (allowPaint) {
-            if (paint.image.isSVG && paint.data.mode !== 'repeat') {
+            if (paint.data.mode !== 'repeat') {
                 let { width, height } = paint.data
-                width *= scaleX * canvas.pixelRatio
-                height *= scaleY * canvas.pixelRatio
-                allowPaint = width > 4096 || height > 4096
+                width *= abs(scaleX) * canvas.pixelRatio
+                height *= abs(scaleY) * canvas.pixelRatio
+                allowPaint = width * height > Platform.image.maxSize
             } else {
                 allowPaint = false
             }
@@ -36,7 +38,7 @@ export function checkImage(ui: IUI, canvas: ILeaferCanvas, paint: ILeafPaint, al
             canvas.restore()
             return true
         } else {
-            if (!paint.style) {
+            if (!paint.style || Export.running) {
                 createPattern(ui, paint, canvas.pixelRatio)
             } else {
                 if (!paint.patternTask) {

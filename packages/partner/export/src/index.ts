@@ -8,6 +8,7 @@ export const Export: IExportModule = {
 
     export(leaf: ILeaf, filename: IExportFileType | string, options?: IExportOptions | number | boolean): Promise<IExportResult> {
 
+        Export.running = true
         return addTask((success: IExportResultFunction) =>
 
             new Promise((resolve: IFunction) => {
@@ -51,14 +52,15 @@ export const Export: IExportModule = {
 
                         success({ data })
                         resolve()
+                        Export.running = false
 
                         if (unreal) canvas.recycle()
-
                     })
 
                 } else {
                     success({ data: false })
                     resolve()
+                    Export.running = false
                 }
 
             })
