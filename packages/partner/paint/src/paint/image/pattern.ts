@@ -32,14 +32,13 @@ export function createPattern(ui: IUI, paint: ILeafPaint, pixelRatio: number): b
         width *= scaleX
         height *= scaleY
 
-        let { maxSize } = Platform.image
         const size = width * height
 
-
         if (paint.data.mode !== 'repeat') {
-            if (size > maxSize) return false // same as check()
+            if (size > Platform.image.maxCacheSize) return false // same as check()
         }
 
+        let maxSize = Platform.image.maxPatternSize
 
         if (!image.isSVG) {
             const imageSize = image.width * image.height

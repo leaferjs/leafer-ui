@@ -16,12 +16,18 @@ export function checkImage(ui: IUI, canvas: ILeaferCanvas, paint: ILeafPaint, al
         return false
     } else {
 
+        const { data } = paint
+
         if (allowPaint) {
-            if (paint.data.mode !== 'repeat') {
-                let { width, height } = paint.data
+            if (data.mode !== 'repeat') {
+                let { width, height } = data
                 width *= abs(scaleX) * canvas.pixelRatio
                 height *= abs(scaleY) * canvas.pixelRatio
-                allowPaint = width * height > Platform.image.maxSize
+                if (data.scaleX) {
+                    width *= data.scaleX
+                    height *= data.scaleY
+                }
+                allowPaint = width * height > Platform.image.maxCacheSize
             } else {
                 allowPaint = false
             }
@@ -30,7 +36,6 @@ export function checkImage(ui: IUI, canvas: ILeaferCanvas, paint: ILeafPaint, al
         if (allowPaint) {
             canvas.save()
             canvas.clip()
-            const { data } = paint
             if (paint.blendMode) canvas.blendMode = paint.blendMode
             if (data.opacity) canvas.opacity *= data.opacity
             if (data.transform) canvas.transform(data.transform)
