@@ -161,13 +161,17 @@ export class Leafer extends Group implements ILeafer {
         }
     }
 
+    public startLayout(): void {
+        this.layouter.start()
+    }
+
+    public stopLayout(): void {
+        this.layouter.stop()
+    }
+
     public resize(size: IScreenSizeData): void {
         const data = DataHelper.copyAttrs({}, size, canvasSizeAttrs)
         Object.keys(data).forEach(key => (this as any)[key] = data[key])
-    }
-
-    public updateLayout(): void {
-        this.__layout.update(true)
     }
 
     public forceFullRender(): void {

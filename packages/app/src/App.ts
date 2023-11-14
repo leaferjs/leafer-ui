@@ -35,12 +35,22 @@ export class App extends Leafer implements IApp {
 
     public start(): void {
         super.start()
-        this.children.forEach(leafer => { leafer.start() })
+        this.children.forEach(leafer => leafer.start())
     }
 
     public stop(): void {
-        this.children.forEach(leafer => { leafer.stop() })
+        this.children.forEach(leafer => leafer.stop())
         super.stop()
+    }
+
+    public startLayout(): void {
+        super.startLayout()
+        this.children.forEach(leafer => leafer.startLayout())
+    }
+
+    public stopLayout(): void {
+        super.stopLayout()
+        this.children.forEach(leafer => leafer.stopLayout())
     }
 
     public addLeafer(merge?: ILeaferConfig): Leafer {
@@ -63,7 +73,7 @@ export class App extends Leafer implements IApp {
     }
 
     protected __onPropertyChange(): void {
-        if (Debug.showHitView) this.children.forEach(leafer => { leafer.forceUpdate('surface') })
+        if (Debug.showHitView) this.children.forEach(leafer => leafer.forceUpdate('surface'))
     }
 
     protected __onCreated(): void {
@@ -88,16 +98,16 @@ export class App extends Leafer implements IApp {
     }
 
     public __render(canvas: ILeaferCanvas, _options: IRenderOptions): void {
-        this.children.forEach(leafer => { canvas.copyWorld(leafer.canvas) })
+        this.children.forEach(leafer => canvas.copyWorld(leafer.canvas))
     }
 
     public __onResize(event: IResizeEvent): void {
-        this.children.forEach(leafer => { leafer.resize(event) })
+        this.children.forEach(leafer => leafer.resize(event))
         super.__onResize(event)
     }
 
     protected __checkUpdateLayout(): void {
-        this.children.forEach(leafer => { leafer.__layout.update() })
+        this.children.forEach(leafer => leafer.__layout.update())
     }
 
     protected __getChildConfig(userConfig?: ILeaferConfig): ILeaferConfig {
