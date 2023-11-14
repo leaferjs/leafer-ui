@@ -64,7 +64,7 @@ export class Polygon extends UI implements IPolygon {
     @rewrite(line.__updateBoxBounds)
     public __updateBoxBounds(): void { }
 
-    @rewrite(line.__scaleResize)
-    public __scaleResize(_scaleX: number, _scaleY: number): void { }
+    @rewrite(line.scaleResize)
+    public scaleResize(_scaleX: number, _scaleY: number): void { }
 
 }

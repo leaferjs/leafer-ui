@@ -86,12 +86,12 @@ export class Line extends UI implements ILine {
         }
     }
 
-    public __scaleResize(scaleX: number, scaleY: number): void {
+    public scaleResize(scaleX: number, scaleY = scaleX): void {
         if (this.points) {
             PathScaler.scalePoints(this.__.points, scaleX, scaleY)
             this.points = this.__.points
         } else {
-            super.__scaleResize(scaleX, scaleY)
+            super.scaleResize(scaleX, scaleY)
         }
     }
 
