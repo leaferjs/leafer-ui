@@ -30,7 +30,7 @@ export class Path extends UI implements IPath {
         super(data)
     }
 
-    public scaleResize(scaleX: number, scaleY = scaleX): void {
+    public __scaleResize(scaleX: number, scaleY: number): void {
         PathScaler.scale(this.__.path, scaleX, scaleY)
         this.path = this.__.path
     }

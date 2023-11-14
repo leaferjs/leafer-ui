@@ -31,7 +31,7 @@ export class Box extends Group implements IBox {
         this.__layout.renderChanged || this.__layout.renderChange()
     }
 
-    public scaleResize(scaleX: number, scaleY = scaleX): void {
+    public __scaleResize(scaleX: number, scaleY: number): void {
         this.width *= scaleX
         this.height *= scaleY
     }
