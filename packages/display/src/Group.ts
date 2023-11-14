@@ -1,4 +1,3 @@
-import { IPathDrawer, IPathCommandData } from '@leafer/interface'
 import { Branch, useModule, dataProcessor, registerUI, UICreator, MatrixHelper } from '@leafer/core'
 
 import { IGroup, IGroupData, IGroupInputData, IUI, IUIInputData } from '@leafer-ui/interface'
