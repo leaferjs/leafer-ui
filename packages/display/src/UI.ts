@@ -28,6 +28,8 @@ export class UI extends Leaf implements IUI {
 
     public isFrame?: boolean
 
+    declare public children?: IUI[]
+
     // ---
 
     // id

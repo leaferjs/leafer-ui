@@ -7,4 +7,5 @@ export interface ILeafer extends IGroup, ILeaferAttrData, IControl {
     readonly app: ILeafer
     parent?: IApp
     zoomLayer?: IGroup
+    editor?: IGroup
 }

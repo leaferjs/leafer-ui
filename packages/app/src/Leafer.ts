@@ -47,6 +47,9 @@ export class Leafer extends Group implements ILeafer {
     public canvasManager: ICanvasManager
     public hitCanvasManager?: IHitCanvasManager
 
+    // plugin
+    public editor: IGroup
+
     public zoomLayer: IGroup = this
 
     public userConfig: ILeaferConfig

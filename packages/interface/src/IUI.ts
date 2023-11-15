@@ -270,6 +270,8 @@ export interface IUI extends IFillAttrData, IStrokeAttrData, ICornerRadiusAttrDa
 
     proxyData?: IUIInputData
 
+    children?: IUI[]
+
     reset(data?: IUIInputData): void
 
     set(data: IUIInputData): void
