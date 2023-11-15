@@ -43,14 +43,14 @@ export class App extends Leafer implements IApp {
         super.stop()
     }
 
-    public startLayout(): void {
-        super.startLayout()
-        this.children.forEach(leafer => leafer.startLayout())
+    public unlockLayout(): void {
+        super.unlockLayout()
+        this.children.forEach(leafer => leafer.unlockLayout())
     }
 
-    public stopLayout(): void {
-        super.stopLayout()
-        this.children.forEach(leafer => leafer.stopLayout())
+    public lockLayout(): void {
+        super.lockLayout()
+        this.children.forEach(leafer => leafer.lockLayout())
     }
 
     public addLeafer(merge?: ILeaferConfig): Leafer {

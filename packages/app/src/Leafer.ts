@@ -30,6 +30,7 @@ export class Leafer extends Group implements ILeafer {
     public ready: boolean
     public viewReady: boolean
     public viewCompleted: boolean
+    public get layoutLocked() { return !this.layouter.running }
 
     public view: unknown
 
@@ -161,11 +162,12 @@ export class Leafer extends Group implements ILeafer {
         }
     }
 
-    public startLayout(): void {
+    public unlockLayout(): void {
         this.layouter.start()
     }
 
-    public stopLayout(): void {
+    public lockLayout(): void {
+        this.updateLayout()
         this.layouter.stop()
     }
 
