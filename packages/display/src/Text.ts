@@ -151,11 +151,11 @@ export class Text extends UI implements IText {
                 const [top, right, bottom, left] = MathHelper.fourNumber(padding)
                 if (autoWidth) {
                     b.x -= left
-                    b.width += left + right
+                    b.width += (right + left)
                 }
                 if (autoHeight) {
                     b.y -= top
-                    b.height += top + bottom
+                    b.height += (bottom + top)
                 }
             }
             this.__updateNaturalSize()
