@@ -319,6 +319,10 @@ export interface IUIData extends IUIComputedData, ILeafData {
 
     __useEffect?: boolean
 
+    __autoWidth: boolean
+    __autoHeight: boolean
+    __autoBounds: boolean
+
     // path
     path?: IPathCommandData
     windingRule?: IWindingRule

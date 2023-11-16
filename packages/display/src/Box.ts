@@ -1,4 +1,4 @@
-import { ILeaferCanvas, IRenderOptions, IPathDrawer, IBoundsData, IPathCommandData, __Boolean } from '@leafer/interface'
+import { ILeaferCanvas, IRenderOptions, IPathDrawer, IBoundsData, IPathCommandData, __Boolean, IObject } from '@leafer/interface'
 import { rewrite, rewriteAble, registerUI, BoundsHelper, dataProcessor, affectRenderBoundsType } from '@leafer/core'
 
 import { IBox, IBoxData, IBoxInputData, IOverflow } from '@leafer-ui/interface'
@@ -32,8 +32,12 @@ export class Box extends Group implements IBox {
     }
 
     public __scaleResize(scaleX: number, scaleY: number): void {
-        this.width *= scaleX
-        this.height *= scaleY
+        if (this.__.__autoBounds && this.children.length) {
+            super.__scaleResize(scaleX, scaleY)
+        } else {
+            this.width *= scaleX
+            this.height *= scaleY
+        }
     }
 
     @rewrite(rect.__updateStrokeSpread)
@@ -51,7 +55,16 @@ export class Box extends Group implements IBox {
 
 
     @rewrite(rect.__updateBoxBounds)
-    public __updateBoxBounds(): void { }
+    public __updateRectBoxBounds(): void { }
+
+    public __updateBoxBounds(): void {
+        if (this.__.__autoBounds && this.children.length) {
+            super.__updateBoxBounds()
+            this.__updateNaturalSize()
+        } else {
+            this.__updateRectBoxBounds()
+        }
+    }
 
     @rewrite(rect.__updateStrokeBounds)
     public __updateStrokeBounds(): void { }

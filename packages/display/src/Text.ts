@@ -1,5 +1,5 @@
 import { ILeaferCanvas, IPathDrawer, IPathCommandData, __Boolean, __Number, __String, IBoundsData } from '@leafer/interface'
-import { BoundsHelper, boundsType, dataProcessor, registerUI, affectStrokeBoundsType, hitType } from '@leafer/core'
+import { BoundsHelper, boundsType, dataProcessor, registerUI, affectStrokeBoundsType, hitType, MathHelper } from '@leafer/core'
 
 import { IText, IFontWeight, ITextCase, ITextDecoration, ITextData, ITextInputData, ITextAlign, IVerticalAlign, ITextDrawData, IOverflow, IUnitData, IStrokeAlign, IHitType, ITextWrap } from '@leafer-ui/interface'
 import { TextData, UnitConvert } from '@leafer-ui/data'
@@ -122,8 +122,8 @@ export class Text extends UI implements IText {
         const layout = this.__layout
         const { lineHeight, letterSpacing, fontFamily, fontSize, fontWeight, italic, textCase, textOverflow } = data
 
-        const width = data.__getInput('width')
-        const height = data.__getInput('height')
+        const autoWidth = data.__autoWidth
+        const autoHeight = data.__autoHeight
 
         // compute
 
@@ -131,7 +131,7 @@ export class Text extends UI implements IText {
         data.__letterSpacing = UnitConvert.number(letterSpacing, fontSize)
         data.__baseLine = data.__lineHeight - (data.__lineHeight - fontSize * 0.7) / 2
         data.__font = `${italic ? 'italic ' : ''}${textCase === 'small-caps' ? 'small-caps ' : ''}${fontWeight !== 'normal' ? fontWeight + ' ' : ''}${fontSize}px ${fontFamily}`
-        data.__clipText = textOverflow !== 'show' && (width || height)
+        data.__clipText = textOverflow !== 'show' && !data.__autoBounds
 
         this.__updateTextDrawData()
 
@@ -140,14 +140,27 @@ export class Text extends UI implements IText {
 
         if (data.__lineHeight < fontSize) spread(bounds, fontSize / 2)
 
-        if (width && height) {
-            super.__updateBoxBounds()
-        } else {
-            b.x = width ? 0 : bounds.x
-            b.y = height ? 0 : bounds.y
-            b.width = width ? width : bounds.width
-            b.height = height ? height : bounds.height
+        if (autoWidth || autoHeight) {
+            b.x = autoWidth ? bounds.x : 0
+            b.y = autoHeight ? bounds.y : 0
+            b.width = autoWidth ? bounds.width : data.width
+            b.height = autoHeight ? bounds.height : data.height
+
+            const { padding } = data
+            if (padding) {
+                const [top, right, bottom, left] = MathHelper.fourNumber(padding)
+                if (autoWidth) {
+                    b.x -= left
+                    b.width += left + right
+                }
+                if (autoHeight) {
+                    b.y -= top
+                    b.height += top + bottom
+                }
+            }
             this.__updateNaturalSize()
+        } else {
+            super.__updateBoxBounds()
         }
 
         const contentBounds = includes(b, bounds) ? b : bounds

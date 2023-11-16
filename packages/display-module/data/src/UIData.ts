@@ -30,6 +30,10 @@ export class UIData extends LeafData implements IUIData {
     protected _shadow?: __Value
     protected _innerShadow?: __Value
 
+    public get __autoWidth() { return !this._width }
+    public get __autoHeight() { return !this._height }
+    public get __autoBounds() { return !this._width && !this._height }
+
 
     protected setVisible(value: __Boolean) {
         if (this.__leaf.leafer) this.__leaf.leafer.watcher.hasVisible = true
