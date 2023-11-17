@@ -37,7 +37,6 @@ export class Path extends UI implements IPath {
 
     public __updateBoxBounds(): void {
         toBounds(this.__.path, this.__layout.boxBounds)
-        this.__updateNaturalSize()
     }
 
 }

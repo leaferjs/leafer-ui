@@ -60,7 +60,6 @@ export class Box extends Group implements IBox {
     public __updateBoxBounds(): void {
         if (this.__.__autoBounds && this.children.length) {
             super.__updateBoxBounds()
-            this.__updateNaturalSize()
         } else {
             this.__updateRectBoxBounds()
         }
