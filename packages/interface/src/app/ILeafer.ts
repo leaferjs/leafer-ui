@@ -8,4 +8,8 @@ export interface ILeafer extends IGroup, ILeaferAttrData, IControl {
     parent?: IApp
     zoomLayer?: IGroup
     editor?: IGroup
+
+    ground?: ILeafer
+    tree?: ILeafer
+    sky?: ILeafer
 }

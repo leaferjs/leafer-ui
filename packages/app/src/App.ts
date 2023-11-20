@@ -1,4 +1,4 @@
-import { ILeaferConfig, IResizeEvent, ILeaferCanvas, IRenderOptions, __Value, ILeaferBase } from '@leafer/interface'
+import { ILeaferConfig, IResizeEvent, ILeaferCanvas, IRenderOptions, __Value, ILeaferBase, IObject } from '@leafer/interface'
 import { DataHelper, Debug, LayoutEvent, PropertyEvent, RenderEvent, canvasSizeAttrs, registerUI } from '@leafer/core'
 
 import { IApp, ILeafer } from '@leafer-ui/interface'
@@ -16,6 +16,10 @@ export class App extends Leafer implements IApp {
     declare public children: ILeafer[]
 
     public realCanvas: boolean
+
+    public ground?: ILeafer
+    public tree?: ILeafer
+    public sky?: ILeafer
 
     protected __setApp(): void {
         const { canvas } = this
@@ -51,6 +55,17 @@ export class App extends Leafer implements IApp {
     public lockLayout(): void {
         super.lockLayout()
         this.children.forEach(leafer => leafer.lockLayout())
+    }
+
+    public create(config: IObject): void {
+        const drawConfig: ILeaferConfig = { type: 'draw', usePartRender: false }
+        this.ground = this.addLeafer({ ...drawConfig })
+        this.tree = this.addLeafer()
+        this.sky = this.addLeafer(drawConfig)
+        if (config.editor) {
+            this.editor = config.editor
+            this.sky.add(config.editor)
+        }
     }
 
     public addLeafer(merge?: ILeaferConfig): Leafer {

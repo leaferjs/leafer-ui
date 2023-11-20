@@ -90,7 +90,10 @@ export class Line extends UI implements ILine {
             PathScaler.scalePoints(this.__.points, scaleX, scaleY)
             this.points = this.__.points
         } else {
-            super.__scaleResize(scaleX, scaleY)
+            const point = this.toPoint
+            point.x *= scaleX
+            point.y *= scaleY
+            this.toPoint = point
         }
     }
 
