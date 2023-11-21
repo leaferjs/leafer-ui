@@ -1,7 +1,7 @@
-import { ILeaferConfig, IResizeEvent, ILeaferCanvas, IRenderOptions, __Value, ILeaferBase, IObject } from '@leafer/interface'
-import { DataHelper, Debug, LayoutEvent, PropertyEvent, RenderEvent, canvasSizeAttrs, registerUI } from '@leafer/core'
+import { ILeaferConfig, IResizeEvent, ILeaferCanvas, IRenderOptions, __Value, ILeaferBase } from '@leafer/interface'
+import { Creator, DataHelper, Debug, LayoutEvent, PropertyEvent, RenderEvent, canvasSizeAttrs, registerUI } from '@leafer/core'
 
-import { IApp, ILeafer } from '@leafer-ui/interface'
+import { IApp, IAppConfig, IAppInputData, IEditorBase, ILeafer } from '@leafer-ui/interface'
 
 import { Leafer } from './Leafer'
 
@@ -20,6 +20,20 @@ export class App extends Leafer implements IApp {
     public ground?: ILeafer
     public tree?: ILeafer
     public sky?: ILeafer
+
+    constructor(userConfig?: IAppConfig, data?: IAppInputData) {
+        super(userConfig, data)
+        if (userConfig) {
+            const { ground, tree, sky, editor } = userConfig
+            if (ground) this.ground = this.addLeafer(ground)
+            if (tree || editor) this.tree = this.addLeafer(tree)
+            if (sky || editor) this.sky = this.addLeafer(sky || { type: 'draw', usePartRender: false })
+            if (editor) {
+                this.editor = Creator.editor(editor) as IEditorBase
+                this.sky.add(this.editor)
+            }
+        }
+    }
 
     protected __setApp(): void {
         const { canvas } = this
@@ -57,24 +71,13 @@ export class App extends Leafer implements IApp {
         this.children.forEach(leafer => leafer.lockLayout())
     }
 
-    public create(config: IObject): void {
-        const drawConfig: ILeaferConfig = { type: 'draw', usePartRender: false }
-        this.ground = this.addLeafer({ ...drawConfig })
-        this.tree = this.addLeafer()
-        this.sky = this.addLeafer(drawConfig)
-        if (config.editor) {
-            this.editor = config.editor
-            this.sky.add(config.editor)
-        }
-    }
-
     public addLeafer(merge?: ILeaferConfig): Leafer {
         const leafer = new Leafer(merge)
         this.add(leafer)
         return leafer
     }
 
-    public add(leafer: Leafer): void {
+    public add(leafer: ILeafer): void {
         if (!leafer.view) {
             if (this.realCanvas && !this.canvas.bounds) { // wait miniapp select canvas
                 setTimeout(() => this.add(leafer), 10)

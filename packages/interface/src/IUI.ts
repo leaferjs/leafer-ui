@@ -215,6 +215,12 @@ export interface ILeaferInputData extends IGroupInputData {
     pixelRatio?: number
 }
 
+export interface IAppData extends ILeaferData {
+
+}
+export interface IAppInputData extends ILeaferInputData {
+
+}
 
 // Frame
 export interface IFrame extends IBox {

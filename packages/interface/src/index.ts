@@ -1,6 +1,6 @@
 export * from '@leafer/interface'
 
-export { IApp } from './app/IApp'
+export { IApp, IAppConfig } from './app/IApp'
 export { ILeafer } from './app/ILeafer'
 
 export {
@@ -18,6 +18,7 @@ export {
     IBox, IBoxInputData, IBoxData,
     IGroup, IGroupInputData, IGroupData,
     ILeaferInputData, ILeaferData,
+    IAppInputData, IAppData,
     IUI, IUIBaseInputData, IUIData, IFindUIMethod,
     IUITag, IUIInputData
 } from './IUI'
@@ -36,3 +37,5 @@ export { IExportModule, IExportOptions, IExportResult, IExportResultFunction } f
 export { IPaintModule } from './module/IPaint'
 export { IEffectModule } from './module/IEffect'
 export { ICachedShape } from './ICachedShape'
+
+export { IEditorBase, IEditorConfig } from './editor/IEditor'

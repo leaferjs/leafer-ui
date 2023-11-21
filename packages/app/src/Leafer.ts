@@ -1,7 +1,7 @@
 import { ILeaferCanvas, IRenderer, ILayouter, ISelector, IWatcher, IInteraction, ILeaferConfig, ICanvasManager, IHitCanvasManager, IAutoBounds, IScreenSizeData, IResizeEvent, ILeaf, IEventListenerId, ITimer, __Value, IObject, IControl, IPointData } from '@leafer/interface'
 import { AutoBounds, LayoutEvent, ResizeEvent, LeaferEvent, CanvasManager, HitCanvasManager, ImageManager, DataHelper, Creator, Run, Debug, RenderEvent, registerUI, boundsType, canvasSizeAttrs, dataProcessor, PluginManager, WaitHelper, WatchEvent } from '@leafer/core'
 
-import { ILeaferInputData, ILeaferData, IFunction, IUIInputData, ILeafer, IGroup, IApp } from '@leafer-ui/interface'
+import { ILeaferInputData, ILeaferData, IFunction, IUIInputData, ILeafer, IGroup, IApp, IEditorBase } from '@leafer-ui/interface'
 import { LeaferTypeCreator } from '@leafer-ui/type'
 import { LeaferData } from '@leafer-ui/data'
 import { Group } from '@leafer-ui/display'
@@ -48,7 +48,7 @@ export class Leafer extends Group implements ILeafer {
     public hitCanvasManager?: IHitCanvasManager
 
     // plugin
-    public editor: IGroup
+    public editor: IEditorBase
 
     public zoomLayer: IGroup = this
 
