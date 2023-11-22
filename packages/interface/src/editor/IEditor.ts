@@ -15,6 +15,7 @@ export interface IEditorBase extends IGroup {
     readonly dragging: boolean
 
     element: IUI
+    buttons: IGroup
 
     selector: IGroup
     editBox: IGroup
@@ -46,7 +47,9 @@ export interface IEditorBase extends IGroup {
 }
 
 export interface IEditorConfig {
-    type?: 'pc' | 'mobile'
+    showRotatePoint?: boolean
+    showMiddlePoints?: boolean
+
     editSize?: 'auto' | IEditSize
 
     around?: IAround
@@ -64,7 +67,11 @@ export interface IEditorConfig {
     rotatePoint?: IRectInputData
     rect?: IRectInputData
 
+    buttonsPosition?: 'top' | 'bottom'
+    buttonsMargin?: number
+
     selector?: boolean
+    boxSelect?: boolean
     area?: IRectInputData
 
     hideOnMove?: boolean

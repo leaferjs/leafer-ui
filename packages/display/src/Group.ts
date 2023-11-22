@@ -76,8 +76,11 @@ export class Group extends UI implements IGroup {
 
     public __scaleResize(scaleX: number, scaleY: number): void {
         const { children } = this
-        matrix.a = scaleX, matrix.d = scaleY
-        for (let i = 0; i < children.length; i++) children[i].transform(matrix, true)
+        for (let i = 0; i < children.length; i++) {
+            matrix.a = scaleX // must update,  mabe child change matrix
+            matrix.d = scaleY
+            children[i].transform(matrix, true)
+        }
     }
 
     // add

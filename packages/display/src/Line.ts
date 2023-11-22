@@ -90,10 +90,16 @@ export class Line extends UI implements ILine {
             PathScaler.scalePoints(this.__.points, scaleX, scaleY)
             this.points = this.__.points
         } else {
-            const point = this.toPoint
-            point.x *= scaleX
-            point.y *= scaleY
-            this.toPoint = point
+
+            if (this.__tag !== 'Line') {
+                const point = this.toPoint
+                point.x *= scaleX
+                point.y *= scaleY
+                this.toPoint = point
+            } else {
+                // Polygon ...
+                super.__scaleResize(scaleX, scaleY)
+            }
         }
     }
 
