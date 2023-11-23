@@ -47,7 +47,7 @@ export function stroke(stroke: string, ui: IUI, canvas: ILeaferCanvas, renderOpt
                 options.windingRule ? out.clip(options.windingRule) : out.clip()
                 out.clearWorld(ui.__layout.renderBounds)
 
-                if (ui.__worldFliped || renderOptions.matrix) {
+                if (ui.__worldFlipped || renderOptions.matrix) {
                     canvas.copyWorldByReset(out)
                 } else {
                     canvas.copyWorldToInner(out, ui.__world, ui.__layout.renderBounds)
@@ -102,7 +102,7 @@ export function strokes(strokes: ILeafPaint[], ui: IUI, canvas: ILeaferCanvas, r
                 options.windingRule ? out.clip(options.windingRule) : out.clip()
                 out.clearWorld(renderBounds)
 
-                if (ui.__worldFliped || renderOptions.matrix) {
+                if (ui.__worldFlipped || renderOptions.matrix) {
                     canvas.copyWorldByReset(out)
                 } else {
                     canvas.copyWorldToInner(out, ui.__world, renderBounds)

@@ -36,7 +36,7 @@ function drawAlignStroke(align: IStrokeAlign, stroke: string | ILeafPaint[], isS
     fillText(ui, out)
     out.blendMode = 'normal'
 
-    if (ui.__worldFliped || renderOptions.matrix) {
+    if (ui.__worldFlipped || renderOptions.matrix) {
         canvas.copyWorldByReset(out)
     } else {
         canvas.copyWorldToInner(out, ui.__world, ui.__layout.renderBounds)

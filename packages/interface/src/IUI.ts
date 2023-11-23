@@ -375,5 +375,5 @@ export type IUITag =
 
 
 export interface IUIInputData extends IRectInputData, IEllipseInputData, IPolygonInputData, IStarInputData, ILineInputData, IPathInputData, ITextInputData, IImageInputData, IGroupInputData, IFrameInputData, IUIBaseInputData, IObject {
-
+    children?: IUIInputData[]
 }

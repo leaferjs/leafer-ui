@@ -1,4 +1,4 @@
-import { IGroup, IUI, IRectInputData, ISelectorProxy, IEditSize, ICursorType, IAround, IDragEvent, IRotateEvent, IStroke, IFill, ILeafList, ILeaf, IObject } from '@leafer-ui/interface'
+import { IGroup, IUI, IRectInputData, ISelectorProxy, IEditSize, ICursorType, IAround, IDragEvent, IRotateEvent, IStroke, IFill, ILeafList, ILeaf, IObject, IBoxInputData } from '@leafer-ui/interface'
 
 export interface IEditorBase extends IGroup, ISelectorProxy {
     config: IEditorConfig
@@ -63,11 +63,12 @@ export interface IEditorConfig {
     pointSize?: number
     pointRadius?: number
 
-    point?: IRectInputData | IRectInputData[]
-    rotatePoint?: IRectInputData
-    rect?: IRectInputData
+    point?: IBoxInputData | IBoxInputData[]
+    rotatePoint?: IBoxInputData
+    rect?: IBoxInputData
 
-    buttonsPosition?: 'top' | 'bottom'
+    buttonsDirection?: 'top' | 'right' | 'bottom' | 'left'
+    buttonsFixed?: boolean
     buttonsMargin?: number
 
     selector?: boolean
