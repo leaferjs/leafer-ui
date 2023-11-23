@@ -1,6 +1,6 @@
-import { IGroup, IUI, IRectInputData, IEditSize, ICursorType, IAround, IDragEvent, IRotateEvent, IStroke, IFill, ILeafList, ILeaf, IObject } from '@leafer-ui/interface'
+import { IGroup, IUI, IRectInputData, ISelectorProxy, IEditSize, ICursorType, IAround, IDragEvent, IRotateEvent, IStroke, IFill, ILeafList, ILeaf, IObject } from '@leafer-ui/interface'
 
-export interface IEditorBase extends IGroup {
+export interface IEditorBase extends IGroup, ISelectorProxy {
     config: IEditorConfig
 
     hoverTarget: IUI
