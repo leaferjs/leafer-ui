@@ -68,7 +68,6 @@ export interface IEditorConfig {
     buttonsMargin?: number
 
     hideOnMove?: boolean
-    hideHover?: boolean
 
     moveCursor?: ICursorType
     resizeCursor?: ICursorType[]
@@ -79,6 +78,7 @@ export interface IEditorConfig {
     rotateGap?: number
 
     selector?: boolean
+    hover?: boolean
     boxSelect?: boolean
 
     rotateable?: boolean
