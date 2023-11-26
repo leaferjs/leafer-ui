@@ -47,14 +47,7 @@ export interface IEditorBase extends IGroup, ISelectorProxy {
 }
 
 export interface IEditorConfig {
-    showRotatePoint?: boolean
-    showMiddlePoints?: boolean
-
     editSize?: 'auto' | IEditSize
-
-    around?: IAround
-    lockRatio?: boolean
-    rotateGap?: number
 
     stroke?: IStroke
     strokeWidth?: number
@@ -64,16 +57,15 @@ export interface IEditorConfig {
     pointRadius?: number
 
     point?: IBoxInputData | IBoxInputData[]
+    middlePoint?: IBoxInputData | IBoxInputData[]
     rotatePoint?: IBoxInputData
+
     rect?: IBoxInputData
+    area?: IRectInputData
 
     buttonsDirection?: 'top' | 'right' | 'bottom' | 'left'
     buttonsFixed?: boolean
     buttonsMargin?: number
-
-    selector?: boolean
-    boxSelect?: boolean
-    area?: IRectInputData
 
     hideOnMove?: boolean
     hideHover?: boolean
@@ -81,6 +73,13 @@ export interface IEditorConfig {
     moveCursor?: ICursorType
     resizeCursor?: ICursorType[]
     rotateCursor?: ICursorType[]
+
+    around?: IAround
+    lockRatio?: boolean
+    rotateGap?: number
+
+    selector?: boolean
+    boxSelect?: boolean
 
     rotateable?: boolean
     resizeable?: boolean

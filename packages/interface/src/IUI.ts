@@ -352,7 +352,7 @@ export interface IUIComputedData extends IFillComputedData, IBorderComputedData,
 export interface IUIBaseInputData extends IFillInputData, IStrokeInputData, ITextStyleInputData, ICornerRadiusInputData, IEffectInputData, ILeafInputData {
     padding?: number | number[]
     locked?: boolean
-    children?: IUIBaseInputData[]
+    children?: IUIInputData[]
 }
 
 
