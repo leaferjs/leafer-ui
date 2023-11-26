@@ -91,7 +91,7 @@ export class Line extends UI implements ILine {
             this.points = this.__.points
         } else {
 
-            if (this.__tag !== 'Line') {
+            if (this.__tag === 'Line') {
                 const point = this.toPoint
                 point.x *= scaleX
                 point.y *= scaleY
