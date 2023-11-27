@@ -167,6 +167,7 @@ export class Leafer extends Group implements ILeafer {
 
     public unlockLayout(): void {
         this.layouter.start()
+        this.updateLayout()
     }
 
     public lockLayout(): void {
