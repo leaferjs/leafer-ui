@@ -1,4 +1,4 @@
-import { ILeaferCanvas, IRenderer, ILayouter, ISelector, IWatcher, IInteraction, ILeaferConfig, ICanvasManager, IHitCanvasManager, IAutoBounds, IScreenSizeData, IResizeEvent, ILeaf, IEventListenerId, ITimer, __Value, IObject, IControl, IPointData } from '@leafer/interface'
+import { ILeaferCanvas, IRenderer, ILayouter, ISelector, IWatcher, IInteraction, ILeaferConfig, ICanvasManager, IHitCanvasManager, IAutoBounds, IScreenSizeData, IResizeEvent, ILeaf, IEventListenerId, ITimer, IValue, IObject, IControl, IPointData } from '@leafer/interface'
 import { AutoBounds, LayoutEvent, ResizeEvent, LeaferEvent, CanvasManager, HitCanvasManager, ImageManager, DataHelper, Creator, Run, Debug, RenderEvent, registerUI, boundsType, canvasSizeAttrs, dataProcessor, PluginManager, WaitHelper, WatchEvent } from '@leafer/core'
 
 import { ILeaferInputData, ILeaferData, IFunction, IUIInputData, ILeafer, IGroup, IApp, IEditorBase } from '@leafer-ui/interface'
@@ -229,7 +229,7 @@ export class Leafer extends Group implements ILeafer {
         }
     }
 
-    public __setAttr(attrName: string, newValue: __Value): void {
+    public __setAttr(attrName: string, newValue: IValue): void {
         if (this.canvas) {
             if (canvasSizeAttrs.includes(attrName)) {
                 this.__changeCanvasSize(attrName, newValue as number)
@@ -242,7 +242,7 @@ export class Leafer extends Group implements ILeafer {
         super.__setAttr(attrName, newValue)
     }
 
-    public __getAttr(attrName: string): __Value {
+    public __getAttr(attrName: string): IValue {
         if (this.canvas && canvasSizeAttrs.includes(attrName)) return this.canvas[attrName]
         return super.__getAttr(attrName)
     }

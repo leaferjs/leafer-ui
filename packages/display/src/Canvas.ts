@@ -1,4 +1,4 @@
-import { ILeaferCanvas, ILeaferCanvasConfig, __String, __Number, IRenderOptions, IPointData, ICanvasContext2D, IScreenSizeData, ISizeData, IHitType } from '@leafer/interface'
+import { ILeaferCanvas, ILeaferCanvasConfig, INumber, IRenderOptions, IPointData, ICanvasContext2D, IScreenSizeData, ISizeData, IHitType } from '@leafer/interface'
 import { Creator, Matrix, Platform, dataProcessor, registerUI, hitType } from '@leafer/core'
 
 import { ICanvas, ICanvasData, ICanvasInputData, IUI } from '@leafer-ui/interface'
@@ -17,13 +17,13 @@ export class Canvas extends Rect implements ICanvas {
     declare public __: ICanvasData
 
     @resizeType(100)
-    declare public width: __Number
+    declare public width: INumber
 
     @resizeType(100)
-    declare public height: __Number
+    declare public height: INumber
 
     @resizeType(Platform.devicePixelRatio)
-    public pixelRatio: __Number
+    public pixelRatio: INumber
 
     @resizeType(true)
     public smooth: boolean

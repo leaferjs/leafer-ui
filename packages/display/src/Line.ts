@@ -1,4 +1,4 @@
-import { IPointData, __Number } from '@leafer/interface'
+import { IPointData, INumber } from '@leafer/interface'
 import { PathBounds, PathCommandDataHelper, PointHelper, boundsType, pathType, affectStrokeBoundsType, dataProcessor, registerUI, PathScaler } from '@leafer/core'
 
 import { ILine, ILineData, ILineInputData, IStrokeAlign } from '@leafer-ui/interface'
@@ -24,7 +24,7 @@ export class Line extends UI implements ILine {
     declare public strokeAlign: IStrokeAlign
 
     @boundsType(0)
-    declare public height: __Number
+    declare public height: INumber
 
     @pathType()
     public points: number[]

@@ -1,4 +1,4 @@
-import { __Number } from '@leafer/interface'
+import { INumber } from '@leafer/interface'
 import { PathCommandDataHelper, Platform, dataProcessor, pathType, registerUI } from '@leafer/core'
 
 import { IEllipse, IEllipseInputData, IEllipseData } from '@leafer-ui/interface'
@@ -18,13 +18,13 @@ export class Ellipse extends UI implements IEllipse {
     declare public __: IEllipseData
 
     @pathType(0)
-    public innerRadius: __Number
+    public innerRadius: INumber
 
     @pathType(0)
-    public startAngle: __Number
+    public startAngle: INumber
 
     @pathType(0)
-    public endAngle: __Number
+    public endAngle: INumber
 
     constructor(data?: IEllipseInputData) {
         super(data)

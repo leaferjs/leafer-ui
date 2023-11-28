@@ -1,4 +1,4 @@
-import { ILeaferConfig, IResizeEvent, ILeaferCanvas, IRenderOptions, __Value, ILeaferBase } from '@leafer/interface'
+import { ILeaferConfig, IResizeEvent, ILeaferCanvas, IRenderOptions, ILeaferBase } from '@leafer/interface'
 import { Creator, DataHelper, Debug, LayoutEvent, PropertyEvent, RenderEvent, canvasSizeAttrs, registerUI } from '@leafer/core'
 
 import { IApp, IAppConfig, IAppInputData, IEditorBase, ILeafer } from '@leafer-ui/interface'

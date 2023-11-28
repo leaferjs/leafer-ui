@@ -1,4 +1,4 @@
-import { __Number } from '@leafer/interface'
+import { INumber } from '@leafer/interface'
 import { PathCommandDataHelper, dataProcessor, pathType, registerUI } from '@leafer/core'
 
 import { IStar, IStarData, IStarInputData } from '@leafer-ui/interface'
@@ -20,10 +20,10 @@ export class Star extends UI implements IStar {
     declare public __: IStarData
 
     @pathType(5)
-    public corners: __Number
+    public corners: INumber
 
     @pathType(0.382)
-    public innerRadius: __Number
+    public innerRadius: INumber
 
     constructor(data?: IStarInputData) {
         super(data)

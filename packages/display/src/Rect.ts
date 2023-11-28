@@ -1,4 +1,4 @@
-import { IPathDrawer, IPathCommandData, __Number } from '@leafer/interface'
+import { IPathDrawer, IPathCommandData } from '@leafer/interface'
 import { dataProcessor, registerUI, rewrite, rewriteAble, useModule } from '@leafer/core'
 
 import { IRect, IRectInputData, IRectData } from '@leafer-ui/interface'

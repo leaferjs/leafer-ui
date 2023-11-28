@@ -1,7 +1,7 @@
-import { ILeaferCanvas, IPathDrawer, IPathCommandData, __Boolean, __Number, __String, IBoundsData } from '@leafer/interface'
-import { BoundsHelper, boundsType, dataProcessor, registerUI, affectStrokeBoundsType, hitType, MathHelper } from '@leafer/core'
+import { ILeaferCanvas, IPathDrawer, IPathCommandData, IBoolean, INumber, IString, IBoundsData } from '@leafer/interface'
+import { BoundsHelper, boundsType, surfaceType, dataProcessor, registerUI, affectStrokeBoundsType, hitType, MathHelper } from '@leafer/core'
 
-import { IText, IFontWeight, ITextCase, ITextDecoration, ITextData, ITextInputData, ITextAlign, IVerticalAlign, ITextDrawData, IOverflow, IUnitData, IStrokeAlign, IHitType, ITextWrap } from '@leafer-ui/interface'
+import { IFill, IText, IFontWeight, ITextCase, ITextDecoration, ITextData, ITextInputData, ITextAlign, IVerticalAlign, ITextDrawData, IOverflow, IUnitData, IStrokeAlign, IHitType, ITextWrap } from '@leafer-ui/interface'
 import { TextData, UnitConvert } from '@leafer-ui/data'
 
 import { TextConvert } from '@leafer-ui/external'
@@ -21,13 +21,16 @@ export class Text extends UI implements IText {
 
     // size
     @boundsType(0)
-    declare public width: __Number
+    declare public width: INumber
 
     @boundsType(0)
-    declare public height: __Number
+    declare public height: INumber
 
     @boundsType(0)
     public padding: number | number[]
+
+    @surfaceType('#000000')
+    declare public fill: IFill
 
     @affectStrokeBoundsType('outside')
     declare public strokeAlign: IStrokeAlign
@@ -36,19 +39,19 @@ export class Text extends UI implements IText {
     declare public hitFill: IHitType
 
     @boundsType('')
-    public text: __String
+    public text: IString
 
     @boundsType('L')
-    public fontFamily: __String
+    public fontFamily: IString
 
     @boundsType(12)
-    public fontSize: __Number
+    public fontSize: INumber
 
     @boundsType('normal')
     public fontWeight: IFontWeight
 
     @boundsType(false)
-    public italic: __Boolean
+    public italic: IBoolean
 
     @boundsType('none')
     public textCase: ITextCase
@@ -57,16 +60,16 @@ export class Text extends UI implements IText {
     public textDecoration: ITextDecoration
 
     @boundsType(0)
-    public letterSpacing: __Number | IUnitData
+    public letterSpacing: INumber | IUnitData
 
     @boundsType({ type: 'percent', value: 150 } as IUnitData)
-    public lineHeight: __Number | IUnitData
+    public lineHeight: INumber | IUnitData
 
     @boundsType(0)
-    public paraIndent: __Number
+    public paraIndent: INumber
 
     @boundsType(0)
-    public paraSpacing: __Number
+    public paraSpacing: INumber
 
     @boundsType('left')
     public textAlign: ITextAlign

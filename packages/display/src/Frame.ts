@@ -1,4 +1,3 @@
-import { __Boolean } from '@leafer/interface'
 import { dataProcessor, registerUI, affectRenderBoundsType } from '@leafer/core'
 
 import { IFrame, IFrameData, IFrameInputData, IOverflow } from '@leafer-ui/interface'

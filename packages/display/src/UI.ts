@@ -1,4 +1,4 @@
-import { ILeaferCanvas, IPathDrawer, IPathCommandData, IHitType, __Number, __Boolean, __String, IPathString, IExportFileType, IPointData, ICursorType, IAround, ILeafDataOptions, IFindMethod } from '@leafer/interface'
+import { ILeaferCanvas, IPathDrawer, IPathCommandData, IHitType, INumber, IBoolean, IString, IPathString, IExportFileType, IPointData, ICursorType, IAround, ILeafDataOptions, IFindMethod } from '@leafer/interface'
 import { Leaf, PathDrawer, surfaceType, dataType, positionType, boundsType, pathType, scaleType, rotationType, opacityType, sortType, maskType, dataProcessor, useModule, rewrite, rewriteAble, UICreator, PathCorner, hitType, strokeType, PathConvert, eraserType, cursorType, autoLayoutType } from '@leafer/core'
 
 import { IUI, IShadowEffect, IBlurEffect, IStrokeAlign, IStrokeJoin, IStrokeCap, IBlendMode, IDashPatternString, IShadowString, IGrayscaleEffect, IUIData, IGroup, IStrokeWidthString, ICornerRadiusString, IUIInputData, IExportOptions, IExportResult, IFill, IStroke, IFindUIMethod, IEditSize, ILeafer } from '@leafer-ui/interface'
@@ -34,13 +34,13 @@ export class UI extends Leaf implements IUI {
 
     // id
     @dataType('')
-    public id: __String
+    public id: IString
 
     @dataType('')
-    public name: __String
+    public name: IString
 
     @dataType('')
-    public className: __String
+    public className: IString
 
 
     // layer
@@ -48,55 +48,55 @@ export class UI extends Leaf implements IUI {
     public blendMode: IBlendMode
 
     @opacityType(1)
-    public opacity: __Number
+    public opacity: INumber
 
     @opacityType(true)
-    public visible: __Boolean
+    public visible: IBoolean
 
     @maskType(false)
-    public isMask: __Boolean
+    public isMask: IBoolean
 
     @eraserType(false)
-    public isEraser?: __Boolean
+    public isEraser?: IBoolean
 
     @dataType(false)
-    public locked: __Boolean
+    public locked: IBoolean
 
     @sortType(0)
-    public zIndex: __Number
+    public zIndex: INumber
 
 
     // position
     @positionType(0)
-    public x: __Number
+    public x: INumber
 
     @positionType(0)
-    public y: __Number
+    public y: INumber
 
     // size
     @boundsType(100)
-    public width: __Number
+    public width: INumber
 
     @boundsType(100)
-    public height: __Number
+    public height: INumber
 
     // scale
     @scaleType(1)
-    public scaleX: __Number
+    public scaleX: INumber
 
     @scaleType(1)
-    public scaleY: __Number
+    public scaleY: INumber
 
     // rotate
     @rotationType(0)
-    public rotation: __Number
+    public rotation: INumber
 
     // skew
     @rotationType(0)
-    public skewX: __Number
+    public skewX: INumber
 
     @rotationType(0)
-    public skewY: __Number
+    public skewY: INumber
 
 
     @autoLayoutType()
@@ -104,11 +104,11 @@ export class UI extends Leaf implements IUI {
 
 
     @dataType(false)
-    public draggable: __Boolean
+    public draggable: IBoolean
 
 
     @dataType(false)
-    public editable: __Boolean
+    public editable: IBoolean
 
     @dataType('size')
     public editSize?: IEditSize
@@ -116,7 +116,7 @@ export class UI extends Leaf implements IUI {
 
     // hit
     @hitType(true)
-    public hittable: __Boolean
+    public hittable: IBoolean
 
     @hitType('path')
     public hitFill: IHitType
@@ -125,16 +125,16 @@ export class UI extends Leaf implements IUI {
     public hitStroke: IHitType
 
     @hitType(false)
-    public hitBox: __Boolean
+    public hitBox: IBoolean
 
     @hitType(true)
-    public hitChildren: __Boolean
+    public hitChildren: IBoolean
 
     @hitType(true)
-    public hitSelf: __Boolean
+    public hitSelf: IBoolean
 
     @hitType()
-    public hitRadius: __Number
+    public hitRadius: INumber
 
     @cursorType('')
     public cursor: ICursorType | ICursorType[]
@@ -165,13 +165,13 @@ export class UI extends Leaf implements IUI {
     public strokeJoin: IStrokeJoin
 
     @strokeType()
-    public dashPattern: __Number[] | IDashPatternString
+    public dashPattern: INumber[] | IDashPatternString
 
     @strokeType()
-    public dashOffset: __Number
+    public dashOffset: INumber
 
     @strokeType(10)
-    public miterLimit: __Number
+    public miterLimit: INumber
 
 
     // corner
@@ -180,7 +180,7 @@ export class UI extends Leaf implements IUI {
     public cornerRadius: number | number[] | ICornerRadiusString
 
     @pathType()
-    public cornerSmoothing: __Number
+    public cornerSmoothing: INumber
 
     // effect
 
@@ -191,16 +191,16 @@ export class UI extends Leaf implements IUI {
     public innerShadow: IShadowEffect | IShadowEffect[] | IShadowString
 
     @effectType()
-    public blur: __Number | IBlurEffect
+    public blur: INumber | IBlurEffect
 
     @effectType()
-    public backgroundBlur: __Number | IBlurEffect
+    public backgroundBlur: INumber | IBlurEffect
 
     @effectType()
-    public grayscale: __Number | IGrayscaleEffect
+    public grayscale: INumber | IGrayscaleEffect
 
 
-    public set scale(value: __Number | IPointData) {
+    public set scale(value: INumber | IPointData) {
         if (typeof value === 'number') {
             this.scaleX = this.scaleY = value
         } else {
@@ -209,7 +209,7 @@ export class UI extends Leaf implements IUI {
         }
     }
 
-    public get scale(): __Number | IPointData {
+    public get scale(): INumber | IPointData {
         const { scaleX, scaleY } = this
         return scaleX !== scaleY ? { x: scaleX, y: scaleY } : scaleX
     }

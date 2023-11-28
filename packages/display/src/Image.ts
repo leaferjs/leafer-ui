@@ -1,4 +1,4 @@
-import { ILeaferImage, __String } from '@leafer/interface'
+import { ILeaferImage, IString } from '@leafer/interface'
 import { ImageEvent, boundsType, dataProcessor, registerUI } from '@leafer/core'
 
 import { IImage, IImageInputData, IImageData, IImagePaint } from '@leafer-ui/interface'
@@ -16,7 +16,7 @@ export class Image extends Rect implements IImage {
     declare public __: IImageData
 
     @boundsType('')
-    public url: __String
+    public url: IString
 
     public get ready(): boolean { return this.image ? this.image.ready : false }
 

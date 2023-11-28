@@ -1,4 +1,4 @@
-import { __Number, __Value, __Boolean } from '@leafer/interface'
+import { INumber, IValue, IBoolean } from '@leafer/interface'
 import { LeafData, Debug } from '@leafer/core'
 
 import { IShadowEffect, IUI, IUIData, IUnitData, ILeafPaint } from '@leafer-ui/interface'
@@ -19,28 +19,28 @@ export class UIData extends LeafData implements IUIData {
     public __pixelFill?: boolean // png / svg / webp
     public __pixelStroke?: boolean
 
-    protected _visible?: __Boolean
+    protected _visible?: IBoolean
 
-    protected _width?: __Number
-    protected _height?: __Number
+    protected _width?: INumber
+    protected _height?: INumber
 
-    protected _fill?: __Value
-    protected _stroke?: __Value
+    protected _fill?: IValue
+    protected _stroke?: IValue
 
-    protected _shadow?: __Value
-    protected _innerShadow?: __Value
+    protected _shadow?: IValue
+    protected _innerShadow?: IValue
 
     public get __autoWidth() { return !this._width }
     public get __autoHeight() { return !this._height }
     public get __autoBounds() { return !this._width && !this._height }
 
 
-    protected setVisible(value: __Boolean) {
+    protected setVisible(value: IBoolean) {
         if (this.__leaf.leafer) this.__leaf.leafer.watcher.hasVisible = true
         this._visible = value
     }
 
-    protected setWidth(value: __Number) {
+    protected setWidth(value: INumber) {
         if (value < 0) {
             this._width = -value
             this.__leaf.scaleX *= -1
@@ -50,7 +50,7 @@ export class UIData extends LeafData implements IUIData {
         }
     }
 
-    protected setHeight(value: __Number) {
+    protected setHeight(value: INumber) {
         if (value < 0) {
             this._height = -value
             this.__leaf.scaleY *= -1
@@ -61,7 +61,7 @@ export class UIData extends LeafData implements IUIData {
     }
 
 
-    protected setFill(value: __Value) {
+    protected setFill(value: IValue) {
         if (this.__naturalWidth) this.__naturalWidth = this.__naturalHeight = undefined
         if (typeof value === 'string' || !value) {
             if (this.__isFills) {
@@ -79,7 +79,7 @@ export class UIData extends LeafData implements IUIData {
         }
     }
 
-    protected setStroke(value: __Value) {
+    protected setStroke(value: IValue) {
         if (typeof value === 'string' || !value) {
             if (this.__isStrokes) {
                 this.__removeInput('stroke')
@@ -97,7 +97,7 @@ export class UIData extends LeafData implements IUIData {
     }
 
 
-    protected setShadow(value: __Value) {
+    protected setShadow(value: IValue) {
         this.__setInput('shadow', value)
         if (value instanceof Array) {
             if (value.some((item: IShadowEffect) => item.visible === false)) value = value.filter((item: IShadowEffect) => item.visible !== false)
@@ -109,7 +109,7 @@ export class UIData extends LeafData implements IUIData {
         }
     }
 
-    protected setInnerShadow(value: __Value) {
+    protected setInnerShadow(value: IValue) {
         this.__setInput('innerShadow', value)
         if (value instanceof Array) {
             if (value.some((item: IShadowEffect) => item.visible === false)) value = value.filter((item: IShadowEffect) => item.visible !== false)
