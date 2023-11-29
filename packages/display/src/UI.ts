@@ -176,7 +176,7 @@ export class UI extends Leaf implements IUI {
 
     // corner
 
-    @pathType()
+    @pathType(0)
     public cornerRadius: number | number[] | ICornerRadiusString
 
     @pathType()
