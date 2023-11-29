@@ -11,7 +11,7 @@ export class UIData extends LeafData implements IUIData {
 
     declare public __leaf: IUI
 
-    public __blendLayer?: boolean
+    public __blendLayer?: boolean // 非元素属性必须以两个下划线开头
 
     public __isFills?: boolean
     public __isStrokes?: boolean

@@ -18,6 +18,7 @@
     "leaferjs"
   ],
   "dependencies": {
+    "@leafer-ui/data": "1.0.0-rc.6",
     "@leafer-ui/bounds": "1.0.0-rc.6",
     "@leafer-ui/hit": "1.0.0-rc.6",
     "@leafer-ui/render": "1.0.0-rc.6"
