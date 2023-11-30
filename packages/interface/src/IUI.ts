@@ -1,4 +1,4 @@
-import { ILeaf, ILeafComputedData, ILeafData, ILeafDataOptions, ILeafInputData, ILeaferCanvas, IRenderOptions, IPathDrawer, IPointData, IPath2D, IPathCommandData, IWindingRule, ILeaferImageConfig, IBoundsData, IObject, IPathString, ILeaferImage, IBlob, IPathCreator, AnswerType } from '@leafer/interface'
+import { ILeaf, ILeafComputedData, ILeafData, ILeafInputData, ILeaferCanvas, IRenderOptions, IPathDrawer, IPointData, IPath2D, IPathCommandData, IWindingRule, ILeaferImageConfig, IBoundsData, IObject, IPathString, ILeaferImage, IBlob, IPathCreator, AnswerType } from '@leafer/interface'
 
 import {
     IFillAttrData, IFillInputData, IFillComputedData,
@@ -275,6 +275,7 @@ export interface IUI extends IFillAttrData, IStrokeAttrData, ICornerRadiusAttrDa
     isFrame?: boolean
 
     proxyData?: IUIInputData
+    __proxyData?: IUIInputData
 
     children?: IUI[]
 
@@ -283,8 +284,8 @@ export interface IUI extends IFillAttrData, IStrokeAttrData, ICornerRadiusAttrDa
     set(data: IUIInputData): void
     toJSON(): IUIInputData
 
-    get(options?: ILeafDataOptions): IUIInputData
-    getProxyData(): IUIInputData
+    get(): IUIInputData
+    createProxyData(): IUIInputData
 
     find(condition: number | string | IFindUIMethod, options?: any): IUI[]
     findOne(condition: number | string | IFindUIMethod, options?: any): IUI
