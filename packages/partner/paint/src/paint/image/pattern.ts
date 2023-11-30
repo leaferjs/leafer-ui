@@ -45,7 +45,7 @@ export function createPattern(ui: IUI, paint: ILeafPaint, pixelRatio: number): b
             if (maxSize > imageSize) maxSize = imageSize
         }
 
-        if (size > maxSize) imageScale = size / maxSize
+        if (size > maxSize) imageScale = Math.sqrt(size / maxSize)
 
         if (imageScale) {
             scaleX /= imageScale
