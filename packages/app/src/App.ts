@@ -106,10 +106,6 @@ export class App extends Leafer implements IApp {
         if (this.children.every(child => child.viewReady)) super.__onViewReady()
     }
 
-    protected __checkViewCompleted(): boolean {
-        return this.children.every(item => item.viewCompleted)
-    }
-
     protected __onChildRenderEnd(e: RenderEvent): void {
         this.renderer.addBlock(e.renderBounds)
         if (this.viewReady) this.renderer.update()
@@ -143,7 +139,7 @@ export class App extends Leafer implements IApp {
     protected __listenChildEvents(leafer: ILeaferBase): void {
         leafer.once(LayoutEvent.END, () => this.__onReady())
         leafer.once(RenderEvent.START, () => this.__onCreated())
-        leafer.once(RenderEvent.END, (e) => this.__onRenderEnd(e))
+        leafer.once(RenderEvent.END, () => this.__onViewReady())
         if (this.realCanvas) this.__eventIds.push(leafer.on_(RenderEvent.END, this.__onChildRenderEnd, this))
     }
 

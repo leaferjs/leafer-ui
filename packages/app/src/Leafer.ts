@@ -1,5 +1,5 @@
 import { ILeaferCanvas, IRenderer, ILayouter, ISelector, IWatcher, IInteraction, ILeaferConfig, ICanvasManager, IHitCanvasManager, IAutoBounds, IScreenSizeData, IResizeEvent, ILeaf, IEventListenerId, ITimer, IValue, IObject, IControl, IPointData } from '@leafer/interface'
-import { AutoBounds, LayoutEvent, ResizeEvent, LeaferEvent, CanvasManager, HitCanvasManager, ImageManager, DataHelper, Creator, Run, Debug, RenderEvent, registerUI, boundsType, canvasSizeAttrs, dataProcessor, PluginManager, WaitHelper, WatchEvent } from '@leafer/core'
+import { AutoBounds, LayoutEvent, ResizeEvent, LeaferEvent, CanvasManager, HitCanvasManager, ImageManager, DataHelper, Creator, Run, Debug, RenderEvent, AnimateEvent, registerUI, boundsType, canvasSizeAttrs, dataProcessor, PluginManager, WaitHelper, WatchEvent } from '@leafer/core'
 
 import { ILeaferInputData, ILeaferData, IFunction, IUIInputData, ILeafer, IGroup, IApp, IEditorBase } from '@leafer-ui/interface'
 import { LeaferTypeCreator } from '@leafer-ui/type'
@@ -30,6 +30,7 @@ export class Leafer extends Group implements ILeafer {
     public ready: boolean
     public viewReady: boolean
     public viewCompleted: boolean
+    public get imageReady(): boolean { return this.viewReady && ImageManager.isComplete }
     public get layoutLocked() { return !this.layouter.running }
 
     public view: unknown
@@ -283,23 +284,24 @@ export class Leafer extends Group implements ILeafer {
         WaitHelper.run(this.__viewReadyWait)
     }
 
-    protected __onRenderEnd(_e: RenderEvent): void {
-        if (!this.viewReady) this.__onViewReady()
-        const completed = this.__checkViewCompleted()
-        if (completed) this.__onViewCompleted()
-        this.viewCompleted = completed
-        WaitHelper.run(this.__nextRenderWait)
-    }
+    protected __onAnimateFrame(): void {
+        if (this.viewReady) {
+            if (this.__nextRenderWait.length) WaitHelper.run(this.__nextRenderWait)
 
-    protected __checkViewCompleted(): boolean {
-        return this.viewReady && !this.watcher.changed && ImageManager.isComplete
-    }
-
-    protected __onViewCompleted(): void {
-        if (!this.viewCompleted) {
-            this.emitLeafer(LeaferEvent.VIEW_COMPLETED)
-            WaitHelper.run(this.__viewCompletedWait)
+            const { imageReady } = this
+            if (imageReady && !this.viewCompleted) this.__checkViewCompleted()
+            if (!imageReady) this.viewCompleted = false
         }
+    }
+
+    protected __checkViewCompleted(emit: boolean = true): void {
+        this.nextRender(() => {
+            if (this.imageReady) {
+                if (emit) this.emitLeafer(LeaferEvent.VIEW_COMPLETED)
+                WaitHelper.run(this.__viewCompletedWait)
+                this.viewCompleted = true
+            }
+        })
     }
 
     protected __onWatchData(): void {
@@ -317,20 +319,16 @@ export class Leafer extends Group implements ILeafer {
     }
 
     public waitViewCompleted(item: IFunction): void {
+        this.__viewCompletedWait.push(item)
         if (this.viewCompleted) {
-            item()
+            this.__checkViewCompleted(false)
         } else {
-            this.__viewCompletedWait.push(item)
             if (!this.running) this.start()
         }
     }
 
     public nextRender(item: IFunction): void {
-        if (this.watcher && !this.watcher.changed) {
-            item()
-        } else {
-            this.__nextRenderWait.push(item)
-        }
+        this.__nextRenderWait.push(item)
     }
 
     protected __checkUpdateLayout(): void {
@@ -346,9 +344,10 @@ export class Leafer extends Group implements ILeafer {
         this.once(LeaferEvent.START, () => Run.end(runId))
         this.once(LayoutEvent.END, () => this.__onReady())
         this.once(RenderEvent.START, () => this.__onCreated())
+        this.once(RenderEvent.END, () => this.__onViewReady())
         this.__eventIds.push(
             this.on_(WatchEvent.DATA, this.__onWatchData, this),
-            this.on_(RenderEvent.END, this.__onRenderEnd, this),
+            this.on_(AnimateEvent.FRAME, this.__onAnimateFrame, this),
             this.on_(LayoutEvent.CHECK_UPDATE, this.__checkUpdateLayout, this)
         )
     }
