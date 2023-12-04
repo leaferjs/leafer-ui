@@ -64,11 +64,11 @@ function hasNaturalSize(ui: IUI, attrName: string, image: ISizeData): boolean {
         d.__naturalWidth = image.width
         d.__naturalHeight = image.height
         if (!d.__getInput('width') || !d.__getInput('height')) {
+            ui.forceUpdate('width')
             if (ui.__proxyData) {
                 ui.setProxyAttr('width', ui.__.width)
                 ui.setProxyAttr('height', ui.__.height)
             }
-            ui.forceUpdate('width')
             return false
         }
     }
