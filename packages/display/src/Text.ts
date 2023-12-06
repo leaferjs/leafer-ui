@@ -123,7 +123,7 @@ export class Text extends UI implements IText {
 
         const data = this.__
         const layout = this.__layout
-        const { lineHeight, letterSpacing, fontFamily, fontSize, fontWeight, italic, textCase, textOverflow } = data
+        const { lineHeight, letterSpacing, fontFamily, fontSize, fontWeight, italic, textCase, textOverflow, padding } = data
 
         const autoWidth = data.__autoWidth
         const autoHeight = data.__autoHeight
@@ -132,6 +132,7 @@ export class Text extends UI implements IText {
 
         data.__lineHeight = UnitConvert.number(lineHeight, fontSize)
         data.__letterSpacing = UnitConvert.number(letterSpacing, fontSize)
+        data.__padding = padding ? MathHelper.fourNumber(padding) : undefined
         data.__baseLine = data.__lineHeight - (data.__lineHeight - fontSize * 0.7) / 2
         data.__font = `${italic ? 'italic ' : ''}${textCase === 'small-caps' ? 'small-caps ' : ''}${fontWeight !== 'normal' ? fontWeight + ' ' : ''}${fontSize}px ${fontFamily}`
         data.__clipText = textOverflow !== 'show' && !data.__autoBounds
@@ -149,9 +150,8 @@ export class Text extends UI implements IText {
             b.width = autoWidth ? bounds.width : data.width
             b.height = autoHeight ? bounds.height : data.height
 
-            const { padding } = data
             if (padding) {
-                const [top, right, bottom, left] = MathHelper.fourNumber(padding)
+                const [top, right, bottom, left] = data.__padding
                 if (autoWidth) {
                     b.x -= left
                     b.width += (right + left)

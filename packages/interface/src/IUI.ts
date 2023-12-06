@@ -127,6 +127,7 @@ export interface ITextData extends ITextAttrData, ITextStyleComputedData, IUIDat
     __baseLine?: number
     __lineHeight?: number
     __letterSpacing?: number
+    __padding?: number[]
     __clipText?: boolean
     __textBoxBounds?: IBoundsData
 }
