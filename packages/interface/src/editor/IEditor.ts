@@ -4,7 +4,7 @@ export interface IEditorBase extends IGroup, ISelectorProxy {
     config: IEditorConfig
 
     hoverTarget: IUI
-    target: IUI | IUI[] | ILeafList
+    target: IUI | IUI[]
 
     readonly list: IUI[]
 
