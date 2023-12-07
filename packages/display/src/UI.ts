@@ -19,7 +19,7 @@ export class UI extends Leaf implements IUI {
     @dataProcessor(UIData)
     declare public __: IUIData
 
-    declare public proxyData?: IUIInputData // need rewrite getter
+    declare public proxyData: IUIInputData // need rewrite getter
     declare public __proxyData?: IUIInputData
 
     public get app(): ILeafer { return this.leafer && this.leafer.app }

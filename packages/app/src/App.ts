@@ -17,9 +17,9 @@ export class App extends Leafer implements IApp {
 
     public realCanvas: boolean
 
-    public ground?: ILeafer
-    public tree?: ILeafer
-    public sky?: ILeafer
+    public ground: ILeafer
+    public tree: ILeafer
+    public sky: ILeafer
 
     constructor(userConfig?: IAppConfig, data?: IAppInputData) {
         super(userConfig, data)

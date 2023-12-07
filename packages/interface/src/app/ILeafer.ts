@@ -7,8 +7,8 @@ export interface ILeafer extends IGroup, ILeaferAttrData, IControl {
     readonly isApp: boolean
     readonly app: ILeafer
     parent?: IApp
-    zoomLayer?: IGroup
-    editor?: IEditorBase
+    zoomLayer: IGroup
+    editor: IEditorBase
 
     ground?: ILeafer
     tree?: ILeafer

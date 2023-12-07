@@ -275,7 +275,7 @@ export interface IUI extends IFillAttrData, IStrokeAttrData, ICornerRadiusAttrDa
     parent?: IGroup
     isFrame?: boolean
 
-    proxyData?: IUIInputData
+    proxyData: IUIInputData
     __proxyData?: IUIInputData
 
     children?: IUI[]
