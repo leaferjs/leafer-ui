@@ -72,6 +72,8 @@ export interface IImagePaint extends IPaintBase {
     offset?: IPointData
     scale?: number | IPointData
     rotation?: number
+
+    repeat?: IRepeat
 }
 export interface IImageFilters {
     exposure?: number // 曝光
@@ -83,6 +85,7 @@ export interface IImageFilters {
     shadows?: number // 阴影
 }
 export type IImagePaintMode = 'cover' | 'fit' | 'strench' | 'clip' | 'repeat'
+export type IRepeat = boolean | 'x' | 'y'
 
 // 描边
 export type IStrokeAlign = 'inside' | 'outside' | 'center'

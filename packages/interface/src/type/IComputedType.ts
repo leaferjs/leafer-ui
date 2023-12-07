@@ -27,6 +27,7 @@ export interface ILeafPaintPatternData {
     opacity?: number
     transform?: IMatrixData
     mode?: IImagePaintMode
+    repeat?: 'repeat' | 'repeat-x' | 'repeat-y'
 }
 
 export type ILeafFill = ILeafPaint

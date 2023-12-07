@@ -23,8 +23,8 @@ export {
     IUITag, IUIInputData
 } from './IUI'
 
-export { IUnitData, IVectorPath, IShadowEffect, IBlurEffect, IGrayscaleEffect, IFill, IStroke, IStrokeAlign, IStrokeJoin, IStrokeCap, IRGB, IRGBA, IColor, IColorStop, IPaint, IGradientPaint, IImagePaint, IImagePaintMode, IFontWeight, ITextCase, ITextDecoration, ITextAlign, IVerticalAlign, IOverflow, ITextWrap } from './type/IType'
-export { ICornerRadiusString, IStrokeWidthString, IPaintString, IShadowString, IPercent, IDashPatternString, IColorString as IStringColor } from './type/IStringType'
+export { IUnitData, IVectorPath, IShadowEffect, IBlurEffect, IGrayscaleEffect, IFill, IStroke, IStrokeAlign, IStrokeJoin, IStrokeCap, IRGB, IRGBA, IColor, IColorStop, IPaint, IGradientPaint, IImagePaint, IImagePaintMode, IFontWeight, ITextCase, ITextDecoration, ITextAlign, IVerticalAlign, IOverflow, ITextWrap, IRepeat } from './type/IType'
+export { ICornerRadiusString, IStrokeWidthString, IPaintString, IShadowString, IPercent, IDashPatternString, IColorString } from './type/IStringType'
 export { ILeafFill, ILeafPaint, ILeafPaintPatternData, ILeafPaintColor, ILeafStrokePaint, ILeafShadowEffect } from './type/IComputedType'
 
 export { IUIRenderModule, IRectRenderModule, IImageRenderModule, ITextRenderModule, IGroupRenderModule, IFrameRenderModule } from './module/IUIRender'

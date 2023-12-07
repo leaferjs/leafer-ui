@@ -11,7 +11,7 @@ const { get, translate } = MatrixHelper
 export function createData(leafPaint: ILeafPaint, image: ILeaferImage, paint: IImagePaint, box: IBoundsData): void {
     let { width, height } = image
 
-    const { opacity, mode, offset, scale, rotation, blendMode } = paint
+    const { opacity, mode, offset, scale, rotation, blendMode, repeat } = paint
     const sameBox = box.width === width && box.height === height
     if (blendMode) leafPaint.blendMode = blendMode
 
@@ -30,6 +30,7 @@ export function createData(leafPaint: ILeafPaint, image: ILeaferImage, paint: II
             break
         case 'repeat':
             if (!sameBox || scale || rotation) repeatMode(data, box, width, height, scale as number, rotation)
+            if (!repeat) data.repeat = 'repeat'
             break
         case 'fit':
         case 'cover':
@@ -40,4 +41,5 @@ export function createData(leafPaint: ILeafPaint, image: ILeaferImage, paint: II
     data.width = width
     data.height = height
     if (opacity) data.opacity = opacity
+    if (repeat) data.repeat = typeof repeat === 'string' ? (repeat === 'x' ? 'repeat-x' : 'repeat-y') : 'repeat'
 }

@@ -17,7 +17,7 @@ export function createPattern(ui: IUI, paint: ILeafPaint, pixelRatio: number): b
         scaleY = Math.abs(scaleY)
 
         const { image, data } = paint
-        let imageScale: number, imageMatrix: IMatrixData, { width, height, scaleX: sx, scaleY: sy, opacity, transform, mode } = data
+        let imageScale: number, imageMatrix: IMatrixData, { width, height, scaleX: sx, scaleY: sy, opacity, transform, repeat } = data
 
         if (sx) {
             imageMatrix = get()
@@ -34,7 +34,7 @@ export function createPattern(ui: IUI, paint: ILeafPaint, pixelRatio: number): b
 
         const size = width * height
 
-        if (paint.data.mode !== 'repeat') {
+        if (!repeat) {
             if (size > Platform.image.maxCacheSize) return false // same as check()
         }
 
@@ -67,7 +67,7 @@ export function createPattern(ui: IUI, paint: ILeafPaint, pixelRatio: number): b
             scale(imageMatrix, 1 / scaleX, 1 / scaleY)
         }
 
-        const pattern = Platform.canvas.createPattern(image.getCanvas(width < 1 ? 1 : width, height < 1 ? 1 : height, opacity) as any, mode === 'repeat' ? 'repeat' : (Platform.origin.noRepeat || 'no-repeat'))
+        const pattern = Platform.canvas.createPattern(image.getCanvas(width < 1 ? 1 : width, height < 1 ? 1 : height, opacity) as any, repeat || (Platform.origin.noRepeat || 'no-repeat'))
 
         try {
             if (paint.transform) paint.transform = null

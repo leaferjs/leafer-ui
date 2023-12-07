@@ -19,7 +19,7 @@ export function checkImage(ui: IUI, canvas: ILeaferCanvas, paint: ILeafPaint, al
         const { data } = paint
 
         if (allowPaint) {
-            if (data.mode !== 'repeat') {
+            if (!data.repeat) {
                 let { width, height } = data
                 width *= abs(scaleX) * canvas.pixelRatio
                 height *= abs(scaleY) * canvas.pixelRatio
