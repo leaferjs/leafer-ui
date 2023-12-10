@@ -2,11 +2,10 @@ import { ILeaferCanvas, IRenderOptions, IPathDrawer, IBoundsData, IPathCommandDa
 import { rewrite, rewriteAble, registerUI, BoundsHelper, dataProcessor, affectRenderBoundsType } from '@leafer/core'
 
 import { IBox, IBoxData, IBoxInputData, IOverflow } from '@leafer-ui/interface'
+import { BoxData } from '@leafer-ui/data'
 
 import { Group } from './Group'
 import { Rect } from './Rect'
-import { BoxData } from '@leafer-ui/data'
-
 
 const rect = Rect.prototype
 const group = Group.prototype
