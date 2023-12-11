@@ -8,7 +8,7 @@ import {
     IEffectAttrData, IEffectInputData, IEffectComputedData,
     ITextStyleAttrData, ITextStyleInputData, ITextStyleComputedData
 } from './ICommonAttr'
-import { IArrowType, IOverflow } from './type/IType'
+import { IOverflow } from './type/IType'
 import { IExportOptions } from './module/IExport'
 import { ILeafer } from './app/ILeafer'
 
