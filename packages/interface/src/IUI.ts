@@ -303,8 +303,8 @@ export interface IUI extends IFillAttrData, IStrokeAttrData, ICornerRadiusAttrDa
     find(condition: number | string | IFindUIMethod, options?: any): IUI[]
     findOne(condition: number | string | IFindUIMethod, options?: any): IUI
 
-    getPath(curve?: boolean): IPathCommandData
-    getPathString(curve?: boolean): IPathString
+    getPath(curve?: boolean, pathForRender?: boolean): IPathCommandData
+    getPathString(curve?: boolean, pathForRender?: boolean): IPathString
 
     __drawPathByData(drawer: IPathDrawer, data: IPathCommandData): void
     __drawPathByBox(drawer: IPathDrawer): void

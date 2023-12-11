@@ -258,14 +258,15 @@ export class UI extends Leaf implements IUI {
 
     // path
 
-    public getPath(curve?: boolean): IPathCommandData {
-        const { path } = this.__
+    public getPath(curve?: boolean, pathForRender?: boolean): IPathCommandData {
+        this.__layout.update()
+        const path = pathForRender ? this.__.__pathForRender : this.__.path
         if (!path) return []
         return curve ? PathConvert.toCanvasData(path, true) : path
     }
 
-    public getPathString(curve?: boolean): IPathString {
-        return PathConvert.stringify(this.getPath(curve))
+    public getPathString(curve?: boolean, pathForRender?: boolean): IPathString {
+        return PathConvert.stringify(this.getPath(curve, pathForRender))
     }
 
 
