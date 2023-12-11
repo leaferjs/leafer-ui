@@ -8,7 +8,7 @@ import {
     IEffectAttrData, IEffectInputData, IEffectComputedData,
     ITextStyleAttrData, ITextStyleInputData, ITextStyleComputedData
 } from './ICommonAttr'
-import { IOverflow } from './type/IType'
+import { IArrowType, IOverflow } from './type/IType'
 import { IExportOptions } from './module/IExport'
 import { ILeafer } from './app/ILeafer'
 
@@ -28,6 +28,18 @@ interface ILineAttrData {
 }
 export interface ILineData extends ILineAttrData, IUIData { }
 export interface ILineInputData extends ILineAttrData, IUIBaseInputData { }
+
+
+// Arrow
+export interface IArrow extends ILine {
+    __: IArrowData
+}
+
+interface IArrowAttrData {
+
+}
+export interface IArrowData extends IArrowAttrData, ILineData { }
+export interface IArrowInputData extends IArrowAttrData, IUIBaseInputData { }
 
 
 // Rect

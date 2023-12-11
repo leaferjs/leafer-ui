@@ -92,6 +92,9 @@ export type IStrokeAlign = 'inside' | 'outside' | 'center'
 export type IStrokeCap = 'none' | 'round' | 'square' | 'arrow-lines' | 'arrow-equilateral'
 export type IStrokeJoin = 'bevel' | 'round' | 'miter'
 
+// 箭头
+export type IArrowType = 'none' | 'line' | 'triangle' | 'circle'
+
 // 文本
 export type ITextAlign = 'left' | 'center' | 'right' | 'justify'
 export type IVerticalAlign = 'top' | 'middle' | 'bottom'

@@ -1,4 +1,4 @@
-import { IStrokeAlign, IStrokeCap, IStrokeJoin, IBlurEffect, IFontWeight, ITextCase, ITextDecoration, IShadowEffect, IGrayscaleEffect, ITextAlign, IVerticalAlign, IOverflow, IUnitData, ITextWrap, IStroke, IFill } from './type/IType'
+import { IStrokeAlign, IStrokeCap, IStrokeJoin, IBlurEffect, IFontWeight, ITextCase, ITextDecoration, IShadowEffect, IGrayscaleEffect, ITextAlign, IVerticalAlign, IOverflow, IUnitData, ITextWrap, IStroke, IFill, IArrowType } from './type/IType'
 import { ILeafStrokePaint, ILeafShadowEffect, ILeafPaint } from './type/IComputedType'
 import { IDashPatternString, IShadowString, IColorString, IStrokeWidthString, ICornerRadiusString } from './type/IStringType'
 
@@ -44,6 +44,9 @@ export interface IStrokeAttrData {
     dashPattern: number[] | IDashPatternString
     dashOffset: number
     miterLimit: number
+
+    startArrow: IArrowType
+    endArrow: IArrowType
 }
 export interface IStrokeInputData {
     stroke?: IStroke
@@ -55,6 +58,9 @@ export interface IStrokeInputData {
     dashPattern?: number[] | IDashPatternString
     dashOffset?: number
     miterLimit?: number
+
+    startArrow?: IArrowType
+    endArrow?: IArrowType
 }
 export interface IStrokeComputedData {
     stroke?: IColorString | ILeafStrokePaint[]

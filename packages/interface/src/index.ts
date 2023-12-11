@@ -5,6 +5,7 @@ export { ILeafer } from './app/ILeafer'
 
 export {
     ILine, ILineInputData, ILineData,
+    IArrow, IArrowInputData, IArrowData,
     IRect, IRectInputData, IRectData,
     IEllipse, IEllipseInputData, IEllipseData,
     IPolygon, IPolygonInputData, IPolygonData,
@@ -23,7 +24,7 @@ export {
     IUITag, IUIInputData
 } from './IUI'
 
-export { IUnitData, IVectorPath, IShadowEffect, IBlurEffect, IGrayscaleEffect, IFill, IStroke, IStrokeAlign, IStrokeJoin, IStrokeCap, IRGB, IRGBA, IColor, IColorStop, IPaint, IGradientPaint, IImagePaint, IImagePaintMode, IFontWeight, ITextCase, ITextDecoration, ITextAlign, IVerticalAlign, IOverflow, ITextWrap, IRepeat } from './type/IType'
+export { IUnitData, IVectorPath, IShadowEffect, IBlurEffect, IGrayscaleEffect, IFill, IStroke, IStrokeAlign, IStrokeJoin, IStrokeCap, IArrowType, IRGB, IRGBA, IColor, IColorStop, IPaint, IGradientPaint, IImagePaint, IImagePaintMode, IFontWeight, ITextCase, ITextDecoration, ITextAlign, IVerticalAlign, IOverflow, ITextWrap, IRepeat } from './type/IType'
 export { ICornerRadiusString, IStrokeWidthString, IPaintString, IShadowString, IPercent, IDashPatternString, IColorString } from './type/IStringType'
 export { ILeafFill, ILeafPaint, ILeafPaintPatternData, ILeafPaintColor, ILeafStrokePaint, ILeafShadowEffect } from './type/IComputedType'
 
