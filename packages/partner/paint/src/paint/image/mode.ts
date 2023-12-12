@@ -1,9 +1,10 @@
-import { IBoundsData } from '@leafer/interface'
+import { IBoundsData, IPointData, IMatrixData, } from '@leafer/interface'
 import { MatrixHelper } from '@leafer/core'
 
-import { IMatrixData, IImagePaintMode, IPointData, ILeafPaintPatternData } from '@leafer-ui/interface'
+import { IImagePaintMode, ILeafPaintPatternData } from '@leafer-ui/interface'
 
 
+let origin = {} as IPointData
 const { get, rotateOfOuter, translate, scaleOfOuter, scale: scaleHelper, rotate } = MatrixHelper
 
 export function fillOrFitMode(data: ILeafPaintPatternData, mode: IImagePaintMode, box: IBoundsData, width: number, height: number, rotation: number): void {
@@ -22,12 +23,12 @@ export function fillOrFitMode(data: ILeafPaintPatternData, mode: IImagePaintMode
 }
 
 
-export function clipMode(data: ILeafPaintPatternData, box: IBoundsData, offset: IPointData, scale: number | IPointData, rotation: number): void {
+export function clipMode(data: ILeafPaintPatternData, box: IBoundsData, x: number, y: number, scaleX: number, scaleY: number, rotation: number): void {
     const transform: IMatrixData = get()
     translate(transform, box.x, box.y)
-    if (offset) translate(transform, offset.x, offset.y)
-    if (scale) {
-        typeof scale === 'number' ? scaleHelper(transform, scale) : scaleHelper(transform, scale.x, scale.y)
+    if (x || y) translate(transform, x, y)
+    if (scaleX) {
+        scaleHelper(transform, scaleX, scaleY)
         data.scaleX = transform.a
         data.scaleY = transform.d
     }
@@ -36,9 +37,8 @@ export function clipMode(data: ILeafPaintPatternData, box: IBoundsData, offset: 
 }
 
 
-export function repeatMode(data: ILeafPaintPatternData, box: IBoundsData, width: number, height: number, scale: number, rotation: number): void {
+export function repeatMode(data: ILeafPaintPatternData, box: IBoundsData, width: number, height: number, x: number, y: number, scaleX: number, scaleY: number, rotation: number): void {
     const transform = get()
-
     if (rotation) {
         rotate(transform, rotation)
         switch (rotation) {
@@ -53,10 +53,14 @@ export function repeatMode(data: ILeafPaintPatternData, box: IBoundsData, width:
                 break
         }
     }
-    translate(transform, box.x, box.y)
-    if (scale) {
-        scaleOfOuter(transform, box, scale)
-        data.scaleX = data.scaleY = scale
+    origin.x = box.x
+    origin.y = box.y
+    if (x || y) origin.x += x, origin.y += y
+    translate(transform, origin.x, origin.y)
+    if (scaleX) {
+        scaleOfOuter(transform, origin, scaleX, scaleY)
+        data.scaleX = scaleX
+        data.scaleY = scaleY
     }
     data.transform = transform
 }

@@ -1,4 +1,4 @@
-import { IPointData, IPathCommandData, IWindingRule, IBlendMode, IExportFileType } from '@leafer/interface'
+import { IPointData, IPathCommandData, IWindingRule, IBlendMode, IExportFileType, ISizeData } from '@leafer/interface'
 import { IColorString, IPaintString } from './IStringType'
 
 export interface IUnitData {
@@ -70,6 +70,7 @@ export interface IImagePaint extends IPaintBase {
     filters?: IImageFilters
 
     offset?: IPointData
+    size?: number | ISizeData
     scale?: number | IPointData
     rotation?: number
 

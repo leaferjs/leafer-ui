@@ -11,11 +11,22 @@ const { get, translate } = MatrixHelper
 export function createData(leafPaint: ILeafPaint, image: ILeaferImage, paint: IImagePaint, box: IBoundsData): void {
     let { width, height } = image
 
-    const { opacity, mode, offset, scale, rotation, blendMode, repeat } = paint
+
+    const { opacity, mode, offset, scale, size, rotation, blendMode, repeat } = paint
     const sameBox = box.width === width && box.height === height
     if (blendMode) leafPaint.blendMode = blendMode
 
     const data: ILeafPaintPatternData = leafPaint.data = { mode }
+
+    let x: number, y: number, scaleX: number, scaleY: number
+    if (offset) x = offset.x, y = offset.y
+    if (size) {
+        scaleX = (typeof size === 'number' ? size : size.width) / width
+        scaleY = (typeof size === 'number' ? size : size.height) / height
+    } else if (scale) {
+        scaleX = typeof scale === 'number' ? scale : scale.x
+        scaleY = typeof scale === 'number' ? scale : scale.y
+    }
 
     switch (mode) {
         case 'strench':
@@ -26,10 +37,10 @@ export function createData(leafPaint: ILeafPaint, image: ILeaferImage, paint: II
             }
             break
         case 'clip':
-            if (offset || scale || rotation) clipMode(data, box, offset, scale, rotation)
+            if (offset || scaleX || rotation) clipMode(data, box, x, y, scaleX, scaleY, rotation)
             break
         case 'repeat':
-            if (!sameBox || scale || rotation) repeatMode(data, box, width, height, scale as number, rotation)
+            if (!sameBox || scaleX || rotation) repeatMode(data, box, width, height, x, y, scaleX, scaleY, rotation)
             if (!repeat) data.repeat = 'repeat'
             break
         case 'fit':
