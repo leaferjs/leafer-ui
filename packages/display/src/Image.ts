@@ -1,7 +1,7 @@
 import { ILeaferImage, IString } from '@leafer/interface'
 import { ImageEvent, boundsType, dataProcessor, registerUI } from '@leafer/core'
 
-import { IImage, IImageInputData, IImageData, IImagePaint } from '@leafer-ui/interface'
+import { IImage, IImageInputData, IImageData } from '@leafer-ui/interface'
 import { ImageData } from '@leafer-ui/data'
 
 import { Rect } from './Rect'
@@ -24,29 +24,9 @@ export class Image extends Rect implements IImage {
 
     constructor(data?: IImageInputData) {
         super(data)
-    }
-
-    public __updateBoxBounds(): void {
-
-        let update: boolean
-
-        const { url } = this
-        const fill = this.fill as IImagePaint
-
-        if (fill) {
-            if (fill.url !== url) update = true
-        } else {
-            if (url) update = true
-        }
-
-        if (update) {
-            if (this.image) this.image = null
-            this.fill = url ? { type: 'image', mode: 'strench', url } : undefined
-            this.once(ImageEvent.LOADED, (e) => this.image = e.image)
-        }
-
-        super.__updateBoxBounds()
-
+        this.on(ImageEvent.LOADED, (e: ImageEvent) => {
+            if (e.attrName === 'fill' && e.attrValue.url === this.url) this.image = e.image
+        })
     }
 
     public destroy(): void {
