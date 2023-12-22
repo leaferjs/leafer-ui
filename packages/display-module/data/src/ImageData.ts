@@ -1,4 +1,4 @@
-import { IImageData, IImageInputData, IImage } from '@leafer-ui/interface'
+import { IImageData, IImageInputData, IImage, IObject } from '@leafer-ui/interface'
 
 import { RectData } from './RectData'
 
@@ -10,8 +10,24 @@ export class ImageData extends RectData implements IImageData {
     protected _url: string
 
     protected setUrl(value: string) {
+        this.__setImageFill(value)
+        this._url = value
+    }
+
+    public __setImageFill(value: string): void {
         if (this.__leaf.image) this.__leaf.image = null;
         (this as IImageInputData).fill = value ? { type: 'image', mode: 'strench', url: value } : undefined
-        this._url = value
+    }
+
+    public __getData(): IObject {
+        const data = super.__getData()
+        delete data.fill
+        return data
+    }
+
+    public __getInputData(): IObject {
+        const data = super.__getInputData()
+        delete data.fill
+        return data
     }
 }

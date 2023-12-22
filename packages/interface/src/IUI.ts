@@ -201,7 +201,9 @@ export interface IImage extends IRect, ILeaferImageConfig {
 interface IImageAttrData {
     url?: string
 }
-export interface IImageData extends IImageAttrData, IRectData { }
+export interface IImageData extends IImageAttrData, IRectData {
+    __setImageFill(value: string): void
+}
 export interface IImageInputData extends IImageAttrData, IUIBaseInputData { }
 
 export interface ICanvas extends IRect {
