@@ -36,8 +36,8 @@ export interface IEditorBase extends IGroup, ISelectorProxy {
     onRotate(e: IDragEvent | IRotateEvent): void
     onSkew(e: IDragEvent): void
 
-    group(): void
-    ungroup(): void
+    group(group?: IGroup): IGroup
+    ungroup(): IUI[]
 
     lock(): void
     unlock(): void
