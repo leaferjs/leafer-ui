@@ -28,6 +28,8 @@ Leafer UI 致力于实现一套简洁、开放、现代化的 UI 绘图语言标
 
 [快速安装](https://www.leaferjs.com/ui/guide/start.html)
 
+[LeaferJS 主仓库](https://github.com/leaferjs/LeaferJS)
+
 ### License
 
 Leafer UI 是采用 MIT 许可的开源项目，可以永久免费使用。
