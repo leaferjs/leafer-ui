@@ -14,6 +14,9 @@ export class Arrow extends Line implements IArrow {
     @dataProcessor(ArrowData)
     declare public __: IArrowData
 
+    @strokeType('none')
+    declare public startArrow: IArrowType
+
     @strokeType('lines')
     declare public endArrow: IArrowType
 
