@@ -1,4 +1,4 @@
-import { ILeaferCanvas, IRenderer, ILayouter, ISelector, IWatcher, IInteraction, ILeaferConfig, ICanvasManager, IHitCanvasManager, IAutoBounds, IScreenSizeData, IResizeEvent, ILeaf, IEventListenerId, ITimer, IValue, IObject, IControl, IPointData } from '@leafer/interface'
+import { ILeaferCanvas, IRenderer, ILayouter, ISelector, IWatcher, IInteraction, ILeaferConfig, ICanvasManager, IHitCanvasManager, IAutoBounds, IScreenSizeData, IResizeEvent, ILeaf, IEventListenerId, ITimer, IValue, IObject, IControl, IPointData, IBounds } from '@leafer/interface'
 import { AutoBounds, LayoutEvent, ResizeEvent, LeaferEvent, CanvasManager, HitCanvasManager, ImageManager, DataHelper, Creator, Run, Debug, RenderEvent, AnimateEvent, registerUI, boundsType, canvasSizeAttrs, dataProcessor, PluginManager, WaitHelper, WatchEvent } from '@leafer/core'
 
 import { ILeaferInputData, ILeaferData, IFunction, IUIInputData, ILeafer, IGroup, IApp, IEditorBase } from '@leafer-ui/interface'
@@ -182,7 +182,11 @@ export class Leafer extends Group implements ILeafer {
     }
 
     public forceFullRender(): void {
-        this.renderer.addBlock(this.canvas.bounds)
+        this.forceRender()
+    }
+
+    public forceRender(bounds?: IBounds): void {
+        this.renderer.addBlock(bounds || this.canvas.bounds)
         if (this.viewReady) this.renderer.update()
     }
 
