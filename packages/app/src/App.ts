@@ -23,6 +23,10 @@ export class App extends Leafer implements IApp {
 
     constructor(userConfig?: IAppConfig, data?: IAppInputData) {
         super(userConfig, data)
+    }
+
+    public init(userConfig?: IAppConfig, parentApp?: IApp): void {
+        super.init(userConfig, parentApp)
         if (userConfig) {
             const { ground, tree, sky, editor } = userConfig
             if (ground) this.ground = this.addLeafer(ground)
