@@ -10,7 +10,7 @@ Leafer UI 是基于 Leafer 开发的一套绚丽多彩的 UI 绘图框架，可�
 
 想马上开始使用，请查看 [快速安装](https://leaferjs.com/ui/guide/start.html)， 有问题、建议可以 [提交到这里](https://github.com/leaferjs/ui/issues)，或加入[技术交流群](https://leaferjs.com/ui/guide/)。
 
-🌟 记得点亮你的 [小星星](https://github.com/leaferjs/ui) ✨ ✨ ✨
+🌟 记得点亮你的 [GitHub 小星星](https://github.com/leaferjs/ui) ✨ ✨ ✨
 
 ## 使命与愿景
 
