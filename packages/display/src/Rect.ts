@@ -1,7 +1,7 @@
 import { IPathDrawer, IPathCommandData } from '@leafer/interface'
-import { dataProcessor, registerUI, rewrite, rewriteAble, useModule } from '@leafer/core'
+import { BoundsHelper, dataProcessor, registerUI, rewrite, rewriteAble, useModule } from '@leafer/core'
 
-import { IRect, IRectInputData, IRectData } from '@leafer-ui/interface'
+import { IRect, IRectInputData, IRectData, IRadiusPointData } from '@leafer-ui/interface'
 import { RectData } from '@leafer-ui/data'
 import { RectRender } from '@leafer-ui/display-module'
 
@@ -24,5 +24,15 @@ export class Rect extends UI implements IRect {
 
     @rewrite(UI.prototype.__drawPathByBox)
     public __drawPathByData(_drawer: IPathDrawer, _data: IPathCommandData): void { }
+
+    // hit 
+
+    public __updateHitCanvas(): void {
+        if (this.stroke || this.cornerRadius) super.__updateHitCanvas()
+    }
+
+    public __hit(inner: IRadiusPointData): boolean {
+        return this.__hitCanvas ? super.__hit(inner) : BoundsHelper.hitRadiusPoint(this.__layout.boxBounds, inner)
+    }
 
 }
