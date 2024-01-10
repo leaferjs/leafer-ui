@@ -1,4 +1,4 @@
-import { IBoundsData, IImageEvent, ISizeData } from '@leafer/interface'
+import { IBoundsData, IImageEvent, ILeaferImage, IObject } from '@leafer/interface'
 import { ImageEvent, ImageManager } from '@leafer/core'
 
 import { IUI, IImagePaint, ILeafPaint } from '@leafer-ui/interface'
@@ -15,43 +15,32 @@ export function image(ui: IUI, attrName: string, attrValue: IImagePaint, box: IB
 
     if (image.ready) {
 
-        if (hasNaturalSize(ui, attrName, image)) createData(leafPaint, image, attrValue, box)
+        checkSizeAndCreateData(ui, attrName, attrValue, image, leafPaint, box)
 
         if (firstUse) {
-            emit(ui, ImageEvent.LOAD, event)
-            emit(ui, ImageEvent.LOADED, event)
+            onLoad(ui, event)
+            onLoadSuccess(ui, event)
         }
 
     } else if (image.error) {
 
-        if (firstUse) {
-            ui.forceUpdate('surface')
-            event.error = image.error
-            emit(ui, ImageEvent.ERROR, event)
-        }
+        if (firstUse) onLoadError(ui, event, image.error)
 
-    } else {
+    } else { // need load
 
-        if (firstUse) emit(ui, ImageEvent.LOAD, event)
+        if (firstUse) onLoad(ui, event)
 
         leafPaint.loadId = image.load(
             () => {
                 leafPaint.loadId = null
                 if (!ui.destroyed) {
-
-                    if (hasNaturalSize(ui, attrName, image)) {
-                        createData(leafPaint, image, attrValue, box)
-                        ui.forceUpdate('surface')
-                    }
-
-                    emit(ui, ImageEvent.LOADED, event)
+                    if (checkSizeAndCreateData(ui, attrName, attrValue, image, leafPaint, box)) ui.forceUpdate('surface')
+                    onLoadSuccess(ui, event)
                 }
             },
             (error) => {
                 leafPaint.loadId = null
-                ui.forceUpdate('surface')
-                event.error = error
-                emit(ui, ImageEvent.ERROR, event)
+                onLoadError(ui, event, error)
             }
         )
 
@@ -61,12 +50,12 @@ export function image(ui: IUI, attrName: string, attrValue: IImagePaint, box: IB
 }
 
 
-function hasNaturalSize(ui: IUI, attrName: string, image: ISizeData): boolean {
+function checkSizeAndCreateData(ui: IUI, attrName: string, attrValue: IImagePaint, image: ILeaferImage, leafPaint: ILeafPaint, box: IBoundsData): boolean {
     if (attrName === 'fill' && !ui.__.__naturalWidth) {
         const { __: d } = ui
         d.__naturalWidth = image.width
         d.__naturalHeight = image.height
-        if (!d.__getInput('width') || !d.__getInput('height')) {
+        if (d.__autoWidth || d.__autoHeight) {
             ui.forceUpdate('width')
             if (ui.__proxyData) {
                 ui.setProxyAttr('width', ui.__.width)
@@ -75,10 +64,29 @@ function hasNaturalSize(ui: IUI, attrName: string, image: ISizeData): boolean {
             return false
         }
     }
+
+    createData(leafPaint, image, attrValue, box)
     return true
+}
+
+
+
+function onLoad(ui: IUI, event: IImageEvent): void {
+    emit(ui, ImageEvent.LOAD, event)
+}
+
+
+function onLoadSuccess(ui: IUI, event: IImageEvent): void {
+    emit(ui, ImageEvent.LOADED, event)
+}
+
+
+function onLoadError(ui: IUI, event: IImageEvent, error: string | IObject,): void {
+    event.error = error
+    ui.forceUpdate('surface')
+    emit(ui, ImageEvent.ERROR, event)
 }
 
 function emit(ui: IUI, type: string, data: IImageEvent): void {
     if (ui.hasEvent(type)) ui.emitEvent(new ImageEvent(type, data))
 }
-
