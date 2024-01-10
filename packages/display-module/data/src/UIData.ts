@@ -19,6 +19,8 @@ export class UIData extends LeafData implements IUIData {
     public __pixelFill?: boolean // png / svg / webp
     public __pixelStroke?: boolean
 
+    public __needComputePaint: boolean
+
     protected _visible?: IBoolean
 
     protected _width?: INumber
@@ -33,7 +35,6 @@ export class UIData extends LeafData implements IUIData {
     public get __autoWidth() { return !this._width }
     public get __autoHeight() { return !this._height }
     public get __autoBounds() { return !this._width && !this._height }
-
 
     protected setVisible(value: IBoolean) {
         if (this.__leaf.leafer) this.__leaf.leafer.watcher.hasVisible = true
@@ -119,6 +120,15 @@ export class UIData extends LeafData implements IUIData {
         } else {
             this._innerShadow = null
         }
+    }
+
+    // custom
+
+    public __computePaint(): void {
+        const { fill, stroke } = this.__input
+        if (fill) Paint.compute('fill', this.__leaf)
+        if (stroke) Paint.compute('stroke', this.__leaf)
+        this.__needComputePaint = false
     }
 
 }

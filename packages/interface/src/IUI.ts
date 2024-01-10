@@ -358,6 +358,9 @@ export interface IUIData extends IUIComputedData, ILeafData {
     __font?: string
     __textDrawData?: ITextDrawData
 
+    __needComputePaint: boolean
+    __computePaint(): void
+
 }
 export interface IUIComputedData extends IFillComputedData, IBorderComputedData, IStrokeComputedData, ITextStyleComputedData, ICornerRadiusComputedData, IEffectComputedData, ILeafComputedData {
     padding?: number | number[]

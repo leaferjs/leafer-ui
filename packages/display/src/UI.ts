@@ -174,6 +174,11 @@ export class UI extends Leaf implements IUI {
     @strokeType(10)
     public miterLimit: INumber
 
+    // load 
+
+    @dataType(true)
+    public lazy: IBoolean  // load image / compute paint
+
     // arrow
 
     @strokeType('none')
@@ -272,15 +277,16 @@ export class UI extends Leaf implements IUI {
 
     public __onUpdateSize(): void {
         if (this.__.__input) {
-            const { fill, stroke } = this.__.__input
-            if (fill) Paint.compute('fill', this)
-            if (stroke) Paint.compute('stroke', this)
+            const data = this.__
+            data.__needComputePaint = true
+            if (data.lazy && this.leafer && !this.leafer.canvas.bounds.hit(this.__world)) return
+            data.__computePaint()
         }
     }
 
     public __updateRenderPath(): void {
         if (this.__.path) {
-            const { __: data } = this
+            const data = this.__
             data.__pathForRender = data.cornerRadius ? PathCorner.smooth(data.path, data.cornerRadius, data.cornerSmoothing) : data.path
         }
     }
