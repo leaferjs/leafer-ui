@@ -7,18 +7,19 @@ import { createData } from './data'
 
 
 export function image(ui: IUI, attrName: string, attrValue: IImagePaint, box: IBoundsData, firstUse: boolean): ILeafPaint {
+
     const leafPaint: ILeafPaint = { type: attrValue.type }
     const image = leafPaint.image = ImageManager.get(attrValue)
 
-    const event: IImageEvent = (firstUse || image.loading) && { target: ui, image, attrName, attrValue }
+    const event: IImageEvent = (firstUse || image.loading) && { image, attrName, attrValue }
 
     if (image.ready) {
 
         if (hasNaturalSize(ui, attrName, image)) createData(leafPaint, image, attrValue, box)
 
         if (firstUse) {
-            emit(ImageEvent.LOAD, event)
-            emit(ImageEvent.LOADED, event)
+            emit(ui, ImageEvent.LOAD, event)
+            emit(ui, ImageEvent.LOADED, event)
         }
 
     } else if (image.error) {
@@ -26,15 +27,16 @@ export function image(ui: IUI, attrName: string, attrValue: IImagePaint, box: IB
         if (firstUse) {
             ui.forceUpdate('surface')
             event.error = image.error
-            emit(ImageEvent.ERROR, event)
+            emit(ui, ImageEvent.ERROR, event)
         }
 
     } else {
 
-        if (firstUse) emit(ImageEvent.LOAD, event)
+        if (firstUse) emit(ui, ImageEvent.LOAD, event)
 
         leafPaint.loadId = image.load(
             () => {
+                leafPaint.loadId = null
                 if (!ui.destroyed) {
 
                     if (hasNaturalSize(ui, attrName, image)) {
@@ -42,13 +44,14 @@ export function image(ui: IUI, attrName: string, attrValue: IImagePaint, box: IB
                         ui.forceUpdate('surface')
                     }
 
-                    emit(ImageEvent.LOADED, event)
+                    emit(ui, ImageEvent.LOADED, event)
                 }
             },
             (error) => {
+                leafPaint.loadId = null
                 ui.forceUpdate('surface')
                 event.error = error
-                emit(ImageEvent.ERROR, event)
+                emit(ui, ImageEvent.ERROR, event)
             }
         )
 
@@ -75,7 +78,7 @@ function hasNaturalSize(ui: IUI, attrName: string, image: ISizeData): boolean {
     return true
 }
 
-function emit(type: string, data: IImageEvent): void {
-    if (data.target.hasEvent(type)) data.target.emitEvent(new ImageEvent(type, data))
+function emit(ui: IUI, type: string, data: IImageEvent): void {
+    if (ui.hasEvent(type)) ui.emitEvent(new ImageEvent(type, data))
 }
 
