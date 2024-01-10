@@ -14,12 +14,11 @@ export const UIHit: IUIHitModule = {
     },
 
     __hit(inner: IRadiusPointData): boolean {
-        const { __hitCanvas: h } = this
-        if (Platform.name === 'miniapp') this.__drawHitPath(h) // fix: 小程序需要实时更新
+        if (Platform.name === 'miniapp') this.__drawHitPath(this.__hitCanvas) // fix: 小程序需要实时更新
 
         const { fill, hitFill, windingRule } = this.__
         const needHitFill = (fill && hitFill === 'path') || hitFill === 'all'
-        const isHitFill = h.hitFill(inner, windingRule)
+        const isHitFill = this.__hitFill(inner, windingRule)
         if (needHitFill && isHitFill) return true
 
         const { stroke, hitStroke, strokeWidth, strokeAlign } = this.__
@@ -32,7 +31,7 @@ export const UIHit: IUIHitModule = {
             switch (strokeAlign) {
                 case 'inside':
                     hitWidth += strokeWidth * 2
-                    if (!needHitFill && (isHitFill && h.hitStroke(inner, hitWidth))) return true
+                    if (!needHitFill && (isHitFill && this.__hitStroke(inner, hitWidth))) return true
                     hitWidth = radiusWidth
                     break
                 case 'center':
@@ -41,14 +40,14 @@ export const UIHit: IUIHitModule = {
                 case 'outside':
                     hitWidth += strokeWidth * 2
                     if (!needHitFill) {
-                        if (!isHitFill && h.hitStroke(inner, hitWidth)) return true
+                        if (!isHitFill && this.__hitStroke(inner, hitWidth)) return true
                         hitWidth = radiusWidth
                     }
                     break
             }
         }
 
-        return hitWidth ? h.hitStroke(inner, hitWidth) : false
+        return hitWidth ? this.__hitStroke(inner, hitWidth) : false
     }
 
 }

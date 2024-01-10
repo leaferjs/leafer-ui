@@ -31,8 +31,8 @@ export class Rect extends UI implements IRect {
         if (this.stroke || this.cornerRadius) super.__updateHitCanvas()
     }
 
-    public __hit(inner: IRadiusPointData): boolean {
-        return this.__hitCanvas ? super.__hit(inner) : BoundsHelper.hitRadiusPoint(this.__layout.boxBounds, inner)
+    public __hitFill(inner: IRadiusPointData, windingRule?: string): boolean {
+        return this.__hitCanvas ? super.__hitFill(inner, windingRule) : BoundsHelper.hitRadiusPoint(this.__layout.boxBounds, inner)
     }
 
 }
