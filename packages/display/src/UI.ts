@@ -7,7 +7,7 @@ import { effectType } from '@leafer-ui/decorator'
 import { UIData } from '@leafer-ui/data'
 import { UIBounds, UIHit, UIRender } from '@leafer-ui/display-module'
 
-import { Export, Paint } from '@leafer-ui/external'
+import { Export } from '@leafer-ui/external'
 
 
 @useModule(UIBounds)

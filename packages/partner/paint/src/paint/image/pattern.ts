@@ -4,6 +4,7 @@ import { IUI, ILeafPaint, IMatrixData } from '@leafer-ui/interface'
 
 
 const { get, scale, copy } = MatrixHelper
+const { round } = Math
 
 export function createPattern(ui: IUI, paint: ILeafPaint, pixelRatio: number): boolean {
 
@@ -67,14 +68,8 @@ export function createPattern(ui: IUI, paint: ILeafPaint, pixelRatio: number): b
             scale(imageMatrix, 1 / scaleX, 1 / scaleY)
         }
 
-        const pattern = Platform.canvas.createPattern(image.getCanvas(width < 1 ? 1 : width, height < 1 ? 1 : height, opacity) as any, repeat || (Platform.origin.noRepeat || 'no-repeat'))
-
-        try {
-            if (paint.transform) paint.transform = null
-            if (imageMatrix) pattern.setTransform ? pattern.setTransform(imageMatrix) : paint.transform = imageMatrix
-        } catch {
-            paint.transform = imageMatrix
-        }
+        const canvas = image.getCanvas(width < 1 ? 1 : round(width), height < 1 ? 1 : round(height), opacity)
+        const pattern = image.getPattern(canvas, repeat || (Platform.origin.noRepeat || 'no-repeat'), imageMatrix, paint)
 
         paint.style = pattern
         paint.patternId = id

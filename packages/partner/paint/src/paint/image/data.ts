@@ -11,7 +11,6 @@ const { get, translate } = MatrixHelper
 export function createData(leafPaint: ILeafPaint, image: ILeaferImage, paint: IImagePaint, box: IBoundsData): void {
     let { width, height } = image
 
-
     const { opacity, mode, offset, scale, size, rotation, blendMode, repeat } = paint
     const sameBox = box.width === width && box.height === height
     if (blendMode) leafPaint.blendMode = blendMode

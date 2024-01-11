@@ -1,21 +1,38 @@
 import { IBoundsData, IImageEvent, ILeaferImage, IObject } from '@leafer/interface'
-import { ImageEvent, ImageManager } from '@leafer/core'
+import { Bounds, BoundsHelper, ImageEvent, ImageManager } from '@leafer/core'
 
 import { IUI, IImagePaint, ILeafPaint } from '@leafer-ui/interface'
 
 import { createData } from './data'
 
 
-export function image(ui: IUI, attrName: string, attrValue: IImagePaint, box: IBoundsData, firstUse: boolean): ILeafPaint {
+interface IImagePaintCache {
+    leafPaint: ILeafPaint
+    paint: IImagePaint
+    boxBounds: IBoundsData
+}
 
-    const leafPaint: ILeafPaint = { type: attrValue.type }
-    const image = leafPaint.image = ImageManager.get(attrValue)
+let cache: IImagePaintCache, box = new Bounds()
+const { isSame } = BoundsHelper
 
-    const event: IImageEvent = (firstUse || image.loading) && { image, attrName, attrValue }
+export function image(ui: IUI, attrName: string, paint: IImagePaint, boxBounds: IBoundsData, firstUse: boolean): ILeafPaint {
+    let leafPaint: ILeafPaint, event: IImageEvent
+    const image = ImageManager.get(paint)
+
+    if (cache && paint === cache.paint && isSame(boxBounds, cache.boxBounds)) {
+        leafPaint = cache.leafPaint
+    } else {
+        leafPaint = { type: paint.type }
+        leafPaint.image = image
+
+        cache = image.use > 1 ? { leafPaint, paint, boxBounds: box.set(boxBounds) } : null
+    }
+
+    if (firstUse || image.loading) event = { image, attrName, attrValue: paint }
 
     if (image.ready) {
 
-        checkSizeAndCreateData(ui, attrName, attrValue, image, leafPaint, box)
+        checkSizeAndCreateData(ui, attrName, paint, image, leafPaint, boxBounds)
 
         if (firstUse) {
             onLoad(ui, event)
@@ -32,15 +49,15 @@ export function image(ui: IUI, attrName: string, attrValue: IImagePaint, box: IB
 
         leafPaint.loadId = image.load(
             () => {
-                leafPaint.loadId = null
                 if (!ui.destroyed) {
-                    if (checkSizeAndCreateData(ui, attrName, attrValue, image, leafPaint, box)) ui.forceUpdate('surface')
+                    if (checkSizeAndCreateData(ui, attrName, paint, image, leafPaint, boxBounds)) ui.forceUpdate('surface')
                     onLoadSuccess(ui, event)
                 }
+                leafPaint.loadId = null
             },
             (error) => {
-                leafPaint.loadId = null
                 onLoadError(ui, event, error)
+                leafPaint.loadId = null
             }
         )
 
@@ -50,22 +67,22 @@ export function image(ui: IUI, attrName: string, attrValue: IImagePaint, box: IB
 }
 
 
-function checkSizeAndCreateData(ui: IUI, attrName: string, attrValue: IImagePaint, image: ILeaferImage, leafPaint: ILeafPaint, box: IBoundsData): boolean {
+function checkSizeAndCreateData(ui: IUI, attrName: string, paint: IImagePaint, image: ILeaferImage, leafPaint: ILeafPaint, boxBounds: IBoundsData): boolean {
     if (attrName === 'fill' && !ui.__.__naturalWidth) {
-        const { __: d } = ui
-        d.__naturalWidth = image.width
-        d.__naturalHeight = image.height
-        if (d.__autoWidth || d.__autoHeight) {
+        const data = ui.__
+        data.__naturalWidth = image.width
+        data.__naturalHeight = image.height
+        if (data.__autoWidth || data.__autoHeight) {
             ui.forceUpdate('width')
             if (ui.__proxyData) {
-                ui.setProxyAttr('width', ui.__.width)
-                ui.setProxyAttr('height', ui.__.height)
+                ui.setProxyAttr('width', data.width)
+                ui.setProxyAttr('height', data.height)
             }
             return false
         }
     }
 
-    createData(leafPaint, image, attrValue, box)
+    if (!leafPaint.data) createData(leafPaint, image, paint, boxBounds)
     return true
 }
 
@@ -86,6 +103,7 @@ function onLoadError(ui: IUI, event: IImageEvent, error: string | IObject,): voi
     ui.forceUpdate('surface')
     emit(ui, ImageEvent.ERROR, event)
 }
+
 
 function emit(ui: IUI, type: string, data: IImageEvent): void {
     if (ui.hasEvent(type)) ui.emitEvent(new ImageEvent(type, data))
