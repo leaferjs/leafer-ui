@@ -1,5 +1,5 @@
-import { IUI, IPaint, ILeafPaint, IRGB, IBooleanMap, IImagePaint, IObject } from '@leafer-ui/interface'
-import { ColorConvert, ImageManager } from '@leafer-ui/core'
+import { IUI, IPaint, ILeafPaint, IRGB, IBooleanMap, IObject } from '@leafer-ui/interface'
+import { ColorConvert } from '@leafer-ui/core'
 
 import { image } from "./paint/image/image"
 import { linearGradient } from './paint/linear'
@@ -28,18 +28,13 @@ export function compute(attrName: 'fill' | 'stroke', ui: IUI): void {
 
     (data as IObject)['_' + attrName] = value.length ? value : undefined
 
-    // check png / svg / webp
-
-    let isPixel
-    if (paints.length === 1) {
-        const paint = paints[0] as IImagePaint
-        if (paint.type === 'image') isPixel = ImageManager.isPixel(paint)
-    }
+    let hasOpacityPixel
+    if (value.length && value[0].image) hasOpacityPixel = value[0].image.hasOpacityPixel
 
     if (attrName === 'fill') {
-        data.__pixelFill = isPixel
+        data.__pixelFill = hasOpacityPixel
     } else {
-        data.__pixelStroke = isPixel
+        data.__pixelStroke = hasOpacityPixel
     }
 }
 
