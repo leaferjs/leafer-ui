@@ -11,25 +11,21 @@ import { recycleImage } from './paint/image'
 let recycleMap: IBooleanMap
 
 export function compute(attrName: 'fill' | 'stroke', ui: IUI): void {
-    const value: ILeafPaint[] = []
-    const data = ui.__
+    const data = ui.__, leafPaints: ILeafPaint[] = []
 
-    let item: ILeafPaint
-    let paints = data.__input[attrName] as IPaint[]
-
+    let paints: IPaint[] = data.__input[attrName], hasOpacityPixel: boolean
     if (!(paints instanceof Array)) paints = [paints]
 
     recycleMap = recycleImage(attrName, data)
 
-    for (let i = 0, len = paints.length; i < len; i++) {
+    for (let i = 0, len = paints.length, item: ILeafPaint; i < len; i++) {
         item = getLeafPaint(attrName, paints[i], ui)
-        if (item) value.push(item)
+        if (item) leafPaints.push(item)
     }
 
-    (data as IObject)['_' + attrName] = value.length ? value : undefined
+    (data as IObject)['_' + attrName] = leafPaints.length ? leafPaints : undefined
 
-    let hasOpacityPixel
-    if (value.length && value[0].image) hasOpacityPixel = value[0].image.hasOpacityPixel
+    if (leafPaints.length && leafPaints[0].image) hasOpacityPixel = leafPaints[0].image.hasOpacityPixel
 
     if (attrName === 'fill') {
         data.__pixelFill = hasOpacityPixel
@@ -39,7 +35,7 @@ export function compute(attrName: 'fill' | 'stroke', ui: IUI): void {
 }
 
 
-function getLeafPaint(attrName: string, paint: IPaint, ui: IUI,): ILeafPaint {
+function getLeafPaint(attrName: string, paint: IPaint, ui: IUI): ILeafPaint {
     if (typeof paint !== 'object' || paint.visible === false || paint.opacity === 0) return undefined
     const { boxBounds } = ui.__layout
 
