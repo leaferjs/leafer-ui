@@ -1,5 +1,5 @@
 import { ILeaferCanvas, IRenderer, ILayouter, ISelector, IWatcher, IInteraction, ILeaferConfig, ICanvasManager, IHitCanvasManager, IAutoBounds, IScreenSizeData, IResizeEvent, ILeaf, IEventListenerId, ITimer, IValue, IObject, IControl, IPointData, IBounds } from '@leafer/interface'
-import { AutoBounds, LayoutEvent, ResizeEvent, LeaferEvent, CanvasManager, HitCanvasManager, ImageManager, DataHelper, Creator, Run, Debug, RenderEvent, AnimateEvent, registerUI, boundsType, canvasSizeAttrs, dataProcessor, PluginManager, WaitHelper, WatchEvent } from '@leafer/core'
+import { AutoBounds, LayoutEvent, ResizeEvent, LeaferEvent, CanvasManager, HitCanvasManager, ImageManager, DataHelper, Creator, Run, Debug, RenderEvent, registerUI, boundsType, canvasSizeAttrs, dataProcessor, PluginManager, WaitHelper, WatchEvent } from '@leafer/core'
 
 import { ILeaferInputData, ILeaferData, IFunction, IUIInputData, ILeafer, IGroup, IApp, IEditorBase } from '@leafer-ui/interface'
 import { LeaferTypeCreator } from '@leafer-ui/type'
@@ -290,7 +290,7 @@ export class Leafer extends Group implements ILeafer {
         WaitHelper.run(this.__viewReadyWait)
     }
 
-    protected __onAnimateFrame(): void {
+    protected __onNextRender(): void {
         if (this.viewReady) {
             WaitHelper.run(this.__nextRenderWait)
 
@@ -353,7 +353,7 @@ export class Leafer extends Group implements ILeafer {
         this.once(RenderEvent.END, () => this.__onViewReady())
         this.__eventIds.push(
             this.on_(WatchEvent.DATA, this.__onWatchData, this),
-            this.on_(AnimateEvent.FRAME, this.__onAnimateFrame, this),
+            this.on_(RenderEvent.NEXT, this.__onNextRender, this),
             this.on_(LayoutEvent.CHECK_UPDATE, this.__checkUpdateLayout, this)
         )
     }
