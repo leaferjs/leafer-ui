@@ -33,6 +33,8 @@ export class Leafer extends Group implements ILeafer {
     public get imageReady(): boolean { return this.viewReady && ImageManager.isComplete }
     public get layoutLocked() { return !this.layouter.running }
 
+    public transforming: boolean
+
     public view: unknown
 
     //  manager
@@ -290,7 +292,7 @@ export class Leafer extends Group implements ILeafer {
 
     protected __onAnimateFrame(): void {
         if (this.viewReady) {
-            if (this.__nextRenderWait.length) WaitHelper.run(this.__nextRenderWait)
+            WaitHelper.run(this.__nextRenderWait)
 
             const { imageReady } = this
             if (imageReady && !this.viewCompleted) this.__checkViewCompleted()
