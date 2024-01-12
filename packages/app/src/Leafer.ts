@@ -333,8 +333,15 @@ export class Leafer extends Group implements ILeafer {
         }
     }
 
-    public nextRender(item: IFunction): void {
-        this.__nextRenderWait.push(item)
+    public nextRender(item: IFunction, off?: 'off'): void {
+        const list = this.__nextRenderWait
+        if (off) {
+            for (let i = 0; i < list.length; i++) {
+                if (list[i] === item) { list.splice(i, 1); break }
+            }
+        } else {
+            list.push(item)
+        }
     }
 
     protected __checkUpdateLayout(): void {
