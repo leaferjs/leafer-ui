@@ -121,7 +121,8 @@ export class Leafer extends Group implements ILeafer {
             start = parentApp.running
         } else {
             this.selector = Creator.selector(this)
-            this.__controllers.unshift(this.interaction = Creator.interaction(this, this.canvas, this.selector, config))
+            this.interaction = Creator.interaction(this, this.canvas, this.selector, config)
+            if (this.interaction) this.__controllers.unshift(this.interaction)
 
             this.canvasManager = new CanvasManager()
             this.hitCanvasManager = new HitCanvasManager()
