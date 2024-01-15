@@ -1,5 +1,5 @@
 import { IPointData, INumber } from '@leafer/interface'
-import { PathBounds, PathCommandDataHelper, PointHelper, boundsType, pathType, affectStrokeBoundsType, dataProcessor, registerUI, PathScaler } from '@leafer/core'
+import { PathBounds, PathCommandDataHelper, PointHelper, boundsType, pathType, affectStrokeBoundsType, dataProcessor, registerUI } from '@leafer/core'
 
 import { ILine, ILineData, ILineInputData, IStrokeAlign } from '@leafer-ui/interface'
 import { LineData } from '@leafer-ui/data'
@@ -82,24 +82,6 @@ export class Line extends UI implements ILine {
             toBounds(this.__.__pathForRender, this.__layout.boxBounds)
         } else {
             super.__updateBoxBounds()
-        }
-    }
-
-    public __scaleResize(scaleX: number, scaleY: number): void {
-        if (this.points) {
-            PathScaler.scalePoints(this.__.points, scaleX, scaleY)
-            this.points = this.__.points
-        } else {
-
-            if (this.__tag === 'Line') {
-                const point = this.toPoint
-                point.x *= scaleX
-                point.y *= scaleY
-                this.toPoint = point
-            } else {
-                // Polygon ...
-                super.__scaleResize(scaleX, scaleY)
-            }
         }
     }
 

@@ -1,12 +1,10 @@
-import { Branch, useModule, dataProcessor, registerUI, UICreator, MatrixHelper } from '@leafer/core'
+import { Branch, useModule, dataProcessor, registerUI, UICreator } from '@leafer/core'
 
 import { IGroup, IGroupData, IGroupInputData, IUI, IUIInputData } from '@leafer-ui/interface'
 import { GroupData } from '@leafer-ui/data'
 
 import { UI } from './UI'
 
-
-const matrix = MatrixHelper.get()
 
 @useModule(Branch)
 @registerUI()
@@ -72,15 +70,6 @@ export class Group extends UI implements IGroup {
         const data = super.toJSON()
         data.children = this.children.map(child => child.toJSON())
         return data
-    }
-
-    public __scaleResize(scaleX: number, scaleY: number): void {
-        const { children } = this
-        for (let i = 0; i < children.length; i++) {
-            matrix.a = scaleX // must update
-            matrix.d = scaleY
-            children[i].transform(matrix, true)
-        }
     }
 
     // add

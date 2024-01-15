@@ -30,15 +30,6 @@ export class Box extends Group implements IBox {
         this.__layout.renderChanged || this.__layout.renderChange()
     }
 
-    public __scaleResize(scaleX: number, scaleY: number): void {
-        if (this.__.__autoBounds && this.children.length) {
-            super.__scaleResize(scaleX, scaleY)
-        } else {
-            this.width *= scaleX
-            this.height *= scaleY
-        }
-    }
-
     @rewrite(rect.__updateStrokeSpread)
     public __updateStrokeSpread(): number { return 0 }
 
