@@ -1,5 +1,5 @@
 import { ILeaferCanvas, IRenderer, ILayouter, ISelector, IWatcher, IInteraction, ILeaferConfig, ICanvasManager, IHitCanvasManager, IAutoBounds, IScreenSizeData, IResizeEvent, ILeaf, IEventListenerId, ITimer, IValue, IObject, IControl, IPointData, IBounds, ILeaferType } from '@leafer/interface'
-import { AutoBounds, LayoutEvent, ResizeEvent, LeaferEvent, CanvasManager, HitCanvasManager, ImageManager, DataHelper, Creator, Run, Debug, RenderEvent, registerUI, boundsType, canvasSizeAttrs, dataProcessor, WaitHelper, WatchEvent } from '@leafer/core'
+import { AutoBounds, LayoutEvent, ResizeEvent, LeaferEvent, CanvasManager, ImageManager, DataHelper, Creator, Run, Debug, RenderEvent, registerUI, boundsType, canvasSizeAttrs, dataProcessor, WaitHelper, WatchEvent } from '@leafer/core'
 
 import { ILeaferInputData, ILeaferData, IFunction, IUIInputData, ILeafer, IGroup, IApp, IEditorBase } from '@leafer-ui/interface'
 import { LeaferData } from '@leafer-ui/data'
@@ -122,10 +122,13 @@ export class Leafer extends Group implements ILeafer {
         } else {
             this.selector = Creator.selector(this)
             this.interaction = Creator.interaction(this, this.canvas, this.selector, config)
-            if (this.interaction) this.__controllers.unshift(this.interaction)
+
+            if (this.interaction) {
+                this.__controllers.unshift(this.interaction)
+                this.hitCanvasManager = Creator.hitCanvasManager()
+            }
 
             this.canvasManager = new CanvasManager()
-            this.hitCanvasManager = new HitCanvasManager()
 
             start = config.start
         }
@@ -390,9 +393,9 @@ export class Leafer extends Group implements ILeafer {
                     this.__controllers.length = 0
 
                     if (!this.parent) {
-                        this.selector.destroy()
+                        if (this.selector) this.selector.destroy()
+                        if (this.hitCanvasManager) this.hitCanvasManager.destroy()
                         this.canvasManager.destroy()
-                        this.hitCanvasManager.destroy()
                     }
 
                     this.canvas.destroy()

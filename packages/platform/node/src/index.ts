@@ -6,10 +6,11 @@ export * from '@leafer-ui/partner'
 
 import { ICreator } from '@leafer/interface'
 import { Creator, LeaferCanvas } from '@leafer/node'
-import { InteractionBase } from '@leafer/interaction'
+import { InteractionBase, HitCanvasManager } from '@leafer/interaction'
 
 
 Object.assign(Creator, {
     interaction: (target, canvas, selector, options?) => { return new InteractionBase(target, canvas, selector, options) },
-    hitCanvas: (options?, manager?) => new LeaferCanvas(options, manager)
+    hitCanvas: (options?, manager?) => new LeaferCanvas(options, manager),
+    hitCanvasManager: () => new HitCanvasManager()
 } as ICreator)
