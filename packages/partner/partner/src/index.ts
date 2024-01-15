@@ -1,5 +1,5 @@
 // leaferui's partner, allow replace
-import { Paint, Effect, TextConvert, ColorConvert, Export } from '@leafer-ui/core'
+import { Paint, Effect, TextConvert, ColorConvert, Export } from '@leafer-ui/draw'
 
 import * as UIPaint from '@leafer-ui/paint'
 import * as UIEffect from '@leafer-ui/effect'
@@ -13,4 +13,3 @@ Object.assign(Effect, UIEffect)
 Object.assign(TextConvert, UITextConvert)
 Object.assign(ColorConvert, UIColorConvert)
 Object.assign(Export, UIExport)
-

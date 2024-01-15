@@ -1,5 +1,5 @@
 import { IUI, IPaint, ILeafPaint, IRGB, IBooleanMap, IObject } from '@leafer-ui/interface'
-import { ColorConvert } from '@leafer-ui/core'
+import { ColorConvert } from '@leafer-ui/draw'
 
 import { image } from "./paint/image/image"
 import { linearGradient } from './paint/linear'

@@ -18,8 +18,12 @@
     "leaferjs"
   ],
   "dependencies": {
+    "@leafer-ui/draw": "1.0.0-rc.9",
     "@leafer-ui/paint": "1.0.0-rc.9",
-    "@leafer-ui/effect": "1.0.0-rc.9"
+    "@leafer-ui/effect": "1.0.0-rc.9",
+    "@leafer-ui/text": "1.0.0-rc.9",
+    "@leafer-ui/color": "1.0.0-rc.9",
+    "@leafer-ui/export": "1.0.0-rc.9"
   },
   "devDependencies": {
      "@leafer-ui/interface": "1.0.0-rc.9"
