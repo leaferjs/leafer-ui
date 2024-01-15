@@ -1,5 +1,6 @@
 export * from '@leafer/miniapp'
 export * from '@leafer/interaction-miniapp'
+export * from '@leafer/partner'
 
 export * from '@leafer-ui/core'
 export * from '@leafer-ui/partner'

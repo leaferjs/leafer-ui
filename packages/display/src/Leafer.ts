@@ -1,10 +1,9 @@
-import { ILeaferCanvas, IRenderer, ILayouter, ISelector, IWatcher, IInteraction, ILeaferConfig, ICanvasManager, IHitCanvasManager, IAutoBounds, IScreenSizeData, IResizeEvent, ILeaf, IEventListenerId, ITimer, IValue, IObject, IControl, IPointData, IBounds } from '@leafer/interface'
-import { AutoBounds, LayoutEvent, ResizeEvent, LeaferEvent, CanvasManager, HitCanvasManager, ImageManager, DataHelper, Creator, Run, Debug, RenderEvent, registerUI, boundsType, canvasSizeAttrs, dataProcessor, PluginManager, WaitHelper, WatchEvent } from '@leafer/core'
+import { ILeaferCanvas, IRenderer, ILayouter, ISelector, IWatcher, IInteraction, ILeaferConfig, ICanvasManager, IHitCanvasManager, IAutoBounds, IScreenSizeData, IResizeEvent, ILeaf, IEventListenerId, ITimer, IValue, IObject, IControl, IPointData, IBounds, ILeaferType } from '@leafer/interface'
+import { AutoBounds, LayoutEvent, ResizeEvent, LeaferEvent, CanvasManager, HitCanvasManager, ImageManager, DataHelper, Creator, Run, Debug, RenderEvent, registerUI, boundsType, canvasSizeAttrs, dataProcessor, WaitHelper, WatchEvent } from '@leafer/core'
 
 import { ILeaferInputData, ILeaferData, IFunction, IUIInputData, ILeafer, IGroup, IApp, IEditorBase } from '@leafer-ui/interface'
-import { LeaferTypeCreator } from '@leafer-ui/type'
 import { LeaferData } from '@leafer-ui/data'
-import { Group } from '@leafer-ui/display'
+import { Group } from './Group'
 
 
 const debug = Debug.get('Leafer')
@@ -101,7 +100,8 @@ export class Leafer extends Group implements ILeafer {
 
         let start: boolean
         const { config } = this
-        LeaferTypeCreator.run(config.type, this)
+
+        this.initType(config.type) // LeaferType
 
         // render / layout
         this.canvas = Creator.canvas(config)
@@ -137,8 +137,12 @@ export class Leafer extends Group implements ILeafer {
 
         if (start) this.__startTimer = setTimeout(this.start.bind(this))
 
-        PluginManager.onLeafer(this)
+        this.onInit() // can rewrite init event
     }
+
+    public onInit(): void { }
+
+    public initType(_type: ILeaferType): void { } // rewrite in @leafer-ui/type
 
     public set(data: IUIInputData): void {
         if (!this.children) {

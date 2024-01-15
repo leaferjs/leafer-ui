@@ -12,7 +12,6 @@ export const LeaferTypeCreator = {
 
     list: {} as ILeaferTypeList,
 
-
     register(name: string, fn: ILeaferTypeFunction): void {
         if (list[name]) {
             debug.repeat(name)
@@ -22,7 +21,7 @@ export const LeaferTypeCreator = {
     },
 
     run(name: string, leafer: ILeaferBase): void {
-        const fn = LeaferTypeCreator.list[name]
+        const fn = list[name]
         if (fn) {
             fn(leafer)
         } else {
@@ -32,8 +31,7 @@ export const LeaferTypeCreator = {
 
 }
 
-const { list } = LeaferTypeCreator
+const { list, register } = LeaferTypeCreator
 
-LeaferTypeCreator.register('draw', draw)
-LeaferTypeCreator.register('user', draw)
-LeaferTypeCreator.register('design', design)
+register('draw', draw)
+register('design', design)

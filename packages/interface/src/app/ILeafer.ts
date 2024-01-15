@@ -1,4 +1,4 @@
-import { IControl, ILeaferAttrData, ILeaferConfig } from '@leafer/interface'
+import { IControl, ILeaferAttrData, ILeaferConfig, ILeaferType } from '@leafer/interface'
 import { IApp } from './IApp'
 import { IGroup } from '../IUI'
 import { IEditorBase } from '../editor/IEditor'
@@ -15,4 +15,7 @@ export interface ILeafer extends IGroup, ILeaferAttrData, IControl {
     sky?: ILeafer
 
     userConfig?: ILeaferConfig
+
+    onInit(): void
+    initType(type: ILeaferType): void
 }

@@ -1,10 +1,12 @@
 export * from '@leafer/node'
+export * from '@leafer/partner'
 
 export * from '@leafer-ui/core'
 export * from '@leafer-ui/partner'
 
 import { ICreator } from '@leafer/interface'
-import { Creator, InteractionBase, LeaferCanvas } from '@leafer/node'
+import { Creator, LeaferCanvas } from '@leafer/node'
+import { InteractionBase } from '@leafer/interaction'
 
 
 Object.assign(Creator, {

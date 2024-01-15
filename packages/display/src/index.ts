@@ -1,5 +1,6 @@
 export { UI } from './UI'
 
+export { Leafer } from './Leafer'
 export { Group } from './Group'
 export { Box } from './Box'
 export { Frame } from './Frame'

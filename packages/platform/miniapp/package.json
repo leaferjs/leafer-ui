@@ -22,6 +22,7 @@
   "dependencies": {
     "@leafer/core": "1.0.0-rc.9",
     "@leafer/miniapp": "1.0.0-rc.9",
+    "@leafer/partner": "1.0.0-rc.9",
     "@leafer/interaction-miniapp": "1.0.0-rc.9",
     "@leafer-ui/core": "1.0.0-rc.9",
     "@leafer-ui/partner": "1.0.0-rc.9",
