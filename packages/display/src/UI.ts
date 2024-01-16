@@ -5,13 +5,12 @@ import { IUI, IShadowEffect, IBlurEffect, IStrokeAlign, IStrokeJoin, IStrokeCap,
 import { effectType } from '@leafer-ui/decorator'
 
 import { UIData } from '@leafer-ui/data'
-import { UIBounds, UIHit, UIRender } from '@leafer-ui/display-module'
+import { UIBounds, UIRender } from '@leafer-ui/display-module'
 
 import { Export } from '@leafer-ui/external'
 
 
 @useModule(UIBounds)
-@useModule(UIHit)
 @useModule(UIRender)
 @rewriteAble()
 export class UI extends Leaf implements IUI {

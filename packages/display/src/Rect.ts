@@ -25,14 +25,4 @@ export class Rect extends UI implements IRect {
     @rewrite(UI.prototype.__drawPathByBox)
     public __drawPathByData(_drawer: IPathDrawer, _data: IPathCommandData): void { }
 
-    // hit 
-
-    public __updateHitCanvas(): void {
-        if (this.stroke || this.cornerRadius) super.__updateHitCanvas()
-    }
-
-    public __hitFill(inner: IRadiusPointData, windingRule?: string): boolean {
-        return this.__hitCanvas ? super.__hitFill(inner, windingRule) : BoundsHelper.hitRadiusPoint(this.__layout.boxBounds, inner)
-    }
-
 }

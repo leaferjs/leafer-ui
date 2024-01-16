@@ -1,7 +1,7 @@
 {
-  "name": "@leafer-ui/hit",
+  "name": "@leafer-ui/scale",
   "version": "1.0.0-rc.9",
-  "description": "@leafer-ui/hit",
+  "description": "@leafer-ui/scale",
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
   "main": "src/index.ts",
@@ -11,12 +11,15 @@
     "type": "git",
     "url": "https://github.com/leaferjs/ui.git"
   },
-  "homepage": "https://github.com/leaferjs/ui/tree/main/packages/hit",
+  "homepage": "https://github.com/leaferjs/ui/tree/main/packages/scale",
   "bugs": "https://github.com/leaferjs/ui/issues",
   "keywords": [
     "leafer-ui",
     "leaferjs"
   ],
+  "dependencies": {
+    "@leafer-ui/draw": "1.0.0-rc.9"
+  },
   "devDependencies": {
      "@leafer/interface": "1.0.0-rc.9",
      "@leafer-ui/interface": "1.0.0-rc.9"
