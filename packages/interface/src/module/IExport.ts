@@ -16,5 +16,5 @@ export interface IExportResultFunction {
 
 export interface IExportModule {
     running?: boolean
-    export?(leaf: ILeaf, filename: IExportFileType | string, options?: IExportOptions | number | boolean): Promise<IExportResult>
+    export(leaf: ILeaf, filename: IExportFileType | string, options?: IExportOptions | number | boolean): Promise<IExportResult>
 }

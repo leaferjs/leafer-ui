@@ -12,6 +12,8 @@ export type IFill = IPaint | IPaint[] | IPaintString
 
 export type IStroke = IPaint | IPaint[] | IPaintString
 
+export type IPaintAttr = 'fill' | 'stroke'
+
 export interface IPaintBase {
     type: IPaintType
     blendMode?: IBlendMode

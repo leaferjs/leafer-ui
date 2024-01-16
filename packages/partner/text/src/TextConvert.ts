@@ -1,6 +1,6 @@
 import { Platform, Direction4 } from '@leafer/core'
 
-import { ITextConvertModule, ITextData, ITextDrawData } from '@leafer-ui/interface'
+import { ITextData, ITextDrawData } from '@leafer-ui/interface'
 
 import { createRows } from './TextRows'
 import { layoutChar } from './CharLayout'
@@ -11,52 +11,48 @@ import { decorationText } from './TextDecoration'
 
 const { top, right, bottom, left } = Direction4
 
-export const TextConvert: ITextConvertModule = {
+export function getDrawData(content: string, style: ITextData): ITextDrawData {
 
-    getDrawData(content: string, style: ITextData): ITextDrawData {
+    if (typeof content !== 'string') content = String(content)
 
-        if (typeof content !== 'string') content = String(content)
+    let x = 0, y = 0
 
-        let x = 0, y = 0
+    let width = style.__getInput('width') || 0
+    let height = style.__getInput('height') || 0
 
-        let width = style.__getInput('width') || 0
-        let height = style.__getInput('height') || 0
+    const { textDecoration, __font, __padding: padding } = style
 
-        const { textDecoration, __font, __padding: padding } = style
-
-        if (padding) {
-            if (width) {
-                x = padding[left]
-                width -= (padding[right] + padding[left])
-            }
-            if (height) {
-                y = padding[top]
-                height -= (padding[top] + padding[bottom])
-            }
+    if (padding) {
+        if (width) {
+            x = padding[left]
+            width -= (padding[right] + padding[left])
         }
-
-        const drawData: ITextDrawData = {
-            bounds: { x, y, width, height },
-            rows: [],
-            paraNumber: 0,
-            font: Platform.canvas.font = __font
+        if (height) {
+            y = padding[top]
+            height -= (padding[top] + padding[bottom])
         }
-
-        createRows(drawData, content, style) // set rows, paraNumber
-
-        if (padding) padAutoText(padding, drawData, style, width, height)
-
-        layoutText(drawData, style) // set bounds
-
-        layoutChar(drawData, style, width, height) // set char.x
-
-        if (drawData.overflow) clipText(drawData, style)
-
-        if (textDecoration !== 'none') decorationText(drawData, style)
-
-        return drawData
-
     }
+
+    const drawData: ITextDrawData = {
+        bounds: { x, y, width, height },
+        rows: [],
+        paraNumber: 0,
+        font: Platform.canvas.font = __font
+    }
+
+    createRows(drawData, content, style) // set rows, paraNumber
+
+    if (padding) padAutoText(padding, drawData, style, width, height)
+
+    layoutText(drawData, style) // set bounds
+
+    layoutChar(drawData, style, width, height) // set char.x
+
+    if (drawData.overflow) clipText(drawData, style)
+
+    if (textDecoration !== 'none') decorationText(drawData, style)
+
+    return drawData
 
 }
 

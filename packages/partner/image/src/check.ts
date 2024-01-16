@@ -3,7 +3,7 @@ import { ILeaferCanvas } from '@leafer/interface'
 import { ImageManager, Platform } from '@leafer/core'
 
 import { IUI, ILeafPaint } from '@leafer-ui/interface'
-import { Export } from '@leafer-ui/external'
+import { Export } from '@leafer-ui/draw'
 
 import { createPattern } from './pattern'
 

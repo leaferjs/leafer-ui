@@ -1,7 +1,7 @@
 import { IPathDrawer, IPathCommandData } from '@leafer/interface'
-import { BoundsHelper, dataProcessor, registerUI, rewrite, rewriteAble, useModule } from '@leafer/core'
+import { dataProcessor, registerUI, rewrite, rewriteAble, useModule } from '@leafer/core'
 
-import { IRect, IRectInputData, IRectData, IRadiusPointData } from '@leafer-ui/interface'
+import { IRect, IRectInputData, IRectData } from '@leafer-ui/interface'
 import { RectData } from '@leafer-ui/data'
 import { RectRender } from '@leafer-ui/display-module'
 

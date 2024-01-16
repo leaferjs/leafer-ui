@@ -1,9 +1,9 @@
 import { ILeaferCanvas, IRenderOptions } from '@leafer/interface'
 
 import { IUI, ITextRowData, ILeafPaint, IStrokeAlign, ILeafStrokePaint } from '@leafer-ui/interface'
+import { PaintImage } from "@leafer-ui/external"
 
 import { fillText } from './FillText'
-import { checkImage } from './paint/image'
 
 
 export function strokeText(stroke: string | ILeafPaint[], ui: IUI, canvas: ILeaferCanvas, renderOptions?: IRenderOptions): void {
@@ -71,7 +71,7 @@ export function drawStrokesStyle(strokes: ILeafStrokePaint[], isText: boolean, u
     for (let i = 0, len = strokes.length; i < len; i++) {
         item = strokes[i]
 
-        if (item.image && checkImage(ui, canvas, item, false)) continue
+        if (item.image && PaintImage.checkImage(ui, canvas, item, false)) continue
 
         if (item.style) {
 

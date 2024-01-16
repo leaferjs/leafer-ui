@@ -1,22 +1,18 @@
-import { IUI, IPaint, ILeafPaint, IRGB, IBooleanMap, IObject } from '@leafer-ui/interface'
+import { IUI, IPaint, ILeafPaint, IRGB, IBooleanMap, IObject, IPaintAttr } from '@leafer-ui/interface'
 import { ColorConvert } from '@leafer-ui/draw'
 
-import { image } from "./paint/image/image"
-import { linearGradient } from './paint/linear'
-import { radialGradient } from "./paint/radial"
-import { conicGradient } from "./paint/conic"
-import { recycleImage } from './paint/image'
+import { PaintImage, PaintGradient } from "@leafer-ui/external"
 
 
 let recycleMap: IBooleanMap
 
-export function compute(attrName: 'fill' | 'stroke', ui: IUI): void {
+export function compute(attrName: IPaintAttr, ui: IUI): void {
     const data = ui.__, leafPaints: ILeafPaint[] = []
 
     let paints: IPaint[] = data.__input[attrName], hasOpacityPixel: boolean
     if (!(paints instanceof Array)) paints = [paints]
 
-    recycleMap = recycleImage(attrName, data)
+    recycleMap = PaintImage.recycleImage(attrName, data)
 
     for (let i = 0, len = paints.length, item: ILeafPaint; i < len; i++) {
         item = getLeafPaint(attrName, paints[i], ui)
@@ -44,13 +40,13 @@ function getLeafPaint(attrName: string, paint: IPaint, ui: IUI): ILeafPaint {
             let { type, blendMode, color, opacity } = paint
             return { type, blendMode, style: ColorConvert.string(color, opacity) }
         case 'image':
-            return image(ui, attrName, paint, boxBounds, !recycleMap || !recycleMap[paint.url])
+            return PaintImage.image(ui, attrName, paint, boxBounds, !recycleMap || !recycleMap[paint.url])
         case 'linear':
-            return linearGradient(paint, boxBounds)
+            return PaintGradient.linearGradient(paint, boxBounds)
         case 'radial':
-            return radialGradient(paint, boxBounds)
+            return PaintGradient.radialGradient(paint, boxBounds)
         case 'angular':
-            return conicGradient(paint, boxBounds)
+            return PaintGradient.conicGradient(paint, boxBounds)
         default:
             return (paint as IRGB).r ? { type: 'solid', style: ColorConvert.string(paint) } : undefined
     }

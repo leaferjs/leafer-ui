@@ -2,7 +2,7 @@ import { INumber, IValue, IBoolean } from '@leafer/interface'
 import { LeafData, Debug } from '@leafer/core'
 
 import { IShadowEffect, IUI, IUIData, IUnitData, ILeafPaint } from '@leafer-ui/interface'
-import { Paint } from '@leafer-ui/external'
+import { Paint, PaintImage } from '@leafer-ui/external'
 
 
 const emptyPaint: ILeafPaint = {}
@@ -67,7 +67,7 @@ export class UIData extends LeafData implements IUIData {
         if (typeof value === 'string' || !value) {
             if (this.__isFills) {
                 this.__removeInput('fill')
-                Paint.recycleImage('fill', this)
+                PaintImage.recycleImage('fill', this)
                 this.__isFills = false
                 if (this.__pixelFill) this.__pixelFill = false
             }
@@ -84,7 +84,7 @@ export class UIData extends LeafData implements IUIData {
         if (typeof value === 'string' || !value) {
             if (this.__isStrokes) {
                 this.__removeInput('stroke')
-                Paint.recycleImage('stroke', this)
+                PaintImage.recycleImage('stroke', this)
                 this.__isStrokes = false
                 if (this.__pixelStroke) this.__pixelStroke = false
             }

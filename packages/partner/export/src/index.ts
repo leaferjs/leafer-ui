@@ -4,11 +4,11 @@ import { TaskProcessor } from '@leafer/core'
 import { IExportModule, IExportOptions, IExportResult, IExportResultFunction } from '@leafer-ui/interface'
 
 
-export const Export: IExportModule = {
+export const ExportModule: IExportModule = {
 
     export(leaf: ILeaf, filename: IExportFileType | string, options?: IExportOptions | number | boolean): Promise<IExportResult> {
 
-        Export.running = true
+        this.running = true
         return addTask((success: IExportResultFunction) =>
 
             new Promise((resolve: IFunction) => {
@@ -52,7 +52,7 @@ export const Export: IExportModule = {
 
                         success({ data })
                         resolve()
-                        Export.running = false
+                        this.running = false
 
                         if (unreal) canvas.recycle()
                     })
@@ -60,7 +60,7 @@ export const Export: IExportModule = {
                 } else {
                     success({ data: false })
                     resolve()
-                    Export.running = false
+                    this.running = false
                 }
 
             })

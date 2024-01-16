@@ -1,8 +1,8 @@
 import { ILeaferCanvas } from '@leafer/interface'
 
 import { ILeafPaint, IUI } from '@leafer-ui/interface'
+import { PaintImage } from "@leafer-ui/external"
 
-import { checkImage } from './paint/image'
 import { fillText } from './FillText'
 
 
@@ -18,7 +18,7 @@ export function fills(fills: ILeafPaint[], ui: IUI, canvas: ILeaferCanvas): void
     for (let i = 0, len = fills.length; i < len; i++) {
         item = fills[i]
 
-        if (item.image && checkImage(ui, canvas, item, !__font)) continue
+        if (item.image && PaintImage.checkImage(ui, canvas, item, !__font)) continue
 
         if (item.style) {
 

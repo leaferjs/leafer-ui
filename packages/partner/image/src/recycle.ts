@@ -1,10 +1,10 @@
 import { IBooleanMap, ILeaferImage, IObject } from '@leafer/interface'
 import { ImageManager } from '@leafer/core'
 
-import { IImagePaint, ILeafPaint, IUIData } from '@leafer-ui/interface'
+import { IImagePaint, ILeafPaint, IPaintAttr, IUIData } from '@leafer-ui/interface'
 
 
-export function recycleImage(attrName: 'fill' | 'stroke', data: IUIData): IBooleanMap {
+export function recycleImage(attrName: IPaintAttr, data: IUIData): IBooleanMap {
     const paints = (data as IObject)['_' + attrName] as ILeafPaint[]
 
     if (paints instanceof Array) {

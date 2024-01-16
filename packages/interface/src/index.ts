@@ -24,7 +24,7 @@ export {
     IUITag, IUIInputData
 } from './IUI'
 
-export { IUnitData, IVectorPath, IShadowEffect, IBlurEffect, IGrayscaleEffect, IFill, IStroke, IStrokeAlign, IStrokeJoin, IStrokeCap, IArrowType, IRGB, IRGBA, IColor, IColorStop, IPaint, IGradientPaint, IImagePaint, IImagePaintMode, IFontWeight, ITextCase, ITextDecoration, ITextAlign, IVerticalAlign, IOverflow, ITextWrap, IRepeat } from './type/IType'
+export { IUnitData, IVectorPath, IShadowEffect, IBlurEffect, IGrayscaleEffect, IFill, IStroke, IPaintAttr, IStrokeAlign, IStrokeJoin, IStrokeCap, IArrowType, IRGB, IRGBA, IColor, IColorStop, IPaint, IGradientPaint, IImagePaint, IImagePaintMode, IFontWeight, ITextCase, ITextDecoration, ITextAlign, IVerticalAlign, IOverflow, ITextWrap, IRepeat } from './type/IType'
 export { ICornerRadiusString, IStrokeWidthString, IPaintString, IShadowString, IPercent, IDashPatternString, IColorString } from './type/IStringType'
 export { ILeafFill, ILeafPaint, ILeafPaintPatternData, ILeafPaintColor, ILeafStrokePaint, ILeafShadowEffect } from './type/IComputedType'
 
@@ -35,7 +35,7 @@ export { ITextConvertModule } from './module/ITextConvert'
 export { IColorConvertModule } from './module/IColorConvert'
 export { IExportModule, IExportOptions, IExportResult, IExportResultFunction } from './module/IExport'
 
-export { IPaintModule } from './module/IPaint'
+export { IPaintModule, IPaintImageModule, IPaintGradientModule } from './module/IPaint'
 export { IEffectModule } from './module/IEffect'
 export { ICachedShape } from './ICachedShape'
 
