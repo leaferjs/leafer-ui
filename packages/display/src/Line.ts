@@ -1,5 +1,5 @@
 import { IPointData, INumber } from '@leafer/interface'
-import { PathBounds, PathCommandDataHelper, PointHelper, boundsType, pathType, affectStrokeBoundsType, dataProcessor, registerUI } from '@leafer/core'
+import { PathBounds, PathCommandDataHelper, PointHelper, boundsType, pathType, affectStrokeBoundsType, dataProcessor, registerUI, getPointData } from '@leafer/core'
 
 import { ILine, ILineData, ILineInputData, IStrokeAlign } from '@leafer-ui/interface'
 import { LineData } from '@leafer-ui/data'
@@ -34,7 +34,7 @@ export class Line extends UI implements ILine {
 
     public get toPoint(): IPointData {
         const { width, rotation } = this.__
-        const to: IPointData = { x: 0, y: 0 }
+        const to: IPointData = getPointData()
 
         if (width) to.x = width
         if (rotation) rotate(to, rotation)
