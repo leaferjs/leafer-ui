@@ -37,8 +37,8 @@ export function stroke(stroke: string, ui: IUI, canvas: ILeaferCanvas, renderOpt
                 break
 
             case 'outside':
-                const out = canvas.getSameCanvas(true)
-                out.setStroke(stroke, strokeWidth * 2, ui.__)
+                const out = canvas.getSameCanvas(true, true)
+                out.setStroke(stroke, strokeWidth * 2, options)
 
                 ui.__drawRenderPath(out)
 
@@ -54,7 +54,6 @@ export function stroke(stroke: string, ui: IUI, canvas: ILeaferCanvas, renderOpt
                 }
 
                 out.recycle()
-
                 break
         }
 
@@ -92,10 +91,10 @@ export function strokes(strokes: ILeafPaint[], ui: IUI, canvas: ILeaferCanvas, r
 
             case 'outside':
                 const { renderBounds } = ui.__layout
-                const out = canvas.getSameCanvas(true)
+                const out = canvas.getSameCanvas(true, true)
                 ui.__drawRenderPath(out)
 
-                out.setStroke(undefined, strokeWidth * 2, ui.__)
+                out.setStroke(undefined, strokeWidth * 2, options)
 
                 drawStrokesStyle(strokes, false, ui, out)
 
