@@ -17,17 +17,6 @@ export class Group extends UI implements IGroup {
 
     declare public children: IUI[]
 
-    public set mask(child: IUI) {
-        if (this.__hasMask) this.__removeMask()
-        if (child) {
-            child.isMask = true
-            this.addAt(child, 0)
-        }
-    }
-    public get mask(): IUI {
-        return this.children.find(item => item.isMask)
-    }
-
     constructor(data?: IGroupInputData) {
         super(data)
         this.__setBranch()

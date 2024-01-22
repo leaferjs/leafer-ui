@@ -1,4 +1,4 @@
-import { ILeaferCanvas, IPathDrawer, IPathCommandData, IHitType, INumber, IBoolean, IString, IPathString, IExportFileType, IPointData, ICursorType, IAround, IFindMethod } from '@leafer/interface'
+import { ILeaferCanvas, IPathDrawer, IPathCommandData, IHitType, INumber, IBoolean, IString, IPathString, IExportFileType, IPointData, ICursorType, IMaskType, IAround, IFindMethod } from '@leafer/interface'
 import { Leaf, PathDrawer, surfaceType, dataType, positionType, boundsType, pathType, scaleType, rotationType, opacityType, sortType, maskType, dataProcessor, useModule, rewrite, rewriteAble, UICreator, PathCorner, hitType, strokeType, PathConvert, eraserType, cursorType, autoLayoutType, PathCreator } from '@leafer/core'
 
 import { IUI, IShadowEffect, IBlurEffect, IStrokeAlign, IStrokeJoin, IStrokeCap, IBlendMode, IDashPatternString, IShadowString, IGrayscaleEffect, IUIData, IGroup, IStrokeWidthString, ICornerRadiusString, IUIInputData, IExportOptions, IExportResult, IFill, IStroke, IArrowType, IFindUIMethod, IEditSize, ILeafer } from '@leafer-ui/interface'
@@ -53,17 +53,21 @@ export class UI extends Leaf implements IUI {
     @opacityType(true)
     public visible: IBoolean
 
-    @maskType(false)
-    public isMask: IBoolean
-
-    @eraserType(false)
-    public isEraser?: IBoolean
-
     @dataType(false)
     public locked: IBoolean
 
     @sortType(0)
     public zIndex: INumber
+
+
+    @maskType(false)
+    public mask: IBoolean
+
+    @dataType('pixel')
+    public maskType: IMaskType
+
+    @maskType(false)
+    public eraser: IBoolean
 
 
     // position
@@ -175,7 +179,7 @@ export class UI extends Leaf implements IUI {
 
     // load 
 
-    @dataType(true)
+    @dataType(false)
     public lazy: IBoolean  // load image / compute paint
 
     // arrow

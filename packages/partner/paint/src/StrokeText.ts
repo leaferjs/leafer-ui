@@ -26,7 +26,7 @@ export function strokeText(stroke: string | ILeafPaint[], ui: IUI, canvas: ILeaf
 function drawAlignStroke(align: IStrokeAlign, stroke: string | ILeafPaint[], isStrokes: boolean, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void {
     const { strokeWidth, __font } = ui.__
 
-    const out = canvas.getSameCanvas(true)
+    const out = canvas.getSameCanvas(true, true)
     out.setStroke(isStrokes ? undefined : stroke, strokeWidth * 2, ui.__)
 
     out.font = __font
@@ -36,13 +36,13 @@ function drawAlignStroke(align: IStrokeAlign, stroke: string | ILeafPaint[], isS
     fillText(ui, out)
     out.blendMode = 'normal'
 
-    if (ui.__worldFlipped || renderOptions.matrix) {
-        canvas.copyWorldByReset(out)
+    if (ui.__worldFlipped) {
+        canvas.copyWorldByReset(out, ui.__renderWorld)
     } else {
-        canvas.copyWorldToInner(out, ui.__world, ui.__layout.renderBounds)
+        canvas.copyWorldToInner(out, ui.__renderWorld, ui.__layout.renderBounds)
     }
 
-    out.recycle()
+    out.recycle(ui.__renderWorld)
 }
 
 export function drawTextStroke(ui: IUI, canvas: ILeaferCanvas): void {

@@ -268,7 +268,6 @@ export interface IBoxInputData extends IGroupInputData {
 export interface IGroup extends IUI {
     __: IGroupData
     children: IUI[]
-    mask?: IUI
     add(child: IUI, index?: number): void
     addAt(child: IUI, index: number): void
     addAfter(child: IUI, after: IUI): void
