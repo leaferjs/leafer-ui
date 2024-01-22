@@ -32,7 +32,7 @@ export const UIRender: IUIRenderModule = {
 
         if (fill) Paint.fill(fill as string, this, canvas)
         if (__drawAfterFill) this.__drawAfterFill(canvas, options)
-        if (stroke) Paint.stroke(stroke as string, this, canvas, options)
+        if (stroke) Paint.stroke(stroke as string, this, canvas)
     },
 
     __draw(canvas: ILeaferCanvas, options: IRenderOptions): void {
@@ -50,18 +50,19 @@ export const UIRender: IUIRenderModule = {
             if (data.__useEffect) {
 
                 const shape = Paint.shape(this, canvas, options)
+                this.__nowWorld = this.__getRenderWorld(options) // restore
 
                 const { shadow, innerShadow } = data
 
-                if (shadow) Effect.shadow(this, canvas, shape, options)
+                if (shadow) Effect.shadow(this, canvas, shape)
 
                 if (fill) data.__isFills ? Paint.fills(fill as ILeafPaint[], this, canvas) : Paint.fill(fill as string, this, canvas)
 
                 if (__drawAfterFill) this.__drawAfterFill(canvas, options)
 
-                if (innerShadow) Effect.innerShadow(this, canvas, shape, options)
+                if (innerShadow) Effect.innerShadow(this, canvas, shape)
 
-                if (stroke) data.__isStrokes ? Paint.strokes(stroke as ILeafStrokePaint[], this, canvas, options) : Paint.stroke(stroke as string, this, canvas, options)
+                if (stroke) data.__isStrokes ? Paint.strokes(stroke as ILeafStrokePaint[], this, canvas) : Paint.stroke(stroke as string, this, canvas)
 
                 if (shape.worldCanvas) shape.worldCanvas.recycle()
                 shape.canvas.recycle()
@@ -70,10 +71,9 @@ export const UIRender: IUIRenderModule = {
 
                 if (fill) data.__isFills ? Paint.fills(fill as ILeafPaint[], this, canvas) : Paint.fill(fill as string, this, canvas)
                 if (__drawAfterFill) this.__drawAfterFill(canvas, options)
-                if (stroke) data.__isStrokes ? Paint.strokes(stroke as ILeafStrokePaint[], this, canvas, options) : Paint.stroke(stroke as string, this, canvas, options)
+                if (stroke) data.__isStrokes ? Paint.strokes(stroke as ILeafStrokePaint[], this, canvas) : Paint.stroke(stroke as string, this, canvas)
 
             }
-
 
         } else {
 
@@ -82,17 +82,17 @@ export const UIRender: IUIRenderModule = {
         }
     },
 
-    __renderShape(canvas: ILeaferCanvas, renderOptions: IRenderOptions): void {
-        if (!this.__worldOpacity) return
+    __renderShape(canvas: ILeaferCanvas, options: IRenderOptions): void {
+        if (this.__worldOpacity) {
+            canvas.setWorld(this.__nowWorld = this.__getRenderWorld(options))
 
-        canvas.setWorld(this.__world, renderOptions.matrix)
+            const { fill, stroke } = this.__
 
-        const { fill, stroke } = this.__
+            this.__drawRenderPath(canvas)
 
-        this.__drawRenderPath(canvas)
-
-        if (fill) this.__.__pixelFill ? Paint.fills(fill as ILeafPaint[], this, canvas) : Paint.fill('#000000', this, canvas)
-        if (stroke) this.__.__pixelStroke ? Paint.strokes(stroke as ILeafStrokePaint[], this, canvas, renderOptions) : Paint.stroke('#000000', this, canvas, renderOptions)
+            if (fill) this.__.__pixelFill ? Paint.fills(fill as ILeafPaint[], this, canvas) : Paint.fill('#000000', this, canvas)
+            if (stroke) this.__.__pixelStroke ? Paint.strokes(stroke as ILeafStrokePaint[], this, canvas) : Paint.stroke('#000000', this, canvas)
+        }
     }
 
 }

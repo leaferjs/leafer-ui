@@ -1,4 +1,4 @@
-import { IBoundsData, ILeaferCanvas, IMatrixWithBoundsData, IOffsetBoundsData, IRenderOptions } from '@leafer/interface'
+import { IBoundsData, ILeaferCanvas, IMatrixWithBoundsData, IOffsetBoundsData } from '@leafer/interface'
 import { BoundsHelper } from '@leafer/core'
 
 import { IUI, ICachedShape } from '@leafer-ui/interface'
@@ -9,11 +9,11 @@ import { drawWorldShadow } from './Shadow'
 const { toOffsetOutBounds } = BoundsHelper
 const offsetOutBounds = {} as IOffsetBoundsData
 
-export function innerShadow(ui: IUI, current: ILeaferCanvas, shape: ICachedShape, renderOptions: IRenderOptions): void {
+export function innerShadow(ui: IUI, current: ILeaferCanvas, shape: ICachedShape): void {
 
     let copyBounds: IBoundsData, spreadScale: number
 
-    const { __world, __layout: __layout } = ui
+    const { __nowWorld: nowWorld, __layout: __layout } = ui
     const { innerShadow } = ui.__
     const { worldCanvas, bounds, shapeBounds, scaleX, scaleY } = shape
 
@@ -35,9 +35,9 @@ export function innerShadow(ui: IUI, current: ILeaferCanvas, shape: ICachedShape
         other.restore()
 
         if (worldCanvas) {
-            other.copyWorld(other, bounds, __world, 'copy')
-            other.copyWorld(worldCanvas, __world, __world, 'source-out')
-            copyBounds = __world
+            other.copyWorld(other, bounds, nowWorld, 'copy')
+            other.copyWorld(worldCanvas, nowWorld, nowWorld, 'source-out')
+            copyBounds = nowWorld
         } else {
             other.copyWorld(shape.canvas, shapeBounds, bounds, 'source-out')
             copyBounds = bounds
@@ -45,17 +45,17 @@ export function innerShadow(ui: IUI, current: ILeaferCanvas, shape: ICachedShape
 
         other.fillWorld(copyBounds, item.color, 'source-in')
 
-        if (ui.__worldFlipped || renderOptions.matrix) {
-            current.copyWorldByReset(other, copyBounds, __world, item.blendMode)
+        if (ui.__worldFlipped) {
+            current.copyWorldByReset(other, copyBounds, nowWorld, item.blendMode)
         } else {
             current.copyWorldToInner(other, copyBounds as IMatrixWithBoundsData, __layout.renderBounds, item.blendMode)
         }
 
-        if (end && index < end) other.clear()
+        if (end && index < end) other.clearWorld(copyBounds, true)
 
     })
 
-    other.recycle()
+    other.recycle(copyBounds)
 
 }
 

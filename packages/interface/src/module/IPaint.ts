@@ -13,10 +13,10 @@ export interface IPaintModule {
 
     fillText(ui: IUI, canvas: ILeaferCanvas): void
 
-    stroke(stroke: string, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void
-    strokes(strokes: ILeafPaint[], ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void
+    stroke(stroke: string, ui: IUI, canvas: ILeaferCanvas): void
+    strokes(strokes: ILeafPaint[], ui: IUI, canvas: ILeaferCanvas): void
 
-    strokeText(stroke: string | ILeafPaint[], ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void
+    strokeText(stroke: string | ILeafPaint[], ui: IUI, canvas: ILeaferCanvas): void
     drawTextStroke(ui: IUI, canvas: ILeaferCanvas): void
 
     shape(ui: IUI, current: ILeaferCanvas, renderOptions: IRenderOptions): ICachedShape

@@ -1,18 +1,18 @@
-import { ILeaferCanvas, IRenderOptions } from '@leafer/interface'
+import { ILeaferCanvas } from '@leafer/interface'
 
 import { IUI, ILeafPaint } from '@leafer-ui/interface'
 
 import { strokeText, drawStrokesStyle } from './StrokeText'
 
 
-export function stroke(stroke: string, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void {
+export function stroke(stroke: string, ui: IUI, canvas: ILeaferCanvas): void {
     const options = ui.__
     const { strokeWidth, strokeAlign, __font } = options
     if (!strokeWidth) return
 
     if (__font) {
 
-        strokeText(stroke, ui, canvas, renderOptions)
+        strokeText(stroke, ui, canvas)
 
     } else {
 
@@ -48,12 +48,12 @@ export function stroke(stroke: string, ui: IUI, canvas: ILeaferCanvas, renderOpt
                 out.clearWorld(ui.__layout.renderBounds)
 
                 if (ui.__worldFlipped) {
-                    canvas.copyWorldByReset(out, ui.__renderWorld)
+                    canvas.copyWorldByReset(out, ui.__nowWorld)
                 } else {
-                    canvas.copyWorldToInner(out, ui.__renderWorld, ui.__layout.renderBounds)
+                    canvas.copyWorldToInner(out, ui.__nowWorld, ui.__layout.renderBounds)
                 }
 
-                out.recycle(ui.__renderWorld)
+                out.recycle(ui.__nowWorld)
                 break
         }
 
@@ -61,14 +61,14 @@ export function stroke(stroke: string, ui: IUI, canvas: ILeaferCanvas, renderOpt
 }
 
 
-export function strokes(strokes: ILeafPaint[], ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void {
+export function strokes(strokes: ILeafPaint[], ui: IUI, canvas: ILeaferCanvas): void {
     const options = ui.__
     const { strokeWidth, strokeAlign, __font } = options
     if (!strokeWidth) return
 
     if (__font) {
 
-        strokeText(strokes, ui, canvas, renderOptions)
+        strokeText(strokes, ui, canvas)
 
     } else {
 
@@ -102,12 +102,12 @@ export function strokes(strokes: ILeafPaint[], ui: IUI, canvas: ILeaferCanvas, r
                 out.clearWorld(renderBounds)
 
                 if (ui.__worldFlipped) {
-                    canvas.copyWorldByReset(out, ui.__renderWorld)
+                    canvas.copyWorldByReset(out, ui.__nowWorld)
                 } else {
-                    canvas.copyWorldToInner(out, ui.__renderWorld, renderBounds)
+                    canvas.copyWorldToInner(out, ui.__nowWorld, renderBounds)
                 }
 
-                out.recycle(ui.__renderWorld)
+                out.recycle(ui.__nowWorld)
                 break
         }
 

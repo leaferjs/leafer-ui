@@ -1,4 +1,4 @@
-import { ILeaferCanvas, IRenderOptions } from '@leafer/interface'
+import { ILeaferCanvas } from '@leafer/interface'
 
 import { IUI, ITextRowData, ILeafPaint, IStrokeAlign, ILeafStrokePaint } from '@leafer-ui/interface'
 import { PaintImage } from "@leafer-ui/external"
@@ -6,7 +6,7 @@ import { PaintImage } from "@leafer-ui/external"
 import { fillText } from './FillText'
 
 
-export function strokeText(stroke: string | ILeafPaint[], ui: IUI, canvas: ILeaferCanvas, renderOptions?: IRenderOptions): void {
+export function strokeText(stroke: string | ILeafPaint[], ui: IUI, canvas: ILeaferCanvas): void {
     const { strokeAlign } = ui.__
     const isStrokes = typeof stroke !== 'string'
     switch (strokeAlign) {
@@ -15,15 +15,15 @@ export function strokeText(stroke: string | ILeafPaint[], ui: IUI, canvas: ILeaf
             isStrokes ? drawStrokesStyle(stroke as ILeafPaint[], true, ui, canvas) : drawTextStroke(ui, canvas)
             break
         case 'inside':
-            drawAlignStroke('inside', stroke, isStrokes, ui, canvas, renderOptions)
+            drawAlignStroke('inside', stroke, isStrokes, ui, canvas)
             break
         case 'outside':
-            drawAlignStroke('outside', stroke, isStrokes, ui, canvas, renderOptions)
+            drawAlignStroke('outside', stroke, isStrokes, ui, canvas)
             break
     }
 }
 
-function drawAlignStroke(align: IStrokeAlign, stroke: string | ILeafPaint[], isStrokes: boolean, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void {
+function drawAlignStroke(align: IStrokeAlign, stroke: string | ILeafPaint[], isStrokes: boolean, ui: IUI, canvas: ILeaferCanvas): void {
     const { strokeWidth, __font } = ui.__
 
     const out = canvas.getSameCanvas(true, true)
@@ -37,12 +37,12 @@ function drawAlignStroke(align: IStrokeAlign, stroke: string | ILeafPaint[], isS
     out.blendMode = 'normal'
 
     if (ui.__worldFlipped) {
-        canvas.copyWorldByReset(out, ui.__renderWorld)
+        canvas.copyWorldByReset(out, ui.__nowWorld)
     } else {
-        canvas.copyWorldToInner(out, ui.__renderWorld, ui.__layout.renderBounds)
+        canvas.copyWorldToInner(out, ui.__nowWorld, ui.__layout.renderBounds)
     }
 
-    out.recycle(ui.__renderWorld)
+    out.recycle(ui.__nowWorld)
 }
 
 export function drawTextStroke(ui: IUI, canvas: ILeaferCanvas): void {
