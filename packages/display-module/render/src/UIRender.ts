@@ -50,7 +50,7 @@ export const UIRender: IUIRenderModule = {
             if (data.__useEffect) {
 
                 const shape = Paint.shape(this, canvas, options)
-                this.__nowWorld = this.__getRenderWorld(options) // restore
+                this.__nowWorld = this.__getNowWorld(options) // restore
 
                 const { shadow, innerShadow } = data
 
@@ -84,7 +84,7 @@ export const UIRender: IUIRenderModule = {
 
     __renderShape(canvas: ILeaferCanvas, options: IRenderOptions): void {
         if (this.__worldOpacity) {
-            canvas.setWorld(this.__nowWorld = this.__getRenderWorld(options))
+            canvas.setWorld(this.__nowWorld = this.__getNowWorld(options))
 
             const { fill, stroke } = this.__
 

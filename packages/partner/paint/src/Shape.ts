@@ -10,7 +10,7 @@ export function shape(ui: IUI, current: ILeaferCanvas, options: IRenderOptions):
     const canvas = current.getSameCanvas()
     const nowWorld = ui.__nowWorld
 
-    let bounds: IBoundsData, matrix: IMatrix, shapeBounds: IBoundsData, worldCanvas: ILeaferCanvas
+    let bounds: IBoundsData, fitMatrix: IMatrix, shapeBounds: IBoundsData, worldCanvas: ILeaferCanvas
 
     let { scaleX, scaleY } = nowWorld
     if (scaleX < 0) scaleX = -scaleX
@@ -25,28 +25,35 @@ export function shape(ui: IUI, current: ILeaferCanvas, options: IRenderOptions):
 
         const { renderShapeSpread: spread } = ui.__layout
         const worldClipBounds = getIntersectData(spread ? getSpread(current.bounds, spread * scaleX, spread * scaleY) : current.bounds, nowWorld)
-        matrix = current.bounds.getFitMatrix(worldClipBounds)
+        fitMatrix = current.bounds.getFitMatrix(worldClipBounds)
+        let { a: fitScaleX, d: fitScaleY } = fitMatrix
 
-        if (matrix.a < 1) {
+        if (fitMatrix.a < 1) {
             worldCanvas = current.getSameCanvas()
             ui.__renderShape(worldCanvas, options)
 
-            scaleX *= matrix.a
-            scaleY *= matrix.d
+            scaleX *= fitScaleX
+            scaleY *= fitScaleY
         }
 
-        shapeBounds = getOuterOf(nowWorld, matrix)
-        bounds = getByMove(shapeBounds, -matrix.e, -matrix.f)
+        shapeBounds = getOuterOf(nowWorld, fitMatrix)
+        bounds = getByMove(shapeBounds, -fitMatrix.e, -fitMatrix.f)
 
-        if (options.matrix) matrix.multiply(options.matrix)
-        options = { ...options, matrix }
+        if (options.matrix) {
+            const { matrix } = options
+            fitMatrix.multiply(matrix)
+            fitScaleX *= matrix.scaleX
+            fitScaleY *= matrix.scaleY
+        }
+
+        options = { ...options, matrix: fitMatrix.toWorld(fitScaleX, fitScaleY) }
 
     }
 
     ui.__renderShape(canvas, options)
 
     return {
-        canvas, matrix, bounds,
+        canvas, matrix: fitMatrix, bounds,
         worldCanvas, shapeBounds, scaleX, scaleY
     }
 }
