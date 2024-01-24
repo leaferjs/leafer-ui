@@ -85,4 +85,6 @@ export class Group extends UI implements IGroup {
 
     public removeAll(_destroy?: boolean): void { }
 
+    public clear(): void { }
+
 }

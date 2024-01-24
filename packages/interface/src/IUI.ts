@@ -1,4 +1,4 @@
-import { ILeaf, ILeafComputedData, ILeafData, ILeafInputData, ILeaferCanvas, IRenderOptions, IPathDrawer, IPointData, IPath2D, IPathCommandData, IWindingRule, ILeaferImageConfig, IBoundsData, IObject, IPathString, ILeaferImage, IBlob, IPathCreator, AnswerType } from '@leafer/interface'
+import { ILeaf, ILeafComputedData, ILeafData, ILeafInputData, ILeaferCanvas, IRenderOptions, IExportOptions, IExportResult, IPathDrawer, IPointData, IPath2D, IPathCommandData, IWindingRule, ILeaferImageConfig, IBoundsData, IObject, IPathString, ILeaferImage, IBlob, IPathCreator, AnswerType } from '@leafer/interface'
 
 import {
     IFillAttrData, IFillInputData, IFillComputedData,
@@ -9,7 +9,6 @@ import {
     ITextStyleAttrData, ITextStyleInputData, ITextStyleComputedData
 } from './ICommonAttr'
 import { IOverflow } from './type/IType'
-import { IExportOptions } from './module/IExport'
 import { ILeafer } from './app/ILeafer'
 
 
@@ -275,6 +274,7 @@ export interface IGroup extends IUI {
     addMany(...children: ILeaf[]): void
     remove(child?: IUI): void
     removeAll(): void
+    clear(): void
 }
 export interface IGroupData extends IUIData { }
 export interface IGroupInputData extends IUIBaseInputData { }
@@ -311,7 +311,7 @@ export interface IUI extends IFillAttrData, IStrokeAttrData, ICornerRadiusAttrDa
     __drawPathByBox(drawer: IPathDrawer): void
     __drawAfterFill?(canvas: ILeaferCanvas, options: IRenderOptions): void
 
-    export(filename: string, options?: IExportOptions | number): Promise<IBlob | string | boolean>
+    export(filename: string, options?: IExportOptions | number): Promise<IExportResult>
     clone(): IUI
 }
 

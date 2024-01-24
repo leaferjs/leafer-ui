@@ -63,10 +63,10 @@ export class UI extends Leaf implements IUI {
     @maskType(false)
     public mask: IBoolean
 
-    @dataType('pixel')
+    @surfaceType('pixel')
     public maskType: IMaskType
 
-    @maskType(false)
+    @eraserType(false)
     public eraser: IBoolean
 
 

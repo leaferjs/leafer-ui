@@ -77,8 +77,4 @@ export class Pen extends Group implements IPen {
         this.pathElement.forceUpdate('path')
     }
 
-    public clear(): void {
-        this.removeAll(true)
-    }
-
 }
