@@ -1,5 +1,5 @@
-import { ILeaf, IExportFileType, IBlob, IFunction } from '@leafer/interface'
-import { TaskProcessor } from '@leafer/core'
+import { ILeaf, IExportFileType, IFunction, IRenderOptions, IBoundsData } from '@leafer/interface'
+import { Creator, Matrix, TaskProcessor, FileHelper } from '@leafer/core'
 
 import { IExportModule, IExportOptions, IExportResult, IExportResultFunction } from '@leafer-ui/interface'
 
@@ -13,54 +13,52 @@ export const ExportModule: IExportModule = {
 
             new Promise((resolve: IFunction) => {
 
+                const over = (result: IExportResult) => {
+                    success(result)
+                    resolve()
+                    this.running = false
+                }
+
                 const { leafer } = leaf
                 if (leafer) {
 
                     leafer.waitViewCompleted(async () => {
 
-                        let quality, blob: boolean
-                        let { canvas } = leafer
-                        let { unreal } = canvas
+                        let renderBounds: IBoundsData, matrix = new Matrix(), scaleX = 1, scaleY = 1
+                        const { pixelRatio, slice, fill, screenshot } = FileHelper.getExportOptions(options)
 
-                        if (unreal) {
-                            canvas = canvas.getSameCanvas()
-                            canvas.backgroundColor = leafer.config.fill
-                            leafer.__render(canvas, {})
-                        }
-
-                        switch (typeof options) {
-                            case 'object':
-                                if (options.quality) quality = options.quality
-                                if (options.blob) blob = true
-                                break
-                            case 'number':
-                                quality = options
-                                break
-                            case 'boolean':
-                                blob = options
-                        }
-
-                        let data: IBlob | string | boolean
-
-                        if (filename.includes('.')) {
-                            data = await canvas.saveAs(filename, quality)
-                        } else if (blob) {
-                            data = await canvas.toBlob(filename, quality)
+                        if (screenshot) {
+                            renderBounds = screenshot === true ? (leaf.isLeafer ? leafer.canvas.bounds : leaf.worldRenderBounds) : screenshot
                         } else {
-                            data = await canvas.toDataURL(filename, quality)
+                            renderBounds = leaf.getBounds('render', 'local')
+
+                            const { localTransform, __world: world } = leaf
+                            matrix.set(world).divide(localTransform).invert()
+                            scaleX = 1 / (world.scaleX / leaf.scaleX)
+                            scaleY = 1 / (world.scaleY / leaf.scaleY)
                         }
 
-                        success({ data })
-                        resolve()
-                        this.running = false
+                        const { x, y, width, height } = renderBounds
+                        const canvas = Creator.canvas({ width, height, pixelRatio })
+                        const renderOptions: IRenderOptions = { matrix: matrix.translate(-x, -y).toWorld(scaleX, scaleY) }
 
-                        if (unreal) canvas.recycle()
+                        if (slice) {
+                            leaf = leafer // render all in bounds
+                            renderOptions.bounds = canvas.bounds
+                        }
+
+                        if (!FileHelper.isOpacityImage(filename) || fill) canvas.fillWorld(canvas.bounds, fill || '#FFFFFF')
+                        leaf.__render(canvas, renderOptions)
+
+                        const data = filename === 'canvas' ? canvas : await canvas.export(filename, options)
+                        over({ data })
+
                     })
 
                 } else {
-                    success({ data: false })
-                    resolve()
-                    this.running = false
+
+                    over({ data: false })
+
                 }
 
             })

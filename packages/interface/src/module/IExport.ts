@@ -1,17 +1,4 @@
-import { ILeaf, IExportFileType, IBlob } from '@leafer/interface'
-
-export interface IExportOptions {
-    quality?: number
-    blob?: boolean
-}
-
-export interface IExportResult {
-    data: IBlob | string | boolean
-}
-
-export interface IExportResultFunction {
-    (data: IExportResult): void
-}
+import { ILeaf, IExportFileType, IExportOptions, IExportResult } from '@leafer/interface'
 
 
 export interface IExportModule {

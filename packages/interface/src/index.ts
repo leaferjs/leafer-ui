@@ -33,7 +33,7 @@ export { IUIBoundsModule } from './module/IUIBounds'
 export { IUIHitModule } from './module/IUIHit'
 export { ITextConvertModule } from './module/ITextConvert'
 export { IColorConvertModule } from './module/IColorConvert'
-export { IExportModule, IExportOptions, IExportResult, IExportResultFunction } from './module/IExport'
+export { IExportModule } from './module/IExport'
 
 export { IPaintModule, IPaintImageModule, IPaintGradientModule } from './module/IPaint'
 export { IEffectModule } from './module/IEffect'

@@ -45,8 +45,7 @@ export class Canvas extends Rect implements ICanvas {
     public draw(ui: IUI, offset?: IPointData, scale?: number | IPointData, rotation?: number): void {
         ui.__layout.update()
 
-        const matrix = new Matrix(ui.__world)
-        matrix.invert()
+        const matrix = new Matrix(ui.__world).invert()
 
         const m = new Matrix()
         if (offset) m.translate(offset.x, offset.y)
@@ -54,7 +53,7 @@ export class Canvas extends Rect implements ICanvas {
         if (rotation) m.rotate(rotation)
         matrix.multiplyParent(m)
 
-        ui.__render(this.canvas, { matrix })
+        ui.__render(this.canvas, { matrix: matrix.toWorld() })
         this.paint()
     }
 
