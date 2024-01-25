@@ -1,7 +1,8 @@
-import { ILeaf, IExportFileType, IFunction, IRenderOptions, IBoundsData } from '@leafer/interface'
+import { ILeaf, IExportFileType, IFunction, IRenderOptions, IBoundsData, IBounds } from '@leafer/interface'
 import { Creator, Matrix, TaskProcessor, FileHelper } from '@leafer/core'
 
 import { IExportModule, IExportOptions, IExportResult, IExportResultFunction } from '@leafer-ui/interface'
+import { getTrimBounds } from './trim'
 
 
 export const ExportModule: IExportModule = {
@@ -24,13 +25,14 @@ export const ExportModule: IExportModule = {
 
                     leafer.waitViewCompleted(async () => {
 
-                        let renderBounds: IBoundsData, matrix = new Matrix(), scaleX = 1, scaleY = 1
-                        const { pixelRatio, slice, fill, screenshot } = FileHelper.getExportOptions(options)
+                        let localRenderBounds: IBoundsData, trimBounds: IBounds, scaleX = 1, scaleY = 1
+                        const { pixelRatio, slice, trim, fill, screenshot } = FileHelper.getExportOptions(options)
+                        const needFill = FileHelper.isOpaqueImage(filename) || fill, matrix = new Matrix()
 
                         if (screenshot) {
-                            renderBounds = screenshot === true ? (leaf.isLeafer ? leafer.canvas.bounds : leaf.worldRenderBounds) : screenshot
+                            localRenderBounds = screenshot === true ? (leaf.isLeafer ? leafer.canvas.bounds : leaf.worldRenderBounds) : screenshot
                         } else {
-                            renderBounds = leaf.getBounds('render', 'local')
+                            localRenderBounds = leaf.getBounds('render', 'local')
 
                             const { localTransform, __world: world } = leaf
                             matrix.set(world).divide(localTransform).invert()
@@ -38,8 +40,8 @@ export const ExportModule: IExportModule = {
                             scaleY = 1 / (world.scaleY / leaf.scaleY)
                         }
 
-                        const { x, y, width, height } = renderBounds
-                        const canvas = Creator.canvas({ width, height, pixelRatio })
+                        const { x, y, width, height } = localRenderBounds
+                        let canvas = Creator.canvas({ width, height, pixelRatio })
                         const renderOptions: IRenderOptions = { matrix: matrix.translate(-x, -y).toWorld(scaleX, scaleY) }
 
                         if (slice) {
@@ -47,11 +49,23 @@ export const ExportModule: IExportModule = {
                             renderOptions.bounds = canvas.bounds
                         }
 
-                        if (!FileHelper.isOpacityImage(filename) || fill) canvas.fillWorld(canvas.bounds, fill || '#FFFFFF')
+                        canvas.save()
                         leaf.__render(canvas, renderOptions)
+                        canvas.restore()
+
+                        if (trim) {
+                            trimBounds = getTrimBounds(canvas)
+                            const old = canvas, { width, height } = trimBounds
+                            const config = { x: 0, y: 0, width, height, pixelRatio }
+
+                            canvas = Creator.canvas(config)
+                            canvas.copyWorld(old, trimBounds, config)
+                        }
+
+                        if (needFill) canvas.fillWorld(canvas.bounds, fill || '#FFFFFF', 'destination-over')
 
                         const data = filename === 'canvas' ? canvas : await canvas.export(filename, options)
-                        over({ data })
+                        over({ data, localRenderBounds, trimBounds })
 
                     })
 
