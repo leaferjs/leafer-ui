@@ -72,6 +72,7 @@ export interface IEditorConfig {
     moveCursor?: ICursorType
     resizeCursor?: IImageCursor
     rotateCursor?: IImageCursor
+    skewCursor?: IImageCursor
 
     around?: IAround
     lockRatio?: boolean
