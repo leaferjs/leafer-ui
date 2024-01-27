@@ -42,7 +42,7 @@ export const ExportModule: IExportModule = {
 
                         const { x, y, width, height } = localRenderBounds
                         let canvas = Creator.canvas({ width, height, pixelRatio })
-                        const renderOptions: IRenderOptions = { matrix: matrix.translate(-x, -y).toWorld(scaleX, scaleY) }
+                        const renderOptions: IRenderOptions = { matrix: matrix.translate(-x, -y).withScale(scaleX, scaleY) }
 
                         if (slice) {
                             leaf = leafer // render all in bounds

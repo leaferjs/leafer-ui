@@ -53,7 +53,7 @@ export class Canvas extends Rect implements ICanvas {
         if (rotation) m.rotate(rotation)
         matrix.multiplyParent(m)
 
-        ui.__render(this.canvas, { matrix: matrix.toWorld() })
+        ui.__render(this.canvas, { matrix: matrix.withScale() })
         this.paint()
     }
 

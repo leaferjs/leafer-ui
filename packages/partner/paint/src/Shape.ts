@@ -46,7 +46,7 @@ export function shape(ui: IUI, current: ILeaferCanvas, options: IRenderOptions):
             fitScaleY *= matrix.scaleY
         }
 
-        options = { ...options, matrix: fitMatrix.toWorld(fitScaleX, fitScaleY) }
+        options = { ...options, matrix: fitMatrix.withScale(fitScaleX, fitScaleY) }
 
     }
 
