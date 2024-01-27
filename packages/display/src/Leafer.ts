@@ -1,4 +1,4 @@
-import { ILeaferCanvas, IRenderer, ILayouter, ISelector, IWatcher, IInteraction, ILeaferConfig, ICanvasManager, IHitCanvasManager, IAutoBounds, IScreenSizeData, IResizeEvent, ILeaf, IEventListenerId, ITimer, IValue, IObject, IControl, IPointData, IBounds, ILeaferType } from '@leafer/interface'
+import { ILeaferCanvas, IRenderer, ILayouter, ISelector, IWatcher, IInteraction, ILeaferConfig, ICanvasManager, IHitCanvasManager, IAutoBounds, IScreenSizeData, IResizeEvent, ILeaf, IEventListenerId, ITimer, IValue, IObject, IControl, IPointData, IBounds, ILeaferType, ICursorType } from '@leafer/interface'
 import { AutoBounds, LayoutEvent, ResizeEvent, LeaferEvent, CanvasManager, ImageManager, DataHelper, Creator, Run, Debug, RenderEvent, registerUI, boundsType, canvasSizeAttrs, dataProcessor, WaitHelper, WatchEvent } from '@leafer/core'
 
 import { ILeaferInputData, ILeaferData, IFunction, IUIInputData, ILeafer, IGroup, IApp, IEditorBase } from '@leafer-ui/interface'
@@ -201,8 +201,9 @@ export class Leafer extends Group implements ILeafer {
         if (this.viewReady) this.renderer.update()
     }
 
-    public updateCursor(): void {
-        if (this.interaction) this.interaction.updateCursor()
+    public updateCursor(cursor?: ICursorType): void {
+        const i = this.interaction
+        if (i) cursor ? i.setCursor(cursor) : i.updateCursor()
     }
 
     protected __doResize(size: IScreenSizeData): void {
