@@ -1,5 +1,5 @@
 import { IKeepTouchData, IPointData } from '@leafer/interface'
-import { InteractionBase, InteractionHelper } from '@leafer/interaction'
+import { InteractionBase, InteractionHelper } from '@leafer-ui/core'
 
 import { PointerEventHelper } from './PointerEventHelper'
 

@@ -27,8 +27,9 @@
   "dependencies": {
     "@leafer-ui/draw": "1.0.0-rc.9",
     "@leafer-ui/app": "1.0.0-rc.9",
-    "@leafer-ui/event": "1.0.0-rc.9",
     "@leafer-ui/type": "1.0.0-rc.9",
+    "@leafer-ui/interaction": "1.0.0-rc.9",
+    "@leafer-ui/event": "1.0.0-rc.9",
     "@leafer-ui/hit": "1.0.0-rc.9"
   }
 }

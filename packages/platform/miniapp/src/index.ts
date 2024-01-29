@@ -1,13 +1,14 @@
 export * from '@leafer/miniapp'
-export * from '@leafer/interaction-miniapp'
 export * from '@leafer/partner'
 
 export * from '@leafer-ui/core'
+export * from '@leafer-ui/interaction-miniapp'
 export * from '@leafer-ui/partner'
 
 import { ICreator } from '@leafer/interface'
 import { useCanvas, Creator, LeaferCanvas } from '@leafer/miniapp'
-import { Interaction, HitCanvasManager } from '@leafer/interaction-miniapp'
+import { HitCanvasManager } from '@leafer-ui/core'
+import { Interaction } from '@leafer-ui/interaction-miniapp'
 
 
 Object.assign(Creator, {

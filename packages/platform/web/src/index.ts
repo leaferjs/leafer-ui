@@ -1,13 +1,14 @@
 export * from '@leafer/web'
-export * from '@leafer/interaction-web'
 export * from '@leafer/partner'
 
 export * from '@leafer-ui/core'
+export * from '@leafer-ui/interaction-web'
 export * from '@leafer-ui/partner'
 
 import { ICreator } from '@leafer/interface'
 import { useCanvas, Creator, LeaferCanvas } from '@leafer/web'
-import { Interaction, HitCanvasManager } from '@leafer/interaction-web'
+import { HitCanvasManager } from '@leafer-ui/core'
+import { Interaction } from '@leafer-ui/interaction-web'
 
 
 Object.assign(Creator, {

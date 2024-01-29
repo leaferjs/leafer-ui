@@ -1,5 +1,5 @@
 import { IPointData, IWheelConfig } from '@leafer/interface'
-import { MathHelper, Platform } from '@leafer/core'
+import { MathHelper, Platform } from '@leafer-ui/core'
 
 
 export const WheelEventHelper = {

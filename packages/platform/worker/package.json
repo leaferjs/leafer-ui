@@ -27,7 +27,6 @@
     "@leafer/partner": "1.0.0-rc.9",
     "@leafer-ui/core": "1.0.0-rc.9",
     "@leafer-ui/partner": "1.0.0-rc.9",
-    "@leafer-ui/interface": "1.0.0-rc.9",
-    "leafer-in": "1.0.0-rc.9"
+    "@leafer-ui/interface": "1.0.0-rc.9"
   }
 }

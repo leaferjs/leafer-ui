@@ -6,7 +6,7 @@ export * from '@leafer-ui/partner'
 
 import { ICreator } from '@leafer/interface'
 import { Creator, LeaferCanvas } from '@leafer/node'
-import { InteractionBase, HitCanvasManager } from '@leafer/interaction'
+import { InteractionBase, HitCanvasManager } from '@leafer-ui/core'
 
 
 Object.assign(Creator, {
