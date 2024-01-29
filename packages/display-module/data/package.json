@@ -11,7 +11,7 @@
     "type": "git",
     "url": "https://github.com/leaferjs/ui.git"
   },
-  "homepage": "https://github.com/leaferjs/ui/tree/main/packages/data",
+  "homepage": "https://github.com/leaferjs/ui/tree/main/packages/display-module/data",
   "bugs": "https://github.com/leaferjs/ui/issues",
   "keywords": [
     "leafer-ui",

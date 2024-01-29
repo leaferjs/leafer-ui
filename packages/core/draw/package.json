@@ -5,14 +5,19 @@
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
   "type": "module",
-  "main": "src/index.ts",
+  "main": "lib/draw.esm.js",
+  "exports": {
+    "import": "./lib/draw.esm.js",
+    "require": "./lib/draw.cjs",
+    "types": "./types/index.d.ts"
+  },
   "types": "types/index.d.ts",
-  "files": ["src","types","dist"],
+  "files": ["src","types","lib"],
   "repository": {
     "type": "git",
     "url": "https://github.com/leaferjs/ui.git"
   },
-  "homepage": "https://github.com/leaferjs/ui/tree/main/packages/draw",
+  "homepage": "https://github.com/leaferjs/ui/tree/main/packages/core/draw",
   "bugs": "https://github.com/leaferjs/ui/issues",
   "keywords": [
     "leafer draw",
