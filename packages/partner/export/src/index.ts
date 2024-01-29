@@ -25,22 +25,28 @@ export const ExportModule: IExportModule = {
 
                     leafer.waitViewCompleted(async () => {
 
-                        let localRenderBounds: IBoundsData, trimBounds: IBounds, scaleX = 1, scaleY = 1
-                        const { pixelRatio, slice, trim, fill, screenshot } = FileHelper.getExportOptions(options)
+                        let renderBounds: IBoundsData, trimBounds: IBounds, scaleX = 1, scaleY = 1
+                        const { scale, pixelRatio, slice, trim, fill, screenshot } = FileHelper.getExportOptions(options)
                         const needFill = FileHelper.isOpaqueImage(filename) || fill, matrix = new Matrix()
 
                         if (screenshot) {
-                            localRenderBounds = screenshot === true ? (leaf.isLeafer ? leafer.canvas.bounds : leaf.worldRenderBounds) : screenshot
+                            renderBounds = screenshot === true ? (leaf.isLeafer ? leafer.canvas.bounds : leaf.worldRenderBounds) : screenshot
                         } else {
-                            localRenderBounds = leaf.getBounds('render', 'local')
-
                             const { localTransform, __world: world } = leaf
                             matrix.set(world).divide(localTransform).invert()
                             scaleX = 1 / (world.scaleX / leaf.scaleX)
                             scaleY = 1 / (world.scaleY / leaf.scaleY)
+                            renderBounds = leaf.getBounds('render', 'local')
                         }
 
-                        const { x, y, width, height } = localRenderBounds
+                        let { x, y, width, height } = renderBounds
+
+                        if (scale) {
+                            matrix.scale(scale)
+                            width *= scale, height *= scale
+                            scaleX *= scale, scaleY *= scale
+                        }
+
                         let canvas = Creator.canvas({ width, height, pixelRatio })
                         const renderOptions: IRenderOptions = { matrix: matrix.translate(-x, -y).withScale(scaleX, scaleY) }
 
@@ -65,7 +71,7 @@ export const ExportModule: IExportModule = {
                         if (needFill) canvas.fillWorld(canvas.bounds, fill || '#FFFFFF', 'destination-over')
 
                         const data = filename === 'canvas' ? canvas : await canvas.export(filename, options)
-                        over({ data, localRenderBounds, trimBounds })
+                        over({ data, renderBounds, trimBounds })
 
                     })
 
