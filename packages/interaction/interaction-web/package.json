@@ -1,0 +1,27 @@
+{
+  "name": "@leafer/interaction-web",
+  "version": "1.0.0-rc.9",
+  "description": "@leafer/interaction-web",
+  "author": "Chao (Leafer) Wan",
+  "license": "MIT",
+  "main": "src/index.ts",
+  "types": "types/index.d.ts",
+  "files": ["src","types","dist"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/leaferjs/leafer.git"
+  },
+  "homepage": "https://github.com/leaferjs/leafer/tree/main/packages/interaction/interaction-web",
+  "bugs": "https://github.com/leaferjs/leafer/issues",
+  "keywords": [
+    "leafer",
+    "leaferjs"
+  ],
+  "dependencies": {
+    "@leafer/core": "1.0.0-rc.9",
+    "@leafer/interaction":"1.0.0-rc.9"
+  },
+  "devDependencies": {
+     "@leafer/interface": "1.0.0-rc.9"
+  }
+}
