@@ -3,7 +3,7 @@ import { Creator, DataHelper, Debug, LayoutEvent, PropertyEvent, RenderEvent, ca
 
 import { IApp, IAppConfig, IAppInputData, IEditorBase, ILeafer } from '@leafer-ui/interface'
 
-import { Leafer } from '@leafer-ui/display'
+import { Leafer } from '@leafer-ui/draw'
 
 
 @registerUI()

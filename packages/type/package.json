@@ -19,7 +19,7 @@
   ],
   "dependencies": {
     "@leafer/core": "1.0.0-rc.9",
-    "@leafer-ui/display": "1.0.0-rc.9",
+    "@leafer-ui/draw": "1.0.0-rc.9",
     "@leafer-ui/event": "1.0.0-rc.9"
   },
   "devDependencies": {
