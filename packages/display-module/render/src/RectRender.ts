@@ -18,19 +18,21 @@ export const RectRender: IRectRenderModule = {
 
         if (stroke) {
 
-            const { strokeAlign, strokeWidth } = this.__
-            canvas.setStroke(stroke, strokeWidth, this.__)
-            const half = strokeWidth / 2
+            const { strokeAlign, __strokeWidth } = this.__
+            if (!__strokeWidth) return
+
+            canvas.setStroke(stroke, __strokeWidth, this.__)
+            const half = __strokeWidth / 2
 
             switch (strokeAlign) {
                 case 'center':
                     canvas.strokeRect(0, 0, width, height)
                     break
                 case 'inside':
-                    canvas.strokeRect(half, half, width - strokeWidth, height - strokeWidth)
+                    canvas.strokeRect(half, half, width - __strokeWidth, height - __strokeWidth)
                     break
                 case 'outside':
-                    canvas.strokeRect(-half, -half, width + strokeWidth, height + strokeWidth)
+                    canvas.strokeRect(-half, -half, width + __strokeWidth, height + __strokeWidth)
                     break
             }
         }

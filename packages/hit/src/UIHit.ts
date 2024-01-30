@@ -17,7 +17,7 @@ UI.prototype.__hit = function (inner: IRadiusPointData): boolean {
     const isHitFill = this.__hitFill(inner, windingRule)
     if (needHitFill && isHitFill) return true
 
-    const { stroke, hitStroke, strokeWidth, strokeAlign } = this.__
+    const { stroke, hitStroke, __strokeWidth, strokeAlign } = this.__
     const needHitStroke = (stroke && hitStroke === 'path') || hitStroke === 'all'
     const radiusWidth = inner.radiusX * 2
 
@@ -26,15 +26,15 @@ UI.prototype.__hit = function (inner: IRadiusPointData): boolean {
     if (needHitStroke) {
         switch (strokeAlign) {
             case 'inside':
-                hitWidth += strokeWidth * 2
+                hitWidth += __strokeWidth * 2
                 if (!needHitFill && (isHitFill && this.__hitStroke(inner, hitWidth))) return true
                 hitWidth = radiusWidth
                 break
             case 'center':
-                hitWidth += strokeWidth
+                hitWidth += __strokeWidth
                 break
             case 'outside':
-                hitWidth += strokeWidth * 2
+                hitWidth += __strokeWidth * 2
                 if (!needHitFill) {
                     if (!isHitFill && this.__hitStroke(inner, hitWidth)) return true
                     hitWidth = radiusWidth

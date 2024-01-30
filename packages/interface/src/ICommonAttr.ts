@@ -1,15 +1,17 @@
+import { INumber, IBoolean, IString } from '@leafer/interface'
 import { IStrokeAlign, IStrokeCap, IStrokeJoin, IBlurEffect, IFontWeight, ITextCase, ITextDecoration, IShadowEffect, IGrayscaleEffect, ITextAlign, IVerticalAlign, IOverflow, IUnitData, ITextWrap, IStroke, IFill, IArrowType } from './type/IType'
 import { ILeafStrokePaint, ILeafShadowEffect, ILeafPaint } from './type/IComputedType'
 import { IDashPatternString, IShadowString, IColorString, IStrokeWidthString, ICornerRadiusString } from './type/IStringType'
 
+
 // corner---
 export interface ICornerRadiusAttrData {
-    cornerRadius: number | number[] | ICornerRadiusString
-    cornerSmoothing: number
+    cornerRadius: INumber | INumber[] | ICornerRadiusString
+    cornerSmoothing: INumber
 }
 export interface ICornerRadiusInputData {
-    cornerRadius?: number | number[] | ICornerRadiusString
-    cornerSmoothing?: number
+    cornerRadius?: INumber | INumber[] | ICornerRadiusString
+    cornerSmoothing?: INumber
 }
 export interface ICornerRadiusComputedData {
     cornerRadius?: number
@@ -38,12 +40,13 @@ export interface IStrokeAttrData {
     stroke: IStroke
 
     strokeAlign: IStrokeAlign
-    strokeWidth: number | number[] | IStrokeWidthString
+    strokeWidth: INumber | INumber[] | IStrokeWidthString
+    strokeWidthFixed: IBoolean
     strokeCap: IStrokeCap
     strokeJoin: IStrokeJoin
-    dashPattern: number[] | IDashPatternString
-    dashOffset: number
-    miterLimit: number
+    dashPattern: INumber[] | IDashPatternString
+    dashOffset: INumber
+    miterLimit: INumber
 
     startArrow: IArrowType
     endArrow: IArrowType
@@ -52,12 +55,13 @@ export interface IStrokeInputData {
     stroke?: IStroke
 
     strokeAlign?: IStrokeAlign
-    strokeWidth?: number | number[] | IStrokeWidthString
+    strokeWidth?: INumber | INumber[] | IStrokeWidthString
+    strokeWidthFixed?: IBoolean
     strokeCap?: IStrokeCap
     strokeJoin?: IStrokeJoin
-    dashPattern?: number[] | IDashPatternString
-    dashOffset?: number
-    miterLimit?: number
+    dashPattern?: INumber[] | IDashPatternString
+    dashOffset?: INumber
+    miterLimit?: INumber
 
     startArrow?: IArrowType
     endArrow?: IArrowType
@@ -68,6 +72,7 @@ export interface IStrokeComputedData {
     strokeAlign?: IStrokeAlign
     strokeWidth?: number
     strokeWidths?: number[]
+    strokeWidthFixed?: boolean
     strokeCap?: IStrokeCap
     strokeJoin?: IStrokeJoin
     dashPattern?: number[]
@@ -77,17 +82,17 @@ export interface IStrokeComputedData {
 
 // text---
 export interface ITextStyleAttrData {
-    fontFamily: string
-    fontSize: number
+    fontFamily: IString
+    fontSize: INumber
     fontWeight: IFontWeight
-    italic: boolean
+    italic: IBoolean
     textCase: ITextCase
     textDecoration: ITextDecoration
-    letterSpacing: number | IUnitData
-    lineHeight: number | IUnitData
+    letterSpacing: INumber | IUnitData
+    lineHeight: INumber | IUnitData
 
-    paraIndent: number
-    paraSpacing: number
+    paraIndent: INumber
+    paraSpacing: INumber
 
     textAlign: ITextAlign
     verticalAlign: IVerticalAlign
@@ -96,17 +101,17 @@ export interface ITextStyleAttrData {
     textOverflow: IOverflow | string
 }
 export interface ITextStyleInputData {
-    fontFamily?: string
-    fontSize?: number
+    fontFamily?: IString
+    fontSize?: INumber
     fontWeight?: IFontWeight
-    italic?: boolean
+    italic?: IBoolean
     textCase?: ITextCase
     textDecoration?: ITextDecoration
-    letterSpacing?: number | IUnitData
-    lineHeight?: number | IUnitData
+    letterSpacing?: INumber | IUnitData
+    lineHeight?: INumber | IUnitData
 
-    paraIndent?: number
-    paraSpacing?: number
+    paraIndent?: INumber
+    paraSpacing?: INumber
 
     textAlign?: ITextAlign
     verticalAlign?: IVerticalAlign
@@ -138,16 +143,16 @@ export interface ITextStyleComputedData {
 export interface IEffectAttrData {
     shadow: IShadowEffect | IShadowEffect[] | IShadowString
     innerShadow: IShadowEffect | IShadowEffect[] | IShadowString
-    blur: number | IBlurEffect
-    backgroundBlur: number | IBlurEffect
-    grayscale: number | IGrayscaleEffect
+    blur: INumber | IBlurEffect
+    backgroundBlur: INumber | IBlurEffect
+    grayscale: INumber | IGrayscaleEffect
 }
 export interface IEffectInputData {
     shadow?: IShadowEffect | IShadowEffect[] | IShadowString
     innerShadow?: IShadowEffect | IShadowEffect[] | IShadowString
-    blur?: number | IBlurEffect
-    backgroundBlur?: number | IBlurEffect
-    grayscale?: number | IGrayscaleEffect
+    blur?: INumber | IBlurEffect
+    backgroundBlur?: INumber | IBlurEffect
+    grayscale?: INumber | IGrayscaleEffect
 }
 export interface IEffectComputedData {
     shadow?: ILeafShadowEffect[]

@@ -24,10 +24,10 @@ export function strokeText(stroke: string | ILeafPaint[], ui: IUI, canvas: ILeaf
 }
 
 function drawAlignStroke(align: IStrokeAlign, stroke: string | ILeafPaint[], isStrokes: boolean, ui: IUI, canvas: ILeaferCanvas): void {
-    const { strokeWidth, __font } = ui.__
+    const { __strokeWidth, __font } = ui.__
 
     const out = canvas.getSameCanvas(true, true)
-    out.setStroke(isStrokes ? undefined : stroke, strokeWidth * 2, ui.__)
+    out.setStroke(isStrokes ? undefined : stroke, __strokeWidth * 2, ui.__)
 
     out.font = __font
     isStrokes ? drawStrokesStyle(stroke as ILeafPaint[], true, ui, out) : drawTextStroke(ui, out)

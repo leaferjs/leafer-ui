@@ -16,6 +16,17 @@ export class UIData extends LeafData implements IUIData {
     public __isFills?: boolean
     public __isStrokes?: boolean
 
+    public get __strokeWidth(): number {
+        const { strokeWidth, strokeWidthFixed } = this as IUIData
+        if (strokeWidthFixed) {
+            let { scaleX } = this.__leaf.__world
+            if (scaleX < 0) scaleX = -scaleX
+            return scaleX > 1 ? strokeWidth / scaleX : strokeWidth
+        } else {
+            return strokeWidth
+        }
+    }
+
     public __pixelFill?: boolean // png / svg / webp
     public __pixelStroke?: boolean
 

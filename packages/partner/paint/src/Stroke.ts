@@ -7,8 +7,8 @@ import { strokeText, drawStrokesStyle } from './StrokeText'
 
 export function stroke(stroke: string, ui: IUI, canvas: ILeaferCanvas): void {
     const options = ui.__
-    const { strokeWidth, strokeAlign, __font } = options
-    if (!strokeWidth) return
+    const { __strokeWidth, strokeAlign, __font } = options
+    if (!__strokeWidth) return
 
     if (__font) {
 
@@ -20,14 +20,14 @@ export function stroke(stroke: string, ui: IUI, canvas: ILeaferCanvas): void {
 
             case 'center':
 
-                canvas.setStroke(stroke, strokeWidth, options)
+                canvas.setStroke(stroke, __strokeWidth, options)
                 canvas.stroke()
                 break
 
             case 'inside':
 
                 canvas.save()
-                canvas.setStroke(stroke, strokeWidth * 2, options)
+                canvas.setStroke(stroke, __strokeWidth * 2, options)
 
                 options.windingRule ? canvas.clip(options.windingRule) : canvas.clip()
                 canvas.stroke()
@@ -38,7 +38,7 @@ export function stroke(stroke: string, ui: IUI, canvas: ILeaferCanvas): void {
 
             case 'outside':
                 const out = canvas.getSameCanvas(true, true)
-                out.setStroke(stroke, strokeWidth * 2, options)
+                out.setStroke(stroke, __strokeWidth * 2, options)
 
                 ui.__drawRenderPath(out)
 
@@ -63,8 +63,8 @@ export function stroke(stroke: string, ui: IUI, canvas: ILeaferCanvas): void {
 
 export function strokes(strokes: ILeafPaint[], ui: IUI, canvas: ILeaferCanvas): void {
     const options = ui.__
-    const { strokeWidth, strokeAlign, __font } = options
-    if (!strokeWidth) return
+    const { __strokeWidth, strokeAlign, __font } = options
+    if (!__strokeWidth) return
 
     if (__font) {
 
@@ -75,13 +75,13 @@ export function strokes(strokes: ILeafPaint[], ui: IUI, canvas: ILeaferCanvas): 
         switch (strokeAlign) {
 
             case 'center':
-                canvas.setStroke(undefined, strokeWidth, options)
+                canvas.setStroke(undefined, __strokeWidth, options)
                 drawStrokesStyle(strokes, false, ui, canvas)
                 break
 
             case 'inside':
                 canvas.save()
-                canvas.setStroke(undefined, strokeWidth * 2, options)
+                canvas.setStroke(undefined, __strokeWidth * 2, options)
                 options.windingRule ? canvas.clip(options.windingRule) : canvas.clip()
 
                 drawStrokesStyle(strokes, false, ui, canvas)
@@ -94,7 +94,7 @@ export function strokes(strokes: ILeafPaint[], ui: IUI, canvas: ILeaferCanvas): 
                 const out = canvas.getSameCanvas(true, true)
                 ui.__drawRenderPath(out)
 
-                out.setStroke(undefined, strokeWidth * 2, options)
+                out.setStroke(undefined, __strokeWidth * 2, options)
 
                 drawStrokesStyle(strokes, false, ui, out)
 

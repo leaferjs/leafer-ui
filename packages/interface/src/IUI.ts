@@ -11,7 +11,6 @@ import {
 import { IOverflow } from './type/IType'
 import { ILeafer } from './app/ILeafer'
 
-
 // Line
 export interface ILine extends IUI {
     __: ILineData
@@ -328,6 +327,8 @@ export interface IUIData extends IUIComputedData, ILeafData {
     // 非数据属性, 自动计算的缓存数据
     __isFills?: boolean
     __isStrokes?: boolean
+
+    readonly __strokeWidth: number
 
     __pixelFill?: boolean // png / svg / webp
     __pixelStroke?: boolean
