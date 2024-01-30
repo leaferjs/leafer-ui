@@ -1,5 +1,5 @@
 import { ILeaferCanvas, IPathDrawer, IPathCommandData, IHitType, INumber, IBoolean, IString, IPathString, IExportFileType, IPointData, ICursorType, IMaskType, IAround, IFindMethod } from '@leafer/interface'
-import { Leaf, PathDrawer, surfaceType, dataType, positionType, boundsType, pathType, scaleType, rotationType, opacityType, sortType, maskType, dataProcessor, useModule, rewrite, rewriteAble, UICreator, PathCorner, hitType, strokeType, PathConvert, eraserType, cursorType, autoLayoutType, PathCreator } from '@leafer/core'
+import { Leaf, PathDrawer, surfaceType, dataType, positionType, boundsType, pathType, scaleType, rotationType, opacityType, sortType, maskType, dataProcessor, useModule, rewrite, rewriteAble, UICreator, PathCorner, hitType, strokeType, PathConvert, eraserType, cursorType, autoLayoutType, PathCreator, BoundsHelper } from '@leafer/core'
 
 import { IUI, IShadowEffect, IBlurEffect, IStrokeAlign, IStrokeJoin, IStrokeCap, IBlendMode, IDashPatternString, IShadowString, IGrayscaleEffect, IUIData, IGroup, IStrokeWidthString, ICornerRadiusString, IUIInputData, IExportOptions, IExportResult, IFill, IStroke, IArrowType, IFindUIMethod, IEditSize, ILeafer } from '@leafer-ui/interface'
 import { effectType } from '@leafer-ui/decorator'
@@ -265,7 +265,11 @@ export class UI extends Leaf implements IUI {
     public getPath(curve?: boolean, pathForRender?: boolean): IPathCommandData {
         this.__layout.update()
         let path = pathForRender ? this.__.__pathForRender : this.__.path
-        if (!path) this.__drawPathByBox(new PathCreator(path = []))
+        if (!path) {
+            path = []
+            const { width, height } = this.boxBounds
+            if (width || height) this.__drawPathByBox(new PathCreator(path))
+        }
         return curve ? PathConvert.toCanvasData(path, true) : path
     }
 
