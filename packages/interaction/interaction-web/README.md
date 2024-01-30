@@ -1,1 +1,1 @@
-# @leafer/interaction-web
+# @leafer-ui/interaction-web

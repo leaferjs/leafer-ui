@@ -1,1 +1,1 @@
-# @leafer/interaction-miniapp
+# @leafer-ui/interaction-miniapp
