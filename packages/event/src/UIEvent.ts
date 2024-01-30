@@ -33,6 +33,10 @@ export class UIEvent extends Event implements IUIEvent {
         Object.assign(this, params)
     }
 
+    public getPage(): IPointData {
+        return this.current.getPagePoint(this)
+    }
+
     public getInner(relative?: ILeaf): IPointData {
         if (!relative) relative = this.current
         return relative.getInnerPoint(this)

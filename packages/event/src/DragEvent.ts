@@ -36,6 +36,10 @@ export class DragEvent extends PointerEvent implements IDragEvent {
     static setData(data: IObject): void {
         this.data = data
     }
+    public getPageMove(total?: boolean): IPointData {
+        this.assignMove(total)
+        return this.current.getPagePoint(move, null, true)
+    }
 
     public getInnerMove(relative?: ILeaf, total?: boolean): IPointData {
         if (!relative) relative = this.current
@@ -47,6 +51,10 @@ export class DragEvent extends PointerEvent implements IDragEvent {
         if (!relative) relative = this.current
         this.assignMove(total)
         return relative.getLocalPoint(move, null, true)
+    }
+
+    public getPageTotal(): IPointData {
+        return this.getPageMove(true)
     }
 
     public getInnerTotal(relative?: ILeaf): IPointData {
