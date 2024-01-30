@@ -253,15 +253,11 @@ export class UI extends Leaf implements IUI {
     public createProxyData(): IUIInputData { return undefined }
 
 
-    // find
+    // hit rewrite
 
-    public find(condition: number | string | IFindUIMethod, options?: any): IUI[] {
-        return this.leafer ? this.leafer.selector.getBy(condition as IFindMethod, this, false, options) as IUI[] : []
-    }
+    public find(_condition: number | string | IFindUIMethod, _options?: any): IUI[] { return undefined }
 
-    public findOne(condition: number | string | IFindUIMethod, options?: any): IUI {
-        return this.leafer ? this.leafer.selector.getBy(condition as IFindMethod, this, true, options) as IUI : null
-    }
+    public findOne(_condition: number | string | IFindUIMethod, _options?: any): IUI { return undefined }
 
 
     // path

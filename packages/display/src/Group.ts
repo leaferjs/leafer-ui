@@ -1,3 +1,4 @@
+import { IPickOptions, IPickResult, IPointData } from '@leafer/interface'
 import { Branch, useModule, dataProcessor, registerUI, UICreator } from '@leafer/core'
 
 import { IGroup, IGroupData, IGroupInputData, IUI, IUIInputData } from '@leafer-ui/interface'
@@ -60,6 +61,12 @@ export class Group extends UI implements IGroup {
         data.children = this.children.map(child => child.toJSON())
         return data
     }
+
+
+    // hit rewrite
+
+    public pick(_hitPoint: IPointData, _options?: IPickOptions): IPickResult { return undefined }
+
 
     // add
 

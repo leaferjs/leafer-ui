@@ -1,4 +1,4 @@
-import { ILeaf, ILeafComputedData, ILeafData, ILeafInputData, ILeaferCanvas, IRenderOptions, IExportOptions, IExportResult, IPathDrawer, IPointData, IPath2D, IPathCommandData, IWindingRule, ILeaferImageConfig, IBoundsData, IObject, IPathString, ILeaferImage, IBlob, IPathCreator, AnswerType } from '@leafer/interface'
+import { ILeaf, ILeafComputedData, ILeafData, ILeafInputData, ILeaferCanvas, IRenderOptions, IExportOptions, IExportResult, IPathDrawer, IPointData, IPath2D, IPathCommandData, IWindingRule, ILeaferImageConfig, IBoundsData, IObject, IPathString, ILeaferImage, IPathCreator, AnswerType, IPickOptions, IPickResult } from '@leafer/interface'
 
 import {
     IFillAttrData, IFillInputData, IFillComputedData,
@@ -267,6 +267,7 @@ export interface IBoxInputData extends IGroupInputData {
 export interface IGroup extends IUI {
     __: IGroupData
     children: IUI[]
+    pick(hitPoint: IPointData, options?: IPickOptions): IPickResult
     add(child: IUI, index?: number): void
     addAt(child: IUI, index: number): void
     addAfter(child: IUI, after: IUI): void
