@@ -5,6 +5,7 @@ import { PaintModule } from '@leafer-ui/paint'
 import { PaintImageModule } from '@leafer-ui/image'
 import { PaintGradientModule } from '@leafer-ui/gradient'
 import { EffectModule } from '@leafer-ui/effect'
+import '@leafer-ui/mask'
 
 import { TextConvertModule } from '@leafer-ui/text'
 import { ColorConvertModule } from '@leafer-ui/color'
