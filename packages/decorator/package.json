@@ -1,6 +1,6 @@
 {
   "name": "@leafer-ui/decorator",
-  "version": "1.0.0-rc.9",
+  "version": "1.0.0-rc.10",
   "description": "@leafer-ui/decorator",
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
@@ -18,10 +18,10 @@
     "leaferjs"
   ],
   "dependencies": {
-    "@leafer/core": "1.0.0-rc.9"
+    "@leafer/core": "1.0.0-rc.10"
   },
   "devDependencies": {
-     "@leafer/interface": "1.0.0-rc.9",
-     "@leafer-ui/interface": "1.0.0-rc.9"
+     "@leafer/interface": "1.0.0-rc.10",
+     "@leafer-ui/interface": "1.0.0-rc.10"
   }
 }
