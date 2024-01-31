@@ -33,6 +33,7 @@ export class InteractionBase implements IInteraction {
     public shrinkCanvasBounds: IBounds
 
     public downData: IPointerEvent
+    protected oldDownData?: IPointerEvent // 通过updateDownData强制更新下来的数据
     public hoverData: IPointerEvent
 
     public downTime: number
@@ -155,6 +156,7 @@ export class InteractionBase implements IInteraction {
 
         this.emit(PointerEvent.BEFORE_UP, data)
         this.emit(PointerEvent.UP, data)
+        if (this.oldDownData) this.emit(PointerEvent.UP, this.oldDownData, undefined, data.path) // oldDownPath必须触发up
         this.emit(PointerEvent.UP, this.downData, undefined, data.path) // downPath必须触发up
 
         this.touchLeave(data)
@@ -164,7 +166,7 @@ export class InteractionBase implements IInteraction {
 
         this.dragger.dragEnd(data)
 
-        this.downData = null
+        this.downData = this.oldDownData = null
 
         this.updateCursor(data)
     }
@@ -324,8 +326,10 @@ export class InteractionBase implements IInteraction {
     }
 
     public updateDownData(data?: IPointerEvent, options?: IPickOptions): void {
-        if (!data) data = this.downData
+        const { downData } = this
+        if (!data && downData) data = { ...downData }
         if (!data) return
+        this.oldDownData = downData
         this.findPath(data, options)
         this.downData = data
     }
