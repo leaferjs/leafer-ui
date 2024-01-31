@@ -1,13 +1,13 @@
-import { ILeaf, IExportFileType, IFunction, IRenderOptions, IBoundsData, IBounds } from '@leafer/interface'
+import { IExportFileType, IFunction, IRenderOptions, IBoundsData, IBounds } from '@leafer/interface'
 import { Creator, Matrix, TaskProcessor, FileHelper } from '@leafer/core'
 
-import { IExportModule, IExportOptions, IExportResult, IExportResultFunction } from '@leafer-ui/interface'
+import { IExportModule, IExportOptions, IExportResult, IExportResultFunction, IUI } from '@leafer-ui/interface'
 import { getTrimBounds } from './trim'
 
 
 export const ExportModule: IExportModule = {
 
-    export(leaf: ILeaf, filename: IExportFileType | string, options?: IExportOptions | number | boolean): Promise<IExportResult> {
+    export(leaf: IUI, filename: IExportFileType | string, options?: IExportOptions | number | boolean): Promise<IExportResult> {
 
         this.running = true
         return addTask((success: IExportResultFunction) =>
@@ -26,7 +26,9 @@ export const ExportModule: IExportModule = {
                     leafer.waitViewCompleted(async () => {
 
                         let renderBounds: IBoundsData, trimBounds: IBounds, scaleX = 1, scaleY = 1
-                        const { scale, pixelRatio, slice, trim, fill, screenshot } = FileHelper.getExportOptions(options)
+                        options = FileHelper.getExportOptions(options)
+                        const { scale, pixelRatio, slice, trim, fill } = options
+                        const screenshot = options.screenshot || leaf.isApp
                         const needFill = FileHelper.isOpaqueImage(filename) || fill, matrix = new Matrix()
 
                         if (screenshot) {
