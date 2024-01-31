@@ -27,8 +27,9 @@ export const ExportModule: IExportModule = {
 
                         let renderBounds: IBoundsData, trimBounds: IBounds, scaleX = 1, scaleY = 1
                         options = FileHelper.getExportOptions(options)
-                        const { scale, pixelRatio, slice, trim, fill } = options
+                        const { scale, pixelRatio, slice, trim } = options
                         const screenshot = options.screenshot || leaf.isApp
+                        const fill = options.fill === undefined ? ((leaf.isLeafer && screenshot) ? leaf.fill : '') : options.fill // leafer use 
                         const needFill = FileHelper.isOpaqueImage(filename) || fill, matrix = new Matrix()
 
                         if (screenshot) {
