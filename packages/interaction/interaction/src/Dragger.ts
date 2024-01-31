@@ -80,7 +80,7 @@ export class Dragger {
         let leaf: ILeaf
         for (let i = 0, len = path.length; i < len; i++) {
             leaf = path.list[i]
-            if ((leaf.__.draggable || leaf.__.editable) && leaf.__.hitSelf) {
+            if ((leaf.__.draggable || leaf.__.editable) && leaf.__.hitSelf && !leaf.__.locked) {
                 this.dragableList = new LeafList(leaf)
                 break
             }
