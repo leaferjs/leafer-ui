@@ -1,4 +1,4 @@
-import { ILeaferConfig, IResizeEvent, ILeaferCanvas, IRenderOptions, ILeaferBase, IBounds } from '@leafer/interface'
+import { ILeaferConfig, IResizeEvent, ILeaferCanvas, IRenderOptions, ILeaferBase, IBoundsData } from '@leafer/interface'
 import { Creator, DataHelper, Debug, LayoutEvent, PropertyEvent, RenderEvent, canvasSizeAttrs, registerUI } from '@leafer/core'
 
 import { IApp, IAppConfig, IAppInputData, IEditorBase, ILeafer } from '@leafer-ui/interface'
@@ -75,7 +75,7 @@ export class App extends Leafer implements IApp {
         this.children.forEach(leafer => leafer.lockLayout())
     }
 
-    public forceRender(bounds?: IBounds): void {
+    public forceRender(bounds?: IBoundsData): void {
         this.children.forEach(leafer => leafer.forceRender(bounds))
     }
 
