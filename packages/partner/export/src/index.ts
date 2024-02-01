@@ -51,7 +51,7 @@ export const ExportModule: IExportModule = {
                             scaleX *= scale, scaleY *= scale
                         }
 
-                        let canvas = Creator.canvas({ width: Math.ceil(width), height: Math.ceil(width), pixelRatio })
+                        let canvas = Creator.canvas({ width: Math.ceil(width), height: Math.ceil(height), pixelRatio })
                         const renderOptions: IRenderOptions = { matrix: matrix.translate(-x, -y).withScale(scaleX, scaleY) }
 
                         if (slice) {

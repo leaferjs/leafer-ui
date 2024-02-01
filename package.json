@@ -1,6 +1,6 @@
 {
   "name": "leafer-ui",
-  "version": "1.0.0-rc.10",
+  "version": "1.0.0-rc.12",
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
   "main": "dist/web.esm.js",
@@ -27,7 +27,7 @@
     "engine"
   ],
   "dependencies": {
-    "@leafer-ui/web": "1.0.0-rc.10",
-    "@leafer-ui/interface": "1.0.0-rc.10"
+    "@leafer-ui/web": "1.0.0-rc.12",
+    "@leafer-ui/interface": "1.0.0-rc.12"
   }
 }
