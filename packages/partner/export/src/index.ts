@@ -27,7 +27,8 @@ export const ExportModule: IExportModule = {
 
                         let renderBounds: IBoundsData, trimBounds: IBounds, scaleX = 1, scaleY = 1
                         options = FileHelper.getExportOptions(options)
-                        const { scale, pixelRatio, slice, trim } = options
+                        const { scale, slice, trim } = options
+                        const pixelRatio = options.pixelRatio || 1
                         const screenshot = options.screenshot || leaf.isApp
                         const fill = options.fill === undefined ? ((leaf.isLeafer && screenshot) ? leaf.fill : '') : options.fill // leafer use 
                         const needFill = FileHelper.isOpaqueImage(filename) || fill, matrix = new Matrix()
@@ -50,7 +51,7 @@ export const ExportModule: IExportModule = {
                             scaleX *= scale, scaleY *= scale
                         }
 
-                        let canvas = Creator.canvas({ width, height, pixelRatio })
+                        let canvas = Creator.canvas({ width: Math.ceil(width), height: Math.ceil(width), pixelRatio })
                         const renderOptions: IRenderOptions = { matrix: matrix.translate(-x, -y).withScale(scaleX, scaleY) }
 
                         if (slice) {
@@ -74,7 +75,7 @@ export const ExportModule: IExportModule = {
                         if (needFill) canvas.fillWorld(canvas.bounds, fill || '#FFFFFF', 'destination-over')
 
                         const data = filename === 'canvas' ? canvas : await canvas.export(filename, options)
-                        over({ data, renderBounds, trimBounds })
+                        over({ data, width: canvas.pixelWidth, height: canvas.pixelHeight, renderBounds, trimBounds })
 
                     })
 

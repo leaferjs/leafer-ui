@@ -1,7 +1,7 @@
 import { ILeaferCanvas } from '@leafer/interface'
 
 import { IUI, ITextRowData, ILeafPaint, IStrokeAlign, ILeafStrokePaint } from '@leafer-ui/interface'
-import { PaintImage } from "@leafer-ui/external"
+import { PaintImage } from "@leafer-ui/draw"
 
 import { fillText } from './FillText'
 

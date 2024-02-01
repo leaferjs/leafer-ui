@@ -1,7 +1,5 @@
 import { IUI, IPaint, ILeafPaint, IRGB, IBooleanMap, IObject, IPaintAttr } from '@leafer-ui/interface'
-import { ColorConvert } from '@leafer-ui/draw'
-
-import { PaintImage, PaintGradient } from "@leafer-ui/external"
+import { ColorConvert, PaintImage, PaintGradient } from '@leafer-ui/draw'
 
 
 let recycleMap: IBooleanMap
