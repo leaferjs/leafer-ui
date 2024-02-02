@@ -1,5 +1,5 @@
 import { IExportFileType, IFunction, IRenderOptions, IBoundsData, IBounds } from '@leafer/interface'
-import { Creator, Matrix, TaskProcessor, FileHelper } from '@leafer/core'
+import { Creator, Matrix, TaskProcessor, FileHelper, Bounds } from '@leafer/core'
 
 import { IExportModule, IExportOptions, IExportResult, IExportResultFunction, IUI } from '@leafer-ui/interface'
 import { getTrimBounds } from './trim'
@@ -27,7 +27,8 @@ export const ExportModule: IExportModule = {
 
                         let renderBounds: IBoundsData, trimBounds: IBounds, scaleX = 1, scaleY = 1
                         options = FileHelper.getExportOptions(options)
-                        const { scale, slice, trim } = options
+                        const { slice, trim } = options
+                        const scale = options.scale || 1
                         const pixelRatio = options.pixelRatio || 1
                         const screenshot = options.screenshot || leaf.isApp
                         const fill = options.fill === undefined ? ((leaf.isLeafer && screenshot) ? leaf.fill : '') : options.fill // leafer use 
@@ -38,21 +39,15 @@ export const ExportModule: IExportModule = {
                         } else {
                             const { localTransform, __world: world } = leaf
                             matrix.set(world).divide(localTransform).invert()
-                            scaleX = 1 / (world.scaleX / leaf.scaleX)
-                            scaleY = 1 / (world.scaleY / leaf.scaleY)
+                            scaleX = 1 / (world.scaleX / leaf.scaleX) * scale
+                            scaleY = 1 / (world.scaleY / leaf.scaleY) * scale
                             renderBounds = leaf.getBounds('render', 'local')
                         }
 
-                        let { x, y, width, height } = renderBounds
+                        const { x, y, width, height } = new Bounds(renderBounds).scale(scale).ceil()
 
-                        if (scale) {
-                            matrix.scale(scale)
-                            width *= scale, height *= scale
-                            scaleX *= scale, scaleY *= scale
-                        }
-
-                        let canvas = Creator.canvas({ width: Math.ceil(width), height: Math.ceil(height), pixelRatio })
-                        const renderOptions: IRenderOptions = { matrix: matrix.translate(-x, -y).withScale(scaleX, scaleY) }
+                        let canvas = Creator.canvas({ width, height, pixelRatio })
+                        const renderOptions: IRenderOptions = { matrix: matrix.scale(scale).translate(-x, -y).withScale(scaleX, scaleY) }
 
                         if (slice) {
                             leaf = leafer // render all in bounds
