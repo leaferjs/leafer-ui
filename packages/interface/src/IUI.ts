@@ -344,7 +344,8 @@ export interface IUIData extends IUIComputedData, ILeafData {
 
     __autoWidth: boolean
     __autoHeight: boolean
-    __autoBounds: boolean
+    __autoSide: boolean
+    __autoSize: boolean
 
     // path
     path?: IPathCommandData

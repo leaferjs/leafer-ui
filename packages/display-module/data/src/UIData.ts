@@ -45,7 +45,8 @@ export class UIData extends LeafData implements IUIData {
 
     public get __autoWidth() { return !this._width }
     public get __autoHeight() { return !this._height }
-    public get __autoBounds() { return !this._width && !this._height }
+    public get __autoSide() { return !this._width || !this._height }
+    public get __autoSize() { return !this._width && !this._height }
 
     protected setVisible(value: IBoolean) {
         if (this.__leaf.leafer) this.__leaf.leafer.watcher.hasVisible = true

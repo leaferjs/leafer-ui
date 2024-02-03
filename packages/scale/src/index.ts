@@ -74,7 +74,7 @@ Group.prototype.__scaleResize = function (scaleX: number, scaleY: number): void 
 }
 
 Box.prototype.__scaleResize = function (scaleX: number, scaleY: number): void {
-    if (this.__.__autoBounds && this.children.length) {
+    if (this.__.__autoSize && this.children.length) {
         groupScaleResize(this, scaleX, scaleY)
     } else {
         scaleResize(this, scaleX, scaleY)

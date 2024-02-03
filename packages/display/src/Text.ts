@@ -135,7 +135,7 @@ export class Text extends UI implements IText {
         data.__padding = padding ? MathHelper.fourNumber(padding) : undefined
         data.__baseLine = data.__lineHeight - (data.__lineHeight - fontSize * 0.7) / 2
         data.__font = `${italic ? 'italic ' : ''}${textCase === 'small-caps' ? 'small-caps ' : ''}${fontWeight !== 'normal' ? fontWeight + ' ' : ''}${fontSize}px ${fontFamily}`
-        data.__clipText = textOverflow !== 'show' && !data.__autoBounds
+        data.__clipText = textOverflow !== 'show' && !data.__autoSize
 
         this.__updateTextDrawData()
 

@@ -72,7 +72,7 @@ function checkSizeAndCreateData(ui: IUI, attrName: string, paint: IImagePaint, i
         const data = ui.__
         data.__naturalWidth = image.width
         data.__naturalHeight = image.height
-        if (data.__autoWidth || data.__autoHeight) {
+        if (data.__autoSide) {
             ui.forceUpdate('width')
             if (ui.__proxyData) {
                 ui.setProxyAttr('width', data.width)
