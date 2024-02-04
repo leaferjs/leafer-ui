@@ -2,7 +2,7 @@ import { ILeaferCanvas, ILeaferCanvasConfig, INumber, IRenderOptions, IPointData
 import { Creator, Matrix, Platform, dataProcessor, registerUI, hitType } from '@leafer/core'
 
 import { ICanvas, ICanvasData, ICanvasInputData, IUI } from '@leafer-ui/interface'
-import { ImageData } from '@leafer-ui/data'
+import { CanvasData } from '@leafer-ui/data'
 
 import { Rect } from './Rect'
 import { resizeType } from '@leafer-ui/decorator'
@@ -13,7 +13,7 @@ export class Canvas extends Rect implements ICanvas {
 
     public get __tag() { return 'Canvas' }
 
-    @dataProcessor(ImageData)
+    @dataProcessor(CanvasData)
     declare public __: ICanvasData
 
     @resizeType(100)
@@ -23,7 +23,7 @@ export class Canvas extends Rect implements ICanvas {
     declare public height: INumber
 
     @resizeType(Platform.devicePixelRatio)
-    public pixelRatio: INumber
+    declare public pixelRatio: INumber
 
     @resizeType(true)
     public smooth: boolean

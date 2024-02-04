@@ -75,7 +75,7 @@ export class UIData extends LeafData implements IUIData {
 
 
     protected setFill(value: IValue) {
-        if (this.__naturalWidth) this.__naturalWidth = this.__naturalHeight = undefined
+        if (this.__naturalWidth) this.__removeNaturalSize()
         if (typeof value === 'string' || !value) {
             if (this.__isFills) {
                 this.__removeInput('fill')

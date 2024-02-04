@@ -206,13 +206,11 @@ export interface IImageInputData extends IImageAttrData, IUIBaseInputData { }
 
 export interface ICanvas extends IRect {
     __: ICanvasData
-    pixelRatio: number
     smooth: boolean
     canvas: ILeaferCanvas
     __updateSize(): void
 }
 interface ICanvasAttrData {
-    pixelRatio?: number
     smooth?: boolean
 }
 export interface ICanvasData extends ICanvasAttrData, IRectData { }
@@ -221,11 +219,11 @@ export interface ICanvasInputData extends ICanvasAttrData, IUIBaseInputData { }
 
 // Leafer
 export interface ILeaferData extends IGroupData {
-    pixelRatio?: number
+
 }
 
 export interface ILeaferInputData extends IGroupInputData {
-    pixelRatio?: number
+
 }
 
 export interface IAppData extends ILeaferData {

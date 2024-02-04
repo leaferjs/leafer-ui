@@ -70,8 +70,8 @@ export function image(ui: IUI, attrName: string, paint: IImagePaint, boxBounds: 
 function checkSizeAndCreateData(ui: IUI, attrName: string, paint: IImagePaint, image: ILeaferImage, leafPaint: ILeafPaint, boxBounds: IBoundsData): boolean {
     if (attrName === 'fill' && !ui.__.__naturalWidth) {
         const data = ui.__
-        data.__naturalWidth = image.width
-        data.__naturalHeight = image.height
+        data.__naturalWidth = image.width / data.pixelRatio
+        data.__naturalHeight = image.height / data.pixelRatio
         if (data.__autoSide) {
             ui.forceUpdate('width')
             if (ui.__proxyData) {

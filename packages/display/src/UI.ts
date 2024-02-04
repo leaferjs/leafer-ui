@@ -180,10 +180,13 @@ export class UI extends Leaf implements IUI {
     @strokeType(10)
     public miterLimit: INumber
 
-    // load 
+    // image
 
     @dataType(false)
     public lazy: IBoolean  // load image / compute paint
+
+    @boundsType(1, true)
+    public pixelRatio: INumber
 
     // arrow
 
