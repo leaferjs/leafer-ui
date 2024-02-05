@@ -197,7 +197,7 @@ export class Leafer extends Group implements ILeafer {
     }
 
     public forceRender(bounds?: IBoundsData): void {
-        this.renderer.addBlock(new Bounds(bounds) || this.canvas.bounds)
+        this.renderer.addBlock(bounds ? new Bounds(bounds) : this.canvas.bounds)
         if (this.viewReady) this.renderer.update()
     }
 
