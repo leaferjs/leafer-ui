@@ -78,6 +78,9 @@ export interface IStrokeComputedData {
     dashPattern?: number[]
     dashOffset?: number
     miterLimit?: number
+
+    startArrow?: IArrowType
+    endArrow?: IArrowType
 }
 
 // text---

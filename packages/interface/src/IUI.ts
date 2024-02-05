@@ -338,6 +338,7 @@ export interface IUIData extends IUIComputedData, ILeafData {
     __isOverflow?: boolean
     __blendLayer?: boolean
 
+    __useArrow?: boolean
     __useEffect?: boolean
 
     __autoWidth: boolean

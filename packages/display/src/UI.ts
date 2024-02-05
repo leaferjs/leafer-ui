@@ -7,7 +7,7 @@ import { effectType } from '@leafer-ui/decorator'
 import { UIData } from '@leafer-ui/data'
 import { UIBounds, UIRender } from '@leafer-ui/display-module'
 
-import { Export } from '@leafer-ui/external'
+import { Export, PathArrow } from '@leafer-ui/external'
 
 
 @useModule(UIBounds)
@@ -297,6 +297,7 @@ export class UI extends Leaf implements IUI {
         if (this.__.path) {
             const data = this.__
             data.__pathForRender = data.cornerRadius ? PathCorner.smooth(data.path, data.cornerRadius, data.cornerSmoothing) : data.path
+            if (data.__useArrow) data.__pathForRender = PathArrow.add(data.__pathForRender, data.startArrow, data.endArrow)
         }
     }
 

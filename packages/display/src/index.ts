@@ -10,6 +10,7 @@ export { Ellipse } from './Ellipse'
 export { Polygon } from './Polygon'
 export { Star } from './Star'
 export { Line } from './Line'
+export { Arrow } from './Arrow'
 
 export { Image } from './Image'
 export { Canvas } from './Canvas'

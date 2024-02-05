@@ -31,6 +31,7 @@ export { ILeafFill, ILeafPaint, ILeafPaintPatternData, ILeafPaintColor, ILeafStr
 export { IUIRenderModule, IRectRenderModule, IImageRenderModule, ITextRenderModule, IGroupRenderModule, IFrameRenderModule } from './module/IUIRender'
 export { IUIBoundsModule } from './module/IUIBounds'
 export { IUIHitModule } from './module/IUIHit'
+export { IPathArrowModule } from './module/IPathArrow'
 export { ITextConvertModule } from './module/ITextConvert'
 export { IColorConvertModule } from './module/IColorConvert'
 export { IExportModule } from './module/IExport'
