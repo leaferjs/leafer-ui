@@ -92,11 +92,27 @@ export type IRepeat = boolean | 'x' | 'y'
 
 // 描边
 export type IStrokeAlign = 'inside' | 'outside' | 'center'
-export type IStrokeCap = 'none' | 'round' | 'square' | 'arrow-lines' | 'arrow-equilateral'
+export type IStrokeCap = 'none' | 'round' | 'square'
 export type IStrokeJoin = 'bevel' | 'round' | 'miter'
 
 // 箭头
-export type IArrowType = 'none' | 'line' | 'triangle' | 'circle'
+export type IArrowType = IPathDataArrow | 'none' | 'angle' | 'angle-side' | 'arrow' | 'triangle' | 'triangle-flip' | 'circle' | 'circle-line' | 'square' | 'square-line' | 'diamond' | 'diamond-line' | 'mark'
+
+export interface IPathDataArrowMap {
+    [name: string]: IPathDataArrow
+}
+
+export interface IPathDataArrow {
+    connect?: IPathDataArrowOffset // 箭头与线条的连接点位置
+    offset?: IPathDataArrowOffset  // 箭头偏移距离，与末端对齐
+    path: IPathCommandData
+}
+
+export interface IPathDataArrowOffset {
+    x?: number // 偏移距离（x轴）
+    bevelJoin?: number // strokeJoin 为 bevel 时增加的偏移距离（x轴）
+    roundJoin?: number // strokeJoin 为 round 时增加的偏移距离（x轴）
+}
 
 // 文本
 export type ITextAlign = 'left' | 'center' | 'right' | 'justify'

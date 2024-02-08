@@ -1,7 +1,9 @@
 import { IPathCommandData } from '@leafer/interface'
-import { IArrowType } from '../type/IType'
+import { IPathDataArrowMap } from '../type/IType'
+import { IUI } from '../IUI'
 
 
 export interface IPathArrowModule {
-    add(path: IPathCommandData, startArrow?: IArrowType, endArrow?: IArrowType): IPathCommandData
+    list: IPathDataArrowMap
+    add(ui: IUI, path: IPathCommandData): IPathCommandData
 }

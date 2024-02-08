@@ -17,7 +17,7 @@ export class Arrow extends Line implements IArrow {
     @strokeType('none')
     declare public startArrow: IArrowType
 
-    @strokeType('lines')
+    @strokeType('angle')
     declare public endArrow: IArrowType
 
     constructor(data?: IArrowInputData) {
