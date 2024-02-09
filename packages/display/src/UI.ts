@@ -1,5 +1,5 @@
 import { ILeaferCanvas, IPathDrawer, IPathCommandData, IHitType, INumber, IBoolean, IString, IPathString, IExportFileType, IPointData, ICursorType, IMaskType, IAround, IValue, IWindingRule } from '@leafer/interface'
-import { Leaf, PathDrawer, surfaceType, dataType, positionType, boundsType, pathType, scaleType, rotationType, opacityType, sortType, maskType, dataProcessor, useModule, rewrite, rewriteAble, UICreator, PathCorner, hitType, strokeType, PathConvert, eraserType, cursorType, autoLayoutType, PathCreator, naturalBoundsType } from '@leafer/core'
+import { Leaf, PathDrawer, surfaceType, dataType, positionType, boundsType, pathType, scaleType, rotationType, opacityType, sortType, maskType, dataProcessor, registerUI, useModule, rewrite, rewriteAble, UICreator, PathCorner, hitType, strokeType, PathConvert, eraserType, cursorType, autoLayoutType, PathCreator, naturalBoundsType } from '@leafer/core'
 
 import { IUI, IShadowEffect, IBlurEffect, IStrokeAlign, IStrokeJoin, IStrokeCap, IBlendMode, IDashPatternString, IShadowString, IGrayscaleEffect, IUIData, IGroup, IStrokeWidthString, ICornerRadiusString, IUIInputData, IExportOptions, IExportResult, IFill, IStroke, IArrowType, IFindUIMethod, IEditSize, ILeafer } from '@leafer-ui/interface'
 import { arrowType, effectType } from '@leafer-ui/decorator'
@@ -350,6 +350,13 @@ export class UI extends Leaf implements IUI {
         return UICreator.get(data.tag || this.prototype.__tag, data, x, y, width, height) as IUI
     }
 
+    static registerUI(): void {
+        registerUI()(this)
+    }
+
+    static registerData(data: IUIData): void {
+        dataProcessor(data)(this.prototype)
+    }
 
     public destroy(): void {
         this.fill = this.stroke = null
