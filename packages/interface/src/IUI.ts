@@ -1,4 +1,4 @@
-import { ILeaf, ILeafComputedData, ILeafData, ILeafInputData, ILeaferCanvas, IRenderOptions, IExportOptions, IExportResult, IPathDrawer, IPointData, IPath2D, IPathCommandData, IWindingRule, ILeaferImageConfig, IBoundsData, IObject, IPathString, ILeaferImage, IPathCreator, IAnswer, IPickOptions, IPickResult, IValue } from '@leafer/interface'
+import { ILeaf, ILeafComputedData, ILeafData, ILeafInputData, ILeaferCanvas, IRenderOptions, IExportOptions, IExportResult, IPathDrawer, IPointData, IPathCommandData, ILeaferImageConfig, IBoundsData, IObject, IPathString, ILeaferImage, IPathCreator, IAnswer, IPickOptions, IPickResult, IValue } from '@leafer/interface'
 
 import {
     IFillAttrData, IFillInputData, IFillComputedData,
@@ -37,7 +37,7 @@ interface IArrowAttrData {
 
 }
 export interface IArrowData extends IArrowAttrData, ILineData { }
-export interface IArrowInputData extends IArrowAttrData, IUIBaseInputData { }
+export interface IArrowInputData extends IArrowAttrData, ILineInputData { }
 
 
 // Rect
@@ -97,16 +97,10 @@ export interface IStarInputData extends IStarAttrData, IUIBaseInputData { }
 // Path
 export interface IPath extends IUI {
     __: IPathData
-    path: IPathCommandData | IPathString
-    windingRule: IWindingRule
 }
 export interface IPathData extends IUIData {
-    path?: IPathCommandData
-    windingRule?: IWindingRule
 }
 export interface IPathInputData extends IUIBaseInputData {
-    path?: IPathCommandData | IPathString
-    windingRule?: IWindingRule
 }
 
 // Pen
@@ -338,21 +332,10 @@ export interface IUIData extends IUIComputedData, ILeafData {
     __isOverflow?: boolean
     __blendLayer?: boolean
 
-    __useArrow?: boolean
-
-    __useEffect?: boolean
-
-    __autoWidth: boolean
-    __autoHeight: boolean
-    __autoSide: boolean
-    __autoSize: boolean
-
-    // path
-    path?: IPathCommandData
-    windingRule?: IWindingRule
-
-    __pathForRender?: IPathCommandData
-    __path2DForRender?: IPath2D
+    readonly __autoWidth: boolean
+    readonly __autoHeight: boolean
+    readonly __autoSide: boolean
+    readonly __autoSize: boolean
 
     __boxStroke?: boolean
 

@@ -1,10 +1,11 @@
-import { INumber, IValue, IBoolean } from '@leafer/interface'
-import { LeafData, Debug } from '@leafer/core'
+import { INumber, IValue, IBoolean, IPathCommandData, IPathString } from '@leafer/interface'
+import { PathConvert, LeafData, Debug } from '@leafer/core'
 
 import { IShadowEffect, IUI, IUIData, IUnitData, ILeafPaint } from '@leafer-ui/interface'
 import { Paint, PaintImage } from '@leafer-ui/external'
 
 
+const { parse } = PathConvert
 const emptyPaint: ILeafPaint = {}
 const debug = Debug.get('UIData')
 export class UIData extends LeafData implements IUIData {
@@ -39,6 +40,8 @@ export class UIData extends LeafData implements IUIData {
 
     protected _fill?: IValue
     protected _stroke?: IValue
+
+    protected _path: IPathCommandData
 
     protected _shadow?: IValue
     protected _innerShadow?: IValue
@@ -107,6 +110,18 @@ export class UIData extends LeafData implements IUIData {
             this.__isStrokes = true
             this._stroke || (this._stroke = emptyPaint)
         }
+    }
+
+
+    protected setPath(value: IPathCommandData | IPathString) {
+        if (typeof value === 'string') {
+            this.__setInput('path', value)
+            this._path = parse(value)
+        } else {
+            if (this.__input) this.__removeInput('path')
+            this._path = value
+        }
+        if (this.__pathInputed !== 2) this.__pathInputed = value ? 1 : 0
     }
 
 

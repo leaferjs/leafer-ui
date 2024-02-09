@@ -6,7 +6,6 @@ export { LeaferData } from './LeaferData'
 export { FrameData } from './FrameData'
 
 export { LineData } from './LineData'
-export { ArrowData } from './ArrowData'
 export { RectData } from './RectData'
 export { EllipseData } from './EllipseData'
 export { PolygonData } from './PolygonData'

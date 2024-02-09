@@ -1,4 +1,4 @@
-import { ILeaferCanvas, IRenderOptions, IPathDrawer, IBoundsData, IPathCommandData } from '@leafer/interface'
+import { ILeaferCanvas, IRenderOptions, IBoundsData } from '@leafer/interface'
 import { rewrite, rewriteAble, registerUI, BoundsHelper, dataProcessor, affectRenderBoundsType } from '@leafer/core'
 
 import { IBox, IBoxData, IBoxInputData, IOverflow } from '@leafer-ui/interface'
@@ -75,7 +75,6 @@ export class Box extends Group implements IBox {
         }
     }
 
-
     @rewrite(rect.__updateRenderBounds)
     public __updateRectRenderBounds(): void { }
 
@@ -86,10 +85,6 @@ export class Box extends Group implements IBox {
         super.__updateChange()
         this.__updateRectChange()
     }
-
-
-    @rewrite(rect.__drawPathByData)
-    public __drawPathByData(_drawer: IPathDrawer, _data: IPathCommandData): void { }
 
 
     @rewrite(rect.__render)

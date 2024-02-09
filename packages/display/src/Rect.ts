@@ -1,5 +1,4 @@
-import { IPathDrawer, IPathCommandData } from '@leafer/interface'
-import { dataProcessor, registerUI, rewrite, rewriteAble, useModule } from '@leafer/core'
+import { dataProcessor, registerUI, rewriteAble, useModule } from '@leafer/core'
 
 import { IRect, IRectInputData, IRectData } from '@leafer-ui/interface'
 import { RectData } from '@leafer-ui/data'
@@ -21,8 +20,5 @@ export class Rect extends UI implements IRect {
     constructor(data?: IRectInputData) {
         super(data)
     }
-
-    @rewrite(UI.prototype.__drawPathByBox)
-    public __drawPathByData(_drawer: IPathDrawer, _data: IPathCommandData): void { }
 
 }

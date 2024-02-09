@@ -1,8 +1,8 @@
-import { ILeaferCanvas, IPathDrawer, IPathCommandData, IHitType, INumber, IBoolean, IString, IPathString, IExportFileType, IPointData, ICursorType, IMaskType, IAround, IValue } from '@leafer/interface'
-import { Leaf, PathDrawer, surfaceType, dataType, positionType, boundsType, pathType, scaleType, rotationType, opacityType, sortType, maskType, dataProcessor, useModule, rewrite, rewriteAble, UICreator, PathCorner, hitType, strokeType, PathConvert, eraserType, cursorType, autoLayoutType, PathCreator } from '@leafer/core'
+import { ILeaferCanvas, IPathDrawer, IPathCommandData, IHitType, INumber, IBoolean, IString, IPathString, IExportFileType, IPointData, ICursorType, IMaskType, IAround, IValue, IWindingRule } from '@leafer/interface'
+import { Leaf, PathDrawer, surfaceType, dataType, positionType, boundsType, pathType, scaleType, rotationType, opacityType, sortType, maskType, dataProcessor, useModule, rewrite, rewriteAble, UICreator, PathCorner, hitType, strokeType, PathConvert, eraserType, cursorType, autoLayoutType, PathCreator, naturalBoundsType } from '@leafer/core'
 
 import { IUI, IShadowEffect, IBlurEffect, IStrokeAlign, IStrokeJoin, IStrokeCap, IBlendMode, IDashPatternString, IShadowString, IGrayscaleEffect, IUIData, IGroup, IStrokeWidthString, ICornerRadiusString, IUIInputData, IExportOptions, IExportResult, IFill, IStroke, IArrowType, IFindUIMethod, IEditSize, ILeafer } from '@leafer-ui/interface'
-import { effectType } from '@leafer-ui/decorator'
+import { arrowType, effectType } from '@leafer-ui/decorator'
 
 import { UIData } from '@leafer-ui/data'
 import { UIBounds, UIRender } from '@leafer-ui/display-module'
@@ -185,15 +185,22 @@ export class UI extends Leaf implements IUI {
     @dataType(false)
     public lazy: IBoolean  // load image / compute paint
 
-    @boundsType(1, true)
+    @naturalBoundsType(1)
     public pixelRatio: INumber
+
+    // path
+    @pathType()
+    public path: IPathCommandData | IPathString
+
+    @pathType()
+    public windingRule: IWindingRule
 
     // arrow
 
-    @strokeType('none')
+    @arrowType('none')
     public startArrow: IArrowType
 
-    @strokeType('none')
+    @arrowType('none')
     public endArrow: IArrowType
 
     // corner
@@ -297,7 +304,7 @@ export class UI extends Leaf implements IUI {
         if (this.__.path) {
             const data = this.__
             data.__pathForRender = data.cornerRadius ? PathCorner.smooth(data.path, data.cornerRadius, data.cornerSmoothing) : data.path
-            if (data.__useArrow) data.__pathForRender = PathArrow.add(data.__pathForRender, data.startArrow, data.endArrow)
+            if (data.__useArrow) PathArrow.addArrows(this, !data.cornerRadius)
         }
     }
 
@@ -311,8 +318,13 @@ export class UI extends Leaf implements IUI {
         this.__drawPathByData(canvas, this.__.path)
     }
 
-    @rewrite(PathDrawer.drawPathByData)
-    public __drawPathByData(_drawer: IPathDrawer, _data: IPathCommandData): void { }
+    public __drawPathByData(drawer: IPathDrawer, data: IPathCommandData): void {
+        if (data) {
+            PathDrawer.drawPathByData(drawer, data)
+        } else {
+            this.__drawPathByBox(drawer)
+        }
+    }
 
     public __drawPathByBox(drawer: IPathDrawer): void {
         const { x, y, width, height } = this.__layout.boxBounds
