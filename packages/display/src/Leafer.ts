@@ -22,6 +22,8 @@ export class Leafer extends Group implements ILeafer {
     public get isApp(): boolean { return false }
     public get app(): ILeafer { return this.parent || this }
 
+    public get isLeafer(): boolean { return true }
+
     declare public parent?: IApp
 
     public running: boolean
@@ -231,7 +233,6 @@ export class Leafer extends Group implements ILeafer {
 
     public __setLeafer(leafer: ILeafer): void {
         this.leafer = leafer
-        this.isLeafer = !!leafer
         this.__level = 1
     }
 

@@ -18,6 +18,8 @@ export class Box extends Group implements IBox {
 
     public get __tag() { return 'Box' }
 
+    public get isBranchLeaf(): boolean { return true }
+
     @dataProcessor(BoxData)
     declare public __: IBoxData
 
@@ -26,7 +28,6 @@ export class Box extends Group implements IBox {
 
     constructor(data?: IBoxInputData) {
         super(data)
-        this.isBranchLeaf = true
         this.__layout.renderChanged || this.__layout.renderChange()
     }
 

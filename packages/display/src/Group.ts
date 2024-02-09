@@ -13,6 +13,8 @@ export class Group extends UI implements IGroup {
 
     public get __tag() { return 'Group' }
 
+    public get isBranch(): boolean { return true }
+
     @dataProcessor(GroupData)
     declare public __: IGroupData
 
@@ -20,13 +22,17 @@ export class Group extends UI implements IGroup {
 
     constructor(data?: IGroupInputData) {
         super(data)
+    }
+
+    public reset(data?: IGroupInputData): void {
         this.__setBranch()
+        super.reset(data)
     }
 
     public __setBranch(): void {
-        this.isBranch = true
         if (!this.children) this.children = []
     }
+
 
     // data
 
