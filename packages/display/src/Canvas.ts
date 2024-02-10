@@ -3,9 +3,9 @@ import { Creator, Matrix, Platform, dataProcessor, registerUI, hitType } from '@
 
 import { ICanvas, ICanvasData, ICanvasInputData, IUI } from '@leafer-ui/interface'
 import { CanvasData } from '@leafer-ui/data'
+import { resizeType } from '@leafer-ui/decorator'
 
 import { Rect } from './Rect'
-import { resizeType } from '@leafer-ui/decorator'
 
 
 @registerUI()

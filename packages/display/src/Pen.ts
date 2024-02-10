@@ -20,7 +20,7 @@ export class Pen extends Group implements IPen {
     public pathStyle: IPathInputData
 
     @penPathType()
-    public path: IPathCommandData // use __path, readonly
+    declare public path: IPathCommandData // use __path, readonly
 
     public __path: IPathCommandData
 

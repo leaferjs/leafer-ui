@@ -1,6 +1,6 @@
 {
   "name": "@leafer-ui/interaction-web",
-  "version": "1.0.0-rc.12",
+  "version": "1.0.0-rc.17",
   "description": "@leafer-ui/interaction-web",
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
@@ -18,10 +18,10 @@
     "leaferjs"
   ],
   "dependencies": {
-    "@leafer/core": "1.0.0-rc.12",
-    "@leafer-ui/core": "1.0.0-rc.12"
+    "@leafer/core": "1.0.0-rc.17",
+    "@leafer-ui/core": "1.0.0-rc.17"
   },
   "devDependencies": {
-     "@leafer/interface": "1.0.0-rc.12"
+     "@leafer/interface": "1.0.0-rc.17"
   }
 }
