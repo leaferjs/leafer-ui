@@ -1,5 +1,6 @@
 import { IRadiusPointData } from '@leafer/interface'
-import { UI, Platform } from '@leafer-ui/draw'
+import { Platform } from '@leafer/core'
+import { UI } from '@leafer-ui/draw'
 
 
 UI.prototype.__updateHitCanvas = function (): void {

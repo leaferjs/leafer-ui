@@ -44,7 +44,7 @@ export class Group extends UI implements IGroup {
             if (!this.children) {
                 this.__setBranch()
             } else {
-                this.removeAll(true)
+                this.clear()
             }
 
             super.set(data)

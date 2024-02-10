@@ -121,7 +121,6 @@ export class UIData extends LeafData implements IUIData {
             if (this.__input) this.__removeInput('path')
             this._path = value
         }
-        if (this.__pathInputed !== 2) this.__pathInputed = value ? 1 : 0
     }
 
 

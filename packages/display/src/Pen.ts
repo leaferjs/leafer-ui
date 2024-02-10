@@ -1,4 +1,4 @@
-import { PathCreator, dataProcessor, registerUI, useModule } from '@leafer/core'
+import { PathCreator, dataProcessor, defineKey, registerUI, useModule } from '@leafer/core'
 
 import { IPenData, IPenInputData, IPathInputData, IPathCommandData, IPath, IPen } from '@leafer-ui/interface'
 import { PenData } from '@leafer-ui/data'
@@ -7,7 +7,7 @@ import { Group } from './Group'
 import { Path } from './Path'
 
 
-@useModule(PathCreator, ['beginPath'])
+@useModule(PathCreator, ['beginPath', 'path'])
 @registerUI()
 export class Pen extends Group implements IPen {
 
@@ -18,7 +18,11 @@ export class Pen extends Group implements IPen {
 
     public pathElement: IPath
     public pathStyle: IPathInputData
-    public path: IPathCommandData
+
+    @penPathType()
+    public path: IPathCommandData // use __path, readonly
+
+    public __path: IPathCommandData
 
     constructor(data?: IPenInputData) {
         super(data)
@@ -27,13 +31,13 @@ export class Pen extends Group implements IPen {
     public setStyle(data: IPathInputData): Pen {
         const path = this.pathElement = new Path(data)
         this.pathStyle = data
-        this.path = path.path as IPathCommandData || (path.path = [])
+        this.__path = path.path as IPathCommandData || (path.path = [])
         this.add(path)
         return this
     }
 
     public beginPath(): Pen {
-        this.path.length = 0
+        this.__path.length = 0
         this.paint()
         return this
     }
@@ -77,4 +81,12 @@ export class Pen extends Group implements IPen {
         this.pathElement.forceUpdate('path')
     }
 
+}
+
+function penPathType() {
+    return (target: IPen, key: string) => {
+        defineKey(target, key, {
+            get() { return this.__path }
+        })
+    }
 }

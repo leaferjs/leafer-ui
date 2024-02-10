@@ -22,6 +22,8 @@ export const UIBounds: IUIBoundsModule = {
 
         this.__layout.strokeBoxSpread = boxWidth
 
+        if (this.__.__useArrow) width += strokeWidth * 5 // 后期需要精细化
+
         return width
     },
 

@@ -11,6 +11,8 @@ export class Frame extends Box implements IFrame {
 
     public get __tag() { return 'Frame' }
 
+    public get isFrame(): boolean { return true }
+
     @dataProcessor(FrameData)
     declare public __: IFrameData
 
@@ -22,6 +24,5 @@ export class Frame extends Box implements IFrame {
 
     constructor(data?: IFrameInputData) {
         super(data)
-        this.isFrame = true
     }
 }

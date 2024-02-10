@@ -278,7 +278,7 @@ export interface IUI extends IFillAttrData, IStrokeAttrData, ICornerRadiusAttrDa
     readonly app: ILeafer
     leafer?: ILeafer
     parent?: IGroup
-    isFrame?: boolean
+    readonly isFrame?: boolean
 
     proxyData: IUIInputData
     __proxyData?: IUIInputData

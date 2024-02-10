@@ -1,5 +1,5 @@
 import { ILeaferCanvas, IPathDrawer, IPathCommandData, IHitType, INumber, IBoolean, IString, IPathString, IExportFileType, IPointData, ICursorType, IMaskType, IAround, IValue, IWindingRule } from '@leafer/interface'
-import { Leaf, PathDrawer, surfaceType, dataType, positionType, boundsType, pathType, scaleType, rotationType, opacityType, sortType, maskType, dataProcessor, registerUI, useModule, rewrite, rewriteAble, UICreator, PathCorner, hitType, strokeType, PathConvert, eraserType, cursorType, autoLayoutType, PathCreator, naturalBoundsType } from '@leafer/core'
+import { Leaf, PathDrawer, surfaceType, dataType, positionType, boundsType, pathType, scaleType, rotationType, opacityType, sortType, maskType, dataProcessor, registerUI, useModule, rewrite, rewriteAble, UICreator, PathCorner, hitType, strokeType, PathConvert, eraserType, cursorType, autoLayoutType, PathCreator, naturalBoundsType, pathInputType } from '@leafer/core'
 
 import { IUI, IShadowEffect, IBlurEffect, IStrokeAlign, IStrokeJoin, IStrokeCap, IBlendMode, IDashPatternString, IShadowString, IGrayscaleEffect, IUIData, IGroup, IStrokeWidthString, ICornerRadiusString, IUIInputData, IExportOptions, IExportResult, IFill, IStroke, IArrowType, IFindUIMethod, IEditSize, ILeafer } from '@leafer-ui/interface'
 import { arrowType, effectType } from '@leafer-ui/decorator'
@@ -26,7 +26,7 @@ export class UI extends Leaf implements IUI {
     declare public leafer?: ILeafer
     declare public parent?: IGroup
 
-    public isFrame?: boolean
+    public get isFrame(): boolean { return false }
 
     declare public children?: IUI[]
 
@@ -189,11 +189,13 @@ export class UI extends Leaf implements IUI {
     public pixelRatio: INumber
 
     // path
-    @pathType()
+
+    @pathInputType()
     public path: IPathCommandData | IPathString
 
     @pathType()
     public windingRule: IWindingRule
+
 
     // arrow
 
