@@ -45,6 +45,8 @@ export function image(ui: IUI, attrName: string, paint: IImagePaint, boxBounds: 
 
     } else { // need load
 
+        ui.leafer.renderer.ignore = true // wait loaded
+
         if (firstUse) onLoad(ui, event)
 
         leafPaint.loadId = image.load(
