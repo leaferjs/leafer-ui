@@ -1,4 +1,4 @@
-import { ILeaferCanvas, IPathDrawer, IPathCommandData, IHitType, INumber, IBoolean, IString, IPathString, IExportFileType, IPointData, ICursorType, IMaskType, IAround, IValue, IWindingRule } from '@leafer/interface'
+import { ILeaferCanvas, IPathDrawer, IPathCommandData, IHitType, INumber, IBoolean, IString, IPathString, IExportFileType, IPointData, ICursorType, IMaskType, IAround, IValue, IWindingRule, IPathCreator } from '@leafer/interface'
 import { Leaf, PathDrawer, surfaceType, dataType, positionType, boundsType, pathType, scaleType, rotationType, opacityType, sortType, maskType, dataProcessor, registerUI, useModule, rewrite, rewriteAble, UICreator, PathCorner, hitType, strokeType, PathConvert, eraserType, cursorType, autoLayoutType, PathCreator, naturalBoundsType, pathInputType } from '@leafer/core'
 
 import { IUI, IShadowEffect, IBlurEffect, IStrokeAlign, IStrokeJoin, IStrokeCap, IBlendMode, IDashPatternString, IShadowString, IGrayscaleEffect, IUIData, IGroup, IStrokeWidthString, ICornerRadiusString, IUIInputData, IExportOptions, IExportResult, IFill, IStroke, IArrowType, IFindUIMethod, IEditSize, ILeafer } from '@leafer-ui/interface'
@@ -9,6 +9,8 @@ import { UIBounds, UIRender } from '@leafer-ui/display-module'
 
 import { Export, PathArrow } from '@leafer-ui/external'
 
+
+const pen = new PathCreator()
 
 @useModule(UIBounds)
 @useModule(UIRender)
@@ -55,6 +57,12 @@ export class UI extends Leaf implements IUI {
 
     @dataType(false)
     public locked: IBoolean
+
+    @dataType(false)
+    public selected: IBoolean
+
+    @dataType(false)
+    public disabled: IBoolean
 
     @sortType(0)
     public zIndex: INumber
@@ -231,6 +239,24 @@ export class UI extends Leaf implements IUI {
     public grayscale: INumber | IGrayscaleEffect
 
 
+    // states
+
+    @dataType()
+    public hoverStyle: IUIInputData
+
+    @dataType()
+    public pressStyle: IUIInputData
+
+    @dataType()
+    public focusStyle: IUIInputData
+
+    @dataType()
+    public selectedStyle: IUIInputData
+
+    @dataType()
+    public disabledStyle: IUIInputData
+
+
     public set scale(value: INumber | IPointData) {
         if (typeof value === 'number') {
             this.scaleX = this.scaleY = value
@@ -243,6 +269,12 @@ export class UI extends Leaf implements IUI {
     public get scale(): INumber | IPointData {
         const { scaleX, scaleY } = this
         return scaleX !== scaleY ? { x: scaleX, y: scaleY } : scaleX
+    }
+
+
+    public get pen(): IPathCreator {
+        this.path = pen.path = this.__.path || []
+        return pen
     }
 
 
@@ -261,8 +293,8 @@ export class UI extends Leaf implements IUI {
         Object.assign(this, data)
     }
 
-    public get(name?: string): IUIInputData | IValue {
-        return name ? this.__.__getInput(name) : this.__.__getInputData()
+    public get(name?: string | string[] | IUIInputData): IUIInputData | IValue {
+        return typeof name === 'string' ? this.__.__getInput(name) : this.__.__getInputData(name)
     }
 
     public createProxyData(): IUIInputData { return undefined }

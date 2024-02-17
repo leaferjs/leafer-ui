@@ -1,6 +1,6 @@
 import { ILeaferCanvas, IRenderOptions } from '@leafer/interface'
 
-import { IUIRenderModule, ILeafPaint, ILeafStrokePaint } from '@leafer-ui/interface'
+import { IUIRenderModule, ILeafPaint, ILeafStrokePaint, IUI } from '@leafer-ui/interface'
 import { Paint, Effect } from '@leafer-ui/external'
 
 
@@ -26,20 +26,13 @@ export const UIRender: IUIRenderModule = {
     },
 
     __drawFast(canvas: ILeaferCanvas, options: IRenderOptions): void {
-        const { fill, stroke, __drawAfterFill } = this.__
-
-        this.__drawRenderPath(canvas)
-
-        if (fill) Paint.fill(fill as string, this, canvas)
-        if (__drawAfterFill) this.__drawAfterFill(canvas, options)
-        if (stroke) Paint.stroke(stroke as string, this, canvas)
+        drawFast(this, canvas, options)
     },
 
     __draw(canvas: ILeaferCanvas, options: IRenderOptions): void {
+        const data = this.__
 
-        if (this.__.__complex) {
-
-            const data = this.__
+        if (data.__complex) {
 
             if (data.__needComputePaint) data.__computePaint()
 
@@ -77,7 +70,11 @@ export const UIRender: IUIRenderModule = {
 
         } else {
 
-            this.__drawFast(canvas, options)
+            if (data.__pathInputed) {
+                drawFast(this, canvas, options)
+            } else {
+                this.__drawFast(canvas, options)
+            }
 
         }
     },
@@ -95,4 +92,15 @@ export const UIRender: IUIRenderModule = {
         }
     }
 
+}
+
+
+function drawFast(ui: IUI, canvas: ILeaferCanvas, options: IRenderOptions): void {
+    const { fill, stroke, __drawAfterFill } = ui.__
+
+    ui.__drawRenderPath(canvas)
+
+    if (fill) Paint.fill(fill as string, ui, canvas)
+    if (__drawAfterFill) ui.__drawAfterFill(canvas, options)
+    if (stroke) Paint.stroke(stroke as string, ui, canvas)
 }

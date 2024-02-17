@@ -283,6 +283,12 @@ export interface IUI extends IFillAttrData, IStrokeAttrData, ICornerRadiusAttrDa
     proxyData: IUIInputData
     __proxyData?: IUIInputData
 
+    hoverStyle: IUIInputData
+    pressStyle: IUIInputData
+    focusStyle: IUIInputData
+    selectedStyle: IUIInputData
+    disabledStyle: IUIInputData
+
     children?: IUI[]
 
     reset(data?: IUIInputData): void
@@ -290,7 +296,7 @@ export interface IUI extends IFillAttrData, IStrokeAttrData, ICornerRadiusAttrDa
     set(data: IUIInputData): void
     toJSON(): IUIInputData
 
-    get(name?: string): IUIInputData | IValue
+    get(name?: string | string[] | IUIInputData): IUIInputData | IValue
     createProxyData(): IUIInputData
 
     find(condition: number | string | IFindUIMethod, options?: any): IUI[]
@@ -314,7 +320,12 @@ export interface IFindUIMethod {
 export interface IUIData extends IUIComputedData, ILeafData {
 
     padding?: number | number[]
-    locked?: boolean
+
+    hoverStyle?: IUIInputData
+    pressStyle?: IUIInputData
+    focusStyle?: IUIInputData
+    selectedStyle?: IUIInputData
+    disabledStyle?: IUIInputData
 
     // 非数据属性, 自动计算的缓存数据
     __isFills?: boolean
@@ -349,13 +360,11 @@ export interface IUIData extends IUIComputedData, ILeafData {
 }
 export interface IUIComputedData extends IFillComputedData, IBorderComputedData, IStrokeComputedData, ITextStyleComputedData, ICornerRadiusComputedData, IEffectComputedData, ILeafComputedData {
     padding?: number | number[]
-
-    locked?: boolean
 }
 
 export interface IUIBaseInputData extends IFillInputData, IStrokeInputData, ITextStyleInputData, ICornerRadiusInputData, IEffectInputData, ILeafInputData {
     padding?: number | number[]
-    locked?: boolean
+
     children?: IUIInputData[]
 }
 
