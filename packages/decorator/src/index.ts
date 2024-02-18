@@ -1,1 +1,1 @@
-export { arrowType, effectType, resizeType } from './data'
+export { stateType, arrowType, effectType, resizeType } from './data'

@@ -1,4 +1,4 @@
-import { IUIEvent, IPointerEvent, ILeaf, IInteraction, IInteractionConfig, ILeafList, IMoveEvent, IZoomEvent, IRotateEvent, ISelector, IBounds, IEventListenerId, IInteractionCanvas, ITimer, IKeepTouchData, IKeyEvent, IPickOptions, ICursorType, IBooleanMap } from '@leafer/interface'
+import { IUIEvent, IPointerEvent, ILeaf, IInteraction, IInteractionConfig, ILeafList, IMoveEvent, IZoomEvent, IRotateEvent, ISelector, IBounds, IEventListenerId, IInteractionCanvas, ITimer, IKeepTouchData, IKeyEvent, IPickOptions, ICursorType, IBooleanMap, IStateStyleType } from '@leafer/interface'
 import { LeaferEvent, ResizeEvent, LeafList, Bounds, PointHelper, DataHelper } from '@leafer/core'
 
 import { PointerEvent, DropEvent, KeyEvent, PointerButton, Keyboard } from '@leafer-ui/event'
@@ -8,6 +8,7 @@ import { Dragger } from './Dragger'
 import { emit } from './emit'
 import { InteractionHelper } from './InteractionHelper'
 import { MultiTouchHelper } from './MultiTouchHelper'
+import { setStateStyle, unsetStateStyle } from './StateStyle'
 import { config } from './config'
 
 
@@ -37,6 +38,8 @@ export class InteractionBase implements IInteraction {
     public hoverData: IPointerEvent
 
     public downTime: number
+    protected canDown: boolean
+
     protected overPath: LeafList
     protected enterPath: LeafList
 
@@ -89,18 +92,19 @@ export class InteractionBase implements IInteraction {
         this.updateDownData(data)
         if (useDefaultPath) data.path = this.defaultPath
 
-        this.emit(PointerEvent.BEFORE_DOWN, data)
-        this.emit(PointerEvent.DOWN, data)
-
         this.downTime = Date.now()
-
         this.dragger.setDragData(data)
 
-        if (PointerButton.left(data)) {
-            this.tapWait()
-            this.longPressWait(data)
-        } else if (PointerButton.right(data)) {
-            this.waitMenuTap = true
+        if (this.canDown = !this.moveMode) {
+            this.emit(PointerEvent.BEFORE_DOWN, data)
+            this.emit(PointerEvent.DOWN, data)
+
+            if (PointerButton.left(data)) {
+                this.tapWait()
+                this.longPressWait(data)
+            } else if (PointerButton.right(data)) {
+                this.waitMenuTap = true
+            }
         }
 
         this.updateCursor(data)
@@ -134,10 +138,15 @@ export class InteractionBase implements IInteraction {
 
         if (!this.dragger.moving) {
             this.updateHoverData(data)
+            if (this.moveMode) data.path = this.defaultPath
+
             this.emit(PointerEvent.MOVE, data)
 
-            this.pointerOverOrOut(data)
-            this.pointerEnterOrLeave(data)
+            if (!(this.dragging && !this.config.pointer.dragHover)) {
+                this.pointerOverOrOut(data)
+                this.pointerEnterOrLeave(data)
+            }
+
             if (this.dragger.dragging) {
                 this.dragger.dragOverOrOut(data)
                 this.dragger.dragEnterOrLeave(data)
@@ -154,15 +163,17 @@ export class InteractionBase implements IInteraction {
 
         this.findPath(data)
 
-        this.emit(PointerEvent.BEFORE_UP, data)
-        this.emit(PointerEvent.UP, data)
-        if (this.oldDownData) this.emit(PointerEvent.UP, this.oldDownData, undefined, data.path) // oldDownPath必须触发up
-        this.emit(PointerEvent.UP, this.downData, undefined, data.path) // downPath必须触发up
+        if (this.canDown) {
+            this.emit(PointerEvent.BEFORE_UP, data)
+            this.emit(PointerEvent.UP, data)
+            if (this.oldDownData) this.emit(PointerEvent.UP, this.oldDownData, undefined, data.path) // oldDownPath必须触发up
+            this.emit(PointerEvent.UP, this.downData, undefined, data.path) // downPath必须触发up
 
-        this.touchLeave(data)
+            this.touchLeave(data)
 
-        this.tap(data)
-        this.menuTap(data)
+            this.tap(data)
+            this.menuTap(data)
+        }
 
         this.dragger.dragEnd(data)
 
@@ -222,7 +233,10 @@ export class InteractionBase implements IInteraction {
             Keyboard.setDownCode(code)
 
             this.emit(KeyEvent.HOLD, data, this.defaultPath)
-            if (this.moveMode) this.updateCursor()
+            if (this.moveMode) {
+                this.pointerMoveReal(this.hoverData) // remove hoverStyle
+                this.updateCursor()
+            }
         }
         this.emit(KeyEvent.DOWN, data, this.defaultPath)
     }
@@ -239,9 +253,6 @@ export class InteractionBase implements IInteraction {
 
     // helper
     protected pointerOverOrOut(data: IPointerEvent): void {
-        if (this.dragger.moving) return
-        if (this.dragging && !this.config.pointer.dragHover) return
-
         const { path } = data
         if (this.overPath) {
             if (path.indexAt(0) !== this.overPath.indexAt(0)) {
@@ -255,10 +266,13 @@ export class InteractionBase implements IInteraction {
     }
 
     protected pointerEnterOrLeave(data: IPointerEvent): void {
-        if (this.dragger.moving) return
-        if (this.dragging && !this.config.pointer.dragHover) return
+        let { path } = data
 
-        const { path } = data
+        if (this.downData && !this.moveMode) {
+            path = path.clone()
+            this.downData.path.forEach(leaf => path.add(leaf))
+        }
+
         this.emit(PointerEvent.LEAVE, data, this.enterPath, path)
         this.emit(PointerEvent.ENTER, data, path, this.enterPath)
         this.enterPath = path
@@ -341,6 +355,15 @@ export class InteractionBase implements IInteraction {
         this.hoverData = data
     }
 
+
+    public setStateStyle(leaf: ILeaf, stateType: IStateStyleType): void {
+        setStateStyle(leaf, stateType)
+    }
+
+    public unsetStateStyle(leaf: ILeaf, stateType: IStateStyleType): void {
+        unsetStateStyle(leaf, stateType)
+    }
+
     public updateCursor(data?: IPointerEvent): void {
         if (this.config.cursor.stop) return
 
@@ -355,8 +378,7 @@ export class InteractionBase implements IInteraction {
             return this.setCursor(this.downData ? 'grabbing' : 'grab')
         } else if (!data) return
 
-        let leaf: ILeaf
-        let cursor: ICursorType | ICursorType[]
+        let leaf: ILeaf, cursor: ICursorType | ICursorType[]
 
         const { path } = data
         for (let i = 0, len = path.length; i < len; i++) {
@@ -371,6 +393,7 @@ export class InteractionBase implements IInteraction {
     public setCursor(cursor: ICursorType | ICursorType[]): void {
         this.cursor = cursor
     }
+
 
     protected emitTap(data: IPointerEvent) {
         this.emit(PointerEvent.TAP, data)
