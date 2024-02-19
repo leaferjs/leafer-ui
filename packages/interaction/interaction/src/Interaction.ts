@@ -38,7 +38,7 @@ export class InteractionBase implements IInteraction {
     public hoverData: IPointerEvent
 
     public downTime: number
-    protected canDown: boolean
+    protected downed: boolean
 
     protected overPath: LeafList
     protected enterPath: LeafList
@@ -95,7 +95,7 @@ export class InteractionBase implements IInteraction {
         this.downTime = Date.now()
         this.dragger.setDragData(data)
 
-        if (this.canDown = !this.moveMode) {
+        if (this.downed = !this.moveMode) {
             this.emit(PointerEvent.BEFORE_DOWN, data)
             this.emit(PointerEvent.DOWN, data)
 
@@ -157,17 +157,19 @@ export class InteractionBase implements IInteraction {
     }
 
     public pointerUp(data?: IPointerEvent): void {
-        if (!data) data = this.downData
-        if (!this.downData) return
+        const { downData, oldDownData } = this
+        if (!data) data = downData
+        if (!downData) return
         PointerButton.defaultLeft(data)
 
         this.findPath(data)
 
-        if (this.canDown) {
+        if (this.downed) {
+            this.downed = false
             this.emit(PointerEvent.BEFORE_UP, data)
             this.emit(PointerEvent.UP, data)
-            if (this.oldDownData) this.emit(PointerEvent.UP, this.oldDownData, undefined, data.path) // oldDownPath必须触发up
-            this.emit(PointerEvent.UP, this.downData, undefined, data.path) // downPath必须触发up
+            if (oldDownData) this.emit(PointerEvent.UP, oldDownData, undefined, data.path) // oldDownPath必须触发up
+            this.emit(PointerEvent.UP, downData, undefined, data.path) // downPath必须触发up
 
             this.touchLeave(data)
 
@@ -254,15 +256,17 @@ export class InteractionBase implements IInteraction {
     // helper
     protected pointerOverOrOut(data: IPointerEvent): void {
         const { path } = data
-        if (this.overPath) {
-            if (path.indexAt(0) !== this.overPath.indexAt(0)) {
-                this.emit(PointerEvent.OUT, data, this.overPath)
+        const { overPath } = this
+        this.overPath = path
+
+        if (overPath) {
+            if (path.indexAt(0) !== overPath.indexAt(0)) {
+                this.emit(PointerEvent.OUT, data, overPath)
                 this.emit(PointerEvent.OVER, data, path)
             }
         } else {
             this.emit(PointerEvent.OVER, data, path)
         }
-        this.overPath = path
     }
 
     protected pointerEnterOrLeave(data: IPointerEvent): void {
@@ -273,9 +277,11 @@ export class InteractionBase implements IInteraction {
             this.downData.path.forEach(leaf => path.add(leaf))
         }
 
-        this.emit(PointerEvent.LEAVE, data, this.enterPath, path)
-        this.emit(PointerEvent.ENTER, data, path, this.enterPath)
+        const { enterPath } = this
         this.enterPath = path
+
+        this.emit(PointerEvent.LEAVE, data, enterPath, path)
+        this.emit(PointerEvent.ENTER, data, path, enterPath)
     }
 
     protected touchLeave(data: IPointerEvent): void {
@@ -335,9 +341,20 @@ export class InteractionBase implements IInteraction {
         return find.path
     }
 
+
     public isDrag(leaf: ILeaf): boolean {
         return this.dragger.getList().has(leaf)
     }
+
+    public isPress(leaf: ILeaf): boolean {
+        const { downData, oldDownData } = this
+        return this.downed && ((downData && downData.path.has(leaf)) || (oldDownData && oldDownData.path.has(leaf)))
+    }
+
+    public isHover(leaf: ILeaf): boolean {
+        return this.enterPath && this.enterPath.has(leaf)
+    }
+
 
     public updateDownData(data?: IPointerEvent, options?: IPickOptions): void {
         const { downData } = this

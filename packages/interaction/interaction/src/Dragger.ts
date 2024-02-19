@@ -117,6 +117,7 @@ export class Dragger {
         const { interaction } = this
         const { dragOverPath } = this
         const { path } = data
+        this.dragOverPath = path
 
         if (dragOverPath) {
             if (path.indexAt(0) !== dragOverPath.indexAt(0)) {
@@ -126,7 +127,7 @@ export class Dragger {
         } else {
             interaction.emit(DragEvent.OVER, data, path)
         }
-        this.dragOverPath = path
+
     }
 
     public dragEnterOrLeave(data: IPointerEvent): void {

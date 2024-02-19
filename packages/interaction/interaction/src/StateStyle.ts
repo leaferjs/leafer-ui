@@ -4,59 +4,64 @@ import { PointerEvent } from '@leafer-ui/event'
 
 
 export function setStateStyle(leaf: ILeaf, stateType: IStateStyleType, pointerState?: boolean): void {
+
+    let style: IObject
     const data = leaf.__ as IObject
-    let stateStyle: IObject, restoreName: string
 
     if (pointerState) {
 
         // hover / press
-        restoreName = '__' + stateType
-        stateStyle = !hasFixedState(leaf) && data[stateType]
+        style = !hasFixedState(leaf) && data[stateType]
 
     } else {
 
         //  disabled > focus > selected
-        restoreName = '__stateStyle'
         switch (stateType) {
             case 'disabledStyle':
-                stateStyle = data[stateType]
+                style = data[stateType]
                 break
             case 'focusStyle':
-                stateStyle = !leaf.disabled && data[stateType]
+                style = !leaf.disabled && data[stateType]
                 break
             case 'selectedStyle':
-                stateStyle = !leaf.disabled && !leaf.focus && data[stateType]
+                style = !leaf.disabled && !leaf.focus && data[stateType]
                 break
-        }
-
-        // 先回到正常状态
-        if (stateStyle) {
-            restoreStyle(leaf, '__pressStyle')
-            restoreStyle(leaf, '__hoverStyle')
-            restoreStyle(leaf, '__stateStyle')
         }
 
     }
 
-    if (stateStyle) {
-        if (!data[restoreName]) {
-            data[restoreName] = leaf.get(stateStyle) as IObject
-            leaf.set(stateStyle)
-        }
+    if (style) {
+        restoreStyle(leaf) // 先回到正常状态
+        leaf.__.__normalStyle = leaf.get(style) as IObject
+        leaf.set(style)
     }
 
 }
 
-export function unsetStateStyle(leaf: ILeaf, stateType: IStateStyleType, pointerState?: boolean): void {
+export function unsetStateStyle(leaf: ILeaf, _stateType: IStateStyleType, pointerState?: boolean): void {
+
     if (pointerState) {
 
-        // hover / press
-        if (!hasFixedState(leaf)) restoreStyle(leaf, '__' + stateType)
+        if (!hasFixedState(leaf)) {
+
+            restoreStyle(leaf)
+
+            // press > hover
+            if (leaf.leafer) {
+                const { interaction } = leaf.leafer
+                if (interaction.isPress(leaf) && leaf.pressStyle) {
+                    setStateStyle(leaf, 'pressStyle', true)
+                } else if (interaction.isHover(leaf) && leaf.hoverStyle) {
+                    setStateStyle(leaf, 'hoverStyle', true)
+                }
+            }
+
+        }
 
     } else {
 
         //  disabled > focus > selected
-        restoreStyle(leaf, '__stateStyle')
+        restoreStyle(leaf)
 
         if (leaf.disabled && leaf.disabledStyle) {
             setStateStyle(leaf, 'disabledStyle')
@@ -67,6 +72,7 @@ export function unsetStateStyle(leaf: ILeaf, stateType: IStateStyleType, pointer
         }
 
     }
+
 }
 
 export function updateEventStyle(leaf: ILeaf, eventType: string): void {
@@ -91,10 +97,10 @@ function hasFixedState(leaf: ILeaf): boolean {
     return leaf.focus || leaf.selected || leaf.disabled
 }
 
-function restoreStyle(leaf: ILeaf, restoreName: string) {
-    const data = leaf.__ as IObject
-    if (data[restoreName]) {
-        leaf.set(data[restoreName])
-        data[restoreName] = undefined
+function restoreStyle(leaf: ILeaf) {
+    const style = leaf.__.__normalStyle
+    if (style) {
+        leaf.set(style)
+        leaf.__.__normalStyle = undefined
     }
 }
