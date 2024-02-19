@@ -186,8 +186,7 @@ export class Dragger {
 
 
     protected swipe(data: IPointerEvent, endDragData: IDragEvent): void {
-        const { interaction } = this
-        const { downData } = interaction
+        const { interaction, downData } = this
         if (PointHelper.getDistance(downData, data) > interaction.config.pointer.swipeDistance) {
             const swipeData = getSwipeEventData(downData, this.dragData, endDragData)
             this.interaction.emit(swipeData.type, swipeData)
