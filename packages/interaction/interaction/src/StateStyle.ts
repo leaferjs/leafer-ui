@@ -32,7 +32,7 @@ export function setStateStyle(leaf: ILeaf, stateType: IStateStyleType, pointerSt
 
     if (style) {
         restoreStyle(leaf) // 先回到正常状态
-        leaf.__.__normalStyle = leaf.get(style) as IObject
+        leaf.__.normalStyle = leaf.get(style) as IObject
         leaf.set(style)
     }
 
@@ -98,9 +98,9 @@ function hasFixedState(leaf: ILeaf): boolean {
 }
 
 function restoreStyle(leaf: ILeaf) {
-    const style = leaf.__.__normalStyle
+    const style = leaf.__.normalStyle
     if (style) {
         leaf.set(style)
-        leaf.__.__normalStyle = undefined
+        leaf.__.normalStyle = undefined
     }
 }

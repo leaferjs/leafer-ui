@@ -245,6 +245,9 @@ export class UI extends Leaf implements IUI {
     // states
 
     @dataType()
+    public normalStyle: IUIInputData // auto restore hover / press / focus / selected / disabled style
+
+    @dataType()
     public hoverStyle: IUIInputData
 
     @dataType()
