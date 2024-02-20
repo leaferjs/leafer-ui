@@ -36,9 +36,9 @@ export function arrowType(defaultValue?: IValue) {
         defineLeafAttr(target, key, defaultValue, {
             set(value: IValue) {
                 this.__setAttr(key, value)
-                doStrokeType(this)
                 const data = (this as IUI).__
                 data.__useArrow = data.startArrow !== 'none' || data.endArrow !== 'none'
+                doStrokeType(this)
             }
         })
     }
