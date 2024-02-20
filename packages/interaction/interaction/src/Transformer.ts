@@ -23,6 +23,7 @@ export class Transformer {
             const { path } = interaction.selector.getByPoint(data, interaction.hitRadius)
             data.path = path
             this.moveData = { ...data, moveX: 0, moveY: 0 }
+            interaction.cancelHover()
             interaction.emit(MoveEvent.START, this.moveData)
         }
 
@@ -40,6 +41,7 @@ export class Transformer {
             const { path } = interaction.selector.getByPoint(data, interaction.hitRadius)
             data.path = path
             this.zoomData = { ...data, scale: 1 }
+            interaction.cancelHover()
             interaction.emit(ZoomEvent.START, this.zoomData)
         }
 
@@ -57,6 +59,7 @@ export class Transformer {
             const { path } = interaction.selector.getByPoint(data, interaction.hitRadius)
             data.path = path
             this.rotateData = { ...data, rotation: 0 }
+            interaction.cancelHover()
             interaction.emit(RotateEvent.START, this.rotateData)
         }
 

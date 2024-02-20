@@ -142,10 +142,7 @@ export class InteractionBase implements IInteraction {
 
             this.emit(PointerEvent.MOVE, data)
 
-            if (!(this.dragging && !this.config.pointer.dragHover)) {
-                this.pointerOverOrOut(data)
-                this.pointerEnterOrLeave(data)
-            }
+            if (!(this.dragging && !this.config.pointer.dragHover)) this.pointerHover(data)
 
             if (this.dragger.dragging) {
                 this.dragger.dragOverOrOut(data)
@@ -236,7 +233,7 @@ export class InteractionBase implements IInteraction {
 
             this.emit(KeyEvent.HOLD, data, this.defaultPath)
             if (this.moveMode) {
-                this.pointerMoveReal(this.hoverData) // remove hoverStyle
+                this.cancelHover()
                 this.updateCursor()
             }
         }
@@ -254,6 +251,11 @@ export class InteractionBase implements IInteraction {
 
 
     // helper
+    protected pointerHover(data: IPointerEvent): void {
+        this.pointerOverOrOut(data)
+        this.pointerEnterOrLeave(data)
+    }
+
     protected pointerOverOrOut(data: IPointerEvent): void {
         const { path } = data
         const { overPath } = this
@@ -353,6 +355,14 @@ export class InteractionBase implements IInteraction {
 
     public isHover(leaf: ILeaf): boolean {
         return this.enterPath && this.enterPath.has(leaf)
+    }
+
+    public cancelHover(): void {
+        const { hoverData } = this
+        if (hoverData) {
+            hoverData.path = this.defaultPath
+            this.pointerHover(hoverData)
+        }
     }
 
 
