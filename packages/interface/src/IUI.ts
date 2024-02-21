@@ -322,7 +322,7 @@ export interface IUIData extends IUIComputedData, ILeafData {
 
     padding?: number | number[]
 
-    normalStyle: IUIInputData
+    normalStyle?: IUIInputData
     hoverStyle?: IUIInputData
     pressStyle?: IUIInputData
     focusStyle?: IUIInputData
@@ -366,6 +366,13 @@ export interface IUIComputedData extends IFillComputedData, IBorderComputedData,
 
 export interface IUIBaseInputData extends IFillInputData, IStrokeInputData, ITextStyleInputData, ICornerRadiusInputData, IEffectInputData, ILeafInputData {
     padding?: number | number[]
+
+    normalStyle?: IUIInputData
+    hoverStyle?: IUIInputData
+    pressStyle?: IUIInputData
+    focusStyle?: IUIInputData
+    selectedStyle?: IUIInputData
+    disabledStyle?: IUIInputData
 
     children?: IUIInputData[]
 }
