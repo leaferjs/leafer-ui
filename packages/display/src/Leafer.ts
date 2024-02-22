@@ -358,6 +358,13 @@ export class Leafer extends Group implements ILeafer {
     // need plugin
     public zoom(_zoomType: IZoomType, _padding?: number | number[], _fixed?: boolean): IBoundsData { return undefined }
 
+    public validScale(changeScale: number): number {
+        const { scaleX } = this.zoomLayer.__, { min, max } = this.app.config.zoom, absScale = Math.abs(scaleX * changeScale)
+        if (absScale < min) changeScale = min / scaleX
+        else if (absScale > max) changeScale = max / scaleX
+        return changeScale
+    }
+
     protected __checkUpdateLayout(): void {
         this.__layout.update()
     }
