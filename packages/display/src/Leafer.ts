@@ -356,7 +356,7 @@ export class Leafer extends Group implements ILeafer {
     }
 
     // need plugin
-    public zoom(_type: IZoomType, _padding?: number | number[], _fixed?: boolean): IBoundsData { return undefined }
+    public zoom(_zoomType: IZoomType, _padding?: number | number[], _fixed?: boolean): IBoundsData { return undefined }
 
     protected __checkUpdateLayout(): void {
         this.__layout.update()

@@ -1,5 +1,5 @@
 import { IPointerEvent, IDragEvent, ILeaf, ILeafList, ITimer, IFunction } from '@leafer/interface'
-import { BoundsHelper, PointHelper, LeafHelper, LeafList } from '@leafer/core'
+import { BoundsHelper, PointHelper, LeafList } from '@leafer/core'
 
 import { MoveEvent, DragEvent, DropEvent, PointerButton } from '@leafer-ui/event'
 
@@ -109,7 +109,7 @@ export class Dragger {
         const list = this.getList()
         if (list.length && running) {
             const { moveX, moveY } = this.dragData
-            list.forEach(leaf => LeafHelper.moveWorld(leaf, moveX, moveY))
+            list.forEach(leaf => leaf.moveWorld(moveX, moveY))
         }
     }
 
