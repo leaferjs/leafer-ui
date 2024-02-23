@@ -22,8 +22,7 @@ export function image(ui: IUI, attrName: string, paint: IImagePaint, boxBounds: 
     if (cache && paint === cache.paint && isSame(boxBounds, cache.boxBounds)) {
         leafPaint = cache.leafPaint
     } else {
-        leafPaint = { type: paint.type }
-        leafPaint.image = image
+        leafPaint = { type: paint.type, image }
 
         cache = image.use > 1 ? { leafPaint, paint, boxBounds: box.set(boxBounds) } : null
     }

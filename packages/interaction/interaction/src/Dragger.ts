@@ -180,7 +180,7 @@ export class Dragger {
 
     protected animate(func?: IFunction, off?: 'off'): void { // dragEnd animation
         const animateWait = func || this.animateWait
-        if (animateWait) this.interaction.target.nextRender(animateWait, off)
+        if (animateWait) this.interaction.target.nextRender(animateWait, null, off)
         this.animateWait = func
     }
 
