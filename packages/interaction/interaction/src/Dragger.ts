@@ -26,7 +26,8 @@ export class Dragger {
 
     protected autoMoveTimer: ITimer
 
-    protected canAnimate: boolean
+    public canAnimate: boolean
+    public canDragOut: boolean
     protected animateWait: IFunction
 
     constructor(interaction: InteractionBase) {
@@ -37,6 +38,7 @@ export class Dragger {
         if (this.animateWait) this.dragEndReal()
         this.downData = this.interaction.downData
         this.dragData = getDragEventData(data, data, data)
+        this.canAnimate = this.canDragOut = true
     }
 
     public getList(): ILeafList {
@@ -51,8 +53,6 @@ export class Dragger {
             this.canAnimate = false // 防止dragEnd动画
             interaction.pointerCancel() // 按住中键/右键拖出页面后的up事件接收不到
             return
-        } else {
-            this.canAnimate = interaction.config.move.dragAnimate
         }
 
         if (!this.moving && canDrag) {
@@ -144,7 +144,7 @@ export class Dragger {
         if (!this.dragData) return
 
         const { moveX, moveY } = this.dragData
-        if (this.canAnimate && this.moving && (Math.abs(moveX) > 1 || Math.abs(moveY) > 1)) {
+        if (this.interaction.config.move.dragAnimate && this.canAnimate && this.moving && (Math.abs(moveX) > 1 || Math.abs(moveY) > 1)) {
             data = { ...data }
             speed = (speed || (data.pointerType === 'touch' ? 2 : 1)) * 0.9
             PointHelper.move(data, moveX * speed, moveY * speed)
@@ -214,9 +214,9 @@ export class Dragger {
 
 
     protected autoMoveOnDragOut(data: IPointerEvent): void {
-        const { interaction, downData } = this
+        const { interaction, downData, canDragOut } = this
         const { autoDistance, dragOut } = interaction.config.move
-        if (!dragOut || !autoDistance) return
+        if (!dragOut || !canDragOut || !autoDistance) return
 
         const bounds = interaction.shrinkCanvasBounds
         const { x, y } = bounds
