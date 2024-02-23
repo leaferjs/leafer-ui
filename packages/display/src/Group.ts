@@ -51,7 +51,7 @@ export class Group extends UI implements IGroup {
 
             let child: IUI
             children.forEach(childData => {
-                child = UICreator.get(childData.tag, childData) as IUI
+                child = (childData as IUI).__ ? childData as IUI : UICreator.get(childData.tag, childData) as IUI
                 this.add(child)
             })
 
