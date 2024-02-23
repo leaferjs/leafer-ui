@@ -69,7 +69,6 @@ export class Leafer extends Group implements ILeafer {
         move: {
             holdSpaceKey: true,
             holdMiddleKey: true,
-            dragOut: true,
             autoDistance: 2
         }
     }

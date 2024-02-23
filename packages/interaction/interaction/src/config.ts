@@ -2,7 +2,6 @@ import { IInteractionConfig } from '@leafer/interface'
 
 export const config: IInteractionConfig = {
     wheel: {
-        zoomMode: false,
         zoomSpeed: 0.5,
         moveSpeed: 0.5,
         rotateSpeed: 0.5,
@@ -11,14 +10,12 @@ export const config: IInteractionConfig = {
     },
     pointer: {
         hitRadius: 5,
-        through: false,
         tapTime: 120,
         longPressTime: 800,
         transformTime: 500,
         dragHover: true,
         dragDistance: 2,
         swipeDistance: 20,
-        ignoreMove: false,
         preventDefaultMenu: true
     },
     cursor: {}
