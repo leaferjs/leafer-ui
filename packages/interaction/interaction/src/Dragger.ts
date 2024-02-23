@@ -52,7 +52,7 @@ export class Dragger {
             interaction.pointerCancel() // 按住中键/右键拖出页面后的up事件接收不到
             return
         } else {
-            this.canAnimate = true
+            this.canAnimate = interaction.config.move.dragAnimate
         }
 
         if (!this.moving && canDrag) {
