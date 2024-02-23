@@ -328,17 +328,17 @@ export class Leafer extends Group implements ILeafer {
     }
 
     public waitReady(item: IFunction, bind?: IObject): void {
-        if (bind) item.bind(bind)
+        if (bind) item = item.bind(bind)
         this.ready ? item() : this.__readyWait.push(item)
     }
 
     public waitViewReady(item: IFunction, bind?: IObject): void {
-        if (bind) item.bind(bind)
+        if (bind) item = item.bind(bind)
         this.viewReady ? item() : this.__viewReadyWait.push(item)
     }
 
     public waitViewCompleted(item: IFunction, bind?: IObject): void {
-        if (bind) item.bind(bind)
+        if (bind) item = item.bind(bind)
         this.__viewCompletedWait.push(item)
         if (this.viewCompleted) {
             this.__checkViewCompleted(false)
@@ -348,7 +348,7 @@ export class Leafer extends Group implements ILeafer {
     }
 
     public nextRender(item: IFunction, bind?: IObject, off?: 'off'): void {
-        if (bind) item.bind(bind)
+        if (bind) item = item.bind(bind)
         const list = this.__nextRenderWait
         if (off) {
             for (let i = 0; i < list.length; i++) {
