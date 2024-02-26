@@ -8,7 +8,7 @@ const { ceil, abs } = Math
 
 export function createPattern(ui: IUI, paint: ILeafPaint, pixelRatio: number): boolean {
 
-    let { scaleX, scaleY } = ui.__world
+    let { scaleX, scaleY } = ui.__nowWorld
 
     const id = scaleX + '-' + scaleY
 

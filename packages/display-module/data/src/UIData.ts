@@ -20,7 +20,7 @@ export class UIData extends LeafData implements IUIData {
     public get __strokeWidth(): number {
         const { strokeWidth, strokeWidthFixed } = this as IUIData
         if (strokeWidthFixed) {
-            let { scaleX } = this.__leaf.__world
+            let { scaleX } = this.__leaf.__nowWorld
             if (scaleX < 0) scaleX = -scaleX
             return scaleX > 1 ? strokeWidth / scaleX : strokeWidth
         } else {
