@@ -73,7 +73,7 @@ export function zoomLayerType() {
         const privateKey = '_' + key
         defineKey(target, key, {
             set(value: IUI) { if (this.isLeafer) (this as IObject)[privateKey] = value },
-            get() { return this.isLeafer ? (this as IObject)[privateKey] : this.leafer && this.leafer.zoomLayer }
+            get() { return this.isLeafer ? ((this as IObject)[privateKey] || this) : this.leafer && this.leafer.zoomLayer }
         })
     }
 }
