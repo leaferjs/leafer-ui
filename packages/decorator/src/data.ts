@@ -1,5 +1,5 @@
-import { IStateStyleType, IValue } from '@leafer/interface'
-import { defineLeafAttr, doStrokeType } from '@leafer/core'
+import { IStateStyleType, IValue, IObject } from '@leafer/interface'
+import { defineKey, defineLeafAttr, doStrokeType } from '@leafer/core'
 
 import { ICanvas, IUI } from '@leafer-ui/interface'
 
@@ -64,6 +64,16 @@ export function resizeType(defaultValue?: IValue) {
                 this.__layout.boxChanged || this.__layout.boxChange();
                 (this as ICanvas).__updateSize()
             }
+        })
+    }
+}
+
+export function zoomLayerType() {
+    return (target: IUI, key: string) => {
+        const privateKey = '_' + key
+        defineKey(target, key, {
+            set(value: IUI) { if (this.isLeafer) (this as IObject)[privateKey] = value },
+            get() { return this.isLeafer ? (this as IObject)[privateKey] : this.leafer && this.leafer.zoomLayer }
         })
     }
 }

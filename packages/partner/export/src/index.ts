@@ -1,4 +1,4 @@
-import { IExportFileType, IFunction, IRenderOptions, IBoundsData, IBounds, ILocationType } from '@leafer/interface'
+import { IExportFileType, IFunction, IRenderOptions, IBoundsData, IBounds, ILocationType, ILeaf } from '@leafer/interface'
 import { Creator, Matrix, TaskProcessor, FileHelper, Bounds } from '@leafer/core'
 
 import { IExportModule, IExportOptions, IExportResult, IExportResultFunction, IUI } from '@leafer-ui/interface'
@@ -39,7 +39,7 @@ export const ExportModule: IExportModule = {
                         if (screenshot) {
                             renderBounds = screenshot === true ? (isLeafer ? leafer.canvas.bounds : leaf.worldRenderBounds) : screenshot
                         } else {
-                            const location: ILocationType = options.location || ((isLeafer || isFrame) ? 'inner' : 'local')
+                            let location: ILocationType | ILeaf = options.location || (isLeafer ? 'inner' : 'local')
 
                             scaleX = worldTransform.scaleX
                             scaleY = worldTransform.scaleY
@@ -57,6 +57,13 @@ export const ExportModule: IExportModule = {
                                     scaleX = 1
                                     scaleY = 1
                                     break
+                                case 'page':
+                                    location = leaf.leafer
+                                default:
+                                    matrix.set(worldTransform).divide(leaf.getTransform(location)).invert()
+                                    const l = location.worldTransform
+                                    scaleX /= scaleX / l.scaleX
+                                    scaleY /= scaleY / l.scaleY
                             }
 
                             renderBounds = leaf.getBounds('render', location)

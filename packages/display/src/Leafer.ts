@@ -1,7 +1,7 @@
 import { ILeaferCanvas, IRenderer, ILayouter, ISelector, IWatcher, IInteraction, ILeaferConfig, ICanvasManager, IHitCanvasManager, IAutoBounds, IScreenSizeData, IResizeEvent, ILeaf, IEventListenerId, ITimer, IValue, IObject, IControl, IPointData, ILeaferType, ICursorType, IBoundsData, INumber, IZoomType } from '@leafer/interface'
 import { AutoBounds, LayoutEvent, ResizeEvent, LeaferEvent, CanvasManager, ImageManager, DataHelper, Creator, Run, Debug, RenderEvent, registerUI, boundsType, canvasSizeAttrs, dataProcessor, WaitHelper, WatchEvent, Bounds } from '@leafer/core'
 
-import { ILeaferInputData, ILeaferData, IFunction, IUIInputData, ILeafer, IGroup, IApp, IEditorBase } from '@leafer-ui/interface'
+import { ILeaferInputData, ILeaferData, IFunction, IUIInputData, ILeafer, IApp, IEditorBase } from '@leafer-ui/interface'
 import { LeaferData } from '@leafer-ui/data'
 import { Group } from './Group'
 
@@ -53,8 +53,6 @@ export class Leafer extends Group implements ILeafer {
 
     // plugin
     public editor: IEditorBase
-
-    public zoomLayer: IGroup = this
 
     public userConfig: ILeaferConfig
     public config: ILeaferConfig = {
@@ -233,10 +231,6 @@ export class Leafer extends Group implements ILeafer {
     public __setLeafer(leafer: ILeafer): void {
         this.leafer = leafer
         this.__level = 1
-    }
-
-    public setZoomLayer(zoomLayer: ILeaf): void {
-        this.zoomLayer = zoomLayer as IGroup
     }
 
     protected __checkAutoLayout(config: ILeaferConfig): void {
