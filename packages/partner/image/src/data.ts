@@ -30,10 +30,6 @@ export function createData(leafPaint: ILeafPaint, image: ILeaferImage, paint: II
     switch (mode) {
         case 'strench':
             if (!sameBox) width = box.width, height = box.height
-            if (box.x || box.y) {
-                data.transform = get()
-                translate(data.transform, box.x, box.y)
-            }
             break
         case 'clip':
             if (offset || scaleX || rotation) clipMode(data, box, x, y, scaleX, scaleY, rotation)
@@ -46,6 +42,13 @@ export function createData(leafPaint: ILeafPaint, image: ILeaferImage, paint: II
         case 'cover':
         default:
             if (!sameBox || rotation) fillOrFitMode(data, mode, box, width, height, rotation)
+    }
+
+    if (!data.transform) {
+        if (box.x || box.y) {
+            data.transform = get()
+            translate(data.transform, box.x, box.y)
+        }
     }
 
     data.width = width
