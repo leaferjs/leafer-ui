@@ -11,7 +11,7 @@ export function stateType(defaultValue?: IValue) {
         defineLeafAttr(target, key, defaultValue, {
             set(value: IValue) {
                 this.__setAttr(key, value)
-                this.waitLeafer(() => { State.setStyle(this, stateType, value as boolean) })
+                this.waitLeafer(() => { if (State.setStyle) State.setStyle(this, stateType, value as boolean) })
             }
         })
     }
