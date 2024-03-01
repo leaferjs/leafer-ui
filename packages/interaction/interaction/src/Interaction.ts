@@ -1,4 +1,4 @@
-import { IUIEvent, IPointerEvent, ILeaf, IInteraction, IInteractionConfig, ILeafList, IMoveEvent, IZoomEvent, IRotateEvent, ISelector, IBounds, IEventListenerId, IInteractionCanvas, ITimer, IKeepTouchData, IKeyEvent, IPickOptions, ICursorType, IBooleanMap, IStateStyleType } from '@leafer/interface'
+import { IUIEvent, IPointerEvent, ILeaf, IInteraction, IInteractionConfig, ILeafList, IMoveEvent, IZoomEvent, IRotateEvent, ISelector, IBounds, IEventListenerId, IInteractionCanvas, ITimer, IKeepTouchData, IKeyEvent, IPickOptions, ICursorType, IBooleanMap } from '@leafer/interface'
 import { LeaferEvent, ResizeEvent, LeafList, Bounds, PointHelper, DataHelper } from '@leafer/core'
 
 import { PointerEvent, DropEvent, KeyEvent, PointerButton, Keyboard } from '@leafer-ui/event'
@@ -8,7 +8,6 @@ import { Dragger } from './Dragger'
 import { emit } from './emit'
 import { InteractionHelper } from './InteractionHelper'
 import { MultiTouchHelper } from './MultiTouchHelper'
-import { setStateStyle, unsetStateStyle } from './StateStyle'
 import { config } from './config'
 
 
@@ -36,6 +35,7 @@ export class InteractionBase implements IInteraction {
     public downData: IPointerEvent
     protected oldDownData?: IPointerEvent // 通过updateDownData强制更新下来的数据
     public hoverData: IPointerEvent
+    public focusData: ILeaf
 
     public downTime: number
     protected downed: boolean
@@ -362,6 +362,11 @@ export class InteractionBase implements IInteraction {
         return this.enterPath && this.enterPath.has(leaf)
     }
 
+    public isFocus(leaf: ILeaf): boolean {
+        return this.focusData === leaf
+    }
+
+
     public cancelHover(): void {
         const { hoverData } = this
         if (hoverData) {
@@ -385,15 +390,6 @@ export class InteractionBase implements IInteraction {
         if (!data) return
         this.findPath(data, { exclude: this.dragger.getList(), name: PointerEvent.MOVE })
         this.hoverData = data
-    }
-
-
-    public setStateStyle(leaf: ILeaf, stateType: IStateStyleType): void {
-        setStateStyle(leaf, stateType)
-    }
-
-    public unsetStateStyle(leaf: ILeaf, stateType: IStateStyleType): void {
-        unsetStateStyle(leaf, stateType)
     }
 
     public updateCursor(data?: IPointerEvent): void {

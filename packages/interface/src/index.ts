@@ -35,6 +35,7 @@ export { IPathArrowModule } from './module/IPathArrow'
 export { ITextConvertModule } from './module/ITextConvert'
 export { IColorConvertModule } from './module/IColorConvert'
 export { IExportModule } from './module/IExport'
+export { IStateModule } from './module/IState'
 
 export { IPaintModule, IPaintImageModule, IPaintGradientModule } from './module/IPaint'
 export { IEffectModule } from './module/IEffect'

@@ -1,5 +1,5 @@
 // Implemented in partner
-import { IPaintModule, IPaintImageModule, IPaintGradientModule, IEffectModule, ITextConvertModule, IExportModule, IColorConvertModule, IPathArrowModule } from "@leafer-ui/interface"
+import { IPaintModule, IPaintImageModule, IPaintGradientModule, IEffectModule, ITextConvertModule, IExportModule, IColorConvertModule, IPathArrowModule, IStateModule } from "@leafer-ui/interface"
 
 
 export const TextConvert = {} as ITextConvertModule
@@ -18,3 +18,5 @@ export const PaintGradient = {} as IPaintGradientModule
 export const Effect = {} as IEffectModule
 
 export const Export = {} as IExportModule
+
+export const State = {} as IStateModule

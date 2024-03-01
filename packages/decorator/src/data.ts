@@ -2,6 +2,7 @@ import { IStateStyleType, IValue, IObject } from '@leafer/interface'
 import { defineKey, defineLeafAttr, doStrokeType } from '@leafer/core'
 
 import { ICanvas, IUI } from '@leafer-ui/interface'
+import { State } from '@leafer-ui/external'
 
 
 export function stateType(defaultValue?: IValue) {
@@ -10,17 +11,10 @@ export function stateType(defaultValue?: IValue) {
         defineLeafAttr(target, key, defaultValue, {
             set(value: IValue) {
                 this.__setAttr(key, value)
-                setStateStyle(this as IUI, stateType, value as boolean)
+                this.waitLeafer(() => { State.setStyle(this, stateType, value as boolean) })
             }
         })
     }
-}
-
-export function setStateStyle(ui: IUI, stateType: IStateStyleType, value: boolean) {
-    ui.waitLeafer(() => {
-        const { interaction } = ui.leafer
-        if (interaction) value ? interaction.setStateStyle(ui, stateType) : interaction.unsetStateStyle(ui, stateType)
-    })
 }
 
 export function arrowType(defaultValue?: IValue) {
