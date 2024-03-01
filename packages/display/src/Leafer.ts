@@ -353,7 +353,7 @@ export class Leafer extends Group implements ILeafer {
     }
 
     // need view plugin
-    public zoom(_zoomType: IZoomType, _padding?: IFourNumber, _fixed?: boolean): IBoundsData { return undefined }
+    public zoom(_zoomType: IZoomType, _padding?: IFourNumber, _fixedScale?: boolean): IBoundsData { return undefined }
 
     public validScale(changeScale: number): number {
         const { scaleX } = this.zoomLayer.__, { min, max } = this.app.config.zoom, absScale = Math.abs(scaleX * changeScale)
