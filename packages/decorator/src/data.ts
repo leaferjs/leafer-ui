@@ -4,31 +4,23 @@ import { defineKey, defineLeafAttr, doStrokeType } from '@leafer/core'
 import { ICanvas, IUI } from '@leafer-ui/interface'
 
 
-let focusUI: IUI
-
 export function stateType(defaultValue?: IValue) {
     return (target: IUI, key: string) => {
         const stateType = key + 'Style' as IStateStyleType
         defineLeafAttr(target, key, defaultValue, {
             set(value: IValue) {
                 this.__setAttr(key, value)
-                this.waitLeafer(() => {
-                    const { interaction } = this.leafer
-                    if (interaction) {
-                        if (value) {
-                            if (key === 'focus') {
-                                if (focusUI) focusUI.focus = false
-                                focusUI = this as IUI
-                            }
-                            interaction.setStateStyle(this, stateType)
-                        } else {
-                            interaction.unsetStateStyle(this, stateType)
-                        }
-                    }
-                })
+                setStateStyle(this as IUI, stateType, value as boolean)
             }
         })
     }
+}
+
+export function setStateStyle(ui: IUI, stateType: IStateStyleType, value: boolean) {
+    ui.waitLeafer(() => {
+        const { interaction } = ui.leafer
+        if (interaction) value ? interaction.setStateStyle(ui, stateType) : interaction.unsetStateStyle(ui, stateType)
+    })
 }
 
 export function arrowType(defaultValue?: IValue) {

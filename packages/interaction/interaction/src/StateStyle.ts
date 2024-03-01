@@ -24,7 +24,7 @@ export function setStateStyle(leaf: ILeaf, stateType: IStateStyleType, pointerSt
                 style = !leaf.disabled && data[stateType]
                 break
             case 'selectedStyle':
-                style = !leaf.disabled && !leaf.focus && data[stateType]
+                style = !leaf.disabled && !leaf.isFocus && data[stateType]
                 break
         }
 
@@ -63,11 +63,11 @@ export function unsetStateStyle(leaf: ILeaf, _stateType: IStateStyleType, pointe
         //  disabled > focus > selected
         restoreStyle(leaf)
 
-        if (leaf.disabled && leaf.disabledStyle) {
+        if (leaf.disabledStyle && leaf.disabled) {
             setStateStyle(leaf, 'disabledStyle')
-        } else if (leaf.focus && leaf.focusStyle) {
+        } else if (leaf.focusStyle && leaf.isFocus) {
             setStateStyle(leaf, 'focusStyle')
-        } else if (leaf.selected && leaf.selectedStyle) {
+        } else if (leaf.selectedStyle && leaf.selected) {
             setStateStyle(leaf, 'selectedStyle')
         }
 
@@ -94,7 +94,7 @@ export function updateEventStyle(leaf: ILeaf, eventType: string): void {
 
 
 function hasFixedState(leaf: ILeaf): boolean {
-    return leaf.focus || leaf.selected || leaf.disabled
+    return leaf.selected || leaf.disabled || leaf.isFocus
 }
 
 function restoreStyle(leaf: ILeaf) {
