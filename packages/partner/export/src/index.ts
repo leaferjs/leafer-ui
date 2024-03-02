@@ -39,12 +39,12 @@ export const ExportModule: IExportModule = {
                         if (screenshot) {
                             renderBounds = screenshot === true ? (isLeafer ? leafer.canvas.bounds : leaf.worldRenderBounds) : screenshot
                         } else {
-                            let location: ILocationType | ILeaf = options.location || (isLeafer ? 'inner' : 'local')
+                            let relative: ILocationType | ILeaf = options.relative || (isLeafer ? 'inner' : 'local')
 
                             scaleX = worldTransform.scaleX
                             scaleY = worldTransform.scaleY
 
-                            switch (location) {
+                            switch (relative) {
                                 case 'inner':
                                     matrix.set(worldTransform).invert()
                                     break
@@ -58,15 +58,15 @@ export const ExportModule: IExportModule = {
                                     scaleY = 1
                                     break
                                 case 'page':
-                                    location = leaf.leafer
+                                    relative = leaf.leafer
                                 default:
-                                    matrix.set(worldTransform).divide(leaf.getTransform(location)).invert()
-                                    const l = location.worldTransform
+                                    matrix.set(worldTransform).divide(leaf.getTransform(relative)).invert()
+                                    const l = relative.worldTransform
                                     scaleX /= scaleX / l.scaleX
                                     scaleY /= scaleY / l.scaleY
                             }
 
-                            renderBounds = leaf.getBounds('render', location)
+                            renderBounds = leaf.getBounds('render', relative)
                         }
 
                         const { x, y, width, height } = new Bounds(renderBounds).scale(scale).ceil()
