@@ -1,5 +1,5 @@
 import { ILeaferCanvas, IPathDrawer, IPathCommandData, IHitType, INumber, IBoolean, IString, IPathString, IExportFileType, IPointData, ICursorType, IMaskType, IAround, IValue, IWindingRule, IPathCreator } from '@leafer/interface'
-import { Leaf, PathDrawer, surfaceType, dataType, positionType, boundsType, pathType, scaleType, rotationType, opacityType, sortType, maskType, dataProcessor, registerUI, useModule, rewrite, rewriteAble, UICreator, PathCorner, hitType, strokeType, PathConvert, eraserType, cursorType, autoLayoutType, PathCreator, naturalBoundsType, pathInputType } from '@leafer/core'
+import { Leaf, PathDrawer, surfaceType, dataType, positionType, boundsType, pathType, scaleType, rotationType, opacityType, sortType, maskType, dataProcessor, registerUI, useModule, rewrite, rewriteAble, UICreator, PathCorner, hitType, strokeType, PathConvert, eraserType, cursorType, autoLayoutType, pen, naturalBoundsType, pathInputType } from '@leafer/core'
 
 import { IUI, IShadowEffect, IBlurEffect, IStrokeAlign, IStrokeJoin, IStrokeCap, IBlendMode, IDashPatternString, IShadowString, IGrayscaleEffect, IUIData, IGroup, IStrokeWidthString, ICornerRadiusString, IUIInputData, IExportOptions, IExportResult, IFill, IStroke, IArrowType, IFindUIMethod, IEditSize, ILeafer } from '@leafer-ui/interface'
 import { arrowType, effectType, stateType, zoomLayerType } from '@leafer-ui/decorator'
@@ -10,7 +10,7 @@ import { UIBounds, UIRender } from '@leafer-ui/display-module'
 import { Export, PathArrow } from '@leafer-ui/external'
 
 
-const pen = new PathCreator()
+
 
 @useModule(UIBounds)
 @useModule(UIRender)
@@ -281,7 +281,7 @@ export class UI extends Leaf implements IUI {
 
 
     public get pen(): IPathCreator {
-        this.path = pen.path = this.__.path || []
+        pen.set(this.path = this.__.path || [])
         return pen
     }
 
@@ -321,9 +321,11 @@ export class UI extends Leaf implements IUI {
         this.__layout.update()
         let path = pathForRender ? this.__.__pathForRender : this.__.path
         if (!path) {
-            path = []
             const { width, height } = this.boxBounds
-            if (width || height) this.__drawPathByBox(new PathCreator(path))
+            if (width || height) {
+                pen.set(path = [])
+                this.__drawPathByBox(pen)
+            }
         }
         return curve ? PathConvert.toCanvasData(path, true) : path
     }
