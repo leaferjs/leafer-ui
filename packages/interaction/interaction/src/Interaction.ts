@@ -93,10 +93,9 @@ export class InteractionBase implements IInteraction {
         if (useDefaultPath) data.path = this.defaultPath
 
         this.downTime = Date.now()
-        this.dragger.setDragData(data)
 
         if (this.downed = !this.moveMode) {
-            this.emit(PointerEvent.BEFORE_DOWN, data)
+            this.emit(PointerEvent.BEFORE_DOWN, data) // downData maybe changed
             this.emit(PointerEvent.DOWN, data)
 
             if (PointerButton.left(data)) {
@@ -107,6 +106,7 @@ export class InteractionBase implements IInteraction {
             }
         }
 
+        this.dragger.setDragData(data) // must after down event
         this.updateCursor(data)
     }
 
