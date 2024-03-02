@@ -1,5 +1,6 @@
 import { IRadiusPointData } from '@leafer/interface'
-import { Rect, UI, BoundsHelper } from '@leafer-ui/draw'
+import { BoundsHelper } from '@leafer/core'
+import { Rect, UI } from '@leafer-ui/draw'
 
 
 const ui = new UI()

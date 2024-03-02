@@ -1,6 +1,6 @@
 {
   "name": "@leafer-ui/interaction-miniapp",
-  "version": "1.0.0-rc.17",
+  "version": "1.0.0-rc.18",
   "description": "@leafer-ui/interaction-miniapp",
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
@@ -18,9 +18,9 @@
     "leaferjs"
   ],
   "dependencies": {
-    "@leafer-ui/core": "1.0.0-rc.17"
+    "@leafer-ui/core": "1.0.0-rc.18"
   },
   "devDependencies": {
-     "@leafer/interface": "1.0.0-rc.17"
+     "@leafer/interface": "1.0.0-rc.18"
   }
 }

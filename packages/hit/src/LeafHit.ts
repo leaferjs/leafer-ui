@@ -1,5 +1,5 @@
 import { IRadiusPointData } from '@leafer/interface'
-import { Leaf, PointHelper, BoundsHelper } from '@leafer-ui/draw'
+import { Leaf, PointHelper, BoundsHelper } from '@leafer/core'
 
 
 const { toInnerRadiusPointOf, copy, setRadius } = PointHelper
