@@ -69,9 +69,9 @@ export const ExportModule: IExportModule = {
                             renderBounds = leaf.getBounds('render', relative)
                         }
 
-                        const { x, y, width, height } = new Bounds(renderBounds).scale(scale).ceil()
+                        const { x, y, width, height } = new Bounds(renderBounds).scale(scale)
 
-                        let canvas = Creator.canvas({ width, height, pixelRatio })
+                        let canvas = Creator.canvas({ width: Math.round(width), height: Math.round(height), pixelRatio })
                         const renderOptions: IRenderOptions = { matrix: matrix.scale(scale).translate(-x, -y).withScale(1 / scaleX * scale, 1 / scaleY * scale) }
 
                         if (slice) {
