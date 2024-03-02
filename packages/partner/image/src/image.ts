@@ -44,12 +44,13 @@ export function image(ui: IUI, attrName: string, paint: IImagePaint, boxBounds: 
 
     } else { // need load
 
-        ui.leafer.renderer.ignore = true // wait loaded
+        ignoreRender(ui, true) // wait loaded
 
         if (firstUse) onLoad(ui, event)
 
         leafPaint.loadId = image.load(
             () => {
+                ignoreRender(ui, false)
                 if (!ui.destroyed) {
                     if (checkSizeAndCreateData(ui, attrName, paint, image, leafPaint, boxBounds)) ui.forceUpdate('surface')
                     onLoadSuccess(ui, event)
@@ -57,6 +58,7 @@ export function image(ui: IUI, attrName: string, paint: IImagePaint, boxBounds: 
                 leafPaint.loadId = null
             },
             (error) => {
+                ignoreRender(ui, false)
                 onLoadError(ui, event, error)
                 leafPaint.loadId = null
             }
@@ -108,4 +110,9 @@ function onLoadError(ui: IUI, event: IImageEvent, error: string | IObject,): voi
 
 function emit(ui: IUI, type: string, data: IImageEvent): void {
     if (ui.hasEvent(type)) ui.emitEvent(new ImageEvent(type, data))
+}
+
+function ignoreRender(ui: IUI, value: boolean): void {
+    const { leafer } = ui
+    if (leafer && leafer.viewReady) leafer.renderer.ignore = value // prevent blink on hover
 }
