@@ -21,7 +21,7 @@ export class InteractionBase implements IInteraction {
     public running: boolean
 
     public get dragging(): boolean { return this.dragger.dragging }
-    public get isDragEmpty(): boolean { return this.config.move.dragEmpty && (this.hoverData && (this.hoverData.path.list[0] as ILeaf).isLeafer) && (!this.downData || (this.downData.path.list[0] as ILeaf).isLeafer) }
+    public get isDragEmpty(): boolean { return this.config.move.dragEmpty && this.isRootPath(this.hoverData) && (!this.downData || this.isRootPath(this.downData)) }
     public get isHoldRightKey(): boolean { return this.config.move.holdRightKey && this.downData && PointerButton.right(this.downData) }
     public get moveMode(): boolean { return this.config.move.drag || (this.config.move.holdSpaceKey && Keyboard.isHoldSpaceKey()) || (this.downData && ((this.config.move.holdMiddleKey && PointerButton.middle(this.downData)) || (this.isHoldRightKey && this.dragger.moving))) || this.isDragEmpty }
 
@@ -33,12 +33,10 @@ export class InteractionBase implements IInteraction {
     public shrinkCanvasBounds: IBounds
 
     public downData: IPointerEvent
-    protected oldDownData?: IPointerEvent // 通过updateDownData强制更新下来的数据
     public hoverData: IPointerEvent
     public focusData: ILeaf
 
     public downTime: number
-    protected downed: boolean
 
     protected overPath: LeafList
     protected enterPath: LeafList
@@ -90,20 +88,18 @@ export class InteractionBase implements IInteraction {
         PointerButton.defaultLeft(data)
 
         this.updateDownData(data)
-        if (useDefaultPath) data.path = this.defaultPath
+        this.checkPath(data, useDefaultPath)
 
         this.downTime = Date.now()
 
-        if (this.downed = !this.moveMode) {
-            this.emit(PointerEvent.BEFORE_DOWN, data) // downData maybe changed
-            this.emit(PointerEvent.DOWN, data)
+        this.emit(PointerEvent.BEFORE_DOWN, data) // downData maybe changed
+        this.emit(PointerEvent.DOWN, data)
 
-            if (PointerButton.left(data)) {
-                this.tapWait()
-                this.longPressWait(data)
-            } else if (PointerButton.right(data)) {
-                this.waitMenuTap = true
-            }
+        if (PointerButton.left(data)) {
+            this.tapWait()
+            this.longPressWait(data)
+        } else if (PointerButton.right(data)) {
+            this.waitMenuTap = true
         }
 
         this.dragger.setDragData(data) // must after down event
@@ -143,7 +139,7 @@ export class InteractionBase implements IInteraction {
 
         if (!this.dragger.moving) {
             this.updateHoverData(data)
-            if (this.moveMode) data.path = this.defaultPath
+            this.checkPath(data)
 
             this.emit(PointerEvent.MOVE, data)
 
@@ -159,29 +155,26 @@ export class InteractionBase implements IInteraction {
     }
 
     public pointerUp(data?: IPointerEvent): void {
-        const { downData, oldDownData } = this
+        const { downData } = this
         if (!data) data = downData
         if (!downData) return
+
         PointerButton.defaultLeft(data)
+        this.downData = null // must before pointer.up event
 
         this.findPath(data)
+        data.path.addList(downData.path.list)  // downPath必须触发
+        this.checkPath(data)
 
-        if (this.downed) {
-            this.downed = false
-            this.emit(PointerEvent.BEFORE_UP, data)
-            this.emit(PointerEvent.UP, data)
-            if (oldDownData) this.emit(PointerEvent.UP, oldDownData, undefined, data.path) // oldDownPath必须触发up
-            this.emit(PointerEvent.UP, downData, undefined, data.path) // downPath必须触发up
+        this.emit(PointerEvent.BEFORE_UP, data)
+        this.emit(PointerEvent.UP, data)
 
-            this.touchLeave(data)
+        this.touchLeave(data)
 
-            this.tap(data)
-            this.menuTap(data)
-        }
+        this.tap(data)
+        this.menuTap(data)
 
         this.dragger.dragEnd(data)
-
-        this.downData = this.oldDownData = null
 
         this.updateCursor(data)
     }
@@ -348,14 +341,25 @@ export class InteractionBase implements IInteraction {
         return find.path
     }
 
+    public isRootPath(data: IPointerEvent): boolean {
+        return data && (data.path.list[0] as ILeaf).isLeafer
+    }
+
+    protected checkPath(data: IPointerEvent, useDefaultPath?: boolean): void {
+        if (useDefaultPath || this.canMove(data)) data.path = this.defaultPath
+    }
+
+    public canMove(data: IPointerEvent): boolean { // moveMode and path can move
+        return this.moveMode && data && data.path.list.every(item => !item.isOutside)
+    }
+
 
     public isDrag(leaf: ILeaf): boolean {
         return this.dragger.getList().has(leaf)
     }
 
     public isPress(leaf: ILeaf): boolean {
-        const { downData, oldDownData } = this
-        return this.downed && ((downData && downData.path.has(leaf)) || (oldDownData && oldDownData.path.has(leaf)))
+        return this.downData && this.downData.path.has(leaf)
     }
 
     public isHover(leaf: ILeaf): boolean {
@@ -376,12 +380,12 @@ export class InteractionBase implements IInteraction {
     }
 
 
-    public updateDownData(data?: IPointerEvent, options?: IPickOptions): void {
+    public updateDownData(data?: IPointerEvent, options?: IPickOptions, merge?: boolean): void {
         const { downData } = this
         if (!data && downData) data = { ...downData }
         if (!data) return
-        this.oldDownData = downData
         this.findPath(data, options)
+        if (merge && downData) data.path.addList(downData.path.list)
         this.downData = data
     }
 
@@ -402,7 +406,7 @@ export class InteractionBase implements IInteraction {
 
         if (this.dragger.moving) {
             return this.setCursor('grabbing')
-        } else if (this.moveMode) {
+        } else if (this.canMove(data)) {
             return this.setCursor(this.downData ? 'grabbing' : 'grab')
         } else if (!data) return
 
