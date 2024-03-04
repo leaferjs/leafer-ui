@@ -378,7 +378,7 @@ export class InteractionBase implements IInteraction {
 
     public updateDownData(data?: IPointerEvent, options?: IPickOptions, merge?: boolean): void {
         const { downData } = this
-        if (!data && downData) data = { ...downData }
+        if (!data && downData) data = downData
         if (!data) return
         this.findPath(data, options)
         if (merge && downData) data.path.addList(downData.path.list)

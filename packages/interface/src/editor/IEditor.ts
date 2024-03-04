@@ -48,6 +48,7 @@ export interface IEditorBase extends IGroup, ISelectorProxy {
 
 export interface IEditorConfig {
     editSize?: 'auto' | IEditSize
+    dualEvent?: boolean
 
     stroke?: IStroke
     strokeWidth?: number
@@ -82,6 +83,7 @@ export interface IEditorConfig {
     hover?: boolean
     boxSelect?: boolean
 
+    moveable?: boolean
     rotateable?: boolean
     resizeable?: boolean
     skewable?: boolean
