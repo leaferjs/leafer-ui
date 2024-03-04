@@ -115,10 +115,6 @@ export class InteractionBase implements IInteraction {
 
         const hit = this.canvas.bounds.hitPoint(data)
         if (hit || downData) {
-            if (hit && !downData && PointerButton.left(data)) {
-                this.pointerDown(data, true) // 从外部拖拽内容进入，需要先模拟down事件
-                this.dragger.canDragOut = false
-            }
             this.pointerMoveReal(data)
             if (downData) this.dragger.checkDragOut(data)
         }
