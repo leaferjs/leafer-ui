@@ -8,7 +8,7 @@ const inner = {} as IRadiusPointData
 Leaf.prototype.__hitWorld = function (point: IRadiusPointData): boolean {
     if (this.__layout.hitCanvasChanged || !this.__hitCanvas) {
         this.__updateHitCanvas()
-        this.__layout.hitCanvasChanged = false
+        if (!this.__layout.boundsChanged) this.__layout.hitCanvasChanged = false
     }
 
     if (this.__.hitRadius) {
