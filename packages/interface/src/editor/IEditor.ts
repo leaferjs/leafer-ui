@@ -49,6 +49,7 @@ export interface IEditorBase extends IGroup, ISelectorProxy {
 export interface IEditorConfig {
     editSize?: 'auto' | IEditSize
     dualEvent?: boolean
+    keyEvent?: boolean
 
     stroke?: IStroke
     strokeWidth?: number
