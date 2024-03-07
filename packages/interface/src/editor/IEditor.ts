@@ -77,7 +77,7 @@ export interface IEditorConfig {
     skewCursor?: IImageCursor
 
     around?: IAround
-    lockRatio?: boolean
+    lockRatio?: boolean | 'corner'
     rotateGap?: number
 
     selector?: boolean
