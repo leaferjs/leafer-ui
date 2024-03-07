@@ -70,7 +70,7 @@ export interface IEditorConfig {
     buttonsMargin?: number
 
     hideOnMove?: boolean
-    hideOnSmall?: boolean
+    hideOnSmall?: boolean | number
 
     moveCursor?: ICursorType
     resizeCursor?: IImageCursor
