@@ -7,7 +7,7 @@ import { Group } from './Group'
 import { Path } from './Path'
 
 
-@useModule(PathCreator, ['beginPath', 'path'])
+@useModule(PathCreator, ['set', 'beginPath', 'path'])
 @registerUI()
 export class Pen extends Group implements IPen {
 

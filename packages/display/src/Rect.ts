@@ -10,7 +10,7 @@ import { UI } from './UI'
 @useModule(RectRender)
 @rewriteAble()
 @registerUI()
-export class Rect extends UI implements IRect {
+export class Rect extends UI implements IRect { // tip: rewrited Box
 
     public get __tag() { return 'Rect' }
 

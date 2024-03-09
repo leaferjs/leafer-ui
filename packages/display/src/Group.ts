@@ -9,7 +9,7 @@ import { UI } from './UI'
 
 @useModule(Branch)
 @registerUI()
-export class Group extends UI implements IGroup {
+export class Group extends UI implements IGroup {   // tip: rewrited Box
 
     public get __tag() { return 'Group' }
 

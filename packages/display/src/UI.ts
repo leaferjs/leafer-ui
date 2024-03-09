@@ -15,7 +15,7 @@ import { Export, PathArrow } from '@leafer-ui/external'
 @useModule(UIBounds)
 @useModule(UIRender)
 @rewriteAble()
-export class UI extends Leaf implements IUI {
+export class UI extends Leaf implements IUI { // tip: rewrited Box
 
     @dataProcessor(UIData)
     declare public __: IUIData
