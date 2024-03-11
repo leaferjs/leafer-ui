@@ -10,12 +10,8 @@ export function design(leafer: ILeaferBase): void {
     if (leafer.isApp) return
     leafer.__eventIds.push(
         leafer.on_(MoveEvent.BEFORE_MOVE, (e: MoveEvent) => {
-            let { moveX, moveY } = e
-            if (leafer.config.move.scroll) {
-                if (Math.abs(moveX) > Math.abs(moveY)) moveY = 0
-                else moveX = 0
-            }
-            leafer.zoomLayer.move(moveX, moveY)
+            const { x, y } = leafer.validMove(e.moveX, e.moveY)
+            if (x || y) leafer.zoomLayer.move(x, y)
         }),
         leafer.on_(ZoomEvent.BEFORE_ZOOM, (e: ZoomEvent) => {
             const { zoomLayer } = leafer
