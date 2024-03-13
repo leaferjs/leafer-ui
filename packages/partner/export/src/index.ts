@@ -33,7 +33,7 @@ export const ExportModule: IExportModule = {
                         const scale = options.scale || 1
                         const pixelRatio = options.pixelRatio || 1
                         const screenshot = options.screenshot || leaf.isApp
-                        const fill = (isLeafer && screenshot) ? (options.fill === undefined ? leaf.fill : undefined) : options.fill // leafer use 
+                        const fill = (isLeafer && screenshot) ? (options.fill === undefined ? leaf.fill : options.fill) : options.fill // leafer use 
                         const needFill = FileHelper.isOpaqueImage(filename) || fill, matrix = new Matrix()
 
                         if (screenshot) {
