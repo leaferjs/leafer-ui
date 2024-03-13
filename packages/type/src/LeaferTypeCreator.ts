@@ -2,8 +2,8 @@ import { ILeaferBase, ILeaferTypeList, ILeaferTypeFunction } from '@leafer/inter
 
 import { Debug } from '@leafer/core'
 
-import { draw } from './draw'
-import { design } from './design'
+import { addInteractionWindow } from './window'
+import { document } from './document'
 
 
 const debug = Debug.get('LeaferTypeCreator')
@@ -33,5 +33,6 @@ export const LeaferTypeCreator = {
 
 const { list, register } = LeaferTypeCreator
 
-register('draw', draw)
-register('design', design)
+register('draw', () => { })
+register('design', addInteractionWindow)
+register('document', document)

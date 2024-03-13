@@ -6,7 +6,7 @@ import { MoveEvent, ZoomEvent } from '@leafer-ui/event'
 import { Group } from '@leafer-ui/display'
 
 
-export function design(leafer: ILeaferBase): void {
+export function addInteractionWindow(leafer: ILeaferBase): void {
     if (leafer.isApp) return
     leafer.__eventIds.push(
         leafer.on_(MoveEvent.BEFORE_MOVE, (e: MoveEvent) => {
