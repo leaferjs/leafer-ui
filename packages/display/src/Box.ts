@@ -38,10 +38,9 @@ export class Box extends Group implements IBox {
     public __updateRectRenderSpread(): number { return 0 }
 
     public __updateRenderSpread(): number {
-        let width = this.__updateRectRenderSpread() || super.__updateRenderSpread()
-        this.__.__drawAfterFill = this.__.overflow === 'hide'
-        if (!width) width = this.__.__drawAfterFill ? 0 : 1
-        return width
+        const width = this.__updateRectRenderSpread()
+        const hide = this.__.__drawAfterFill = this.__.overflow === 'hide'
+        return (width || hide) ? width : -1
     }
 
 
