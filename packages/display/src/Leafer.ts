@@ -360,6 +360,19 @@ export class Leafer extends Group implements ILeafer {
         if (scroll) {
             if (Math.abs(moveX) > Math.abs(moveY)) moveY = 0
             else moveX = 0
+
+            if (scroll === 'limit') {
+                const { x, y, width, height } = new Bounds(this.__world).addPoint(this.zoomLayer as IPointData)
+                const right = x + width - this.width, bottom = y + height - this.height
+
+                if (x >= 0 && right <= 0) moveX = 0 // includeX
+                else if (moveX > 0) { if (x + moveX > 0) moveX = -x }
+                else if (moveX < 0 && right + moveX < 0) moveX = -right
+
+                if (y >= 0 && bottom <= 0) moveY = 0 // includeY
+                else if (moveY > 0) { if (y + moveY > 0) moveY = -y }
+                else if (moveY < 0 && bottom + moveY < 0) moveY = -bottom
+            }
         }
         return { x: disabled ? 0 : moveX, y: disabled ? 0 : moveY }
     }
