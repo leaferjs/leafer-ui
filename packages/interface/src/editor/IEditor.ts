@@ -85,6 +85,7 @@ export interface IEditorConfig {
     selector?: boolean
     hover?: boolean
     boxSelect?: boolean
+    continuousSelect?: boolean // 点击可以连续选择
 
     moveable?: boolean
     rotateable?: boolean
