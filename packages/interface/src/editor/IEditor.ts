@@ -81,6 +81,7 @@ export interface IEditorConfig {
     lockRatio?: boolean | 'corner'
     rotateGap?: number
 
+    select?: 'pointer.down' | 'tap'
     selector?: boolean
     hover?: boolean
     boxSelect?: boolean
