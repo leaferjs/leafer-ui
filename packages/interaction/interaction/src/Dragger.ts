@@ -109,7 +109,7 @@ export class Dragger {
         const list = this.getList()
         if (list.length && running) {
             const { moveX, moveY } = this.dragData
-            list.forEach(leaf => leaf.moveWorld(moveX, moveY))
+            list.forEach(leaf => leaf.draggable && leaf.moveWorld(moveX, moveY))
         }
     }
 
@@ -141,7 +141,7 @@ export class Dragger {
     }
 
     public dragEnd(data: IPointerEvent, speed?: number): void {
-        if (!this.dragData) return
+        if (!this.dragging && !this.moving) return
 
         const { moveX, moveY } = this.dragData
         if (this.interaction.config.move.dragAnimate && this.canAnimate && this.moving && (Math.abs(moveX) > 1 || Math.abs(moveY) > 1)) {
