@@ -23,6 +23,7 @@
     "@leafer-ui/event": "1.0.0-rc.19"
   },
   "devDependencies": {
-     "@leafer/interface": "1.0.0-rc.19"
+     "@leafer/interface": "1.0.0-rc.19",
+     "@leafer-ui/interface": "1.0.0-rc.19"
   }
 }

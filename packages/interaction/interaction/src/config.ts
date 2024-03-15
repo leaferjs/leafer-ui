@@ -13,6 +13,7 @@ export const config: IInteractionConfig = {
         tapTime: 120,
         longPressTime: 800,
         transformTime: 500,
+        hover: true,
         dragHover: true,
         dragDistance: 2,
         swipeDistance: 20,

@@ -1,6 +1,7 @@
 import { IUIEvent, IPointerEvent, ILeaf, IInteraction, IInteractionConfig, ILeafList, IMoveEvent, IZoomEvent, IRotateEvent, ISelector, IBounds, IEventListenerId, IInteractionCanvas, ITimer, IKeepTouchData, IKeyEvent, IPickOptions, ICursorType, IBooleanMap } from '@leafer/interface'
 import { LeaferEvent, ResizeEvent, LeafList, Bounds, PointHelper, DataHelper } from '@leafer/core'
 
+import { IApp } from '@leafer-ui/interface'
 import { PointerEvent, DropEvent, KeyEvent, PointerButton, Keyboard } from '@leafer-ui/event'
 
 import { Transformer } from './Transformer'
@@ -21,7 +22,7 @@ export class InteractionBase implements IInteraction {
     public running: boolean
 
     public get dragging(): boolean { return this.dragger.dragging }
-    public get isDragEmpty(): boolean { return this.config.move.dragEmpty && this.isRootPath(this.hoverData) && (!this.downData || this.isRootPath(this.downData)) }
+    public get isDragEmpty(): boolean { return this.config.move.dragEmpty && this.isRootPath(this.hoverData) && (!this.downData || (this.isRootPath(this.downData) || this.isTreePath(this.downData))) }
     public get isHoldRightKey(): boolean { return this.config.move.holdRightKey && this.downData && PointerButton.right(this.downData) }
     public get moveMode(): boolean { return this.config.move.drag || (this.config.move.holdSpaceKey && Keyboard.isHoldSpaceKey()) || (this.downData && ((this.config.move.holdMiddleKey && PointerButton.middle(this.downData)) || (this.isHoldRightKey && this.dragger.moving))) || this.isDragEmpty }
 
@@ -121,10 +122,11 @@ export class InteractionBase implements IInteraction {
     }
 
     public pointerMoveReal(data: IPointerEvent): void {
+        const { dragHover, dragDistance } = this.config.pointer
         this.emit(PointerEvent.BEFORE_MOVE, data, this.defaultPath)
 
         if (this.downData) {
-            const canDrag = PointHelper.getDistance(this.downData, data) > this.config.pointer.dragDistance
+            const canDrag = PointHelper.getDistance(this.downData, data) > dragDistance
             if (canDrag) {
                 if (this.waitTap) this.pointerWaitCancel()
                 this.waitMenuTap = false
@@ -139,7 +141,7 @@ export class InteractionBase implements IInteraction {
 
             this.emit(PointerEvent.MOVE, data)
 
-            if (!(this.dragging && !this.config.pointer.dragHover)) this.pointerHover(data)
+            if (!(this.dragging && !dragHover)) this.pointerHover(data)
 
             if (this.dragger.dragging) {
                 this.dragger.dragOverOrOut(data)
@@ -167,8 +169,10 @@ export class InteractionBase implements IInteraction {
 
         this.touchLeave(data)
 
-        this.tap(data)
-        this.menuTap(data)
+        if (!data.isCancel) {
+            this.tap(data)
+            this.menuTap(data)
+        }
 
         this.dragger.dragEnd(data)
 
@@ -176,7 +180,9 @@ export class InteractionBase implements IInteraction {
     }
 
     public pointerCancel(): void {
-        this.pointerUp(this.dragger.dragData)
+        const data = { ...this.dragger.dragData }
+        data.isCancel = true
+        this.pointerUp(data)
     }
 
 
@@ -246,8 +252,10 @@ export class InteractionBase implements IInteraction {
 
     // helper
     protected pointerHover(data: IPointerEvent): void {
-        this.pointerOverOrOut(data)
-        this.pointerEnterOrLeave(data)
+        if (this.config.pointer.hover) {
+            this.pointerOverOrOut(data)
+            this.pointerEnterOrLeave(data)
+        }
     }
 
     protected pointerOverOrOut(data: IPointerEvent): void {
@@ -339,6 +347,12 @@ export class InteractionBase implements IInteraction {
 
     public isRootPath(data: IPointerEvent): boolean {
         return data && (data.path.list[0] as ILeaf).isLeafer
+    }
+
+    protected isTreePath(data: IPointerEvent): boolean {
+        const app = this.target.app as IApp
+        if (!app || !app.isApp) return false
+        return app.editor && (!data.path.has(app.editor) && data.path.has(app.tree)) // 当dragEmpty为true时，在手机端(pointer.hover为false)可以拖动tree层（编辑器选中的元素除外）
     }
 
     protected checkPath(data: IPointerEvent, useDefaultPath?: boolean): void {
