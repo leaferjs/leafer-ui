@@ -356,8 +356,8 @@ export class Leafer extends Group implements ILeafer {
     public zoom(_zoomType: IZoomType, _padding?: IFourNumber, _fixedScale?: boolean): IBoundsData { return undefined }
 
     // interaction window rewrite
-    public validMove(moveX: number, moveY: number): IPointData { return { x: moveX, y: moveY } }
-    public validScale(changeScale: number): number { return changeScale }
+    public getValidMove(moveX: number, moveY: number): IPointData { return { x: moveX, y: moveY } }
+    public getValidScale(changeScale: number): number { return changeScale }
 
     protected __checkUpdateLayout(): void {
         this.__layout.update()

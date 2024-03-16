@@ -10,12 +10,12 @@ export function addInteractionWindow(leafer: ILeaferBase): void {
     if (leafer.isApp) return
     leafer.__eventIds.push(
         leafer.on_(MoveEvent.BEFORE_MOVE, (e: MoveEvent) => {
-            const { x, y } = leafer.validMove(e.moveX, e.moveY)
+            const { x, y } = leafer.getValidMove(e.moveX, e.moveY)
             if (x || y) leafer.zoomLayer.move(x, y)
         }),
         leafer.on_(ZoomEvent.BEFORE_ZOOM, (e: ZoomEvent) => {
             const { zoomLayer } = leafer
-            const changeScale = leafer.validScale(e.scale)
+            const changeScale = leafer.getValidScale(e.scale)
             if (changeScale !== 1) {
                 PointHelper.scaleOf(zoomLayer as Group, e, changeScale)
                 zoomLayer.scale = zoomLayer.__.scaleX * changeScale

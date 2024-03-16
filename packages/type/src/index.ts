@@ -11,7 +11,7 @@ Leafer.prototype.initType = function (type: ILeaferType) {
     LeaferTypeCreator.run(type, this)
 }
 
-Leafer.prototype.validMove = function (moveX: number, moveY: number): IPointData {
+Leafer.prototype.getValidMove = function (moveX: number, moveY: number): IPointData {
     const { scroll, disabled } = this.app.config.move
     if (scroll) {
         if (Math.abs(moveX) > Math.abs(moveY)) moveY = 0
@@ -33,7 +33,7 @@ Leafer.prototype.validMove = function (moveX: number, moveY: number): IPointData
     return { x: disabled ? 0 : moveX, y: disabled ? 0 : moveY }
 }
 
-Leafer.prototype.validScale = function (changeScale: number): number {
+Leafer.prototype.getValidScale = function (changeScale: number): number {
     const { scaleX } = this.zoomLayer.__, { min, max, disabled } = this.app.config.zoom, absScale = Math.abs(scaleX * changeScale)
     if (absScale < min) changeScale = min / scaleX
     else if (absScale > max) changeScale = max / scaleX
