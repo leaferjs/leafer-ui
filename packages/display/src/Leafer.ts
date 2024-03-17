@@ -80,6 +80,7 @@ export class Leafer extends Group implements ILeafer {
     protected __startTimer: ITimer
     protected __controllers: IControl[] = []
 
+    protected __initWait: IFunction[] // assign in waitInit()
     protected __readyWait: IFunction[] = []
     protected __viewReadyWait: IFunction[] = []
     protected __viewCompletedWait: IFunction[] = []
@@ -140,6 +141,7 @@ export class Leafer extends Group implements ILeafer {
 
         if (start) this.__startTimer = setTimeout(this.start.bind(this))
 
+        WaitHelper.run(this.__initWait)
         this.onInit() // can rewrite init event
     }
 
@@ -148,13 +150,7 @@ export class Leafer extends Group implements ILeafer {
     public initType(_type: ILeaferType): void { } // rewrite in @leafer-ui/type
 
     public set(data: IUIInputData): void {
-        if (!this.children) {
-            setTimeout(() => {
-                super.set(data)
-            })
-        } else {
-            super.set(data)
-        }
+        this.waitInit(() => { super.set(data) })
     }
 
     public start(): void {
@@ -318,6 +314,12 @@ export class Leafer extends Group implements ILeafer {
         if (this.watcher.childrenChanged && this.interaction) {
             this.nextRender(() => this.interaction.updateCursor())
         }
+    }
+
+    public waitInit(item: IFunction, bind?: IObject): void {
+        if (bind) item = item.bind(bind)
+        if (!this.__initWait) this.__initWait = [] // set() use
+        this.canvas ? item() : this.__initWait.push(item)
     }
 
     public waitReady(item: IFunction, bind?: IObject): void {
