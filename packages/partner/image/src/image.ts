@@ -24,7 +24,7 @@ export function image(ui: IUI, attrName: string, paint: IImagePaint, boxBounds: 
     } else {
         leafPaint = { type: paint.type, image }
 
-        cache = image.use > 1 ? { leafPaint, paint, boxBounds: box.set(boxBounds) } : null
+        cache = image.use > 1 ? { leafPaint, paint, boxBounds: box.set(boxBounds) } : null // 只保留最后一个cache
     }
 
     if (firstUse || image.loading) event = { image, attrName, attrValue: paint }

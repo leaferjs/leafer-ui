@@ -1,5 +1,5 @@
 import { IBoundsData, ILeaferImage } from '@leafer/interface'
-import { MatrixHelper } from '@leafer/core'
+import { MatrixHelper, Bounds } from '@leafer/core'
 
 import { IImagePaint, ILeafPaint, ILeafPaintPatternData } from '@leafer-ui/interface'
 
@@ -7,9 +7,11 @@ import { clipMode, fillOrFitMode, repeatMode } from './mode'
 
 
 const { get, translate } = MatrixHelper
+const tempBox = new Bounds()
 
 export function createData(leafPaint: ILeafPaint, image: ILeaferImage, paint: IImagePaint, box: IBoundsData): void {
     let { width, height } = image
+    if (paint.padding) box = tempBox.set(box).shrink(paint.padding)
 
     const { opacity, mode, offset, scale, size, rotation, blendMode, repeat } = paint
     const sameBox = box.width === width && box.height === height
