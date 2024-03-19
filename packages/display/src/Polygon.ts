@@ -32,7 +32,6 @@ export class Polygon extends UI implements IPolygon {
 
     constructor(data?: IPolygonInputData) {
         super(data)
-        this.pathClosed = true
     }
 
     public __updatePath(): void {

@@ -209,6 +209,9 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     @pathType()
     public windingRule: IWindingRule
 
+    @pathType(true)
+    public closed: boolean
+
 
     // arrow
 

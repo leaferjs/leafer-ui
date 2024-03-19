@@ -33,6 +33,9 @@ export class Line extends UI implements ILine { // tip: rewrited Polygon
     @pathType(0)
     public curve: boolean | number
 
+    @pathType(false)
+    public closed: boolean
+
     public get toPoint(): IPointData {
         const { width, rotation } = this.__
         const to: IPointData = getPointData()
@@ -60,7 +63,7 @@ export class Line extends UI implements ILine { // tip: rewrited Polygon
 
         if (this.__.points) {
 
-            drawPoints(path, this.__.points, false)
+            drawPoints(path, this.__.points, this.__.closed)
 
         } else {
 
@@ -73,7 +76,7 @@ export class Line extends UI implements ILine { // tip: rewrited Polygon
     public __updateRenderPath(): void {
         const data = this.__
         if (!this.pathInputed && data.points && data.curve) {
-            drawPoints(data.__pathForRender = [], data.points, data.curve, this.pathClosed)
+            drawPoints(data.__pathForRender = [], data.points, data.curve, this.__.closed)
             if (data.__useArrow) PathArrow.addArrows(this, false)
         } else {
             super.__updateRenderPath()
