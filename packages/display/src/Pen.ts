@@ -76,10 +76,12 @@ export class Pen extends Group implements IPen {
 
     public drawPoints(_points: number[], _curve?: boolean | number, _close?: boolean): Pen { return this }
 
+    public clearPath(): Pen { return this }
 
     public paint(): void {
         this.pathElement.forceUpdate('path')
     }
+
 
 }
 

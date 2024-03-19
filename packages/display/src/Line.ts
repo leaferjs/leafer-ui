@@ -76,7 +76,7 @@ export class Line extends UI implements ILine { // tip: rewrited Polygon
     public __updateRenderPath(): void {
         const data = this.__
         if (!this.pathInputed && data.points && data.curve) {
-            drawPoints(data.__pathForRender = [], data.points, data.curve, this.__.closed)
+            drawPoints(data.__pathForRender = [], data.points, data.curve, data.closed)
             if (data.__useArrow) PathArrow.addArrows(this, false)
         } else {
             super.__updateRenderPath()

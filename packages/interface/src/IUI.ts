@@ -111,7 +111,6 @@ export interface IPen extends IGroup, IPathCreator {
     pathStyle: IPathInputData
     path: IPathCommandData
     paint(): void
-    clear(): void
 }
 
 export interface IPenData extends IGroupData { }
