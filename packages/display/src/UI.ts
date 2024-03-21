@@ -84,35 +84,35 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
 
 
     // position
-    @positionType(0)
+    @positionType(0, true)
     public x: INumber
 
-    @positionType(0)
+    @positionType(0, true)
     public y: INumber
 
     // size
-    @boundsType(100)
+    @boundsType(100, true)
     public width: INumber
 
-    @boundsType(100)
+    @boundsType(100, true)
     public height: INumber
 
     // scale
-    @scaleType(1)
+    @scaleType(1, true)
     public scaleX: INumber
 
-    @scaleType(1)
+    @scaleType(1, true)
     public scaleY: INumber
 
     // rotate
-    @rotationType(0)
+    @rotationType(0, true)
     public rotation: INumber
 
     // skew
-    @rotationType(0)
+    @rotationType(0, true)
     public skewX: INumber
 
-    @rotationType(0)
+    @rotationType(0, true)
     public skewY: INumber
 
 
