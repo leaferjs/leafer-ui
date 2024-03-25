@@ -10,6 +10,7 @@ import {
 } from './ICommonAttr'
 import { IOverflow } from './type/IType'
 import { ILeafer } from './app/ILeafer'
+import { IEditorConfig } from './editor/IEditor'
 
 // Line
 export interface ILine extends IUI {
@@ -290,6 +291,8 @@ export interface IUI extends IFillAttrData, IStrokeAttrData, ICornerRadiusAttrDa
     selectedStyle: IUIInputData
     disabledStyle: IUIInputData
 
+    editorStyle: IEditorConfig
+
     children?: IUI[]
 
     reset(data?: IUIInputData): void
@@ -328,6 +331,8 @@ export interface IUIData extends IUIComputedData, ILeafData {
     focusStyle?: IUIInputData
     selectedStyle?: IUIInputData
     disabledStyle?: IUIInputData
+
+    editorStyle?: IEditorConfig
 
     // 非数据属性, 自动计算的缓存数据
     __isFills?: boolean
@@ -373,6 +378,8 @@ export interface IUIBaseInputData extends IFillInputData, IStrokeInputData, ITex
     focusStyle?: IUIInputData
     selectedStyle?: IUIInputData
     disabledStyle?: IUIInputData
+
+    editorStyle?: IEditorConfig
 
     children?: IUIInputData[]
 }
