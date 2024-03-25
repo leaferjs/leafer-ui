@@ -1,5 +1,5 @@
-import { ILeaferCanvas, IRenderer, ILayouter, ISelector, IWatcher, IInteraction, ILeaferConfig, ICanvasManager, IHitCanvasManager, IAutoBounds, IScreenSizeData, IResizeEvent, IEventListenerId, ITimer, IValue, IObject, IControl, IPointData, ILeaferType, ICursorType, IBoundsData, INumber, IZoomType, IFourNumber } from '@leafer/interface'
-import { AutoBounds, LayoutEvent, ResizeEvent, LeaferEvent, CanvasManager, ImageManager, DataHelper, Creator, Run, Debug, RenderEvent, registerUI, boundsType, canvasSizeAttrs, dataProcessor, WaitHelper, WatchEvent, Bounds } from '@leafer/core'
+import { ILeaferCanvas, IRenderer, ILayouter, ISelector, IWatcher, IInteraction, ILeaferConfig, ICanvasManager, IHitCanvasManager, IAutoBounds, IScreenSizeData, IResizeEvent, IEventListenerId, ITimer, IValue, IObject, IControl, IPointData, ILeaferType, ICursorType, IBoundsData, INumber, IZoomType, IFourNumber, ILeafList } from '@leafer/interface'
+import { AutoBounds, LayoutEvent, ResizeEvent, LeaferEvent, CanvasManager, ImageManager, DataHelper, Creator, Run, Debug, RenderEvent, registerUI, boundsType, canvasSizeAttrs, dataProcessor, WaitHelper, WatchEvent, Bounds, LeafList } from '@leafer/core'
 
 import { ILeaferInputData, ILeaferData, IFunction, IUIInputData, ILeafer, IApp, IEditorBase } from '@leafer-ui/interface'
 import { LeaferData } from '@leafer-ui/data'
@@ -10,6 +10,8 @@ const debug = Debug.get('Leafer')
 
 @registerUI()
 export class Leafer extends Group implements ILeafer {
+
+    static list = new LeafList() // 所有leafer实例
 
     public get __tag() { return 'Leafer' }
 
@@ -91,6 +93,7 @@ export class Leafer extends Group implements ILeafer {
         super(data)
         this.userConfig = userConfig
         if (userConfig && (userConfig.view || userConfig.width)) this.init(userConfig)
+        Leafer.list.add(this)
     }
 
     public init(userConfig?: ILeaferConfig, parentApp?: IApp): void {
@@ -388,9 +391,10 @@ export class Leafer extends Group implements ILeafer {
         this.__eventIds.length = 0
     }
 
-    public destroy(): void {
-        setTimeout(() => {
+    public destroy(sync?: boolean): void {
+        const doDestory = () => {
             if (!this.destroyed) {
+                Leafer.list.remove(this)
                 try {
                     this.stop()
                     this.emitEvent(new LeaferEvent(LeaferEvent.END, this))
@@ -419,7 +423,7 @@ export class Leafer extends Group implements ILeafer {
                     debug.error(e)
                 }
             }
-        })
-
+        }
+        sync ? doDestory() : setTimeout(doDestory)
     }
 }

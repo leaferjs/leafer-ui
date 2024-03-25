@@ -18,4 +18,5 @@ export interface ILeafer extends IGroup, ILeaferAttrData, IControl {
 
     onInit(): void
     initType(type: ILeaferType): void
+    destroy(sync?: boolean): void
 }
