@@ -10,8 +10,6 @@ import { UIBounds, UIRender } from '@leafer-ui/display-module'
 import { Export, PathArrow } from '@leafer-ui/external'
 
 
-
-
 @useModule(UIBounds)
 @useModule(UIRender)
 @rewriteAble()
@@ -344,9 +342,7 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     public __onUpdateSize(): void {
         if (this.__.__input) {
             const data = this.__
-            data.__needComputePaint = true
-            if (data.lazy && this.leafer && !this.leafer.canvas.bounds.hit(this.__world)) return
-            data.__computePaint()
+            data.lazy ? data.__needComputePaint = true : data.__computePaint()// 后期可优化： this.leafer.lazyBounds.hit(this.__world) 
         }
     }
 
