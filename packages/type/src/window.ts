@@ -1,9 +1,8 @@
-import { ILeaferBase } from '@leafer/interface'
+import { ILeaferBase, IPointData } from '@leafer/interface'
 
 import { PointHelper } from '@leafer/core'
 
 import { MoveEvent, ZoomEvent } from '@leafer-ui/event'
-import { Group } from '@leafer-ui/display'
 
 
 export function addInteractionWindow(leafer: ILeaferBase): void {
@@ -17,7 +16,7 @@ export function addInteractionWindow(leafer: ILeaferBase): void {
             const { zoomLayer } = leafer
             const changeScale = leafer.getValidScale(e.scale)
             if (changeScale !== 1) {
-                PointHelper.scaleOf(zoomLayer as Group, e, changeScale)
+                PointHelper.scaleOf(zoomLayer as IPointData, e, changeScale)
                 zoomLayer.scale = zoomLayer.__.scaleX * changeScale
             }
         })
