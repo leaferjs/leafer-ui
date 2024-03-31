@@ -1,4 +1,4 @@
-import { ILeaferCanvas, IRenderer, ILayouter, ISelector, IWatcher, IInteraction, ILeaferConfig, ICanvasManager, IHitCanvasManager, IAutoBounds, IScreenSizeData, IResizeEvent, IEventListenerId, ITimer, IValue, IObject, IControl, IPointData, ILeaferType, ICursorType, IBoundsData, INumber, IZoomType, IFourNumber, ILeafList } from '@leafer/interface'
+import { ILeaferCanvas, IRenderer, ILayouter, ISelector, IWatcher, IInteraction, ILeaferConfig, ICanvasManager, IHitCanvasManager, IAutoBounds, IScreenSizeData, IResizeEvent, IEventListenerId, ITimer, IValue, IObject, IControl, IPointData, ILeaferType, ICursorType, IBoundsData, INumber, IZoomType, IFourNumber, ILeafList, IBounds } from '@leafer/interface'
 import { AutoBounds, LayoutEvent, ResizeEvent, LeaferEvent, CanvasManager, ImageManager, DataHelper, Creator, Run, Debug, RenderEvent, registerUI, boundsType, canvasSizeAttrs, dataProcessor, WaitHelper, WatchEvent, Bounds, LeafList } from '@leafer/core'
 
 import { ILeaferInputData, ILeaferData, IFunction, IUIInputData, ILeafer, IApp, IEditorBase } from '@leafer-ui/interface'
@@ -11,7 +11,11 @@ const debug = Debug.get('Leafer')
 @registerUI()
 export class Leafer extends Group implements ILeafer {
 
+
+    static get version() { return '1.0.0-rc.19' }
+
     static list = new LeafList() // 所有leafer实例
+
 
     public get __tag() { return 'Leafer' }
 
@@ -62,6 +66,7 @@ export class Leafer extends Group implements ILeafer {
         start: true,
         hittable: true,
         smooth: true,
+        lazySpeard: 100,
         zoom: {
             min: 0.01,
             max: 256
@@ -74,6 +79,7 @@ export class Leafer extends Group implements ILeafer {
     }
 
     public autoLayout?: IAutoBounds
+    public lazyBounds: IBounds
 
     public get FPS(): number { return this.renderer ? this.renderer.FPS : 60 }
     public get cursorPoint(): IPointData { return (this.interaction && this.interaction.hoverData) || { x: this.width / 2, y: this.height / 2 } }
@@ -108,16 +114,17 @@ export class Leafer extends Group implements ILeafer {
         this.initType(config.type) // LeaferType
 
         // render / layout
-        this.canvas = Creator.canvas(config)
+        const canvas = this.canvas = Creator.canvas(config)
         this.__controllers.push(
-            this.renderer = Creator.renderer(this, this.canvas, config),
+            this.renderer = Creator.renderer(this, canvas, config),
             this.watcher = Creator.watcher(this, config),
             this.layouter = Creator.layouter(this, config)
         )
 
         if (this.isApp) this.__setApp()
         this.__checkAutoLayout(config)
-        this.view = this.canvas.view
+        this.updateLazyBounds()
+        this.view = canvas.view
 
         // interaction / manager
         if (parentApp) {
@@ -125,7 +132,7 @@ export class Leafer extends Group implements ILeafer {
             start = parentApp.running
         } else {
             this.selector = Creator.selector(this)
-            this.interaction = Creator.interaction(this, this.canvas, this.selector, config)
+            this.interaction = Creator.interaction(this, canvas, this.selector, config)
 
             if (this.interaction) {
                 this.__controllers.unshift(this.interaction)
@@ -139,7 +146,8 @@ export class Leafer extends Group implements ILeafer {
 
         this.hittable = config.hittable
         this.fill = config.fill
-        this.canvasManager.add(this.canvas)
+        this.canvasManager.add(canvas)
+
 
         this.__listenEvents()
 
@@ -205,10 +213,16 @@ export class Leafer extends Group implements ILeafer {
         if (i) cursor ? i.setCursor(cursor) : i.updateCursor()
     }
 
+    public updateLazyBounds(): void {
+        this.lazyBounds = this.canvas.bounds.clone().spread(this.config.lazySpeard)
+    }
+
     protected __doResize(size: IScreenSizeData): void {
-        if (!this.canvas || this.canvas.isSameSize(size)) return
+        const { canvas } = this
+        if (!canvas || canvas.isSameSize(size)) return
         const old = DataHelper.copyAttrs({}, this.canvas, canvasSizeAttrs) as IScreenSizeData
-        this.canvas.resize(size)
+        canvas.resize(size)
+        this.updateLazyBounds()
         this.__onResize(new ResizeEvent(size, old))
     }
 
