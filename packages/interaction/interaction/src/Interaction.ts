@@ -22,9 +22,13 @@ export class InteractionBase implements IInteraction {
     public running: boolean
 
     public get dragging(): boolean { return this.dragger.dragging }
-    public get isDragEmpty(): boolean { return this.config.move.dragEmpty && this.isRootPath(this.hoverData) && (!this.downData || (this.isRootPath(this.downData) || this.isTreePath(this.downData))) }
+    public get moveMode(): boolean { return this.config.move.drag || this.isHoldSpaceKey || this.isHoldMiddleKey || (this.isHoldRightKey && this.dragger.moving) || this.isDragEmpty }
+
+    public get isDragEmpty(): boolean { return this.config.move.dragEmpty && this.isRootPath(this.hoverData) && (!this.downData || this.isRootPath(this.downData)) }
+    public get isMobileDragEmpty(): boolean { return this.config.move.dragEmpty && !this.config.pointer.hover && this.isTreePath(this.downData) }
+    public get isHoldMiddleKey(): boolean { return this.config.move.holdMiddleKey && this.downData && PointerButton.middle(this.downData) }
     public get isHoldRightKey(): boolean { return this.config.move.holdRightKey && this.downData && PointerButton.right(this.downData) }
-    public get moveMode(): boolean { return this.config.move.drag || (this.config.move.holdSpaceKey && Keyboard.isHoldSpaceKey()) || (this.downData && ((this.config.move.holdMiddleKey && PointerButton.middle(this.downData)) || (this.isHoldRightKey && this.dragger.moving))) || this.isDragEmpty }
+    public get isHoldSpaceKey(): boolean { return this.config.move.holdSpaceKey && Keyboard.isHoldSpaceKey() }
 
     public config: IInteractionConfig = config
 
@@ -104,7 +108,7 @@ export class InteractionBase implements IInteraction {
         }
 
         this.dragger.setDragData(data) // must after down event
-        this.updateCursor(data)
+        if (!this.isHoldRightKey) this.updateCursor(data)
     }
 
     public pointerMove(data?: IPointerEvent): void {
@@ -158,12 +162,15 @@ export class InteractionBase implements IInteraction {
         if (!downData) return
 
         PointerButton.defaultLeft(data)
-        this.downData = null // must before pointer.up event
 
         this.findPath(data)
+        const upData = { ...data, path: data.path.clone() }
+
         data.path.addList(downData.path.list)  // downPath必须触发
+
         this.checkPath(data)
 
+        this.downData = null // must before pointer.up event
         this.emit(PointerEvent.BEFORE_UP, data)
         this.emit(PointerEvent.UP, data)
 
@@ -176,7 +183,7 @@ export class InteractionBase implements IInteraction {
 
         this.dragger.dragEnd(data)
 
-        this.updateCursor(data)
+        this.updateCursor(upData)
     }
 
     public pointerCancel(): void {
@@ -349,7 +356,7 @@ export class InteractionBase implements IInteraction {
         return data && (data.path.list[0] as ILeaf).isLeafer
     }
 
-    protected isTreePath(data: IPointerEvent): boolean {
+    public isTreePath(data: IPointerEvent): boolean {
         const app = this.target.app as IApp
         if (!app || !app.isApp) return false
         return app.editor && (!data.path.has(app.editor) && data.path.has(app.tree)) // 当dragEmpty为true时，在手机端(pointer.hover为false)可以拖动tree层（编辑器选中的元素除外）
@@ -407,7 +414,7 @@ export class InteractionBase implements IInteraction {
     }
 
     public updateCursor(data?: IPointerEvent): void {
-        if (this.config.cursor.stop) return
+        if (this.config.cursor.stop || !this.config.pointer.hover) return
 
         if (!data) {
             this.updateHoverData()

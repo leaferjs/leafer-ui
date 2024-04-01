@@ -56,7 +56,7 @@ export class Dragger {
         }
 
         if (!this.moving && canDrag) {
-            if (this.moving = interaction.canMove(this.downData) || interaction.isHoldRightKey) interaction.emit(MoveEvent.START, this.dragData)
+            if (this.moving = interaction.canMove(this.downData) || interaction.isHoldRightKey || interaction.isMobileDragEmpty) interaction.emit(MoveEvent.START, this.dragData)
         }
 
         if (!this.moving) {
