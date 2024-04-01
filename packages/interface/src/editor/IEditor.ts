@@ -81,9 +81,9 @@ export interface IEditorConfig {
     lockRatio?: boolean | 'corner'
     rotateGap?: number
 
-    select?: 'pointer.down' | 'tap'
     selector?: boolean
     hover?: boolean
+    select?: 'press' | 'tap'
     boxSelect?: boolean
     continuousSelect?: boolean // 点击可以连续选择
 
