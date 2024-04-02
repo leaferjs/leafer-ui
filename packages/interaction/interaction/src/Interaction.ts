@@ -25,7 +25,7 @@ export class InteractionBase implements IInteraction {
     public get moveMode(): boolean { return this.config.move.drag || this.isHoldSpaceKey || this.isHoldMiddleKey || (this.isHoldRightKey && this.dragger.moving) || this.isDragEmpty }
 
     public get isDragEmpty(): boolean { return this.config.move.dragEmpty && this.isRootPath(this.hoverData) && (!this.downData || this.isRootPath(this.downData)) }
-    public get isMobileDragEmpty(): boolean { return this.config.move.dragEmpty && !this.config.pointer.hover && this.isTreePath(this.downData) }
+    public get isMobileDragEmpty(): boolean { return this.config.move.dragEmpty && !this.config.pointer.hover && this.downData && this.isTreePath(this.downData) }
     public get isHoldMiddleKey(): boolean { return this.config.move.holdMiddleKey && this.downData && PointerButton.middle(this.downData) }
     public get isHoldRightKey(): boolean { return this.config.move.holdRightKey && this.downData && PointerButton.right(this.downData) }
     public get isHoldSpaceKey(): boolean { return this.config.move.holdSpaceKey && Keyboard.isHoldSpaceKey() }
