@@ -1,4 +1,4 @@
-import { ILeaferCanvas, IPathDrawer, IPathCommandData, IHitType, INumber, IBoolean, IString, IPathString, IExportFileType, IPointData, ICursorType, IMaskType, IAround, IValue, IWindingRule, IPathCreator, IHittable } from '@leafer/interface'
+import { ILeaferCanvas, IPathDrawer, IPathCommandData, IHitType, INumber, IBoolean, IString, IPathString, IExportFileType, IPointData, ICursorType, IMaskType, IAround, IValue, IWindingRule, IPathCreator } from '@leafer/interface'
 import { Leaf, PathDrawer, surfaceType, dataType, positionType, boundsType, pathType, scaleType, rotationType, opacityType, sortType, maskType, dataProcessor, registerUI, useModule, rewrite, rewriteAble, UICreator, PathCorner, hitType, strokeType, PathConvert, eraserType, cursorType, autoLayoutType, pen, naturalBoundsType, pathInputType } from '@leafer/core'
 
 import { IUI, IShadowEffect, IBlurEffect, IStrokeAlign, IStrokeJoin, IStrokeCap, IBlendMode, IDashPatternString, IShadowString, IGrayscaleEffect, IUIData, IGroup, IStrokeWidthString, ICornerRadiusString, IUIInputData, IExportOptions, IExportResult, IFill, IStroke, IArrowType, IFindUIMethod, IEditSize, ILeafer, IEditorConfig } from '@leafer-ui/interface'
@@ -134,7 +134,7 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
 
     // hit
     @hitType(true)
-    public hittable: IHittable
+    public hittable: IBoolean
 
     @hitType('path')
     public hitFill: IHitType

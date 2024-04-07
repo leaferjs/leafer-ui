@@ -79,7 +79,7 @@ export const UIRender: IUIRenderModule = {
         }
     },
 
-    __renderShape(canvas: ILeaferCanvas, options: IRenderOptions): void {
+    __renderShape(canvas: ILeaferCanvas, options: IRenderOptions, ignoreFill?: boolean, ignoreStroke?: boolean): void {
         if (this.__worldOpacity) {
             canvas.setWorld(this.__nowWorld = this.__getNowWorld(options))
 
@@ -87,8 +87,8 @@ export const UIRender: IUIRenderModule = {
 
             this.__drawRenderPath(canvas)
 
-            if (fill) this.__.__pixelFill ? Paint.fills(fill as ILeafPaint[], this, canvas) : Paint.fill('#000000', this, canvas)
-            if (stroke) this.__.__pixelStroke ? Paint.strokes(stroke as ILeafStrokePaint[], this, canvas) : Paint.stroke('#000000', this, canvas)
+            if (fill && !ignoreFill) this.__.__pixelFill ? Paint.fills(fill as ILeafPaint[], this, canvas) : Paint.fill('#000000', this, canvas)
+            if (stroke && !ignoreStroke) this.__.__pixelStroke ? Paint.strokes(stroke as ILeafStrokePaint[], this, canvas) : Paint.stroke('#000000', this, canvas)
         }
     }
 

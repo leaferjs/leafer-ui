@@ -11,6 +11,6 @@ Rect.prototype.__updateHitCanvas = function () {
     if (this.stroke || this.cornerRadius) ui.__updateHitCanvas.call(this)
 }
 
-Rect.prototype.__hitFill = function (inner: IRadiusPointData, windingRule?: string): boolean {
-    return this.__hitCanvas ? ui.__hitFill.call(this, inner, windingRule) : BoundsHelper.hitRadiusPoint(this.__layout.boxBounds, inner)
+Rect.prototype.__hitFill = function (inner: IRadiusPointData): boolean {
+    return this.__hitCanvas ? ui.__hitFill.call(this, inner) : BoundsHelper.hitRadiusPoint(this.__layout.boxBounds, inner)
 }

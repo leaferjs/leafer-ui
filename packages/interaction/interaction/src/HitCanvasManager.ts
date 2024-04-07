@@ -1,4 +1,4 @@
-import { IScreenSizeData, IHitCanvasManager, ILeaf, IHitCanvas, ILeafList } from '@leafer/interface'
+import { IHitCanvasManager, ILeaf, IHitCanvas, ILeafList, ILeaferCanvasConfig } from '@leafer/interface'
 import { CanvasManager, LeafList, Creator } from '@leafer/core'
 
 
@@ -7,9 +7,9 @@ export class HitCanvasManager extends CanvasManager implements IHitCanvasManager
     protected pathTypeList: ILeafList = new LeafList()
     protected imageTypeList: ILeafList = new LeafList()
 
-    public getImageType(leaf: ILeaf, size: IScreenSizeData): IHitCanvas {
+    public getImageType(leaf: ILeaf, config: ILeaferCanvasConfig): IHitCanvas {
         this.imageTypeList.add(leaf)
-        return Creator.hitCanvas(size)
+        return Creator.hitCanvas(config)
     }
 
     public getPathType(leaf: ILeaf): IHitCanvas {

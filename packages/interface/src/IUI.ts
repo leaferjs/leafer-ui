@@ -343,6 +343,9 @@ export interface IUIData extends IUIComputedData, ILeafData {
     __pixelFill?: boolean // png / svg / webp
     __pixelStroke?: boolean
 
+    __hitPixelFill?: boolean
+    __hitPixelStroke?: boolean
+
     __opacityFill?: boolean  // 半透明的
     __opacityStroke?: boolean
 
