@@ -46,7 +46,7 @@ export function checkImage(ui: IUI, canvas: ILeaferCanvas, paint: ILeafPaint, al
             if (!paint.style || Export.running) {
                 createPattern(ui, paint, canvas.pixelRatio)
             } else {
-                if (!paint.patternTask) {
+                if (!paint.patternTask && !ImageManager.patternLocked) {
                     paint.patternTask = ImageManager.patternTasker.add(async () => {
                         paint.patternTask = null
                         if (canvas.bounds.hit(ui.__nowWorld)) createPattern(ui, paint, canvas.pixelRatio)

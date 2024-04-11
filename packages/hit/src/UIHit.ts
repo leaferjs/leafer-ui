@@ -1,6 +1,6 @@
 import { IRadiusPointData } from '@leafer/interface'
 import { Platform, Matrix } from '@leafer/core'
-import { UI } from '@leafer-ui/draw'
+import { UI, ImageManager } from '@leafer-ui/draw'
 
 
 const matrix = new Matrix()
@@ -10,7 +10,6 @@ UI.prototype.__updateHitCanvas = function (): void {
     data.__hitPixelFill = data.__pixelFill && data.hitFill === 'pixel'
     data.__hitPixelStroke = data.__pixelStroke && data.hitStroke === 'pixel'
     const hitPixel = data.__hitPixelFill || data.__hitPixelStroke
-
     const { x, y, width, height } = this.__layout.renderBounds
 
     if (!this.__hitCanvas) this.__hitCanvas = hitPixel ? hitCanvasManager.getImageType(this, { width, height, pixelRatio: 1, contextSettings: { willReadFrequently: true } }) : hitCanvasManager.getPathType(this)
@@ -20,7 +19,9 @@ UI.prototype.__updateHitCanvas = function (): void {
     if (hitPixel) {
         h.resize({ width, height, pixelRatio: 1 })
         const scale = h.hitScale = 0.5
+        ImageManager.patternLocked = true
         this.__renderShape(h, { matrix: matrix.setWith(this.__world).scaleWith(1 / scale).invertWith().translate(-x * scale, -y * scale) }, !data.__hitPixelFill, !data.__hitPixelStroke) // 矩阵
+        ImageManager.patternLocked = false
         h.resetTransform()
     }
 

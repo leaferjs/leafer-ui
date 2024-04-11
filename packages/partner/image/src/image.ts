@@ -52,7 +52,10 @@ export function image(ui: IUI, attrName: string, paint: IImagePaint, boxBounds: 
             () => {
                 ignoreRender(ui, false)
                 if (!ui.destroyed) {
-                    if (checkSizeAndCreateData(ui, attrName, paint, image, leafPaint, boxBounds)) ui.forceUpdate('surface')
+                    if (checkSizeAndCreateData(ui, attrName, paint, image, leafPaint, boxBounds)) {
+                        if (image.hasOpacityPixel) ui.__layout.hitCanvasChanged = true
+                        ui.forceUpdate('surface')
+                    }
                     onLoadSuccess(ui, event)
                 }
                 leafPaint.loadId = null
