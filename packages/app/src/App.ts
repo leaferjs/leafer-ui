@@ -119,7 +119,8 @@ export class App extends Leafer implements IApp {
         if (this.viewReady) this.renderer.update()
     }
 
-    public __render(canvas: ILeaferCanvas, _options: IRenderOptions): void {
+    public __render(canvas: ILeaferCanvas, options: IRenderOptions): void {
+        canvas.setWorld(options.matrix || this.__world)
         this.children.forEach(leafer => canvas.copyWorld(leafer.canvas))
     }
 

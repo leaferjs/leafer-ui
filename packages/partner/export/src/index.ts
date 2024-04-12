@@ -46,10 +46,10 @@ export const ExportModule: IExportModule = {
 
                             switch (relative) {
                                 case 'inner':
-                                    matrix.set(worldTransform).invert()
+                                    matrix.set(worldTransform)
                                     break
                                 case 'local':
-                                    matrix.set(worldTransform).divide(leaf.localTransform).invert()
+                                    matrix.set(worldTransform).divide(leaf.localTransform)
                                     scaleX /= leaf.scaleX
                                     scaleY /= leaf.scaleY
                                     break
@@ -60,7 +60,7 @@ export const ExportModule: IExportModule = {
                                 case 'page':
                                     relative = leaf.leafer
                                 default:
-                                    matrix.set(worldTransform).divide(leaf.getTransform(relative)).invert()
+                                    matrix.set(worldTransform).divide(leaf.getTransform(relative))
                                     const l = relative.worldTransform
                                     scaleX /= scaleX / l.scaleX
                                     scaleY /= scaleY / l.scaleY
@@ -72,7 +72,7 @@ export const ExportModule: IExportModule = {
                         const { x, y, width, height } = new Bounds(renderBounds).scale(scale)
 
                         let canvas = Creator.canvas({ width: Math.round(width), height: Math.round(height), pixelRatio })
-                        const renderOptions: IRenderOptions = { matrix: matrix.scale(scale).translate(-x, -y).withScale(1 / scaleX * scale, 1 / scaleY * scale) }
+                        const renderOptions: IRenderOptions = { matrix: matrix.scale(1 / scale).invert().translate(-x, -y).withScale(1 / scaleX * scale, 1 / scaleY * scale) }
 
                         if (slice) {
                             leaf = leafer // render all in bounds
