@@ -1,4 +1,4 @@
-import { ILeaf, ILeafComputedData, ILeafData, ILeafInputData, ILeaferCanvas, IRenderOptions, IExportOptions, IExportResult, IPathDrawer, IPointData, IPathCommandData, ILeaferImageConfig, IBoundsData, IObject, IPathString, ILeaferImage, IPathCreator, IAnswer, IPickOptions, IPickResult, IValue } from '@leafer/interface'
+import { ILeaf, ILeafComputedData, ILeafData, ILeafInputData, ILeaferCanvas, IRenderOptions, IExportOptions, IExportResult, IPathDrawer, IPointData, IPathCommandData, ILeaferImageConfig, IBoundsData, IObject, IPathString, ILeaferImage, IPathCreator, IAnswer, IPickOptions, IPickResult, IValue, ICanvasContext2DSettings } from '@leafer/interface'
 
 import {
     IFillAttrData, IFillInputData, IFillComputedData,
@@ -201,11 +201,13 @@ export interface IImageInputData extends IImageAttrData, IUIBaseInputData { }
 export interface ICanvas extends IRect {
     __: ICanvasData
     smooth: boolean
+    contextSettings: ICanvasContext2DSettings
     canvas: ILeaferCanvas
     __updateSize(): void
 }
 interface ICanvasAttrData {
     smooth?: boolean
+    contextSettings?: ICanvasContext2DSettings
 }
 export interface ICanvasData extends ICanvasAttrData, IRectData { }
 export interface ICanvasInputData extends ICanvasAttrData, IUIBaseInputData { }
@@ -343,8 +345,7 @@ export interface IUIData extends IUIComputedData, ILeafData {
     __pixelFill?: boolean // png / svg / webp
     __pixelStroke?: boolean
 
-    __hitPixelFill?: boolean
-    __hitPixelStroke?: boolean
+    __isHitPixel?: boolean
 
     __opacityFill?: boolean  // 半透明的
     __opacityStroke?: boolean
