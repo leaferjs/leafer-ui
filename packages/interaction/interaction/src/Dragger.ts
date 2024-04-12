@@ -165,12 +165,19 @@ export class Dragger {
         if (throughPath) endDragData.throughPath = throughPath
         endDragData.path = path
 
-        if (this.moving) interaction.emit(MoveEvent.END, endDragData)
+        if (this.moving) {
+            this.moving = false
+            interaction.emit(MoveEvent.END, endDragData)
+        }
+
         if (this.dragging) {
+            const dropList = this.getList()
+
+            this.dragging = false
             interaction.emit(DragEvent.END, endDragData)
 
-            this.swipe(data, endDragData)
-            this.drop(data)
+            this.swipe(data, downData, dragData, endDragData)
+            this.drop(data, dropList, this.dragEnterPath)
         }
 
         this.autoMoveCancel()
@@ -185,24 +192,23 @@ export class Dragger {
     }
 
 
-    protected swipe(data: IPointerEvent, endDragData: IDragEvent): void {
-        const { interaction, downData } = this
+    protected swipe(data: IPointerEvent, downData: IPointerEvent, dragData: IDragEvent, endDragData: IDragEvent): void {
+        const { interaction } = this
         if (PointHelper.getDistance(downData, data) > interaction.config.pointer.swipeDistance) {
-            const swipeData = getSwipeEventData(downData, this.dragData, endDragData)
+            const swipeData = getSwipeEventData(downData, dragData, endDragData)
             this.interaction.emit(swipeData.type, swipeData)
         }
     }
 
-    protected drop(data: IPointerEvent): void {
-        const dropData = getDropEventData(data, this.getList(), DragEvent.data)
-        dropData.path = this.dragEnterPath
+    protected drop(data: IPointerEvent, dropList: ILeafList, dragEnterPath: ILeafList): void {
+        const dropData = getDropEventData(data, dropList, DragEvent.data)
+        dropData.path = dragEnterPath
         this.interaction.emit(DropEvent.DROP, dropData)
-        this.interaction.emit(DragEvent.LEAVE, data, this.dragEnterPath)
+        this.interaction.emit(DragEvent.LEAVE, data, dragEnterPath)
     }
 
     protected dragReset(): void {
         DragEvent.list = DragEvent.data = this.dragableList = this.dragData = this.downData = this.dragOverPath = this.dragEnterPath = null
-        this.dragging = this.moving = false
     }
 
 
