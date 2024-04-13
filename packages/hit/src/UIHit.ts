@@ -1,27 +1,33 @@
 import { IRadiusPointData } from '@leafer/interface'
-import { Platform, Matrix } from '@leafer/core'
+import { Platform, Matrix, Bounds } from '@leafer/core'
 import { UI, ImageManager } from '@leafer-ui/draw'
 
 
 const matrix = new Matrix()
+const bounds = new Bounds()
 
 UI.prototype.__updateHitCanvas = function (): void {
     const data = this.__, { hitCanvasManager } = this.leafer
-    data.__hitPixelFill = data.__pixelFill && data.hitFill === 'pixel'
-    data.__hitPixelStroke = data.__pixelStroke && data.hitStroke === 'pixel'
-    const hitPixel = data.__hitPixelFill || data.__hitPixelStroke
-    const { x, y, width, height } = this.__layout.renderBounds
 
-    if (!this.__hitCanvas) this.__hitCanvas = hitPixel ? hitCanvasManager.getImageType(this, { width, height, pixelRatio: 1, contextSettings: { willReadFrequently: true } }) : hitCanvasManager.getPathType(this)
+    const isHitPixelFill = data.__pixelFill && data.hitFill === 'pixel'
+    const isHitPixelStroke = data.__pixelStroke && data.hitStroke === 'pixel'
+    const isHitPixel = data.__isHitPixel = isHitPixelFill || isHitPixelStroke
+
+    if (!this.__hitCanvas) this.__hitCanvas = isHitPixel ? hitCanvasManager.getImageType(this, { contextSettings: { willReadFrequently: true } }) : hitCanvasManager.getPathType(this)
 
     const h = this.__hitCanvas
 
-    if (hitPixel) {
+    if (isHitPixel) {
+        const { renderBounds } = this.__layout
+        const scale = h.hitScale = bounds.set(0, 0, 100, 100).getFitMatrix(renderBounds, 0.25).a
+        const { x, y, width, height } = bounds.set(renderBounds).scale(scale)
         h.resize({ width, height, pixelRatio: 1 })
-        const scale = h.hitScale = 0.5
+        h.clear()
+
         ImageManager.patternLocked = true
-        this.__renderShape(h, { matrix: matrix.setWith(this.__world).scaleWith(1 / scale).invertWith().translate(-x * scale, -y * scale) }, !data.__hitPixelFill, !data.__hitPixelStroke) // 矩阵
+        this.__renderShape(h, { matrix: matrix.setWith(this.__world).scaleWith(1 / scale).invertWith().translate(-x, -y) }, !isHitPixelFill, !isHitPixelStroke) // 矩阵
         ImageManager.patternLocked = false
+
         h.resetTransform()
     }
 
@@ -35,9 +41,7 @@ UI.prototype.__hit = function (inner: IRadiusPointData): boolean {
     // hit pixel
 
     const data = this.__
-    if (data.__hitPixelFill || data.__hitPixelStroke) {
-        if (this.__hitPixel(inner)) return true
-    }
+    if (data.__isHitPixel && this.__hitPixel(inner)) return true
 
     // hit path
 
