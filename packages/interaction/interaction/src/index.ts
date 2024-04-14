@@ -4,9 +4,9 @@ export { MultiTouchHelper } from './MultiTouchHelper'
 export { Cursor } from './Cursor'
 export { HitCanvasManager } from './HitCanvasManager'
 
-
 import { IPointData, IRadiusPointData, IWindingRule } from '@leafer/interface'
 import { LeaferCanvasBase, Bounds } from '@leafer/core'
+
 
 const canvas = LeaferCanvasBase.prototype
 const temp = new Bounds()
