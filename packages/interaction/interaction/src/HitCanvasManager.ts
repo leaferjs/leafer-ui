@@ -4,25 +4,29 @@ import { CanvasManager, LeafList, Creator } from '@leafer/core'
 
 export class HitCanvasManager extends CanvasManager implements IHitCanvasManager {
 
-    protected pathTypeList: ILeafList = new LeafList()
-    protected imageTypeList: ILeafList = new LeafList()
+    public maxTotal = 1000 // 最多缓存多少张画布
 
-    public getImageType(leaf: ILeaf, config: ILeaferCanvasConfig): IHitCanvas {
-        this.imageTypeList.add(leaf)
+    protected pathList: ILeafList = new LeafList()
+    protected pixelList: ILeafList = new LeafList()
+
+    public getPixelType(leaf: ILeaf, config: ILeaferCanvasConfig): IHitCanvas {
+        this.__autoClear()
+        this.pixelList.add(leaf)
         return Creator.hitCanvas(config)
     }
 
     public getPathType(leaf: ILeaf): IHitCanvas {
-        this.pathTypeList.add(leaf)
+        this.__autoClear()
+        this.pathList.add(leaf)
         return Creator.hitCanvas()
     }
 
     public clearImageType(): void {
-        this.__clearLeafList(this.imageTypeList)
+        this.__clearLeafList(this.pixelList)
     }
 
     public clearPathType(): void {
-        this.__clearLeafList(this.pathTypeList)
+        this.__clearLeafList(this.pathList)
     }
 
     protected __clearLeafList(leafList: ILeafList): void {
@@ -35,6 +39,10 @@ export class HitCanvasManager extends CanvasManager implements IHitCanvasManager
             })
             leafList.reset()
         }
+    }
+
+    protected __autoClear(): void {
+        if (this.pathList.length + this.pixelList.length > this.maxTotal) this.clear()
     }
 
     public clear(): void {

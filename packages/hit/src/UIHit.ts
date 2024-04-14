@@ -13,7 +13,7 @@ ui.__updateHitCanvas = function (): void {
     const isHitPixelStroke = data.__pixelStroke && data.hitStroke === 'pixel'
     const isHitPixel = isHitPixelFill || isHitPixelStroke
 
-    if (!this.__hitCanvas) this.__hitCanvas = isHitPixel ? hitCanvasManager.getImageType(this, { contextSettings: { willReadFrequently: true } }) : hitCanvasManager.getPathType(this)
+    if (!this.__hitCanvas) this.__hitCanvas = isHitPixel ? hitCanvasManager.getPixelType(this, { contextSettings: { willReadFrequently: true } }) : hitCanvasManager.getPathType(this)
 
     const h = this.__hitCanvas
 
