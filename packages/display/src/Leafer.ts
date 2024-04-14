@@ -1,4 +1,4 @@
-import { ILeaferCanvas, IRenderer, ILayouter, ISelector, IWatcher, IInteraction, ILeaferConfig, ICanvasManager, IHitCanvasManager, IAutoBounds, IScreenSizeData, IResizeEvent, IEventListenerId, ITimer, IValue, IObject, IControl, IPointData, ILeaferType, ICursorType, IBoundsData, INumber, IZoomType, IFourNumber, ILeafList, IBounds } from '@leafer/interface'
+import { ILeaferCanvas, IRenderer, ILayouter, ISelector, IWatcher, IInteraction, ILeaferConfig, ICanvasManager, IHitCanvasManager, IAutoBounds, IScreenSizeData, IResizeEvent, IEventListenerId, ITimer, IValue, IObject, IControl, IPointData, ILeaferType, ICursorType, IBoundsData, INumber, IZoomType, IFourNumber, IBounds } from '@leafer/interface'
 import { AutoBounds, LayoutEvent, ResizeEvent, LeaferEvent, CanvasManager, ImageManager, DataHelper, Creator, Run, Debug, RenderEvent, registerUI, boundsType, canvasSizeAttrs, dataProcessor, WaitHelper, WatchEvent, Bounds, LeafList } from '@leafer/core'
 
 import { ILeaferInputData, ILeaferData, IFunction, IUIInputData, ILeafer, IApp, IEditorBase } from '@leafer-ui/interface'
@@ -254,7 +254,7 @@ export class Leafer extends Group implements ILeafer {
         }
     }
 
-    public __setAttr(attrName: string, newValue: IValue): void {
+    public __setAttr(attrName: string, newValue: IValue): boolean {
         if (this.canvas) {
             if (canvasSizeAttrs.includes(attrName)) {
                 this.__changeCanvasSize(attrName, newValue as number)
@@ -264,7 +264,7 @@ export class Leafer extends Group implements ILeafer {
                 this.canvas.hittable = newValue as boolean
             }
         }
-        super.__setAttr(attrName, newValue)
+        return super.__setAttr(attrName, newValue)
     }
 
     public __getAttr(attrName: string): IValue {

@@ -166,6 +166,8 @@ export class Text extends UI implements IText {
             super.__updateBoxBounds()
         }
 
+        if (italic) b.width += fontSize * 0.16
+
         const contentBounds = includes(b, bounds) ? b : bounds
         if (contentBounds !== layout.contentBounds) {
             layout.contentBounds = contentBounds

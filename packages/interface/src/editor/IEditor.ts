@@ -79,6 +79,7 @@ export interface IEditorConfig {
 
     around?: IAround
     lockRatio?: boolean | 'corner'
+    lockMove?: boolean | 'x' | 'y'
     rotateGap?: number
 
     selector?: boolean
