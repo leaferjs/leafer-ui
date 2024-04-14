@@ -12,7 +12,7 @@ const debug = Debug.get('Leafer')
 export class Leafer extends Group implements ILeafer {
 
 
-    static get version() { return '1.0.0-rc.19' }
+    static get version() { return '1.0.0-rc.20' }
 
     static list = new LeafList() // 所有leafer实例
 

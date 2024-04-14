@@ -34,7 +34,7 @@ export class Line extends UI implements ILine { // tip: rewrited Polygon
     public curve: boolean | number
 
     @pathType(false)
-    public closed: boolean
+    declare public closed: boolean
 
     public get toPoint(): IPointData {
         const { width, rotation } = this.__
