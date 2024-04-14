@@ -1,4 +1,4 @@
-import { Platform, MatrixHelper } from '@leafer/core'
+import { Platform, MatrixHelper, ImageManager } from '@leafer/core'
 
 import { IUI, ILeafPaint, IMatrixData } from '@leafer-ui/interface'
 
@@ -8,7 +8,7 @@ const { ceil, abs } = Math
 
 export function createPattern(ui: IUI, paint: ILeafPaint, pixelRatio: number): boolean {
 
-    let { scaleX, scaleY } = ui.__nowWorld
+    let { scaleX, scaleY } = ImageManager.patternLocked ? ui.__world : ui.__nowWorld
 
     const id = scaleX + '-' + scaleY
 

@@ -10,7 +10,7 @@ import { createPattern } from './pattern'
 const { abs } = Math
 
 export function checkImage(ui: IUI, canvas: ILeaferCanvas, paint: ILeafPaint, allowPaint?: boolean): boolean {
-    const { scaleX, scaleY } = ui.__nowWorld
+    const { scaleX, scaleY } = ImageManager.patternLocked ? ui.__world : ui.__nowWorld
 
     if (!paint.data || paint.patternId === scaleX + '-' + scaleY) {
         return false
@@ -46,7 +46,7 @@ export function checkImage(ui: IUI, canvas: ILeaferCanvas, paint: ILeafPaint, al
             if (!paint.style || Export.running) {
                 createPattern(ui, paint, canvas.pixelRatio)
             } else {
-                if (!paint.patternTask && !ImageManager.patternLocked) {
+                if (!paint.patternTask) {
                     paint.patternTask = ImageManager.patternTasker.add(async () => {
                         paint.patternTask = null
                         if (canvas.bounds.hit(ui.__nowWorld)) createPattern(ui, paint, canvas.pixelRatio)

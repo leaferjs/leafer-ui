@@ -4,13 +4,14 @@ import { UI, ImageManager } from '@leafer-ui/draw'
 
 
 const matrix = new Matrix()
+const ui = UI.prototype
 
-UI.prototype.__updateHitCanvas = function (): void {
+ui.__updateHitCanvas = function (): void {
     const data = this.__, { hitCanvasManager } = this.leafer
 
     const isHitPixelFill = data.__pixelFill && data.hitFill === 'pixel'
     const isHitPixelStroke = data.__pixelStroke && data.hitStroke === 'pixel'
-    const isHitPixel = data.__isHitPixel = isHitPixelFill || isHitPixelStroke
+    const isHitPixel = isHitPixelFill || isHitPixelStroke
 
     if (!this.__hitCanvas) this.__hitCanvas = isHitPixel ? hitCanvasManager.getImageType(this, { contextSettings: { willReadFrequently: true } }) : hitCanvasManager.getPathType(this)
 
@@ -18,7 +19,7 @@ UI.prototype.__updateHitCanvas = function (): void {
 
     if (isHitPixel) {
         const { renderBounds } = this.__layout
-        const size = Platform.image.maxHitCanvasSize
+        const size = Platform.image.hitCanvasSize
         const scale = h.hitScale = tempBounds.set(0, 0, size, size).getFitMatrix(renderBounds, 0.5).a
         const { x, y, width, height } = tempBounds.set(renderBounds).scale(scale)
         h.resize({ width, height, pixelRatio: 1 })
@@ -27,15 +28,19 @@ UI.prototype.__updateHitCanvas = function (): void {
         ImageManager.patternLocked = true
         this.__renderShape(h, { matrix: matrix.setWith(this.__world).scaleWith(1 / scale).invertWith().translate(-x, -y) }, !isHitPixelFill, !isHitPixelStroke) // 矩阵
         ImageManager.patternLocked = false
-
         h.resetTransform()
+
+        data.__isHitPixel = true
+    } else {
+        data.__isHitPixel && (data.__isHitPixel = false)
     }
 
     this.__drawHitPath(h)
     h.setStrokeOptions(data)
+
 }
 
-UI.prototype.__hit = function (inner: IRadiusPointData): boolean {
+ui.__hit = function (inner: IRadiusPointData): boolean {
     if (Platform.name === 'miniapp') this.__drawHitPath(this.__hitCanvas) // fix: 小程序需要实时更新
 
     // hit pixel
