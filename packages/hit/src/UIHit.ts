@@ -1,10 +1,9 @@
 import { IRadiusPointData } from '@leafer/interface'
-import { Platform, Matrix, Bounds } from '@leafer/core'
+import { Platform, Matrix, tempBounds } from '@leafer/core'
 import { UI, ImageManager } from '@leafer-ui/draw'
 
 
 const matrix = new Matrix()
-const bounds = new Bounds()
 
 UI.prototype.__updateHitCanvas = function (): void {
     const data = this.__, { hitCanvasManager } = this.leafer
@@ -19,8 +18,9 @@ UI.prototype.__updateHitCanvas = function (): void {
 
     if (isHitPixel) {
         const { renderBounds } = this.__layout
-        const scale = h.hitScale = bounds.set(0, 0, 100, 100).getFitMatrix(renderBounds, 0.25).a
-        const { x, y, width, height } = bounds.set(renderBounds).scale(scale)
+        const size = Platform.image.maxHitCanvasSize
+        const scale = h.hitScale = tempBounds.set(0, 0, size, size).getFitMatrix(renderBounds, 0.5).a
+        const { x, y, width, height } = tempBounds.set(renderBounds).scale(scale)
         h.resize({ width, height, pixelRatio: 1 })
         h.clear()
 
