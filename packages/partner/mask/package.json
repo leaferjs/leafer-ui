@@ -1,6 +1,6 @@
 {
   "name": "@leafer-ui/mask",
-  "version": "1.0.0-rc.20",
+  "version": "1.0.0-rc.21",
   "description": "@leafer-ui/mask",
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
@@ -18,11 +18,11 @@
     "leaferjs"
   ],
   "dependencies": {
-    "@leafer/core": "1.0.0-rc.20",
-    "@leafer-ui/draw": "1.0.0-rc.20"
+    "@leafer/core": "1.0.0-rc.21",
+    "@leafer-ui/draw": "1.0.0-rc.21"
   },
   "devDependencies": {
-     "@leafer/interface": "1.0.0-rc.20",
-     "@leafer-ui/interface": "1.0.0-rc.20"
+     "@leafer/interface": "1.0.0-rc.21",
+     "@leafer-ui/interface": "1.0.0-rc.21"
   }
 }
