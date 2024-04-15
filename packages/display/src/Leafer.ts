@@ -11,9 +11,6 @@ const debug = Debug.get('Leafer')
 @registerUI()
 export class Leafer extends Group implements ILeafer {
 
-
-    static get version() { return '1.0.0-rc.21' }
-
     static list = new LeafList() // 所有leafer实例
 
 
