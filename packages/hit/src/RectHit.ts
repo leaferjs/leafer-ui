@@ -4,13 +4,14 @@ import { Rect, UI } from '@leafer-ui/draw'
 
 
 const ui = new UI()
+const rect = Rect.prototype
 
 // hit 
 
-Rect.prototype.__updateHitCanvas = function () {
+rect.__updateHitCanvas = function () {
     if (this.stroke || this.cornerRadius) ui.__updateHitCanvas.call(this)
 }
 
-Rect.prototype.__hitFill = function (inner: IRadiusPointData): boolean {
+rect.__hitFill = function (inner: IRadiusPointData): boolean {
     return this.__hitCanvas ? ui.__hitFill.call(this, inner) : BoundsHelper.hitRadiusPoint(this.__layout.boxBounds, inner)
 }
