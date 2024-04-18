@@ -381,6 +381,11 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
         }
     }
 
+    // edit tool
+
+    public getEditTool(): string { return 'EditTool' }
+
+    public getEnterEditTool(): string { return 'PathEditTool' }
 
     // create
 
