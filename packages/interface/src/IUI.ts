@@ -316,7 +316,7 @@ export interface IUI extends IFillAttrData, IStrokeAttrData, ICornerRadiusAttrDa
     __drawAfterFill?(canvas: ILeaferCanvas, options: IRenderOptions): void
 
     getEditTool(): string
-    getEnterEditTool(): string
+    getInnerEditTool(): string
 
     export(filename: string, options?: IExportOptions | number | boolean): Promise<IExportResult>
     clone(): IUI
