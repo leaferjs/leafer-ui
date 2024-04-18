@@ -120,7 +120,7 @@ export class App extends Leafer implements IApp {
     }
 
     public __render(canvas: ILeaferCanvas, options: IRenderOptions): void {
-        canvas.setWorld(options.matrix || this.__world)
+        if (options.matrix) canvas.setWorld(options.matrix) // screenshot
         this.children.forEach(leafer => canvas.copyWorld(leafer.canvas))
     }
 
