@@ -1,4 +1,4 @@
-import { ILeaferCanvas, IPathDrawer, IPathCommandData, IBoolean, INumber, IString, IBoundsData } from '@leafer/interface'
+import { ILeaferCanvas, IPathDrawer, IPathCommandData, IBoolean, INumber, IString, IBoundsData, IFourNumber } from '@leafer/interface'
 import { BoundsHelper, boundsType, surfaceType, dataProcessor, registerUI, affectStrokeBoundsType, hitType, MathHelper } from '@leafer/core'
 
 import { IFill, IText, IFontWeight, ITextCase, ITextDecoration, ITextData, ITextInputData, ITextAlign, IVerticalAlign, ITextDrawData, IOverflow, IUnitData, IStrokeAlign, IHitType, ITextWrap } from '@leafer-ui/interface'
@@ -27,7 +27,7 @@ export class Text extends UI implements IText {
     declare public height: INumber
 
     @boundsType(0)
-    public padding: number | number[]
+    public padding: IFourNumber
 
     @surfaceType('#000000')
     declare public fill: IFill
