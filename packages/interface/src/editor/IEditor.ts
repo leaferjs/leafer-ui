@@ -38,6 +38,8 @@ export interface IEditorBase extends IGroup, ISelectorProxy {
 
     group(group?: IGroup | IGroupInputData): IGroup
     ungroup(): IUI[]
+    openGroup(group: IGroup): void
+    closeGroup(group: IGroup): void
 
     lock(): void
     unlock(): void
