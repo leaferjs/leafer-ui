@@ -189,4 +189,6 @@ export class Text extends UI implements IText {
         copyAndSpread(this.__layout.renderBounds, this.__.__textBoxBounds, this.__layout.renderSpread)
     }
 
+
+    public getInnerEditor(): string { return 'TextEditor' }
 }
