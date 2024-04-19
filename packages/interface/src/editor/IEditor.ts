@@ -89,7 +89,7 @@ export interface IEditorConfig {
     select?: 'press' | 'tap'
     boxSelect?: boolean
     continuousSelect?: boolean // 点击可以连续选择
-    enter?: 'double' | 'long' // 双击/长按编辑细节
+    openInner?: 'double' | 'long' // 双击/长按打开内部
 
     moveable?: boolean
     rotateable?: boolean
