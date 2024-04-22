@@ -128,9 +128,6 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     @dataType('size')
     public editSize?: IEditSize
 
-    @dataType()
-    public editorStyle: IEditorConfig
-
 
     // hit
     @hitType(true)
@@ -283,11 +280,19 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
         return scaleX !== scaleY ? { x: scaleX, y: scaleY } : scaleX
     }
 
-
     public get pen(): IPathCreator {
         pen.set(this.path = this.__.path || [])
         return pen
     }
+
+
+    // editor
+
+    public get editConfig(): IEditorConfig { return undefined }
+
+    public get editTool(): string | IObject { return 'EditTool' }
+
+    public get editInner(): string { return 'PathEditor' }
 
 
     constructor(data?: IUIInputData) {
@@ -381,11 +386,6 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
         }
     }
 
-    // edit tool
-
-    public getEditTool(): string | IObject { return 'EditTool' }
-
-    public getInnerEditor(): string | IObject { return 'PathEditor' }
 
     // create
 

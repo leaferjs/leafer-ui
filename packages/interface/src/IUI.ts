@@ -295,7 +295,9 @@ export interface IUI extends IFillAttrData, IStrokeAttrData, ICornerRadiusAttrDa
     selectedStyle: IUIInputData
     disabledStyle: IUIInputData
 
-    editorStyle: IEditorConfig
+    editConfig: IEditorConfig
+    editTool: string | IObject
+    editInner: string
 
     children?: IUI[]
 
@@ -317,9 +319,6 @@ export interface IUI extends IFillAttrData, IStrokeAttrData, ICornerRadiusAttrDa
     __drawPathByBox(drawer: IPathDrawer): void
     __drawAfterFill?(canvas: ILeaferCanvas, options: IRenderOptions): void
 
-    getEditTool(): string | IObject
-    getInnerEditor(): string | IObject
-
     export(filename: string, options?: IExportOptions | number | boolean): Promise<IExportResult>
     clone(): IUI
 }
@@ -338,8 +337,6 @@ export interface IUIData extends IUIComputedData, ILeafData {
     focusStyle?: IUIInputData
     selectedStyle?: IUIInputData
     disabledStyle?: IUIInputData
-
-    editorStyle?: IEditorConfig
 
     // 非数据属性, 自动计算的缓存数据
     __isFills?: boolean
@@ -387,8 +384,6 @@ export interface IUIBaseInputData extends IFillInputData, IStrokeInputData, ITex
     focusStyle?: IUIInputData
     selectedStyle?: IUIInputData
     disabledStyle?: IUIInputData
-
-    editorStyle?: IEditorConfig
 
     children?: IUIInputData[]
 }

@@ -1,4 +1,4 @@
-import { ILeaferCanvas, IPathDrawer, IPathCommandData, IBoolean, INumber, IString, IBoundsData, IFourNumber } from '@leafer/interface'
+import { ILeaferCanvas, IPathDrawer, IPathCommandData, IBoolean, INumber, IString, IBoundsData, IFourNumber, IObject } from '@leafer/interface'
 import { BoundsHelper, boundsType, surfaceType, dataProcessor, registerUI, affectStrokeBoundsType, hitType, MathHelper } from '@leafer/core'
 
 import { IFill, IText, IFontWeight, ITextCase, ITextDecoration, ITextData, ITextInputData, ITextAlign, IVerticalAlign, ITextDrawData, IOverflow, IUnitData, IStrokeAlign, IHitType, ITextWrap } from '@leafer-ui/interface'
@@ -83,10 +83,13 @@ export class Text extends UI implements IText {
     @boundsType('show')
     public textOverflow: IOverflow | string
 
+    public get editInner(): string { return 'TextEditor' }
+
     public get textDrawData(): ITextDrawData {
         this.__layout.update()
         return this.__.__textDrawData
     }
+
 
     constructor(data?: ITextInputData) {
         super(data)
@@ -189,6 +192,4 @@ export class Text extends UI implements IText {
         copyAndSpread(this.__layout.renderBounds, this.__.__textBoxBounds, this.__layout.renderSpread)
     }
 
-
-    public getInnerEditor(): string { return 'TextEditor' }
 }
