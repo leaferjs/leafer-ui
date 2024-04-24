@@ -1,4 +1,4 @@
-import { INumber, IBoolean, IString } from '@leafer/interface'
+import { INumber, IBoolean, IString, IFourNumber } from '@leafer/interface'
 import { IStrokeAlign, IStrokeCap, IStrokeJoin, IBlurEffect, IFontWeight, ITextCase, ITextDecoration, IShadowEffect, IGrayscaleEffect, ITextAlign, IVerticalAlign, IOverflow, IUnitData, ITextWrap, IStroke, IFill, IArrowType } from './type/IType'
 import { ILeafStrokePaint, ILeafShadowEffect, ILeafPaint } from './type/IComputedType'
 import { IDashPatternString, IShadowString, IColorString, IStrokeWidthString, ICornerRadiusString } from './type/IStringType'
@@ -6,11 +6,11 @@ import { IDashPatternString, IShadowString, IColorString, IStrokeWidthString, IC
 
 // corner---
 export interface ICornerRadiusAttrData {
-    cornerRadius: INumber | INumber[] | ICornerRadiusString
+    cornerRadius: IFourNumber | ICornerRadiusString
     cornerSmoothing: INumber
 }
 export interface ICornerRadiusInputData {
-    cornerRadius?: INumber | INumber[] | ICornerRadiusString
+    cornerRadius?: IFourNumber | ICornerRadiusString
     cornerSmoothing?: INumber
 }
 export interface ICornerRadiusComputedData {
@@ -40,7 +40,7 @@ export interface IStrokeAttrData {
     stroke: IStroke
 
     strokeAlign: IStrokeAlign
-    strokeWidth: INumber | INumber[] | IStrokeWidthString
+    strokeWidth: IFourNumber | IStrokeWidthString
     strokeWidthFixed: IBoolean
     strokeCap: IStrokeCap
     strokeJoin: IStrokeJoin
@@ -55,7 +55,7 @@ export interface IStrokeInputData {
     stroke?: IStroke
 
     strokeAlign?: IStrokeAlign
-    strokeWidth?: INumber | INumber[] | IStrokeWidthString
+    strokeWidth?: IFourNumber | IStrokeWidthString
     strokeWidthFixed?: IBoolean
     strokeCap?: IStrokeCap
     strokeJoin?: IStrokeJoin
