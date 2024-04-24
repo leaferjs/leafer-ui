@@ -41,4 +41,4 @@ export { IPaintModule, IPaintImageModule, IPaintGradientModule } from './module/
 export { IEffectModule } from './module/IEffect'
 export { ICachedShape } from './ICachedShape'
 
-export { IEditorBase, IEditorConfig } from './editor/IEditor'
+export { IEditorBase, IEditorConfig, IEditToolFunction, IEditorConfigFunction } from './editor/IEditor'

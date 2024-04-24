@@ -1,4 +1,4 @@
-import { IGroup, IUI, IRectInputData, ISelectorProxy, IEditSize, ICursorType, IAround, IDragEvent, IRotateEvent, IStroke, IFill, ILeaf, IObject, IBoxInputData, IGroupInputData, IImageCursor } from '@leafer-ui/interface'
+import { IGroup, IUI, IRectInputData, ISelectorProxy, IEditSize, ICursorType, IAround, IDragEvent, IRotateEvent, IStroke, IFill, ILeaf, IObject, IBoxInputData, IGroupInputData, IImageCursor, IUIInputData } from '@leafer-ui/interface'
 
 export interface IEditorBase extends IGroup, ISelectorProxy {
     config: IEditorConfig
@@ -98,4 +98,12 @@ export interface IEditorConfig {
     rotateable?: boolean
     resizeable?: boolean
     skewable?: boolean
+}
+
+export interface IEditorConfigFunction {
+    (ui: any): IEditorConfig
+}
+
+export interface IEditToolFunction {
+    (ui: any): string
 }
