@@ -1,7 +1,7 @@
 import { IStateStyleType, IValue, IObject } from '@leafer/interface'
 import { defineKey, decorateLeafAttr, attr, doStrokeType } from '@leafer/core'
 
-import { ICanvas, IUI } from '@leafer-ui/interface'
+import { ICanvas, IUI, IApp } from '@leafer-ui/interface'
 import { State } from '@leafer-ui/external'
 
 
@@ -50,7 +50,11 @@ export function zoomLayerType() {
         const privateKey = '_' + key
         defineKey(target, key, {
             set(value: IUI) { if (this.isLeafer) (this as IObject)[privateKey] = value },
-            get() { return this.isLeafer ? ((this as IObject)[privateKey] || this) : this.leafer && this.leafer.zoomLayer }
+            get() {
+                return this.isApp
+                    ? (this as IApp).tree.zoomLayer
+                    : (this.isLeafer ? ((this as IObject)[privateKey] || this) : this.leafer && this.leafer.zoomLayer)
+            }
         })
     }
 }
