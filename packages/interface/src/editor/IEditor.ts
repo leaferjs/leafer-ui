@@ -2,6 +2,7 @@ import { IGroup, IUI, IRectInputData, ISelectorProxy, IEditSize, ICursorType, IA
 
 export interface IEditorBase extends IGroup, ISelectorProxy {
     config: IEditorConfig
+    mergeConfig: IEditorConfig // 实际使用，合并了选中元素上的editConfig
 
     hoverTarget: IUI
     target: IUI | IUI[]

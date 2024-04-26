@@ -1,4 +1,4 @@
-import { IPointerEvent, IDragEvent, ILeaf, ILeafList, ITimer, IFunction } from '@leafer/interface'
+import { IPointerEvent, IDragEvent, ILeaf, ILeafList, ITimer, IFunction, IPointData } from '@leafer/interface'
 import { BoundsHelper, PointHelper, LeafList } from '@leafer/core'
 
 import { MoveEvent, DragEvent, DropEvent, PointerButton } from '@leafer-ui/event'
@@ -21,6 +21,7 @@ export class Dragger {
     protected downData: IPointerEvent
 
     public dragableList: ILeafList
+    public realDragableList: ILeafList
     protected dragOverPath: ILeafList
     protected dragEnterPath: ILeafList
 
@@ -72,6 +73,7 @@ export class Dragger {
             if (this.dragging) {
                 this.interaction.emit(DragEvent.START, this.dragData)
                 this.getDragableList(this.dragData.path)
+                DragEvent.setStartPoint(this.realDragableList = this.getList())
             }
         }
     }
@@ -106,10 +108,11 @@ export class Dragger {
 
     protected dragReal(): void {
         const { running } = this.interaction
-        const list = this.getList()
+        const list = this.realDragableList
         if (list.length && running) {
-            const { moveX, moveY } = this.dragData
-            list.forEach(leaf => leaf.draggable && leaf.moveWorld(moveX, moveY))
+            const { totalX, totalY } = this.dragData
+            const total = { x: totalX, y: totalY }
+            list.forEach(leaf => leaf.draggable && DragEvent.dragTo(leaf, total))
         }
     }
 
