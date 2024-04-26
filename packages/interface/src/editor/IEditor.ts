@@ -1,4 +1,4 @@
-import { IGroup, IUI, IRectInputData, ISelectorProxy, IEditSize, ICursorType, IAround, IDragEvent, IRotateEvent, IStroke, IFill, ILeaf, IObject, IBoxInputData, IGroupInputData, IImageCursor } from '@leafer-ui/interface'
+import { IGroup, IUI, IRectInputData, ISelectorProxy, IEditSize, ICursorType, IAround, IDragEvent, IRotateEvent, IStroke, IFill, ILeaf, ILeafList, IObject, IBoxInputData, IGroupInputData, IImageCursor } from '@leafer-ui/interface'
 
 export interface IEditorBase extends IGroup, ISelectorProxy {
     config: IEditorConfig
@@ -7,8 +7,13 @@ export interface IEditorBase extends IGroup, ISelectorProxy {
     target: IUI | IUI[]
 
     readonly list: IUI[]
+    leafList: ILeafList
+    openedGroupList: ILeafList
 
-    readonly hasTarget: boolean
+    readonly editing: boolean
+    innerEditing: boolean
+    readonly groupOpening: boolean
+
     readonly multiple: boolean
     readonly single: boolean
 
@@ -20,6 +25,7 @@ export interface IEditorBase extends IGroup, ISelectorProxy {
     selector: IGroup
     editBox: IGroup
     editTool: IObject
+    innerEditor: IObject
 
     hasItem(item: IUI): boolean
     shiftItem(item: IUI): void

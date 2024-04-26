@@ -290,7 +290,7 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
 
     public get editConfig(): IEditorConfig { return undefined }
 
-    public get editTool(): string | IObject { return 'EditTool' }
+    public get editOuter(): string { return 'EditTool' }
 
     public get editInner(): string { return 'PathEditor' }
 
@@ -414,7 +414,7 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
 
     static setEditConfig(_config: IEditorConfig | IEditorConfigFunction): void { }
 
-    static setEditTool(_toolName: string | IEditToolFunction): void { }
+    static setEditOuter(_toolName: string | IEditToolFunction): void { }
 
     static setEditInner(_editorName: string | IEditToolFunction): void { }
 

@@ -296,7 +296,7 @@ export interface IUI extends IFillAttrData, IStrokeAttrData, ICornerRadiusAttrDa
     disabledStyle: IUIInputData
 
     editConfig: IEditorConfig
-    editTool: string | IObject
+    editOuter: string
     editInner: string
 
     children?: IUI[]
