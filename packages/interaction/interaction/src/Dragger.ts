@@ -73,7 +73,7 @@ export class Dragger {
             if (this.dragging) {
                 this.interaction.emit(DragEvent.START, this.dragData)
                 this.getDragableList(this.dragData.path)
-                DragEvent.setStartPoint(this.realDragableList = this.getList())
+                DragEvent.setStartPoints(this.realDragableList = this.getList())
             }
         }
     }
@@ -111,8 +111,7 @@ export class Dragger {
         const list = this.realDragableList
         if (list.length && running) {
             const { totalX, totalY } = this.dragData
-            const total = { x: totalX, y: totalY }
-            list.forEach(leaf => leaf.draggable && DragEvent.dragTo(leaf, total))
+            list.forEach(leaf => leaf.draggable && DragEvent.dragByTotal(leaf, { x: totalX, y: totalY }))
         }
     }
 

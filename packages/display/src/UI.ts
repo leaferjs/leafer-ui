@@ -122,7 +122,7 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     public draggable: IBoolean | 'x' | 'y'
 
     @dataType()
-    public dragBounds: IBoundsData
+    public dragBounds?: IBoundsData | 'parent'
 
 
     @dataType(false)

@@ -38,21 +38,22 @@ export class DragEvent extends PointerEvent implements IDragEvent {
         this.data = data
     }
 
-    static setStartPoint(list: ILeafList | ILeaf[]): void {
+    static setStartPoints(list: ILeafList | ILeaf[]): void {
         this.startPoints = {}
         list.forEach(leaf => this.startPoints[leaf.innerId] = { x: leaf.x, y: leaf.y })
     }
 
-    static dragTo(leaf: ILeaf, total: IPointData): void {
+    static dragByTotal(leaf: ILeaf, total: IPointData): void { // 依赖 startPoints
         const start = this.startPoints[leaf.innerId]
         const { draggable, dragBounds } = leaf
-        leaf.worldToLocal(total, total, true)
-        total.x += start.x - leaf.x, total.y += start.y - leaf.y
-        if (dragBounds) this.getMoveInDragBounds(leaf.getBounds('box', 'local'), dragBounds, total, true)
-        leaf.move(draggable === 'y' ? 0 : total.x, draggable === 'x' ? 0 : total.y)
+        const move = leaf.getLocalPoint(total, null, true)
+        move.x += start.x - leaf.x
+        move.y += start.y - leaf.y
+        if (dragBounds) this.getValidMove(leaf.getBounds('box', 'local'), dragBounds === 'parent' ? leaf.parent.boxBounds : dragBounds, move, true)
+        leaf.move(draggable === 'y' ? 0 : move.x, draggable === 'x' ? 0 : move.y)
     }
 
-    static getMoveInDragBounds(box: IBoundsData, dragBounds: IBoundsData, move: IPointData, change?: boolean): IPointData {
+    static getValidMove(box: IBoundsData, dragBounds: IBoundsData, move: IPointData, change?: boolean): IPointData {
         const x = box.x + move.x, y = box.y + move.y
         const right = x + box.width, bottom = y + box.height
         const boundsRight = dragBounds.x + dragBounds.width, boundsBottom = dragBounds.y + dragBounds.height
