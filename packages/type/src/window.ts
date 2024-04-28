@@ -9,8 +9,7 @@ export function addInteractionWindow(leafer: ILeaferBase): void {
     if (leafer.isApp) return
     leafer.__eventIds.push(
         leafer.on_(MoveEvent.BEFORE_MOVE, (e: MoveEvent) => {
-            const { x, y } = leafer.getValidMove(e.moveX, e.moveY)
-            if (x || y) leafer.zoomLayer.move(x, y)
+            leafer.zoomLayer.move(leafer.getValidMove(e.moveX, e.moveY))
         }),
         leafer.on_(ZoomEvent.BEFORE_ZOOM, (e: ZoomEvent) => {
             const { zoomLayer } = leafer

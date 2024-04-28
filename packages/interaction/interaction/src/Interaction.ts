@@ -35,6 +35,8 @@ export class InteractionBase implements IInteraction {
     public cursor: ICursorType | ICursorType[]
     public get hitRadius(): number { return this.config.pointer.hitRadius }
 
+    public bottomList?: ILeafList
+
     public shrinkCanvasBounds: IBounds
 
     public downData: IPointerEvent
@@ -346,7 +348,8 @@ export class InteractionBase implements IInteraction {
     // update
     public findPath(data: IPointerEvent, options?: IPickOptions): ILeafList {
         const { hitRadius, through } = this.config.pointer
-        const find = this.selector.getByPoint(data, hitRadius, options || { through })
+        const { bottomList } = this
+        const find = this.selector.getByPoint(data, hitRadius, { bottomList, name: data.type, ...(options || { through }) })
         if (find.throughPath) data.throughPath = find.throughPath
         data.path = find.path
         return find.path
@@ -432,7 +435,7 @@ export class InteractionBase implements IInteraction {
         const { path } = data
         for (let i = 0, len = path.length; i < len; i++) {
             leaf = path.list[i]
-            cursor = leaf.cursor
+            cursor = leaf.emitLeaf ? leaf.emitLeaf.cursor : leaf.cursor
             if (cursor) break
         }
 
