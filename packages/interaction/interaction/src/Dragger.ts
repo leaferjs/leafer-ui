@@ -117,12 +117,7 @@ export class Dragger {
         const list = this.realDragableList
         if (list.length && running) {
             const { totalX, totalY } = this.dragData
-            list.forEach(leaf => {
-                if (leaf.draggable) {
-                    const move = DragEvent.getValidMove(leaf, this.dragStartPoints[leaf.innerId], { x: totalX, y: totalY })
-                    leaf.move(move.x, move.y)
-                }
-            })
+            list.forEach(leaf => leaf.draggable && leaf.move(DragEvent.getValidMove(leaf, this.dragStartPoints[leaf.innerId], { x: totalX, y: totalY })))
         }
     }
 
