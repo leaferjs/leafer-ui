@@ -28,7 +28,6 @@ export class DragEvent extends PointerEvent implements IDragEvent {
 
     static list: ILeafList
     static data: IObject
-    static startPoints: IPointDataMap
 
     static setList(data: ILeaf | ILeaf[] | ILeafList): void {
         this.list = data instanceof LeafList ? data : new LeafList(data as ILeaf[])
@@ -38,22 +37,18 @@ export class DragEvent extends PointerEvent implements IDragEvent {
         this.data = data
     }
 
-    static setStartPoints(list: ILeafList | ILeaf[]): void {
-        this.startPoints = {}
-        list.forEach(leaf => this.startPoints[leaf.innerId] = { x: leaf.x, y: leaf.y })
-    }
-
-    static dragByTotal(leaf: ILeaf, total: IPointData): void { // 依赖 startPoints
-        const start = this.startPoints[leaf.innerId]
-        const { draggable, dragBounds } = leaf
+    static getValidMove(leaf: ILeaf, start: IPointData, total: IPointData): IPointData {
+        const { draggable, dragBounds, x, y } = leaf
         const move = leaf.getLocalPoint(total, null, true)
-        move.x += start.x - leaf.x
-        move.y += start.y - leaf.y
-        if (dragBounds) this.getValidMove(leaf.getBounds('box', 'local'), dragBounds === 'parent' ? leaf.parent.boxBounds : dragBounds, move, true)
-        leaf.move(draggable === 'y' ? 0 : move.x, draggable === 'x' ? 0 : move.y)
+        move.x += start.x - x
+        move.y += start.y - y
+        if (dragBounds) this.getMoveInDragBounds(leaf.__local, dragBounds === 'parent' ? leaf.parent.boxBounds : dragBounds, move, true)
+        if (draggable === 'x') move.y = 0
+        if (draggable === 'y') move.x = 0
+        return move
     }
 
-    static getValidMove(box: IBoundsData, dragBounds: IBoundsData, move: IPointData, change?: boolean): IPointData {
+    static getMoveInDragBounds(box: IBoundsData, dragBounds: IBoundsData, move: IPointData, change?: boolean): IPointData {
         const x = box.x + move.x, y = box.y + move.y
         const right = x + box.width, bottom = y + box.height
         const boundsRight = dragBounds.x + dragBounds.width, boundsBottom = dragBounds.y + dragBounds.height
