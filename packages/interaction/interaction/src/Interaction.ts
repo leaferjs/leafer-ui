@@ -1,4 +1,4 @@
-import { IUIEvent, IPointerEvent, ILeaf, IInteraction, IInteractionConfig, ILeafList, IMoveEvent, IZoomEvent, IRotateEvent, ISelector, IBounds, IEventListenerId, IInteractionCanvas, ITimer, IKeepTouchData, IKeyEvent, IPickOptions, ICursorType, IBooleanMap } from '@leafer/interface'
+import { IUIEvent, IPointerEvent, ILeaf, IInteraction, IInteractionConfig, ILeafList, IMoveEvent, IZoomEvent, IRotateEvent, ISelector, IBounds, IEventListenerId, IInteractionCanvas, ITimer, IKeepTouchData, IKeyEvent, IPickOptions, ICursorType, IBooleanMap, IPickBottom } from '@leafer/interface'
 import { LeaferEvent, ResizeEvent, LeafList, Bounds, PointHelper, DataHelper } from '@leafer/core'
 
 import { IApp } from '@leafer-ui/interface'
@@ -35,7 +35,7 @@ export class InteractionBase implements IInteraction {
     public cursor: ICursorType | ICursorType[]
     public get hitRadius(): number { return this.config.pointer.hitRadius }
 
-    public bottomList?: ILeafList
+    public bottomList?: IPickBottom[]
 
     public shrinkCanvasBounds: IBounds
 
@@ -435,7 +435,7 @@ export class InteractionBase implements IInteraction {
         const { path } = data
         for (let i = 0, len = path.length; i < len; i++) {
             leaf = path.list[i]
-            cursor = leaf.emitLeaf ? leaf.emitLeaf.cursor : leaf.cursor
+            cursor = leaf.syncEventer ? leaf.syncEventer.cursor : leaf.cursor
             if (cursor) break
         }
 
