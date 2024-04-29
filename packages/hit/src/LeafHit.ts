@@ -8,6 +8,8 @@ const inner = {} as IRadiusPointData
 const leaf = Leaf.prototype
 
 leaf.__hitWorld = function (point: IRadiusPointData): boolean {
+    if (!this.__.hitSelf) return false
+
     if (this.__.hitRadius) {
         copy(inner, point), point = inner
         setRadius(point, this.__.hitRadius)
