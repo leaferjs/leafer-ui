@@ -1,5 +1,5 @@
 import { IExportFileType, IFunction, IRenderOptions, IBoundsData, IBounds, ILocationType, ILeaf } from '@leafer/interface'
-import { Creator, Matrix, TaskProcessor, FileHelper, Bounds } from '@leafer/core'
+import { Creator, Matrix, TaskProcessor, FileHelper, Bounds, Platform } from '@leafer/core'
 
 import { IExportModule, IExportOptions, IExportResult, IExportResultFunction, IUI } from '@leafer-ui/interface'
 import { getTrimBounds } from './trim'
@@ -18,6 +18,13 @@ export const ExportModule: IExportModule = {
                     success(result)
                     resolve()
                     this.running = false
+                }
+
+                if (filename === 'json') {
+                    return over({ data: leaf.toJSON() })
+                } else if (FileHelper.fileType(filename) === 'json') {
+                    Platform.origin.download('data:text/plain;charset=utf-8,' + encodeURIComponent(JSON.stringify(leaf.toJSON())), filename)
+                    return over({ data: true })
                 }
 
                 const { leafer } = leaf
