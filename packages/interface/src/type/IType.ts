@@ -1,4 +1,4 @@
-import { IPointData, IPathCommandData, IWindingRule, IBlendMode, IExportFileType, ISizeData, IFourNumber } from '@leafer/interface'
+import { IPointData, IPathCommandData, IWindingRule, IBlendMode, IExportFileType, ISizeData, IFourNumber, IAround, IDirection } from '@leafer/interface'
 import { IColorString, IPaintString } from './IStringType'
 
 export interface IUnitData {
@@ -72,7 +72,10 @@ export interface IImagePaint extends IPaintBase {
     filters?: IImageFilters
 
     padding?: IFourNumber
+
+    around?: IDirection
     offset?: IPointData
+
     size?: number | ISizeData
     scale?: number | IPointData
     rotation?: number
@@ -88,7 +91,7 @@ export interface IImageFilters {
     highlights?: number // 高光
     shadows?: number // 阴影
 }
-export type IImagePaintMode = 'cover' | 'fit' | 'strench' | 'clip' | 'repeat'
+export type IImagePaintMode = 'normal' | 'cover' | 'fit' | 'strench' | 'clip' | 'repeat'
 export type IRepeat = boolean | 'x' | 'y'
 
 // 描边
