@@ -57,6 +57,7 @@ export function createData(leafPaint: ILeafPaint, image: ILeaferImage, paint: II
             break
         case 'repeat':
             if (!sameBox || scaleX || rotation) repeatMode(data, box, width, height, x, y, scaleX, scaleY, rotation, around)
+            if (!repeat) data.repeat = 'repeat'
             break
         case 'fit':
         case 'cover':
