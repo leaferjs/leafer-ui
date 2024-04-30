@@ -383,7 +383,8 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     public __drawPathByBox(drawer: IPathDrawer): void {
         const { x, y, width, height } = this.__layout.boxBounds
         if (this.__.cornerRadius) {
-            drawer.roundRect(x, y, width, height, this.__.cornerRadius)
+            const { cornerRadius } = this.__
+            drawer.roundRect(x, y, width, height, typeof cornerRadius === 'number' ? [cornerRadius] : cornerRadius) // 修复微信浏览器bug, 后续需进一步优化
         } else {
             drawer.rect(x, y, width, height)
         }
