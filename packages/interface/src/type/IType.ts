@@ -1,4 +1,4 @@
-import { IPointData, IPathCommandData, IWindingRule, IBlendMode, IExportFileType, ISizeData, IFourNumber, IAround, IDirection } from '@leafer/interface'
+import { IPointData, IPathCommandData, IWindingRule, IBlendMode, IExportFileType, ISizeData, IFourNumber, IDirection } from '@leafer/interface'
 import { IColorString, IPaintString } from './IStringType'
 
 export interface IUnitData {

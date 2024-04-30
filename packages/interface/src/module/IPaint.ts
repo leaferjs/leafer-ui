@@ -1,9 +1,9 @@
-import { ILeaferCanvas, IRenderOptions, IBooleanMap, IBoundsData, ILeaferImage } from '@leafer/interface'
+import { ILeaferCanvas, IRenderOptions, IBooleanMap, IBoundsData, ILeaferImage, IAround } from '@leafer/interface'
 
 import { ILeafPaint, ILeafPaintPatternData } from '../type/IComputedType'
 import { IUI, IUIData } from '../IUI'
 import { ICachedShape } from '../ICachedShape'
-import { IGradientPaint, IImagePaint, IImagePaintMode, IPaintAttr } from '../type/IType'
+import { IGradientPaint, IImagePaint, IPaintAttr } from '../type/IType'
 
 export interface IPaintModule {
     compute(attrName: IPaintAttr, ui: IUI): void
@@ -30,9 +30,9 @@ export interface IPaintImageModule {
     recycleImage(attrName: IPaintAttr, data: IUIData): IBooleanMap
 
     createData(leafPaint: ILeafPaint, image: ILeaferImage, paint: IImagePaint, box: IBoundsData): void
-    fillOrFitMode(data: ILeafPaintPatternData, mode: IImagePaintMode, box: IBoundsData, width: number, height: number, rotation: number): void
+    fillOrFitMode(data: ILeafPaintPatternData, box: IBoundsData, x: number, y: number, scaleX: number, scaleY: number, rotation: number): void
     clipMode(data: ILeafPaintPatternData, box: IBoundsData, x: number, y: number, scaleX: number, scaleY: number, rotation: number): void
-    repeatMode(data: ILeafPaintPatternData, box: IBoundsData, width: number, height: number, x: number, y: number, scaleX: number, scaleY: number, rotation: number): void
+    repeatMode(data: ILeafPaintPatternData, box: IBoundsData, width: number, height: number, x: number, y: number, scaleX: number, scaleY: number, rotation: number, around: IAround): void
 }
 
 export interface IPaintGradientModule {

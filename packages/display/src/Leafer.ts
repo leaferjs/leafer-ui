@@ -291,7 +291,6 @@ export class Leafer extends Group implements ILeafer {
     protected __onReady(): void {
         if (this.ready) return
         this.ready = true
-        this.updateLazyBounds()
         this.emitLeafer(LeaferEvent.BEFORE_READY)
         this.emitLeafer(LeaferEvent.READY)
         this.emitLeafer(LeaferEvent.AFTER_READY)
@@ -387,6 +386,7 @@ export class Leafer extends Group implements ILeafer {
     protected __listenEvents(): void {
         const runId = Run.start('FirstCreate ' + this.innerName)
         this.once(LeaferEvent.START, () => Run.end(runId))
+        this.once(LayoutEvent.START, () => this.updateLazyBounds())
         this.once(LayoutEvent.END, () => this.__onReady())
         this.once(RenderEvent.START, () => this.__onCreated())
         this.once(RenderEvent.END, () => this.__onViewReady())
