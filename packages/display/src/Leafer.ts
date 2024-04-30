@@ -120,7 +120,6 @@ export class Leafer extends Group implements ILeafer {
 
         if (this.isApp) this.__setApp()
         this.__checkAutoLayout(config)
-        this.updateLazyBounds()
         this.view = canvas.view
 
         // interaction / manager
@@ -292,6 +291,7 @@ export class Leafer extends Group implements ILeafer {
     protected __onReady(): void {
         if (this.ready) return
         this.ready = true
+        this.updateLazyBounds()
         this.emitLeafer(LeaferEvent.BEFORE_READY)
         this.emitLeafer(LeaferEvent.READY)
         this.emitLeafer(LeaferEvent.AFTER_READY)
