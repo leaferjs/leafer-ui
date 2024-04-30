@@ -362,7 +362,7 @@ export class InteractionBase implements IInteraction {
     public isTreePath(data: IPointerEvent): boolean {
         const app = this.target.app as IApp
         if (!app || !app.isApp) return false
-        return app.editor && (!data.path.has(app.editor) && data.path.has(app.tree)) // 当dragEmpty为true时，在手机端(pointer.hover为false)可以拖动tree层（编辑器选中的元素除外）
+        return app.editor && (!data.path.has(app.editor) && data.path.has(app.tree) && !(data.target as ILeaf).syncEventer) // 当dragEmpty为true时，在手机端(pointer.hover为false)可以拖动tree层（编辑器选中的元素除外）
     }
 
     protected checkPath(data: IPointerEvent, useDefaultPath?: boolean): void {

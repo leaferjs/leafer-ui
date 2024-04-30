@@ -1,4 +1,4 @@
-import { IGroup, IUI, IRectInputData, ISelectorProxy, IEditSize, ICursorType, IAround, IDragEvent, IRotateEvent, IStroke, IFill, ILeaf, ILeafList, IObject, IBoxInputData, IGroupInputData, IImageCursor } from '@leafer-ui/interface'
+import { IGroup, IUI, IBox, IRectInputData, ISelectorProxy, IEditSize, ICursorType, IAround, IDragEvent, IRotateEvent, IStroke, IFill, ILeaf, ILeafList, IObject, IBoxInputData, IGroupInputData, IImageCursor, IRect, IBoundsData, IKeyEvent, IUIInputData } from '@leafer-ui/interface'
 
 export interface IEditorBase extends IGroup, ISelectorProxy {
     config: IEditorConfig
@@ -24,7 +24,7 @@ export interface IEditorBase extends IGroup, ISelectorProxy {
     buttons: IGroup
 
     selector: IGroup
-    editBox: IGroup
+    editBox: IEditBoxBase
     editTool: IObject
     innerEditor: IObject
 
@@ -96,6 +96,7 @@ export interface IEditorConfig {
 
     selector?: boolean
     hover?: boolean
+    hoverStyle?: IUIInputData
     select?: 'press' | 'tap'
     boxSelect?: boolean
     continuousSelect?: boolean // 点击可以连续选择
@@ -105,6 +106,48 @@ export interface IEditorConfig {
     rotateable?: boolean
     resizeable?: boolean
     skewable?: boolean
+}
+
+export interface IEditPoint extends IBox {
+    direction: number
+    pointType: IEditPointType
+}
+
+export type IEditPointType = 'rotate' | 'resize'
+
+export interface IEditBoxBase extends IGroup {
+    editor: IEditorBase
+    dragging: boolean
+    moving: boolean
+
+    view: IGroup //  放置默认编辑工具控制点
+
+    circle: IEditPoint
+    rect: IRect
+
+    buttons: IGroup
+
+    resizePoints: IEditPoint[]
+    rotatePoints: IEditPoint[]
+    resizeLines: IEditPoint[]
+
+    readonly flipped: boolean
+    readonly flippedX: boolean
+    readonly flippedY: boolean
+    readonly flippedOne: boolean
+
+    enterPoint: IEditPoint
+
+    getPointStyle(userStyle?: IBoxInputData): IBoxInputData
+    getPointsStyle(): IBoxInputData[]
+    getMiddlePointsStyle(): IBoxInputData[]
+
+    load(): void
+    update(bounds: IBoundsData): void
+    unload(): void
+
+    onArrow(e: IKeyEvent): void
+
 }
 
 export interface IEditorConfigFunction {
