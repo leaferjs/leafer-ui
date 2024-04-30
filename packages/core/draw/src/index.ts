@@ -1,4 +1,4 @@
-export const version = "1.0.0-rc.21"
+export const version = "1.0.0-rc.22"
 
 export * from '@leafer/core'
 
