@@ -1,4 +1,4 @@
-import { ILeaferCanvas, IPathDrawer, IPathCommandData, IHitType, INumber, IBoolean, IString, IPathString, IExportFileType, IPointData, ICursorType, IMaskType, IAround, IValue, IWindingRule, IPathCreator, IFourNumber, IBoundsData, IAutoLayoutType, IGap, IAutoLayoutAlign, IWrapAlign, IAxis } from '@leafer/interface'
+import { ILeaferCanvas, IPathDrawer, IPathCommandData, IHitType, INumber, IBoolean, IString, IPathString, IExportFileType, IPointData, ICursorType, IMaskType, IAround, IValue, IWindingRule, IPathCreator, IFourNumber, IBoundsData, IAutoLayoutType, IGap, IAutoLayoutAlign, IWrapAlign, IAxis, ILimitSize, IBoundsType } from '@leafer/interface'
 import { Leaf, PathDrawer, surfaceType, dataType, positionType, boundsType, pathType, scaleType, rotationType, opacityType, sortType, maskType, dataProcessor, registerUI, useModule, rewrite, rewriteAble, UICreator, PathCorner, hitType, strokeType, PathConvert, eraserType, cursorType, autoLayoutType, pen, naturalBoundsType, pathInputType } from '@leafer/core'
 
 import { IUI, IShadowEffect, IBlurEffect, IStrokeAlign, IStrokeJoin, IStrokeCap, IBlendMode, IDashPatternString, IShadowString, IGrayscaleEffect, IUIData, IGroup, IStrokeWidthString, ICornerRadiusString, IUIInputData, IExportOptions, IExportResult, IFill, IStroke, IArrowType, IFindUIMethod, IEditSize, ILeafer, IEditorConfig, IEditorConfigFunction, IEditToolFunction } from '@leafer-ui/interface'
@@ -138,11 +138,23 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     public warpAlign: IWrapAlign
 
 
+    @boundsType(true)
+    public joinAuto: IBoolean
+
+    @boundsType(false)
+    public autoWidth: IBoolean | ILimitSize
+
+    @boundsType(false)
+    public autoHeight: IBoolean | ILimitSize
+
     @boundsType(0)
     public padding: IFourNumber
 
     @boundsType(0)
     public margin: IFourNumber
+
+    @boundsType('box')
+    public boxType: IBoundsType
 
 
     // drag
