@@ -1,4 +1,4 @@
-import { ILeaferCanvas, IPathDrawer, IPathCommandData, IHitType, INumber, IBoolean, IString, IPathString, IExportFileType, IPointData, ICursorType, IMaskType, IAround, IValue, IWindingRule, IPathCreator, IFourNumber, IBoundsData, IAutoLayoutType, IGap, IAutoLayoutAlign, IWrapAlign, IAxis, ILimitSize, IBoundsType } from '@leafer/interface'
+import { ILeaferCanvas, IPathDrawer, IPathCommandData, IHitType, INumber, IBoolean, IString, IPathString, IExportFileType, IPointData, ICursorType, IMaskType, IAround, IValue, IWindingRule, IPathCreator, IFourNumber, IBoundsData, IFlowType, IGap, IWrapAlign, IAxis, IAutoSize, IBoundsType, IAlign, IConstraint, IAutoBoxData } from '@leafer/interface'
 import { Leaf, PathDrawer, surfaceType, dataType, positionType, boundsType, pathType, scaleType, rotationType, opacityType, sortType, maskType, dataProcessor, registerUI, useModule, rewrite, rewriteAble, UICreator, PathCorner, hitType, strokeType, PathConvert, eraserType, cursorType, autoLayoutType, pen, naturalBoundsType, pathInputType } from '@leafer/core'
 
 import { IUI, IShadowEffect, IBlurEffect, IStrokeAlign, IStrokeJoin, IStrokeCap, IBlendMode, IDashPatternString, IShadowString, IGrayscaleEffect, IUIData, IGroup, IStrokeWidthString, ICornerRadiusString, IUIInputData, IExportOptions, IExportResult, IFill, IStroke, IArrowType, IFindUIMethod, IEditSize, ILeafer, IEditorConfig, IEditorConfigFunction, IEditToolFunction } from '@leafer-ui/interface'
@@ -117,16 +117,32 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     @autoLayoutType()
     public around: IAround
 
+    // image
+    @dataType(false)
+    public lazy: IBoolean  // load image / compute paint
+
+    @naturalBoundsType(1)
+    public pixelRatio: INumber
+
+    // path
+    @pathInputType()
+    public path: IPathCommandData | IPathString
+
+    @pathType()
+    public windingRule: IWindingRule
+
+    @pathType(true)
+    public closed: boolean
 
     // auto layout
     @autoLayoutType(false)
-    public auto: IAutoLayoutType
+    public flow: IFlowType
 
     @boundsType(0)
     public gap: IGap
 
-    @boundsType('topLeft')
-    public align: IAutoLayoutAlign
+    @boundsType('top-left')
+    public align: IAlign
 
     @boundsType(false)
     public wrap: IBoolean
@@ -139,13 +155,16 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
 
 
     @boundsType(true)
-    public joinAuto: IBoolean
+    public inFlow: IBoolean
 
     @boundsType(false)
-    public autoWidth: IBoolean | ILimitSize
+    public autoWidth: IBoolean | IAutoSize
 
     @boundsType(false)
-    public autoHeight: IBoolean | ILimitSize
+    public autoHeight: IBoolean | IAutoSize
+
+    @boundsType()
+    public autoBox: IAutoBoxData | IConstraint
 
     @boundsType(0)
     public padding: IFourNumber
@@ -153,8 +172,8 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     @boundsType(0)
     public margin: IFourNumber
 
-    @boundsType('box')
-    public boxType: IBoundsType
+    @boundsType('margin')
+    public flowBox: IBoundsType
 
 
     // drag
@@ -233,25 +252,6 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
 
     @strokeType(10)
     public miterLimit: INumber
-
-    // image
-
-    @dataType(false)
-    public lazy: IBoolean  // load image / compute paint
-
-    @naturalBoundsType(1)
-    public pixelRatio: INumber
-
-    // path
-
-    @pathInputType()
-    public path: IPathCommandData | IPathString
-
-    @pathType()
-    public windingRule: IWindingRule
-
-    @pathType(true)
-    public closed: boolean
 
 
     // arrow
