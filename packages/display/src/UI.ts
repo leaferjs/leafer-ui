@@ -1,4 +1,4 @@
-import { ILeaferCanvas, IPathDrawer, IPathCommandData, IHitType, INumber, IBoolean, IString, IPathString, IExportFileType, IPointData, ICursorType, IMaskType, IAround, IValue, IWindingRule, IPathCreator, IFourNumber, IBoundsData, IFlowType, IGap, IWrapAlign, IAxis, IAutoSize, IBoundsType, IAlign, IConstraint, IAutoBoxData } from '@leafer/interface'
+import { ILeaferCanvas, IPathDrawer, IPathCommandData, IHitType, INumber, IBoolean, IString, IPathString, IExportFileType, IPointData, ICursorType, IMaskType, IAround, IValue, IWindingRule, IPathCreator, IFourNumber, IBoundsData, IFlowType, IGap, IWrapAlign, IAxis, IAutoSize, IAlign, IConstraint, IAutoBoxData, IFlowBoxType } from '@leafer/interface'
 import { Leaf, PathDrawer, surfaceType, dataType, positionType, boundsType, pathType, scaleType, rotationType, opacityType, sortType, maskType, dataProcessor, registerUI, useModule, rewrite, rewriteAble, UICreator, PathCorner, hitType, strokeType, PathConvert, eraserType, cursorType, autoLayoutType, pen, naturalBoundsType, pathInputType } from '@leafer/core'
 
 import { IUI, IShadowEffect, IBlurEffect, IStrokeAlign, IStrokeJoin, IStrokeCap, IBlendMode, IDashPatternString, IShadowString, IGrayscaleEffect, IUIData, IGroup, IStrokeWidthString, ICornerRadiusString, IUIInputData, IExportOptions, IExportResult, IFill, IStroke, IArrowType, IFindUIMethod, IEditSize, ILeafer, IEditorConfig, IEditorConfigFunction, IEditToolFunction } from '@leafer-ui/interface'
@@ -139,6 +139,9 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     public flow: IFlowType
 
     @boundsType(0)
+    public padding: IFourNumber
+
+    @boundsType(0)
     public gap: IGap
 
     @boundsType('top-left')
@@ -154,6 +157,13 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     public warpAlign: IWrapAlign
 
 
+    @boundsType('box')
+    public flowBox: IFlowBoxType
+
+    @boundsType(false)
+    public zIndexReverse: IBoolean
+
+
     @boundsType(true)
     public inFlow: IBoolean
 
@@ -165,15 +175,6 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
 
     @boundsType()
     public autoBox: IAutoBoxData | IConstraint
-
-    @boundsType(0)
-    public padding: IFourNumber
-
-    @boundsType(0)
-    public margin: IFourNumber
-
-    @boundsType('margin')
-    public flowBox: IBoundsType
 
 
     // drag
