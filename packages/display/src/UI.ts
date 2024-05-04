@@ -150,18 +150,8 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     @boundsType(false)
     public wrap: IWrap
 
-    @autoLayoutType(0)
-    public wrapGap: IGap
-
-    @boundsType('from')
-    public warpAlign: IWrapAlign
-
-
     @boundsType('box')
     public flowBox: IFlowBoxType
-
-    @boundsType(false)
-    public zIndexReverse: IBoolean
 
 
     @boundsType(true)
