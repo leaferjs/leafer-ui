@@ -40,6 +40,17 @@ interface IArrowAttrData {
 export interface IArrowData extends IArrowAttrData, ILineData { }
 export interface IArrowInputData extends IArrowAttrData, ILineInputData { }
 
+// Flow
+export interface IFlow extends IBox {
+    __: IFlowData
+}
+
+interface IFlowAttrData {
+
+}
+export interface IFlowData extends IFlowAttrData, IBoxData { }
+export interface IFlowInputData extends IFlowAttrData, IBoxInputData { }
+
 
 // Rect
 export interface IRect extends IUI {

@@ -16,6 +16,7 @@ export {
     IImage, IImageInputData, IImageData,
     ICanvas, ICanvasInputData, ICanvasData,
     IFrame, IFrameInputData, IFrameData,
+    IFlow, IFlowInputData, IFlowData,
     IBox, IBoxInputData, IBoxData,
     IGroup, IGroupInputData, IGroupData,
     ILeaferInputData, ILeaferData,
