@@ -14,12 +14,12 @@ export function createData(leafPaint: ILeafPaint, image: ILeaferImage, paint: II
     let { width, height } = image
     if (paint.padding) box = tempBox.set(box).shrink(paint.padding)
 
-    const { opacity, mode, around, offset, scale, size, rotation, blendMode, repeat } = paint
+    const { opacity, mode, align, offset, scale, size, rotation, blendMode, repeat } = paint
     const sameBox = box.width === width && box.height === height
     if (blendMode) leafPaint.blendMode = blendMode
 
     const data: ILeafPaintPatternData = leafPaint.data = { mode }
-    const swapSize = around !== 'center' && (rotation || 0) % 180 === 90
+    const swapSize = align !== 'center' && (rotation || 0) % 180 === 90
     const swapWidth = swapSize ? height : width, swapHeight = swapSize ? width : height
 
     let x = 0, y = 0, scaleX: number, scaleY: number
@@ -38,10 +38,10 @@ export function createData(leafPaint: ILeafPaint, image: ILeaferImage, paint: II
         scaleY = typeof scale === 'number' ? scale : scale.y
     }
 
-    if (around) {
+    if (align) {
         const imageBounds = { x, y, width: swapWidth, height: swapHeight }
         if (scaleX) imageBounds.width *= scaleX, imageBounds.height *= scaleY
-        AroundHelper.toPoint(around, box, tempPoint, true, imageBounds)
+        AroundHelper.toPoint(align, box, tempPoint, true, imageBounds)
         x += tempPoint.x, y += tempPoint.y
     }
 
@@ -56,7 +56,7 @@ export function createData(leafPaint: ILeafPaint, image: ILeaferImage, paint: II
             if (x || y || scaleX || rotation) clipMode(data, box, x, y, scaleX, scaleY, rotation)
             break
         case 'repeat':
-            if (!sameBox || scaleX || rotation) repeatMode(data, box, width, height, x, y, scaleX, scaleY, rotation, around)
+            if (!sameBox || scaleX || rotation) repeatMode(data, box, width, height, x, y, scaleX, scaleY, rotation, align)
             if (!repeat) data.repeat = 'repeat'
             break
         case 'fit':

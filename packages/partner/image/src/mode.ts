@@ -1,4 +1,4 @@
-import { IBoundsData, IPointData, IMatrixData, IAround, } from '@leafer/interface'
+import { IBoundsData, IPointData, IMatrixData, IAlign, } from '@leafer/interface'
 import { MatrixHelper } from '@leafer/core'
 
 import { ILeafPaintPatternData } from '@leafer-ui/interface'
@@ -25,10 +25,10 @@ export function clipMode(data: ILeafPaintPatternData, box: IBoundsData, x: numbe
 }
 
 
-export function repeatMode(data: ILeafPaintPatternData, box: IBoundsData, width: number, height: number, x: number, y: number, scaleX: number, scaleY: number, rotation: number, around: IAround): void {
+export function repeatMode(data: ILeafPaintPatternData, box: IBoundsData, width: number, height: number, x: number, y: number, scaleX: number, scaleY: number, rotation: number, align: IAlign): void {
     const transform = get()
     if (rotation) {
-        if (around === 'center') {
+        if (align === 'center') {
             rotateOfOuter(transform, { x: width / 2, y: height / 2 }, rotation)
         } else {
             rotate(transform, rotation)
