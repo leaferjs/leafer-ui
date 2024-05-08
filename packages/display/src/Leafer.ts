@@ -195,10 +195,6 @@ export class Leafer extends Group implements ILeafer {
         Object.keys(data).forEach(key => (this as any)[key] = data[key])
     }
 
-    public forceFullRender(): void {
-        this.forceRender()
-    }
-
     public forceRender(bounds?: IBoundsData): void {
         this.renderer.addBlock(bounds ? new Bounds(bounds) : this.canvas.bounds)
         if (this.viewReady) this.renderer.update()
@@ -280,7 +276,7 @@ export class Leafer extends Group implements ILeafer {
         if (this.canvas.allowBackgroundColor) {
             this.canvas.backgroundColor = newValue as string
         } else {
-            this.forceFullRender()
+            this.forceRender()
         }
     }
 
