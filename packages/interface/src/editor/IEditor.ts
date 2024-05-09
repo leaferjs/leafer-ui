@@ -59,7 +59,7 @@ export interface IEditorBase extends IGroup, ISelectorProxy {
 }
 
 export interface IEditorConfig {
-    editSize?: 'auto' | IEditSize
+    editSize?: IEditSize
     dualEvent?: boolean
     keyEvent?: boolean
 
@@ -91,7 +91,6 @@ export interface IEditorConfig {
 
     around?: IAround
     lockRatio?: boolean | 'corner'
-    lockMove?: boolean | 'x' | 'y'
     rotateGap?: number
 
     selector?: boolean
