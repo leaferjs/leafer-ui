@@ -1,5 +1,5 @@
 import { IBoundsData, ILeaferImage, IPointData } from '@leafer/interface'
-import { MatrixHelper, Bounds, AroundHelper } from '@leafer/core'
+import { MatrixHelper, Bounds, AlignHelper } from '@leafer/core'
 
 import { IImagePaint, ILeafPaint, ILeafPaintPatternData } from '@leafer-ui/interface'
 
@@ -41,7 +41,7 @@ export function createData(leafPaint: ILeafPaint, image: ILeaferImage, paint: II
     if (align) {
         const imageBounds = { x, y, width: swapWidth, height: swapHeight }
         if (scaleX) imageBounds.width *= scaleX, imageBounds.height *= scaleY
-        AroundHelper.toPoint(align, box, tempPoint, true, imageBounds)
+        AlignHelper.toPoint(align, imageBounds, box, tempPoint, true)
         x += tempPoint.x, y += tempPoint.y
     }
 
