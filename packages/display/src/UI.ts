@@ -151,7 +151,7 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     public wrap: IWrap
 
     @boundsType('box')
-    public flowBox: IFlowBoxType
+    public itemBox: IFlowBoxType
 
 
     @boundsType(true)
