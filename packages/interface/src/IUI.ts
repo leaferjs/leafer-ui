@@ -1,4 +1,4 @@
-import { ILeaf, ILeafComputedData, ILeafData, ILeafInputData, ILeaferCanvas, IRenderOptions, IExportOptions, IExportResult, IPathDrawer, IPointData, IPathCommandData, ILeaferImageConfig, IBoundsData, IObject, IPathString, ILeaferImage, IPathCreator, IAnswer, IPickOptions, IPickResult, IValue, ICanvasContext2DSettings, IFourNumber } from '@leafer/interface'
+import { ILeaf, ILeafComputedData, ILeafData, ILeafInputData, ILeaferCanvas, IRenderOptions, IExportOptions, IExportResult, IPathDrawer, IPointData, IPathCommandData, ILeaferImageConfig, IBoundsData, IObject, IPathString, ILeaferImage, IPathCreator, IAnswer, IPickOptions, IPickResult, IValue, ICanvasContext2DSettings, IFourNumber, IFindCondition } from '@leafer/interface'
 
 import {
     IFillAttrData, IFillInputData, IFillComputedData,
@@ -320,8 +320,8 @@ export interface IUI extends IFillAttrData, IStrokeAttrData, ICornerRadiusAttrDa
     get(name?: string | string[] | IUIInputData): IUIInputData | IValue
     createProxyData(): IUIInputData
 
-    find(condition: number | string | IFindUIMethod, options?: any): IUI[]
-    findOne(condition: number | string | IFindUIMethod, options?: any): IUI
+    find(condition: number | string | IFindCondition | IFindUIMethod, options?: any): IUI[]
+    findOne(condition: number | string | IFindCondition | IFindUIMethod, options?: any): IUI
 
     getPath(curve?: boolean, pathForRender?: boolean): IPathCommandData
     getPathString(curve?: boolean, pathForRender?: boolean): IPathString
