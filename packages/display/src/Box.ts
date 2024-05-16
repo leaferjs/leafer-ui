@@ -49,6 +49,7 @@ export class Box extends Group implements IBox {
 
     public __updateBoxBounds(): void {
         const data = this.__
+
         if (data.__autoSide && this.children.length) {
             if (this.leafer) this.leafer.layouter.addExtra(this)
             super.__updateBoxBounds()
@@ -60,6 +61,8 @@ export class Box extends Group implements IBox {
         } else {
             this.__updateRectBoxBounds()
         }
+
+        if (data.flow) this.__updateContentBounds()
     }
 
     @rewrite(rect.__updateStrokeBounds)
