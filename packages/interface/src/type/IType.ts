@@ -1,11 +1,6 @@
 import { IPointData, IPathCommandData, IWindingRule, IBlendMode, IExportFileType, ISizeData, IFourNumber, IAlign } from '@leafer/interface'
 import { IColorString, IPaintString } from './IStringType'
 
-export interface IUnitData {
-    type: 'percent' | 'px'
-    value: number
-}
-
 export type IPaint = ISolidPaint | IGradientPaint | IImagePaint
 
 export type IFill = IPaint | IPaint[] | IPaintString
