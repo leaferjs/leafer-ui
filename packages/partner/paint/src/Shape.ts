@@ -24,7 +24,7 @@ export function shape(ui: IUI, current: ILeaferCanvas, options: IRenderOptions):
     } else {
 
         const { renderShapeSpread: spread } = ui.__layout
-        const worldClipBounds = getIntersectData(spread ? getSpread(current.bounds, spread * scaleX, spread * scaleY) : current.bounds, nowWorld)
+        const worldClipBounds = getIntersectData(spread ? getSpread(current.bounds, scaleX === scaleY ? spread * scaleX : [spread * scaleY, spread * scaleX]) : current.bounds, nowWorld)
         fitMatrix = current.bounds.getFitMatrix(worldClipBounds)
         let { a: fitScaleX, d: fitScaleY } = fitMatrix
 
