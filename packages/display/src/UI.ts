@@ -157,10 +157,10 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     @boundsType(true)
     public inFlow: IBoolean
 
-    @boundsType()
+    @boundsType() // rewrite in flow
     public autoWidth: IAutoSize
 
-    @boundsType()
+    @boundsType()  // rewrite in flow
     public autoHeight: IAutoSize
 
     @boundsType()
