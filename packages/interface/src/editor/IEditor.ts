@@ -28,6 +28,9 @@ export interface IEditorBase extends IGroup, ISelectorProxy {
     editTool: IObject
     innerEditor: IObject
 
+    select(target: IUI | IUI[]): void
+    cancel(): void
+
     hasItem(item: IUI): boolean
     shiftItem(item: IUI): void
     addItem(item: IUI): void
