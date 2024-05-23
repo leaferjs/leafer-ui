@@ -127,7 +127,7 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
 
 
     // center
-    @positionType()
+    @autoLayoutType()
     public origin: IAlign | IPointData
 
     @autoLayoutType()
