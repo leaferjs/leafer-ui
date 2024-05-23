@@ -114,16 +114,19 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     public skewY: INumber
 
 
+    // offset
+    @positionType(0, true)
+    public offsetX: INumber
+
+    @positionType(0, true)
+    public offsetY: INumber
+
     // scroll
     @positionType(0, true)
     public scrollX: INumber
 
     @positionType(0, true)
     public scrollY: INumber
-
-    // offset
-    @positionType()
-    public offset: IPointData
 
 
     // center
