@@ -321,7 +321,9 @@ export interface IUI extends IFillAttrData, IStrokeAttrData, ICornerRadiusAttrDa
     createProxyData(): IUIInputData
 
     find(condition: number | string | IFindCondition | IFindUIMethod, options?: any): IUI[]
+    findTag(tag: string | string[]): IUI[]
     findOne(condition: number | string | IFindCondition | IFindUIMethod, options?: any): IUI
+    findId(id: number | string): IUI
 
     getPath(curve?: boolean, pathForRender?: boolean): IPathCommandData
     getPathString(curve?: boolean, pathForRender?: boolean): IPathString
