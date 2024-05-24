@@ -164,7 +164,7 @@ export class UIData extends LeafData implements IUIData {
 export const UnitConvert = {
 
     number(value: number | IUnitData, percentRefer?: number): number {
-        if (typeof value === 'object') return value.type === 'percent' ? value.value / 100 * percentRefer : value.value
+        if (typeof value === 'object') return value.type === 'percent' ? value.value * percentRefer : value.value
         return value
     }
 
