@@ -1,11 +1,11 @@
 {
   "name": "@leafer-ui/node",
-  "version": "1.0.0-rc.22",
+  "version": "1.0.0-rc.23",
   "description": "@leafer-ui/node",
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
   "type": "module",
-  "main": "dist/core.esm.js",
+  "main": "dist/node.esm.js",
   "exports": {
     "import": "./dist/node.esm.js",
     "require": "./dist/node.cjs",
@@ -26,13 +26,13 @@
     "leaferjs"
   ],
   "dependencies": {
-    "@leafer/core": "1.0.0-rc.22",
-    "@leafer/node": "1.0.0-rc.22",
-    "@leafer/partner": "1.0.0-rc.22",
-    "@leafer/interface": "1.0.0-rc.22",
-    "@leafer-ui/draw": "1.0.0-rc.22",
-    "@leafer-ui/core": "1.0.0-rc.22",
-    "@leafer-ui/partner": "1.0.0-rc.22",
-    "@leafer-ui/interface": "1.0.0-rc.22"
+    "@leafer/core": "1.0.0-rc.23",
+    "@leafer/node": "1.0.0-rc.23",
+    "@leafer/partner": "1.0.0-rc.23",
+    "@leafer/interface": "1.0.0-rc.23",
+    "@leafer-ui/draw": "1.0.0-rc.23",
+    "@leafer-ui/core": "1.0.0-rc.23",
+    "@leafer-ui/partner": "1.0.0-rc.23",
+    "@leafer-ui/interface": "1.0.0-rc.23"
   }
 }
