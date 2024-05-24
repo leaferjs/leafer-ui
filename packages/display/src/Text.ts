@@ -9,7 +9,7 @@ import { TextConvert } from '@leafer-ui/external'
 import { UI } from './UI'
 
 
-const { copyAndSpread, includes, spread, setList } = BoundsHelper
+const { copyAndSpread, includes, isSame, spread, setList } = BoundsHelper
 
 @registerUI()
 export class Text extends UI implements IText {
@@ -169,7 +169,7 @@ export class Text extends UI implements IText {
         if (italic) b.width += fontSize * 0.16
 
         const contentBounds = includes(b, bounds) ? b : bounds
-        if (contentBounds !== layout.contentBounds) {
+        if (!isSame(contentBounds, layout.contentBounds)) {
             layout.contentBounds = contentBounds
             layout.renderChanged = true
             setList(data.__textBoxBounds = {} as IBoundsData, [b, bounds])
