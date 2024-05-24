@@ -9,12 +9,12 @@ export function clipText(drawData: ITextDrawData, style: ITextData): void {
     let { textOverflow } = style
     rows.splice(overflow)
 
-
-    if (textOverflow !== 'hide') {
-        if (textOverflow === 'ellipsis') textOverflow = '...'
+    if (textOverflow && textOverflow !== 'show') {
+        if (textOverflow === 'hide') textOverflow = ''
+        else if (textOverflow === 'ellipsis') textOverflow = '...'
 
         let char: ITextCharData, charRight: number
-        const ellipsisWidth = Platform.canvas.measureText(textOverflow).width
+        const ellipsisWidth = textOverflow ? Platform.canvas.measureText(textOverflow).width : 0
         const right = style.x + style.width - ellipsisWidth
         const list = style.textWrap === 'none' ? rows : [rows[overflow - 1]]
 
