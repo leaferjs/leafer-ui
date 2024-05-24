@@ -37,8 +37,12 @@ export const ExportModule: IExportModule = {
                         let renderBounds: IBoundsData, trimBounds: IBounds, scaleX = 1, scaleY = 1
                         const { worldTransform, isLeafer, isFrame } = leaf
                         const { slice, trim, onCanvas } = options
-                        const scale = options.scale || 1
-                        const pixelRatio = options.pixelRatio || 1
+                        let scale = options.scale || 1
+                        let pixelRatio = options.pixelRatio || 1
+                        if (leaf.isApp) {
+                            scale *= pixelRatio // app 只能以自身的pixelRatio导出，需转移到scale上
+                            pixelRatio = leaf.app.pixelRatio
+                        }
                         const screenshot = options.screenshot || leaf.isApp
                         const fill = (isLeafer && screenshot) ? (options.fill === undefined ? leaf.fill : options.fill) : options.fill // leafer use 
                         const needFill = FileHelper.isOpaqueImage(filename) || fill, matrix = new Matrix()
