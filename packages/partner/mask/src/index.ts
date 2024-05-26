@@ -24,7 +24,7 @@ Group.prototype.__renderMask = function (canvas: ILeaferCanvas, options: IRender
 
             // mask start
 
-            if (child.__.maskType === 'path') {
+            if (child.__.mask === 'path') {
 
                 if (child.opacity < 1) {
 
@@ -40,7 +40,7 @@ Group.prototype.__renderMask = function (canvas: ILeaferCanvas, options: IRender
 
                 child.__clip(contentCanvas || canvas, options)
 
-            } else {
+            } else { // pixel
 
                 currentMask = 'alpha'
                 if (!maskCanvas) maskCanvas = getCanvas(canvas)
@@ -49,7 +49,7 @@ Group.prototype.__renderMask = function (canvas: ILeaferCanvas, options: IRender
 
             }
 
-            if (child.__.maskType !== 'clipping') continue
+            if (child.__.mask !== 'clipping') continue
         }
 
         if (excludeRenderBounds(child, options)) continue

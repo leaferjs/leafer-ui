@@ -72,13 +72,10 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
 
 
     @maskType(false)
-    public mask: IMaskType
-
-    @surfaceType('pixel') // will remove
-    public maskType: IMaskType
+    public mask: IBoolean | IMaskType
 
     @eraserType(false)
-    public eraser: IEraserType
+    public eraser: IBoolean | IEraserType
 
 
     // position
