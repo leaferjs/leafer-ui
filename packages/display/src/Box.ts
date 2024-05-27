@@ -50,35 +50,45 @@ export class Box extends Group implements IBox {
     public __updateBoxBounds(): void {
         const data = this.__
 
-        if (data.__autoSide && this.children.length) {
-            if (this.leafer) this.leafer.layouter.addExtra(this)
-            super.__updateBoxBounds()
-            if (!data.__autoSize) {
-                const b = this.__layout.boxBounds
-                if (!data.__autoWidth) b.x = 0, b.width = data.width
-                if (!data.__autoHeight) b.y = 0, b.height = data.height
+        if (this.children.length) {
+            if (data.__autoSide) {
+                if (this.leafer) this.leafer.layouter.addExtra(this)
+                super.__updateBoxBounds()
+                if (!data.__autoSize) {
+                    const b = this.__layout.boxBounds
+                    if (!data.__autoWidth) b.x = 0, b.width = data.width
+                    if (!data.__autoHeight) b.y = 0, b.height = data.height
+                }
+            } else {
+                this.__updateRectBoxBounds()
             }
+
+            if (data.flow) this.__updateContentBounds()
+
         } else {
             this.__updateRectBoxBounds()
         }
-
-        if (data.flow) this.__updateContentBounds()
     }
 
     @rewrite(rect.__updateStrokeBounds)
     public __updateStrokeBounds(): void { }
 
     public __updateRenderBounds(): void {
-        super.__updateRenderBounds()
+        let isOverflow: boolean
         const { renderBounds } = this.__layout
-        copy(childrenRenderBounds, renderBounds)
-        this.__updateRectRenderBounds()
 
-        const isOverflow = !includes(renderBounds, childrenRenderBounds) || undefined
+        if (this.children.length) {
+            super.__updateRenderBounds()
+            copy(childrenRenderBounds, renderBounds)
+            this.__updateRectRenderBounds()
+
+            isOverflow = !includes(renderBounds, childrenRenderBounds) || undefined
+        } else {
+            this.__updateRectRenderBounds()
+        }
+
         this.isOverflow !== isOverflow && (this.isOverflow = isOverflow)
-
-        const hide = this.__.__drawAfterFill = this.__.overflow === 'hide'
-        if (isOverflow && !hide) add(renderBounds, childrenRenderBounds)
+        if (isOverflow && !(this.__.__drawAfterFill = this.__.overflow === 'hide')) add(renderBounds, childrenRenderBounds)
     }
 
     @rewrite(rect.__updateRenderBounds)
@@ -105,21 +115,22 @@ export class Box extends Group implements IBox {
             this.__renderRect(canvas, options)
         } else {
             this.__renderRect(canvas, options)
-            this.__renderGroup(canvas, options)
+            if (this.children.length) this.__renderGroup(canvas, options)
         }
     }
 
     public __drawAfterFill(canvas: ILeaferCanvas, options: IRenderOptions): void {
+        const { length } = this.children
         if (this.isOverflow) {
             canvas.save()
             canvas.clip()
-            this.__renderGroup(canvas, options)
+            if (length) this.__renderGroup(canvas, options)
             canvas.restore()
         } else {
-            this.__renderGroup(canvas, options)
+            if (length) this.__renderGroup(canvas, options)
         }
 
-        if (this.__.stroke && this.children.length) {
+        if (this.__.stroke && length) {
             canvas.setWorld(this.__nowWorld)
             this.__drawRenderPath(canvas)
         }
