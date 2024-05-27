@@ -9,8 +9,8 @@ import { Rect } from './Rect'
 
 const rect = Rect.prototype
 const group = Group.prototype
-const bounds = {} as IBoundsData
-const { copy, add } = BoundsHelper
+const childrenRenderBounds = {} as IBoundsData
+const { copy, add, includes } = BoundsHelper
 
 @rewriteAble()
 @registerUI()
@@ -26,6 +26,8 @@ export class Box extends Group implements IBox {
     @affectRenderBoundsType('show')
     declare public overflow: IOverflow
 
+    public isOverflow: boolean
+
     constructor(data?: IBoxInputData) {
         super(data)
         this.__layout.renderChanged || this.__layout.renderChange()
@@ -38,9 +40,7 @@ export class Box extends Group implements IBox {
     public __updateRectRenderSpread(): number { return 0 }
 
     public __updateRenderSpread(): number {
-        const width = this.__updateRectRenderSpread()
-        const hide = this.__.__drawAfterFill = this.__.overflow === 'hide'
-        return (width || hide) ? width : -1
+        return this.__updateRectRenderSpread() || -1
     }
 
 
@@ -69,13 +69,16 @@ export class Box extends Group implements IBox {
     public __updateStrokeBounds(): void { }
 
     public __updateRenderBounds(): void {
+        super.__updateRenderBounds()
+        const { renderBounds } = this.__layout
+        copy(childrenRenderBounds, renderBounds)
         this.__updateRectRenderBounds()
-        if (!this.__.__drawAfterFill) {
-            const { renderBounds } = this.__layout
-            copy(bounds, renderBounds)
-            super.__updateRenderBounds()
-            add(renderBounds, bounds)
-        }
+
+        const isOverflow = !includes(renderBounds, childrenRenderBounds) || undefined
+        this.isOverflow !== isOverflow && (this.isOverflow = isOverflow)
+
+        const hide = this.__.__drawAfterFill = this.__.overflow === 'hide'
+        if (isOverflow && !hide) add(renderBounds, childrenRenderBounds)
     }
 
     @rewrite(rect.__updateRenderBounds)
@@ -107,11 +110,19 @@ export class Box extends Group implements IBox {
     }
 
     public __drawAfterFill(canvas: ILeaferCanvas, options: IRenderOptions): void {
-        canvas.save()
-        canvas.clip()
-        this.__renderGroup(canvas, options)
-        canvas.restore()
-        if (this.__.stroke) this.__drawRenderPath(canvas)
+        if (this.isOverflow) {
+            canvas.save()
+            canvas.clip()
+            this.__renderGroup(canvas, options)
+            canvas.restore()
+        } else {
+            this.__renderGroup(canvas, options)
+        }
+
+        if (this.__.stroke && this.children.length) {
+            canvas.setWorld(this.__nowWorld)
+            this.__drawRenderPath(canvas)
+        }
     }
 
 }
