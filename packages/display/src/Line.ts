@@ -59,11 +59,12 @@ export class Line extends UI implements ILine { // tip: rewrited Polygon
 
     public __updatePath(): void {
 
-        const path: number[] = this.__.path = []
+        const data = this.__
+        const path: number[] = data.path = []
 
-        if (this.__.points) {
+        if (data.points) {
 
-            drawPoints(path, this.__.points, this.__.closed)
+            drawPoints(path, data.points, null, data.closed)
 
         } else {
 
