@@ -54,7 +54,7 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     public opacity: INumber
 
     @opacityType(true)
-    public visible: IBoolean
+    public visible: IBoolean | 'none'
 
 
     @stateType(false)
