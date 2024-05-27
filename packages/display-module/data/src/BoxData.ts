@@ -4,5 +4,5 @@ import { GroupData } from "./GroupData"
 
 
 export class BoxData extends GroupData implements IBoxData {
-    get __boxStroke(): boolean { return true }
+    get __boxStroke(): boolean { return !this.__pathInputed }
 }

@@ -59,7 +59,7 @@ export class Text extends UI implements IText {
     @boundsType(0)
     public letterSpacing: INumber | IUnitData
 
-    @boundsType({ type: 'percent', value: 150 } as IUnitData)
+    @boundsType({ type: 'percent', value: 1.5 } as IUnitData)
     public lineHeight: INumber | IUnitData
 
     @boundsType(0)

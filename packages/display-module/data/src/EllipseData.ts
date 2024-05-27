@@ -4,5 +4,5 @@ import { UIData } from "./UIData"
 
 
 export class EllipseData extends UIData implements IEllipseData {
-    get __boxStroke(): boolean { return true }
+    get __boxStroke(): boolean { return !this.__pathInputed }
 }

@@ -47,7 +47,7 @@ export const UIBounds: IUIBoundsModule = {
 
         this.__layout.renderShapeSpread = shapeWidth
 
-        return width
+        return width + (this.__layout.strokeSpread || 0)
     }
 
 }
