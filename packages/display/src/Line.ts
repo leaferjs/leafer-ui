@@ -64,7 +64,7 @@ export class Line extends UI implements ILine { // tip: rewrited Polygon
 
         if (data.points) {
 
-            drawPoints(path, data.points, null, data.closed)
+            drawPoints(path, data.points, false, data.closed)
 
         } else {
 

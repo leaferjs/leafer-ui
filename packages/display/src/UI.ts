@@ -347,7 +347,7 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
 
     public get editConfig(): IEditorConfig { return undefined }
 
-    public get editOuter(): string { return 'EditTool' }
+    public get editOuter(): string { return this.__.__isLinePath ? 'LineEditTool' : 'EditTool' }
 
     public get editInner(): string { return 'PathEditor' }
 
