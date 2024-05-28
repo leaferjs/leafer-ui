@@ -5,20 +5,19 @@ export const UIBounds: IUIBoundsModule = {
 
     __updateStrokeSpread(): number {
         let width = 0, boxWidth = 0
-        const { stroke, hitStroke, strokeAlign, strokeWidth } = this.__
+        const data = this.__, { strokeAlign, strokeWidth } = data
 
-        if ((stroke || hitStroke === 'all') && strokeWidth && strokeAlign !== 'inside') {
+        if ((data.stroke || data.hitStroke === 'all') && strokeWidth && strokeAlign !== 'inside') {
             boxWidth = width = strokeAlign === 'center' ? strokeWidth / 2 : strokeWidth
 
-            if (!this.__.__boxStroke) {
-                const { strokeCap, path } = this.__
-                const miterLimitAddWidth = (path && path.length > 6) ? 10 * width : 0 // =  Math.sin((miterLimit = 10) * OneRadian / 2) * Math.sqrt(strokeWidth) - width 后期需继续精确优化
-                const storkeCapAddWidth = strokeCap === 'none' ? 0 : strokeWidth
+            if (!data.__boxStroke) {
+                const miterLimitAddWidth = data.__isLinePath ? 0 : 10 * width  // =  Math.sin((miterLimit = 10) * OneRadian / 2) * Math.sqrt(strokeWidth) - width 后期需继续精确优化
+                const storkeCapAddWidth = data.strokeCap === 'none' ? 0 : strokeWidth
                 width += Math.max(miterLimitAddWidth, storkeCapAddWidth)
             }
         }
 
-        if (this.__.__useArrow) width += strokeWidth * 5 // 后期需要精细化
+        if (data.__useArrow) width += strokeWidth * 5 // 后期需要精细化
 
         this.__layout.strokeBoxSpread = boxWidth
 
