@@ -1,5 +1,3 @@
-import { OneRadian } from '@leafer/core'
-
 import { IUIBoundsModule } from "@leafer-ui/interface"
 
 
@@ -13,8 +11,8 @@ export const UIBounds: IUIBoundsModule = {
             boxWidth = width = strokeAlign === 'center' ? strokeWidth / 2 : strokeWidth
 
             if (!this.__.__boxStroke) {
-                const { miterLimit, strokeCap } = this.__
-                const miterLimitAddWidth = this.__tag !== 'Line' ? 1 / Math.sin(miterLimit * OneRadian / 2) * Math.sqrt(strokeWidth) - width : 0
+                const { strokeCap, path } = this.__
+                const miterLimitAddWidth = (path && path.length > 6) ? 10 * width : 0 // =  Math.sin((miterLimit = 10) * OneRadian / 2) * Math.sqrt(strokeWidth) - width 后期需继续精确优化
                 const storkeCapAddWidth = strokeCap === 'none' ? 0 : strokeWidth
                 width += Math.max(miterLimitAddWidth, storkeCapAddWidth)
             }
