@@ -17,6 +17,8 @@ const fontWeightMap = {
 
 export class TextData extends UIData implements ITextData {
 
+    public get __useNaturalRatio() { return false }
+
     protected _fontWeight?: number
 
     setFontWeight(value: IFontWeight): void {
