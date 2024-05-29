@@ -1,8 +1,9 @@
 import { IBranch, ILeaf } from '@leafer/interface'
 import { MatrixHelper } from '@leafer-ui/draw'
 
+import { ILine, IPolygon, IText } from '@leafer-ui/interface'
+
 import { PathScaler } from './PathScaler'
-import { ILine, IPolygon } from '@leafer-in/interface'
 
 
 const matrix = MatrixHelper.get()
@@ -11,9 +12,14 @@ export function scaleResize(leaf: ILeaf, scaleX: number, scaleY: number): void {
     if (leaf.pathInputed) {
         scaleResizePath(leaf, scaleX, scaleY)
     } else {
-        if (scaleX !== 1) leaf.width *= scaleX
-        if (scaleY !== 1) leaf.height *= scaleY // Text auto height
+        leaf.width *= scaleX
+        leaf.height *= scaleY // Text auto height
     }
+}
+
+export function scaleResizeFont(leaf: IText, scaleX: number, scaleY: number): void {
+    if (scaleX !== 1) leaf.fontSize *= scaleX
+    else if (scaleY !== 1) leaf.fontSize *= scaleY
 }
 
 export function scaleResizePath(leaf: ILeaf, scaleX: number, scaleY: number): void {

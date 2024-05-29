@@ -1,10 +1,10 @@
 export { PathScaler } from './PathScaler'
-export { scaleResize, scaleResizeGroup, scaleResizePath, scaleResizePoints } from './scaler'
+export { scaleResize, scaleResizeGroup, scaleResizeFont, scaleResizePath, scaleResizePoints } from './scaler'
 
 import { ILeaf } from '@leafer/interface'
-import { Leaf, Path, Line, Polygon, Group, Box } from '@leafer-ui/draw'
+import { Leaf, Path, Line, Text, Polygon, Group, Box } from '@leafer-ui/draw'
 
-import { scaleResize, scaleResizeGroup, scaleResizePath, scaleResizePoints } from './scaler'
+import { scaleResize, scaleResizeFont, scaleResizeGroup, scaleResizePath, scaleResizePoints } from './scaler'
 
 
 // leaf
@@ -24,6 +24,14 @@ Leaf.prototype.scaleResize = function (scaleX: number, scaleY = scaleX, noResize
 
 Leaf.prototype.__scaleResize = function (scaleX: number, scaleY: number): void {
     scaleResize(this, scaleX, scaleY)
+}
+
+Text.prototype.__scaleResize = function (scaleX: number, scaleY: number): void {
+    if (this.editConfig && this.editConfig.editSize === 'font-size') {
+        scaleResizeFont(this, scaleX, scaleY)
+    } else {
+        scaleResize(this, scaleX, scaleY)
+    }
 }
 
 Path.prototype.__scaleResize = function (scaleX: number, scaleY: number): void {
