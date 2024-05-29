@@ -309,8 +309,8 @@ export class InteractionBase implements IInteraction {
     protected tap(data: IPointerEvent): void {
         const { pointer } = this.config
 
-        const longTap = this.longTap(data)
-        if (!pointer.tapMore && longTap) return
+        const hasLong = this.longTap(data)
+        if (!pointer.tapMore && hasLong) return // long_press / long_tap
 
         if (!this.waitTap) return
         if (pointer.tapMore) this.emitTap(data)
@@ -482,13 +482,13 @@ export class InteractionBase implements IInteraction {
     }
 
     protected longTap(data: IPointerEvent): boolean {
-        let longTap
+        let hasLong
         if (this.longPressed) {
             this.emit(PointerEvent.LONG_TAP, data)
-            if (pathHasEventType(data.path, PointerEvent.LONG_TAP)) longTap = true
+            if (pathHasEventType(data.path, PointerEvent.LONG_TAP) || pathHasEventType(data.path, PointerEvent.LONG_PRESS)) hasLong = true
         }
         this.longPressWaitCancel()
-        return longTap
+        return hasLong
     }
 
     protected longPressWaitCancel(): void {
