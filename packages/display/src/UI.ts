@@ -338,7 +338,9 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     }
 
     public get pen(): IPathCreator {
-        pen.set(this.path = this.__.path || [])
+        const { path } = this.__
+        pen.set(this.path = path || [])
+        if (!path) this.__drawPathByBox(pen)
         return pen
     }
 
@@ -390,13 +392,7 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     public getPath(curve?: boolean, pathForRender?: boolean): IPathCommandData {
         this.__layout.update()
         let path = pathForRender ? this.__.__pathForRender : this.__.path
-        if (!path) {
-            const { width, height } = this.boxBounds
-            if (width || height) {
-                pen.set(path = [])
-                this.__drawPathByBox(pen)
-            }
-        }
+        if (!path) pen.set(path = []), this.__drawPathByBox(pen)
         return curve ? PathConvert.toCanvasData(path, true) : path
     }
 
