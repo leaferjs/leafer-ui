@@ -312,6 +312,8 @@ export interface IUI extends IFillAttrData, IStrokeAttrData, ICornerRadiusAttrDa
 
     children?: IUI[]
 
+    readonly pen: IPathCreator
+
     reset(data?: IUIInputData): void
 
     set(data: IUIInputData): void
