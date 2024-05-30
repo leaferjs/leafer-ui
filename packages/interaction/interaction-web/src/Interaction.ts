@@ -1,4 +1,4 @@
-import { IObject, IPointData, ITimer, IKeepTouchData, ICursorType } from '@leafer/interface'
+import { IObject, IPointData, ITimer, IKeepTouchData, ICursorType, IClientPointData } from '@leafer/interface'
 import { MathHelper } from '@leafer/core'
 import { InteractionBase, InteractionHelper, Cursor } from '@leafer-ui/core'
 
@@ -7,12 +7,7 @@ import { WheelEventHelper } from './WheelEventHelper'
 import { KeyEventHelper } from './KeyEventHelper'
 
 
-interface IClientPoint {
-    clientX: number
-    clientY: number
-}
-
-interface IGestureEvent extends IClientPoint, UIEvent {
+interface IGestureEvent extends IClientPointData, UIEvent {
     scale: number
     rotation: number
     preventDefault(): void
@@ -102,11 +97,6 @@ export class Interaction extends InteractionBase {
             window.removeEventListener(name, windowEvents[name])
             this.windowEvents = {}
         }
-    }
-
-    public getLocal(p: IClientPoint, updateClient?: boolean): IPointData {
-        const clientBounds = this.canvas.getClientBounds(updateClient)
-        return { x: p.clientX - clientBounds.x, y: p.clientY - clientBounds.y }
     }
 
     protected getTouches(touches: TouchList): Touch[] {

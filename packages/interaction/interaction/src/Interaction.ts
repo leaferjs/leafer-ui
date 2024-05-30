@@ -1,4 +1,4 @@
-import { IUIEvent, IPointerEvent, ILeaf, IInteraction, IInteractionConfig, ILeafList, IMoveEvent, IZoomEvent, IRotateEvent, ISelector, IBounds, IEventListenerId, IInteractionCanvas, ITimer, IKeepTouchData, IKeyEvent, IPickOptions, ICursorType, IBooleanMap, IPickBottom } from '@leafer/interface'
+import { IUIEvent, IPointerEvent, ILeaf, IInteraction, IInteractionConfig, ILeafList, IMoveEvent, IZoomEvent, IRotateEvent, ISelector, IBounds, IEventListenerId, IInteractionCanvas, ITimer, IKeepTouchData, IKeyEvent, IPickOptions, ICursorType, IBooleanMap, IPickBottom, IClientPointData, IPointData } from '@leafer/interface'
 import { LeaferEvent, ResizeEvent, LeafList, Bounds, PointHelper, DataHelper } from '@leafer/core'
 
 import { IApp } from '@leafer-ui/interface'
@@ -444,6 +444,11 @@ export class InteractionBase implements IInteraction {
 
     public setCursor(cursor: ICursorType | ICursorType[]): void {
         this.cursor = cursor
+    }
+
+    public getLocal(clientPoint: IClientPointData, updateClient?: boolean): IPointData {
+        const clientBounds = this.canvas.getClientBounds(updateClient)
+        return { x: clientPoint.clientX - clientBounds.x, y: clientPoint.clientY - clientBounds.y }
     }
 
 

@@ -50,12 +50,11 @@ export class Interaction extends InteractionBase {
         }
     }
 
-    public getLocal(p: IClientPoint, updateClient?: boolean): IPointData {
-        const clientBounds = this.canvas.getClientBounds(updateClient)
-        if (p.x !== undefined) {
-            return { x: p.x, y: p.y } // Canvas
+    public getLocal(clientPoint: IClientPoint, updateClient?: boolean): IPointData {
+        if (clientPoint.x !== undefined) {
+            return { x: clientPoint.x, y: clientPoint.y } // Canvas
         } else {
-            return { x: p.clientX - clientBounds.x, y: p.clientY - clientBounds.y }
+            return super.getLocal(clientPoint, updateClient)
         }
     }
 
