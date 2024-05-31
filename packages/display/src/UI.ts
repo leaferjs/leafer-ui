@@ -401,6 +401,10 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     }
 
 
+    public load(): void {
+        this.__.__computePaint() // 手动加载图片
+    }
+
     public __onUpdateSize(): void {
         if (this.__.__input) {
             const data = this.__;

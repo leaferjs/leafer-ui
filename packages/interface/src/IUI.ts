@@ -330,6 +330,8 @@ export interface IUI extends IFillAttrData, IStrokeAttrData, ICornerRadiusAttrDa
     getPath(curve?: boolean, pathForRender?: boolean): IPathCommandData
     getPathString(curve?: boolean, pathForRender?: boolean): IPathString
 
+    load(): void
+
     __drawPathByData(drawer: IPathDrawer, data: IPathCommandData): void
     __drawPathByBox(drawer: IPathDrawer): void
     __drawAfterFill?(canvas: ILeaferCanvas, options: IRenderOptions): void
@@ -370,11 +372,6 @@ export interface IUIData extends IUIComputedData, ILeafData {
     __drawAfterFill?: boolean
     __isOverflow?: boolean
     __blendLayer?: boolean
-
-    readonly __autoWidth: boolean
-    readonly __autoHeight: boolean
-    readonly __autoSide: boolean
-    readonly __autoSize: boolean
 
     __boxStroke?: boolean
 

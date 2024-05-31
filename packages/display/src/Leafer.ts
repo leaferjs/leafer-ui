@@ -374,7 +374,7 @@ export class Leafer extends Group implements ILeafer {
     public getValidScale(changeScale: number): number { return changeScale }
 
 
-    public getLocalPointByClient(clientPoint: IClientPointData, updateClient?: boolean): IPointData {
+    public getWorldPointByClient(clientPoint: IClientPointData, updateClient?: boolean): IPointData {
         return this.interaction && this.interaction.getLocal(clientPoint, updateClient)
     }
 
