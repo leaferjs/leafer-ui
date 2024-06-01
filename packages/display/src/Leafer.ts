@@ -82,7 +82,6 @@ export class Leafer extends Group implements ILeafer {
     public get cursorPoint(): IPointData { return (this.interaction && this.interaction.hoverData) || { x: this.width / 2, y: this.height / 2 } }
     public get clientBounds(): IBoundsData { return this.canvas && this.canvas.getClientBounds() }
     public leafs = 0
-    public flows = 0
 
     public __eventIds: IEventListenerId[] = []
     protected __startTimer: ITimer

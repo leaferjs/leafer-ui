@@ -52,7 +52,7 @@ export class Box extends Group implements IBox {
 
         if (this.children.length) {
             if (data.__autoSide) {
-                if (this.leafer) this.leafer.layouter.addExtra(this)
+                if (this.leafer && this.leafer.ready) this.leafer.layouter.addExtra(this)
                 super.__updateBoxBounds()
                 if (!data.__autoSize) {
                     const b = this.__layout.boxBounds
