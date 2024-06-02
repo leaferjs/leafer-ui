@@ -36,11 +36,11 @@ export function layoutChar(drawData: ITextDrawData, style: ITextData, width: num
 
                         wordChar = { char: '', x: charX }
                         charX = toWordChar(word.data, charX, wordChar)
-                        if (wordChar.char !== ' ') row.data.push(wordChar)
+                        if (row.isOverflow || wordChar.char !== ' ') row.data.push(wordChar)
 
                     } else {
 
-                        charX = toChar(word.data, charX, row.data)
+                        charX = toChar(word.data, charX, row.data, row.isOverflow)
 
                     }
 
@@ -75,9 +75,9 @@ function toWordChar(data: ITextCharData[], charX: number, wordChar: ITextCharDat
     return charX
 }
 
-function toChar(data: ITextCharData[], charX: number, rowData: ITextCharData[]): number {
+function toChar(data: ITextCharData[], charX: number, rowData: ITextCharData[], isOverflow?: boolean): number {
     data.forEach(char => {
-        if (char.char !== ' ') {
+        if (isOverflow || char.char !== ' ') {
             char.x = charX
             rowData.push(char)
         }

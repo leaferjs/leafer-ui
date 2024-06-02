@@ -63,7 +63,7 @@ export class UIData extends LeafData implements IUIData {
             this.__leaf.scaleX *= -1
             debug.warn('width < 0, instead -scaleX ', this)
         } else {
-            this._width = value || 1
+            this._width = value
         }
     }
 
@@ -73,7 +73,7 @@ export class UIData extends LeafData implements IUIData {
             this.__leaf.scaleY *= -1
             debug.warn('height < 0, instead -scaleY', this)
         } else {
-            this._height = value || 1
+            this._height = value
         }
     }
 
