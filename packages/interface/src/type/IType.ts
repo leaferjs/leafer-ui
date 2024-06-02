@@ -1,4 +1,4 @@
-import { IPointData, IPathCommandData, IWindingRule, IBlendMode, IExportFileType, ISizeData, IFourNumber, IAlign } from '@leafer/interface'
+import { IPointData, IPathCommandData, IWindingRule, IBlendMode, IExportFileType, ISizeData, IFourNumber, IAlign, IUnitPointData } from '@leafer/interface'
 import { IColorString, IPaintString } from './IStringType'
 
 export type IPaint = ISolidPaint | IGradientPaint | IImagePaint
@@ -47,10 +47,10 @@ export interface IRGBA extends IRGB {
 // ---
 export interface IGradientPaint extends IPaintBase {
     type: IGradientType
-    from?: IPointData
-    to?: IPointData
+    from?: IAlign | IUnitPointData
+    to?: IAlign | IUnitPointData
     stretch?: number
-    stops: IColorStop[]
+    stops: IColorStop[] | IColorString[]
 }
 export interface IColorStop {
     offset: number

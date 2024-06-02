@@ -1,17 +1,15 @@
 import { IMatrixData, IPointData, IBoundsData } from '@leafer/interface'
-import { Platform, PointHelper, MatrixHelper } from '@leafer/core'
+import { Platform, PointHelper, MatrixHelper, AroundHelper } from '@leafer/core'
 
 import { IGradientPaint, ILeafPaint } from '@leafer-ui/interface'
 
 import { applyStops } from './linear'
 
 
-const { set, getAngle, getDistance } = PointHelper
+const { getAngle, getDistance } = PointHelper
 const { get, rotateOfOuter, scaleOfOuter } = MatrixHelper
 
-const defaultFrom = { x: 0.5, y: 0.5 }
-const defaultTo = { x: 0.5, y: 1 }
-
+const { toPoint } = AroundHelper
 const realFrom = {} as IPointData
 const realTo = {} as IPointData
 
@@ -19,14 +17,10 @@ export function conicGradient(paint: IGradientPaint, box: IBoundsData): ILeafPai
 
     let { from, to, type, opacity, blendMode, stretch } = paint
 
-    from || (from = defaultFrom)
-    to || (to = defaultTo)
+    toPoint(from || 'center', box, realFrom)
+    toPoint(to || 'bottom', box, realTo)
 
-    const { x, y, width, height } = box
-
-    set(realFrom, x + from.x * width, y + from.y * height)
-    set(realTo, x + to.x * width, y + to.y * height)
-
+    const { width, height } = box
     const transform: IMatrixData = get()
     const angle = getAngle(realFrom, realTo)
 
