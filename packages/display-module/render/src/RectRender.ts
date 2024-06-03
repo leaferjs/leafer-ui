@@ -7,7 +7,7 @@ export const RectRender: IRectRenderModule = {
 
     __drawFast(canvas: ILeaferCanvas, options: IRenderOptions): void {
 
-        const { width, height, fill, stroke, __drawAfterFill } = this.__
+        let { width, height, fill, stroke, __drawAfterFill } = this.__
 
         if (fill) {
             canvas.fillStyle = fill
@@ -29,12 +29,21 @@ export const RectRender: IRectRenderModule = {
                     canvas.strokeRect(0, 0, width, height)
                     break
                 case 'inside':
-                    canvas.strokeRect(half, half, width - __strokeWidth, height - __strokeWidth)
+                    width -= __strokeWidth, height -= __strokeWidth
+                    if (width < 0 || height < 0) {
+                        canvas.save()
+                        this.__clip(canvas, options)
+                        canvas.strokeRect(half, half, width, height)
+                        canvas.restore()
+                    } else {
+                        canvas.strokeRect(half, half, width, height)
+                    }
                     break
                 case 'outside':
                     canvas.strokeRect(-half, -half, width + __strokeWidth, height + __strokeWidth)
                     break
             }
+
         }
 
     }
