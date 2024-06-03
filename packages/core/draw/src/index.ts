@@ -1,5 +1,3 @@
-export const version = "1.0.0-rc.23"
-
 export * from '@leafer/core'
 
 export * from '@leafer-ui/display'

@@ -254,7 +254,7 @@ export class Leafer extends Group implements ILeafer {
             } else if (attrName === 'fill') {
                 this.__changeFill(newValue as string)
             } else if (attrName === 'hittable') {
-                this.canvas.hittable = newValue as boolean
+                if (!this.parent) this.canvas.hittable = newValue as boolean
             }
         }
         return super.__setAttr(attrName, newValue)

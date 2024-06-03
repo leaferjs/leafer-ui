@@ -1,6 +1,6 @@
 {
   "name": "@leafer-ui/display",
-  "version": "1.0.0-rc.23",
+  "version": "1.0.0-rc.24",
   "description": "@leafer-ui/display",
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
@@ -18,14 +18,14 @@
     "leaferjs"
   ],
   "dependencies": {
-    "@leafer/core": "1.0.0-rc.23",
-    "@leafer-ui/data": "1.0.0-rc.23",
-    "@leafer-ui/display-module": "1.0.0-rc.23",
-    "@leafer-ui/decorator": "1.0.0-rc.23",
-    "@leafer-ui/external": "1.0.0-rc.23"
+    "@leafer/core": "1.0.0-rc.24",
+    "@leafer-ui/data": "1.0.0-rc.24",
+    "@leafer-ui/display-module": "1.0.0-rc.24",
+    "@leafer-ui/decorator": "1.0.0-rc.24",
+    "@leafer-ui/external": "1.0.0-rc.24"
   },
   "devDependencies": {
-     "@leafer/interface": "1.0.0-rc.23",
-     "@leafer-ui/interface": "1.0.0-rc.23"
+     "@leafer/interface": "1.0.0-rc.24",
+     "@leafer-ui/interface": "1.0.0-rc.24"
   }
 }
