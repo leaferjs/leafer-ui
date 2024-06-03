@@ -33,12 +33,14 @@ export function layoutText(drawData: ITextDrawData, style: ITextData): void {
         row = rows[i]
         row.x = x
 
-        switch (textAlign) {
-            case 'center':
-                row.x += (width - row.width) / 2
-                break
-            case 'right':
-                row.x += width - row.width
+        if (row.width < width || (row.width > width && !__clipText)) {
+            switch (textAlign) {
+                case 'center':
+                    row.x += (width - row.width) / 2
+                    break
+                case 'right':
+                    row.x += width - row.width
+            }
         }
 
         if (row.paraStart && paraSpacing && i > 0) starY += paraSpacing
