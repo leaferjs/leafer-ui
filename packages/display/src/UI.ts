@@ -183,6 +183,9 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     public autoHeight: IAutoSize
 
     @boundsType()
+    public lockRatio: IBoolean
+
+    @boundsType()
     public autoBox: IAutoBoxData | IConstraint
 
 
