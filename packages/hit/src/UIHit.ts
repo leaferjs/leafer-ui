@@ -51,11 +51,11 @@ ui.__hit = function (inner: IRadiusPointData): boolean {
     // hit path
 
     const { hitFill } = data
-    const needHitFillPath = ((data.fill && hitFill == 'path') || hitFill === 'all')
+    const needHitFillPath = (data.fill && hitFill && hitFill !== 'none') || hitFill === 'all'
     if (needHitFillPath && this.__hitFill(inner)) return true
 
     const { hitStroke, __strokeWidth } = data
-    const needHitStrokePath = ((data.stroke && hitStroke == 'path') || hitStroke === 'all')
+    const needHitStrokePath = (data.stroke && hitFill && hitStroke !== 'none') || hitStroke === 'all'
     if (!needHitFillPath && !needHitStrokePath) return false
 
     const radiusWidth = inner.radiusX * 2
