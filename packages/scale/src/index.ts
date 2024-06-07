@@ -44,10 +44,7 @@ Line.prototype.__scaleResize = function (scaleX: number, scaleY: number): void {
     } else if (this.points) {
         scaleResizePoints(this, scaleX, scaleY)
     } else {
-        const point = this.toPoint
-        point.x *= scaleX
-        point.y *= scaleY
-        this.toPoint = point
+        this.width *= scaleX
     }
 }
 
