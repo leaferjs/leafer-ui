@@ -16,13 +16,13 @@ import { IEditorConfig } from './editor/IEditor'
 export interface ILine extends IUI {
     __: ILineData
     toPoint: IPointData
-    points: number[] | IPointData[]
+    points: number[]
     curve: boolean | number
 }
 
 interface ILineAttrData {
     toPoint?: IPointData
-    points?: number[] | IPointData[]
+    points?: number[]
     curve?: boolean | number
 }
 export interface ILineData extends ILineAttrData, IUIData { }
@@ -80,12 +80,12 @@ export interface IEllipseInputData extends IEllipseAttrData, IUIBaseInputData { 
 export interface IPolygon extends IUI {
     __: IPolygonData
     sides: number
-    points: number[] | IPointData[]
+    points: number[]
     curve: boolean | number
 }
 interface IPolygonAttrData {
     sides?: number
-    points?: number[] | IPointData[]
+    points?: number[]
     curve?: boolean | number
 }
 export interface IPolygonData extends IPolygonAttrData, IUIData { }

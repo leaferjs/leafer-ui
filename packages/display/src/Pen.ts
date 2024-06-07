@@ -1,4 +1,3 @@
-import { IPointData } from '@leafer/interface'
 import { PathCreator, dataProcessor, defineKey, registerUI, useModule } from '@leafer/core'
 
 import { IPenData, IPenInputData, IPathInputData, IPathCommandData, IPath, IPen } from '@leafer-ui/interface'
@@ -75,7 +74,7 @@ export class Pen extends Group implements IPen {
 
     public drawArc(_x: number, _y: number, _radius: number, _startAngle?: number, _endAngle?: number, _anticlockwise?: boolean): Pen { return this }
 
-    public drawPoints(_points: number[] | IPointData[], _curve?: boolean | number, _close?: boolean): Pen { return this }
+    public drawPoints(_points: number[], _curve?: boolean | number, _close?: boolean): Pen { return this }
 
     public clearPath(): Pen { return this }
 
