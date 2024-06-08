@@ -20,12 +20,25 @@ export const ExportModule: IExportModule = {
                     this.running = false
                 }
 
+
+                const { toURL } = Platform
+                const { download } = Platform.origin
+                const fileType = FileHelper.fileType(filename)
+
                 if (filename === 'json') {
                     return over({ data: leaf.toJSON() })
-                } else if (FileHelper.fileType(filename) === 'json') {
-                    Platform.origin.download('data:text/plain;charset=utf-8,' + encodeURIComponent(JSON.stringify(leaf.toJSON())), filename)
+                } else if (fileType === 'json') {
+                    download(toURL(JSON.stringify(leaf.toJSON()), 'text'), filename)
                     return over({ data: true })
                 }
+
+                if (filename === 'svg') {
+                    return over({ data: leaf.toSVG() })
+                } else if (fileType === 'svg') {
+                    download(toURL(leaf.toSVG(), 'svg'), filename)
+                    return over({ data: true })
+                }
+
 
                 const { leafer } = leaf
                 if (leafer) {
