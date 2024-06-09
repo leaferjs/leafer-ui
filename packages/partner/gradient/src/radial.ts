@@ -20,20 +20,33 @@ export function radialGradient(paint: IGradientPaint, box: IBoundsData): ILeafPa
     toPoint(from || 'center', box, realFrom)
     toPoint(to || 'bottom', box, realTo)
 
-    const { width, height } = box
-    let transform: IMatrixData
-
-    if (width !== height || stretch) {
-        transform = get()
-        scaleOfOuter(transform, realFrom, width / height * (stretch || 1), 1)
-        rotateOfOuter(transform, realFrom, getAngle(realFrom, realTo) + 90)
-    }
-
     const style = Platform.canvas.createRadialGradient(realFrom.x, realFrom.y, 0, realFrom.x, realFrom.y, getDistance(realFrom, realTo))
     applyStops(style, paint.stops, opacity)
 
-    const data: ILeafPaint = { type, style, transform }
+    const data: ILeafPaint = { type, style }
+    const transform = getTransform(box, realFrom, realTo, stretch, true)
+    if (transform) data.transform = transform
     if (blendMode) data.blendMode = blendMode
+
     return data
 
+}
+
+export function getTransform(box: IBoundsData, from: IPointData, to: IPointData, stretch: number, rotate90: boolean): IMatrixData {
+    let transform: IMatrixData
+    const { width, height } = box
+
+    if (width !== height || stretch) {
+        const angle = getAngle(from, to)
+        transform = get()
+        if (rotate90) {
+            scaleOfOuter(transform, from, width / height * (stretch || 1), 1)
+            rotateOfOuter(transform, from, angle + 90)
+        } else {
+            scaleOfOuter(transform, from, 1, width / height * (stretch || 1))
+            rotateOfOuter(transform, from, angle)
+        }
+    }
+
+    return transform
 }

@@ -1,9 +1,10 @@
-import { ILeaferCanvas, IRenderOptions, IBooleanMap, IBoundsData, ILeaferImage, IAround } from '@leafer/interface'
+import { ILeaferCanvas, IRenderOptions, IBooleanMap, IBoundsData, ILeaferImage, IAround, IPointData, IMatrixData } from '@leafer/interface'
 
 import { ILeafPaint, ILeafPaintPatternData } from '../type/IComputedType'
 import { IUI, IUIData } from '../IUI'
 import { ICachedShape } from '../ICachedShape'
 import { IGradientPaint, IImagePaint, IPaintAttr } from '../type/IType'
+
 
 export interface IPaintModule {
     compute(attrName: IPaintAttr, ui: IUI): void
@@ -39,4 +40,5 @@ export interface IPaintGradientModule {
     linearGradient(paint: IGradientPaint, box: IBoundsData): ILeafPaint
     radialGradient(paint: IGradientPaint, box: IBoundsData): ILeafPaint
     conicGradient(paint: IGradientPaint, box: IBoundsData): ILeafPaint
+    getTransform(box: IBoundsData, from: IPointData, to: IPointData, stretch: number, rotate90: boolean): IMatrixData
 }
