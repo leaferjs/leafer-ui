@@ -1,4 +1,4 @@
-import { IGroup, IUI, IBox, IRectInputData, ISelectorProxy, IEditSize, ICursorType, IAlign, IUnitPointData, IDragEvent, IRotateEvent, IStroke, IFill, ILeaf, ILeafList, IObject, IBoxInputData, IGroupInputData, IImageCursor, IRect, IBoundsData, IKeyEvent, IUIInputData } from '@leafer-ui/interface'
+import { IGroup, IUI, IBox, IRectInputData, ISelectorProxy, IEditSize, ICursorType, IAlign, IUnitPointData, IDragEvent, IRotateEvent, IStroke, IFill, ILeaf, ILeafList, IObject, IBoxInputData, IGroupInputData, IImageCursor, IRect, IBoundsData, IKeyEvent, IUIInputData, IZoomEvent } from '@leafer-ui/interface'
 
 export interface IEditorBase extends IGroup, ISelectorProxy {
     config: IEditorConfig
@@ -42,7 +42,7 @@ export interface IEditorBase extends IGroup, ISelectorProxy {
     getEditSize(ui: ILeaf): IEditSize
 
     onMove(e: IDragEvent): void
-    onScale(e: IDragEvent): void
+    onScale(e: IDragEvent | IZoomEvent): void
     onRotate(e: IDragEvent | IRotateEvent): void
     onSkew(e: IDragEvent): void
 
@@ -51,7 +51,7 @@ export interface IEditorBase extends IGroup, ISelectorProxy {
     openGroup(group: IGroup): void
     closeGroup(group: IGroup): void
 
-    openInnerEditor(): void
+    openInnerEditor(target?: IUI): void
     closeInnerEditor(): void
 
     lock(): void
@@ -105,8 +105,8 @@ export interface IEditorConfig {
     openInner?: 'double' | 'long' // 双击/长按打开内部
 
     moveable?: boolean
-    rotateable?: boolean
-    resizeable?: boolean
+    rotateable?: boolean | 'rotate'
+    resizeable?: boolean | 'zoom'
     skewable?: boolean
 }
 
