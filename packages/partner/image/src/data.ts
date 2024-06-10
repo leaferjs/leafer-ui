@@ -11,11 +11,9 @@ const tempBox = new Bounds()
 const tempPoint = {} as IPointData
 
 export function createData(leafPaint: ILeafPaint, image: ILeaferImage, paint: IImagePaint, box: IBoundsData): void {
-
     const { blendMode } = paint
     if (blendMode) leafPaint.blendMode = blendMode
     leafPaint.data = getPatternData(paint, box, image)
-
 }
 
 export function getPatternData(paint: IImagePaint, box: IBoundsData, image: ILeaferImage): ILeafPaintPatternData {

@@ -6,8 +6,8 @@ export * from '@leafer-ui/interaction-web'
 export * from '@leafer-ui/partner'
 
 import { ICreator } from '@leafer/interface'
-import { useCanvas, Creator, LeaferCanvas, ImageManager } from '@leafer/web'
-import { HitCanvasManager, Leafer } from '@leafer-ui/core'
+import { useCanvas, Creator, LeaferCanvas } from '@leafer/web'
+import { HitCanvasManager } from '@leafer-ui/core'
 import { Interaction } from '@leafer-ui/interaction-web'
 
 
@@ -18,11 +18,3 @@ Object.assign(Creator, {
 } as ICreator)
 
 useCanvas('canvas')
-
-// chrome 刷新页面时不会销毁实例，需要主动销毁
-window.addEventListener('unload', () => {
-    const { list } = Leafer
-    list.forEach(leafer => (leafer as Leafer).destroy(true))
-    list.destroy()
-    ImageManager.destroy()
-})
