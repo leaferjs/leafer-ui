@@ -11,14 +11,21 @@ const tempBox = new Bounds()
 const tempPoint = {} as IPointData
 
 export function createData(leafPaint: ILeafPaint, image: ILeaferImage, paint: IImagePaint, box: IBoundsData): void {
+
+    const { blendMode } = paint
+    if (blendMode) leafPaint.blendMode = blendMode
+    leafPaint.data = getPatternData(paint, box, image)
+
+}
+
+export function getPatternData(paint: IImagePaint, box: IBoundsData, image: ILeaferImage): ILeafPaintPatternData {
     let { width, height } = image
     if (paint.padding) box = tempBox.set(box).shrink(paint.padding)
 
-    const { opacity, mode, align, offset, scale, size, rotation, blendMode, repeat } = paint
+    const { opacity, mode, align, offset, scale, size, rotation, repeat } = paint
     const sameBox = box.width === width && box.height === height
-    if (blendMode) leafPaint.blendMode = blendMode
 
-    const data: ILeafPaintPatternData = leafPaint.data = { mode }
+    const data: ILeafPaintPatternData = { mode }
     const swapSize = align !== 'center' && (rotation || 0) % 180 === 90
     const swapWidth = swapSize ? height : width, swapHeight = swapSize ? width : height
 
@@ -81,4 +88,5 @@ export function createData(leafPaint: ILeafPaint, image: ILeaferImage, paint: II
     data.height = height
     if (opacity) data.opacity = opacity
     if (repeat) data.repeat = typeof repeat === 'string' ? (repeat === 'x' ? 'repeat-x' : 'repeat-y') : 'repeat'
+    return data
 }
