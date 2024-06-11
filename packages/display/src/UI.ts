@@ -385,9 +385,9 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
 
     public findTag(tag: string | string[]): IUI[] { return this.find({ tag }) }
 
-    public findOne(_condition: number | string | IFindCondition | IFindUIMethod, _options?: any): IUI { return undefined }
+    public findOne(_condition: number | string | IFindCondition | IFindUIMethod, _options?: any): IUI | undefined { return undefined }
 
-    public findId(id: number | string): IUI { return this.findOne({ id }) }
+    public findId(id: number | string): IUI | undefined { return this.findOne({ id }) }
 
 
     // path

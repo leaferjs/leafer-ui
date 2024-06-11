@@ -13,7 +13,7 @@ ui.find = function (condition: number | string | IFindUIMethod, options?: any): 
     return this.leafer ? this.leafer.selector.getBy(condition as IFindMethod, this, false, options) as IUI[] : []
 }
 
-ui.findOne = function (condition: number | string | IFindUIMethod, options?: any): IUI {
+ui.findOne = function (condition: number | string | IFindUIMethod, options?: any): IUI | undefined {
     return this.leafer ? this.leafer.selector.getBy(condition as IFindMethod, this, true, options) as IUI : null
 }
 
