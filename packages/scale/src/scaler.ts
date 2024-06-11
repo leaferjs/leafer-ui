@@ -18,8 +18,14 @@ export function scaleResize(leaf: ILeaf, scaleX: number, scaleY: number): void {
 }
 
 export function scaleResizeFont(leaf: IText, scaleX: number, scaleY: number): void {
-    if (scaleX !== 1) leaf.fontSize *= scaleX
-    else if (scaleY !== 1) leaf.fontSize *= scaleY
+    const { width, height } = leaf.__localBoxBounds
+    if (scaleX !== 1) {
+        leaf.fontSize *= scaleX
+        leaf.y -= height * (scaleX - scaleY) / 2
+    } else if (scaleY !== 1) {
+        leaf.fontSize *= scaleY
+        leaf.x -= width * (scaleY - scaleX) / 2
+    }
 }
 
 export function scaleResizePath(leaf: ILeaf, scaleX: number, scaleY: number): void {
