@@ -46,6 +46,6 @@ function getLeafPaint(attrName: string, paint: IPaint, ui: IUI): ILeafPaint {
         case 'angular':
             return PaintGradient.conicGradient(paint, boxBounds)
         default:
-            return (paint as IRGB).r ? { type: 'solid', style: ColorConvert.string(paint) } : undefined
+            return (paint as IRGB).r !== undefined ? { type: 'solid', style: ColorConvert.string(paint) } : undefined
     }
 }

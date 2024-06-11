@@ -26,7 +26,7 @@ Leaf.prototype.__scaleResize = function (scaleX: number, scaleY: number): void {
 }
 
 Text.prototype.__scaleResize = function (scaleX: number, scaleY: number): void {
-    if (this.editConfig && this.editConfig.editSize === 'font-size') {
+    if (this.__.__autoSize && this.editConfig && this.editConfig.editSize === 'font-size') {
         scaleResizeFont(this, scaleX, scaleY)
     } else {
         scaleResize(this, scaleX, scaleY)
