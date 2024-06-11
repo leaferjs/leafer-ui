@@ -235,6 +235,8 @@ export class InteractionBase implements IInteraction {
     // key
 
     public keyDown(data: IKeyEvent): void {
+        if (!this.config.keyEvent) return
+
         const { code } = data
         if (!this.downKeyMap[code]) {
             this.downKeyMap[code] = true
@@ -250,6 +252,8 @@ export class InteractionBase implements IInteraction {
     }
 
     public keyUp(data: IKeyEvent): void {
+        if (!this.config.keyEvent) return
+
         const { code } = data
         this.downKeyMap[code] = false
         Keyboard.setUpCode(code)
