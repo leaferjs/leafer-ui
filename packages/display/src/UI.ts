@@ -63,7 +63,7 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     @stateType(false)
     public disabled: IBoolean
 
-    @dataType(false)
+    @surfaceType(false)
     public locked: IBoolean
 
 
