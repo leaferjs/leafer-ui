@@ -69,5 +69,6 @@ Box.prototype.__scaleResize = function (scaleX: number, scaleY: number): void {
         scaleResizeGroup(this, scaleX, scaleY)
     } else {
         scaleResize(this, scaleX, scaleY)
+        if (this.__.resizeChildren) scaleResizeGroup(this, scaleX, scaleY)
     }
 }

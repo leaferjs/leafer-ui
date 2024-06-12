@@ -59,8 +59,8 @@ export class Box extends Group implements IBox {
                 super.__updateBoxBounds()
                 if (!data.__autoSize) {
                     const b = this.__layout.boxBounds
-                    if (!data.__autoWidth) b.x = 0, b.width = data.width
-                    if (!data.__autoHeight) b.y = 0, b.height = data.height
+                    if (!data.__autoWidth) b.height += b.y, b.width = data.width, b.x = b.y = 0
+                    if (!data.__autoHeight) b.width += b.x, b.height = data.height, b.y = b.x = 0
                 }
             } else {
                 this.__updateRectBoxBounds()

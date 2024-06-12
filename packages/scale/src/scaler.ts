@@ -12,8 +12,9 @@ export function scaleResize(leaf: ILeaf, scaleX: number, scaleY: number): void {
     if (leaf.pathInputed) {
         scaleResizePath(leaf, scaleX, scaleY)
     } else {
-        leaf.width *= scaleX
-        leaf.height *= scaleY // Text auto height
+        // fix: Text / Box auto width / height, need check scale === 1
+        if (scaleX !== 1) leaf.width *= scaleX
+        if (scaleY !== 1) leaf.height *= scaleY
     }
 }
 

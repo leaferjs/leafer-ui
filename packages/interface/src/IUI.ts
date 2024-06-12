@@ -267,8 +267,8 @@ export interface IBoxData extends IGroupData {
     overflow?: IOverflow
 }
 export interface IBoxInputData extends IGroupInputData {
-    overflow?: IOverflow
     resizeChildren?: boolean
+    overflow?: IOverflow
 }
 
 
