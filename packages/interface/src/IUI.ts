@@ -134,10 +134,12 @@ export interface IText extends ITextStyleAttrData, IUI {
     __: ITextData
     text: string
     padding: IFourNumber
+    resizeFontSize: IBoolean
 }
 interface ITextAttrData {
     text?: string
     padding?: IFourNumber
+    resizeFontSize?: boolean
 }
 
 export interface ITextData extends ITextAttrData, ITextStyleComputedData, IUIData {
