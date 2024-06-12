@@ -291,6 +291,7 @@ export class Interaction extends InteractionBase {
 
     // safari 
     protected onGesturestart(e: IGestureEvent): void {
+        if (this.useMultiTouch) return
         this.preventDefaultWheel(e)
 
         this.lastGestureScale = 1
@@ -298,6 +299,7 @@ export class Interaction extends InteractionBase {
     }
 
     protected onGesturechange(e: IGestureEvent): void {
+        if (this.useMultiTouch) return
         this.preventDefaultWheel(e)
 
         const local = this.getLocal(e)
@@ -316,6 +318,7 @@ export class Interaction extends InteractionBase {
     }
 
     protected onGestureend(e: IGestureEvent): void {
+        if (this.useMultiTouch) return
         this.preventDefaultWheel(e)
 
         this.transformEnd()
