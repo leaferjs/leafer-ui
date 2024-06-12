@@ -1,4 +1,4 @@
-import { ILeaf, ILeafComputedData, ILeafData, ILeafInputData, ILeaferCanvas, IRenderOptions, IExportOptions, IExportResult, IPathDrawer, IPointData, IPathCommandData, ILeaferImageConfig, IBoundsData, IObject, IPathString, ILeaferImage, IPathCreator, IAnswer, IPickOptions, IPickResult, IValue, ICanvasContext2DSettings, IFourNumber, IFindCondition } from '@leafer/interface'
+import { ILeaf, ILeafComputedData, ILeafData, ILeafInputData, ILeaferCanvas, IRenderOptions, IExportOptions, IExportResult, IPathDrawer, IPointData, IPathCommandData, ILeaferImageConfig, IBoundsData, IObject, IPathString, ILeaferImage, IPathCreator, IAnswer, IPickOptions, IPickResult, IValue, ICanvasContext2DSettings, IFourNumber, IFindCondition, IBoolean } from '@leafer/interface'
 
 import {
     IFillAttrData, IFillInputData, IFillComputedData,
@@ -257,15 +257,18 @@ export interface IFrameInputData extends IBoxInputData {
 // Box
 export interface IBox extends IGroup {
     __: IBoxData
+    resizeChildren: IBoolean
     overflow: IOverflow
     __updateRectRenderBounds(): void
     __renderGroup(canvas: ILeaferCanvas, options: IRenderOptions): void
 }
 export interface IBoxData extends IGroupData {
+    resizeChildren?: boolean
     overflow?: IOverflow
 }
 export interface IBoxInputData extends IGroupInputData {
     overflow?: IOverflow
+    resizeChildren?: boolean
 }
 
 

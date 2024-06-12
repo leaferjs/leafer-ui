@@ -1,5 +1,5 @@
-import { ILeaferCanvas, IRenderOptions, IBoundsData } from '@leafer/interface'
-import { rewrite, rewriteAble, registerUI, BoundsHelper, dataProcessor, affectRenderBoundsType } from '@leafer/core'
+import { ILeaferCanvas, IRenderOptions, IBoundsData, IBoolean } from '@leafer/interface'
+import { rewrite, rewriteAble, registerUI, BoundsHelper, dataProcessor, affectRenderBoundsType, dataType } from '@leafer/core'
 
 import { IBox, IBoxData, IBoxInputData, IOverflow } from '@leafer-ui/interface'
 import { BoxData } from '@leafer-ui/data'
@@ -22,6 +22,9 @@ export class Box extends Group implements IBox {
 
     @dataProcessor(BoxData)
     declare public __: IBoxData
+
+    @dataType(false)
+    public resizeChildren: IBoolean
 
     @affectRenderBoundsType('show')
     declare public overflow: IOverflow
