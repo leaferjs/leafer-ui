@@ -1,5 +1,5 @@
 import { IDragEvent, IPointData, ILeaf, ILeafList, IObject, IBoundsData } from '@leafer/interface'
-import { registerUIEvent, LeafList } from '@leafer/core'
+import { registerUIEvent, LeafList, BoundsHelper } from '@leafer/core'
 
 import { PointerEvent } from './PointerEvent'
 
@@ -87,6 +87,15 @@ export class DragEvent extends PointerEvent implements IDragEvent {
 
     public getLocalTotal(relative?: ILeaf): IPointData {
         return this.getLocalMove(relative, true)
+    }
+
+    public getPageBounds(): IBoundsData {
+        const total = this.getPageTotal()
+        const start = this.getPage()
+        const bounds = {} as IBoundsData
+        BoundsHelper.set(bounds, start.x - total.x, start.y - total.y, total.x, total.y)
+        BoundsHelper.unsign(bounds)
+        return bounds
     }
 
     protected assignMove(total: boolean): void {
