@@ -4,7 +4,7 @@ Leafer UI 是基于 [Leafer](https://github.com/leaferjs/leafer) 开发的一套
 
 提供了常用的 UI 绘图组件，和开箱即用的功能，方便与 Figma、Sketch 等产品进行数据交换，并为跨平台开发提供了统一、丰富的交互事件，如拖拽、旋转、缩放手势等。
 
-1.0.0-rc.25 已发布 🎉🎉🎉，查看 [更新日志](https://leaferjs.com/ui/update/)。
+1.0.0-rc.26 已发布 🎉🎉🎉，查看 [更新日志](https://leaferjs.com/ui/update/)。
 
 目前产品已经逐步稳定，正式版即将到来，感谢所有参与的朋友们～
 
