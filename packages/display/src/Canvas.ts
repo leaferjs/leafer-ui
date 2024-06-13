@@ -1,5 +1,5 @@
-import { ILeaferCanvas, ILeaferCanvasConfig, INumber, IRenderOptions, IPointData, ICanvasContext2D, ICanvasContext2DSettings, IScreenSizeData, ISizeData, IHitType } from '@leafer/interface'
-import { Creator, Matrix, Platform, dataProcessor, registerUI, hitType } from '@leafer/core'
+import { ILeaferCanvas, ILeaferCanvasConfig, INumber, IRenderOptions, IPointData, ICanvasContext2D, ICanvasContext2DSettings, IScreenSizeData, ISizeData } from '@leafer/interface'
+import { Creator, Matrix, Platform, dataProcessor, registerUI } from '@leafer/core'
 
 import { ICanvas, ICanvasData, ICanvasInputData, IUI } from '@leafer-ui/interface'
 import { CanvasData } from '@leafer-ui/data'

@@ -48,15 +48,25 @@ export class DragEvent extends PointerEvent implements IDragEvent {
         return move
     }
 
-    static getMoveInDragBounds(box: IBoundsData, dragBounds: IBoundsData, move: IPointData, change?: boolean): IPointData {
-        const x = box.x + move.x, y = box.y + move.y
-        const right = x + box.width, bottom = y + box.height
+    static getMoveInDragBounds(childBox: IBoundsData, dragBounds: IBoundsData, move: IPointData, change?: boolean): IPointData {
+        const x = childBox.x + move.x, y = childBox.y + move.y
+        const right = x + childBox.width, bottom = y + childBox.height
         const boundsRight = dragBounds.x + dragBounds.width, boundsBottom = dragBounds.y + dragBounds.height
+
         if (!change) move = { ...move }
-        if (x < dragBounds.x) move.x += dragBounds.x - x
-        else if (right > boundsRight) move.x += boundsRight - right
-        if (y < dragBounds.y) move.y += dragBounds.y - y
-        else if (bottom > boundsBottom) move.y += boundsBottom - bottom
+
+        if (BoundsHelper.includes(childBox, dragBounds)) { // childBox > dragBounds
+            if (x > dragBounds.x) move.x += dragBounds.x - x
+            else if (right < boundsRight) move.x += boundsRight - right
+            if (y > dragBounds.y) move.y += dragBounds.y - y
+            else if (bottom < boundsBottom) move.y += boundsBottom - bottom
+        } else {
+            if (x < dragBounds.x) move.x += dragBounds.x - x
+            else if (right > boundsRight) move.x += boundsRight - right
+            if (y < dragBounds.y) move.y += dragBounds.y - y
+            else if (bottom > boundsBottom) move.y += boundsBottom - bottom
+        }
+
         return move
     }
 
