@@ -370,6 +370,7 @@ export interface IUIData extends IUIComputedData, ILeafData {
     __pixelStroke?: boolean
 
     __isHitPixel?: boolean
+    __isCanvas?: boolean // canvas 等需单独绘制的元素
 
     __opacityFill?: boolean  // 半透明的
     __opacityStroke?: boolean

@@ -9,7 +9,7 @@ const ui = UI.prototype
 ui.__updateHitCanvas = function (): void {
     const data = this.__, { hitCanvasManager } = this.leafer
 
-    const isHitPixelFill = data.__pixelFill && data.hitFill === 'pixel'
+    const isHitPixelFill = (data.__pixelFill || data.__isCanvas) && data.hitFill === 'pixel'
     const isHitPixelStroke = data.__pixelStroke && data.hitStroke === 'pixel'
     const isHitPixel = isHitPixelFill || isHitPixelStroke
 
@@ -51,11 +51,11 @@ ui.__hit = function (inner: IRadiusPointData): boolean {
     // hit path
 
     const { hitFill } = data
-    const needHitFillPath = (data.fill && hitFill && hitFill !== 'none') || hitFill === 'all'
+    const needHitFillPath = ((data.fill || data.__isCanvas) && (hitFill === 'path' || (hitFill === 'pixel' && !(data.__pixelFill || data.__isCanvas)))) || hitFill === 'all'
     if (needHitFillPath && this.__hitFill(inner)) return true
 
     const { hitStroke, __strokeWidth } = data
-    const needHitStrokePath = (data.stroke && hitFill && hitStroke !== 'none') || hitStroke === 'all'
+    const needHitStrokePath = (data.stroke && (hitStroke === 'path' || (hitStroke === 'pixel' && !data.__pixelStroke))) || hitStroke === 'all'
     if (!needHitFillPath && !needHitStrokePath) return false
 
     const radiusWidth = inner.radiusX * 2

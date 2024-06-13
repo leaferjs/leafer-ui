@@ -9,7 +9,7 @@ export class HitCanvasManager extends CanvasManager implements IHitCanvasManager
     protected pathList: ILeafList = new LeafList()
     protected pixelList: ILeafList = new LeafList()
 
-    public getPixelType(leaf: ILeaf, config: ILeaferCanvasConfig): IHitCanvas {
+    public getPixelType(leaf: ILeaf, config?: ILeaferCanvasConfig): IHitCanvas {
         this.__autoClear()
         this.pixelList.add(leaf)
         return Creator.hitCanvas(config)

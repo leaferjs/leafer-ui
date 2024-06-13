@@ -9,7 +9,7 @@ const rect = Rect.prototype
 // hit 
 
 rect.__updateHitCanvas = function () {
-    if (this.stroke || this.cornerRadius || (this.fill && this.hitFill === 'pixel') || this.hitStroke === 'all') ui.__updateHitCanvas.call(this)
+    if (this.stroke || this.cornerRadius || ((this.fill || this.__.__isCanvas) && this.hitFill === 'pixel') || this.hitStroke === 'all') ui.__updateHitCanvas.call(this)
     else if (this.__hitCanvas) this.__hitCanvas = null
 }
 

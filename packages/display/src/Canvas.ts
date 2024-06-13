@@ -31,9 +31,6 @@ export class Canvas extends Rect implements ICanvas {
     @resizeType()
     public contextSettings: ICanvasContext2DSettings
 
-    @hitType('all')
-    declare public hitFill: IHitType
-
     public canvas: ILeaferCanvas
 
     public context: ICanvasContext2D
@@ -42,7 +39,7 @@ export class Canvas extends Rect implements ICanvas {
         super(data)
         this.canvas = Creator.canvas(this.__ as ILeaferCanvasConfig)
         this.context = this.canvas.context
-        this.__.__drawAfterFill = true
+        this.__.__isCanvas = this.__.__drawAfterFill = true
     }
 
     public draw(ui: IUI, offset?: IPointData, scale?: number | IPointData, rotation?: number): void {
