@@ -4,13 +4,17 @@ Leafer UI 是基于 [Leafer](https://github.com/leaferjs/leafer) 开发的一套
 
 提供了常用的 UI 绘图组件，和开箱即用的功能，方便与 Figma、Sketch 等产品进行数据交换，并为跨平台开发提供了统一、丰富的交互事件，如拖拽、旋转、缩放手势等。
 
-1.0.0-rc.26 已发布 🎉🎉🎉，查看 [更新日志](https://leaferjs.com/ui/update/)。
+1.0.0-rc.27 已发布 🎉🎉🎉，查看 [更新日志](https://leaferjs.com/ui/update/)。
 
 目前产品已经逐步稳定，正式版即将到来，感谢所有参与的朋友们～
 
-想马上开始使用，请查看 [快速安装](https://leaferjs.com/ui/guide/start.html)， 有问题、建议可以 [提交到这里](https://github.com/leaferjs/ui/issues)，或加入[技术交流群](https://leaferjs.com/ui/guide/)。
-
 如果您仅需绘图功能，推荐更轻量的 [leafer-draw](https://leaferjs.com/ui/guide/type/draw/start.html) （46KB min+gzip）。
+
+如果您想编辑控制图形，需安装 [图形编辑器](https://leaferjs.com/guide/plugin/editor/index.md) 插件。
+
+## 互动交流
+
+想马上开始使用，请查看 [快速安装](https://leaferjs.com/ui/guide/start.html)， 有问题、建议可以 [提交到这里](https://github.com/leaferjs/ui/issues)，或加入 [技术交流群](https://leaferjs.com/#contact)。
 
 🌟 记得前往 [GitHub](https://github.com/leaferjs/ui) / [Gitee](https://gitee.com/leaferjs/ui) 点亮你的 [小星星](https://github.com/leaferjs/ui) ✨ ✨ ✨
 
