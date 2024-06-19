@@ -34,5 +34,7 @@ export const LeaferTypeCreator = {
 const { list, register } = LeaferTypeCreator
 
 register('draw', () => { })
+
+register('custom', () => { })
 register('design', addInteractionWindow)
 register('document', document)
