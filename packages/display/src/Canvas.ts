@@ -64,7 +64,7 @@ export class Canvas extends Rect implements ICanvas {
     public __drawAfterFill(canvas: ILeaferCanvas, _options: IRenderOptions): void {
         const origin = this.canvas.view as ISizeData
         const { width, height } = this
-        if (this.__.cornerRadius) {
+        if (this.__.cornerRadius || this.pathInputed) {
             canvas.save()
             canvas.clip()
             canvas.drawImage(this.canvas.view as any, 0, 0, origin.width, origin.height, 0, 0, width, height)

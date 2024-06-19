@@ -196,7 +196,7 @@ export class Leafer extends Group implements ILeafer {
         Object.keys(data).forEach(key => (this as any)[key] = data[key])
     }
 
-    public forceRender(bounds?: IBoundsData): void {
+    override forceRender(bounds?: IBoundsData): void {
         this.renderer.addBlock(bounds ? new Bounds(bounds) : this.canvas.bounds)
         if (this.viewReady) this.renderer.update()
     }
@@ -247,7 +247,7 @@ export class Leafer extends Group implements ILeafer {
         }
     }
 
-    public __setAttr(attrName: string, newValue: IValue): boolean {
+    override __setAttr(attrName: string, newValue: IValue): boolean {
         if (this.canvas) {
             if (canvasSizeAttrs.includes(attrName)) {
                 this.__changeCanvasSize(attrName, newValue as number)
@@ -263,7 +263,7 @@ export class Leafer extends Group implements ILeafer {
         return super.__setAttr(attrName, newValue)
     }
 
-    public __getAttr(attrName: string): IValue {
+    override __getAttr(attrName: string): IValue {
         if (this.canvas && canvasSizeAttrs.includes(attrName)) return this.canvas[attrName]
         return super.__getAttr(attrName)
     }
@@ -407,7 +407,7 @@ export class Leafer extends Group implements ILeafer {
         this.__eventIds.length = 0
     }
 
-    public destroy(sync?: boolean): void {
+    override destroy(sync?: boolean): void {
         const doDestory = () => {
             if (!this.destroyed) {
                 Leafer.list.remove(this)

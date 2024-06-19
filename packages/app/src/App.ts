@@ -25,7 +25,7 @@ export class App extends Leafer implements IApp {
         super(userConfig, data)
     }
 
-    public init(userConfig?: IAppConfig, parentApp?: IApp): void {
+    override init(userConfig?: IAppConfig, parentApp?: IApp): void {
         super.init(userConfig, parentApp)
         if (userConfig) {
             const { ground, tree, sky, editor } = userConfig
@@ -55,27 +55,27 @@ export class App extends Leafer implements IApp {
         this.__eventIds.push(this.on_(PropertyEvent.CHANGE, this.__onPropertyChange, this))
     }
 
-    public start(): void {
+    override start(): void {
         super.start()
         this.children.forEach(leafer => leafer.start())
     }
 
-    public stop(): void {
+    override stop(): void {
         this.children.forEach(leafer => leafer.stop())
         super.stop()
     }
 
-    public unlockLayout(): void {
+    override unlockLayout(): void {
         super.unlockLayout()
         this.children.forEach(leafer => leafer.unlockLayout())
     }
 
-    public lockLayout(): void {
+    override lockLayout(): void {
         super.lockLayout()
         this.children.forEach(leafer => leafer.lockLayout())
     }
 
-    public forceRender(bounds?: IBoundsData): void {
+    override forceRender(bounds?: IBoundsData): void {
         this.children.forEach(leafer => leafer.forceRender(bounds))
     }
 
@@ -85,7 +85,7 @@ export class App extends Leafer implements IApp {
         return leafer
     }
 
-    public add(leafer: ILeafer): void {
+    override add(leafer: ILeafer): void {
         if (!leafer.view) {
             if (this.realCanvas && !this.canvas.bounds) { // wait miniapp select canvas
                 setTimeout(() => this.add(leafer), 10)
@@ -119,7 +119,7 @@ export class App extends Leafer implements IApp {
         if (this.viewReady) this.renderer.update()
     }
 
-    public __render(canvas: ILeaferCanvas, options: IRenderOptions): void {
+    override __render(canvas: ILeaferCanvas, options: IRenderOptions): void {
         if (options.matrix) {
             const { a, b, c, d, e, f } = options.matrix
             canvas.setTransform(a, b, c, d, e, f) // screenshot
