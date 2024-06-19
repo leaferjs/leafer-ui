@@ -421,7 +421,7 @@ export class InteractionBase implements IInteraction {
     }
 
     public updateCursor(data?: IPointerEvent): void {
-        if (this.config.cursor.stop || !this.config.pointer.hover) return
+        if (!this.config.cursor || !this.config.pointer.hover) return
 
         if (!data) {
             this.updateHoverData()

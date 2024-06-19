@@ -19,6 +19,6 @@ export const config: IInteractionConfig = {
         swipeDistance: 20,
         preventDefaultMenu: true
     },
-    cursor: {},
+    cursor: true,
     keyEvent: true
 }
