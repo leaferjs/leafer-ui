@@ -2,7 +2,7 @@ import { IGroup, IUI, IBox, IRectInputData, ISelectorProxy, IEditSize, ICursorTy
 
 export interface IEditorBase extends IGroup, ISelectorProxy {
     config: IEditorConfig
-    mergeConfig: IEditorConfig // 实际使用，合并了选中元素上的editConfig
+    readonly mergeConfig: IEditorConfig // 实际使用，合并了选中元素上的editConfig
 
     hoverTarget: IUI
     target: IUI | IUI[]
@@ -37,6 +37,7 @@ export interface IEditorBase extends IGroup, ISelectorProxy {
     removeItem(item: IUI): void
 
     update(): void
+    updateEditBox(): void
     updateEditTool(): void
 
     getEditSize(ui: ILeaf): IEditSize
