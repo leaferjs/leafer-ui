@@ -33,7 +33,7 @@ export function checkImage(ui: IUI, canvas: ILeaferCanvas, paint: ILeafPaint, al
             }
         }
 
-        if (allowPaint) {
+        if (allowPaint || (Export.running && !data.repeat)) {
             canvas.save()
             canvas.clip()
             if (paint.blendMode) canvas.blendMode = paint.blendMode

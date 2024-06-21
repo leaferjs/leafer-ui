@@ -52,6 +52,8 @@ export const ExportModule: IExportModule = {
                         const { slice, trim, onCanvas } = options
                         let scale = options.scale || 1
                         let pixelRatio = options.pixelRatio || 1
+                        const smooth = options.smooth === undefined ? leafer.config.smooth : options.smooth
+                        const contextSettings = options.contextSettings || leafer.config.contextSettings
                         if (leaf.isApp) {
                             scale *= pixelRatio // app 只能以自身的pixelRatio导出，需转移到scale上
                             pixelRatio = leaf.app.pixelRatio
@@ -95,7 +97,7 @@ export const ExportModule: IExportModule = {
 
                         const { x, y, width, height } = new Bounds(renderBounds).scale(scale)
 
-                        let canvas = Creator.canvas({ width: Math.round(width), height: Math.round(height), pixelRatio })
+                        let canvas = Creator.canvas({ width: Math.round(width), height: Math.round(height), pixelRatio, smooth, contextSettings })
                         const renderOptions: IRenderOptions = { matrix: matrix.scale(1 / scale).invert().translate(-x, -y).withScale(1 / scaleX * scale, 1 / scaleY * scale) }
 
                         if (slice) {
