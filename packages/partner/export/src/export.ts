@@ -43,6 +43,8 @@ export const ExportModule: IExportModule = {
                 const { leafer } = leaf
                 if (leafer) {
 
+                    checkLazy(leaf)
+
                     leafer.waitViewCompleted(async () => {
 
                         options = FileHelper.getExportOptions(options)
@@ -54,10 +56,12 @@ export const ExportModule: IExportModule = {
                         let pixelRatio = options.pixelRatio || 1
                         const smooth = options.smooth === undefined ? leafer.config.smooth : options.smooth
                         const contextSettings = options.contextSettings || leafer.config.contextSettings
+
                         if (leaf.isApp) {
                             scale *= pixelRatio // app 只能以自身的pixelRatio导出，需转移到scale上
                             pixelRatio = leaf.app.pixelRatio
                         }
+
                         const screenshot = options.screenshot || leaf.isApp
                         const fill = (isLeafer && screenshot) ? (options.fill === undefined ? leaf.fill : options.fill) : options.fill // leafer use 
                         const needFill = FileHelper.isOpaqueImage(filename) || fill, matrix = new Matrix()
@@ -160,4 +164,10 @@ function addTask(task: IFunction): Promise<IExportResult> {
     return new Promise((resolve: IExportResultFunction) => {
         tasker.add(async () => await task(resolve), { parallel: false })
     })
+}
+
+
+function checkLazy(leaf: IUI): void {
+    if (leaf.__.__needComputePaint) leaf.__.__computePaint()
+    if (leaf.isBranch) leaf.children.forEach(child => checkLazy(child))
 }

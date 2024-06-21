@@ -416,7 +416,7 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     public __onUpdateSize(): void {
         if (this.__.__input) {
             const data = this.__;
-            (data.lazy && this.leafer && this.leafer.created && !this.leafer.lazyBounds.hit(this.__world)) ? data.__needComputePaint = true : data.__computePaint()
+            (data.lazy && !this.__inLazyBounds && !Export.running) ? data.__needComputePaint = true : data.__computePaint()
         }
     }
 
