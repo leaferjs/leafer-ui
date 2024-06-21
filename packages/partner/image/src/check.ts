@@ -27,13 +27,13 @@ export function checkImage(ui: IUI, canvas: ILeaferCanvas, paint: ILeafPaint, al
                     width *= data.scaleX
                     height *= data.scaleY
                 }
-                allowPaint = width * height > Platform.image.maxCacheSize
+                allowPaint = (width * height > Platform.image.maxCacheSize) || Export.running
             } else {
                 allowPaint = false
             }
         }
 
-        if (allowPaint || (Export.running && !data.repeat)) {
+        if (allowPaint) {
             canvas.save()
             canvas.clip()
             if (paint.blendMode) canvas.blendMode = paint.blendMode
