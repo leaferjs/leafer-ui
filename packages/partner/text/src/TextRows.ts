@@ -69,7 +69,7 @@ export function createRows(drawData: ITextDrawData, content: string, style: ITex
                     if (breakAll) {
 
                         if (wordWidth) addWord() // break
-                        addRow()
+                        if (rowWidth) addRow()
 
                     } else {
                         if (!afterBreak) afterBreak = charType === Letter && lastCharType == After // split ，S  
@@ -77,11 +77,11 @@ export function createRows(drawData: ITextDrawData, content: string, style: ITex
                         if (langBreak || afterBreak || charType === Break || charType === Before || charType === Single || (wordWidth + charWidth > realWidth)) {
 
                             if (wordWidth) addWord() // break
-                            addRow()
+                            if (rowWidth) addRow()
 
                         } else {
 
-                            addRow()
+                            if (rowWidth) addRow()
                         }
                     }
 
