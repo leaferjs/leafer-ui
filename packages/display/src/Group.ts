@@ -84,7 +84,7 @@ export class Group extends UI implements IGroup {   // tip: rewrited Box
         this.add(child, this.children.indexOf(after) + 1)
     }
 
-    public addBefore(child: UI, before: IUI): void {
+    public addBefore(child: IUI, before: IUI): void {
         this.add(child, this.children.indexOf(before))
     }
 

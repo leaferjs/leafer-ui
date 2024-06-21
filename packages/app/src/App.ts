@@ -85,16 +85,17 @@ export class App extends Leafer implements IApp {
         return leafer
     }
 
-    override add(leafer: ILeafer): void {
+    override add(leafer: ILeafer, index?: number): void {
         if (!leafer.view) {
             if (this.realCanvas && !this.canvas.bounds) { // wait miniapp select canvas
-                setTimeout(() => this.add(leafer), 10)
+                setTimeout(() => this.add(leafer, index), 10)
                 return
             }
             leafer.init(this.__getChildConfig(leafer.userConfig), this)
         }
 
-        super.add(leafer)
+        super.add(leafer, index)
+        if (index !== undefined) leafer.canvas.childIndex = index
         this.__listenChildEvents(leafer)
     }
 
