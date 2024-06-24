@@ -51,7 +51,7 @@ function emitAppChildren(leaf: ILeaf, type: string, data: IUIEvent, capture?: bo
 }
 
 function emitEvent(leaf: ILeaf, type: string, data: IUIEvent, capture?: boolean, excludePath?: ILeafList): boolean {
-    if (leaf.destroyed) return true
+    if (leaf.destroyed) return false
     if (leaf.__.hitSelf && !exclude(leaf, excludePath)) {
 
         if (State.updateEventStyle) State.updateEventStyle(leaf, type) // hoverStyle / pressStyle
