@@ -105,9 +105,9 @@ export class InteractionBase implements IInteraction {
         if (PointerButton.left(data)) {
             this.tapWait()
             this.longPressWait(data)
-        } else if (PointerButton.right(data)) {
-            this.waitMenuTap = true
         }
+
+        this.waitMenuTap = PointerButton.right(data)
 
         this.dragger.setDragData(data) // must after down event
         if (!this.isHoldRightKey) this.updateCursor(data)
