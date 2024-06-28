@@ -281,6 +281,8 @@ export class Interaction extends InteractionBase {
         this.preventDefaultWheel(e)
 
         const { wheel } = this.config
+        if (wheel.disabled) return
+
         const scale = wheel.getScale ? wheel.getScale(e, wheel) : WheelEventHelper.getScale(e, wheel)
         const local = this.getLocal(e)
 
