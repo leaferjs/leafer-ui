@@ -17,10 +17,10 @@ export class Frame extends Box implements IFrame {
     declare public __: IFrameData
 
     @surfaceType('#FFFFFF')
-    declare public fill: IFill
+    declare public fill?: IFill
 
     @affectRenderBoundsType('hide')
-    declare public overflow: IOverflow
+    declare public overflow?: IOverflow
 
     constructor(data?: IFrameInputData) {
         super(data)

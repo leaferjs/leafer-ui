@@ -4,8 +4,8 @@ export interface IEditorBase extends IGroup, ISelectorProxy {
     config: IEditorConfig
     readonly mergeConfig: IEditorConfig // 实际使用，合并了选中元素上的editConfig
 
-    hoverTarget: IUI
-    target: IUI | IUI[]
+    hoverTarget?: IUI
+    target?: IUI | IUI[]
 
     readonly list: IUI[]
     leafList: ILeafList
@@ -20,13 +20,13 @@ export interface IEditorBase extends IGroup, ISelectorProxy {
 
     readonly dragging: boolean
 
-    element: IUI
+    element?: IUI
     buttons: IGroup
 
     selector: IGroup
     editBox: IEditBoxBase
-    editTool: IObject
-    innerEditor: IObject
+    editTool?: IObject
+    innerEditor?: IObject
 
     select(target: IUI | IUI[]): void
     cancel(): void

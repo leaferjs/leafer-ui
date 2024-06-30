@@ -22,13 +22,13 @@ export class Polygon extends UI implements IPolygon {
     declare public __: IPolygonData
 
     @pathType(3)
-    sides: INumber
+    public sides?: INumber
 
     @pathType()
-    points: number[]
+    public points?: number[]
 
     @pathType(0)
-    curve: boolean | number
+    public curve?: boolean | number
 
     constructor(data?: IPolygonInputData) {
         super(data)

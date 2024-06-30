@@ -18,7 +18,7 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     @dataProcessor(UIData)
     declare public __: IUIData
 
-    declare public proxyData: IUIInputData // need rewrite getter
+    declare public proxyData?: IUIInputData // need rewrite getter
     declare public __proxyData?: IUIInputData
 
     public get app(): ILeafer { return this.leafer && this.leafer.app }
@@ -37,201 +37,201 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
 
     // id
     @dataType('')
-    public id: IString
+    public id?: IString
 
     @dataType('')
-    public name: IString
+    public name?: IString
 
     @dataType('')
-    public className: IString
+    public className?: IString
 
 
     // layer
     @surfaceType('pass-through')
-    public blendMode: IBlendMode
+    public blendMode?: IBlendMode
 
     @opacityType(1)
-    public opacity: INumber
+    public opacity?: INumber
 
     @visibleType(true)
-    public visible: IBoolean | 0
+    public visible?: IBoolean | 0
 
 
     @stateType(false)
-    public selected: IBoolean
+    public selected?: IBoolean
 
     @stateType(false)
-    public disabled: IBoolean
+    public disabled?: IBoolean
 
     @surfaceType(false)
-    public locked: IBoolean
+    public locked?: IBoolean
 
 
     @sortType(0)
-    public zIndex: INumber
+    public zIndex?: INumber
 
 
     @maskType(false)
-    public mask: IBoolean | IMaskType
+    public mask?: IBoolean | IMaskType
 
     @eraserType(false)
-    public eraser: IBoolean | IEraserType
+    public eraser?: IBoolean | IEraserType
 
 
     // position
     @positionType(0, true)
-    public x: INumber
+    public x?: INumber
 
     @positionType(0, true)
-    public y: INumber
+    public y?: INumber
 
     // size
     @boundsType(100, true)
-    public width: INumber
+    public width?: INumber
 
     @boundsType(100, true)
-    public height: INumber
+    public height?: INumber
 
     // scale
     @scaleType(1, true)
-    public scaleX: INumber
+    public scaleX?: INumber
 
     @scaleType(1, true)
-    public scaleY: INumber
+    public scaleY?: INumber
 
     // rotate
     @rotationType(0, true)
-    public rotation: INumber
+    public rotation?: INumber
 
     // skew
     @rotationType(0, true)
-    public skewX: INumber
+    public skewX?: INumber
 
     @rotationType(0, true)
-    public skewY: INumber
+    public skewY?: INumber
 
 
     // offset
     @positionType(0, true)
-    public offsetX: INumber
+    public offsetX?: INumber
 
     @positionType(0, true)
-    public offsetY: INumber
+    public offsetY?: INumber
 
     // scroll
     @positionType(0, true)
-    public scrollX: INumber
+    public scrollX?: INumber
 
     @positionType(0, true)
-    public scrollY: INumber
+    public scrollY?: INumber
 
 
     // center
     @autoLayoutType()
-    public origin: IAlign | IUnitPointData
+    public origin?: IAlign | IUnitPointData
 
     @autoLayoutType()
-    public around: IAlign | IUnitPointData
+    public around?: IAlign | IUnitPointData
 
 
     // image
     @dataType(false)
-    public lazy: IBoolean  // load image / compute paint
+    public lazy?: IBoolean  // load image / compute paint
 
     @naturalBoundsType(1)
-    public pixelRatio: INumber
+    public pixelRatio?: INumber
 
 
     // path
     @pathInputType()
-    public path: IPathCommandData | IPathString
+    public path?: IPathCommandData | IPathString
 
     @pathType()
-    public windingRule: IWindingRule
+    public windingRule?: IWindingRule
 
     @pathType(true)
-    public closed: boolean
+    public closed?: boolean
 
 
     // auto layout
     @autoLayoutType(false)
-    public flow: IFlowType
+    public flow?: IFlowType
 
     @boundsType(0)
-    public padding: IFourNumber
+    public padding?: IFourNumber
 
     @boundsType(0)
-    public gap: IGap | IPointGap
+    public gap?: IGap | IPointGap
 
     @boundsType('top-left')
-    public flowAlign: IFlowAlign | IFlowAxisAlign
+    public flowAlign?: IFlowAlign | IFlowAxisAlign
 
     @boundsType(false)
-    public flowWrap: IFlowWrap
+    public flowWrap?: IFlowWrap
 
     @boundsType('box')
-    public itemBox: IFlowBoxType
+    public itemBox?: IFlowBoxType
 
 
     @boundsType(true)
-    public inFlow: IBoolean
+    public inFlow?: IBoolean
 
     @boundsType() // rewrite in flow
-    public autoWidth: IAutoSize
+    public autoWidth?: IAutoSize
 
     @boundsType()  // rewrite in flow
-    public autoHeight: IAutoSize
+    public autoHeight?: IAutoSize
 
     @boundsType()
-    public lockRatio: IBoolean
+    public lockRatio?: IBoolean
 
     @boundsType()
-    public autoBox: IAutoBoxData | IConstraint
+    public autoBox?: IAutoBoxData | IConstraint
 
 
     @boundsType()
-    public widthRange: IRangeSize
+    public widthRange?: IRangeSize
 
     @boundsType()
-    public heightRange: IRangeSize
+    public heightRange?: IRangeSize
 
 
     // drag
     @dataType(false)
-    public draggable: IBoolean | IAxis
+    public draggable?: IBoolean | IAxis
 
     @dataType()
     public dragBounds?: IBoundsData | 'parent'
 
 
     @dataType(false)
-    public editable: IBoolean
+    public editable?: IBoolean
 
 
     // hit
     @hitType(true)
-    public hittable: IBoolean
+    public hittable?: IBoolean
 
     @hitType('path')
-    public hitFill: IHitType
+    public hitFill?: IHitType
 
     @strokeType('path')
-    public hitStroke: IHitType
+    public hitStroke?: IHitType
 
     @hitType(false)
-    public hitBox: IBoolean
+    public hitBox?: IBoolean
 
     @hitType(true)
-    public hitChildren: IBoolean
+    public hitChildren?: IBoolean
 
     @hitType(true)
-    public hitSelf: IBoolean
+    public hitSelf?: IBoolean
 
     @hitType()
-    public hitRadius: INumber
+    public hitRadius?: INumber
 
     @cursorType('')
-    public cursor: ICursorType | ICursorType[]
+    public cursor?: ICursorType | ICursorType[]
 
     // ---
 
@@ -239,91 +239,91 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     // fill
 
     @surfaceType()
-    public fill: IFill
+    public fill?: IFill
 
     // stroke
 
     @strokeType()
-    public stroke: IStroke
+    public stroke?: IStroke
 
     @strokeType('inside')
-    public strokeAlign: IStrokeAlign
+    public strokeAlign?: IStrokeAlign
 
     @strokeType(1)
-    public strokeWidth: IFourNumber | IStrokeWidthString
+    public strokeWidth?: IFourNumber | IStrokeWidthString
 
     @strokeType(false)
-    public strokeWidthFixed: IBoolean
+    public strokeWidthFixed?: IBoolean
 
     @strokeType('none')
-    public strokeCap: IStrokeCap
+    public strokeCap?: IStrokeCap
 
     @strokeType('miter')
-    public strokeJoin: IStrokeJoin
+    public strokeJoin?: IStrokeJoin
 
     @strokeType()
-    public dashPattern: INumber[] | IDashPatternString
+    public dashPattern?: INumber[] | IDashPatternString
 
     @strokeType()
-    public dashOffset: INumber
+    public dashOffset?: INumber
 
     @strokeType(10)
-    public miterLimit: INumber
+    public miterLimit?: INumber
 
 
     // arrow
 
     @arrowType('none')
-    public startArrow: IArrowType
+    public startArrow?: IArrowType
 
     @arrowType('none')
-    public endArrow: IArrowType
+    public endArrow?: IArrowType
 
     // corner
 
     @pathType(0)
-    public cornerRadius: IFourNumber | ICornerRadiusString
+    public cornerRadius?: IFourNumber | ICornerRadiusString
 
     @pathType()
-    public cornerSmoothing: INumber
+    public cornerSmoothing?: INumber
 
     // effect
 
     @effectType()
-    public shadow: IShadowEffect | IShadowEffect[] | IShadowString
+    public shadow?: IShadowEffect | IShadowEffect[] | IShadowString
 
     @effectType()
-    public innerShadow: IShadowEffect | IShadowEffect[] | IShadowString
+    public innerShadow?: IShadowEffect | IShadowEffect[] | IShadowString
 
     @effectType()
-    public blur: INumber | IBlurEffect
+    public blur?: INumber | IBlurEffect
 
     @effectType()
-    public backgroundBlur: INumber | IBlurEffect
+    public backgroundBlur?: INumber | IBlurEffect
 
     @effectType()
-    public grayscale: INumber | IGrayscaleEffect
+    public grayscale?: INumber | IGrayscaleEffect
 
 
     // states
 
     @dataType()
-    public normalStyle: IUIInputData // auto restore hover / press / focus / selected / disabled style
+    public normalStyle?: IUIInputData // auto restore hover / press / focus / selected / disabled style
 
     @dataType()
-    public hoverStyle: IUIInputData
+    public hoverStyle?: IUIInputData
 
     @dataType()
-    public pressStyle: IUIInputData
+    public pressStyle?: IUIInputData
 
     @dataType()
-    public focusStyle: IUIInputData
+    public focusStyle?: IUIInputData
 
     @dataType()
-    public selectedStyle: IUIInputData
+    public selectedStyle?: IUIInputData
 
     @dataType()
-    public disabledStyle: IUIInputData
+    public disabledStyle?: IUIInputData
 
 
     // 预留给用户使用的数据对象

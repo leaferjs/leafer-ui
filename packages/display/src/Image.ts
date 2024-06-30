@@ -20,7 +20,7 @@ export class Image extends Rect implements IImage {
 
     public get ready(): boolean { return this.image ? this.image.ready : false }
 
-    public image: ILeaferImage
+    public image?: ILeaferImage
 
     constructor(data?: IImageInputData) {
         super(data)

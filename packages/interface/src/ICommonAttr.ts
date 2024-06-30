@@ -6,8 +6,8 @@ import { IDashPatternString, IShadowString, IColorString, IStrokeWidthString, IC
 
 // corner---
 export interface ICornerRadiusAttrData {
-    cornerRadius: IFourNumber | ICornerRadiusString
-    cornerSmoothing: INumber
+    cornerRadius?: IFourNumber | ICornerRadiusString
+    cornerSmoothing?: INumber
 }
 export interface ICornerRadiusInputData {
     cornerRadius?: IFourNumber | ICornerRadiusString
@@ -20,7 +20,7 @@ export interface ICornerRadiusComputedData {
 
 // fill---
 export interface IFillAttrData {
-    fill: IFill
+    fill?: IFill
 }
 export interface IFillInputData {
     fill?: IFill
@@ -37,19 +37,19 @@ export interface IBorderComputedData {
 
 // stroke---
 export interface IStrokeAttrData {
-    stroke: IStroke
+    stroke?: IStroke
 
-    strokeAlign: IStrokeAlign
-    strokeWidth: IFourNumber | IStrokeWidthString
-    strokeWidthFixed: IBoolean
-    strokeCap: IStrokeCap
-    strokeJoin: IStrokeJoin
-    dashPattern: INumber[] | IDashPatternString
-    dashOffset: INumber
-    miterLimit: INumber
+    strokeAlign?: IStrokeAlign
+    strokeWidth?: IFourNumber | IStrokeWidthString
+    strokeWidthFixed?: IBoolean
+    strokeCap?: IStrokeCap
+    strokeJoin?: IStrokeJoin
+    dashPattern?: INumber[] | IDashPatternString
+    dashOffset?: INumber
+    miterLimit?: INumber
 
-    startArrow: IArrowType
-    endArrow: IArrowType
+    startArrow?: IArrowType
+    endArrow?: IArrowType
 }
 export interface IStrokeInputData {
     stroke?: IStroke
@@ -85,23 +85,23 @@ export interface IStrokeComputedData {
 
 // text---
 export interface ITextStyleAttrData {
-    fontFamily: IString
-    fontSize: INumber
-    fontWeight: IFontWeight
-    italic: IBoolean
-    textCase: ITextCase
-    textDecoration: ITextDecoration
-    letterSpacing: INumber | IUnitData
-    lineHeight: INumber | IUnitData
+    fontFamily?: IString
+    fontSize?: INumber
+    fontWeight?: IFontWeight
+    italic?: IBoolean
+    textCase?: ITextCase
+    textDecoration?: ITextDecoration
+    letterSpacing?: INumber | IUnitData
+    lineHeight?: INumber | IUnitData
 
-    paraIndent: INumber
-    paraSpacing: INumber
+    paraIndent?: INumber
+    paraSpacing?: INumber
 
-    textAlign: ITextAlign
-    verticalAlign: IVerticalAlign
+    textAlign?: ITextAlign
+    verticalAlign?: IVerticalAlign
 
-    textWrap: ITextWrap
-    textOverflow: IOverflow | string
+    textWrap?: ITextWrap
+    textOverflow?: IOverflow | string
 }
 export interface ITextStyleInputData {
     fontFamily?: IString
@@ -144,11 +144,11 @@ export interface ITextStyleComputedData {
 
 // effect---
 export interface IEffectAttrData {
-    shadow: IShadowEffect | IShadowEffect[] | IShadowString
-    innerShadow: IShadowEffect | IShadowEffect[] | IShadowString
-    blur: INumber | IBlurEffect
-    backgroundBlur: INumber | IBlurEffect
-    grayscale: INumber | IGrayscaleEffect
+    shadow?: IShadowEffect | IShadowEffect[] | IShadowString
+    innerShadow?: IShadowEffect | IShadowEffect[] | IShadowString
+    blur?: INumber | IBlurEffect
+    backgroundBlur?: INumber | IBlurEffect
+    grayscale?: INumber | IGrayscaleEffect
 }
 export interface IEffectInputData {
     shadow?: IShadowEffect | IShadowEffect[] | IShadowString

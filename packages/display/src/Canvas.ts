@@ -17,23 +17,23 @@ export class Canvas extends Rect implements ICanvas {
     declare public __: ICanvasData
 
     @resizeType(100)
-    declare public width: INumber
+    declare public width?: INumber
 
     @resizeType(100)
-    declare public height: INumber
+    declare public height?: INumber
 
     @resizeType(Platform.devicePixelRatio)
-    declare public pixelRatio: INumber
+    declare public pixelRatio?: INumber
 
     @resizeType(true)
-    public smooth: boolean
+    public smooth?: boolean
 
     @resizeType()
-    public contextSettings: ICanvasContext2DSettings
+    public contextSettings?: ICanvasContext2DSettings
 
-    public canvas: ILeaferCanvas
+    public canvas?: ILeaferCanvas
 
-    public context: ICanvasContext2D
+    public context?: ICanvasContext2D
 
     constructor(data?: ICanvasInputData) {
         super(data)

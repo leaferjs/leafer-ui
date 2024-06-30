@@ -22,19 +22,19 @@ export class Line extends UI implements ILine { // tip: rewrited Polygon
     declare public __: ILineData
 
     @affectStrokeBoundsType('center')
-    declare public strokeAlign: IStrokeAlign
+    declare public strokeAlign?: IStrokeAlign
 
     @boundsType(0)
-    declare public height: INumber
+    declare public height?: INumber
 
     @pathType()
-    public points: number[]
+    public points?: number[]
 
     @pathType(0)
-    public curve: boolean | number
+    public curve?: boolean | number
 
     @pathType(false)
-    declare public closed: boolean
+    declare public closed?: boolean
 
     public get toPoint(): IPointData {
         const { width, rotation } = this.__

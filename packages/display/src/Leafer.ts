@@ -20,7 +20,7 @@ export class Leafer extends Group implements ILeafer {
     declare public __: ILeaferData
 
     @boundsType()
-    declare public pixelRatio: INumber
+    declare public pixelRatio?: INumber
 
     public get isApp(): boolean { return false }
     public get app(): ILeafer { return this.parent || this }

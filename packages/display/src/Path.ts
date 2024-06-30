@@ -15,7 +15,7 @@ export class Path extends UI implements IPath {
     declare public __: IPathData
 
     @affectStrokeBoundsType('center')
-    declare public strokeAlign: IStrokeAlign
+    declare public strokeAlign?: IStrokeAlign
 
     constructor(data?: IPathInputData) {
         super(data)

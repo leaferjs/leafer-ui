@@ -18,13 +18,13 @@ export class Ellipse extends UI implements IEllipse {
     declare public __: IEllipseData
 
     @pathType(0)
-    public innerRadius: INumber
+    public innerRadius?: INumber
 
     @pathType(0)
-    public startAngle: INumber
+    public startAngle?: INumber
 
     @pathType(0)
-    public endAngle: INumber
+    public endAngle?: INumber
 
     constructor(data?: IEllipseInputData) {
         super(data)

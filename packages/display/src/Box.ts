@@ -24,10 +24,10 @@ export class Box extends Group implements IBox {
     declare public __: IBoxData
 
     @dataType(false)
-    public resizeChildren: IBoolean
+    public resizeChildren?: IBoolean
 
     @affectRenderBoundsType('show')
-    declare public overflow: IOverflow
+    declare public overflow?: IOverflow
 
     public isOverflow: boolean
 

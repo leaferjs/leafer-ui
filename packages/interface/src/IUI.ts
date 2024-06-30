@@ -1,4 +1,4 @@
-import { ILeaf, ILeafComputedData, ILeafData, ILeafInputData, ILeaferCanvas, IRenderOptions, IExportOptions, IExportResult, IPathDrawer, IPointData, IPathCommandData, ILeaferImageConfig, IBoundsData, IObject, IPathString, ILeaferImage, IPathCreator, IAnswer, IPickOptions, IPickResult, IValue, ICanvasContext2DSettings, IFourNumber, IFindCondition, IBoolean } from '@leafer/interface'
+import { ILeaf, ILeafComputedData, ILeafData, ILeafInputData, ILeaferCanvas, IRenderOptions, IExportOptions, IExportResult, IPathDrawer, IPointData, IPathCommandData, ILeaferImageConfig, IBoundsData, IObject, IPathString, ILeaferImage, IPathCreator, IAnswer, IPickOptions, IPickResult, IValue, ICanvasContext2DSettings, IFourNumber, IFindCondition, IBoolean, ICanvasContext2D } from '@leafer/interface'
 
 import {
     IFillAttrData, IFillInputData, IFillComputedData,
@@ -15,9 +15,9 @@ import { IEditorConfig } from './editor/IEditor'
 // Line
 export interface ILine extends IUI {
     __: ILineData
-    toPoint: IPointData
-    points: number[]
-    curve: boolean | number
+    toPoint?: IPointData
+    points?: number[]
+    curve?: boolean | number
 }
 
 interface ILineAttrData {
@@ -63,9 +63,9 @@ export interface IRectInputData extends IUIBaseInputData { }
 // Ellipse
 export interface IEllipse extends IUI {
     __: IEllipseData
-    startAngle: number
-    endAngle: number
-    innerRadius: number
+    startAngle?: number
+    endAngle?: number
+    innerRadius?: number
 }
 interface IEllipseAttrData {
     startAngle?: number
@@ -79,9 +79,9 @@ export interface IEllipseInputData extends IEllipseAttrData, IUIBaseInputData { 
 // Polygon
 export interface IPolygon extends IUI {
     __: IPolygonData
-    sides: number
-    points: number[]
-    curve: boolean | number
+    sides?: number
+    points?: number[]
+    curve?: boolean | number
 }
 interface IPolygonAttrData {
     sides?: number
@@ -95,8 +95,8 @@ export interface IPolygonInputData extends IPolygonAttrData, IUIBaseInputData { 
 // Star
 export interface IStar extends IUI {
     __: IStarData
-    corners: number
-    innerRadius: number
+    corners?: number
+    innerRadius?: number
 }
 interface IStarAttrData {
     corners?: number
@@ -132,9 +132,9 @@ export interface IPenInputData extends IGroupInputData { }
 // Text
 export interface IText extends ITextStyleAttrData, IUI {
     __: ITextData
-    text: string
-    padding: IFourNumber
-    resizeFontSize: IBoolean
+    text?: string
+    padding?: IFourNumber
+    resizeFontSize?: IBoolean
 }
 interface ITextAttrData {
     text?: string
@@ -215,9 +215,10 @@ export interface IImageInputData extends IImageAttrData, IUIBaseInputData { }
 
 export interface ICanvas extends IRect {
     __: ICanvasData
-    smooth: boolean
-    contextSettings: ICanvasContext2DSettings
-    canvas: ILeaferCanvas
+    smooth?: boolean
+    contextSettings?: ICanvasContext2DSettings
+    canvas?: ILeaferCanvas
+    context?: ICanvasContext2D
     __updateSize(): void
 }
 interface ICanvasAttrData {
@@ -259,8 +260,8 @@ export interface IFrameInputData extends IBoxInputData {
 // Box
 export interface IBox extends IGroup {
     __: IBoxData
-    resizeChildren: IBoolean
-    overflow: IOverflow
+    resizeChildren?: IBoolean
+    overflow?: IOverflow
     __updateRectRenderBounds(): void
     __renderGroup(canvas: ILeaferCanvas, options: IRenderOptions): void
 }
@@ -301,17 +302,17 @@ export interface IUI extends IFillAttrData, IStrokeAttrData, ICornerRadiusAttrDa
     zoomLayer?: IGroup
     readonly isFrame?: boolean
 
-    proxyData: IUIInputData
+    proxyData?: IUIInputData
     __proxyData?: IUIInputData
 
-    normalStyle: IUIInputData
-    hoverStyle: IUIInputData
-    pressStyle: IUIInputData
-    focusStyle: IUIInputData
-    selectedStyle: IUIInputData
-    disabledStyle: IUIInputData
+    normalStyle?: IUIInputData
+    hoverStyle?: IUIInputData
+    pressStyle?: IUIInputData
+    focusStyle?: IUIInputData
+    selectedStyle?: IUIInputData
+    disabledStyle?: IUIInputData
 
-    editConfig: IEditorConfig
+    editConfig?: IEditorConfig
     editOuter: string
     editInner: string
 

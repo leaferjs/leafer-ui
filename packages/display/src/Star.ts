@@ -20,10 +20,10 @@ export class Star extends UI implements IStar {
     declare public __: IStarData
 
     @pathType(5)
-    public corners: INumber
+    public corners?: INumber
 
     @pathType(0.382)
-    public innerRadius: INumber
+    public innerRadius?: INumber
 
     constructor(data?: IStarInputData) {
         super(data)

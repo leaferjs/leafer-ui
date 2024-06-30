@@ -21,67 +21,67 @@ export class Text extends UI implements IText {
 
     // size
     @boundsType(0)
-    declare public width: INumber
+    declare public width?: INumber
 
     @boundsType(0)
-    declare public height: INumber
+    declare public height?: INumber
 
     @dataType(false)
-    public resizeFontSize: IBoolean
+    public resizeFontSize?: IBoolean
 
     @surfaceType('#000000')
-    declare public fill: IFill
+    declare public fill?: IFill
 
     @affectStrokeBoundsType('outside')
-    declare public strokeAlign: IStrokeAlign
+    declare public strokeAlign?: IStrokeAlign
 
     @hitType('all')
-    declare public hitFill: IHitType
+    declare public hitFill?: IHitType
 
     @boundsType('')
-    public text: IString
+    public text?: IString
 
     @boundsType('L')
-    public fontFamily: IString
+    public fontFamily?: IString
 
     @boundsType(12)
-    public fontSize: INumber
+    public fontSize?: INumber
 
     @boundsType('normal')
-    public fontWeight: IFontWeight
+    public fontWeight?: IFontWeight
 
     @boundsType(false)
-    public italic: IBoolean
+    public italic?: IBoolean
 
     @boundsType('none')
-    public textCase: ITextCase
+    public textCase?: ITextCase
 
     @boundsType('none')
-    public textDecoration: ITextDecoration
+    public textDecoration?: ITextDecoration
 
     @boundsType(0)
-    public letterSpacing: INumber | IUnitData
+    public letterSpacing?: INumber | IUnitData
 
     @boundsType({ type: 'percent', value: 1.5 } as IUnitData)
-    public lineHeight: INumber | IUnitData
+    public lineHeight?: INumber | IUnitData
 
     @boundsType(0)
-    public paraIndent: INumber
+    public paraIndent?: INumber
 
     @boundsType(0)
-    public paraSpacing: INumber
+    public paraSpacing?: INumber
 
     @boundsType('left')
-    public textAlign: ITextAlign
+    public textAlign?: ITextAlign
 
     @boundsType('top')
-    public verticalAlign: IVerticalAlign
+    public verticalAlign?: IVerticalAlign
 
     @boundsType('normal')
-    public textWrap: ITextWrap
+    public textWrap?: ITextWrap
 
     @boundsType('show')
-    public textOverflow: IOverflow | string
+    public textOverflow?: IOverflow | string
 
     public get editInner(): string { return 'TextEditor' }
 
