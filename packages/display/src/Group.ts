@@ -1,7 +1,7 @@
-import { IPickOptions, IPickResult, IPointData } from '@leafer/interface'
+import { IJSONOptions, IPickOptions, IPickResult, IPointData } from '@leafer/interface'
 import { Branch, useModule, dataProcessor, registerUI, UICreator } from '@leafer/core'
 
-import { IGroup, IGroupData, IGroupInputData, IUI, IUIInputData } from '@leafer-ui/interface'
+import { IGroup, IGroupData, IGroupInputData, IUI, IUIInputData, IUIJSONData } from '@leafer-ui/interface'
 import { GroupData } from '@leafer-ui/data'
 
 import { UI } from './UI'
@@ -62,9 +62,9 @@ export class Group extends UI implements IGroup {   // tip: rewrited Box
         }
     }
 
-    public toJSON(): IUIInputData {
-        const data = super.toJSON()
-        data.children = this.children.map(child => child.toJSON())
+    public toJSON(options?: IJSONOptions): IUIJSONData {
+        const data = super.toJSON(options)
+        data.children = this.children.map(child => child.toJSON(options))
         return data
     }
 

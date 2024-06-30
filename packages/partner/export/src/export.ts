@@ -10,6 +10,10 @@ export const ExportModule: IExportModule = {
     export(leaf: IUI, filename: IExportFileType | string, options?: IExportOptions | number | boolean): Promise<IExportResult> {
 
         this.running = true
+
+        const fileType = FileHelper.fileType(filename)
+        options = FileHelper.getExportOptions(options)
+
         return addTask((success: IExportResultFunction) =>
 
             new Promise((resolve: IFunction) => {
@@ -20,15 +24,13 @@ export const ExportModule: IExportModule = {
                     this.running = false
                 }
 
-
                 const { toURL } = Platform
                 const { download } = Platform.origin
-                const fileType = FileHelper.fileType(filename)
 
                 if (filename === 'json') {
-                    return over({ data: leaf.toJSON() })
+                    return over({ data: leaf.toJSON(options.json) })
                 } else if (fileType === 'json') {
-                    download(toURL(JSON.stringify(leaf.toJSON()), 'text'), filename)
+                    download(toURL(JSON.stringify(leaf.toJSON(options.json)), 'text'), filename)
                     return over({ data: true })
                 }
 
@@ -46,8 +48,6 @@ export const ExportModule: IExportModule = {
                     checkLazy(leaf)
 
                     leafer.waitViewCompleted(async () => {
-
-                        options = FileHelper.getExportOptions(options)
 
                         let renderBounds: IBoundsData, trimBounds: IBounds, scaleX = 1, scaleY = 1
                         const { worldTransform, isLeafer, isFrame } = leaf
