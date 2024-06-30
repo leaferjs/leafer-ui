@@ -3,7 +3,8 @@ import { Platform } from '@leafer/core'
 import { ITextCharData, ITextData, ITextDrawData, ITextRowData } from '@leafer-ui/interface'
 
 
-export function clipText(drawData: ITextDrawData, style: ITextData): void {
+export function clipText(drawData: ITextDrawData, style: ITextData, x: number, width: number): void {
+    if (!width) return
 
     const { rows, overflow } = drawData
     let { textOverflow } = style
@@ -15,7 +16,7 @@ export function clipText(drawData: ITextDrawData, style: ITextData): void {
 
         let char: ITextCharData, charRight: number
         const ellipsisWidth = textOverflow ? Platform.canvas.measureText(textOverflow).width : 0
-        const right = style.x + style.width - ellipsisWidth
+        const right = x + width - ellipsisWidth
         const list = style.textWrap === 'none' ? rows : [rows[overflow - 1]]
 
         list.forEach(row => {

@@ -48,7 +48,7 @@ export function getDrawData(content: string, style: ITextData): ITextDrawData {
 
     layoutChar(drawData, style, width, height) // set char.x
 
-    if (drawData.overflow) clipText(drawData, style)
+    if (drawData.overflow) clipText(drawData, style, x, width)
 
     if (textDecoration !== 'none') decorationText(drawData, style)
 
