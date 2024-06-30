@@ -12,7 +12,7 @@ Leafer UI 是基于 [Leafer](https://github.com/leaferjs/leafer) 开发的一套
 
 如需编辑图形，推荐更省心的 [leafer-editor](https://leaferjs.com/ui/guide/install/editor/start.html)，已集成了图形编辑器相关插件。
 
-纯绘图的场景，推荐更轻量的 [leafer-draw](https://leaferjs.com/ui/guide/type/draw/start.html) （46KB min+gzip）。
+纯绘图的场景，推荐更轻量的 [leafer-draw](https://leaferjs.com/ui/guide/type/draw/start.html) （49KB min+gzip）。
 
 ## 互动交流
 
