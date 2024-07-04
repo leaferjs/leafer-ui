@@ -371,7 +371,9 @@ export class Leafer extends Group implements ILeafer {
     }
 
     // need view plugin
-    public zoom(_zoomType: IZoomType, _padding?: IFourNumber, _fixedScale?: boolean): IBoundsData { return undefined }
+    public zoom(_zoomType: IZoomType, _padding?: IFourNumber, _fixedScale?: boolean): IBoundsData {
+        return debug.error('need @leafer-in/view') as undefined
+    }
 
     // interaction window rewrite
     public getValidMove(moveX: number, moveY: number): IPointData { return { x: moveX, y: moveY } }
