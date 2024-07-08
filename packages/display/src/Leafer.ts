@@ -120,7 +120,7 @@ export class Leafer extends Group implements ILeafer {
         )
 
         if (this.isApp) this.__setApp()
-        this.__checkAutoLayout(config)
+        this.__checkAutoLayout(config, parentApp)
         this.view = canvas.view
 
         // interaction / manager
@@ -241,9 +241,9 @@ export class Leafer extends Group implements ILeafer {
         this.__level = 1
     }
 
-    protected __checkAutoLayout(config: ILeaferConfig): void {
-        if (!config.width || !config.height) {
-            this.autoLayout = new AutoBounds(config)
+    protected __checkAutoLayout(config: ILeaferConfig, parentApp?: IApp): void {
+        if (!parentApp) {
+            if (!config.width || !config.height) this.autoLayout = new AutoBounds(config)
             this.canvas.startAutoLayout(this.autoLayout, this.__onResize.bind(this))
         }
     }
