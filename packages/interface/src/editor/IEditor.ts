@@ -80,7 +80,7 @@ export interface IEditorConfig {
 
     rect?: IBoxInputData
     area?: IRectInputData
-    mask?: IColorString
+    mask?: boolean | IColorString
 
     buttonsDirection?: 'top' | 'right' | 'bottom' | 'left'
     buttonsFixed?: boolean
