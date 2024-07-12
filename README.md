@@ -8,6 +8,8 @@ Leafer UI 是基于 [Leafer](https://github.com/leaferjs/leafer) 开发的一套
 
 v1.0 正式版已发布 🎉🎉🎉
 
+📗[图文并茂、由浅入深的了解 LeaferJS](https://leaferjs.com/ui/blog/2024-07-09.html)
+
 ## 快速安装
 
 🚀 想马上使用，请 [安装 leafer-ui](https://leaferjs.com/ui/guide/install/ui/start.html)，开始你的探索之旅。
