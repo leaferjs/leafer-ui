@@ -74,9 +74,9 @@ export interface IEditorConfig {
     pointSize?: number
     pointRadius?: number
 
-    point?: IBoxInputData | IBoxInputData[]
-    middlePoint?: IBoxInputData | IBoxInputData[]
-    rotatePoint?: IBoxInputData
+    point?: IEditPointInputData | IEditPointInputData[]
+    middlePoint?: IEditPointInputData | IEditPointInputData[]
+    rotatePoint?: IEditPointInputData
 
     rect?: IBoxInputData
     area?: IRectInputData
@@ -112,12 +112,16 @@ export interface IEditorConfig {
     skewable?: boolean
 }
 
+export interface IEditPointInputData extends IBoxInputData {
+    direction?: number
+    pointType?: IEditPointType
+}
 export interface IEditPoint extends IBox {
     direction: number
     pointType: IEditPointType
 }
 
-export type IEditPointType = 'rotate' | 'resize'
+export type IEditPointType = 'rotate' | 'resize' | 'button'
 
 export interface IEditBoxBase extends IGroup {
     editor: IEditorBase
