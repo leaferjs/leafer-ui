@@ -76,6 +76,7 @@ export interface IEditorConfig {
 
     point?: IEditPointInputData | IEditPointInputData[]
     middlePoint?: IEditPointInputData | IEditPointInputData[]
+
     rotatePoint?: IEditPointInputData
 
     rect?: IBoxInputData
@@ -83,7 +84,7 @@ export interface IEditorConfig {
     mask?: boolean | IColorString
 
     buttonsDirection?: 'top' | 'right' | 'bottom' | 'left'
-    buttonsFixed?: boolean
+    buttonsFixed?: boolean | 'AABB' | 'OBB'
     buttonsMargin?: number
 
     hideOnMove?: boolean
