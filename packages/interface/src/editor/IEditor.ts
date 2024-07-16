@@ -81,9 +81,10 @@ export interface IEditorConfig {
     area?: IRectInputData
     mask?: boolean | IColorString
 
-    rotatePoint?: IEditPointInputData
-    rotatePointDirection?: IDirection4
-    rotatePointMargin?: number
+    circle?: IEditPointInputData
+    circleDirection?: IDirection4
+    circleMargin?: number
+    rotatePoint?: IEditPointInputData // 改用circle代替，后期可移除
 
     buttonsDirection?: IDirection4
     buttonsFixed?: boolean | 'AABB' | 'OBB'
