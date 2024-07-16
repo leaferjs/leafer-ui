@@ -104,7 +104,11 @@ export const ExportModule: IExportModule = {
                         let canvas = Creator.canvas({ width: Math.round(width), height: Math.round(height), pixelRatio, smooth, contextSettings })
                         const renderOptions: IRenderOptions = { matrix: matrix.scale(1 / scale).invert().translate(-x, -y).withScale(1 / scaleX * scale, 1 / scaleY * scale) }
 
+                        let sliceLeaf: IUI
                         if (slice) {
+                            sliceLeaf = leaf
+                            sliceLeaf.__worldOpacity = 0 // hide slice
+
                             leaf = leafer // render all in bounds
                             renderOptions.bounds = canvas.bounds
                         }
@@ -123,6 +127,8 @@ export const ExportModule: IExportModule = {
 
                         canvas.restore()
 
+
+                        if (sliceLeaf) sliceLeaf.__updateWorldOpacity() // show slice
 
                         if (trim) {
                             trimBounds = getTrimBounds(canvas)
