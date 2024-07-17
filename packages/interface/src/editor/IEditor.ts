@@ -110,7 +110,7 @@ export interface IEditorConfig {
     continuousSelect?: boolean // 点击可以连续选择
     openInner?: 'double' | 'long' // 双击/长按打开内部
 
-    moveable?: boolean
+    moveable?: boolean | 'move'
     rotateable?: boolean | 'rotate'
     resizeable?: boolean | 'zoom'
     skewable?: boolean
