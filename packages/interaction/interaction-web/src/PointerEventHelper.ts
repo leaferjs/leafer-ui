@@ -48,6 +48,7 @@ export const PointerEventHelper = {
             width: 1,
             height: 1,
             pointerType: 'touch',
+            multiTouch: e.touches.length > 1,
             pressure: touch.force,
         }
     },

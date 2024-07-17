@@ -92,7 +92,7 @@ export class Interaction extends InteractionBase {
 
     // multiTouch
     protected multiTouchStart(e: TouchEvent): void {
-        this.useMultiTouch = (e.touches.length >= 2)
+        this.useMultiTouch = (e.touches.length > 1)
         this.touches = this.useMultiTouch ? this.getTouches(e.touches) : undefined
         if (this.useMultiTouch) this.pointerCancel()
     }

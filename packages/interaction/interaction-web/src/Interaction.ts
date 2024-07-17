@@ -146,20 +146,20 @@ export class Interaction extends InteractionBase {
     protected onPointerDown(e: PointerEvent): void {
         this.preventDefaultPointer(e)
 
+        if (this.config.pointer.touch || this.useMultiTouch) return
         this.usePointer || (this.usePointer = true)
-        if (this.useMultiTouch) return
         this.pointerDown(PointerEventHelper.convert(e, this.getLocal(e)))
     }
 
     protected onPointerMove(e: PointerEvent): void {
+        if (this.config.pointer.touch || this.useMultiTouch || this.preventWindowPointer(e)) return
         this.usePointer || (this.usePointer = true)
-        if (this.useMultiTouch || this.preventWindowPointer(e)) return
         this.pointerMove(PointerEventHelper.convert(e, this.getLocal(e, true)))
     }
 
     protected onPointerUp(e: PointerEvent): void {
         if (this.downData) this.preventDefaultPointer(e)
-        if (this.useMultiTouch || this.preventWindowPointer(e)) return
+        if (this.config.pointer.touch || this.useMultiTouch || this.preventWindowPointer(e)) return
         this.pointerUp(PointerEventHelper.convert(e, this.getLocal(e)))
     }
 
@@ -238,7 +238,7 @@ export class Interaction extends InteractionBase {
 
     // multiTouch
     protected multiTouchStart(e: TouchEvent): void {
-        this.useMultiTouch = (e.touches.length >= 2)
+        this.useMultiTouch = (e.touches.length > 1)
         this.touches = this.useMultiTouch ? this.getTouches(e.touches) : undefined
         if (this.useMultiTouch) this.pointerCancel()
     }
