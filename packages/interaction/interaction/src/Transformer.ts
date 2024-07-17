@@ -6,6 +6,8 @@ import { InteractionBase } from './Interaction'
 
 export class Transformer {
 
+    public get transforming(): boolean { return !!(this.moveData || this.zoomData || this.rotateData) }
+
     protected interaction: InteractionBase
     protected moveData: IMoveEvent
     protected zoomData: IZoomEvent
