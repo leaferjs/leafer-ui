@@ -111,8 +111,9 @@ export interface IEditorConfig {
     openInner?: 'double' | 'long' // 双击/长按打开内部
 
     moveable?: boolean | 'move'
-    rotateable?: boolean | 'rotate'
     resizeable?: boolean | 'zoom'
+    flipable?: boolean
+    rotateable?: boolean | 'rotate'
     skewable?: boolean
 }
 
