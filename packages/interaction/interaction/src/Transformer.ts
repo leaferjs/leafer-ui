@@ -20,6 +20,7 @@ export class Transformer {
 
     public move(data: IMoveEvent): void {
         const { interaction } = this
+        if (!data.moveType) data.moveType = 'move'
 
         if (!this.moveData) {
             const { path } = interaction.selector.getByPoint(data, interaction.hitRadius)

@@ -1,4 +1,4 @@
-import { IPointerEvent, IDragEvent, ILeaf, ILeafList, ITimer, IFunction, IPointDataMap } from '@leafer/interface'
+import { IPointerEvent, IDragEvent, ILeaf, ILeafList, ITimer, IFunction, IPointDataMap, IMoveEvent } from '@leafer/interface'
 import { BoundsHelper, PointHelper, LeafList } from '@leafer/core'
 
 import { MoveEvent, DragEvent, DropEvent, PointerButton } from '@leafer-ui/event'
@@ -58,7 +58,10 @@ export class Dragger {
         }
 
         if (!this.moving && canDrag) {
-            if (this.moving = interaction.canMove(this.downData) || interaction.isHoldRightKey || interaction.isMobileDragEmpty) interaction.emit(MoveEvent.START, this.dragData)
+            if (this.moving = interaction.canMove(this.downData) || interaction.isHoldRightKey || interaction.isMobileDragEmpty) {
+                (this.dragData as IMoveEvent).moveType = 'drag'
+                interaction.emit(MoveEvent.START, this.dragData)
+            }
         }
 
         if (!this.moving) {
@@ -103,6 +106,7 @@ export class Dragger {
         this.dragData.path = path
 
         if (this.moving) {
+            (this.dragData as IMoveEvent).moveType = 'drag'
             interaction.emit(MoveEvent.BEFORE_MOVE, this.dragData)
             interaction.emit(MoveEvent.MOVE, this.dragData)
         } else if (this.dragging) {
@@ -174,7 +178,8 @@ export class Dragger {
         endDragData.path = path
 
         if (this.moving) {
-            this.moving = false
+            this.moving = false;
+            (endDragData as IMoveEvent).moveType = 'drag'
             interaction.emit(MoveEvent.END, endDragData)
         }
 
@@ -248,7 +253,7 @@ export class Dragger {
             PointHelper.move(downData, moveX, moveY)
             PointHelper.move(this.dragData, moveX, moveY)
 
-            interaction.move({ ...data, moveX, moveY, totalX, totalY })
+            interaction.move({ ...data, moveX, moveY, totalX, totalY, moveType: 'drag' })
             interaction.pointerMoveReal(data)
         }, 10)
     }

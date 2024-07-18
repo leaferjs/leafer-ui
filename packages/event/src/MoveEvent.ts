@@ -12,4 +12,5 @@ export class MoveEvent extends DragEvent implements IMoveEvent {
     static MOVE = 'move'
     static END = 'move.end'
 
+    readonly moveType: 'drag' | 'move'
 }
