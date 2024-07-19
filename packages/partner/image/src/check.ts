@@ -12,7 +12,7 @@ const { abs } = Math
 export function checkImage(ui: IUI, canvas: ILeaferCanvas, paint: ILeafPaint, allowPaint?: boolean): boolean {
     const { scaleX, scaleY } = ImageManager.patternLocked ? ui.__world : ui.__nowWorld
 
-    if (!paint.data || paint.patternId === scaleX + '-' + scaleY) {
+    if (!paint.data || (paint.patternId === scaleX + '-' + scaleY && !Export.running)) {
         return false
     } else {
 
