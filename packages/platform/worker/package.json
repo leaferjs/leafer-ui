@@ -1,6 +1,6 @@
 {
   "name": "@leafer-ui/worker",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "@leafer-ui/worker",
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
@@ -22,13 +22,13 @@
     "leaferjs"
   ],
   "dependencies": {
-    "@leafer/core": "1.0.0",
-    "@leafer/worker": "1.0.0",
-    "@leafer/partner": "1.0.0",
-    "@leafer/interface": "1.0.0",
-    "@leafer-ui/draw": "1.0.0",
-    "@leafer-ui/core": "1.0.0",
-    "@leafer-ui/partner": "1.0.0",
-    "@leafer-ui/interface": "1.0.0"
+    "@leafer/core": "1.0.1",
+    "@leafer/worker": "1.0.1",
+    "@leafer/partner": "1.0.1",
+    "@leafer/interface": "1.0.1",
+    "@leafer-ui/draw": "1.0.1",
+    "@leafer-ui/core": "1.0.1",
+    "@leafer-ui/partner": "1.0.1",
+    "@leafer-ui/interface": "1.0.1"
   }
 }
