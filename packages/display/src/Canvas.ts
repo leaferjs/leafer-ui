@@ -86,8 +86,7 @@ export class Canvas extends Rect implements ICanvas {
     public destroy(): void {
         if (this.canvas) {
             this.canvas.destroy()
-            this.canvas = null
-            this.context = null
+            this.canvas = this.context = null
         }
         super.destroy()
     }
