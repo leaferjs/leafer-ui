@@ -167,6 +167,7 @@ export class InteractionBase implements IInteraction {
         if (!downData) return
 
         PointerButton.defaultLeft(data)
+        data.multiTouch = downData.multiTouch
 
         this.findPath(data)
         const upData = { ...data, path: data.path.clone() }
