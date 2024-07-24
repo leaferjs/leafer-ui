@@ -1,5 +1,5 @@
 import { IExportFileType, IFunction, IRenderOptions, IBoundsData, IBounds, ILocationType, ILeaf } from '@leafer/interface'
-import { Creator, Matrix, TaskProcessor, FileHelper, Bounds, Platform } from '@leafer/core'
+import { Creator, Matrix, TaskProcessor, FileHelper, Bounds, Platform, MathHelper } from '@leafer/core'
 
 import { IExportModule, IExportOptions, IExportResult, IExportResultFunction, IUI } from '@leafer-ui/interface'
 import { getTrimBounds } from './trim'
@@ -52,20 +52,14 @@ export const ExportModule: IExportModule = {
                         let renderBounds: IBoundsData, trimBounds: IBounds, scaleX = 1, scaleY = 1
                         const { worldTransform, isLeafer, isFrame } = leaf
                         const { slice, trim, onCanvas } = options
-                        let scale = options.scale || 1
-                        let pixelRatio = options.pixelRatio || 1
                         const smooth = options.smooth === undefined ? leafer.config.smooth : options.smooth
                         const contextSettings = options.contextSettings || leafer.config.contextSettings
-
-                        if (leaf.isApp) {
-                            scale *= pixelRatio // app 只能以自身的pixelRatio导出，需转移到scale上
-                            pixelRatio = leaf.app.pixelRatio
-                        }
 
                         const screenshot = options.screenshot || leaf.isApp
                         const fill = (isLeafer && screenshot) ? (options.fill === undefined ? leaf.fill : options.fill) : options.fill // leafer use 
                         const needFill = FileHelper.isOpaqueImage(filename) || fill, matrix = new Matrix()
 
+                        // 获取元素大小
                         if (screenshot) {
                             renderBounds = screenshot === true ? (isLeafer ? leafer.canvas.bounds : leaf.worldRenderBounds) : screenshot
                         } else {
@@ -99,10 +93,23 @@ export const ExportModule: IExportModule = {
                             renderBounds = leaf.getBounds('render', relative)
                         }
 
-                        const { x, y, width, height } = new Bounds(renderBounds).scale(scale)
 
+                        // 缩放元素
+                        const scaleData = { scaleX: 1, scaleY: 1 }
+                        MathHelper.getScaleData(options.scale, options.size, renderBounds, scaleData)
+
+                        let pixelRatio = options.pixelRatio || 1
+                        if (leaf.isApp) {
+                            scaleData.scaleX *= pixelRatio // app 只能以自身的pixelRatio导出，需转移到scale上
+                            scaleData.scaleY *= pixelRatio
+                            pixelRatio = leaf.app.pixelRatio
+                        }
+
+
+                        // 导出元素
+                        const { x, y, width, height } = new Bounds(renderBounds).scale(scaleData.scaleX, scaleData.scaleY)
+                        const renderOptions: IRenderOptions = { matrix: matrix.scale(1 / scaleData.scaleX, 1 / scaleData.scaleY).invert().translate(-x, -y).withScale(1 / scaleX * scaleData.scaleX, 1 / scaleY * scaleData.scaleY) }
                         let canvas = Creator.canvas({ width: Math.round(width), height: Math.round(height), pixelRatio, smooth, contextSettings })
-                        const renderOptions: IRenderOptions = { matrix: matrix.scale(1 / scale).invert().translate(-x, -y).withScale(1 / scaleX * scale, 1 / scaleY * scale) }
 
                         let sliceLeaf: IUI
                         if (slice) {

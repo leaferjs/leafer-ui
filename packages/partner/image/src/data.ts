@@ -1,5 +1,5 @@
-import { IBoundsData, ILeaferImage, IPointData } from '@leafer/interface'
-import { MatrixHelper, Bounds, AlignHelper } from '@leafer/core'
+import { IBoundsData, ILeaferImage, IPointData, IScaleData } from '@leafer/interface'
+import { MatrixHelper, MathHelper, Bounds, AlignHelper } from '@leafer/core'
 
 import { IImagePaint, ILeafPaint, ILeafPaintPatternData } from '@leafer-ui/interface'
 
@@ -9,6 +9,7 @@ import { clipMode, fillOrFitMode, repeatMode } from './mode'
 const { get, translate } = MatrixHelper
 const tempBox = new Bounds()
 const tempPoint = {} as IPointData
+const tempScaleData = {} as IScaleData
 
 export function createData(leafPaint: ILeafPaint, image: ILeaferImage, paint: IImagePaint, box: IBoundsData): void {
     const { blendMode } = paint
@@ -35,12 +36,10 @@ export function getPatternData(paint: IImagePaint, box: IBoundsData, image: ILea
             scaleX = scaleY = mode === 'fit' ? Math.min(sw, sh) : Math.max(sw, sh)
             x += (box.width - width * scaleX) / 2, y += (box.height - height * scaleY) / 2
         }
-    } else if (size) {
-        scaleX = (typeof size === 'number' ? size : size.width) / width
-        scaleY = (typeof size === 'number' ? size : size.height) / height
-    } else if (scale) {
-        scaleX = typeof scale === 'number' ? scale : scale.x
-        scaleY = typeof scale === 'number' ? scale : scale.y
+    } else if (scale || size) {
+        MathHelper.getScaleData(scale, size, image, tempScaleData)
+        scaleX = tempScaleData.scaleX
+        scaleY = tempScaleData.scaleY
     }
 
     if (align) {
