@@ -43,7 +43,7 @@ export function checkImage(ui: IUI, canvas: ILeaferCanvas, paint: ILeafPaint, al
             canvas.restore()
             return true
         } else {
-            if (!paint.style || Export.running) {
+            if (!paint.style || paint.sync || Export.running) {
                 createPattern(ui, paint, canvas.pixelRatio)
             } else {
                 if (!paint.patternTask) {

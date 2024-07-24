@@ -14,7 +14,6 @@ export interface IPaintBase {
     blendMode?: IBlendMode
     visible?: boolean
     opacity?: number
-
 }
 
 export type IPaintType =
@@ -76,6 +75,7 @@ export interface IImagePaint extends IPaintBase {
     rotation?: number
 
     repeat?: IRepeat
+    sync?: boolean // 同步显示，不走任务列表生成图案
 }
 export interface IImageFilters {
     exposure?: number // 曝光

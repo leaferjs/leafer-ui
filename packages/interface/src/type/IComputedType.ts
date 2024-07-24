@@ -16,6 +16,7 @@ export interface ILeafPaint {
     loadId?: number
     patternId?: string
     patternTask?: ITaskItem
+    sync?: boolean // 同步显示图片，不走任务列表生成图案
     data?: ILeafPaintPatternData
 }
 
