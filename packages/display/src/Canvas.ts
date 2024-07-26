@@ -22,7 +22,7 @@ export class Canvas extends Rect implements ICanvas {
     @resizeType(100)
     declare public height?: INumber
 
-    @resizeType(Platform.devicePixelRatio)
+    @resizeType(1)
     declare public pixelRatio?: INumber
 
     @resizeType(true)
