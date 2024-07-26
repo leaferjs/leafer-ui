@@ -384,6 +384,10 @@ export class Leafer extends Group implements ILeafer {
         return this.interaction && this.interaction.getLocal(clientPoint, updateClient)
     }
 
+    public updateClientBounds(): void {
+        this.canvas && this.canvas.updateClientBounds()
+    }
+
     protected __checkUpdateLayout(): void {
         this.__layout.update()
     }
