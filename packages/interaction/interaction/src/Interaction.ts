@@ -33,7 +33,7 @@ export class InteractionBase implements IInteraction {
     public get isHoldRightKey(): boolean { return this.config.move.holdRightKey && this.downData && PointerButton.right(this.downData) }
     public get isHoldSpaceKey(): boolean { return this.config.move.holdSpaceKey && Keyboard.isHoldSpaceKey() }
 
-    public config: IInteractionConfig = config
+    public config: IInteractionConfig = DataHelper.clone(config)
 
     public cursor: ICursorType | ICursorType[]
     public get hitRadius(): number { return this.config.pointer.hitRadius }
