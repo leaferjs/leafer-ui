@@ -96,14 +96,14 @@ export class Text extends UI implements IText {
     }
 
     public __drawHitPath(canvas: ILeaferCanvas): void {
-        const { __lineHeight, __baseLine, __textDrawData: data } = this.__
+        const { __lineHeight, fontSize, __baseLine, __textDrawData: data } = this.__
 
         canvas.beginPath()
 
         if (this.__.__letterSpacing < 0) {
             this.__drawPathByData(canvas)
         } else {
-            data.rows.forEach(row => canvas.rect(row.x, row.y - __baseLine, row.width, __lineHeight))
+            data.rows.forEach(row => canvas.rect(row.x, row.y - __baseLine, row.width, __lineHeight < fontSize ? fontSize : __lineHeight))
         }
     }
 
