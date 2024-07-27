@@ -10,7 +10,7 @@ import { Rect } from './Rect'
 const rect = Rect.prototype
 const group = Group.prototype
 const childrenRenderBounds = {} as IBoundsData
-const { copy, add, includes } = BoundsHelper
+const { copy, add, includes, copyAndSpread } = BoundsHelper
 
 @rewriteAble()
 @registerUI()
@@ -50,18 +50,23 @@ export class Box extends Group implements IBox {
     @rewrite(rect.__updateBoxBounds)
     public __updateRectBoxBounds(): void { }
 
-    public __updateBoxBounds(): void {
+    public __updateBoxBounds(secondLayout?: boolean): void {
         const data = this.__
 
         if (this.children.length) {
             if (data.__autoSide) {
                 if (this.leafer && this.leafer.ready) this.leafer.layouter.addExtra(this)
                 super.__updateBoxBounds()
+
+                const { boxBounds } = this.__layout
+
                 if (!data.__autoSize) {
-                    const b = this.__layout.boxBounds
-                    if (!data.__autoWidth) b.height += b.y, b.width = data.width, b.x = b.y = 0
-                    if (!data.__autoHeight) b.width += b.x, b.height = data.height, b.y = b.x = 0
+                    if (data.__autoWidth) boxBounds.width += boxBounds.x, boxBounds.height = data.height, boxBounds.y = boxBounds.x = 0
+                    else boxBounds.height += boxBounds.y, boxBounds.width = data.width, boxBounds.x = boxBounds.y = 0
                 }
+
+                if (secondLayout && data.flow && data.padding) copyAndSpread(boxBounds, boxBounds, data.padding, false, data.__autoSize ? null : (data.__autoWidth ? 'width' : 'height'))
+
             } else {
                 this.__updateRectBoxBounds()
             }
