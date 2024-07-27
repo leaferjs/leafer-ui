@@ -12,6 +12,7 @@ export const ExportModule: IExportModule = {
         this.running = true
 
         const fileType = FileHelper.fileType(filename)
+        const isDownload = filename.includes('.')
         options = FileHelper.getExportOptions(options)
 
         return addTask((success: IExportResultFunction) =>
@@ -27,18 +28,15 @@ export const ExportModule: IExportModule = {
                 const { toURL } = Platform
                 const { download } = Platform.origin
 
-                if (filename === 'json') {
-                    return over({ data: leaf.toJSON(options.json) })
-                } else if (fileType === 'json') {
-                    download(toURL(JSON.stringify(leaf.toJSON(options.json)), 'text'), filename)
-                    return over({ data: true })
+
+                if (fileType === 'json') {
+                    isDownload && download(toURL(JSON.stringify(leaf.toJSON(options.json)), 'text'), filename)
+                    return over({ data: isDownload ? true : leaf.toJSON(options.json) })
                 }
 
-                if (filename === 'svg') {
-                    return over({ data: leaf.toSVG() })
-                } else if (fileType === 'svg') {
-                    download(toURL(leaf.toSVG(), 'svg'), filename)
-                    return over({ data: true })
+                if (fileType === 'svg') {
+                    isDownload && download(toURL(leaf.toSVG(), 'svg'), filename)
+                    return over({ data: isDownload ? true : leaf.toSVG() })
                 }
 
 
