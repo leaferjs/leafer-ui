@@ -196,7 +196,10 @@ export class Interaction extends InteractionBase {
 
     // touch
     protected onTouchStart(e: TouchEvent): void {
-        e.preventDefault()
+        const touch = PointerEventHelper.getTouch(e)
+        const local = this.getLocal(touch, true)
+        const { preventDefault } = this.config.touch
+        if (preventDefault === true || (preventDefault === 'hit' && this.selector.getByPoint(local, this.hitRadius).target)) e.preventDefault()
 
         this.multiTouchStart(e)
 
@@ -206,8 +209,7 @@ export class Interaction extends InteractionBase {
             this.touchTimer = 0
         }
         this.useTouch = true
-        const touch = PointerEventHelper.getTouch(e)
-        this.pointerDown(PointerEventHelper.convertTouch(e, this.getLocal(touch, true)))
+        this.pointerDown(PointerEventHelper.convertTouch(e, local))
     }
 
     protected onTouchMove(e: TouchEvent): void {
