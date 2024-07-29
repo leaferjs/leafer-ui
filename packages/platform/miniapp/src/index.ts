@@ -18,5 +18,5 @@ Object.assign(Creator, {
 } as ICreator)
 
 try {
-    useCanvas('wx', wx)
+    if (wx) useCanvas('miniapp', wx)
 } catch { }
