@@ -14,20 +14,12 @@ export const LeaferTypeCreator = {
     list: {} as ILeaferTypeList,
 
     register(name: string, fn: ILeaferTypeFunction): void {
-        if (list[name]) {
-            debug.repeat(name)
-        } else {
-            list[name] = fn
-        }
+        list[name] ? debug.repeat(name) : list[name] = fn
     },
 
     run(name: string, leafer: ILeaferBase): void {
         const fn = list[name]
-        if (fn) {
-            fn(leafer)
-        } else {
-            debug.error('no', name)
-        }
+        fn ? fn(leafer) : debug.error('no', name)
     }
 
 }

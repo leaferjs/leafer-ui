@@ -90,13 +90,13 @@ export class Box extends Group implements IBox {
             copy(childrenRenderBounds, renderBounds)
             this.__updateRectRenderBounds()
 
-            isOverflow = !includes(renderBounds, childrenRenderBounds) || undefined
+            isOverflow = !includes(renderBounds, childrenRenderBounds) || !this.pathInputed || !this.__.cornerRadius // 路径与圆角直接当溢出处理
         } else {
             this.__updateRectRenderBounds()
         }
 
         this.isOverflow !== isOverflow && (this.isOverflow = isOverflow)
-        if (isOverflow && !(this.__.__drawAfterFill = this.__.overflow === 'hide')) add(renderBounds, childrenRenderBounds)
+        if (!(this.__.__drawAfterFill = this.__.overflow === 'hide') && isOverflow) add(renderBounds, childrenRenderBounds)
     }
 
     @rewrite(rect.__updateRenderBounds)
