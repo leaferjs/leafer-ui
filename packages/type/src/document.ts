@@ -4,6 +4,7 @@ import { addInteractionWindow } from './window'
 
 export function document(leafer: ILeaferBase): void {
     addInteractionWindow(leafer)
-    leafer.config.move.scroll = 'limit'
-    leafer.config.zoom.min = 1
+    const { move, zoom } = leafer.config
+    move.scroll = 'limit'
+    zoom.min = 1
 }

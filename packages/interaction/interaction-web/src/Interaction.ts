@@ -199,7 +199,7 @@ export class Interaction extends InteractionBase {
         const touch = PointerEventHelper.getTouch(e)
         const local = this.getLocal(touch, true)
         const { preventDefault } = this.config.touch
-        if (preventDefault === true || (preventDefault === 'hit' && this.selector.getByPoint(local, this.hitRadius).target)) e.preventDefault()
+        if (preventDefault === true || (preventDefault === 'auto' && this.findPath(local).list.some(item => item.draggable || item.editable))) e.preventDefault()
 
         this.multiTouchStart(e)
 

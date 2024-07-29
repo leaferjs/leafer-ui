@@ -4,6 +4,7 @@ import { Debug } from '@leafer/core'
 
 import { addInteractionWindow } from './window'
 import { document } from './document'
+import { block } from './block'
 
 
 const debug = Debug.get('LeaferTypeCreator')
@@ -38,3 +39,4 @@ register('draw', () => { })
 register('custom', () => { })
 register('design', addInteractionWindow)
 register('document', document)
+register('block', block)
