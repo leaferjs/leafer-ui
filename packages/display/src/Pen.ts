@@ -6,8 +6,7 @@ import { PenData } from '@leafer-ui/data'
 import { Group } from './Group'
 import { Path } from './Path'
 
-
-@useModule(PathCreator, ['set', 'beginPath', 'path'])
+@useModule(PathCreator, ['set', 'beginPath', 'path', 'paint'])
 @registerUI()
 export class Pen extends Group implements IPen {
 
@@ -23,6 +22,8 @@ export class Pen extends Group implements IPen {
     declare public path: IPathCommandData // use __path, readonly
 
     public __path: IPathCommandData
+
+    protected __pathChanged: boolean
 
     constructor(data?: IPenInputData) {
         super(data)
@@ -79,7 +80,15 @@ export class Pen extends Group implements IPen {
     public clearPath(): Pen { return this }
 
     public paint(): void {
-        this.pathElement.forceUpdate('path')
+        if (!this.__pathChanged) {
+            this.pathElement.forceUpdate('path')
+            this.__pathChanged = true
+        }
+    }
+
+    override __updateBoxBounds(): void {
+        this.__pathChanged = false
+        super.__updateBoxBounds()
     }
 
 
