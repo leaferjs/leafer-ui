@@ -23,8 +23,6 @@ export class Pen extends Group implements IPen {
 
     public __path: IPathCommandData
 
-    protected __pathChanged: boolean
-
     constructor(data?: IPenInputData) {
         super(data)
     }
@@ -80,17 +78,8 @@ export class Pen extends Group implements IPen {
     public clearPath(): Pen { return this }
 
     public paint(): void {
-        if (!this.__pathChanged) {
-            this.pathElement.forceUpdate('path')
-            this.__pathChanged = true
-        }
+        if (!this.pathElement.__layout.boxChanged) this.pathElement.forceUpdate('path')
     }
-
-    override __updateBoxBounds(): void {
-        this.__pathChanged = false
-        super.__updateBoxBounds()
-    }
-
 
 }
 
