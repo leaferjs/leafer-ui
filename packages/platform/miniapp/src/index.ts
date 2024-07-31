@@ -7,7 +7,7 @@ export * from '@leafer-ui/partner'
 
 import { ICreator } from '@leafer/interface'
 import { useCanvas, Creator, LeaferCanvas } from '@leafer/miniapp'
-import { HitCanvasManager } from '@leafer-ui/core'
+import { HitCanvasManager, Leafer } from '@leafer-ui/core'
 import { Interaction } from '@leafer-ui/interaction-miniapp'
 
 
@@ -16,6 +16,10 @@ Object.assign(Creator, {
     hitCanvas: (options?, manager?) => new LeaferCanvas(options, manager),
     hitCanvasManager: () => new HitCanvasManager()
 } as ICreator)
+
+Leafer.prototype.receiveEvent = function (event: any): void {
+    this.interaction && this.interaction.receive(event)
+}
 
 try {
     if (wx) useCanvas('miniapp', wx)

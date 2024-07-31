@@ -375,6 +375,7 @@ export class Leafer extends Group implements ILeafer {
         return debug.error('need @leafer-in/view') as undefined
     }
 
+
     // interaction window rewrite
     public getValidMove(moveX: number, moveY: number): IPointData { return { x: moveX, y: moveY } }
     public getValidScale(changeScale: number): number { return changeScale }
@@ -387,6 +388,10 @@ export class Leafer extends Group implements ILeafer {
     public updateClientBounds(): void {
         this.canvas && this.canvas.updateClientBounds()
     }
+
+    // miniapp rewrite
+    public receiveEvent(_event: any): void { }
+
 
     protected __checkUpdateLayout(): void {
         this.__layout.update()
