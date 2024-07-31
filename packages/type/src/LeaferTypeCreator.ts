@@ -19,16 +19,13 @@ export const LeaferTypeCreator = {
 
     run(name: string, leafer: ILeaferBase): void {
         const fn = list[name]
-        fn ? fn(leafer) : debug.error('no', name)
+        fn && fn(leafer)
     }
 
 }
 
 const { list, register } = LeaferTypeCreator
 
-register('draw', () => { })
-
-register('custom', () => { })
 register('design', addInteractionWindow)
 register('document', document)
 register('block', block)
