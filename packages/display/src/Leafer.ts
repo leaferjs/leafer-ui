@@ -385,6 +385,10 @@ export class Leafer extends Group implements ILeafer {
         return this.interaction && this.interaction.getLocal(clientPoint, updateClient)
     }
 
+    public getPagePointByClient(clientPoint: IClientPointData, updateClient?: boolean): IPointData {
+        return this.getPagePoint(this.getWorldPointByClient(clientPoint, updateClient))
+    }
+
     public updateClientBounds(): void {
         this.canvas && this.canvas.updateClientBounds()
     }
