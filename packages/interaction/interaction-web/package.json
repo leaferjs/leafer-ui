@@ -19,7 +19,7 @@
   ],
   "dependencies": {
     "@leafer/core": "1.0.1",
-    "@leafer-ui/core": "1.0.1"
+    "@leafer-ui/interaction": "1.0.1"
   },
   "devDependencies": {
      "@leafer/interface": "1.0.1"

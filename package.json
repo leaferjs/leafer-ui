@@ -3,10 +3,16 @@
   "version": "1.0.1",
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
+  "type": "module",
   "main": "dist/web.esm.js",
+  "exports": {
+    "import": "./dist/web.esm.js",
+    "require": "./dist/web.cjs",
+    "types": "./types/index.d.ts"
+  },
+  "types": "types/index.d.ts",
   "unpkg": "dist/web.js",
   "jsdelivr": "dist/web.js",
-  "types": "types/index.d.ts",
   "files": ["src","types","dist"],
   "repository": {
     "type": "git",

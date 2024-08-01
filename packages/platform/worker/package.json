@@ -4,10 +4,16 @@
   "description": "@leafer-ui/worker",
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
+  "type": "module",
   "main": "dist/worker.esm.js",
+  "exports": {
+    "import": "./dist/worker.esm.js",
+    "require": "./dist/worker.cjs",
+    "types": "./types/index.d.ts"
+  },
+  "types": "types/index.d.ts",
   "unpkg": "dist/worker.js",
   "jsdelivr": "dist/worker.js",
-  "types": "types/index.d.ts",
   "files": ["src","types","dist"],
   "repository": {
     "type": "git",

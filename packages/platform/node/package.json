@@ -12,6 +12,8 @@
     "types": "./types/index.d.ts"
   },
   "types": "types/index.d.ts",
+  "unpkg": "dist/node.esm.js",
+  "jsdelivr": "dist/node.esm.js",
   "files": ["src","types","dist"],
   "repository": {
     "type": "git",

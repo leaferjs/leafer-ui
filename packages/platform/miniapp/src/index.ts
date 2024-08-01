@@ -7,7 +7,8 @@ export * from '@leafer-ui/partner'
 
 import { ICreator } from '@leafer/interface'
 import { useCanvas, Creator, LeaferCanvas } from '@leafer/miniapp'
-import { HitCanvasManager, Leafer } from '@leafer-ui/core'
+import { Leafer } from '@leafer-ui/draw'
+import { HitCanvasManager } from '@leafer-ui/core'
 import { Interaction } from '@leafer-ui/interaction-miniapp'
 
 

@@ -4,8 +4,16 @@
   "description": "@leafer-ui/miniapp",
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
+  "type": "module",
   "main": "dist/miniapp.esm.js",
+  "exports": {
+    "import": "./dist/miniapp.esm.js",
+    "require": "./dist/miniapp.cjs",
+    "types": "./types/index.d.ts"
+  },
   "types": "types/index.d.ts",
+  "unpkg": "dist/miniapp.esm.js",
+  "jsdelivr": "dist/miniapp.esm.js",
   "files": ["src","types","dist"],
   "repository": {
     "type": "git",
