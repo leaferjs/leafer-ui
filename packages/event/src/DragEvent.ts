@@ -114,3 +114,5 @@ export class DragEvent extends PointerEvent implements IDragEvent {
     }
 
 }
+
+export const MyDragEvent = DragEvent

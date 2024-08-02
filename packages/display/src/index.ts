@@ -11,7 +11,7 @@ export { Polygon } from './Polygon'
 export { Star } from './Star'
 export { Line } from './Line'
 
-export { Image } from './Image'
+export { Image, MyImage } from './Image'
 export { Canvas } from './Canvas'
 
 export { Text } from './Text'

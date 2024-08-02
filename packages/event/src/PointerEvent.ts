@@ -46,3 +46,5 @@ export class PointerEvent extends UIEvent implements IPointerEvent {
     public readonly twist?: number
 
 }
+
+export const MyPointerEvent = PointerEvent

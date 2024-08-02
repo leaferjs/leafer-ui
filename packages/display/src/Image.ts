@@ -35,3 +35,5 @@ export class Image extends Rect implements IImage {
     }
 
 }
+
+export const MyImage = Image
