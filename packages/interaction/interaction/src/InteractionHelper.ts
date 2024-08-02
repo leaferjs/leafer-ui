@@ -105,7 +105,15 @@ export const InteractionHelper = {
             if (list[i].hasEvent(type)) find.add(list[i])
         }
         return find
-    }
+    },
+
+    pathCanDrag(path: ILeafList): boolean {
+        return path && path.list.some(item => item.draggable || item.editable)
+    },
+
+    pathHasOutside(path: ILeafList): boolean { // 滚动条元素
+        return path && path.list.some(item => item.isOutside)
+    },
 }
 
 const I = InteractionHelper

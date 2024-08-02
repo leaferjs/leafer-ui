@@ -1,5 +1,5 @@
 import { IPointData, IPointerEvent } from '@leafer/interface'
-import { InteractionHelper } from '@leafer-ui/interaction'
+import { InteractionHelper } from '@leafer-ui/core'
 
 
 export const PointerEventHelper = {

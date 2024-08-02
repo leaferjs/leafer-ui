@@ -1,6 +1,6 @@
 import { IObject, IPointData, ITimer, IKeepTouchData, ICursorType, IClientPointData } from '@leafer/interface'
 import { MathHelper } from '@leafer/core'
-import { InteractionBase, InteractionHelper, Cursor } from '@leafer-ui/interaction'
+import { InteractionBase, InteractionHelper, Cursor } from '@leafer-ui/core'
 
 import { PointerEventHelper } from './PointerEventHelper'
 import { WheelEventHelper } from './WheelEventHelper'
@@ -14,7 +14,7 @@ interface IGestureEvent extends IClientPointData, UIEvent {
 }
 
 
-const { getMoveEventData, getZoomEventData, getRotateEventData } = InteractionHelper
+const { getMoveEventData, getZoomEventData, getRotateEventData, pathCanDrag } = InteractionHelper
 
 export class Interaction extends InteractionBase {
 
@@ -199,7 +199,7 @@ export class Interaction extends InteractionBase {
         const touch = PointerEventHelper.getTouch(e)
         const local = this.getLocal(touch, true)
         const { preventDefault } = this.config.touch
-        if (preventDefault === true || (preventDefault === 'auto' && this.findPath(local).list.some(item => item.draggable || item.editable))) e.preventDefault()
+        if (preventDefault === true || (preventDefault === 'auto' && pathCanDrag(this.findPath(local)))) e.preventDefault()
 
         this.multiTouchStart(e)
 

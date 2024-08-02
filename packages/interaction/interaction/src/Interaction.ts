@@ -12,7 +12,7 @@ import { MultiTouchHelper } from './MultiTouchHelper'
 import { config } from './config'
 
 
-const { pathHasEventType, getMoveEventData, getZoomEventData, getRotateEventData } = InteractionHelper
+const { pathHasEventType, getMoveEventData, getZoomEventData, getRotateEventData, pathCanDrag, pathHasOutside } = InteractionHelper
 export class InteractionBase implements IInteraction {
 
     public target: ILeaf
@@ -24,7 +24,7 @@ export class InteractionBase implements IInteraction {
     public get dragging(): boolean { return this.dragger.dragging }
     public get transforming(): boolean { return this.transformer.transforming }
 
-    public get moveMode(): boolean { return this.config.move.drag || this.isHoldSpaceKey || this.isHoldMiddleKey || (this.isHoldRightKey && this.dragger.moving) || this.isDragEmpty }
+    public get moveMode(): boolean { return this.config.move.drag === true || this.isHoldSpaceKey || this.isHoldMiddleKey || (this.isHoldRightKey && this.dragger.moving) || this.isDragEmpty }
     public get canHover(): boolean { return this.config.pointer.hover && !(this.config as ILeaferConfig).mobile }
 
     public get isDragEmpty(): boolean { return this.config.move.dragEmpty && this.isRootPath(this.hoverData) && (!this.downData || this.isRootPath(this.downData)) }
@@ -374,11 +374,11 @@ export class InteractionBase implements IInteraction {
     }
 
     protected checkPath(data: IPointerEvent, useDefaultPath?: boolean): void {
-        if (useDefaultPath || this.canMove(data)) data.path = this.defaultPath
+        if (useDefaultPath || (this.moveMode && !pathHasOutside(data.path))) data.path = this.defaultPath
     }
 
     public canMove(data: IPointerEvent): boolean { // moveMode and path can move
-        return this.moveMode && data && data.path.list.every(item => !item.isOutside)
+        return data && (this.moveMode || (this.config.move.drag === 'auto' && !pathCanDrag(data.path))) && !pathHasOutside(data.path)
     }
 
 
