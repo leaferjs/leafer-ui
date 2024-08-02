@@ -1,5 +1,5 @@
-import { ILeaferCanvas, ILeaferCanvasConfig, INumber, IRenderOptions, IPointData, ICanvasContext2D, ICanvasContext2DSettings, IScreenSizeData, ISizeData } from '@leafer/interface'
-import { Creator, Matrix, dataProcessor, registerUI } from '@leafer/core'
+import { ILeaferCanvas, ILeaferCanvasConfig, INumber, IRenderOptions, IPointData, ICanvasContext2D, ICanvasContext2DSettings, IScreenSizeData, ISizeData, ILeaferImageConfig } from '@leafer/interface'
+import { Creator, ImageEvent, LeaferImage, Matrix, dataProcessor, registerUI } from '@leafer/core'
 
 import { ICanvas, ICanvasData, ICanvasInputData, IUI } from '@leafer-ui/interface'
 import { CanvasData } from '@leafer-ui/data'
@@ -35,11 +35,25 @@ export class Canvas extends Rect implements ICanvas {
 
     public context?: ICanvasContext2D
 
+    public get ready(): boolean { return !this.url }
+
+    protected url?: string // 用于临时加载canvas的base64数据，完成后会置空
+
     constructor(data?: ICanvasInputData) {
         super(data)
         this.canvas = Creator.canvas(this.__ as ILeaferCanvasConfig)
         this.context = this.canvas.context
         this.__.__isCanvas = this.__.__drawAfterFill = true
+        if (data && data.url) this.drawImage(data.url)
+    }
+
+    public drawImage(url: string): void {
+        new LeaferImage({ url }).load((image: LeaferImage) => {
+            this.context.drawImage(image.view, 0, 0)
+            this.url = undefined
+            this.paint()
+            this.emitEvent(new ImageEvent(ImageEvent.LOADED, { image }))
+        })
     }
 
     public draw(ui: IUI, offset?: IPointData, scale?: number | IPointData, rotation?: number): void {

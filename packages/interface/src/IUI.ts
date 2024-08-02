@@ -224,6 +224,7 @@ export interface ICanvas extends IRect {
 interface ICanvasAttrData {
     smooth?: boolean
     contextSettings?: ICanvasContext2DSettings
+    url?: string
 }
 export interface ICanvasData extends ICanvasAttrData, IRectData { }
 export interface ICanvasInputData extends ICanvasAttrData, IUIBaseInputData { }
