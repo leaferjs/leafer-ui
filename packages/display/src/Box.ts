@@ -55,6 +55,7 @@ export class Box extends Group implements IBox {
 
         if (this.children.length) {
             if (data.__autoSide) {
+
                 if (this.leafer && this.leafer.ready) this.leafer.layouter.addExtra(this)
                 super.__updateBoxBounds()
 
@@ -66,6 +67,8 @@ export class Box extends Group implements IBox {
                 }
 
                 if (secondLayout && data.flow && data.padding) copyAndSpread(boxBounds, boxBounds, data.padding, false, data.__autoSize ? null : (data.__autoWidth ? 'width' : 'height'))
+
+                this.__updateNaturalSize()
 
             } else {
                 this.__updateRectBoxBounds()
