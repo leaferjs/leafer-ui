@@ -1,7 +1,7 @@
 import { IEvent, IPointerEvent, IMoveEvent, IZoomEvent, IRotateEvent, IDragEvent, ISwipeEvent, IUIEvent, IPointData, ILeafList, IDropEvent, IObject } from '@leafer/interface'
 import { PointHelper, LeafList } from '@leafer/core'
 
-import { SwipeEvent } from '@leafer-ui/event'
+import { SwipeEvent, DragEvent } from '@leafer-ui/event'
 
 
 export const InteractionHelper = {
@@ -108,7 +108,7 @@ export const InteractionHelper = {
     },
 
     pathCanDrag(path: ILeafList): boolean {
-        return path && path.list.some(item => item.draggable || item.editable)
+        return path && path.list.some(item => item.draggable || item.editable || (!item.isLeafer && item.hasEvent(DragEvent.DRAG)))
     },
 
     pathHasOutside(path: ILeafList): boolean { // 滚动条元素
