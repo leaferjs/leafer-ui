@@ -86,7 +86,7 @@ export interface IImageFilters {
     highlights?: number // 高光
     shadows?: number // 阴影
 }
-export type IImagePaintMode = 'normal' | 'cover' | 'fit' | 'strench' | 'clip' | 'repeat'
+export type IImagePaintMode = 'normal' | 'cover' | 'fit' | 'stretch' | 'clip' | 'repeat'
 export type IRepeat = boolean | 'x' | 'y'
 
 // 描边

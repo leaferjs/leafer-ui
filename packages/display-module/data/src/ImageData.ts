@@ -16,7 +16,7 @@ export class ImageData extends RectData implements IImageData {
 
     public __setImageFill(value: string): void {
         if (this.__leaf.image) this.__leaf.image = null;
-        (this as IImageInputData).fill = value ? { type: 'image', mode: 'strench', url: value } : undefined
+        (this as IImageInputData).fill = value ? { type: 'image', mode: 'stretch', url: value } : undefined
     }
 
     public __getData(): IObject {

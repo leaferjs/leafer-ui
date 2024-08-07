@@ -21,6 +21,7 @@ export function createData(leafPaint: ILeafPaint, image: ILeaferImage, paint: II
 export function getPatternData(paint: IImagePaint, box: IBoundsData, image: ILeaferImage): ILeafPaintPatternData {
     let { width, height } = image
     if (paint.padding) box = tempBox.set(box).shrink(paint.padding)
+    if (paint.mode === 'strench' as string) paint.mode = 'stretch' // 兼容代码，后续可移除
 
     const { opacity, mode, align, offset, scale, size, rotation, repeat } = paint
     const sameBox = box.width === width && box.height === height
@@ -53,7 +54,7 @@ export function getPatternData(paint: IImagePaint, box: IBoundsData, image: ILea
     if (offset) x += offset.x, y += offset.y
 
     switch (mode) {
-        case 'strench':
+        case 'stretch':
             if (!sameBox) width = box.width, height = box.height
             break
         case 'normal':
@@ -77,7 +78,7 @@ export function getPatternData(paint: IImagePaint, box: IBoundsData, image: ILea
         }
     }
 
-    if (scaleX && mode !== 'strench') {
+    if (scaleX && mode !== 'stretch') {
         data.scaleX = scaleX
         data.scaleY = scaleY
     }
