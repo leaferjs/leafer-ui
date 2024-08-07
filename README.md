@@ -14,11 +14,13 @@ v1.0 正式版已发布 🎉🎉🎉
 
 ## 快速安装
 
-🚀 想马上使用，请 [安装 leafer-ui](https://leaferjs.com/ui/guide/install/ui/start.html)，开始你的探索之旅。
+🚀 想马上使用，请安装 [ leafer-ui](https://leaferjs.com/ui/guide/install/ui/start.html)，开始你的探索之旅。
 
-如需编辑图形，推荐更省心的 [leafer-editor](https://leaferjs.com/ui/guide/install/editor/start.html)，已集成了图形编辑器相关插件。
+## 场景版
 
-纯绘图的场景，推荐更轻量的 [leafer-draw](https://leaferjs.com/ui/guide/type/draw/start.html) （49KB min+gzip）。
+编辑图形的场景，推荐安装更省心的 [leafer-editor](https://leaferjs.com/ui/guide/install/editor/start.html)，已集成了图形编辑器相关插件。
+
+单纯绘图的场景，推荐安装更轻量的 [leafer-draw](https://leaferjs.com/ui/guide/type/draw/start.html) （49KB min+gzip）。
 
 ## 互动交流
 
