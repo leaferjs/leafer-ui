@@ -72,7 +72,7 @@ export class Canvas extends Rect implements ICanvas {
     }
 
     public paint(): void {
-        this.forceUpdate('fill')
+        this.forceRender()
     }
 
     public __drawAfterFill(canvas: ILeaferCanvas, _options: IRenderOptions): void {
