@@ -52,6 +52,31 @@ export interface IFlowData extends IFlowAttrData, IBoxData { }
 export interface IFlowInputData extends IFlowAttrData, IBoxInputData { }
 
 
+// Robot
+export interface IRobot extends IRect {
+    __: IRobotData
+}
+
+interface IRobotAttrData {
+    frames?: IRobotFrames | IRobotFrame[]
+    actions?: IObject
+    speed?: number
+    loop?: number
+    nowFrame?: number
+}
+export interface IRobotFrames {
+    url: string
+    mode?: 'clip' | 'list'
+    total?: number
+}
+export interface IRobotFrame {
+    url: string
+}
+
+export interface IRobotData extends IRobotAttrData, IRectData { }
+export interface IRobotInputData extends IRobotAttrData, IRectInputData { }
+
+
 // Rect
 export interface IRect extends IUI {
     __: IRectData
