@@ -11,8 +11,9 @@ const { abs } = Math
 
 export function checkImage(ui: IUI, canvas: ILeaferCanvas, paint: ILeafPaint, allowPaint?: boolean): boolean {
     const { scaleX, scaleY } = ImageManager.patternLocked ? ui.__world : ui.__nowWorld
+    const { pixelRatio } = canvas
 
-    if (!paint.data || (paint.patternId === scaleX + '-' + scaleY && !Export.running)) {
+    if (!paint.data || (paint.patternId === scaleX + '-' + scaleY + '-' + pixelRatio && !Export.running)) {
         return false
     } else {
 
@@ -21,8 +22,8 @@ export function checkImage(ui: IUI, canvas: ILeaferCanvas, paint: ILeafPaint, al
         if (allowPaint) {
             if (!data.repeat) {
                 let { width, height } = data
-                width *= abs(scaleX) * canvas.pixelRatio
-                height *= abs(scaleY) * canvas.pixelRatio
+                width *= abs(scaleX) * pixelRatio
+                height *= abs(scaleY) * pixelRatio
                 if (data.scaleX) {
                     width *= data.scaleX
                     height *= data.scaleY
@@ -44,12 +45,12 @@ export function checkImage(ui: IUI, canvas: ILeaferCanvas, paint: ILeafPaint, al
             return true
         } else {
             if (!paint.style || paint.sync || Export.running) {
-                createPattern(ui, paint, canvas.pixelRatio)
+                createPattern(ui, paint, pixelRatio)
             } else {
                 if (!paint.patternTask) {
                     paint.patternTask = ImageManager.patternTasker.add(async () => {
                         paint.patternTask = null
-                        if (canvas.bounds.hit(ui.__nowWorld)) createPattern(ui, paint, canvas.pixelRatio)
+                        if (canvas.bounds.hit(ui.__nowWorld)) createPattern(ui, paint, pixelRatio)
                         ui.forceUpdate('surface')
                     }, 300)
                 }

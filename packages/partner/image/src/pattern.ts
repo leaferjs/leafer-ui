@@ -10,7 +10,7 @@ export function createPattern(ui: IUI, paint: ILeafPaint, pixelRatio: number): b
 
     let { scaleX, scaleY } = ImageManager.patternLocked ? ui.__world : ui.__nowWorld
 
-    const id = scaleX + '-' + scaleY
+    const id = scaleX + '-' + scaleY + '-' + pixelRatio
 
     if (paint.patternId !== id && !ui.destroyed) {
 
