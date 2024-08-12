@@ -52,6 +52,23 @@ export interface IFlowData extends IFlowAttrData, IBoxData { }
 export interface IFlowInputData extends IFlowAttrData, IBoxInputData { }
 
 
+
+// Video
+export interface IVideo extends IRect {
+    __: IVideoData
+    play(): void
+    pause(): void
+    stop(): void
+}
+
+interface IVideoAttrData {
+    url?: string
+}
+export interface IVideoData extends IVideoAttrData, IRectData { }
+export interface IVideoInputData extends IVideoAttrData, IRectInputData { }
+
+
+
 // Robot
 export interface IRobot extends IRect {
     __: IRobotData
