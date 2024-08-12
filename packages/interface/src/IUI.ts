@@ -55,22 +55,25 @@ export interface IFlowInputData extends IFlowAttrData, IBoxInputData { }
 // Robot
 export interface IRobot extends IRect {
     __: IRobotData
-    do(action: string | number | number[]): void
+    do(action: string | IRobotAction): void
 }
 
 interface IRobotAttrData {
-    frames?: IRobotFrame | IRobotFrame[]
-    action?: IRobotAction
+    keyframes?: IRobotKeyframe | IRobotKeyframe[]
+    actions?: IRobotActions
     speed?: number
     loop?: number
     nowFrame?: number
 }
 
-export interface IRobotAction {
-    [name: string]: number | number[]
+export interface IRobotActions {
+    [name: string]: IRobotAction
 }
 
-export interface IRobotFrame {
+export type IRobotAction = IRobotKeyframeId | IRobotKeyframeId[]
+export type IRobotKeyframeId = number
+
+export interface IRobotKeyframe {
     mode?: 'normal' | 'clip'
     url: string
     offset?: IPointData
