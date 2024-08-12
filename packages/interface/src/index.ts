@@ -17,7 +17,7 @@ export {
     ICanvas, ICanvasInputData, ICanvasData,
     IFrame, IFrameInputData, IFrameData,
     IFlow, IFlowInputData, IFlowData,
-    IRobot, IRobotInputData, IRobotData, IRobotFrames, IRobotFrame,
+    IRobot, IRobotInputData, IRobotData, IRobotAction, IRobotFrame,
     IBox, IBoxInputData, IBoxData,
     IGroup, IGroupInputData, IGroupData,
     ILeaferInputData, ILeaferData,

@@ -1,4 +1,4 @@
-import { ILeaf, ILeafComputedData, ILeafData, ILeafInputData, ILeaferCanvas, IRenderOptions, IExportOptions, IExportResult, IPathDrawer, IPointData, IPathCommandData, ILeaferImageConfig, IBoundsData, IObject, IPathString, ILeaferImage, IPathCreator, IAnswer, IPickOptions, IPickResult, IValue, ICanvasContext2DSettings, IFourNumber, IFindCondition, IBoolean, ICanvasContext2D, IJSONOptions, IMatrixData } from '@leafer/interface'
+import { ILeaf, ILeafComputedData, ILeafData, ILeafInputData, ILeaferCanvas, IRenderOptions, IExportOptions, IExportResult, IPathDrawer, IPointData, IPathCommandData, ILeaferImageConfig, IBoundsData, IObject, IPathString, ILeaferImage, IPathCreator, IAnswer, IPickOptions, IPickResult, IValue, ICanvasContext2DSettings, IFourNumber, IFindCondition, IBoolean, ICanvasContext2D, IJSONOptions, IMatrixData, ISizeData } from '@leafer/interface'
 
 import {
     IFillAttrData, IFillInputData, IFillComputedData,
@@ -55,22 +55,27 @@ export interface IFlowInputData extends IFlowAttrData, IBoxInputData { }
 // Robot
 export interface IRobot extends IRect {
     __: IRobotData
+    do(action: string | number | number[]): void
 }
 
 interface IRobotAttrData {
-    frames?: IRobotFrames | IRobotFrame[]
-    actions?: IObject
+    frames?: IRobotFrame | IRobotFrame[]
+    action?: IRobotAction
     speed?: number
     loop?: number
     nowFrame?: number
 }
-export interface IRobotFrames {
-    url: string
-    mode?: 'clip' | 'list'
-    total?: number
+
+export interface IRobotAction {
+    [name: string]: number | number[]
 }
+
 export interface IRobotFrame {
+    mode?: 'normal' | 'clip'
     url: string
+    offset?: IPointData
+    size?: number | ISizeData
+    total?: number
 }
 
 export interface IRobotData extends IRobotAttrData, IRectData { }
