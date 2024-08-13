@@ -37,7 +37,7 @@ export class Canvas extends Rect implements ICanvas {
 
     public get ready(): boolean { return !this.url }
 
-    protected url?: string // 用于临时加载canvas的base64数据，完成后会置空
+    public url?: string // 用于临时加载canvas的base64数据，完成后会置空
 
     constructor(data?: ICanvasInputData) {
         super(data)

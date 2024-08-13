@@ -101,7 +101,7 @@ export class DragEvent extends PointerEvent implements IDragEvent {
 
     public getPageBounds(): IBoundsData {
         const total = this.getPageTotal()
-        const start = this.getPage()
+        const start = this.getPagePoint()
         const bounds = {} as IBoundsData
         BoundsHelper.set(bounds, start.x - total.x, start.y - total.y, total.x, total.y)
         BoundsHelper.unsign(bounds)

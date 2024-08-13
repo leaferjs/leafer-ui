@@ -33,19 +33,29 @@ export class UIEvent extends Event implements IUIEvent {
         Object.assign(this, params)
     }
 
-    public getPage(): IPointData {
-        return this.current.getPagePoint(this)
+    public getBoxPoint(relative?: ILeaf): IPointData {
+        if (!relative) relative = this.current
+        return relative.getBoxPoint(this)
     }
 
-    public getInner(relative?: ILeaf): IPointData {
+    public getInnerPoint(relative?: ILeaf): IPointData {
         if (!relative) relative = this.current
         return relative.getInnerPoint(this)
     }
 
-    public getLocal(relative?: ILeaf): IPointData {
+    public getLocalPoint(relative?: ILeaf): IPointData {
         if (!relative) relative = this.current
         return relative.getLocalPoint(this)
     }
+
+    public getPagePoint(): IPointData {
+        return this.current.getPagePoint(this)
+    }
+
+    // 兼容代码，未来可移除
+    public getInner = this.getInnerPoint
+    public getLocal = this.getLocalPoint
+    public getPage = this.getPagePoint
 
     static changeName(oldName: string, newName: string): void {
         EventCreator.changeName(oldName, newName)
