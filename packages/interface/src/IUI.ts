@@ -69,6 +69,22 @@ export interface IVideoInputData extends IVideoAttrData, IRectInputData { }
 
 
 
+// GIF
+export interface IGIF extends IRect {
+    __: IGIFData
+    play(): void
+    pause(): void
+    stop(): void
+}
+
+interface IGIFAttrData {
+    url?: string
+}
+export interface IGIFData extends IGIFAttrData, IRectData { }
+export interface IGIFInputData extends IGIFAttrData, IRectInputData { }
+
+
+
 // Robot
 export interface IRobot extends IRect {
     __: IRobotData
