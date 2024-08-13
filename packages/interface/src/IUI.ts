@@ -13,11 +13,8 @@ import { ILeafer } from './app/ILeafer'
 import { IEditorConfig } from './editor/IEditor'
 
 // Line
-export interface ILine extends IUI {
+export interface ILine extends ILineAttrData, IUI {
     __: ILineData
-    toPoint?: IPointData
-    points?: number[]
-    curve?: boolean | number
 }
 
 interface ILineAttrData {
@@ -54,8 +51,11 @@ export interface IFlowInputData extends IFlowAttrData, IBoxInputData { }
 
 
 // Video
-export interface IVideo extends IRect {
+export interface IVideo extends IPlayerMethods, IRect {
     __: IVideoData
+}
+
+interface IPlayerMethods {
     play(): void
     pause(): void
     stop(): void
@@ -70,11 +70,8 @@ export interface IVideoInputData extends IVideoAttrData, IRectInputData { }
 
 
 // GIF
-export interface IGIF extends IRect {
+export interface IGIF extends IPlayerMethods, IRect {
     __: IGIFData
-    play(): void
-    pause(): void
-    stop(): void
 }
 
 interface IGIFAttrData {
@@ -86,7 +83,7 @@ export interface IGIFInputData extends IGIFAttrData, IRectInputData { }
 
 
 // Robot
-export interface IRobot extends IRect {
+export interface IRobot extends IRobotAttrData, IPlayerMethods, IRect {
     __: IRobotData
     do(action: string | IRobotAction): void
 }
@@ -94,9 +91,9 @@ export interface IRobot extends IRect {
 interface IRobotAttrData {
     keyframes?: IRobotKeyframe | IRobotKeyframe[]
     actions?: IRobotActions
+    action?: string | IRobotAction
     speed?: number
-    loop?: number
-    nowFrame?: number
+    loop?: boolean
 }
 
 export interface IRobotActions {
@@ -127,11 +124,8 @@ export interface IRectInputData extends IUIBaseInputData { }
 
 
 // Ellipse
-export interface IEllipse extends IUI {
+export interface IEllipse extends IUI, IEllipseAttrData {
     __: IEllipseData
-    startAngle?: number
-    endAngle?: number
-    innerRadius?: number
 }
 interface IEllipseAttrData {
     startAngle?: number
@@ -143,11 +137,8 @@ export interface IEllipseInputData extends IEllipseAttrData, IUIBaseInputData { 
 
 
 // Polygon
-export interface IPolygon extends IUI {
+export interface IPolygon extends IPolygonAttrData, IUI {
     __: IPolygonData
-    sides?: number
-    points?: number[]
-    curve?: boolean | number
 }
 interface IPolygonAttrData {
     sides?: number
@@ -159,10 +150,8 @@ export interface IPolygonInputData extends IPolygonAttrData, IUIBaseInputData { 
 
 
 // Star
-export interface IStar extends IUI {
+export interface IStar extends IStarAttrData, IUI {
     __: IStarData
-    corners?: number
-    innerRadius?: number
 }
 interface IStarAttrData {
     corners?: number
@@ -196,11 +185,8 @@ export interface IPenInputData extends IGroupInputData { }
 
 
 // Text
-export interface IText extends ITextStyleAttrData, IUI {
+export interface IText extends ITextAttrData, ITextStyleAttrData, IUI {
     __: ITextData
-    text?: string
-    padding?: IFourNumber
-    resizeFontSize?: IBoolean
 }
 interface ITextAttrData {
     text?: string
@@ -265,9 +251,8 @@ export interface ITextDrawData {
 }
 
 // Image
-export interface IImage extends IRect, ILeaferImageConfig {
+export interface IImage extends IImageAttrData, IRect {
     __: IImageData
-    url: string
     ready: boolean
     image?: ILeaferImage
 }
@@ -279,10 +264,8 @@ export interface IImageData extends IImageAttrData, IRectData {
 }
 export interface IImageInputData extends IImageAttrData, IUIBaseInputData { }
 
-export interface ICanvas extends IRect {
+export interface ICanvas extends ICanvasAttrData, IRect {
     __: ICanvasData
-    smooth?: boolean
-    contextSettings?: ICanvasContext2DSettings
     canvas?: ILeaferCanvas
     context?: ICanvasContext2D
     __updateSize(): void
@@ -325,21 +308,18 @@ export interface IFrameInputData extends IBoxInputData {
 
 
 // Box
-export interface IBox extends IGroup {
+export interface IBox extends IBoxAttrData, IGroup {
     __: IBoxData
-    resizeChildren?: IBoolean
-    overflow?: IOverflow
     __updateRectRenderBounds(): void
     __renderGroup(canvas: ILeaferCanvas, options: IRenderOptions): void
 }
-export interface IBoxData extends IGroupData {
-    resizeChildren?: boolean
+
+interface IBoxAttrData {
     overflow?: IOverflow
+    resizeChildren?: IBoolean
 }
-export interface IBoxInputData extends IGroupInputData {
-    resizeChildren?: boolean
-    overflow?: IOverflow
-}
+export interface IBoxData extends IBoxAttrData, IGroupData { }
+export interface IBoxInputData extends IBoxAttrData, IGroupInputData { }
 
 
 // Group
@@ -418,9 +398,6 @@ export interface IFindUIMethod {
 }
 
 export interface IUIData extends IUIComputedData, ILeafData {
-
-    padding?: number | number[]
-
     normalStyle?: IUIInputData
     hoverStyle?: IUIInputData
     pressStyle?: IUIInputData
@@ -455,15 +432,12 @@ export interface IUIData extends IUIComputedData, ILeafData {
 
     __needComputePaint: boolean
     __computePaint(): void
-
 }
 export interface IUIComputedData extends IFillComputedData, IBorderComputedData, IStrokeComputedData, ITextStyleComputedData, ICornerRadiusComputedData, IEffectComputedData, ILeafComputedData {
     padding?: number | number[]
 }
 
 export interface IUIBaseInputData extends IFillInputData, IStrokeInputData, ITextStyleInputData, ICornerRadiusInputData, IEffectInputData, ILeafInputData {
-    padding?: number | number[]
-
     normalStyle?: IUIInputData
     hoverStyle?: IUIInputData
     pressStyle?: IUIInputData
