@@ -9,6 +9,7 @@ import {
     ITextStyleAttrData, ITextStyleInputData, ITextStyleComputedData
 } from './ICommonAttr'
 import { IOverflow } from './type/IType'
+import { IAnimation, IAnimationControl, IAnimationOptions, IKeyframe, IKeyframes } from './type/IAnimation'
 import { ILeafer } from './app/ILeafer'
 import { IEditorConfig } from './editor/IEditor'
 
@@ -384,6 +385,8 @@ export interface IUI extends IFillAttrData, IStrokeAttrData, ICornerRadiusAttrDa
     getPathString(curve?: boolean, pathForRender?: boolean): IPathString
 
     load(): void
+
+    animate(animation: IKeyframe | IKeyframes | IAnimation, options?: IAnimationOptions): IAnimationControl
 
     __drawPathByData(drawer: IPathDrawer, data: IPathCommandData): void
     __drawPathByBox(drawer: IPathDrawer): void

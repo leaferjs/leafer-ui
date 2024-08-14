@@ -33,6 +33,8 @@ export { ICornerRadiusString, IStrokeWidthString, IPaintString, IShadowString, I
 export { ILeafFill, ILeafPaint, ILeafPaintPatternData, ILeafPaintColor, ILeafStrokePaint, ILeafShadowEffect } from './type/IComputedType'
 export { IStrokeAttrData, IStrokeInputData, IStrokeComputedData, ITextStyleAttrData, ITextStyleInputData, ITextStyleComputedData, IEffectAttrData, IEffectInputData, IEffectComputedData } from './ICommonAttr'
 
+export { IKeyframes, IKeyframe, IKeyframeId, IStyleKeyframe, ITimeKeyframe, IAnimation, IAnimationOptions, IAnimationControl, IStates } from './type/IAnimation'
+
 export { IUIRenderModule, IRectRenderModule, IImageRenderModule, ITextRenderModule, IGroupRenderModule, IFrameRenderModule } from './module/IUIRender'
 export { IUIBoundsModule } from './module/IUIBounds'
 export { IUIHitModule } from './module/IUIHit'
