@@ -9,7 +9,7 @@ import {
     ITextStyleAttrData, ITextStyleInputData, ITextStyleComputedData
 } from './ICommonAttr'
 import { IOverflow } from './type/IType'
-import { IAnimation, IAnimationControl, IAnimationOptions, IKeyframe, IKeyframes } from './type/IAnimation'
+import { IAnimationData, IAnimation, IAnimationOptions, IKeyframe, IKeyframes, IStateName, IStates } from './type/IAnimation'
 import { ILeafer } from './app/ILeafer'
 import { IEditorConfig } from './editor/IEditor'
 
@@ -86,25 +86,16 @@ export interface IGIFInputData extends IGIFAttrData, IRectInputData { }
 // Robot
 export interface IRobot extends IRobotAttrData, IPlayerMethods, IRect {
     __: IRobotData
-    do(action: string | IRobotAction): void
 }
 
 interface IRobotAttrData {
-    keyframes?: IRobotKeyframe | IRobotKeyframe[]
-    actions?: IRobotActions
-    action?: string | IRobotAction
+    frames?: IRobotFrame | IRobotFrame[]
+    nowFrame?: number
     speed?: number
     loop?: boolean
 }
 
-export interface IRobotActions {
-    [name: string]: IRobotAction
-}
-
-export type IRobotAction = IRobotKeyframeId | IRobotKeyframeId[]
-export type IRobotKeyframeId = number
-
-export interface IRobotKeyframe {
+export interface IRobotFrame {
     mode?: 'normal' | 'clip'
     url: string
     offset?: IPointData
@@ -341,7 +332,7 @@ export interface IGroupData extends IUIData { }
 export interface IGroupInputData extends IUIBaseInputData { }
 
 // UI
-export interface IUI extends IFillAttrData, IStrokeAttrData, ICornerRadiusAttrData, IEffectAttrData, ILeaf {
+export interface IUI extends IUIAttrData, IFillAttrData, IStrokeAttrData, ICornerRadiusAttrData, IEffectAttrData, ILeaf {
     __: IUIData
 
     readonly app: ILeafer
@@ -386,21 +377,27 @@ export interface IUI extends IFillAttrData, IStrokeAttrData, ICornerRadiusAttrDa
 
     load(): void
 
-    animate(animation: IKeyframe | IKeyframes | IAnimation, options?: IAnimationOptions): IAnimationControl
-
     __drawPathByData(drawer: IPathDrawer, data: IPathCommandData): void
     __drawPathByBox(drawer: IPathDrawer): void
     __drawAfterFill?(canvas: ILeaferCanvas, options: IRenderOptions): void
 
+    animate(keyframes: IKeyframes | IAnimationData, options?: IAnimationOptions): IAnimation
+
     export(filename: string, options?: IExportOptions | number | boolean): Promise<IExportResult>
     clone(): IUI
+}
+
+interface IUIAttrData {
+    keyframes?: IKeyframe[]
+    states?: IStates
+    state?: IStateName
 }
 
 export interface IFindUIMethod {
     (leaf: IUI, options?: any): IAnswer
 }
 
-export interface IUIData extends IUIComputedData, ILeafData {
+export interface IUIData extends IUIAttrData, IUIComputedData, ILeafData {
     normalStyle?: IUIInputData
     hoverStyle?: IUIInputData
     pressStyle?: IUIInputData
@@ -436,11 +433,11 @@ export interface IUIData extends IUIComputedData, ILeafData {
     __needComputePaint: boolean
     __computePaint(): void
 }
-export interface IUIComputedData extends IFillComputedData, IBorderComputedData, IStrokeComputedData, ITextStyleComputedData, ICornerRadiusComputedData, IEffectComputedData, ILeafComputedData {
-    padding?: number | number[]
+export interface IUIComputedData extends IUIAttrData, IFillComputedData, IBorderComputedData, IStrokeComputedData, ITextStyleComputedData, ICornerRadiusComputedData, IEffectComputedData, ILeafComputedData {
+
 }
 
-export interface IUIBaseInputData extends IFillInputData, IStrokeInputData, ITextStyleInputData, ICornerRadiusInputData, IEffectInputData, ILeafInputData {
+export interface IUIBaseInputData extends IUIAttrData, IFillInputData, IStrokeInputData, ITextStyleInputData, ICornerRadiusInputData, IEffectInputData, ILeafInputData {
     normalStyle?: IUIInputData
     hoverStyle?: IUIInputData
     pressStyle?: IUIInputData
@@ -470,7 +467,7 @@ export type IUITag =
     | 'Box'
 
 
-export interface IUIInputData extends IRectInputData, IEllipseInputData, IPolygonInputData, IStarInputData, ILineInputData, IPathInputData, ITextInputData, IImageInputData, IGroupInputData, IFrameInputData, IUIBaseInputData, IObject {
+export interface IUIInputData extends IRectInputData, IEllipseInputData, IPolygonInputData, IStarInputData, ILineInputData, IPathInputData, ITextInputData, IImageInputData, IGroupInputData, IFrameInputData, IArrowInputData, IGIFInputData, IVideoInputData, IRobotInputData, IUIBaseInputData, IObject {
     children?: IUIInputData[]
 }
 

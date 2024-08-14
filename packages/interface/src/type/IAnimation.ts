@@ -1,15 +1,13 @@
 import { IUIInputData } from '../IUI'
 
 
-export type IKeyframes = IKeyframe[] | IKeyframeId[]
+export type IKeyframes = IKeyframeId | IKeyframeId[] | IKeyframe | IKeyframe[]
 
-export type IKeyframe = IStyleKeyframe | ITimeKeyframe
+export type IKeyframe = IUIInputData | ITimelineKeyframe
 
 export type IKeyframeId = number
 
-export type IStyleKeyframe = IUIInputData
-
-export interface ITimeKeyframe {
+export interface ITimelineKeyframe {
     style: IUIInputData
     easing?: string
     delay?: number
@@ -17,8 +15,8 @@ export interface ITimeKeyframe {
     endDelay?: number
 }
 
-export interface IAnimation extends IAnimationOptions {
-    keyframes: IKeyframe | IKeyframes
+export interface IAnimationData extends IAnimationOptions {
+    keyframes: IKeyframes
 }
 
 export interface IAnimationOptions {
@@ -31,10 +29,13 @@ export interface IAnimationOptions {
     still?: string
 }
 
-export interface IAnimationControl {
+export interface IAnimation {
 
 }
 
 export interface IStates {
-    [name: string]: IStyleKeyframe | IAnimation
+    [name: string]: IKeyframes | IAnimationData
 }
+
+
+export type IStateName = string
