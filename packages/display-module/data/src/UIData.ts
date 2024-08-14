@@ -1,7 +1,7 @@
 import { INumber, IValue, IBoolean, IPathCommandData, IPathString } from '@leafer/interface'
 import { PathConvert, LeafData, Debug } from '@leafer/core'
 
-import { IShadowEffect, IUI, IUIData, IUnitData, ILeafPaint } from '@leafer-ui/interface'
+import { IShadowEffect, IUI, IUIData, IUnitData, ILeafPaint, IStateName } from '@leafer-ui/interface'
 import { Paint, PaintImage } from '@leafer-ui/external'
 
 
@@ -35,6 +35,7 @@ export class UIData extends LeafData implements IUIData {
     public __needComputePaint: boolean
 
     protected _visible?: IBoolean
+    protected _state?: IStateName
 
     protected _width?: INumber
     protected _height?: INumber
@@ -55,6 +56,11 @@ export class UIData extends LeafData implements IUIData {
     protected setVisible(value: IBoolean) {
         if (this.__leaf.leafer) this.__leaf.leafer.watcher.hasVisible = true
         this._visible = value
+    }
+
+    protected setState(value: string): void {
+        this._state = value
+        this.__leaf.__updateState()
     }
 
     protected setWidth(value: INumber) {

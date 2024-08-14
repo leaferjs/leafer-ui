@@ -381,6 +381,8 @@ export interface IUI extends IUIAttrData, IFillAttrData, IStrokeAttrData, ICorne
     __drawPathByBox(drawer: IPathDrawer): void
     __drawAfterFill?(canvas: ILeaferCanvas, options: IRenderOptions): void
 
+    __updateState(): void
+
     animate(keyframes: IKeyframes | IAnimationData, options?: IAnimationOptions): IAnimation
 
     export(filename: string, options?: IExportOptions | number | boolean): Promise<IExportResult>

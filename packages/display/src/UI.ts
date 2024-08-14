@@ -436,6 +436,8 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
         }
     }
 
+
+
     public __drawRenderPath(canvas: ILeaferCanvas): void {
         canvas.beginPath()
         this.__drawPathByData(canvas, this.__.__pathForRender)
@@ -463,6 +465,9 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
             drawer.rect(x, y, width, height)
         }
     }
+
+
+    public __updateState(): void { }
 
     // @leafer-in/animate rewite
 
