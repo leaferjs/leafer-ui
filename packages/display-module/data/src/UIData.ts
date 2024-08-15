@@ -1,7 +1,7 @@
 import { INumber, IValue, IBoolean, IPathCommandData, IPathString } from '@leafer/interface'
 import { PathConvert, LeafData, Debug } from '@leafer/core'
 
-import { IShadowEffect, IUI, IUIData, IUnitData, ILeafPaint, IStateName } from '@leafer-ui/interface'
+import { IShadowEffect, IUI, IUIData, IUnitData, ILeafPaint, IStateName, IAnimationData } from '@leafer-ui/interface'
 import { Paint, PaintImage } from '@leafer-ui/external'
 
 
@@ -35,6 +35,8 @@ export class UIData extends LeafData implements IUIData {
     public __needComputePaint: boolean
 
     protected _visible?: IBoolean
+
+    protected _animation?: IAnimationData
     protected _state?: IStateName
 
     protected _width?: INumber
@@ -53,15 +55,23 @@ export class UIData extends LeafData implements IUIData {
     public get __autoSide() { return !this._width || !this._height }
     public get __autoSize() { return !this._width && !this._height }
 
+
     protected setVisible(value: IBoolean) {
-        if (this.__leaf.leafer) this.__leaf.leafer.watcher.hasVisible = true
         this._visible = value
+        if (this.__leaf.leafer) this.__leaf.leafer.watcher.hasVisible = true
     }
 
-    protected setState(value: string): void {
+
+    protected setAnimation(value: IAnimationData): void {
+        this._animation = value
+        this.__leaf.animate(value)
+    }
+
+    protected setState(value: IStateName): void {
         this._state = value
         this.__leaf.__updateState()
     }
+
 
     protected setWidth(value: INumber) {
         if (value < 0) {

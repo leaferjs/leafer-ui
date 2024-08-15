@@ -391,6 +391,7 @@ export interface IUI extends IUIAttrData, IFillAttrData, IStrokeAttrData, ICorne
 
 interface IUIAttrData {
     keyframes?: IKeyframe[]
+    animation?: IAnimationData
     states?: IStates
     state?: IStateName
 }
