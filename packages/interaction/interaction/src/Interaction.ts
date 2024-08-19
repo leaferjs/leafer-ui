@@ -52,6 +52,7 @@ export class InteractionBase implements IInteraction {
     protected enterPath: LeafList
 
     protected waitMenuTap: boolean
+    protected waitRightTap: boolean
     protected waitTap: boolean
     protected longPressTimer: ITimer
     protected longPressed: boolean
@@ -110,7 +111,7 @@ export class InteractionBase implements IInteraction {
             this.longPressWait(data)
         }
 
-        this.waitMenuTap = PointerButton.right(data)
+        this.waitRightTap = PointerButton.right(data)
 
         this.dragger.setDragData(data) // must after down event
         if (!this.isHoldRightKey) this.updateCursor(data)
@@ -138,7 +139,7 @@ export class InteractionBase implements IInteraction {
             const canDrag = PointHelper.getDistance(this.downData, data) > dragDistance
             if (canDrag) {
                 if (this.waitTap) this.pointerWaitCancel()
-                this.waitMenuTap = false
+                this.waitRightTap = false
             }
 
             this.dragger.checkDrag(data, canDrag)
@@ -207,14 +208,18 @@ export class InteractionBase implements IInteraction {
     }
 
     // context menu
-
     public menu(data: IPointerEvent): void {
         this.findPath(data)
         this.emit(PointerEvent.MENU, data)
+        this.waitMenuTap = true
+        if (!this.downData && this.waitRightTap) this.menuTap(data) // fix: Window 触摸屏双击右键菜单事件会在pointer.up之后触发
     }
 
     public menuTap(data: IPointerEvent): void {
-        if (this.waitMenuTap) this.emit(PointerEvent.MENU_TAP, data)
+        if (this.waitRightTap && this.waitMenuTap) {
+            this.emit(PointerEvent.MENU_TAP, data)
+            this.waitRightTap = this.waitMenuTap = false
+        }
     }
 
     // window transform
