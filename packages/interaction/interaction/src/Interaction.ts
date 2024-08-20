@@ -212,7 +212,7 @@ export class InteractionBase implements IInteraction {
         this.findPath(data)
         this.emit(PointerEvent.MENU, data)
         this.waitMenuTap = true
-        if (!this.downData && this.waitRightTap) this.menuTap(data) // fix: Window 触摸屏双击右键菜单事件会在pointer.up之后触发
+        if (!this.downData && this.waitRightTap) this.menuTap(data) // fix: Windows 触摸屏双击右键菜单事件会在pointer.up之后触发
     }
 
     public menuTap(data: IPointerEvent): void {
