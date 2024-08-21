@@ -21,10 +21,11 @@ export type IEasingType =
     | 'ease-in-back' | 'ease-out-back' | 'ease-in-out-back'
     | 'ease-in-elastic' | 'ease-out-elastic' | 'ease-in-out-elastic'
     | 'ease-in-bounce' | 'ease-out-bounce' | 'ease-in-out-bounce'
+    | number[] // cubic-bezier(number, number, number, number)
 
 export interface ITimelineKeyframe {
     style: IUIInputData
-    easing?: string | number[] // number[] => cubic-bezier(number, number, number, number)
+    easing?: IEasingType
     delay?: number
     duration: number
     endDelay?: number
