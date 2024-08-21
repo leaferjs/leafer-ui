@@ -307,7 +307,7 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
 
     // states
 
-    @dataType([])
+    @dataType()
     public keyframes?: IKeyframe[]
 
     @dataType()
