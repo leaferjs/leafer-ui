@@ -48,8 +48,14 @@ export interface IAnimationOptions {
     ending?: IAnimationEnding
 }
 
-export interface IAnimation extends IAnimationOptions {
-
+export interface IAnimation {
+    readonly easing: IAnimationEasing
+    readonly direction: IAnimationDirection
+    readonly delay: number
+    readonly duration: number
+    readonly endDelay: number
+    readonly loop: boolean | number
+    readonly ending: IAnimationEnding
 }
 
 export interface IStates {
