@@ -36,7 +36,7 @@ export interface IAnimationData extends IAnimationOptions {
 }
 
 export interface IAnimationOptions {
-    easing?: string
+    easing?: IEasingType
     delay?: number
     duration: number
     endDelay?: number
