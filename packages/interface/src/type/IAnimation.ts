@@ -23,7 +23,8 @@ export type IAnimationEasing =
     | 'ease-in-bounce' | 'ease-out-bounce' | 'ease-in-out-bounce'
     | number[] // cubic-bezier(number, number, number, number)
 
-export type IAnimationDirection = 'normal' | 'alternate' | 'reverse'
+export type IAnimationDirection = 'normal' | 'alternate' | 'reverse' | 'alternate-reverse'
+export type IAnimationEnding = 'normal' | 'from' | 'to'
 
 export interface ITimelineKeyframe {
     style: IUIInputData
@@ -39,15 +40,15 @@ export interface IAnimationData extends IAnimationOptions {
 
 export interface IAnimationOptions {
     easing?: IAnimationEasing
+    direction?: IAnimationDirection
     delay?: number
     duration: number
     endDelay?: number
     loop?: boolean | number
-    direction?: IAnimationDirection
-    still?: string
+    ending?: IAnimationEnding
 }
 
-export interface IAnimation {
+export interface IAnimation extends IAnimationOptions {
 
 }
 
