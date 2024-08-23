@@ -44,8 +44,8 @@ export interface IAnimationOptions {
     delay?: number
     duration: number
     endDelay?: number
-    loop?: boolean | number
     ending?: IAnimationEnding
+    loop?: boolean | number
 }
 
 export interface IAnimation {
@@ -54,8 +54,12 @@ export interface IAnimation {
     readonly delay: number
     readonly duration: number
     readonly endDelay: number
-    readonly loop: boolean | number
     readonly ending: IAnimationEnding
+    readonly loop: boolean | number
+    play(): void
+    pause(): void
+    finish(): void
+    replay(): void
 }
 
 export interface IStates {
