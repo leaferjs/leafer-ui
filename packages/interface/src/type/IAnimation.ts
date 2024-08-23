@@ -42,10 +42,12 @@ export interface IAnimationOptions {
     easing?: IAnimationEasing
     direction?: IAnimationDirection
     delay?: number
-    duration: number
+    duration?: number
     endDelay?: number
     ending?: IAnimationEnding
     loop?: boolean | number
+    speed?: number
+    autoplay?: boolean
 }
 
 export interface IAnimation {
@@ -56,6 +58,8 @@ export interface IAnimation {
     readonly endDelay: number
     readonly ending: IAnimationEnding
     readonly loop: boolean | number
+    readonly speed: number
+    readonly autoplay?: boolean
     play(): void
     pause(): void
     finish(): void
