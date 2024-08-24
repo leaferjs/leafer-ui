@@ -31,6 +31,7 @@ export interface IAnimationKeyframe {
     easing?: IAnimationEasing
     delay?: number
     duration?: number
+    autoDuration?: number
     endDelay?: number
 }
 
