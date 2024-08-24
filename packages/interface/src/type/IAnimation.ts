@@ -3,7 +3,7 @@ import { IUIInputData } from '../IUI'
 
 export type IKeyframes = IKeyframeId | IKeyframeId[] | IKeyframe | IKeyframe[]
 
-export type IKeyframe = IUIInputData | ITimelineKeyframe
+export type IKeyframe = IUIInputData | IAnimationKeyframe
 
 export type IKeyframeId = number
 
@@ -26,13 +26,14 @@ export type IAnimationEasing =
 export type IAnimationDirection = 'normal' | 'alternate' | 'reverse' | 'alternate-reverse'
 export type IAnimationEnding = 'normal' | 'from' | 'to'
 
-export interface ITimelineKeyframe {
+export interface IAnimationKeyframe {
     style: IUIInputData
     easing?: IAnimationEasing
     delay?: number
-    duration: number
+    duration?: number
     endDelay?: number
 }
+
 
 export interface IAnimationData extends IAnimationOptions {
     keyframes: IKeyframes
