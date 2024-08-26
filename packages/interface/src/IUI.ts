@@ -9,7 +9,7 @@ import {
     ITextStyleAttrData, ITextStyleInputData, ITextStyleComputedData
 } from './ICommonAttr'
 import { IOverflow } from './type/IType'
-import { IAnimation, IAnimate, IAnimateOptions, IKeyframe, IKeyframes, IStateName, IStates } from './type/IAnimation'
+import { IAnimation, IAnimate, IAnimateOptions, IKeyframe, IMultiKeyframe, IStateName, IStates } from './type/IAnimation'
 import { ILeafer } from './app/ILeafer'
 import { IEditorConfig } from './editor/IEditor'
 
@@ -383,7 +383,7 @@ export interface IUI extends IUIAttrData, IFillAttrData, IStrokeAttrData, ICorne
 
     __updateState(): void
 
-    animate(keyframes: IKeyframes | IAnimation, options?: IAnimateOptions): IAnimate
+    animate(keyframe: IMultiKeyframe, options?: IAnimateOptions | number): IAnimate
 
     export(filename: string, options?: IExportOptions | number | boolean): Promise<IExportResult>
     clone(): IUI

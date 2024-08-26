@@ -3,7 +3,7 @@ import { IObject } from '@leafer/interface'
 import { IUIInputData } from '../IUI'
 
 
-export type IKeyframes = IKeyframeId | IKeyframeId[] | IKeyframe | IKeyframe[]
+export type IMultiKeyframe = IKeyframeId | IKeyframeId[] | IKeyframe | IKeyframe[]
 
 export type IKeyframe = IUIInputData | IAnimateKeyframe
 
@@ -42,7 +42,7 @@ export interface IAnimateKeyframe {
 
 
 export interface IAnimation extends IAnimateOptions {
-    keys: IKeyframes
+    keys: IMultiKeyframe
 }
 
 export interface IAnimateOptions {
@@ -57,7 +57,7 @@ export interface IAnimateOptions {
     autoplay?: boolean
 }
 
-export interface IAnimate extends IAnimation {
+export interface IAnimate extends IAnimateOptions {
     target: IObject
     config: IAnimateOptions
 
@@ -72,7 +72,7 @@ export interface IAnimate extends IAnimation {
 }
 
 export interface IStates {
-    [name: string]: IKeyframes | IAnimation
+    [name: string]: IMultiKeyframe | IAnimation
 }
 
 
