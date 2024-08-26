@@ -1,4 +1,4 @@
-import { IObject } from '@leafer/interface'
+import { IObject, IFunction } from '@leafer/interface'
 
 import { IUIInputData } from '../IUI'
 
@@ -65,10 +65,12 @@ export interface IAnimate extends IAnimateOptions {
     readonly completed: boolean
     readonly looped: number
 
+    onUpdate?: IFunction
+    onComplete?: IFunction
+
     play(): void
     pause(): void
-    finish(): void
-    replay(): void
+    stop(): void
 }
 
 export interface IStates {
