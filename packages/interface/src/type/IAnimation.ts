@@ -1,13 +1,15 @@
+import { IObject } from '@leafer/interface'
+
 import { IUIInputData } from '../IUI'
 
 
 export type IKeyframes = IKeyframeId | IKeyframeId[] | IKeyframe | IKeyframe[]
 
-export type IKeyframe = IUIInputData | IAnimationKeyframe
+export type IKeyframe = IUIInputData | IAnimateKeyframe
 
 export type IKeyframeId = number
 
-export type IAnimationEasing =
+export type IAnimateEasing =
     | 'linear'
     | 'ease'
     | 'ease-in' | 'ease-out' | 'ease-in-out'
@@ -23,12 +25,12 @@ export type IAnimationEasing =
     | 'ease-in-bounce' | 'ease-out-bounce' | 'ease-in-out-bounce'
     | number[] // cubic-bezier(number, number, number, number)
 
-export type IAnimationDirection = 'normal' | 'alternate' | 'reverse' | 'alternate-reverse'
-export type IAnimationEnding = 'normal' | 'from' | 'to'
+export type IAnimateDirection = 'normal' | 'alternate' | 'reverse' | 'alternate-reverse'
+export type IAnimateEnding = 'normal' | 'from' | 'to'
 
-export interface IAnimationKeyframe {
+export interface IAnimateKeyframe {
     key: IUIInputData
-    easing?: IAnimationEasing
+    easing?: IAnimateEasing
     delay?: number
     duration?: number
     endDelay?: number
@@ -39,32 +41,30 @@ export interface IAnimationKeyframe {
 }
 
 
-export interface IAnimationData extends IAnimationOptions {
+export interface IAnimation extends IAnimateOptions {
     keys: IKeyframes
 }
 
-export interface IAnimationOptions {
-    easing?: IAnimationEasing
-    direction?: IAnimationDirection
+export interface IAnimateOptions {
+    easing?: IAnimateEasing
+    direction?: IAnimateDirection
     delay?: number
     duration?: number
     endDelay?: number
-    ending?: IAnimationEnding
+    ending?: IAnimateEnding
     loop?: boolean | number
     speed?: number
     autoplay?: boolean
 }
 
-export interface IAnimation {
-    readonly easing: IAnimationEasing
-    readonly direction: IAnimationDirection
-    readonly delay: number
-    readonly duration: number
-    readonly endDelay: number
-    readonly ending: IAnimationEnding
-    readonly loop: boolean | number
-    readonly speed: number
-    readonly autoplay?: boolean
+export interface IAnimate extends IAnimation {
+    target: IObject
+    config: IAnimateOptions
+
+    readonly runing: boolean
+    readonly completed: boolean
+    readonly looped: number
+
     play(): void
     pause(): void
     finish(): void
@@ -72,7 +72,7 @@ export interface IAnimation {
 }
 
 export interface IStates {
-    [name: string]: IKeyframes | IAnimationData
+    [name: string]: IKeyframes | IAnimation
 }
 
 
