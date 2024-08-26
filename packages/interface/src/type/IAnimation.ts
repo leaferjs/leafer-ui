@@ -27,17 +27,20 @@ export type IAnimationDirection = 'normal' | 'alternate' | 'reverse' | 'alternat
 export type IAnimationEnding = 'normal' | 'from' | 'to'
 
 export interface IAnimationKeyframe {
-    style: IUIInputData
+    key: IUIInputData
     easing?: IAnimationEasing
     delay?: number
     duration?: number
-    autoDuration?: number
     endDelay?: number
+
+    autoDelay?: number
+    autoDuration?: number
+    autoEndDelay?: number
 }
 
 
 export interface IAnimationData extends IAnimationOptions {
-    keyframes: IKeyframes
+    keys: IKeyframes
 }
 
 export interface IAnimationOptions {
