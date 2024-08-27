@@ -79,6 +79,7 @@ export interface IAnimate extends IAnimateOptions {
     readonly began: boolean
     readonly running: boolean
     readonly completed: boolean
+    readonly destroyed: boolean
 
     readonly now: number
     readonly looped: number
@@ -87,6 +88,8 @@ export interface IAnimate extends IAnimateOptions {
     pause(): void
     stop(): void
     seek(time: number): void
+
+    destroy(): void
 }
 
 export interface IStates {
