@@ -84,6 +84,7 @@ export interface IAnimate extends IAnimateOptions {
     play(): void
     pause(): void
     stop(): void
+    seek(time: number): void
 }
 
 export interface IStates {
