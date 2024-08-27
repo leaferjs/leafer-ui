@@ -76,6 +76,7 @@ export interface IAnimate extends IAnimateOptions {
     target: IObject
     config: IAnimateOptions
 
+    readonly currentTime: number
     readonly runing: boolean
     readonly completed: boolean
     readonly looped: number
