@@ -1,4 +1,4 @@
-import { IObject } from '@leafer/interface'
+import { IObject, IFunction } from '@leafer/interface'
 
 import { IUIInputData } from '../IUI'
 
@@ -30,6 +30,7 @@ export type IAnimateEnding = 'normal' | 'from' | 'to'
 
 export interface IAnimateKeyframe {
     key: IUIInputData
+
     easing?: IAnimateEasing
     delay?: number
     duration?: number
@@ -38,6 +39,23 @@ export interface IAnimateKeyframe {
     autoDelay?: number
     autoDuration?: number
     autoEndDelay?: number
+}
+
+export interface IComputedKeyframe {
+    key: IUIInputData
+    before: IUIInputData
+
+    easingFn?: IFunction
+
+    delay?: number
+    endDelay?: number
+    duration?: number
+
+    autoDelay?: number
+    autoDuration?: number
+    autoEndDelay?: number
+
+    totalDuration?: number // 存在delay / endDelay 时， 才会有这个属性
 }
 
 
@@ -89,7 +107,7 @@ export interface IAnimate extends IAnimateOptions {
     stop(): void
     seek(time: number): void
 
-    destroy(): void
+    destroy(complete?: boolean): void
 }
 
 export interface IStates {
