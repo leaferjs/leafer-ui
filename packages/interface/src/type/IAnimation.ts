@@ -55,6 +55,10 @@ export interface IAnimateOptions {
     loop?: boolean | number
     speed?: number
     autoplay?: boolean
+    event?: {
+        update?: IFunction
+        complete?: IFunction
+    }
 }
 
 export interface IAnimate extends IAnimateOptions {
