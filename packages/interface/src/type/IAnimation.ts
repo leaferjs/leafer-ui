@@ -76,9 +76,11 @@ export interface IAnimate extends IAnimateOptions {
     target: IObject
     config: IAnimateOptions
 
-    readonly currentTime: number
-    readonly runing: boolean
+    readonly began: boolean
+    readonly running: boolean
     readonly completed: boolean
+
+    readonly now: number
     readonly looped: number
 
     play(): void
