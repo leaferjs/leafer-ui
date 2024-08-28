@@ -10,6 +10,10 @@ export type IKeyframe = IUIInputData | IAnimateKeyframe
 export type IKeyframeId = number
 
 export type IAnimateEasing =
+    | IAnimateEasingName
+    | number[] // cubic-bezier(number, number, number, number)
+
+export type IAnimateEasingName =
     | 'linear'
     | 'ease'
     | 'ease-in' | 'ease-out' | 'ease-in-out'
@@ -23,7 +27,6 @@ export type IAnimateEasing =
     | 'back-in' | 'back-out' | 'back-in-out'
     | 'elastic-in' | 'elastic-out' | 'elastic-in-out'
     | 'bounce-in' | 'bounce-out' | 'bounce-in-out'
-    | number[] // cubic-bezier(number, number, number, number)
 
 export type IAnimateDirection = 'normal' | 'alternate' | 'reverse' | 'alternate-reverse'
 export type IAnimateEnding = 'normal' | 'from' | 'to'
