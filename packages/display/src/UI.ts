@@ -357,12 +357,17 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
         return scaleX !== scaleY ? { x: scaleX, y: scaleY } : scaleX
     }
 
+
+    public nowAnimate?: IAnimate
+
     public get pen(): IPathCreator {
         const { path } = this.__
         pen.set(this.path = path || [])
         if (!path) this.__drawPathByBox(pen)
         return pen
     }
+
+
 
 
     // editor
@@ -471,11 +476,13 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     }
 
 
-    public __updateState(): void { }
+    public __updateState(): void {
+        this.animate(this.states[this.state])
+    }
 
     // @leafer-in/animate rewite
 
-    public animate(_keyframe: IMultiKeyframe, _options?: IAnimateOptions | number): IAnimate { return undefined }
+    public animate(_keyframe: IMultiKeyframe | IAnimation, _options?: IAnimateOptions | number): IAnimate { return undefined }
 
 
     // create

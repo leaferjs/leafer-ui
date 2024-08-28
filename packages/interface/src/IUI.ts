@@ -357,6 +357,7 @@ export interface IUI extends IUIAttrData, IFillAttrData, IStrokeAttrData, ICorne
 
     children?: IUI[]
 
+    nowAnimate?: IAnimate
     readonly pen: IPathCreator
 
     reset(data?: IUIInputData): void
@@ -383,7 +384,7 @@ export interface IUI extends IUIAttrData, IFillAttrData, IStrokeAttrData, ICorne
 
     __updateState(): void
 
-    animate(keyframe: IMultiKeyframe, options?: IAnimateOptions | number): IAnimate
+    animate(keyframe: IMultiKeyframe | IAnimation, options?: IAnimateOptions | number): IAnimate
 
     export(filename: string, options?: IExportOptions | number | boolean): Promise<IExportResult>
     clone(): IUI

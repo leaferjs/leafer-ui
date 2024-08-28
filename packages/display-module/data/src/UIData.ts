@@ -63,8 +63,7 @@ export class UIData extends LeafData implements IUIData {
 
 
     protected setAnimation(value: IAnimation): void {
-        this._animation = value
-        this.__leaf.animate(value.keys, value)
+        this.__leaf.animate(this._animation = value)
     }
 
     protected setState(value: IStateName): void {
