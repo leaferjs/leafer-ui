@@ -28,6 +28,10 @@ export type IAnimateEasingName =
     | 'elastic-in' | 'elastic-out' | 'elastic-in-out'
     | 'bounce-in' | 'bounce-out' | 'bounce-in-out'
 
+export interface IAnimateEasingFunction {
+    (t: number): number
+}
+
 export type IAnimateDirection = 'normal' | 'alternate' | 'reverse' | 'alternate-reverse'
 export type IAnimateEnding = 'normal' | 'from' | 'to'
 
@@ -96,6 +100,9 @@ export interface IAnimateEventFunction {
 export interface IAnimate extends IAnimateOptions {
     target: IObject
     config: IAnimateOptions
+
+    readonly from: IObject
+    readonly to: IObject
 
     readonly began: boolean
     readonly running: boolean
