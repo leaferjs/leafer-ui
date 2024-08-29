@@ -86,10 +86,11 @@ export interface IGIFInputData extends IGIFAttrData, IRectInputData { }
 // Robot
 export interface IRobot extends IRobotAttrData, IPlayerMethods, IRect {
     __: IRobotData
+    __updateAction(): void
 }
 
 interface IRobotAttrData {
-    frames?: IRobotFrame | IRobotFrame[]
+    robot?: IRobotKeyframe | IRobotKeyframe[]
     actions?: IRobotActions
     action?: IRobotActionName
     now?: number
@@ -103,7 +104,7 @@ export interface IRobotActions {
 
 export type IRobotActionName = string
 
-export interface IRobotFrame {
+export interface IRobotKeyframe {
     mode?: 'normal' | 'clip'
     url: string
     offset?: IPointData
