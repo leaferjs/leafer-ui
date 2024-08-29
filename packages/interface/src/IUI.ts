@@ -87,6 +87,8 @@ export interface IGIFInputData extends IGIFAttrData, IRectInputData { }
 export interface IRobot extends IRobotAttrData, IPlayerMethods, IRect {
     __: IRobotData
     readonly running: boolean
+    readonly nowFrame?: IRobotComputedKeyframe
+    readonly robotFrames?: IRobotComputedKeyframe[]
 
     __updateRobot(): void
     __updateAction(): void
@@ -121,6 +123,10 @@ export interface IRobotKeyframe {
     offset?: IPointData
     size?: number | ISizeData
     total?: number
+}
+
+export interface IRobotComputedKeyframe extends IBoundsData {
+    view: any
 }
 
 export interface IRobotData extends IRobotAttrData, IRectData { }
