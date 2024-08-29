@@ -9,7 +9,7 @@ import {
     ITextStyleAttrData, ITextStyleInputData, ITextStyleComputedData
 } from './ICommonAttr'
 import { IOverflow } from './type/IType'
-import { IAnimation, IAnimate, IAnimateOptions, IKeyframe, IMultiKeyframe, IStateName, IStates } from './type/IAnimation'
+import { IAnimation, IAnimate, IAnimateOptions, IKeyframe, IMultiKeyframe, IStateName, IStates, IKeyframeId } from './type/IAnimation'
 import { ILeafer } from './app/ILeafer'
 import { IEditorConfig } from './editor/IEditor'
 
@@ -90,10 +90,18 @@ export interface IRobot extends IRobotAttrData, IPlayerMethods, IRect {
 
 interface IRobotAttrData {
     frames?: IRobotFrame | IRobotFrame[]
-    nowFrame?: number
+    actions?: IRobotActions
+    action?: IRobotActionName
+    now?: number
     speed?: number
     loop?: boolean
 }
+
+export interface IRobotActions {
+    [name: string]: IKeyframeId | IKeyframeId[]
+}
+
+export type IRobotActionName = string
 
 export interface IRobotFrame {
     mode?: 'normal' | 'clip'
@@ -469,6 +477,10 @@ export type IUITag =
     | 'Group'
     | 'Frame'
     | 'Box'
+    | 'Arrow'
+    | 'Robot'
+    | 'GIF'
+    | 'Video'
 
 
 export interface IUIInputData extends IRectInputData, IEllipseInputData, IPolygonInputData, IStarInputData, ILineInputData, IPathInputData, ITextInputData, IImageInputData, IGroupInputData, IFrameInputData, IArrowInputData, IGIFInputData, IVideoInputData, IRobotInputData, IUIBaseInputData, IObject {
