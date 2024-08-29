@@ -19,7 +19,7 @@ export {
     IFlow, IFlowInputData, IFlowData,
     IVideo, IVideoInputData, IVideoData,
     IGIF, IGIFInputData, IGIFData,
-    IRobot, IRobotInputData, IRobotData, IRobotActions, IRobotActionName, IRobotKeyframe,
+    IRobot, IRobotInputData, IRobotData, IRobotActions, IRobotActionName, IRobotKeyframe, IRobotAnimation,
     IBox, IBoxInputData, IBoxData,
     IGroup, IGroupInputData, IGroupData,
     ILeaferInputData, ILeaferData,
