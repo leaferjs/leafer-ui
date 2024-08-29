@@ -36,7 +36,7 @@ export type IAnimateDirection = 'normal' | 'alternate' | 'reverse' | 'alternate-
 export type IAnimateEnding = 'normal' | 'from' | 'to'
 
 export interface IAnimateKeyframe {
-    key: IUIInputData
+    style: IUIInputData
 
     easing?: IAnimateEasing
     delay?: number
@@ -49,7 +49,7 @@ export interface IAnimateKeyframe {
 }
 
 export interface IComputedKeyframe {
-    key: IUIInputData
+    style: IUIInputData
     before: IUIInputData
 
     easingFn?: IFunction
@@ -67,7 +67,7 @@ export interface IComputedKeyframe {
 
 
 export interface IAnimation extends IAnimateOptions {
-    keys: IMultiKeyframe
+    keyframes: IMultiKeyframe
 }
 
 export interface IAnimateOptions {
@@ -80,6 +80,7 @@ export interface IAnimateOptions {
     loop?: boolean | number
     speed?: number
     autoplay?: boolean
+    fromBefore?: boolean
     event?: IAnimateEvents
 }
 
