@@ -94,7 +94,7 @@ interface IRobotAttrData {
     actions?: IRobotActions
     action?: IRobotActionName
     now?: number
-    speed?: number
+    FPS?: number
     loop?: boolean
 }
 
