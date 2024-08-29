@@ -86,6 +86,8 @@ export interface IGIFInputData extends IGIFAttrData, IRectInputData { }
 // Robot
 export interface IRobot extends IRobotAttrData, IPlayerMethods, IRect {
     __: IRobotData
+    readonly running: boolean
+
     __updateAction(): void
 }
 
