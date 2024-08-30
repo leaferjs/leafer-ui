@@ -41,11 +41,9 @@ export interface IAnimateKeyframe {
     easing?: IAnimateEasing
     delay?: number
     duration?: number
-    endDelay?: number
 
     autoDelay?: number
     autoDuration?: number
-    autoEndDelay?: number
 }
 
 export interface IComputedKeyframe {
@@ -55,14 +53,12 @@ export interface IComputedKeyframe {
     easingFn?: IFunction
 
     delay?: number
-    endDelay?: number
     duration?: number
 
     autoDelay?: number
     autoDuration?: number
-    autoEndDelay?: number
 
-    totalDuration?: number // 存在delay / endDelay 时， 才会有这个属性
+    totalDuration?: number // 存在delay 时， 才会有这个属性
 }
 
 
@@ -73,14 +69,18 @@ export interface IAnimation extends IAnimateOptions {
 export interface IAnimateOptions {
     easing?: IAnimateEasing
     direction?: IAnimateDirection
+
     delay?: number
     duration?: number
-    endDelay?: number
     ending?: IAnimateEnding
+
     loop?: boolean | number
+    loopDelay?: number
+
     speed?: number
     autoplay?: boolean
     fromBefore?: boolean
+
     event?: IAnimateEvents
 }
 
