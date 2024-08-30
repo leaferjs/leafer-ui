@@ -100,8 +100,9 @@ export interface IAnimateEventFunction {
 
 export interface IAnimate extends IAnimateOptions {
     target: IObject
+
     keyframes: IKeyframe[]
-    config: IAnimateOptions
+    config?: IAnimateOptions
 
     readonly from: IObject
     readonly to: IObject
@@ -120,6 +121,7 @@ export interface IAnimate extends IAnimateOptions {
     pause(): void
     stop(): void
     seek(time: number): void
+    kill(): void
 
     destroy(complete?: boolean): void
 }

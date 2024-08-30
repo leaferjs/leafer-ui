@@ -358,7 +358,7 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     }
 
 
-    public nowAnimate?: IAnimate
+    public __animate?: IAnimate
 
     public get pen(): IPathCreator {
         const { path } = this.__
@@ -482,7 +482,9 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
 
     // @leafer-in/animate rewite
 
-    public animate(_keyframe: IMultiKeyframe | IAnimation, _options?: IAnimateOptions | number): IAnimate { return undefined }
+    public animate(_keyframe?: IMultiKeyframe | IAnimation, _options?: IAnimateOptions | number): IAnimate { return undefined }
+
+    public killAnimate(): void { }
 
 
     // create
