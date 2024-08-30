@@ -367,15 +367,15 @@ export interface IUI extends IUIAttrData, IFillAttrData, IStrokeAttrData, ICorne
     zoomLayer?: IGroup
     readonly isFrame?: boolean
 
+    normalStyle?: IUIEaseInputData
+    hoverStyle?: IUIEaseInputData
+    pressStyle?: IUIEaseInputData
+    focusStyle?: IUIEaseInputData
+    selectedStyle?: IUIEaseInputData
+    disabledStyle?: IUIEaseInputData
+
     proxyData?: IUIInputData
     __proxyData?: IUIInputData
-
-    normalStyle?: IUIInputData
-    hoverStyle?: IUIInputData
-    pressStyle?: IUIInputData
-    focusStyle?: IUIInputData
-    selectedStyle?: IUIInputData
-    disabledStyle?: IUIInputData
 
     editConfig?: IEditorConfig
     editOuter: string
@@ -383,7 +383,7 @@ export interface IUI extends IUIAttrData, IFillAttrData, IStrokeAttrData, ICorne
 
     children?: IUI[]
 
-    nowAnimate?: IAnimate
+    __animate?: IAnimate
     readonly pen: IPathCreator
 
     reset(data?: IUIInputData): void
@@ -410,15 +410,23 @@ export interface IUI extends IUIAttrData, IFillAttrData, IStrokeAttrData, ICorne
 
     __updateState(): void
 
-    animate(keyframe: IMultiKeyframe | IAnimation, options?: IAnimateOptions | number): IAnimate
+    animate(keyframe?: IMultiKeyframe | IAnimation, options?: IAnimateOptions | number): IAnimate
+    killAnimate(): void
 
     export(filename: string, options?: IExportOptions | number | boolean): Promise<IExportResult>
     clone(): IUI
 }
 
+export interface IUIEaseInputData extends IUIInputData {
+    ease?: IAnimateOptions | boolean
+    easeIn?: IAnimateOptions | boolean
+    easeOut?: IAnimateOptions | boolean
+}
+
 interface IUIAttrData {
     keyframes?: IKeyframe[]
     animation?: IAnimation
+
     states?: IStates
     state?: IStateName
 }
@@ -428,12 +436,12 @@ export interface IFindUIMethod {
 }
 
 export interface IUIData extends IUIAttrData, IUIComputedData, ILeafData {
-    normalStyle?: IUIInputData
-    hoverStyle?: IUIInputData
-    pressStyle?: IUIInputData
-    focusStyle?: IUIInputData
-    selectedStyle?: IUIInputData
-    disabledStyle?: IUIInputData
+    normalStyle?: IUIEaseInputData
+    hoverStyle?: IUIEaseInputData
+    pressStyle?: IUIEaseInputData
+    focusStyle?: IUIEaseInputData
+    selectedStyle?: IUIEaseInputData
+    disabledStyle?: IUIEaseInputData
 
     // 非数据属性, 自动计算的缓存数据
     __isFills?: boolean
@@ -468,12 +476,12 @@ export interface IUIComputedData extends IUIAttrData, IFillComputedData, IBorder
 }
 
 export interface IUIBaseInputData extends IUIAttrData, IFillInputData, IStrokeInputData, ITextStyleInputData, ICornerRadiusInputData, IEffectInputData, ILeafInputData {
-    normalStyle?: IUIInputData
-    hoverStyle?: IUIInputData
-    pressStyle?: IUIInputData
-    focusStyle?: IUIInputData
-    selectedStyle?: IUIInputData
-    disabledStyle?: IUIInputData
+    normalStyle?: IUIEaseInputData
+    hoverStyle?: IUIEaseInputData
+    pressStyle?: IUIEaseInputData
+    focusStyle?: IUIEaseInputData
+    selectedStyle?: IUIEaseInputData
+    disabledStyle?: IUIEaseInputData
 
     children?: IUIInputData[]
 }
