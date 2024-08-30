@@ -100,18 +100,21 @@ export interface IAnimateEventFunction {
 
 export interface IAnimate extends IAnimateOptions {
     target: IObject
+    keyframes: IKeyframe[]
     config: IAnimateOptions
 
     readonly from: IObject
     readonly to: IObject
 
-    readonly began: boolean
+    readonly started: boolean
     readonly running: boolean
     readonly completed: boolean
     readonly destroyed: boolean
 
     readonly now: number
     readonly looped: number
+
+    init(): void
 
     play(): void
     pause(): void
