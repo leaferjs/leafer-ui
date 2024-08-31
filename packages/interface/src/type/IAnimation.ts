@@ -3,8 +3,6 @@ import { IObject, IFunction } from '@leafer/interface'
 import { IUIInputData } from '../IUI'
 
 
-export type IMultiKeyframe = IKeyframeId | IKeyframeId[] | IKeyframe | IKeyframe[]
-
 export type IKeyframe = IUIInputData | IAnimateKeyframe
 
 export type IKeyframeId = number
@@ -62,8 +60,14 @@ export interface IComputedKeyframe {
 }
 
 
-export interface IAnimation extends IAnimateOptions {
-    keyframes: IMultiKeyframe
+export type IAnimation = IStyleAnimation | IKeyframesAnimation
+
+export interface IKeyframesAnimation extends IAnimateOptions {
+    keyframes: IKeyframe[]
+}
+
+export interface IStyleAnimation extends IAnimateOptions {
+    style: IUIInputData
 }
 
 export interface IAnimateOptions {
@@ -112,7 +116,7 @@ export interface IAnimate extends IAnimateOptions {
     readonly completed: boolean
     readonly destroyed: boolean
 
-    readonly now: number
+    readonly time: number
     readonly looped: number
 
     init(): void
@@ -127,7 +131,7 @@ export interface IAnimate extends IAnimateOptions {
 }
 
 export interface IStates {
-    [name: string]: IMultiKeyframe | IAnimation
+    [name: string]: IUIInputData | IKeyframe[] | IAnimation
 }
 
 

@@ -9,7 +9,7 @@ import {
     ITextStyleAttrData, ITextStyleInputData, ITextStyleComputedData
 } from './ICommonAttr'
 import { IOverflow } from './type/IType'
-import { IAnimation, IAnimate, IAnimateOptions, IKeyframe, IMultiKeyframe, IStateName, IStates, IKeyframeId, IAnimateDirection } from './type/IAnimation'
+import { IAnimation, IAnimate, IAnimateOptions, IKeyframe, IStateName, IStates, IKeyframeId, IAnimateDirection } from './type/IAnimation'
 import { ILeafer } from './app/ILeafer'
 import { IEditorConfig } from './editor/IEditor'
 
@@ -410,7 +410,7 @@ export interface IUI extends IUIAttrData, IFillAttrData, IStrokeAttrData, ICorne
 
     __updateState(): void
 
-    animate(keyframe?: IMultiKeyframe | IAnimation, options?: IAnimateOptions | number): IAnimate
+    animate(keyframe?: IUIInputData | IKeyframe[] | IAnimation, options?: IAnimateOptions | number): IAnimate
     killAnimate(): void
 
     export(filename: string, options?: IExportOptions | number | boolean): Promise<IExportResult>
@@ -424,11 +424,10 @@ export interface IUIEaseInputData extends IUIInputData {
 }
 
 interface IUIAttrData {
-    keyframes?: IKeyframe[]
-    animation?: IAnimation
-
     states?: IStates
     state?: IStateName
+
+    animation?: IAnimation
 }
 
 export interface IFindUIMethod {
