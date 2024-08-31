@@ -129,10 +129,3 @@ export interface IAnimate extends IAnimateOptions {
 
     destroy(complete?: boolean): void
 }
-
-export interface IStates {
-    [name: string]: IUIInputData | IKeyframe[] | IAnimation
-}
-
-
-export type IStateName = string

@@ -25,7 +25,7 @@ export {
     ILeaferInputData, ILeaferData,
     IAppInputData, IAppData,
     IUI, IUIBaseInputData, IUIData, IFindUIMethod,
-    IUITag, IUIInputData, IUIJSONData, IUIEaseInputData
+    IUITag, IUIInputData, IUIJSONData, IStateStyle, IStates, IStateName
 } from './IUI'
 
 export { IVectorPath, IShadowEffect, IBlurEffect, IGrayscaleEffect, IFill, IStroke, IPaintAttr, IStrokeAlign, IStrokeJoin, IStrokeCap, IArrowType, IPathDataArrow, IPathDataArrowMap, IRGB, IRGBA, IColor, IColorStop, IPaint, IGradientPaint, IImagePaint, IImagePaintMode, IFontWeight, ITextCase, ITextDecoration, ITextAlign, IVerticalAlign, IOverflow, ITextWrap, IRepeat } from './type/IType'
@@ -33,7 +33,7 @@ export { ICornerRadiusString, IStrokeWidthString, IPaintString, IShadowString, I
 export { ILeafFill, ILeafPaint, ILeafPaintPatternData, ILeafPaintColor, ILeafStrokePaint, ILeafShadowEffect } from './type/IComputedType'
 export { IStrokeAttrData, IStrokeInputData, IStrokeComputedData, ITextStyleAttrData, ITextStyleInputData, ITextStyleComputedData, IEffectAttrData, IEffectInputData, IEffectComputedData } from './ICommonAttr'
 
-export { IKeyframe, IKeyframeId, IAnimateEasing, IAnimateEasingFunction, IAnimateEasingName, IAnimateDirection, IAnimateEnding, IAnimateEvents, IAnimateEventFunction, IAnimateKeyframe, IComputedKeyframe, IAnimation, IStyleAnimation, IKeyframesAnimation, IAnimateOptions, IAnimate, IStates, IStateName } from './type/IAnimation'
+export { IKeyframe, IKeyframeId, IAnimateEasing, IAnimateEasingFunction, IAnimateEasingName, IAnimateDirection, IAnimateEnding, IAnimateEvents, IAnimateEventFunction, IAnimateKeyframe, IComputedKeyframe, IAnimation, IStyleAnimation, IKeyframesAnimation, IAnimateOptions, IAnimate } from './type/IAnimation'
 
 export { IUIRenderModule, IRectRenderModule, IImageRenderModule, ITextRenderModule, IGroupRenderModule, IFrameRenderModule } from './module/IUIRender'
 export { IUIBoundsModule } from './module/IUIBounds'
