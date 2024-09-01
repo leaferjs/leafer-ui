@@ -7,9 +7,9 @@ import { State } from '@leafer-ui/external'
 
 export function stateType(defaultValue?: IValue) {
     return decorateLeafAttr(defaultValue, (key: string) => attr({
-        set(value: IValue) {
+        set(value: boolean) {
             this.__setAttr(key, value)
-            this.waitLeafer(() => { if (State.setStyle) State.setStyle(this, key + 'Style' as IStateStyleType, value as boolean) })
+            this.waitLeafer(() => { if (State.setStyle) State.setStyle(this, key + 'Style' as IStateStyleType, value) })
         }
     }))
 }

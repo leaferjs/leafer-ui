@@ -2,7 +2,7 @@ import { INumber, IValue, IBoolean, IPathCommandData, IPathString } from '@leafe
 import { PathConvert, LeafData, Debug } from '@leafer/core'
 
 import { IShadowEffect, IUI, IUIData, IUnitData, ILeafPaint, IStateName, IAnimation } from '@leafer-ui/interface'
-import { Paint, PaintImage } from '@leafer-ui/external'
+import { Paint, PaintImage, State } from '@leafer-ui/external'
 
 
 const { parse } = PathConvert
@@ -68,7 +68,7 @@ export class UIData extends LeafData implements IUIData {
 
     protected setState(value: IStateName): void {
         this._state = value
-        this.__leaf.__updateState()
+        State.setState(this.__leaf, value)
     }
 
 

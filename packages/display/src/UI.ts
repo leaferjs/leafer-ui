@@ -308,16 +308,15 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     // states
 
     @dataType()
-    public keyframes?: IKeyframe[]
-
-    @dataType()
     public animation?: IAnimation
 
-    @dataType()
+
+    @dataType({})
     public states?: IStates
 
     @dataType('')
     public state?: IStateName
+
 
     @dataType()
     public normalStyle?: IUIInputData // auto restore hover / press / focus / selected / disabled style
@@ -366,8 +365,6 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
         if (!path) this.__drawPathByBox(pen)
         return pen
     }
-
-
 
 
     // editor
@@ -473,11 +470,6 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
         } else {
             drawer.rect(x, y, width, height)
         }
-    }
-
-
-    public __updateState(): void {
-        this.animate(this.states[this.state])
     }
 
     // @leafer-in/animate rewite
