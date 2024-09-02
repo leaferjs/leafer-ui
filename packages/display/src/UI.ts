@@ -233,6 +233,9 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     @cursorType('')
     public cursor?: ICursorType | ICursorType[]
 
+    @dataType(false)
+    public button?: IBoolean
+
     // ---
 
 
