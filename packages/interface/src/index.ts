@@ -25,7 +25,7 @@ export {
     ILeaferInputData, ILeaferData,
     IAppInputData, IAppData,
     IUI, IUIBaseInputData, IUIData, IFindUIMethod,
-    IUITag, IUIInputData, IUIJSONData, IStateStyle, IStates, IStateName
+    IUITag, IUIInputData, IUIJSONData, IStateStyle, IStates, IStateName, IStateEase
 } from './IUI'
 
 export { IVectorPath, IShadowEffect, IBlurEffect, IGrayscaleEffect, IFill, IStroke, IPaintAttr, IStrokeAlign, IStrokeJoin, IStrokeCap, IArrowType, IPathDataArrow, IPathDataArrowMap, IRGB, IRGBA, IColor, IColorStop, IPaint, IGradientPaint, IImagePaint, IImagePaintMode, IFontWeight, ITextCase, ITextDecoration, ITextAlign, IVerticalAlign, IOverflow, ITextWrap, IRepeat } from './type/IType'

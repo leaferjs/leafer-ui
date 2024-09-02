@@ -420,6 +420,8 @@ export interface IStates {
 
 export type IStateName = string
 
+export type IStateEase = IAnimateOptions | boolean
+
 interface IUIAttrData {
     animation?: IAnimation
 
@@ -433,9 +435,9 @@ interface IUIAttrData {
     selectedStyle?: IStateStyle
     disabledStyle?: IStateStyle
 
-    ease?: IAnimateOptions | boolean
-    easeIn?: IAnimateOptions | boolean
-    easeOut?: IAnimateOptions | boolean
+    ease?: IStateEase
+    easeIn?: IStateEase
+    easeOut?: IStateEase
 }
 
 export interface IFindUIMethod {
