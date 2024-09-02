@@ -1,4 +1,4 @@
-import { INumber, IValue, IBoolean, IPathCommandData, IPathString } from '@leafer/interface'
+import { INumber, IValue, IBoolean, IPathCommandData, IPathString, IPointData } from '@leafer/interface'
 import { PathConvert, LeafData, Debug } from '@leafer/core'
 
 import { IShadowEffect, IUI, IUIData, IUnitData, ILeafPaint, IAnimation } from '@leafer-ui/interface'
@@ -11,6 +11,8 @@ const debug = Debug.get('UIData')
 export class UIData extends LeafData implements IUIData {
 
     declare public __leaf: IUI
+
+    public get scale(): INumber | IPointData { const { scaleX, scaleY } = this as IUIData; return scaleX !== scaleY ? { x: scaleX, y: scaleY } : scaleX }
 
     public __blendLayer?: boolean // 非元素属性必须以两个下划线开头
 

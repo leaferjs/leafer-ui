@@ -445,6 +445,9 @@ export interface IFindUIMethod {
 }
 
 export interface IUIData extends IUIAttrData, IUIComputedData, ILeafData {
+
+    readonly scale: number | IPointData
+
     // 非数据属性, 自动计算的缓存数据
     __isFills?: boolean
     __isStrokes?: boolean

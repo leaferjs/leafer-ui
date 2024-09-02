@@ -340,7 +340,7 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     public disabledStyle?: IUIInputData
 
 
-    @dataType()
+    @dataType(true)
     public ease?: IStateEase
 
     @dataType()
@@ -365,8 +365,7 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     }
 
     public get scale(): INumber | IPointData {
-        const { scaleX, scaleY } = this
-        return scaleX !== scaleY ? { x: scaleX, y: scaleY } : scaleX
+        return this.__.scale
     }
 
 
