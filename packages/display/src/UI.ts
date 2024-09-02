@@ -57,10 +57,10 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     public visible?: IBoolean | 0
 
 
-    @stateType(false)
+    @stateType(false, 'selectedStyle')
     public selected?: IBoolean
 
-    @stateType(false)
+    @stateType(false, 'disabledStyle')
     public disabled?: IBoolean
 
     @surfaceType(false)
@@ -317,7 +317,7 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     @dataType({})
     public states?: IStates
 
-    @dataType('')
+    @stateType('')
     public state?: IStateName
 
 
