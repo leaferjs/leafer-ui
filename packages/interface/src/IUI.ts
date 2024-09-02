@@ -410,9 +410,7 @@ export interface IUI extends IUIAttrData, IFillAttrData, IStrokeAttrData, ICorne
 
 
 export interface IStateStyle extends IUIInputData {
-    ease?: IAnimateOptions | boolean
-    easeIn?: IAnimateOptions | boolean
-    easeOut?: IAnimateOptions | boolean
+
 }
 
 export interface IStates {
@@ -434,6 +432,10 @@ interface IUIAttrData {
     focusStyle?: IStateStyle
     selectedStyle?: IStateStyle
     disabledStyle?: IStateStyle
+
+    ease?: IAnimateOptions | boolean
+    easeIn?: IAnimateOptions | boolean
+    easeOut?: IAnimateOptions | boolean
 }
 
 export interface IFindUIMethod {
