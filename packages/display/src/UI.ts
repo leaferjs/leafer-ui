@@ -492,7 +492,7 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
 
     // @leafer-in/animate rewite
 
-    public animate(_keyframe?: IUIInputData | IKeyframe[] | IAnimation, _options?: IAnimateOptions | number): IAnimate {
+    public animate(_keyframe?: IUIInputData | IKeyframe[] | IAnimation, _options?: IAnimateOptions | number, _lockNormalStyle?: boolean): IAnimate {
         return needPlugin('animate')
     }
 
