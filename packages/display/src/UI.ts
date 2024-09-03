@@ -399,8 +399,14 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     public reset(_data?: IUIInputData): void { }
 
 
-    public set(data: IUIInputData): void {
-        Object.assign(this, data)
+    public set(data: IUIInputData, lockNormalStyle?: boolean): void {
+        if (lockNormalStyle) {
+            this.lockNormalStyle = true
+            Object.assign(this, data)
+            this.lockNormalStyle = false
+        } else {
+            Object.assign(this, data)
+        }
     }
 
     public get(name?: string | string[] | IUIInputData): IUIInputData | IValue {
