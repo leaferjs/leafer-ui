@@ -47,6 +47,7 @@ export interface IAnimateKeyframe {
 export interface IComputedKeyframe {
     style: IUIInputData
     before: IUIInputData
+    between?: IUIInputData
 
     easingFn?: IFunction
 

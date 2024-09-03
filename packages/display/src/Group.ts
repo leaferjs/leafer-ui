@@ -36,7 +36,7 @@ export class Group extends UI implements IGroup {   // tip: rewrited Box
 
     // data
 
-    public set(data: IUIInputData): void {
+    public set(data: IUIInputData, lockNormalStyle?: boolean): void {
         if (data.children) {
             const { children } = data
             delete data.children
@@ -47,7 +47,7 @@ export class Group extends UI implements IGroup {   // tip: rewrited Box
                 this.clear()
             }
 
-            super.set(data)
+            super.set(data, lockNormalStyle)
 
             let child: IUI
             children.forEach(childData => {
@@ -58,7 +58,7 @@ export class Group extends UI implements IGroup {   // tip: rewrited Box
             data.children = children
 
         } else {
-            super.set(data)
+            super.set(data, lockNormalStyle)
         }
     }
 
