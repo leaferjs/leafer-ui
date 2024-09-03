@@ -59,12 +59,15 @@ export class UIData extends LeafData implements IUIData {
 
     protected setVisible(value: IBoolean) {
         this._visible = value
-        if (this.__leaf.leafer) this.__leaf.leafer.watcher.hasVisible = true
+
+        const { leafer } = this.__leaf
+        if (leafer) leafer.watcher.hasVisible = true
     }
 
 
     protected setAnimation(value: IAnimation): void {
-        this.__leaf.animate(this._animation = value)
+        const leaf = this.__leaf
+        leaf.waitLeafer(() => leaf.animate(this._animation = value))
     }
 
 

@@ -9,7 +9,7 @@ export function stateType(defaultValue?: IValue, styleKey?: string) {
     return decorateLeafAttr(defaultValue, (key: string) => attr({
         set(value: any) {
             this.__setAttr(key, value)
-            if (State.setStyle) styleKey ? State.setStyle(this, styleKey, value) : State.setState(this, value)
+            this.waitLeafer(() => styleKey ? State.setStyle(this, styleKey, value) : State.setState(this, value))
         }
     }))
 }
