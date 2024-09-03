@@ -3,6 +3,8 @@ import { AutoBounds, LayoutEvent, ResizeEvent, LeaferEvent, CanvasManager, Image
 
 import { ILeaferInputData, ILeaferData, IFunction, IUIInputData, ILeafer, IApp, IEditorBase } from '@leafer-ui/interface'
 import { LeaferData } from '@leafer-ui/data'
+import { needPlugin } from '@leafer-ui/external'
+
 import { Group } from './Group'
 
 
@@ -372,7 +374,7 @@ export class Leafer extends Group implements ILeafer {
 
     // need view plugin
     public zoom(_zoomType: IZoomType, _padding?: IFourNumber, _fixedScale?: boolean): IBoundsData {
-        return debug.error('need @leafer-in/view') as undefined
+        return needPlugin('view')
     }
 
 

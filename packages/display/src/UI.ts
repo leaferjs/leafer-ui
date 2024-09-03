@@ -7,7 +7,7 @@ import { arrowType, effectType, stateType, zoomLayerType } from '@leafer-ui/deco
 import { UIData } from '@leafer-ui/data'
 import { UIBounds, UIRender } from '@leafer-ui/display-module'
 
-import { Export, PathArrow } from '@leafer-ui/external'
+import { Export, needPlugin, PathArrow } from '@leafer-ui/external'
 
 
 @useModule(UIBounds)
@@ -486,7 +486,9 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
 
     // @leafer-in/animate rewite
 
-    public animate(_keyframe?: IUIInputData | IKeyframe[] | IAnimation, _options?: IAnimateOptions | number): IAnimate { return undefined }
+    public animate(_keyframe?: IUIInputData | IKeyframe[] | IAnimation, _options?: IAnimateOptions | number): IAnimate {
+        return needPlugin('animate')
+    }
 
     public killAnimate(): void { }
 
