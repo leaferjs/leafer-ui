@@ -381,7 +381,7 @@ export interface IUI extends IUIAttrData, IFillAttrData, IStrokeAttrData, ICorne
 
     reset(data?: IUIInputData): void
 
-    set(data: IUIInputData, lockNormalStyle?: boolean): void
+    set(data: IUIInputData, isTemp?: boolean): void
     toJSON(options?: IJSONOptions): IUIJSONData
 
     get(name?: string | string[] | IUIInputData): IUIInputData | IValue
@@ -401,7 +401,7 @@ export interface IUI extends IUIAttrData, IFillAttrData, IStrokeAttrData, ICorne
     __drawPathByBox(drawer: IPathDrawer): void
     __drawAfterFill?(canvas: ILeaferCanvas, options: IRenderOptions): void
 
-    animate(keyframe?: IUIInputData | IKeyframe[] | IAnimation, options?: IAnimateOptions | number, lockNormalStyle?: boolean): IAnimate
+    animate(keyframe?: IUIInputData | IKeyframe[] | IAnimation, options?: IAnimateOptions | number, isTemp?: boolean): IAnimate
     killAnimate(): void
 
     export(filename: string, options?: IExportOptions | number | boolean): Promise<IExportResult>

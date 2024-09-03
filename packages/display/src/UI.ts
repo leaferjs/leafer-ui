@@ -389,8 +389,8 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     public reset(_data?: IUIInputData): void { }
 
 
-    public set(data: IUIInputData, lockNormalStyle?: boolean): void {
-        if (lockNormalStyle) {
+    public set(data: IUIInputData, isTemp?: boolean): void {
+        if (isTemp) {
             this.lockNormalStyle = true
             Object.assign(this, data)
             this.lockNormalStyle = false
@@ -482,7 +482,7 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
 
     // @leafer-in/animate rewite
 
-    public animate(_keyframe?: IUIInputData | IKeyframe[] | IAnimation, _options?: IAnimateOptions | number, _lockNormalStyle?: boolean): IAnimate {
+    public animate(_keyframe?: IUIInputData | IKeyframe[] | IAnimation, _options?: IAnimateOptions | number, _isTemp?: boolean): IAnimate {
         return needPlugin('animate')
     }
 
