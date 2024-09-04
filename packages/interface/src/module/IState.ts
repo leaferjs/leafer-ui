@@ -1,6 +1,9 @@
-import { ILeaf, IBoolean, IString, IStateName, IStateStyle } from '@leafer-ui/interface'
+import { ILeaf, IBoolean, IString, IObject, IStateName, IStateStyle } from '@leafer-ui/interface'
 
 export interface IStateModule {
+
+    animateExcludes: IObject // 动画中排除的状态属性
+
     isState(state: IStateName, leaf: ILeaf, button?: ILeaf | boolean): boolean
     isSelected(leaf: ILeaf, button?: ILeaf | boolean): boolean
     isDisabled(leaf: ILeaf, button?: ILeaf | boolean): boolean
