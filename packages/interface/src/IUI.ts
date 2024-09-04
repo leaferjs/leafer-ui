@@ -428,7 +428,6 @@ interface IUIAttrData {
     states?: IStates
     state?: IStateName
 
-    normalStyle?: IStateStyle
     hoverStyle?: IStateStyle
     pressStyle?: IStateStyle
     focusStyle?: IStateStyle

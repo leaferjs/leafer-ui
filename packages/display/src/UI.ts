@@ -2,7 +2,7 @@ import { ILeaferCanvas, IPathDrawer, IPathCommandData, IHitType, INumber, IBoole
 import { Leaf, PathDrawer, surfaceType, dataType, positionType, boundsType, pathType, scaleType, rotationType, opacityType, visibleType, sortType, maskType, dataProcessor, registerUI, useModule, rewrite, rewriteAble, UICreator, PathCorner, hitType, strokeType, PathConvert, eraserType, cursorType, autoLayoutType, pen, naturalBoundsType, pathInputType, MathHelper } from '@leafer/core'
 
 import { IUI, IShadowEffect, IBlurEffect, IStrokeAlign, IStrokeJoin, IStrokeCap, IBlendMode, IDashPatternString, IShadowString, IGrayscaleEffect, IUIData, IGroup, IStrokeWidthString, ICornerRadiusString, IUIInputData, IExportOptions, IExportResult, IFill, IStroke, IArrowType, IFindUIMethod, ILeafer, IEditorConfig, IEditorConfigFunction, IEditToolFunction, IKeyframe, IAnimation, IAnimateOptions, IAnimate, IStates, IStateName, IStateEase } from '@leafer-ui/interface'
-import { arrowType, effectType, stateType, zoomLayerType } from '@leafer-ui/decorator'
+import { arrowType, effectType, stateType, stateStyleType, zoomLayerType } from '@leafer-ui/decorator'
 
 import { UIData } from '@leafer-ui/data'
 import { UIBounds, UIRender } from '@leafer-ui/display-module'
@@ -308,13 +308,14 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     public grayscale?: INumber | IGrayscaleEffect
 
 
-    // states
+    // states 
+
 
     @dataType()
     public animation?: IAnimation
 
 
-    @dataType({})
+    @stateStyleType({})
     public states?: IStates
 
     @stateType('')
@@ -322,21 +323,21 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
 
 
     @dataType()
-    public normalStyle?: IUIInputData // auto restore hover / press / focus / selected / disabled style
+    public normalStyle?: IUIInputData
 
-    @dataType()
+    @stateStyleType()
     public hoverStyle?: IUIInputData
 
-    @dataType()
+    @stateStyleType()
     public pressStyle?: IUIInputData
 
-    @dataType()
+    @stateStyleType()
     public focusStyle?: IUIInputData
 
-    @dataType()
+    @stateStyleType()
     public selectedStyle?: IUIInputData
 
-    @dataType()
+    @stateStyleType()
     public disabledStyle?: IUIInputData
 
 

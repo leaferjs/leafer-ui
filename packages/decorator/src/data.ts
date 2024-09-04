@@ -14,6 +14,15 @@ export function stateType(defaultValue?: IValue, styleName?: string) {
     }))
 }
 
+export function stateStyleType(defaultValue?: IValue) {
+    return decorateLeafAttr(defaultValue, (key: string) => attr({
+        set(value: any) {
+            this.__setAttr(key, value)
+            this.__layout.stateStyleChanged = true
+        }
+    }))
+}
+
 export function arrowType(defaultValue?: IValue) {
     return decorateLeafAttr(defaultValue, (key: string) => attr({
         set(value: IValue) {
