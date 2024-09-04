@@ -23,6 +23,6 @@ export const Effect = {} as IEffectModule
 export const Export = {} as IExportModule
 
 export const State = {
-    setStyle(_leaf: IUI, _styleName: IString, _value: IBoolean): void { return needPlugin('state') },
-    setState(_leaf: IUI, _stateName: IString): void { return needPlugin('state') }
+    setStyleName(_leaf: IUI, _styleName: IString, _value: IBoolean): void { return needPlugin('state') },
+    set(_leaf: IUI, _stateName: IString): void { return needPlugin('state') }
 } as IStateModule

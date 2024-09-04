@@ -1,4 +1,4 @@
-import { ILeaf, IBoolean, IString, IStateName } from '@leafer-ui/interface'
+import { ILeaf, IBoolean, IString, IStateName, IStateStyle } from '@leafer-ui/interface'
 
 export interface IStateModule {
     isState(state: IStateName, leaf: ILeaf, button?: ILeaf | boolean): boolean
@@ -11,7 +11,11 @@ export interface IStateModule {
 
     isDrag(leaf: ILeaf, button?: boolean | ILeaf): boolean
 
-    setStyle(leaf: ILeaf, styleName: IString, value: IBoolean): void
-    setState(leaf: ILeaf, stateName: IString): void
+    setStyleName(leaf: ILeaf, styleName: IString, value: IBoolean): void
+    set(leaf: ILeaf, stateName: IString): void
+
+    getStyle(leaf: ILeaf): IStateStyle
+
+    updateStyle(leaf: ILeaf, style?: IStateStyle, easeType?: 'easeIn' | 'easeOut'): void
     updateEventStyle(leaf: ILeaf, eventType: string): void
 }
