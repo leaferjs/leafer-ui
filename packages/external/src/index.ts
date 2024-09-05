@@ -1,9 +1,6 @@
 // Implemented in partner
 import { IPaintModule, IPaintImageModule, IPaintGradientModule, IEffectModule, ITextConvertModule, IExportModule, IColorConvertModule, IPathArrowModule, IStateModule, IUI, IString, IBoolean } from "@leafer-ui/interface"
-
-export function needPlugin(name: string): any {
-    console.error('need @leafer-in/' + name)
-}
+import { needPlugin } from '@leafer/core'
 
 export const TextConvert = {} as ITextConvertModule
 
