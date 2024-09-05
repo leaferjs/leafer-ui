@@ -1,5 +1,5 @@
 import { ILeaferCanvas, IPathDrawer, IPathCommandData, IHitType, INumber, IBoolean, IString, IPathString, IExportFileType, IPointData, ICursorType, IMaskType, IEraserType, IValue, IWindingRule, IPathCreator, IFourNumber, IBoundsData, IFlowType, IGap, IFlowWrap, IAxis, IConstraint, IAutoBoxData, IFlowBoxType, IPointGap, IFlowAlign, IFlowAxisAlign, IFindCondition, IAutoSize, IRangeSize, IAlign, IUnitPointData, IObject, IScaleData } from '@leafer/interface'
-import { Leaf, PathDrawer, surfaceType, dataType, positionType, boundsType, pathType, scaleType, rotationType, opacityType, visibleType, sortType, maskType, dataProcessor, registerUI, useModule, rewrite, rewriteAble, UICreator, PathCorner, hitType, strokeType, PathConvert, eraserType, cursorType, autoLayoutType, pen, naturalBoundsType, pathInputType, MathHelper } from '@leafer/core'
+import { Leaf, PathDrawer, surfaceType, dataType, positionType, boundsType, pathType, scaleType, rotationType, opacityType, visibleType, sortType, maskType, dataProcessor, registerUI, useModule, rewrite, rewriteAble, UICreator, PathCorner, hitType, strokeType, PathConvert, eraserType, cursorType, autoLayoutType, pen, naturalBoundsType, pathInputType, MathHelper, needPlugin } from '@leafer/core'
 
 import { IUI, IShadowEffect, IBlurEffect, IStrokeAlign, IStrokeJoin, IStrokeCap, IBlendMode, IDashPatternString, IShadowString, IGrayscaleEffect, IUIData, IGroup, IStrokeWidthString, ICornerRadiusString, IUIInputData, IExportOptions, IExportResult, IFill, IStroke, IArrowType, IFindUIMethod, ILeafer, IEditorConfig, IEditorConfigFunction, IEditToolFunction, IKeyframe, IAnimation, IAnimateOptions, IAnimate, IStates, IStateName, IStateEase, IAnimateEasingName } from '@leafer-ui/interface'
 import { arrowType, effectType, stateType, stateStyleType, zoomLayerType } from '@leafer-ui/decorator'
@@ -7,7 +7,7 @@ import { arrowType, effectType, stateType, stateStyleType, zoomLayerType } from 
 import { UIData } from '@leafer-ui/data'
 import { UIBounds, UIRender } from '@leafer-ui/display-module'
 
-import { Export, needPlugin, PathArrow } from '@leafer-ui/external'
+import { Export, PathArrow } from '@leafer-ui/external'
 
 
 @useModule(UIBounds)

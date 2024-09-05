@@ -1,9 +1,8 @@
 import { ILeaferCanvas, IRenderer, ILayouter, ISelector, IWatcher, IInteraction, ILeaferConfig, ICanvasManager, IHitCanvasManager, IAutoBounds, IScreenSizeData, IResizeEvent, IEventListenerId, ITimer, IValue, IObject, IControl, IPointData, ILeaferType, ICursorType, IBoundsData, INumber, IZoomType, IFourNumber, IBounds, IClientPointData } from '@leafer/interface'
-import { AutoBounds, LayoutEvent, ResizeEvent, LeaferEvent, CanvasManager, ImageManager, DataHelper, Creator, Run, Debug, RenderEvent, registerUI, boundsType, canvasSizeAttrs, dataProcessor, WaitHelper, WatchEvent, Bounds, LeafList } from '@leafer/core'
+import { AutoBounds, LayoutEvent, ResizeEvent, LeaferEvent, CanvasManager, ImageManager, DataHelper, Creator, Run, Debug, RenderEvent, registerUI, boundsType, canvasSizeAttrs, dataProcessor, WaitHelper, WatchEvent, Bounds, LeafList, needPlugin } from '@leafer/core'
 
 import { ILeaferInputData, ILeaferData, IFunction, IUIInputData, ILeafer, IApp, IEditorBase } from '@leafer-ui/interface'
 import { LeaferData } from '@leafer-ui/data'
-import { needPlugin } from '@leafer-ui/external'
 
 import { Group } from './Group'
 
