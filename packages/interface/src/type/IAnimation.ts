@@ -84,7 +84,7 @@ export interface IAnimateOptions {
 
     speed?: number
     autoplay?: boolean
-    fromBefore?: boolean
+    fromNow?: boolean
 
     event?: IAnimateEvents
 }
