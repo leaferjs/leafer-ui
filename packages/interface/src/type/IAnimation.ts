@@ -46,8 +46,8 @@ export interface IAnimateKeyframe {
 
 export interface IComputedKeyframe {
     style: IUIInputData
-    before: IUIInputData
-    between?: IUIInputData
+    beforeStyle: IUIInputData
+    betweenStyle?: IUIInputData
 
     easingFn?: IFunction
 
@@ -110,8 +110,8 @@ export interface IAnimate extends IAnimateOptions {
     config?: IAnimateOptions
 
     readonly frames: IComputedKeyframe[]
-    readonly from: IObject
-    readonly to: IObject
+    readonly fromStyle: IObject
+    readonly toStyle: IObject
     readonly endingStyle: IObject
 
     readonly started: boolean
