@@ -109,8 +109,10 @@ export interface IAnimate extends IAnimateOptions {
     keyframes: IKeyframe[]
     config?: IAnimateOptions
 
+    readonly frames: IComputedKeyframe[]
     readonly from: IObject
     readonly to: IObject
+    readonly endingStyle: IObject
 
     readonly started: boolean
     readonly running: boolean
@@ -119,6 +121,9 @@ export interface IAnimate extends IAnimateOptions {
 
     readonly time: number
     readonly looped: number
+
+    readonly alternate: boolean
+    readonly realEnding: IAnimateEnding
 
     init(): void
 
