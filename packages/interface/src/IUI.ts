@@ -425,6 +425,9 @@ export type IStateEase = boolean | IAnimateEasingName | IAnimateOptions
 interface IUIAttrData {
     animation?: IAnimation
 
+    animateIn?: IAnimation
+    animateOut?: IAnimation
+
     states?: IStates
     state?: IStateName
 
