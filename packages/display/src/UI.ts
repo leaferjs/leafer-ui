@@ -315,6 +315,13 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     public animation?: IAnimation
 
 
+    @dataType()
+    public animateIn?: IAnimation
+
+    @dataType()
+    public animateOut?: IAnimation
+
+
     @stateStyleType({})
     public states?: IStates
 
