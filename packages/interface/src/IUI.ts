@@ -1,4 +1,4 @@
-import { ILeaf, ILeafComputedData, ILeafData, ILeafInputData, ILeaferCanvas, IRenderOptions, IExportOptions, IExportResult, IPathDrawer, IPointData, IPathCommandData, IBoundsData, IObject, IPathString, ILeaferImage, IPathCreator, IAnswer, IPickOptions, IPickResult, IValue, ICanvasContext2DSettings, IFourNumber, IFindCondition, IBoolean, ICanvasContext2D, IJSONOptions, IMatrixData, ISizeData } from '@leafer/interface'
+import { ILeaf, ILeafComputedData, ILeafData, ILeafInputData, ILeaferCanvas, IRenderOptions, IExportOptions, IExportResult, IPathDrawer, IPointData, IPathCommandData, IBoundsData, IObject, IPathString, ILeaferImage, IPathCreator, IAnswer, IPickOptions, IPickResult, IValue, ICanvasContext2DSettings, IFourNumber, IFindCondition, IBoolean, ICanvasContext2D, IJSONOptions, IMatrixData, ISizeData, INumber, IAround, IPercentData, IUnitData } from '@leafer/interface'
 
 import {
     IFillAttrData, IFillInputData, IFillComputedData,
@@ -394,6 +394,7 @@ export interface IUI extends IUIAttrData, IFillAttrData, IStrokeAttrData, ICorne
 
     getPath(curve?: boolean, pathForRender?: boolean): IPathCommandData
     getPathString(curve?: boolean, pathForRender?: boolean): IPathString
+    getPathLength(): number
 
     load(): void
 
@@ -422,11 +423,15 @@ export type IStateName = string
 
 export type IStateEase = boolean | IAnimateEasingName | IAnimateOptions
 
+
 interface IUIAttrData {
     animation?: IAnimation
 
     animateIn?: IAnimation
     animateOut?: IAnimation
+
+    motionPath?: boolean
+    motionPosition?: INumber | IUnitData
 
     states?: IStates
     state?: IStateName
