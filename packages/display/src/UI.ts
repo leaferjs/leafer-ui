@@ -310,21 +310,32 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
 
     // animation
 
-
     @dataType()
     public animation?: IAnimation
 
-    @dataType()
-    public animateIn?: IAnimation
 
     @dataType()
-    public animateOut?: IAnimation
+    public animationIn?: IAnimation
+
+    @dataType()
+    public animationOut?: IAnimation
+
 
     @dataType()
     public motionPath?: boolean
 
     @dataType()
     public motionPosition?: INumber | IUnitData
+
+
+    @dataType(true)
+    public transition?: IStateEase
+
+    @dataType()
+    public transitionIn?: IStateEase
+
+    @dataType()
+    public transitionOut?: IStateEase
 
 
     // states 
@@ -353,16 +364,6 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
 
     @stateStyleType()
     public disabledStyle?: IUIInputData
-
-
-    @dataType(true)
-    public ease?: IStateEase
-
-    @dataType()
-    public easeIn?: IStateEase
-
-    @dataType()
-    public easeOut?: IStateEase
 
 
     // 预留给用户使用的数据对象

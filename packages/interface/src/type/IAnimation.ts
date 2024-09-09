@@ -26,12 +26,14 @@ export type IAnimateEasingName =
     | 'elastic-in' | 'elastic-out' | 'elastic-in-out'
     | 'bounce-in' | 'bounce-out' | 'bounce-in-out'
 
+
+export type IAnimateDirection = 'normal' | 'alternate' | 'reverse' | 'alternate-reverse'
+export type IAnimateEnding = 'normal' | 'from' | 'to'
+
 export interface IAnimateEasingFunction {
     (t: number): number
 }
 
-export type IAnimateDirection = 'normal' | 'alternate' | 'reverse' | 'alternate-reverse'
-export type IAnimateEnding = 'normal' | 'from' | 'to'
 
 export interface IAnimateKeyframe {
     style: IUIInputData
@@ -83,9 +85,11 @@ export interface IAnimateOptions {
     loopDelay?: number
 
     speed?: number
-    autoplay?: boolean
-    fromNow?: boolean
 
+    join?: boolean
+    autoplay?: boolean
+
+    attrs?: string[]
     event?: IAnimateEvents
 }
 

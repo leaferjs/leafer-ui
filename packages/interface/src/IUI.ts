@@ -1,4 +1,4 @@
-import { ILeaf, ILeafComputedData, ILeafData, ILeafInputData, ILeaferCanvas, IRenderOptions, IExportOptions, IExportResult, IPathDrawer, IPointData, IPathCommandData, IBoundsData, IObject, IPathString, ILeaferImage, IPathCreator, IAnswer, IPickOptions, IPickResult, IValue, ICanvasContext2DSettings, IFourNumber, IFindCondition, IBoolean, ICanvasContext2D, IJSONOptions, IMatrixData, ISizeData, INumber, IAround, IPercentData, IUnitData } from '@leafer/interface'
+import { ILeaf, ILeafComputedData, ILeafData, ILeafInputData, ILeaferCanvas, IRenderOptions, IExportOptions, IExportResult, IPathDrawer, IPointData, IPathCommandData, IBoundsData, IObject, IPathString, ILeaferImage, IPathCreator, IAnswer, IPickOptions, IPickResult, IValue, ICanvasContext2DSettings, IFourNumber, IFindCondition, IBoolean, ICanvasContext2D, IJSONOptions, IMatrixData, ISizeData, INumber, IUnitData } from '@leafer/interface'
 
 import {
     IFillAttrData, IFillInputData, IFillComputedData,
@@ -426,12 +426,15 @@ export type IStateEase = boolean | IAnimateEasingName | IAnimateOptions
 
 interface IUIAttrData {
     animation?: IAnimation
-
-    animateIn?: IAnimation
-    animateOut?: IAnimation
+    animationIn?: IAnimation
+    animationOut?: IAnimation
 
     motionPath?: boolean
     motionPosition?: INumber | IUnitData
+
+    transition?: IStateEase
+    transitionIn?: IStateEase
+    transitionOut?: IStateEase
 
     states?: IStates
     state?: IStateName
@@ -441,10 +444,6 @@ interface IUIAttrData {
     focusStyle?: IStateStyle
     selectedStyle?: IStateStyle
     disabledStyle?: IStateStyle
-
-    ease?: IStateEase
-    easeIn?: IStateEase
-    easeOut?: IStateEase
 }
 
 export interface IFindUIMethod {
