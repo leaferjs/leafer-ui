@@ -9,7 +9,7 @@ import {
     ITextStyleAttrData, ITextStyleInputData, ITextStyleComputedData
 } from './ICommonAttr'
 import { IOverflow } from './type/IType'
-import { IAnimation, IAnimate, IAnimateOptions, IKeyframe, IKeyframeId, IAnimateDirection, IAnimateEasingName } from './type/IAnimation'
+import { IAnimation, IAnimate, IKeyframe, IKeyframeId, IAnimateDirection, ITransition } from './IAnimation'
 import { ILeafer } from './app/ILeafer'
 import { IEditorConfig } from './editor/IEditor'
 
@@ -402,7 +402,7 @@ export interface IUI extends IUIAttrData, IFillAttrData, IStrokeAttrData, ICorne
     __drawPathByBox(drawer: IPathDrawer): void
     __drawAfterFill?(canvas: ILeaferCanvas, options: IRenderOptions): void
 
-    animate(keyframe?: IUIInputData | IKeyframe[] | IAnimation, options?: IAnimateOptions | IAnimateEasingName | number | boolean, isTemp?: boolean): IAnimate
+    animate(keyframe?: IUIInputData | IKeyframe[] | IAnimation, options?: ITransition, isTemp?: boolean): IAnimate
     killAnimate(): void
 
     export(filename: string, options?: IExportOptions | number | boolean): Promise<IExportResult>
@@ -421,7 +421,6 @@ export interface IStates {
 
 export type IStateName = string
 
-export type IStateEase = boolean | IAnimateEasingName | IAnimateOptions
 
 
 interface IUIAttrData {
@@ -432,9 +431,9 @@ interface IUIAttrData {
     motionPath?: boolean
     motionPosition?: INumber | IUnitData
 
-    transition?: IStateEase
-    transitionIn?: IStateEase
-    transitionOut?: IStateEase
+    transition?: ITransition
+    transitionIn?: ITransition
+    transitionOut?: ITransition
 
     states?: IStates
     state?: IStateName
