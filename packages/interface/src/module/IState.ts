@@ -19,6 +19,6 @@ export interface IStateModule {
 
     getStyle(leaf: ILeaf): IStateStyle
 
-    updateStyle(leaf: ILeaf, style?: IStateStyle, easeType?: 'easeIn' | 'easeOut'): void
+    updateStyle(leaf: ILeaf, style?: IStateStyle, transitionType?: 'transitionIn' | 'transitionOut'): void
     updateEventStyle(leaf: ILeaf, eventType: string): void
 }
