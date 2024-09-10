@@ -1,4 +1,4 @@
-import { IObject, IPercentData } from '@leafer/interface'
+import { IPercentData } from '@leafer/interface'
 
 import { IUIInputData, IUI } from './IUI'
 

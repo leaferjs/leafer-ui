@@ -546,6 +546,7 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
 
     public destroy(): void {
         this.fill = this.stroke = null
+        if (this.__animate) this.killAnimate()
         super.destroy()
     }
 
