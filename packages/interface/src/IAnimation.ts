@@ -76,7 +76,19 @@ export interface IAnimateEasingFunction {
 
 export type IAnimateEasing =
     | IAnimateEasingName
-    | number[] // cubic-bezier(number, number, number, number)
+    | ICubicBezierEasing
+    | IStepsEasing
+
+export interface ICubicBezierEasing {
+    name: 'cubic-bezier',
+    params: [number, number, number, number]
+}
+
+export interface IStepsEasing {
+    name: 'steps',
+    params: number | [number, 'floor' | 'round' | 'ceil']
+}
+
 
 export type IAnimateEasingName =
     | 'linear'
@@ -137,7 +149,7 @@ export interface IAnimate extends IAnimateOptions {
     readonly alternate: boolean
     readonly realEnding: IAnimateEnding
 
-    init(): void
+    init(target: IUI, keyframe: IUIInputData | IKeyframe[], options?: ITransition, isTemp?: boolean): void
 
     play(): void
     pause(): void
