@@ -1,6 +1,6 @@
-import { IObject } from '@leafer/interface'
+import { IObject, IPercentData } from '@leafer/interface'
 
-import { IUIInputData } from './IUI'
+import { IUIInputData, IUI } from './IUI'
 
 
 export type IAnimation = IStyleAnimation | IKeyframesAnimation
@@ -115,15 +115,16 @@ export interface IAnimateEventFunction {
 
 
 export interface IAnimate extends IAnimateOptions {
-    target: IObject
+    target: IUI
 
     keyframes: IKeyframe[]
     config?: IAnimateOptions
 
     readonly frames: IComputedKeyframe[]
-    readonly fromStyle: IObject
-    readonly toStyle: IObject
-    readonly endingStyle: IObject
+
+    readonly fromStyle: IUIInputData
+    readonly toStyle: IUIInputData
+    readonly endingStyle: IUIInputData
 
     readonly started: boolean
     readonly running: boolean
@@ -141,7 +142,7 @@ export interface IAnimate extends IAnimateOptions {
     play(): void
     pause(): void
     stop(): void
-    seek(time: number): void
+    seek(time: number | IPercentData): void
     kill(): void
 
     destroy(complete?: boolean): void
