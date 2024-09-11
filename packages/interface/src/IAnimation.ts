@@ -72,6 +72,9 @@ export interface IAnimateEasingFunction {
     (t: number): number
 }
 
+export interface ICustomEasingFunction {
+    (...arg: any): IAnimateEasingFunction
+}
 
 
 export type IAnimateEasing =
