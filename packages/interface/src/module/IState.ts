@@ -2,6 +2,7 @@ import { ILeaf, IBoolean, IString, IObject, IStateName, IStateStyle } from '@lea
 
 export interface IStateModule {
 
+    canAnimate: boolean
     animateExcludes: IObject // 动画中排除的状态属性
 
     isState(state: IStateName, leaf: ILeaf, button?: ILeaf | boolean): boolean
