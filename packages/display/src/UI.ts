@@ -1,8 +1,8 @@
-import { ILeaferCanvas, IPathDrawer, IPathCommandData, IHitType, INumber, IBoolean, IString, IPathString, IExportFileType, IPointData, ICursorType, IMaskType, IEraserType, IValue, IWindingRule, IPathCreator, IFourNumber, IBoundsData, IFlowType, IGap, IFlowWrap, IAxis, IConstraint, IAutoBoxData, IFlowBoxType, IPointGap, IFlowAlign, IFlowAxisAlign, IFindCondition, IAutoSize, IRangeSize, IAlign, IUnitPointData, IObject, IScaleData, IUnitData } from '@leafer/interface'
+import { ILeaferCanvas, IPathDrawer, IPathCommandData, IHitType, INumber, IBoolean, IString, IPathString, IExportFileType, IPointData, ICursorType, IMaskType, IEraserType, IValue, IWindingRule, IPathCreator, IFourNumber, IBoundsData, IFlowType, IGap, IFlowWrap, IAxis, IConstraint, IAutoBoxData, IFlowBoxType, IPointGap, IFlowAlign, IFlowAxisAlign, IFindCondition, IAutoSize, IRangeSize, IAlign, IUnitPointData, IObject, IScaleData, IUnitData, IMotionPathData } from '@leafer/interface'
 import { Leaf, PathDrawer, surfaceType, dataType, positionType, boundsType, pathType, scaleType, rotationType, opacityType, visibleType, sortType, maskType, dataProcessor, registerUI, useModule, rewrite, rewriteAble, UICreator, PathCorner, hitType, strokeType, PathConvert, eraserType, cursorType, autoLayoutType, pen, naturalBoundsType, pathInputType, MathHelper, needPlugin } from '@leafer/core'
 
 import { IUI, IShadowEffect, IBlurEffect, IStrokeAlign, IStrokeJoin, IStrokeCap, IBlendMode, IDashPatternString, IShadowString, IGrayscaleEffect, IUIData, IGroup, IStrokeWidthString, ICornerRadiusString, IUIInputData, IExportOptions, IExportResult, IFill, IStroke, IArrowType, IFindUIMethod, ILeafer, IEditorConfig, IEditorConfigFunction, IEditToolFunction, IKeyframe, IAnimation, IAnimate, IStates, IStateName, ITransition } from '@leafer-ui/interface'
-import { arrowType, effectType, stateType, stateStyleType, zoomLayerType } from '@leafer-ui/decorator'
+import { arrowType, effectType, stateType, stateStyleType, zoomLayerType, motionType } from '@leafer-ui/decorator'
 
 import { UIData } from '@leafer-ui/data'
 import { UIBounds, UIRender } from '@leafer-ui/display-module'
@@ -324,8 +324,11 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     @dataType()
     public motionPath?: boolean
 
-    @dataType()
-    public motionPosition?: INumber | IUnitData
+    @motionType()
+    public motion?: INumber | IUnitData
+
+    @dataType(true)
+    public motionRotation?: INumber | IBoolean
 
 
     @dataType(true)
@@ -447,11 +450,13 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     }
 
 
-    // @leafer-in/path rewite
+    // @leafer-in/motion-path rewite
 
-    public getPathLength(): number {
+    public getMotionPathData(): IMotionPathData {
         return needPlugin('path')
     }
+
+    public __updateMotion(): void { }
 
 
     public load(): void {
@@ -466,11 +471,12 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     }
 
     public __updateRenderPath(): void {
-        if (this.__.path) {
-            const data = this.__
+        const data = this.__
+        if (data.path) {
             data.__pathForRender = data.cornerRadius ? PathCorner.smooth(data.path, data.cornerRadius, data.cornerSmoothing) : data.path
             if (data.__useArrow) PathArrow.addArrows(this, !data.cornerRadius)
         }
+        if (data.__pathForMotion) data.__pathForMotion = undefined
     }
 
 

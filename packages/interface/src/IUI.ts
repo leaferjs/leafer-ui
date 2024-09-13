@@ -1,4 +1,4 @@
-import { ILeaf, ILeafComputedData, ILeafData, ILeafInputData, ILeaferCanvas, IRenderOptions, IExportOptions, IExportResult, IPathDrawer, IPointData, IPathCommandData, IBoundsData, IObject, IPathString, ILeaferImage, IPathCreator, IAnswer, IPickOptions, IPickResult, IValue, ICanvasContext2DSettings, IFourNumber, IFindCondition, IBoolean, ICanvasContext2D, IJSONOptions, IMatrixData, ISizeData, INumber, IUnitData } from '@leafer/interface'
+import { ILeaf, ILeafComputedData, ILeafData, ILeafInputData, ILeaferCanvas, IRenderOptions, IExportOptions, IExportResult, IPathDrawer, IPointData, IPathCommandData, IBoundsData, IObject, IPathString, ILeaferImage, IPathCreator, IAnswer, IPickOptions, IPickResult, IValue, ICanvasContext2DSettings, IFourNumber, IFindCondition, IBoolean, ICanvasContext2D, IJSONOptions, IMatrixData, ISizeData, INumber, IUnitData, IMotionPathData } from '@leafer/interface'
 
 import {
     IFillAttrData, IFillInputData, IFillComputedData,
@@ -394,7 +394,9 @@ export interface IUI extends IUIAttrData, IFillAttrData, IStrokeAttrData, ICorne
 
     getPath(curve?: boolean, pathForRender?: boolean): IPathCommandData
     getPathString(curve?: boolean, pathForRender?: boolean): IPathString
-    getPathLength(): number
+
+    getMotionPathData(): IMotionPathData
+    __updateMotion(): void
 
     load(): void
 
@@ -429,7 +431,8 @@ interface IUIAttrData {
     animationOut?: IAnimation
 
     motionPath?: boolean
-    motionPosition?: INumber | IUnitData
+    motion?: INumber | IUnitData
+    motionRotation?: INumber | IBoolean
 
     transition?: ITransition
     transitionIn?: ITransition

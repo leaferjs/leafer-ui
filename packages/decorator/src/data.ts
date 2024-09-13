@@ -5,6 +5,15 @@ import { ICanvas, IUI, IApp } from '@leafer-ui/interface'
 import { State } from '@leafer-ui/external'
 
 
+export function motionType(defaultValue?: IValue) {
+    return decorateLeafAttr(defaultValue, (key: string) => attr({
+        set(value: any) {
+            this.__setAttr(key, value)
+            this.waitLeafer(() => (this as IUI).__updateMotion())
+        }
+    }))
+}
+
 export function stateType(defaultValue?: IValue, styleName?: string) {
     return decorateLeafAttr(defaultValue, (key: string) => attr({
         set(value: any) {
