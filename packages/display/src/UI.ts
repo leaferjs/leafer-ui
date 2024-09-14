@@ -321,7 +321,7 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     public animationOut?: IAnimation
 
 
-    @dataType()
+    @motionType()
     public motionPath?: boolean
 
     @motionType()
@@ -450,15 +450,6 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     }
 
 
-    // @leafer-in/motion-path rewite
-
-    public getMotionPathData(): IMotionPathData {
-        return needPlugin('path')
-    }
-
-    public __updateMotion(): void { }
-
-
     public load(): void {
         this.__.__computePaint() // 手动加载图片
     }
@@ -471,15 +462,12 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     }
 
     public __updateRenderPath(): void {
-        const data = this.__
-        if (data.path) {
+        if (this.__.path) {
+            const data = this.__
             data.__pathForRender = data.cornerRadius ? PathCorner.smooth(data.path, data.cornerRadius, data.cornerSmoothing) : data.path
             if (data.__useArrow) PathArrow.addArrows(this, !data.cornerRadius)
         }
-        if (data.__pathForMotion) data.__pathForMotion = undefined
     }
-
-
 
     public __drawRenderPath(canvas: ILeaferCanvas): void {
         canvas.beginPath()

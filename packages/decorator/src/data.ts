@@ -1,5 +1,5 @@
 import { IValue, IObject } from '@leafer/interface'
-import { defineKey, decorateLeafAttr, attr, doStrokeType } from '@leafer/core'
+import { defineKey, decorateLeafAttr, attr, doStrokeType, isNull } from '@leafer/core'
 
 import { ICanvas, IUI, IApp } from '@leafer-ui/interface'
 import { State } from '@leafer-ui/external'
@@ -9,7 +9,8 @@ export function motionType(defaultValue?: IValue) {
     return decorateLeafAttr(defaultValue, (key: string) => attr({
         set(value: any) {
             this.__setAttr(key, value)
-            this.waitLeafer(() => (this as IUI).__updateMotion())
+            this.__hasMotionPath = this.motionPath || !isNull(this.motion)
+            this.__layout.matrixChanged || this.__layout.matrixChange()
         }
     }))
 }

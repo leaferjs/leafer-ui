@@ -395,9 +395,6 @@ export interface IUI extends IUIAttrData, IFillAttrData, IStrokeAttrData, ICorne
     getPath(curve?: boolean, pathForRender?: boolean): IPathCommandData
     getPathString(curve?: boolean, pathForRender?: boolean): IPathString
 
-    getMotionPathData(): IMotionPathData
-    __updateMotion(): void
-
     load(): void
 
     __drawPathByData(drawer: IPathDrawer, data: IPathCommandData): void
@@ -429,10 +426,6 @@ interface IUIAttrData {
     animation?: IAnimation
     animationIn?: IAnimation
     animationOut?: IAnimation
-
-    motionPath?: boolean
-    motion?: INumber | IUnitData
-    motionRotation?: INumber | IBoolean
 
     transition?: ITransition
     transitionIn?: ITransition
