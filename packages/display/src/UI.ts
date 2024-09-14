@@ -2,7 +2,7 @@ import { ILeaferCanvas, IPathDrawer, IPathCommandData, IHitType, INumber, IBoole
 import { Leaf, PathDrawer, surfaceType, dataType, positionType, boundsType, pathType, scaleType, rotationType, opacityType, visibleType, sortType, maskType, dataProcessor, registerUI, useModule, rewrite, rewriteAble, UICreator, PathCorner, hitType, strokeType, PathConvert, eraserType, cursorType, autoLayoutType, pen, naturalBoundsType, pathInputType, MathHelper, needPlugin } from '@leafer/core'
 
 import { IUI, IShadowEffect, IBlurEffect, IStrokeAlign, IStrokeJoin, IStrokeCap, IBlendMode, IDashPatternString, IShadowString, IGrayscaleEffect, IUIData, IGroup, IStrokeWidthString, ICornerRadiusString, IUIInputData, IExportOptions, IExportResult, IFill, IStroke, IArrowType, IFindUIMethod, ILeafer, IEditorConfig, IEditorConfigFunction, IEditToolFunction, IKeyframe, IAnimation, IAnimate, IStates, IStateName, ITransition } from '@leafer-ui/interface'
-import { arrowType, effectType, stateType, stateStyleType, zoomLayerType } from '@leafer-ui/decorator'
+import { arrowType, effectType, zoomLayerType } from '@leafer-ui/decorator'
 
 import { UIData } from '@leafer-ui/data'
 import { UIBounds, UIRender } from '@leafer-ui/display-module'
@@ -56,12 +56,6 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     @visibleType(true)
     public visible?: IBoolean | 0
 
-
-    @stateType(false, 'selectedStyle')
-    public selected?: IBoolean
-
-    @stateType(false, 'disabledStyle')
-    public disabled?: IBoolean
 
     @surfaceType(false)
     public locked?: IBoolean
@@ -308,24 +302,16 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     public grayscale?: INumber | IGrayscaleEffect
 
 
-    // animation
+    // @leafer-in/animate rewite
 
     @dataType()
     public animation?: IAnimation
-
 
     @dataType()
     public animationIn?: IAnimation
 
     @dataType()
     public animationOut?: IAnimation
-
-
-    public motionPath?: boolean
-
-    public motion?: INumber | IUnitData
-
-    public motionRotation?: INumber | IBoolean
 
 
     @dataType(true)
@@ -338,31 +324,37 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     public transitionOut?: ITransition
 
 
-    // states 
+    // @leafer-in/motion-path rewite
 
-    @stateStyleType({})
+    public motionPath?: boolean
+
+    public motion?: INumber | IUnitData
+
+    public motionRotation?: INumber | IBoolean
+
+
+    // @leafer-in/state rewite
+
     public states?: IStates
 
-    @stateType('')
     public state?: IStateName
 
 
-    @dataType()
+    public selected?: IBoolean
+
+    public disabled?: IBoolean
+
+
     public normalStyle?: IUIInputData
 
-    @stateStyleType()
     public hoverStyle?: IUIInputData
 
-    @stateStyleType()
     public pressStyle?: IUIInputData
 
-    @stateStyleType()
     public focusStyle?: IUIInputData
 
-    @stateStyleType()
     public selectedStyle?: IUIInputData
 
-    @stateStyleType()
     public disabledStyle?: IUIInputData
 
 

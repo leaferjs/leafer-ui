@@ -5,23 +5,6 @@ import { ICanvas, IUI, IApp } from '@leafer-ui/interface'
 import { State } from '@leafer-ui/external'
 
 
-export function stateType(defaultValue?: IValue, styleName?: string) {
-    return decorateLeafAttr(defaultValue, (key: string) => attr({
-        set(value: any) {
-            this.__setAttr(key, value)
-            this.waitLeafer(() => styleName ? State.setStyleName(this, styleName, value) : State.set(this, value))
-        }
-    }))
-}
-
-export function stateStyleType(defaultValue?: IValue) {
-    return decorateLeafAttr(defaultValue, (key: string) => attr({
-        set(value: any) {
-            this.__setAttr(key, value)
-            this.__layout.stateStyleChanged = true
-        }
-    }))
-}
 
 export function arrowType(defaultValue?: IValue) {
     return decorateLeafAttr(defaultValue, (key: string) => attr({
