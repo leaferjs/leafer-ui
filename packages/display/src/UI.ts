@@ -304,23 +304,17 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
 
     // @leafer-in/animate rewite
 
-    @dataType()
     public animation?: IAnimation
 
-    @dataType()
     public animationIn?: IAnimation
 
-    @dataType()
     public animationOut?: IAnimation
 
 
-    @dataType(true)
     public transition?: ITransition
 
-    @dataType()
     public transitionIn?: ITransition
 
-    @dataType()
     public transitionOut?: ITransition
 
 
