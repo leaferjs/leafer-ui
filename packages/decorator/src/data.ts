@@ -1,22 +1,8 @@
 import { IValue, IObject } from '@leafer/interface'
-import { defineKey, decorateLeafAttr, attr, doStrokeType } from '@leafer/core'
+import { defineKey, decorateLeafAttr, attr } from '@leafer/core'
 
 import { ICanvas, IUI, IApp } from '@leafer-ui/interface'
-import { State } from '@leafer-ui/external'
 
-
-
-export function arrowType(defaultValue?: IValue) {
-    return decorateLeafAttr(defaultValue, (key: string) => attr({
-        set(value: IValue) {
-            if (this.__setAttr(key, value)) {
-                const data = (this as IUI).__
-                data.__useArrow = data.startArrow !== 'none' || data.endArrow !== 'none'
-                doStrokeType(this)
-            }
-        }
-    }))
-}
 
 export function effectType(defaultValue?: IValue) {
     return decorateLeafAttr(defaultValue, (key: string) => attr({
