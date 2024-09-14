@@ -147,46 +147,34 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     public closed?: boolean
 
 
-    // auto layout
-    @autoLayoutType(false)
+    // @leafer-in/flow rewite
     public flow?: IFlowType
 
     @boundsType(0)
     public padding?: IFourNumber
 
-    @boundsType(0)
     public gap?: IGap | IPointGap
 
-    @boundsType('top-left')
     public flowAlign?: IFlowAlign | IFlowAxisAlign
 
-    @boundsType(false)
     public flowWrap?: IFlowWrap
 
-    @boundsType('box')
+
     public itemBox?: IFlowBoxType
 
-
-    @boundsType(true)
     public inFlow?: IBoolean
 
-    @boundsType() // rewrite in flow
+
     public autoWidth?: IAutoSize
 
-    @boundsType()  // rewrite in flow
     public autoHeight?: IAutoSize
 
-    @boundsType()
     public lockRatio?: IBoolean
 
-    @boundsType()
     public autoBox?: IAutoBoxData | IConstraint
 
-
-    @boundsType()
     public widthRange?: IRangeSize
 
-    @boundsType()
     public heightRange?: IRangeSize
 
 
