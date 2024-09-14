@@ -1,1 +1,1 @@
-export { motionType, stateType, stateStyleType, arrowType, effectType, resizeType, zoomLayerType } from './data'
+export { stateType, stateStyleType, arrowType, effectType, resizeType, zoomLayerType } from './data'
