@@ -9,7 +9,7 @@ import {
     ITextStyleAttrData, ITextStyleInputData, ITextStyleComputedData
 } from './ICommonAttr'
 import { IOverflow } from './type/IType'
-import { IAnimation, IAnimate, IKeyframe, IKeyframeId, IAnimateDirection, ITransition } from './IAnimation'
+import { IAnimation, IAnimate, IKeyframe, IKeyframeId, IAnimateDirection, ITransition, IAnimateType } from './IAnimation'
 import { ILeafer } from './app/ILeafer'
 import { IEditorConfig } from './editor/IEditor'
 
@@ -377,6 +377,7 @@ export interface IUI extends IUIAttrData, IFillAttrData, IStrokeAttrData, ICorne
     children?: IUI[]
 
     __animate?: IAnimate
+
     readonly pen: IPathCreator
 
     reset(data?: IUIInputData): void
@@ -401,8 +402,8 @@ export interface IUI extends IUIAttrData, IFillAttrData, IStrokeAttrData, ICorne
     __drawPathByBox(drawer: IPathDrawer): void
     __drawAfterFill?(canvas: ILeaferCanvas, options: IRenderOptions): void
 
-    animate(keyframe?: IUIInputData | IKeyframe[] | IAnimation, options?: ITransition, isTemp?: boolean): IAnimate
-    killAnimate(): void
+    animate(keyframe?: IUIInputData | IKeyframe[] | IAnimation, options?: ITransition, type?: IAnimateType, isTemp?: boolean): IAnimate
+    killAnimate(type?: IAnimateType): void
 
     export(filename: string, options?: IExportOptions | number | boolean): Promise<IExportResult>
     clone(): IUI

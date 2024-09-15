@@ -1,7 +1,7 @@
 import { ILeaferCanvas, IPathDrawer, IPathCommandData, IHitType, INumber, IBoolean, IString, IPathString, IExportFileType, IPointData, ICursorType, IMaskType, IEraserType, IValue, IWindingRule, IPathCreator, IFourNumber, IBoundsData, IFlowType, IGap, IFlowWrap, IAxis, IConstraint, IAutoBoxData, IFlowBoxType, IPointGap, IFlowAlign, IFlowAxisAlign, IFindCondition, IAutoSize, IRangeSize, IAlign, IUnitPointData, IObject, IScaleData, IUnitData } from '@leafer/interface'
 import { Leaf, PathDrawer, surfaceType, dataType, positionType, boundsType, pathType, scaleType, rotationType, opacityType, visibleType, sortType, maskType, dataProcessor, registerUI, useModule, rewrite, rewriteAble, UICreator, PathCorner, hitType, strokeType, PathConvert, eraserType, cursorType, autoLayoutType, pen, naturalBoundsType, pathInputType, MathHelper, needPlugin } from '@leafer/core'
 
-import { IUI, IShadowEffect, IBlurEffect, IStrokeAlign, IStrokeJoin, IStrokeCap, IBlendMode, IDashPatternString, IShadowString, IGrayscaleEffect, IUIData, IGroup, IStrokeWidthString, ICornerRadiusString, IUIInputData, IExportOptions, IExportResult, IFill, IStroke, IArrowType, IFindUIMethod, ILeafer, IEditorConfig, IEditorConfigFunction, IEditToolFunction, IKeyframe, IAnimation, IAnimate, IStates, IStateName, ITransition } from '@leafer-ui/interface'
+import { IUI, IShadowEffect, IBlurEffect, IStrokeAlign, IStrokeJoin, IStrokeCap, IBlendMode, IDashPatternString, IShadowString, IGrayscaleEffect, IUIData, IGroup, IStrokeWidthString, ICornerRadiusString, IUIInputData, IExportOptions, IExportResult, IFill, IStroke, IArrowType, IFindUIMethod, ILeafer, IEditorConfig, IEditorConfigFunction, IEditToolFunction, IKeyframe, IAnimation, IAnimate, IStates, IStateName, ITransition, IAnimateType } from '@leafer-ui/interface'
 import { effectType, zoomLayerType } from '@leafer-ui/decorator'
 
 import { UIData } from '@leafer-ui/data'
@@ -147,7 +147,7 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     public closed?: boolean
 
 
-    // @leafer-in/flow rewite
+    // @leafer-in/flow rewrite
     public flow?: IFlowType
 
     @boundsType(0)
@@ -256,7 +256,7 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     public miterLimit?: INumber
 
 
-    // @leafer-in/arrow rewite
+    // @leafer-in/arrow rewrite
 
     public startArrow?: IArrowType
 
@@ -288,7 +288,7 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     public grayscale?: INumber | IGrayscaleEffect
 
 
-    // @leafer-in/animate rewite
+    // @leafer-in/animate rewrite
 
     public animation?: IAnimation
 
@@ -304,7 +304,7 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     public transitionOut?: ITransition
 
 
-    // @leafer-in/motion-path rewite
+    // @leafer-in/motion-path rewrite
 
     public motionPath?: boolean
 
@@ -313,7 +313,7 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     public motionRotation?: INumber | IBoolean
 
 
-    // @leafer-in/state rewite
+    // @leafer-in/state rewrite
 
     public states?: IStates
 
@@ -345,7 +345,6 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
 
     public set scale(value: INumber | IPointData) { MathHelper.assignScale(this as IScaleData, value) }
     public get scale(): INumber | IPointData { return this.__.scale }
-
 
     public __animate?: IAnimate
 
@@ -466,13 +465,13 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
         }
     }
 
-    // @leafer-in/animate rewite
+    // @leafer-in/animate rewrite
 
-    public animate(_keyframe?: IUIInputData | IKeyframe[] | IAnimation, _options?: ITransition, _isTemp?: boolean): IAnimate {
+    public animate(_keyframe?: IUIInputData | IKeyframe[] | IAnimation, _options?: ITransition, _type?: IAnimateType, _isTemp?: boolean): IAnimate {
         return needPlugin('animate')
     }
 
-    public killAnimate(): void { }
+    public killAnimate(_type?: IAnimateType): void { }
 
 
     // create

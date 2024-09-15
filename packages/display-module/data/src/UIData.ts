@@ -1,7 +1,7 @@
 import { INumber, IValue, IBoolean, IPathCommandData, IPathString, IPointData } from '@leafer/interface'
 import { PathConvert, LeafData, Debug } from '@leafer/core'
 
-import { IShadowEffect, IUI, IUIData, IUnitData, ILeafPaint, IAnimation } from '@leafer-ui/interface'
+import { IShadowEffect, IUI, IUIData, IUnitData, ILeafPaint } from '@leafer-ui/interface'
 import { Paint, PaintImage } from '@leafer-ui/external'
 
 
@@ -38,8 +38,6 @@ export class UIData extends LeafData implements IUIData {
 
     protected _visible?: IBoolean
 
-    protected _animation?: IAnimation
-
     protected _width?: INumber
     protected _height?: INumber
 
@@ -63,13 +61,6 @@ export class UIData extends LeafData implements IUIData {
         const { leafer } = this.__leaf
         if (leafer) leafer.watcher.hasVisible = true
     }
-
-
-    protected setAnimation(value: IAnimation): void {
-        const leaf = this.__leaf
-        leaf.waitLeafer(() => leaf.animate(this._animation = value))
-    }
-
 
     protected setWidth(value: INumber) {
         if (value < 0) {

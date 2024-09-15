@@ -7,6 +7,7 @@ export type IAnimation = IStyleAnimation | IKeyframesAnimation
 
 export type ITransition = IAnimateOptions | IAnimateEasingName | number | boolean
 
+export type IAnimateType = 'all' | 'animation' | 'transition' | 'animate'
 
 export interface IStyleAnimation extends IAnimateOptions {
     style: IUIInputData
