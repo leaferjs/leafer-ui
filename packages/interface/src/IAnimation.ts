@@ -112,7 +112,7 @@ export type IAnimateEasingName =
 
 export type IAnimateDirection = 'normal' | 'alternate' | 'reverse' | 'alternate-reverse'
 
-export type IAnimateEnding = 'normal' | 'from' | 'to'
+export type IAnimateEnding = 'auto' | 'from' | 'to'
 
 export interface IAnimateEvents {
     play?: IAnimateEventFunction

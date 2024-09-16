@@ -20,6 +20,6 @@ export interface IStateModule {
 
     getStyle(leaf: ILeaf): IStateStyle
 
-    updateStyle(leaf: ILeaf, style?: IStateStyle, transitionType?: 'transition' | 'transitionOut'): void
+    updateStyle(leaf: ILeaf, style?: IStateStyle, type?: 'in' | 'out'): void
     updateEventStyle(leaf: ILeaf, eventType: string): void
 }
