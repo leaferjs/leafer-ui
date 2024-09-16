@@ -215,9 +215,6 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     @cursorType('')
     public cursor?: ICursorType | ICursorType[]
 
-    @dataType(false)
-    public button?: IBoolean
-
     // ---
 
 
@@ -292,14 +289,10 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
 
     public animation?: IAnimation
 
-    public animationIn?: IAnimation
-
     public animationOut?: IAnimation
 
 
     public transition?: ITransition
-
-    public transitionIn?: ITransition
 
     public transitionOut?: ITransition
 
@@ -336,6 +329,9 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     public selectedStyle?: IUIInputData
 
     public disabledStyle?: IUIInputData
+
+
+    public button?: IBoolean
 
 
     // 预留给用户使用的数据对象

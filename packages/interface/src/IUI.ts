@@ -370,6 +370,9 @@ export interface IUI extends IUIAttrData, IFillAttrData, IStrokeAttrData, ICorne
     proxyData?: IUIInputData
     __proxyData?: IUIInputData
 
+    animation?: IAnimation
+    animationOut?: IAnimation
+
     editConfig?: IEditorConfig
     editOuter: string
     editInner: string
@@ -425,11 +428,9 @@ export type IStateName = string
 
 interface IUIAttrData {
     animation?: IAnimation
-    animationIn?: IAnimation
     animationOut?: IAnimation
 
     transition?: ITransition
-    transitionIn?: ITransition
     transitionOut?: ITransition
 
     states?: IStates

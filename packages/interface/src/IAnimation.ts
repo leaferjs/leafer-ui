@@ -1,4 +1,4 @@
-import { IPercentData } from '@leafer/interface'
+import { IEventer, IEventMap, IPercentData } from '@leafer/interface'
 
 import { IUIInputData, IUI } from './IUI'
 
@@ -130,11 +130,12 @@ export interface IAnimateEventFunction {
 
 
 
-export interface IAnimate extends IAnimateOptions {
+export interface IAnimate extends IAnimateOptions, IEventer {
     target: IUI
 
     keyframes: IKeyframe[]
     config?: IAnimateOptions
+    event?: IEventMap
 
     readonly frames: IComputedKeyframe[]
 
