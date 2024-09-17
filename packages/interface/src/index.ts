@@ -39,6 +39,7 @@ export { IUIRenderModule, IRectRenderModule, IImageRenderModule, ITextRenderModu
 export { IUIBoundsModule } from './module/IUIBounds'
 export { IUIHitModule } from './module/IUIHit'
 export { IPathArrowModule } from './module/IPathArrow'
+export { ITransitionModule, ITransitionMap, ITransitionFunction } from './module/ITransition'
 export { ITextConvertModule } from './module/ITextConvert'
 export { IColorConvertModule } from './module/IColorConvert'
 export { IExportModule } from './module/IExport'
