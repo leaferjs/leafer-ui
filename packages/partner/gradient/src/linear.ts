@@ -26,15 +26,15 @@ export function linearGradient(paint: IGradientPaint, box: IBoundsData): ILeafPa
 }
 
 export function applyStops(gradient: IObject, stops: IColorStop[] | IColorString[], opacity: number): void {
-
-    let stop: IColorStop | string
-    for (let i = 0, len = stops.length; i < len; i++) {
-        stop = stops[i]
-        if (typeof stop === 'string') {
-            gradient.addColorStop(i / (len - 1), ColorConvert.string(stop, opacity))
-        } else {
-            gradient.addColorStop(stop.offset, ColorConvert.string(stop.color, opacity))
+    if (stops) {
+        let stop: IColorStop | string
+        for (let i = 0, len = stops.length; i < len; i++) {
+            stop = stops[i]
+            if (typeof stop === 'string') {
+                gradient.addColorStop(i / (len - 1), ColorConvert.string(stop, opacity))
+            } else {
+                gradient.addColorStop(stop.offset, ColorConvert.string(stop.color, opacity))
+            }
         }
     }
-
 }

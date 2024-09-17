@@ -17,6 +17,9 @@
     "leafer-ui",
     "leaferjs"
   ],
+  "dependencies": {
+    "@leafer-ui/draw": "1.0.2"
+  },
   "devDependencies": {
      "@leafer-ui/interface": "1.0.2"
   }
