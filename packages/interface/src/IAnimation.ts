@@ -1,4 +1,4 @@
-import { IEventer, IEventMap, IPercentData } from '@leafer/interface'
+import { IEventer, IEventMap, IObject, IPercentData } from '@leafer/interface'
 
 import { IUIInputData, IUI } from './IUI'
 
@@ -66,7 +66,7 @@ export interface IComputedKeyframe {
     autoDelay?: number
     autoDuration?: number
 
-    totalDuration?: number // 存在delay 时， 才会有这个属性
+    totalTime?: number // 存在delay 时， 才会有这个属性
 }
 
 export interface IAnimateEasingFunction {
@@ -82,6 +82,7 @@ export type IAnimateEasing =
     | IAnimateEasingName
     | ICubicBezierEasing
     | IStepsEasing
+    | IObject
 
 export interface ICubicBezierEasing {
     name: 'cubic-bezier',
