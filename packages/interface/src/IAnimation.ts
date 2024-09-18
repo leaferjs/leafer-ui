@@ -86,12 +86,12 @@ export type IAnimateEasing =
 
 export interface ICubicBezierEasing {
     name: 'cubic-bezier',
-    params: [number, number, number, number]
+    value: [number, number, number, number]
 }
 
 export interface IStepsEasing {
     name: 'steps',
-    params: number | [number, 'floor' | 'round' | 'ceil']
+    value: number | [number, 'floor' | 'round' | 'ceil']
 }
 
 
