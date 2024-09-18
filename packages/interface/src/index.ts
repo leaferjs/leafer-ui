@@ -33,7 +33,7 @@ export { ICornerRadiusString, IStrokeWidthString, IPaintString, IShadowString, I
 export { ILeafFill, ILeafPaint, ILeafPaintPatternData, ILeafPaintColor, ILeafStrokePaint, ILeafShadowEffect } from './type/IComputedType'
 export { IStrokeAttrData, IStrokeInputData, IStrokeComputedData, ITextStyleAttrData, ITextStyleInputData, ITextStyleComputedData, IEffectAttrData, IEffectInputData, IEffectComputedData } from './ICommonAttr'
 
-export { IAnimation, ITransition, IAnimate, IAnimateType, IKeyframe, IKeyframeId, IAnimateEasing, ICubicBezierEasing, IStepsEasing, IAnimateEasingFunction, IAnimateEasingName, IAnimateDirection, IAnimateEnding, IAnimateEvents, IAnimateEventFunction, ICustomEasingFunction, IAnimateKeyframe, IComputedKeyframe, IStyleAnimation, IKeyframesAnimation, IAnimateOptions } from './IAnimation'
+export { IAnimation, ITransition, IAnimate, IAnimateType, IKeyframe, IKeyframeId, IAnimateEasing, ICubicBezierEasing, IStepsEasing, IAnimateEasingFunction, IAnimateEasingName, IAnimateEnding, IAnimateEvents, IAnimateEventFunction, ICustomEasingFunction, IAnimateKeyframe, IComputedKeyframe, IStyleAnimation, IKeyframesAnimation, IAnimateOptions } from './IAnimation'
 
 export { IUIRenderModule, IRectRenderModule, IImageRenderModule, ITextRenderModule, IGroupRenderModule, IFrameRenderModule } from './module/IUIRender'
 export { IUIBoundsModule } from './module/IUIBounds'

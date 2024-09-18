@@ -19,12 +19,13 @@ export interface IKeyframesAnimation extends IAnimateOptions {
 
 export interface IAnimateOptions {
     easing?: IAnimateEasing
-    direction?: IAnimateDirection
 
     delay?: number
     duration?: number
     ending?: IAnimateEnding
 
+    reverse?: boolean
+    swing?: boolean
     loop?: boolean | number
     loopDelay?: number
 
@@ -111,8 +112,6 @@ export type IAnimateEasingName =
     | 'bounce-in' | 'bounce-out' | 'bounce-in-out'
 
 
-export type IAnimateDirection = 'normal' | 'alternate' | 'reverse' | 'alternate-reverse'
-
 export type IAnimateEnding = 'auto' | 'from' | 'to'
 
 export interface IAnimateEvents {
@@ -152,7 +151,6 @@ export interface IAnimate extends IAnimateOptions, IEventer {
     readonly time: number
     readonly looped: number
 
-    readonly alternate: boolean
     readonly realEnding: IAnimateEnding
 
     init(target: IUI, keyframe: IUIInputData | IKeyframe[], options?: ITransition, isTemp?: boolean): void
