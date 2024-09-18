@@ -476,8 +476,10 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
         return Export.export(this, filename, options)
     }
 
-    public clone(): IUI {
-        return UI.one(this.toJSON())
+    public clone(newData?: IUIInputData): IUI {
+        const json = this.toJSON()
+        if (newData) Object.assign(json, newData)
+        return UI.one(json)
     }
 
     static one(data: IUIInputData, x?: number, y?: number, width?: number, height?: number): IUI {
