@@ -26,6 +26,7 @@ export interface IAnimateOptions {
 
     reverse?: boolean
     swing?: boolean
+
     loop?: boolean | number
     loopDelay?: number
 
@@ -115,13 +116,15 @@ export type IAnimateEasingName =
 export type IAnimateEnding = 'auto' | 'from' | 'to'
 
 export interface IAnimateEvents {
+    created?: IAnimateEventFunction
+
     play?: IAnimateEventFunction
     pause?: IAnimateEventFunction
     stop?: IAnimateEventFunction
+    seek?: IAnimateEventFunction
 
-    create?: IAnimateEventFunction
     update?: IAnimateEventFunction
-    complete?: IAnimateEventFunction
+    completed?: IAnimateEventFunction
 }
 
 export interface IAnimateEventFunction {
