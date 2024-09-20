@@ -17,5 +17,5 @@ export interface ITransitionMap {
 }
 
 export interface ITransitionFunction {
-    (from: any, to: any, t: number, target?: IObject): any
+    (from: any, to: any, t: number, target?: any): any
 }

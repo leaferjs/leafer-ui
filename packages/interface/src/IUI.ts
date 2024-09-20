@@ -9,7 +9,7 @@ import {
     ITextStyleAttrData, ITextStyleInputData, ITextStyleComputedData
 } from './ICommonAttr'
 import { IOverflow } from './type/IType'
-import { IAnimation, IAnimate, IKeyframe, IKeyframeId, IAnimateDirection, ITransition, IAnimateType } from './IAnimation'
+import { IAnimation, IAnimate, IKeyframe, IKeyframeId, ITransition, IAnimateType } from './IAnimation'
 import { ILeafer } from './app/ILeafer'
 import { IEditorConfig } from './editor/IEditor'
 
@@ -109,7 +109,6 @@ export interface IRobotActions {
 
 export interface IRobotAnimation {
     keys: IKeyframeId[]
-    direction?: IAnimateDirection
     loop?: boolean | number
     speed?: number
 }
