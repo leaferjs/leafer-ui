@@ -1,3 +1,5 @@
+export * from '@leafer-ui/interface'
+
 export * from '@leafer/web'
 export * from '@leafer/partner'
 
