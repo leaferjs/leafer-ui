@@ -76,23 +76,23 @@ export class Group extends UI implements IGroup {   // tip: rewrited Box
 
     // add
 
-    public addAt(child: IUI, index: number): void {
+    public addAt(child: IUI | IUIInputData, index: number): void {
         this.add(child, index)
     }
 
-    public addAfter(child: IUI, after: IUI): void {
+    public addAfter(child: IUI | IUIInputData, after: IUI): void {
         this.add(child, this.children.indexOf(after) + 1)
     }
 
-    public addBefore(child: IUI, before: IUI): void {
+    public addBefore(child: IUI | IUIInputData, before: IUI): void {
         this.add(child, this.children.indexOf(before))
     }
 
     // Branch rewrite
 
-    public add(_child: IUI, _index?: number): void { }
+    public add(_child: IUI | IUIInputData, _index?: number): void { }
 
-    public addMany(..._children: IUI[]): void { }
+    public addMany(..._children: IUI[] | IUIInputData[]): void { }
 
     public remove(_child?: IUI, _destroy?: boolean): void { }
 

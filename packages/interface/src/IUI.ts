@@ -344,11 +344,11 @@ export interface IGroup extends IUI {
     __: IGroupData
     children: IUI[]
     pick(hitPoint: IPointData, options?: IPickOptions): IPickResult
-    add(child: IUI, index?: number): void
-    addAt(child: IUI, index: number): void
-    addAfter(child: IUI, after: IUI): void
-    addBefore(child: IUI, before: IUI): void
-    addMany(...children: ILeaf[]): void
+    add(child: IUI | IUIInputData, index?: number): void
+    addAt(child: IUI | IUIInputData, index: number): void
+    addAfter(child: IUI | IUIInputData, after: IUI): void
+    addBefore(child: IUI | IUIInputData, before: IUI): void
+    addMany(...children: ILeaf[] | IUIInputData[]): void
     remove(child?: IUI): void
     removeAll(): void
     clear(): void
