@@ -349,7 +349,7 @@ export interface IGroup extends IUI {
     addAfter(child: IUI | IUIInputData, after: IUI): void
     addBefore(child: IUI | IUIInputData, before: IUI): void
     addMany(...children: ILeaf[] | IUIInputData[]): void
-    remove(child?: IUI): void
+    remove(child?: IUI | number | string | IFindCondition | IFindUIMethod): void
     removeAll(): void
     clear(): void
 }

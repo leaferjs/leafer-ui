@@ -1,7 +1,7 @@
 import { IJSONOptions, IPickOptions, IPickResult, IPointData } from '@leafer/interface'
 import { Branch, useModule, dataProcessor, registerUI, UICreator } from '@leafer/core'
 
-import { IGroup, IGroupData, IGroupInputData, IUI, IUIInputData, IUIJSONData } from '@leafer-ui/interface'
+import { IGroup, IGroupData, IGroupInputData, IUI, IUIInputData, IUIJSONData, IFindCondition, IFindUIMethod } from '@leafer-ui/interface'
 import { GroupData } from '@leafer-ui/data'
 
 import { UI } from './UI'
@@ -94,7 +94,7 @@ export class Group extends UI implements IGroup {   // tip: rewrited Box
 
     public addMany(..._children: IUI[] | IUIInputData[]): void { }
 
-    public remove(_child?: IUI, _destroy?: boolean): void { }
+    public remove(_child?: IUI | number | string | IFindCondition | IFindUIMethod, _destroy?: boolean): void { }
 
     public removeAll(_destroy?: boolean): void { }
 
