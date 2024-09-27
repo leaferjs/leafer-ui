@@ -16,6 +16,8 @@ v1.0 正式版已发布 🎉🎉🎉
 
 📘 [绝境中盛开，LeaferJS 的创业故事](https://leaferjs.com/ui/blog/2024-04-08.html)
 
+如果你觉得不错，请帮我们点个 [Star](https://github.com/leaferjs/ui) 🌟 ，吸引更多的人参与贡献 - [GitHub](https://github.com/leaferjs/ui) / [Gitee](https://gitee.com/leaferjs/ui) ✨ ✨ ✨
+
 ## 快速安装
 
 🚀 想马上使用，请安装 [ leafer-ui](https://leaferjs.com/ui/guide/install/ui/start.html)，开始你的探索之旅。
@@ -45,8 +47,6 @@ Flex 自动布局、中心绘制，后端批量生成，渐变、内外阴影、
 有问题、建议可以 [提交 issue](https://github.com/leaferjs/ui/issues)，留下你的贡献足迹。
 
 欢迎加入 [技术交流群](https://leaferjs.com/#contact) ，与小伙伴们建立联系，共同学习进步，偶尔会有特殊福利。
-
-🌟 记得前往 [GitHub](https://github.com/leaferjs/ui) / [Gitee](https://gitee.com/leaferjs/ui) 点亮你的 [小星星](https://github.com/leaferjs/ui) ✨ ✨ ✨
 
 ## 使命与愿景
 
