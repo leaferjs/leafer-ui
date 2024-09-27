@@ -54,19 +54,27 @@ export class Box extends Group implements IBox {
         const data = this.__
 
         if (this.children.length) {
+
             if (data.__autoSide) {
 
-                if (this.leafer && this.leafer.ready) this.leafer.layouter.addExtra(this)
-                super.__updateBoxBounds()
+                const { flow } = data, { leafer } = this
+                if (leafer && leafer.ready) leafer.layouter.addExtra(this)
+
+                flow && !secondLayout ? this.__updateRectBoxBounds() : super.__updateBoxBounds()
 
                 const { boxBounds } = this.__layout
 
                 if (!data.__autoSize) {
-                    if (data.__autoWidth) boxBounds.width += boxBounds.x, boxBounds.height = data.height, boxBounds.y = boxBounds.x = 0
-                    else boxBounds.height += boxBounds.y, boxBounds.width = data.width, boxBounds.x = boxBounds.y = 0
+                    if (data.__autoWidth) {
+                        boxBounds.height = data.height, boxBounds.y = 0
+                        if (!flow) boxBounds.width += boxBounds.x, boxBounds.x = 0
+                    } else {
+                        boxBounds.width = data.width, boxBounds.x = 0
+                        if (!flow) boxBounds.height += boxBounds.y, boxBounds.y = 0
+                    }
                 }
 
-                if (secondLayout && data.flow && data.padding) copyAndSpread(boxBounds, boxBounds, data.padding, false, data.__autoSize ? null : (data.__autoWidth ? 'width' : 'height'))
+                flow && secondLayout && data.padding && copyAndSpread(boxBounds, boxBounds, data.padding, false, data.__autoSize ? null : (data.__autoWidth ? 'width' : 'height'))
 
                 this.__updateNaturalSize()
 
