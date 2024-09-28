@@ -50,8 +50,6 @@ export class Box extends Group implements IBox {
     @rewrite(rect.__updateBoxBounds)
     public __updateRectBoxBounds(): void { }
 
-    @rewrite(group.__updateBoxBounds)
-    public __updateGroupBoxBounds(): void { }
 
     // @leafer-in/flow will rewrite
     public __updateBoxBounds(_secondLayout?: boolean): void {
