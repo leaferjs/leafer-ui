@@ -444,11 +444,7 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     }
 
     public __drawPathByData(drawer: IPathDrawer, data: IPathCommandData): void {
-        if (data) {
-            PathDrawer.drawPathByData(drawer, data)
-        } else {
-            this.__drawPathByBox(drawer)
-        }
+        data ? PathDrawer.drawPathByData(drawer, data) : this.__drawPathByBox(drawer)
     }
 
     public __drawPathByBox(drawer: IPathDrawer): void {
@@ -456,9 +452,7 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
         if (this.__.cornerRadius) {
             const { cornerRadius } = this.__
             drawer.roundRect(x, y, width, height, typeof cornerRadius === 'number' ? [cornerRadius] : cornerRadius) // 修复微信浏览器bug, 后续需进一步优化
-        } else {
-            drawer.rect(x, y, width, height)
-        }
+        } else drawer.rect(x, y, width, height)
     }
 
     // @leafer-in/animate rewrite
