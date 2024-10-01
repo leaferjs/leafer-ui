@@ -448,7 +448,7 @@ export class InteractionBase implements IInteraction {
         const { path } = data
         for (let i = 0, len = path.length; i < len; i++) {
             leaf = path.list[i]
-            cursor = leaf.syncEventer ? leaf.syncEventer.cursor : leaf.cursor
+            cursor = (leaf.syncEventer && leaf.syncEventer.cursor) || leaf.cursor
             if (cursor) break
         }
 
