@@ -2,7 +2,7 @@
 
 [![LeaferJS](./leaferjs.jpg)](https://www.leaferjs.com)
 
-[**leafer-ui**](https://leaferjs.com/ui/guide/install/ui/start.html) 是基于核心库 [leafer](https://github.com/leaferjs/leafer) 开发的一套绚丽多彩的 UI 绘图、交互框架。作为[LeaferJS](https://www.leaferjs.com) 的表现层，可结合 AI 绘图、生成界面，表现力丰富、性能强劲，可媲美当前主流的设计软件。
+[**leafer-ui**](https://leaferjs.com/ui/guide/install/ui/start.html) 是基于核心库 [leafer](https://github.com/leaferjs/leafer) 开发的一套绚丽多彩的 UI 绘图、交互框架。作为[LeaferJS](https://www.leaferjs.com) 的表现层，可结合 AI 绘图、生成界面，表现力丰富、性能强劲，可媲美当前主流设计软件。
 
 提供了丰富的 UI 绘图元素，和开箱即用的功能，如自动布局、图形编辑、SVG 导出，方便与 Figma、Sketch 等产品进行数据交换。并为跨平台开发提供了统一的交互事件，如拖拽、旋转、缩放手势等。
 
@@ -16,7 +16,7 @@ v1.0 正式版已发布 🎉🎉🎉
 
 📘 [绝境中盛开，LeaferJS 的创业故事](https://leaferjs.com/ui/blog/2024-04-08.html)
 
-如果你觉得不错，请帮我们点个 [Star](https://github.com/leaferjs/ui) 🌟 ，吸引更多的资源参与进来 - [GitHub](https://github.com/leaferjs/ui) / [Gitee](https://gitee.com/leaferjs/ui) ✨ ✨ ✨
+如果你觉得不错，请帮我们点个 [Star](https://github.com/leaferjs/ui) 🌟 ，让这个库被更多的人看见 - [GitHub](https://github.com/leaferjs/ui) / [Gitee](https://gitee.com/leaferjs/ui) ✨ ✨ ✨
 
 ## 快速安装
 
