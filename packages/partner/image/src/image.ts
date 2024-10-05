@@ -44,9 +44,10 @@ export function image(ui: IUI, attrName: string, paint: IImagePaint, boxBounds: 
 
     } else { // need load
 
-        ignoreRender(ui, true) // wait loaded
-
-        if (firstUse) onLoad(ui, event)
+        if (firstUse) {
+            ignoreRender(ui, true) // wait loaded
+            onLoad(ui, event)
+        }
 
         leafPaint.loadId = image.load(
             () => {
