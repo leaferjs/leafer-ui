@@ -43,9 +43,10 @@ export class Dragger {
         this.canAnimate = this.canDragOut = true
     }
 
-    public getList(): ILeafList {
+    public getList(realDraggable?: boolean): ILeafList {
         const { proxy } = this.interaction.selector
-        return this.dragging && (!proxy || !proxy.list.length) ? (DragEvent.list || this.dragableList || emptyList) : emptyList
+        const hasProxyList = proxy && proxy.list.length, dragList = DragEvent.list || this.dragableList || emptyList
+        return this.dragging && (hasProxyList ? (realDraggable ? emptyList : new LeafList(proxy.list)) : dragList) // realDraggable 需排除代理选择器，它有自身的拖拽逻辑
     }
 
     public checkDrag(data: IPointerEvent, canDrag: boolean): void {
@@ -77,7 +78,7 @@ export class Dragger {
             if (this.dragging) {
                 this.interaction.emit(DragEvent.START, this.dragData)
                 this.getDragableList(this.dragData.path)
-                this.setDragStartPoints(this.realDragableList = this.getList())
+                this.setDragStartPoints(this.realDragableList = this.getList(true))
             }
         }
     }
@@ -91,7 +92,7 @@ export class Dragger {
         let leaf: ILeaf
         for (let i = 0, len = path.length; i < len; i++) {
             leaf = path.list[i]
-            if ((leaf.__.draggable || leaf.__.editable) && leaf.__.hitSelf && !leaf.__.locked) {
+            if ((leaf.draggable || leaf.editable) && leaf.hitSelf && !leaf.locked) {
                 this.dragableList = new LeafList(leaf)
                 break
             }
