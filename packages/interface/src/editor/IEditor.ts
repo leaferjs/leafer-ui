@@ -20,6 +20,7 @@ export interface IEditorBase extends IGroup, ISelectorProxy {
     readonly single: boolean
 
     readonly dragging: boolean
+    readonly moving: boolean
 
     element?: IUI
     buttons: IGroup
