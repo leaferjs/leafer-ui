@@ -425,7 +425,7 @@ export class InteractionBase implements IInteraction {
     public updateHoverData(data?: IPointerEvent): void {
         if (!data) data = this.hoverData
         if (!data) return
-        this.findPath(data, { exclude: this.dragger.getList(), name: PointerEvent.MOVE })
+        this.findPath(data, { exclude: this.dragger.getList(false, true), name: PointerEvent.MOVE })
         this.hoverData = data
     }
 

@@ -20,8 +20,8 @@ export class Dragger {
     public dragData: IDragEvent
     protected downData: IPointerEvent
 
-    public dragableList: ILeafList
-    public realDragableList: ILeafList
+    public draggableList: ILeafList
+    public realDraggableList: ILeafList
     protected dragOverPath: ILeafList
     protected dragEnterPath: ILeafList
 
@@ -43,10 +43,10 @@ export class Dragger {
         this.canAnimate = this.canDragOut = true
     }
 
-    public getList(realDraggable?: boolean): ILeafList {
+    public getList(realDraggable?: boolean, hover?: boolean): ILeafList {
         const { proxy } = this.interaction.selector
-        const hasProxyList = proxy && proxy.list.length, dragList = DragEvent.list || this.dragableList || emptyList
-        return this.dragging && (hasProxyList ? (realDraggable ? emptyList : new LeafList(proxy.list)) : dragList) // realDraggable 需排除代理选择器，它有自身的拖拽逻辑
+        const hasProxyList = proxy && proxy.list.length, dragList = DragEvent.list || this.draggableList || emptyList
+        return this.dragging && (hasProxyList ? (realDraggable ? emptyList : new LeafList(hover ? [...proxy.list, ...proxy.dragHoverExclude] : proxy.list)) : dragList) // realDraggable 需排除代理选择器，它有自身的拖拽逻辑
     }
 
     public checkDrag(data: IPointerEvent, canDrag: boolean): void {
@@ -77,8 +77,8 @@ export class Dragger {
             this.dragging = canDrag && PointerButton.left(data)
             if (this.dragging) {
                 this.interaction.emit(DragEvent.START, this.dragData)
-                this.getDragableList(this.dragData.path)
-                this.setDragStartPoints(this.realDragableList = this.getList(true))
+                this.getDraggableList(this.dragData.path)
+                this.setDragStartPoints(this.realDraggableList = this.getList(true))
             }
         }
     }
@@ -88,12 +88,12 @@ export class Dragger {
         list.forEach(leaf => this.dragStartPoints[leaf.innerId] = { x: leaf.x, y: leaf.y })
     }
 
-    protected getDragableList(path: ILeafList): void {
+    protected getDraggableList(path: ILeafList): void {
         let leaf: ILeaf
         for (let i = 0, len = path.length; i < len; i++) {
             leaf = path.list[i]
             if ((leaf.draggable || leaf.editable) && leaf.hitSelf && !leaf.locked) {
-                this.dragableList = new LeafList(leaf)
+                this.draggableList = new LeafList(leaf)
                 break
             }
         }
@@ -119,7 +119,7 @@ export class Dragger {
 
     protected dragReal(): void {
         const { running } = this.interaction
-        const list = this.realDragableList
+        const list = this.realDraggableList
         if (list.length && running) {
             const { totalX, totalY } = this.dragData
             list.forEach(leaf => leaf.draggable && leaf.move(DragEvent.getValidMove(leaf, this.dragStartPoints[leaf.innerId], { x: totalX, y: totalY })))
@@ -222,7 +222,7 @@ export class Dragger {
     }
 
     protected dragReset(): void {
-        DragEvent.list = DragEvent.data = this.dragableList = this.dragData = this.downData = this.dragOverPath = this.dragEnterPath = null
+        DragEvent.list = DragEvent.data = this.draggableList = this.dragData = this.downData = this.dragOverPath = this.dragEnterPath = null
     }
 
 
