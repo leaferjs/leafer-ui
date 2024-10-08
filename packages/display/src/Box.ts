@@ -7,10 +7,10 @@ import { BoxData } from '@leafer-ui/data'
 import { Group } from './Group'
 import { Rect } from './Rect'
 
-const rect = Rect.prototype
-const group = Group.prototype
-const childrenRenderBounds = {} as IBoundsData
+
 const { copy, add, includes } = BoundsHelper
+const rect = Rect.prototype, group = Group.prototype
+const childrenRenderBounds = {} as IBoundsData
 
 @rewriteAble()
 @registerUI()
