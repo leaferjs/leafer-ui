@@ -201,6 +201,7 @@ export class InteractionBase implements IInteraction {
 
 
     public multiTouch(data: IUIEvent, list: IKeepTouchData[]): void {
+        if (this.config.multiTouch.disabled) return
         const { move, angle, scale, center } = MultiTouchHelper.getData(list)
         this.rotate(getRotateEventData(center, angle, data))
         this.zoom(getZoomEventData(center, scale, data))

@@ -22,6 +22,7 @@ export const config: IInteractionConfig = {
     touch: {
         preventDefault: true
     },
+    multiTouch: {},
     cursor: true,
     keyEvent: true
 }
