@@ -16,7 +16,7 @@ v1.0 正式版已发布 🎉🎉🎉
 
 📘 [绝境中盛开，LeaferJS 的创业故事](https://leaferjs.com/ui/blog/2024-04-08.html)
 
-如果你觉得不错，请帮我们点个 [Star](https://github.com/leaferjs/ui) 🌟 ，让这个库被更多的人看见 - [GitHub](https://github.com/leaferjs/ui) / [Gitee](https://gitee.com/leaferjs/ui) ✨ ✨ ✨
+如果你觉得不错，请帮我们点个 [Star](https://github.com/leaferjs/leafer-ui) 🌟 ，让这个库被更多的人看见 - [GitHub](https://github.com/leaferjs/leafer-ui) / [Gitee](https://gitee.com/leaferjs/ui) ✨ ✨ ✨
 
 ## 快速安装
 
