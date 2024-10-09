@@ -44,7 +44,7 @@ Flex 自动布局、中心绘制，后端批量生成，渐变、内外阴影、
 
 ## 互动交流
 
-有问题、建议可以 [提交 issue](https://github.com/leaferjs/ui/issues)，留下你的贡献足迹。
+有问题、建议可以 [提交 issue](https://github.com/leaferjs/leafer-ui/issues)，留下你的贡献足迹。
 
 欢迎加入 [技术交流群](https://leaferjs.com/#contact) ，与小伙伴们建立联系，共同学习进步，偶尔会有特殊福利。
 
@@ -68,9 +68,9 @@ leafer-ui 致力于实现一套简洁、开放、现代化的 UI 绘图语言标
 
 [LeaferJS 主仓库](https://github.com/leaferjs/LeaferJS)
 
-[Leafer 仓库](https://github.com/leaferjs/leafer)
+[leafer 仓库](https://github.com/leaferjs/leafer)
 
-[LeaferIN 官方插件仓库](https://github.com/leaferjs/in)
+[leafer-in 官方插件仓库](https://github.com/leaferjs/leafer-in)
 
 ### License
 

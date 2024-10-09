@@ -16,10 +16,10 @@
   "files": ["src","types","dist"],
   "repository": {
     "type": "git",
-    "url": "https://github.com/leaferjs/ui"
+    "url": "https://github.com/leaferjs/leafer-ui"
   },
-  "homepage": "https://github.com/leaferjs/ui",
-  "bugs": "https://github.com/leaferjs/ui/issues",
+  "homepage": "https://github.com/leaferjs/leafer-ui",
+  "bugs": "https://github.com/leaferjs/leafer-ui/issues",
   "keywords": [
     "leaferui",
     "leafer-ui",
