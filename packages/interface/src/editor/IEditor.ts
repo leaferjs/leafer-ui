@@ -54,7 +54,7 @@ export interface IEditorBase extends IGroup, ISelectorProxy {
     openGroup(group: IGroup): void
     closeGroup(group: IGroup): void
 
-    openInnerEditor(target?: IUI): void
+    openInnerEditor(target?: IUI, select?: boolean): void
     closeInnerEditor(): void
 
     lock(): void

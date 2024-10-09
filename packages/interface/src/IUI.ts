@@ -334,6 +334,7 @@ export interface IBox extends IBoxAttrData, IGroup {
 interface IBoxAttrData {
     overflow?: IOverflow
     resizeChildren?: IBoolean
+    textBox?: IBoolean // 编辑器中，textBox双击会直接进入编辑文本状态，如便利贴文本
 }
 export interface IBoxData extends IBoxAttrData, IGroupData { }
 export interface IBoxInputData extends IBoxAttrData, IGroupInputData { }

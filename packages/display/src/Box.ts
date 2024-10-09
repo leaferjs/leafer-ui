@@ -26,6 +26,9 @@ export class Box extends Group implements IBox {
     @dataType(false)
     public resizeChildren?: IBoolean
 
+    @dataType(false)
+    public textBox?: IBoolean
+
     @affectRenderBoundsType('show')
     declare public overflow?: IOverflow
 
