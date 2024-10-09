@@ -20,7 +20,7 @@ ui.__updateHitCanvas = function (): void {
     if (isHitPixel) {
         const { renderBounds } = this.__layout
         const size = Platform.image.hitCanvasSize
-        const scale = h.hitScale = tempBounds.set(0, 0, size, size).getFitMatrix(renderBounds, 0.5).a
+        const scale = h.hitScale = tempBounds.set(0, 0, size, size).getFitMatrix(renderBounds).a
         const { x, y, width, height } = tempBounds.set(renderBounds).scale(scale)
         h.resize({ width, height, pixelRatio: 1 })
         h.clear()
