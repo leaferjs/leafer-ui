@@ -99,6 +99,7 @@ export interface ITextStyleAttrData {
 
     textAlign?: ITextAlign
     verticalAlign?: IVerticalAlign
+    autoSizeAlign?: IBoolean
 
     textWrap?: ITextWrap
     textOverflow?: IOverflow | string
@@ -118,6 +119,7 @@ export interface ITextStyleInputData {
 
     textAlign?: ITextAlign
     verticalAlign?: IVerticalAlign
+    autoSizeAlign?: IBoolean
 
     textWrap?: ITextWrap
     textOverflow?: IOverflow | string
@@ -137,6 +139,7 @@ export interface ITextStyleComputedData {
 
     textAlign?: ITextAlign
     verticalAlign?: IVerticalAlign
+    autoSizeAlign?: boolean // 自动宽高的文本，是否仍进行整体对齐操作
 
     textWrap?: ITextWrap
     textOverflow?: IOverflow | string

@@ -77,6 +77,9 @@ export class Text extends UI implements IText {
     @boundsType('top')
     public verticalAlign?: IVerticalAlign
 
+    @boundsType(true)
+    public autoSizeAlign?: IBoolean
+
     @boundsType('normal')
     public textWrap?: ITextWrap
 

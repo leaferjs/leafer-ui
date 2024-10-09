@@ -12,13 +12,14 @@ const { Letter, Single, Before, After, Symbol, Break } = CharType
 
 let word: ITextWordData, row: ITextRowData, wordWidth: number, rowWidth: number, realWidth: number
 let char: string, charWidth: number, startCharSize: number, charSize: number, charType: CharType, lastCharType: CharType, langBreak: boolean, afterBreak: boolean, paraStart: boolean
-let textDrawData: ITextDrawData, rows: ITextRowData[] = [], bounds: IBoundsData
+let textDrawData: ITextDrawData, rows: ITextRowData[] = [], bounds: IBoundsData, findMaxWidth: boolean
 
 export function createRows(drawData: ITextDrawData, content: string, style: ITextData): void {
 
     textDrawData = drawData
     rows = drawData.rows
     bounds = drawData.bounds
+    findMaxWidth = !bounds.width && !style.autoSizeAlign
 
     const { __letterSpacing, paraIndent, textCase } = style
     const { canvas } = Platform
@@ -126,7 +127,9 @@ export function createRows(drawData: ITextDrawData, content: string, style: ITex
 
         content.split('\n').forEach(content => {
             textDrawData.paraNumber++
-            rows.push({ x: paraIndent || 0, text: content, width: canvas.measureText(content).width, paraStart: true })
+            rowWidth = canvas.measureText(content).width
+            rows.push({ x: paraIndent || 0, text: content, width: rowWidth, paraStart: true })
+            if (findMaxWidth) setMaxWidth()
         })
 
     }
@@ -162,7 +165,12 @@ function addRow(): void {
 
     row.width = rowWidth
     if (bounds.width) trimRight(row)
+    else if (findMaxWidth) setMaxWidth()
     rows.push(row)
     row = { words: [] }
     rowWidth = 0
+}
+
+function setMaxWidth(): void {
+    if (rowWidth > (textDrawData.maxWidth || 0)) textDrawData.maxWidth = rowWidth
 }

@@ -262,6 +262,7 @@ export interface ITextDrawData {
     rows: ITextRowData[]
     paraNumber: number
     font: string
+    maxWidth?: number // 获取最大的行宽，自动宽度 且非 autoSizeAlign 时才有值
     decorationY?: number
     decorationHeight?: number
     overflow?: number // overflowed row number, not index

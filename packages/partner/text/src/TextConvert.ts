@@ -23,14 +23,11 @@ export function getDrawData(content: string, style: ITextData): ITextDrawData {
     const { textDecoration, __font, __padding: padding } = style
 
     if (padding) {
-        if (width) {
-            x = padding[left]
-            width -= (padding[right] + padding[left])
-        }
-        if (height) {
-            y = padding[top]
-            height -= (padding[top] + padding[bottom])
-        }
+        if (width) x = padding[left], width -= (padding[right] + padding[left])
+        else if (!style.autoSizeAlign) x = padding[left]
+
+        if (height) y = padding[top], height -= (padding[top] + padding[bottom])
+        else if (!style.autoSizeAlign) y = padding[top]
     }
 
     const drawData: ITextDrawData = {
@@ -58,23 +55,17 @@ export function getDrawData(content: string, style: ITextData): ITextDrawData {
 
 
 function padAutoText(padding: number[], drawData: ITextDrawData, style: ITextData, width: number, height: number): void {
-    if (!width) {
+    if (!width && style.autoSizeAlign) {
         switch (style.textAlign) {
-            case 'left':
-                offsetText(drawData, 'x', padding[left])
-                break
-            case 'right':
-                offsetText(drawData, 'x', -padding[right])
+            case 'left': offsetText(drawData, 'x', padding[left]); break
+            case 'right': offsetText(drawData, 'x', -padding[right])
         }
     }
 
-    if (!height) {
+    if (!height && style.autoSizeAlign) {
         switch (style.verticalAlign) {
-            case 'top':
-                offsetText(drawData, 'y', padding[top])
-                break
-            case 'bottom':
-                offsetText(drawData, 'y', -padding[bottom])
+            case 'top': offsetText(drawData, 'y', padding[top]); break
+            case 'bottom': offsetText(drawData, 'y', -padding[bottom])
         }
     }
 }
