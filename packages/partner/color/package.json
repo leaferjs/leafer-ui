@@ -1,6 +1,6 @@
 {
   "name": "@leafer-ui/color",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "@leafer-ui/color",
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
@@ -9,7 +9,7 @@
   "files": ["src","types","dist"],
   "repository": {
     "type": "git",
-    "url": "https://github.com/leaferjs/ui.git"
+    "url": "https://github.com/leaferjs/leafer-ui.git"
   },
   "homepage": "https://github.com/leaferjs/ui/tree/main/packages/partner/color",
   "bugs": "https://github.com/leaferjs/ui/issues",
@@ -18,9 +18,9 @@
     "leaferjs"
   ],
   "dependencies": {
-    "@leafer-ui/draw": "1.0.4"
+    "@leafer-ui/draw": "1.0.5"
   },
   "devDependencies": {
-     "@leafer-ui/interface": "1.0.4"
+     "@leafer-ui/interface": "1.0.5"
   }
 }

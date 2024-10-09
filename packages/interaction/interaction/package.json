@@ -1,6 +1,6 @@
 {
   "name": "@leafer-ui/interaction",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "@leafer-ui/interaction",
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
@@ -9,7 +9,7 @@
   "files": ["src","types","dist"],
   "repository": {
     "type": "git",
-    "url": "https://github.com/leaferjs/ui.git"
+    "url": "https://github.com/leaferjs/leafer-ui.git"
   },
   "homepage": "https://github.com/leaferjs/ui/tree/main/packages/interaction/interaction",
   "bugs": "https://github.com/leaferjs/ui/issues",
@@ -18,12 +18,12 @@
     "leaferjs"
   ],
   "dependencies": {
-    "@leafer/core": "1.0.4",
-    "@leafer-ui/draw": "1.0.4",
-    "@leafer-ui/event": "1.0.4"
+    "@leafer/core": "1.0.5",
+    "@leafer-ui/draw": "1.0.5",
+    "@leafer-ui/event": "1.0.5"
   },
   "devDependencies": {
-     "@leafer/interface": "1.0.4",
-     "@leafer-ui/interface": "1.0.4"
+     "@leafer/interface": "1.0.5",
+     "@leafer-ui/interface": "1.0.5"
   }
 }

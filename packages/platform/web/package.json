@@ -1,6 +1,6 @@
 {
   "name": "@leafer-ui/web",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "@leafer-ui/web",
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
@@ -9,7 +9,7 @@
   "files": ["src","types","dist"],
   "repository": {
     "type": "git",
-    "url": "https://github.com/leaferjs/ui.git"
+    "url": "https://github.com/leaferjs/leafer-ui.git"
   },
   "homepage": "https://github.com/leaferjs/ui/tree/main/packages/platform/web",
   "bugs": "https://github.com/leaferjs/ui/issues",
@@ -18,14 +18,14 @@
     "leaferjs"
   ],
   "dependencies": {
-    "@leafer/core": "1.0.4",
-    "@leafer/web": "1.0.4",
-    "@leafer/partner": "1.0.4",
-    "@leafer/interface": "1.0.4",
-    "@leafer-ui/draw": "1.0.4",
-    "@leafer-ui/core": "1.0.4",
-    "@leafer-ui/interaction-web": "1.0.4",
-    "@leafer-ui/partner": "1.0.4",
-    "@leafer-ui/interface": "1.0.4"
+    "@leafer/core": "1.0.5",
+    "@leafer/web": "1.0.5",
+    "@leafer/partner": "1.0.5",
+    "@leafer/interface": "1.0.5",
+    "@leafer-ui/draw": "1.0.5",
+    "@leafer-ui/core": "1.0.5",
+    "@leafer-ui/interaction-web": "1.0.5",
+    "@leafer-ui/partner": "1.0.5",
+    "@leafer-ui/interface": "1.0.5"
   }
 }
