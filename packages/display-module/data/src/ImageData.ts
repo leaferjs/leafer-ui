@@ -1,4 +1,4 @@
-import { IImageData, IImageInputData, IImage, IObject } from '@leafer-ui/interface'
+import { IImageData, IImageInputData, IImage, IObject, IJSONOptions } from '@leafer-ui/interface'
 
 import { RectData } from './RectData'
 
@@ -25,8 +25,8 @@ export class ImageData extends RectData implements IImageData {
         return data
     }
 
-    public __getInputData(): IObject {
-        const data = super.__getInputData()
+    public __getInputData(names?: string[] | IObject, options?: IJSONOptions): IObject {
+        const data = super.__getInputData(names, options)
         delete data.fill
         return data
     }
