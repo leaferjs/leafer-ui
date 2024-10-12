@@ -26,9 +26,7 @@ export class UIData extends LeafData implements IUIData {
             let { scaleX } = ui.__nowWorld || ui.__world
             if (scaleX < 0) scaleX = -scaleX
             return scaleX > 1 ? strokeWidth / scaleX : strokeWidth
-        } else {
-            return strokeWidth
-        }
+        } else return strokeWidth
     }
 
     public __pixelFill?: boolean // png / svg / webp
@@ -67,9 +65,7 @@ export class UIData extends LeafData implements IUIData {
             this._width = -value
             this.__leaf.scaleX *= -1
             debug.warn('width < 0, instead -scaleX ', this)
-        } else {
-            this._width = value
-        }
+        } else this._width = value
     }
 
     protected setHeight(value: INumber) {
@@ -77,9 +73,7 @@ export class UIData extends LeafData implements IUIData {
             this._height = -value
             this.__leaf.scaleY *= -1
             debug.warn('height < 0, instead -scaleY', this)
-        } else {
-            this._height = value
-        }
+        } else this._height = value
     }
 
 
@@ -135,11 +129,7 @@ export class UIData extends LeafData implements IUIData {
         if (value instanceof Array) {
             if (value.some((item: IShadowEffect) => item.visible === false)) value = value.filter((item: IShadowEffect) => item.visible !== false)
             this._shadow = value.length ? value : null
-        } else if (value) {
-            this._shadow = (value as IShadowEffect).visible === false ? null : [value]
-        } else {
-            this._shadow = null
-        }
+        } else this._shadow = value && (value as IShadowEffect).visible !== false ? [value] : null
     }
 
     protected setInnerShadow(value: IValue) {
@@ -147,11 +137,7 @@ export class UIData extends LeafData implements IUIData {
         if (value instanceof Array) {
             if (value.some((item: IShadowEffect) => item.visible === false)) value = value.filter((item: IShadowEffect) => item.visible !== false)
             this._innerShadow = value.length ? value : null
-        } else if (value) {
-            this._innerShadow = (value as IShadowEffect).visible === false ? null : [value]
-        } else {
-            this._innerShadow = null
-        }
+        } else this._innerShadow = value && (value as IShadowEffect).visible !== false ? [value] : null
     }
 
     // custom
