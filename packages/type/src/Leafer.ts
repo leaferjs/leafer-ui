@@ -16,8 +16,7 @@ leafer.initType = function (type: ILeaferType) {
 leafer.getValidMove = function (moveX: number, moveY: number): IPointData {
     const { scroll, disabled } = this.app.config.move
     if (scroll) {
-        if (Math.abs(moveX) > Math.abs(moveY)) moveY = 0
-        else moveX = 0
+        Math.abs(moveX) > Math.abs(moveY) ? moveY = 0 : moveX = 0
 
         if (scroll === 'limit') {
             const { x, y, width, height } = new Bounds(this.__world).addPoint(this.zoomLayer as IPointData)
