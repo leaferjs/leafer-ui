@@ -32,21 +32,15 @@ export class App extends Leafer implements IApp {
             if (ground) this.ground = this.addLeafer(ground)
             if (tree || editor) this.tree = this.addLeafer(tree)
             if (sky || editor) this.sky = this.addLeafer(sky || { type: 'draw', usePartRender: false })
-            if (editor) {
-                this.editor = Creator.editor(editor) as IEditorBase
-                this.sky.add(this.editor)
-            }
+            if (editor) this.sky.add(this.editor = Creator.editor(editor) as IEditorBase)
         }
     }
 
     protected __setApp(): void {
         const { canvas } = this
         const { realCanvas, view } = this.config
-        if (realCanvas || view === this.canvas.view || !canvas.parentView) {
-            this.realCanvas = true
-        } else {
-            canvas.unrealCanvas()
-        }
+        if (realCanvas || view === this.canvas.view || !canvas.parentView) this.realCanvas = true
+        else canvas.unrealCanvas()
 
         this.leafer = this
         this.watcher.disable()
