@@ -45,9 +45,7 @@ export class Box extends Group implements IBox {
     @rewrite(rect.__updateRenderSpread)
     public __updateRectRenderSpread(): number { return 0 }
 
-    public __updateRenderSpread(): number {
-        return this.__updateRectRenderSpread() || -1
-    }
+    public __updateRenderSpread(): number { return this.__updateRectRenderSpread() || -1 }
 
 
     @rewrite(rect.__updateBoxBounds)
@@ -137,19 +135,18 @@ export class Box extends Group implements IBox {
     }
 
     public __drawAfterFill(canvas: ILeaferCanvas, options: IRenderOptions): void {
-        const { length } = this.children
-        if (this.isOverflow) {
-            canvas.save()
-            canvas.clip()
-            if (length) this.__renderGroup(canvas, options)
-            canvas.restore()
-        } else {
-            if (length) this.__renderGroup(canvas, options)
-        }
+        if (this.children.length) {
+            if (this.isOverflow) {
+                canvas.save()
+                canvas.clip()
+                this.__renderGroup(canvas, options)
+                canvas.restore()
+            } else this.__renderGroup(canvas, options)
 
-        if (this.__.stroke && length) {
-            canvas.setWorld(this.__nowWorld)
-            this.__drawRenderPath(canvas)
+            if (this.__.stroke && this.__.strokeWidth) { // 还原路径
+                canvas.setWorld(this.__nowWorld)
+                this.__drawRenderPath(canvas)
+            }
         }
     }
 
