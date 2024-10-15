@@ -96,7 +96,7 @@ export class Box extends Group implements IBox {
             isOverflow = !includes(renderBounds, childrenRenderBounds)
         } else this.__updateRectRenderBounds()
 
-        this.isOverflow != isOverflow && (this.isOverflow = isOverflow)
+        !this.isOverflow !== !isOverflow && (this.isOverflow = isOverflow) // 节省赋值
         if (!this.__.__drawAfterFill) add(renderBounds, childrenRenderBounds)
     }
 
