@@ -43,7 +43,6 @@ export class Canvas extends Rect implements ICanvas {
         super(data)
         this.canvas = Creator.canvas(this.__ as ILeaferCanvasConfig)
         this.context = this.canvas.context
-        this.__.__isCanvas = this.__.__drawAfterFill = true
         if (data && data.url) this.drawImage(data.url)
     }
 
@@ -57,9 +56,7 @@ export class Canvas extends Rect implements ICanvas {
     }
 
     public draw(ui: IUI, offset?: IPointData, scale?: number | IPointData, rotation?: number): void {
-        ui.__layout.update()
-
-        const matrix = new Matrix(ui.__world).invert()
+        const matrix = new Matrix(ui.worldTransform).invert()
 
         const m = new Matrix()
         if (offset) m.translate(offset.x, offset.y)
@@ -75,16 +72,10 @@ export class Canvas extends Rect implements ICanvas {
         this.forceRender()
     }
 
-    public __drawAfterFill(canvas: ILeaferCanvas, _options: IRenderOptions): void {
-        const { width, height, cornerRadius } = this.__, { view } = this.canvas
-        if (cornerRadius || this.pathInputed) {
-            canvas.save()
-            canvas.clip()
-            canvas.drawImage(view, 0, 0, view.width, view.height, 0, 0, width, height)
-            canvas.restore()
-        } else {
-            canvas.drawImage(view, 0, 0, view.width, view.height, 0, 0, width, height)
-        }
+    // in __drawAfterFill()
+    public __drawContent?(canvas: ILeaferCanvas, _options: IRenderOptions): void {
+        const { width, height } = this.__, { view } = this.canvas
+        canvas.drawImage(view, 0, 0, view.width, view.height, 0, 0, width, height)
     }
 
     public __updateSize(): void {

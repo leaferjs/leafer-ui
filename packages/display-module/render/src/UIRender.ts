@@ -91,6 +91,16 @@ export const UIRender: IUIRenderModule = {
             if (this.__.__isCanvas) this.__drawAfterFill(canvas, options)
             if (stroke && !ignoreStroke) this.__.__pixelStroke ? Paint.strokes(stroke as ILeafStrokePaint[], this, canvas) : Paint.stroke('#000000', this, canvas)
         }
+    },
+
+    __drawAfterFill(canvas: ILeaferCanvas, options: IRenderOptions): void {
+        const { cornerRadius } = this.__
+        if (cornerRadius || this.pathInputed) {
+            canvas.save()
+            canvas.clip()
+            this.__drawContent(canvas, options)
+            canvas.restore()
+        } else this.__drawContent(canvas, options)
     }
 
 }

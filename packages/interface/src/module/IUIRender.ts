@@ -6,6 +6,7 @@ export type IUIRenderModule = IUIRender & ThisType<IUI>
 
 export interface IUIRender extends ILeafRender {
     __drawAfterFill?(canvas: ILeaferCanvas, options: IRenderOptions): void
+    __drawContent?(canvas: ILeaferCanvas, options: IRenderOptions): void
 }
 
 export type IRectRenderModule = IRectRender & ThisType<IRect>
