@@ -94,8 +94,7 @@ export const UIRender: IUIRenderModule = {
     },
 
     __drawAfterFill(canvas: ILeaferCanvas, options: IRenderOptions): void {
-        const { cornerRadius } = this.__
-        if (cornerRadius || this.pathInputed) {
+        if (this.__.__clipContent) {
             canvas.save()
             canvas.clip()
             this.__drawContent(canvas, options)

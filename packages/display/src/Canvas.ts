@@ -73,7 +73,7 @@ export class Canvas extends Rect implements ICanvas {
     }
 
     // in __drawAfterFill()
-    public __drawContent?(canvas: ILeaferCanvas, _options: IRenderOptions): void {
+    public __drawContent(canvas: ILeaferCanvas, _options: IRenderOptions): void {
         const { width, height } = this.__, { view } = this.canvas
         canvas.drawImage(view, 0, 0, view.width, view.height, 0, 0, width, height)
     }

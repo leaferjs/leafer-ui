@@ -367,6 +367,7 @@ export interface IUI extends IUIAttrData, IFillAttrData, IStrokeAttrData, ICorne
     parent?: IGroup
     zoomLayer?: IGroup
     readonly isFrame?: boolean
+    isOverflow?: boolean
 
     proxyData?: IUIInputData
     __proxyData?: IUIInputData
@@ -458,6 +459,8 @@ export interface IUIData extends IUIAttrData, IUIComputedData, ILeafData {
     __isStrokes?: boolean
 
     readonly __strokeWidth: number
+    readonly __hasStroke: boolean
+    readonly __clipContent?: boolean
 
     __pixelFill?: boolean // png / svg / webp
     __pixelStroke?: boolean
@@ -478,7 +481,7 @@ export interface IUIData extends IUIAttrData, IUIComputedData, ILeafData {
     __font?: string
     __textDrawData?: ITextDrawData
 
-    __needComputePaint: boolean
+    __needComputePaint?: boolean
     __computePaint(): void
 }
 export interface IUIComputedData extends IUIAttrData, IFillComputedData, IBorderComputedData, IStrokeComputedData, ITextStyleComputedData, ICornerRadiusComputedData, IEffectComputedData, ILeafComputedData {

@@ -29,6 +29,10 @@ export class UIData extends LeafData implements IUIData {
         } else return strokeWidth
     }
 
+    public get __hasStroke(): boolean { return (this as IUIData).stroke && (this as IUIData).strokeWidth as unknown as boolean }
+
+    public get __clipContent(): boolean { return ((this as IUIData).cornerRadius || this.__pathInputed) as unknown as boolean } // 用于 __drawAfterFill()
+
     public __pixelFill?: boolean // png / svg / webp
     public __pixelStroke?: boolean
 

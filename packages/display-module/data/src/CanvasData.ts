@@ -10,7 +10,7 @@ export class CanvasData extends RectData implements ICanvasData {
 
     public __getInputData(names?: string[] | IObject, options?: IJSONOptions): IObject {
         const data: ICanvasInputData = super.__getInputData(names, options)
-        data.url = (this.__leaf as ICanvas).canvas.toDataURL('png') as string
+        data.url = (this.__leaf as ICanvas).canvas.toDataURL('image/png') as string
         return data
     }
 }

@@ -76,13 +76,9 @@ export class Box extends Group implements IBox {
 
                 this.__updateNaturalSize()
 
-            } else {
-                this.__updateRectBoxBounds()
-            }
+            } else this.__updateRectBoxBounds()
 
-        } else {
-            this.__updateRectBoxBounds()
-        }
+        } else this.__updateRectBoxBounds()
     }
 
     @rewrite(rect.__updateStrokeBounds)
@@ -97,13 +93,11 @@ export class Box extends Group implements IBox {
             copy(childrenRenderBounds, renderBounds)
             this.__updateRectRenderBounds()
 
-            isOverflow = !includes(renderBounds, childrenRenderBounds) || !this.pathInputed || !this.__.cornerRadius // 路径与圆角直接当溢出处理
-        } else {
-            this.__updateRectRenderBounds()
-        }
+            isOverflow = !includes(renderBounds, childrenRenderBounds)
+        } else this.__updateRectRenderBounds()
 
-        this.isOverflow !== isOverflow && (this.isOverflow = isOverflow)
-        if (!(this.__.__drawAfterFill = this.__.overflow === 'hide') && isOverflow) add(renderBounds, childrenRenderBounds)
+        this.isOverflow != isOverflow && (this.isOverflow = isOverflow)
+        if (!this.__.__drawAfterFill) add(renderBounds, childrenRenderBounds)
     }
 
     @rewrite(rect.__updateRenderBounds)
@@ -134,19 +128,13 @@ export class Box extends Group implements IBox {
         }
     }
 
-    public __drawAfterFill(canvas: ILeaferCanvas, options: IRenderOptions): void {
-        if (this.children.length) {
-            if (this.isOverflow) {
-                canvas.save()
-                canvas.clip()
-                this.__renderGroup(canvas, options)
-                canvas.restore()
-            } else this.__renderGroup(canvas, options)
+    // in __drawAfterFill()
+    public __drawContent(canvas: ILeaferCanvas, options: IRenderOptions): void {
+        this.__renderGroup(canvas, options)
 
-            if (this.__.stroke && this.__.strokeWidth) { // 还原路径
-                canvas.setWorld(this.__nowWorld)
-                this.__drawRenderPath(canvas)
-            }
+        if (this.__.__hasStroke) { // 还原绘制路径
+            canvas.setWorld(this.__nowWorld)
+            this.__drawRenderPath(canvas)
         }
     }
 
