@@ -1,5 +1,5 @@
 import { IJSONOptions, IPickOptions, IPickResult, IPointData } from '@leafer/interface'
-import { Branch, useModule, dataProcessor, registerUI, UICreator } from '@leafer/core'
+import { Branch, useModule, dataProcessor, registerUI } from '@leafer/core'
 
 import { IGroup, IGroupData, IGroupInputData, IUI, IUIInputData, IUIJSONData, IFindCondition, IFindUIMethod } from '@leafer-ui/interface'
 import { GroupData } from '@leafer-ui/data'
