@@ -39,27 +39,16 @@ export class Group extends UI implements IGroup {   // tip: rewrited Box
     public set(data: IUIInputData, isTemp?: boolean): void {
         if (data.children) {
             const { children } = data
-            delete data.children
 
-            if (!this.children) {
-                this.__setBranch()
-            } else {
-                this.clear()
-            }
+            delete data.children
+            this.children ? this.clear() : this.__setBranch()
 
             super.set(data, isTemp)
 
-            let child: IUI
-            children.forEach(childData => {
-                child = (childData as IUI).__ ? childData as IUI : UICreator.get(childData.tag, childData) as IUI
-                this.add(child)
-            })
-
+            children.forEach(child => this.add(child))
             data.children = children
 
-        } else {
-            super.set(data, isTemp)
-        }
+        } else super.set(data, isTemp)
     }
 
     public toJSON(options?: IJSONOptions): IUIJSONData {
