@@ -1,6 +1,6 @@
 # leafer-ui
 
-[![LeaferJS](./leaferjs.jpg)](https://www.leaferjs.com)
+[![LeaferJS](https://www.leaferjs.com/image/leaferjs.jpg)](https://www.leaferjs.com)
 
 [**leafer-ui**](https://leaferjs.com/ui/guide/install/ui/start.html) 是基于核心库 [leafer](https://github.com/leaferjs/leafer) 开发的一套绚丽多彩的 UI 绘图、交互框架。作为[LeaferJS](https://www.leaferjs.com) 的表现层，可结合 AI 绘图、生成界面，表现力丰富、性能强劲，可媲美当前主流设计软件。
 
