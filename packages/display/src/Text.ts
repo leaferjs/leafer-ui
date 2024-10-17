@@ -86,8 +86,6 @@ export class Text extends UI implements IText {
     @boundsType('show')
     public textOverflow?: IOverflow | string
 
-    public get editInner(): string { return 'TextEditor' }
-
     public get textDrawData(): ITextDrawData {
         this.__layout.update()
         return this.__.__textDrawData
