@@ -460,7 +460,7 @@ export interface IUIData extends IUIAttrData, IUIComputedData, ILeafData {
 
     readonly __strokeWidth: number
     readonly __hasStroke: boolean
-    readonly __clipContent?: boolean
+
 
     __pixelFill?: boolean // png / svg / webp
     __pixelStroke?: boolean
@@ -472,6 +472,8 @@ export interface IUIData extends IUIAttrData, IUIComputedData, ILeafData {
     __opacityStroke?: boolean
 
     __drawAfterFill?: boolean
+    readonly __clipAfterFill?: boolean
+
     __isOverflow?: boolean
     __blendLayer?: boolean
 

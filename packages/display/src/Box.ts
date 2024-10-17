@@ -94,10 +94,10 @@ export class Box extends Group implements IBox {
             this.__updateRectRenderBounds()
 
             isOverflow = !includes(renderBounds, childrenRenderBounds)
+            if (isOverflow && this.__.overflow !== 'hide') add(renderBounds, childrenRenderBounds)
         } else this.__updateRectRenderBounds()
 
         !this.isOverflow !== !isOverflow && (this.isOverflow = isOverflow) // 节省赋值
-        if (!this.__.__drawAfterFill) add(renderBounds, childrenRenderBounds)
     }
 
     @rewrite(rect.__updateRenderBounds)

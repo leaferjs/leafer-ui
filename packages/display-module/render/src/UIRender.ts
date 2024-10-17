@@ -94,7 +94,7 @@ export const UIRender: IUIRenderModule = {
     },
 
     __drawAfterFill(canvas: ILeaferCanvas, options: IRenderOptions): void {
-        if (this.__.__clipContent) {
+        if (this.__.__clipAfterFill) {
             canvas.save()
             this.windingRule ? canvas.clip(this.windingRule) : canvas.clip()
             this.__drawContent(canvas, options)
