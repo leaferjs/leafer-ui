@@ -79,17 +79,13 @@ export class Line extends UI implements ILine { // tip: rewrited Polygon
         if (!this.pathInputed && data.points && data.curve) {
             drawPoints(data.__pathForRender = [], data.points, data.curve, data.closed)
             if (data.__useArrow) PathArrow.addArrows(this, false)
-        } else {
-            super.__updateRenderPath()
-        }
+        } else super.__updateRenderPath()
     }
 
     public __updateBoxBounds(): void {
         if (this.points) {
             toBounds(this.__.__pathForRender, this.__layout.boxBounds)
-        } else {
-            super.__updateBoxBounds()
-        }
+        } else super.__updateBoxBounds()
     }
 
 }
