@@ -1,4 +1,4 @@
-import { INumber } from '@leafer/interface'
+import { INumber, IPointData } from '@leafer/interface'
 import { PathCommandDataHelper, dataProcessor, pathType, registerUI, rewrite, rewriteAble } from '@leafer/core'
 
 import { IPolygon, IPolygonData, IPolygonInputData } from '@leafer-ui/interface'
@@ -25,7 +25,7 @@ export class Polygon extends UI implements IPolygon {
     public sides?: INumber
 
     @pathType()
-    public points?: number[]
+    public points?: number[] | IPointData[]
 
     @pathType(0)
     public curve?: boolean | number

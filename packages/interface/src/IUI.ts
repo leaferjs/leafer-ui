@@ -20,7 +20,7 @@ export interface ILine extends ILineAttrData, IUI {
 
 interface ILineAttrData {
     toPoint?: IPointData
-    points?: number[]
+    points?: number[] | IPointData[]
     curve?: boolean | number
 }
 export interface ILineData extends ILineAttrData, IUIData { }
@@ -159,7 +159,7 @@ export interface IPolygon extends IPolygonAttrData, IUI {
 }
 interface IPolygonAttrData {
     sides?: number
-    points?: number[]
+    points?: number[] | IPointData[]
     curve?: boolean | number
 }
 export interface IPolygonData extends IPolygonAttrData, IUIData { }

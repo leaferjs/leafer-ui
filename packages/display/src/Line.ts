@@ -28,7 +28,7 @@ export class Line extends UI implements ILine { // tip: rewrited Polygon
     declare public height?: INumber
 
     @pathType()
-    public points?: number[]
+    public points?: number[] | IPointData[]
 
     @pathType(0)
     public curve?: boolean | number
