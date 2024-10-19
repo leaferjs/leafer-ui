@@ -477,7 +477,7 @@ export interface IUIData extends IUIAttrData, IUIComputedData, ILeafData {
     __isOverflow?: boolean
     __blendLayer?: boolean
 
-    __boxStroke?: boolean
+    __boxStroke?: boolean // box闭合描边，可不用计算miterLimit造成的渲染包围盒变化
 
     // text
     __font?: string

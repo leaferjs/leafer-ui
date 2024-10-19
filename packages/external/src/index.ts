@@ -1,10 +1,20 @@
 // Implemented in partner
-import { IPaintModule, IPaintImageModule, IPaintGradientModule, IEffectModule, ITextConvertModule, IExportModule, IColorConvertModule, IPathArrowModule, IStateModule, IUI, IString, IBoolean, ITransitionModule, ITransitionFunction } from "@leafer-ui/interface"
+import { IPaintModule, IPaintImageModule, IPaintGradientModule, IEffectModule, ITextConvertModule, IExportModule, IColorConvertModule, IPathArrowModule, IStateModule, IUI, IString, IBoolean, IUnitData, ITransitionModule, ITransitionFunction } from "@leafer-ui/interface"
 import { needPlugin } from '@leafer/core'
 
 export const TextConvert = {} as ITextConvertModule
 
 export const ColorConvert = {} as IColorConvertModule
+
+export const UnitConvert = {
+
+    number(value: number | IUnitData, percentRefer?: number): number {
+        if (typeof value === 'object') return value.type === 'percent' ? value.value * percentRefer : value.value
+        return value
+    }
+
+}
+
 
 export const PathArrow = {} as IPathArrowModule
 

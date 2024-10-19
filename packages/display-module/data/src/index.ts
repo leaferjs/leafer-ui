@@ -1,4 +1,4 @@
-export { UIData, UnitConvert } from './UIData'
+export { UIData } from './UIData'
 export { GroupData } from './GroupData'
 export { BoxData } from './BoxData'
 

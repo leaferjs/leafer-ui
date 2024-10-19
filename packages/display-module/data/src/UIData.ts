@@ -1,7 +1,7 @@
 import { INumber, IValue, IBoolean, IPathCommandData, IPathString, IPointData } from '@leafer/interface'
 import { PathConvert, LeafData, Debug } from '@leafer/core'
 
-import { IShadowEffect, IUI, IUIData, IUnitData, ILeafPaint } from '@leafer-ui/interface'
+import { IShadowEffect, IUI, IUIData, ILeafPaint } from '@leafer-ui/interface'
 import { Paint, PaintImage } from '@leafer-ui/external'
 
 
@@ -154,13 +154,3 @@ export class UIData extends LeafData implements IUIData {
     }
 
 }
-
-
-export const UnitConvert = {
-
-    number(value: number | IUnitData, percentRefer?: number): number {
-        if (typeof value === 'object') return value.type === 'percent' ? value.value * percentRefer : value.value
-        return value
-    }
-
-} 

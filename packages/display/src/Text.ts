@@ -2,9 +2,9 @@ import { ILeaferCanvas, IPathDrawer, IPathCommandData, IBoolean, INumber, IStrin
 import { BoundsHelper, boundsType, surfaceType, dataProcessor, registerUI, affectStrokeBoundsType, dataType, hitType, MathHelper } from '@leafer/core'
 
 import { IFill, IText, IFontWeight, ITextCase, ITextDecoration, ITextData, ITextInputData, ITextAlign, IVerticalAlign, ITextDrawData, IOverflow, IStrokeAlign, IHitType, ITextWrap } from '@leafer-ui/interface'
-import { TextData, UnitConvert } from '@leafer-ui/data'
+import { TextData } from '@leafer-ui/data'
 
-import { TextConvert } from '@leafer-ui/external'
+import { TextConvert, UnitConvert } from '@leafer-ui/external'
 
 import { UI } from './UI'
 

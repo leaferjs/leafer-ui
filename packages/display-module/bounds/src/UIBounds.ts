@@ -28,17 +28,13 @@ export const UIBounds: IUIBoundsModule = {
         let width: number = 0
         const { shadow, innerShadow, blur, backgroundBlur } = this.__
 
-        if (shadow) shadow.forEach(item => {
-            width = Math.max(width, Math.max(Math.abs(item.y), Math.abs(item.x)) + (item.spread > 0 ? item.spread : 0) + item.blur * 1.5)
-        })
+        if (shadow) shadow.forEach(item => width = Math.max(width, Math.max(Math.abs(item.y), Math.abs(item.x)) + (item.spread > 0 ? item.spread : 0) + item.blur * 1.5))
 
         if (blur) width = Math.max(width, blur)
 
         let shapeWidth = width = Math.ceil(width)
 
-        if (innerShadow) innerShadow.forEach(item => {
-            shapeWidth = Math.max(shapeWidth, Math.max(Math.abs(item.y), Math.abs(item.x)) + (item.spread < 0 ? -item.spread : 0) + item.blur * 1.5)
-        })
+        if (innerShadow) innerShadow.forEach(item => shapeWidth = Math.max(shapeWidth, Math.max(Math.abs(item.y), Math.abs(item.x)) + (item.spread < 0 ? -item.spread : 0) + item.blur * 1.5))
 
         if (backgroundBlur) shapeWidth = Math.max(shapeWidth, backgroundBlur)
 
