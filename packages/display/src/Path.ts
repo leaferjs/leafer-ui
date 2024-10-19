@@ -19,7 +19,6 @@ export class Path extends UI implements IPath {
 
     constructor(data?: IPathInputData) {
         super(data)
-        this.__.__pathInputed = 2
     }
 
 }
