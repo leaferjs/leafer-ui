@@ -137,7 +137,7 @@ export class Text extends UI implements IText {
         data.__lineHeight = UnitConvert.number(lineHeight, fontSize)
         data.__letterSpacing = UnitConvert.number(letterSpacing, fontSize)
         data.__padding = padding ? MathHelper.fourNumber(padding) : undefined
-        data.__baseLine = data.__lineHeight - (data.__lineHeight - fontSize * 0.7) / 2
+        data.__baseLine = data.__lineHeight - (data.__lineHeight - fontSize * 0.7) / 2 // 基线位置
         data.__font = `${italic ? 'italic ' : ''}${textCase === 'small-caps' ? 'small-caps ' : ''}${fontWeight !== 'normal' ? fontWeight + ' ' : ''}${fontSize}px ${fontFamily}`
         data.__clipText = textOverflow !== 'show' && !data.__autoSize
 
@@ -170,16 +170,14 @@ export class Text extends UI implements IText {
             super.__updateBoxBounds()
         }
 
-        if (italic) b.width += fontSize * 0.16
+        if (italic) b.width += fontSize * 0.16 // 倾斜会导致文本的bounds增大
 
         const contentBounds = includes(b, bounds) ? b : bounds
         if (!isSame(contentBounds, layout.contentBounds)) {
             layout.contentBounds = contentBounds
             layout.renderChanged = true
             setList(data.__textBoxBounds = {} as IBoundsData, [b, bounds])
-        } else {
-            data.__textBoxBounds = contentBounds
-        }
+        } else data.__textBoxBounds = contentBounds
 
     }
 
