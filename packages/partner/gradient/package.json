@@ -1,6 +1,6 @@
 {
   "name": "@leafer-ui/gradient",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "@leafer-ui/gradient",
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
@@ -18,11 +18,11 @@
     "leaferjs"
   ],
   "dependencies": {
-    "@leafer/core": "1.0.6",
-    "@leafer-ui/draw": "1.0.6"
+    "@leafer/core": "1.0.7",
+    "@leafer-ui/draw": "1.0.7"
   },
   "devDependencies": {
-     "@leafer/interface": "1.0.6",
-     "@leafer-ui/interface": "1.0.6"
+     "@leafer/interface": "1.0.7",
+     "@leafer-ui/interface": "1.0.7"
   }
 }
