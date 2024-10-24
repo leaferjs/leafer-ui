@@ -1,4 +1,4 @@
-import { IPointData, IPathCommandData, IWindingRule, IBlendMode, IExportFileType, ISizeData, IFourNumber, IAlign, IUnitPointData } from '@leafer/interface'
+import { IPointData, IPathCommandData, IWindingRule, IBlendMode, IExportFileType, ISizeData, IFourNumber, IAlign, IUnitPointData, IObject } from '@leafer/interface'
 import { IColorString, IPaintString } from './IStringType'
 
 export type IPaint = ISolidPaint | IGradientPaint | IImagePaint
@@ -159,5 +159,7 @@ export interface IGrayscaleEffect {
     grayscale: number
     visible?: boolean
 }
+
+export type IEffect = IObject
 
 export type IOverflow = 'show' | 'hide'
