@@ -6,7 +6,7 @@ import { PenData } from '@leafer-ui/data'
 import { Group } from './Group'
 import { Path } from './Path'
 
-@useModule(PathCreator, ['set', 'beginPath', 'path', 'paint'])
+@useModule(PathCreator, ['set', 'path', 'paint'])
 @registerUI()
 export class Pen extends Group implements IPen {
 
@@ -35,13 +35,9 @@ export class Pen extends Group implements IPen {
         return this
     }
 
-    public beginPath(): Pen {
-        this.__path.length = 0
-        this.paint()
-        return this
-    }
-
     // svg and canvas
+
+    public beginPath(): Pen { return this }
 
     public moveTo(_x: number, _y: number): Pen { return this }
 
@@ -75,7 +71,8 @@ export class Pen extends Group implements IPen {
 
     public drawPoints(_points: number[], _curve?: boolean | number, _close?: boolean): Pen { return this }
 
-    public clearPath(): Pen { return this }
+    public clearPath(): Pen { return this } // = beginPath()
+
 
     public paint(): void {
         if (!this.pathElement.__layout.boxChanged) this.pathElement.forceUpdate('path')
