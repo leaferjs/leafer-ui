@@ -119,20 +119,7 @@ export class Text extends UI implements IText {
 
     public __updateTextDrawData(): void {
         const data = this.__
-        data.__textDrawData = TextConvert.getDrawData(data.text, this.__)
-
-    }
-
-    public __updateBoxBounds(): void {
-
-        const data = this.__
-        const layout = this.__layout
         const { lineHeight, letterSpacing, fontFamily, fontSize, fontWeight, italic, textCase, textOverflow, padding } = data
-
-        const autoWidth = data.__autoWidth
-        const autoHeight = data.__autoHeight
-
-        // compute
 
         data.__lineHeight = UnitConvert.number(lineHeight, fontSize)
         data.__letterSpacing = UnitConvert.number(letterSpacing, fontSize)
@@ -141,7 +128,16 @@ export class Text extends UI implements IText {
         data.__font = `${italic ? 'italic ' : ''}${textCase === 'small-caps' ? 'small-caps ' : ''}${fontWeight !== 'normal' ? fontWeight + ' ' : ''}${fontSize}px ${fontFamily}`
         data.__clipText = textOverflow !== 'show' && !data.__autoSize
 
-        this.__updateTextDrawData()
+        data.__textDrawData = TextConvert.getDrawData(data.text, this.__)
+    }
+
+    public __updateBoxBounds(): void {
+
+        const data = this.__
+        const layout = this.__layout
+        const { fontSize, italic, padding, __autoWidth: autoWidth, __autoHeight: autoHeight } = data
+
+        this.__updateTextDrawData() // layout text
 
         const { bounds } = data.__textDrawData
         const b = layout.boxBounds
@@ -156,19 +152,11 @@ export class Text extends UI implements IText {
 
             if (padding) {
                 const [top, right, bottom, left] = data.__padding
-                if (autoWidth) {
-                    b.x -= left
-                    b.width += (right + left)
-                }
-                if (autoHeight) {
-                    b.y -= top
-                    b.height += (bottom + top)
-                }
+                if (autoWidth) b.x -= left, b.width += (right + left)
+                if (autoHeight) b.y -= top, b.height += (bottom + top)
             }
             this.__updateNaturalSize()
-        } else {
-            super.__updateBoxBounds()
-        }
+        } super.__updateBoxBounds()
 
         if (italic) b.width += fontSize * 0.16 // 倾斜会导致文本的bounds增大
 
