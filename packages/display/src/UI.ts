@@ -409,8 +409,8 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
         return curve ? PathConvert.toCanvasData(path, true) : path
     }
 
-    public getPathString(curve?: boolean, pathForRender?: boolean): IPathString {
-        return PathConvert.stringify(this.getPath(curve, pathForRender))
+    public getPathString(curve?: boolean, pathForRender?: boolean, floatLength?: number): IPathString {
+        return PathConvert.stringify(this.getPath(curve, pathForRender), floatLength)
     }
 
 
