@@ -280,11 +280,8 @@ export class Leafer extends Group implements ILeafer {
 
     protected __changeFill(newValue: string): void {
         this.config.fill = newValue as string
-        if (this.canvas.allowBackgroundColor) {
-            this.canvas.backgroundColor = newValue as string
-        } else {
-            this.forceRender()
-        }
+        if (this.canvas.allowBackgroundColor) this.canvas.backgroundColor = newValue as string
+        else this.forceRender()
     }
 
     protected __onCreated(): void {
@@ -352,11 +349,8 @@ export class Leafer extends Group implements ILeafer {
     public waitViewCompleted(item: IFunction, bind?: IObject): void {
         if (bind) item = item.bind(bind)
         this.__viewCompletedWait.push(item)
-        if (this.viewCompleted) {
-            this.__checkViewCompleted(false)
-        } else {
-            if (!this.running) this.start()
-        }
+        if (this.viewCompleted) this.__checkViewCompleted(false)
+        else if (!this.running) this.start()
     }
 
     public nextRender(item: IFunction, bind?: IObject, off?: 'off'): void {
@@ -366,9 +360,7 @@ export class Leafer extends Group implements ILeafer {
             for (let i = 0; i < list.length; i++) {
                 if (list[i] === item) { list.splice(i, 1); break }
             }
-        } else {
-            list.push(item)
-        }
+        } else list.push(item)
     }
 
     // need view plugin
@@ -434,9 +426,7 @@ export class Leafer extends Group implements ILeafer {
                     this.emitEvent(new LeaferEvent(LeaferEvent.END, this))
                     this.__removeListenEvents()
 
-                    this.__controllers.forEach(item => {
-                        if (!(this.parent && item === this.interaction)) item.destroy()
-                    })
+                    this.__controllers.forEach(item => !(this.parent && item === this.interaction) && item.destroy())
                     this.__controllers.length = 0
 
                     if (!this.parent) {
