@@ -1,4 +1,4 @@
-import { IUIEvent, IPointerEvent, ILeaf, IInteraction, IInteractionConfig, ILeafList, IMoveEvent, IZoomEvent, IRotateEvent, ISelector, IBounds, IEventListenerId, IInteractionCanvas, ITimer, IKeepTouchData, IKeyEvent, IPickOptions, ICursorType, IBooleanMap, IPickBottom, IClientPointData, IPointData, ILeaferConfig } from '@leafer/interface'
+import { IUIEvent, IPointerEvent, ILeaf, IInteraction, IInteractionConfig, ILeafList, IMoveEvent, IZoomEvent, IRotateEvent, ISelector, IBounds, IEventListenerId, IInteractionCanvas, ITimer, IKeepTouchData, IKeyEvent, IPickOptions, ICursorType, IBooleanMap, IPickBottom, IClientPointData, IPointData, ILeaferConfig, IMoveConfig, IPointerConfig } from '@leafer/interface'
 import { LeaferEvent, ResizeEvent, LeafList, Bounds, PointHelper, DataHelper } from '@leafer/core'
 
 import { IApp } from '@leafer-ui/interface'
@@ -24,19 +24,21 @@ export class InteractionBase implements IInteraction {
     public get dragging(): boolean { return this.dragger.dragging }
     public get transforming(): boolean { return this.transformer.transforming }
 
-    public get moveMode(): boolean { return this.config.move.drag === true || this.isHoldSpaceKey || this.isHoldMiddleKey || (this.isHoldRightKey && this.dragger.moving) || this.isDragEmpty }
-    public get canHover(): boolean { return this.config.pointer.hover && !(this.config as ILeaferConfig).mobile }
+    public get moveMode(): boolean { return this.m.drag === true || this.isHoldSpaceKey || this.isHoldMiddleKey || (this.isHoldRightKey && this.dragger.moving) || this.isDragEmpty }
+    public get canHover(): boolean { return this.p.hover && !(this.config as ILeaferConfig).mobile }
 
-    public get isDragEmpty(): boolean { return this.config.move.dragEmpty && this.isRootPath(this.hoverData) && (!this.downData || this.isRootPath(this.downData)) }
-    public get isMobileDragEmpty(): boolean { return this.config.move.dragEmpty && !this.canHover && this.downData && this.isTreePath(this.downData) }
-    public get isHoldMiddleKey(): boolean { return this.config.move.holdMiddleKey && this.downData && PointerButton.middle(this.downData) }
-    public get isHoldRightKey(): boolean { return this.config.move.holdRightKey && this.downData && PointerButton.right(this.downData) }
-    public get isHoldSpaceKey(): boolean { return this.config.move.holdSpaceKey && Keyboard.isHoldSpaceKey() }
+    public get isDragEmpty(): boolean { return this.m.dragEmpty && this.isRootPath(this.hoverData) && (!this.downData || this.isRootPath(this.downData)) }
+    public get isMobileDragEmpty(): boolean { return this.m.dragEmpty && !this.canHover && this.downData && this.isTreePath(this.downData) }
+    public get isHoldMiddleKey(): boolean { return this.m.holdMiddleKey && this.downData && PointerButton.middle(this.downData) }
+    public get isHoldRightKey(): boolean { return this.m.holdRightKey && this.downData && PointerButton.right(this.downData) }
+    public get isHoldSpaceKey(): boolean { return this.m.holdSpaceKey && Keyboard.isHoldSpaceKey() }
 
     public config: IInteractionConfig = DataHelper.clone(config)
+    protected get m(): IMoveConfig { return this.config.move }
+    protected get p(): IPointerConfig { return this.config.pointer }
 
     public cursor: ICursorType | ICursorType[]
-    public get hitRadius(): number { return this.config.pointer.hitRadius }
+    public get hitRadius(): number { return this.p.hitRadius }
 
     public bottomList?: IPickBottom[]
 
@@ -132,7 +134,7 @@ export class InteractionBase implements IInteraction {
     }
 
     public pointerMoveReal(data: IPointerEvent): void {
-        const { dragHover, dragDistance } = this.config.pointer
+        const { dragHover, dragDistance } = this.p
         this.emit(PointerEvent.BEFORE_MOVE, data, this.defaultPath)
 
         if (this.downData) {
@@ -361,7 +363,7 @@ export class InteractionBase implements IInteraction {
 
     // update
     public findPath(data: IPointerEvent, options?: IPickOptions): ILeafList {
-        const { hitRadius, through } = this.config.pointer
+        const { hitRadius, through } = this.p
         const { bottomList } = this
         const find = this.selector.getByPoint(data, hitRadius, { bottomList, name: data.type, ...(options || { through }) })
         if (find.throughPath) data.throughPath = find.throughPath
@@ -384,7 +386,7 @@ export class InteractionBase implements IInteraction {
     }
 
     public canMove(data: IPointerEvent): boolean { // moveMode and path can move
-        return data && (this.moveMode || (this.config.move.drag === 'auto' && !pathCanDrag(data.path))) && !pathHasOutside(data.path)
+        return data && (this.moveMode || (this.m.drag === 'auto' && !pathCanDrag(data.path))) && !pathHasOutside(data.path)
     }
 
 
@@ -497,7 +499,7 @@ export class InteractionBase implements IInteraction {
         this.longPressTimer = setTimeout(() => {
             this.longPressed = true
             this.emit(PointerEvent.LONG_PRESS, data)
-        }, this.config.pointer.longPressTime)
+        }, this.p.longPressTime)
     }
 
     protected longTap(data: IPointerEvent): boolean {
