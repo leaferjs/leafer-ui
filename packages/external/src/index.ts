@@ -36,10 +36,6 @@ export const State = {
 
 export const Transition = {
     list: {},
-    register(attrName: string, fn: ITransitionFunction): void {
-        Transition.list[attrName] = fn
-    },
-    get(attrName: string): ITransitionFunction {
-        return Transition.list[attrName]
-    }
+    register(attrName: string, fn: ITransitionFunction): void { Transition.list[attrName] = fn },
+    get(attrName: string): ITransitionFunction { return Transition.list[attrName] }
 } as ITransitionModule

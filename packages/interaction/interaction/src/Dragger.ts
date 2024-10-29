@@ -137,10 +137,7 @@ export class Dragger {
                 interaction.emit(DragEvent.OUT, data, dragOverPath)
                 interaction.emit(DragEvent.OVER, data, path)
             }
-        } else {
-            interaction.emit(DragEvent.OVER, data, path)
-        }
-
+        } else interaction.emit(DragEvent.OVER, data, path)
     }
 
     public dragEnterOrLeave(data: IPointerEvent): void {
@@ -165,9 +162,7 @@ export class Dragger {
             this.drag(data)
             this.animate(() => { this.dragEnd(data, 1) })
 
-        } else {
-            this.dragEndReal(data)
-        }
+        } else this.dragEndReal(data)
     }
 
     protected dragEndReal(data?: IPointerEvent): void {
