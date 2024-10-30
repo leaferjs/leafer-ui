@@ -20,12 +20,7 @@ export function compute(attrName: IPaintAttr, ui: IUI): void {
     (data as IObject)['_' + attrName] = leafPaints.length ? leafPaints : undefined
 
     if (leafPaints.length && leafPaints[0].image) hasOpacityPixel = leafPaints[0].image.hasOpacityPixel
-
-    if (attrName === 'fill') {
-        data.__pixelFill = hasOpacityPixel
-    } else {
-        data.__pixelStroke = hasOpacityPixel
-    }
+    attrName === 'fill' ? data.__pixelFill = hasOpacityPixel : data.__pixelStroke = hasOpacityPixel
 }
 
 
