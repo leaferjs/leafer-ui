@@ -47,11 +47,8 @@ export function stroke(stroke: string, ui: IUI, canvas: ILeaferCanvas): void {
                 options.windingRule ? out.clip(options.windingRule) : out.clip()
                 out.clearWorld(ui.__layout.renderBounds)
 
-                if (ui.__worldFlipped) {
-                    canvas.copyWorldByReset(out, ui.__nowWorld)
-                } else {
-                    canvas.copyWorldToInner(out, ui.__nowWorld, ui.__layout.renderBounds)
-                }
+                if (ui.__worldFlipped) canvas.copyWorldByReset(out, ui.__nowWorld)
+                else canvas.copyWorldToInner(out, ui.__nowWorld, ui.__layout.renderBounds)
 
                 out.recycle(ui.__nowWorld)
                 break
@@ -101,11 +98,8 @@ export function strokes(strokes: ILeafPaint[], ui: IUI, canvas: ILeaferCanvas): 
                 options.windingRule ? out.clip(options.windingRule) : out.clip()
                 out.clearWorld(renderBounds)
 
-                if (ui.__worldFlipped) {
-                    canvas.copyWorldByReset(out, ui.__nowWorld)
-                } else {
-                    canvas.copyWorldToInner(out, ui.__nowWorld, renderBounds)
-                }
+                if (ui.__worldFlipped) canvas.copyWorldByReset(out, ui.__nowWorld)
+                else canvas.copyWorldToInner(out, ui.__nowWorld, renderBounds)
 
                 out.recycle(ui.__nowWorld)
                 break

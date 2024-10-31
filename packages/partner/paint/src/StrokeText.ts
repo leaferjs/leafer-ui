@@ -36,11 +36,8 @@ function drawAlignStroke(align: IStrokeAlign, stroke: string | ILeafPaint[], isS
     fillText(ui, out)
     out.blendMode = 'normal'
 
-    if (ui.__worldFlipped) {
-        canvas.copyWorldByReset(out, ui.__nowWorld)
-    } else {
-        canvas.copyWorldToInner(out, ui.__nowWorld, ui.__layout.renderBounds)
-    }
+    if (ui.__worldFlipped) canvas.copyWorldByReset(out, ui.__nowWorld)
+    else canvas.copyWorldToInner(out, ui.__nowWorld, ui.__layout.renderBounds)
 
     out.recycle(ui.__nowWorld)
 }
@@ -53,13 +50,8 @@ export function drawTextStroke(ui: IUI, canvas: ILeaferCanvas): void {
     for (let i = 0, len = rows.length; i < len; i++) {
         row = rows[i]
 
-        if (row.text) {
-            canvas.strokeText(row.text, row.x, row.y)
-        } else if (row.data) {
-            row.data.forEach(charData => {
-                canvas.strokeText(charData.char, charData.x, row.y)
-            })
-        }
+        if (row.text) canvas.strokeText(row.text, row.x, row.y)
+        else if (row.data) row.data.forEach(charData => { canvas.strokeText(charData.char, charData.x, row.y) })
 
         if (decorationY) canvas.strokeRect(row.x, row.y + decorationY, row.width, decorationHeight)
     }
@@ -74,7 +66,6 @@ export function drawStrokesStyle(strokes: ILeafStrokePaint[], isText: boolean, u
         if (item.image && PaintImage.checkImage(ui, canvas, item, false)) continue
 
         if (item.style) {
-
             canvas.strokeStyle = item.style
 
             if (item.blendMode) {
