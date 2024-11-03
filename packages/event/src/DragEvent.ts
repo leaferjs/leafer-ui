@@ -4,7 +4,7 @@ import { registerUIEvent, LeafList, BoundsHelper } from '@leafer/core'
 import { PointerEvent } from './PointerEvent'
 
 
-const move = {} as IPointData
+const tempMove = {} as IPointData
 
 @registerUIEvent()
 export class DragEvent extends PointerEvent implements IDragEvent {
@@ -72,19 +72,19 @@ export class DragEvent extends PointerEvent implements IDragEvent {
 
     public getPageMove(total?: boolean): IPointData {
         this.assignMove(total)
-        return this.current.getPagePoint(move, null, true)
+        return this.current.getPagePoint(tempMove, null, true)
     }
 
     public getInnerMove(relative?: ILeaf, total?: boolean): IPointData {
         if (!relative) relative = this.current
         this.assignMove(total)
-        return relative.getInnerPoint(move, null, true)
+        return relative.getInnerPoint(tempMove, null, true)
     }
 
     public getLocalMove(relative?: ILeaf, total?: boolean): IPointData {
         if (!relative) relative = this.current
         this.assignMove(total)
-        return relative.getLocalPoint(move, null, true)
+        return relative.getLocalPoint(tempMove, null, true)
     }
 
     public getPageTotal(): IPointData {
@@ -109,8 +109,8 @@ export class DragEvent extends PointerEvent implements IDragEvent {
     }
 
     protected assignMove(total: boolean): void {
-        move.x = total ? this.totalX : this.moveX
-        move.y = total ? this.totalY : this.moveY
+        tempMove.x = total ? this.totalX : this.moveX
+        tempMove.y = total ? this.totalY : this.moveY
     }
 
 }
