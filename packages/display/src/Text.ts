@@ -141,6 +141,7 @@ export class Text extends UI implements IText {
 
         const { bounds } = data.__textDrawData
         const b = layout.boxBounds
+        console.log(bounds, autoWidth, autoHeight)
 
         if (data.__lineHeight < fontSize) spread(bounds, fontSize / 2)
 
@@ -156,7 +157,7 @@ export class Text extends UI implements IText {
                 if (autoHeight) b.y -= top, b.height += (bottom + top)
             }
             this.__updateNaturalSize()
-        } super.__updateBoxBounds()
+        } else super.__updateBoxBounds()
 
         if (italic) b.width += fontSize * 0.16 // 倾斜会导致文本的bounds增大
 
