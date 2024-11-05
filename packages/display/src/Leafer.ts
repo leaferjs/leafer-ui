@@ -166,10 +166,10 @@ export class Leafer extends Group implements ILeafer {
     public start(): void {
         clearTimeout(this.__startTimer)
         if (!this.running && this.canvas) {
+            this.running = true
             this.ready ? this.emitLeafer(LeaferEvent.RESTART) : this.emitLeafer(LeaferEvent.START)
             this.__controllers.forEach(item => item.start())
             if (!this.isApp) this.renderer.render()
-            this.running = true
         }
     }
 
