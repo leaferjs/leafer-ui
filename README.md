@@ -20,15 +20,33 @@ v1.0 正式版已发布 🎉🎉🎉
 
 如果你觉得不错，请帮我们点个 [Star](https://github.com/leaferjs/leafer-ui) 🌟 ，让这个库被更多的人看见 - [GitHub](https://github.com/leaferjs/leafer-ui) / [Gitee](https://gitee.com/leaferjs/ui) ✨ ✨ ✨
 
+## 快速入门
+
+**[1. 准备在线 Playground 环境](https://leaferjs.com/ui/guide/runtime.md)**
+
+可通过 **Cloud Studio** 模版创建一个 **LeaferJS 项目**，用于运行、练习后续的示例代码。
+
+**[2. 学习 LeaferJS 快速入门教程](https://leaferjs.com/ui/guide/basic/app.md)**
+
+跟随官网教程步骤（文档底部有下一步引导按钮）从浅到深的一步步学习。
+
+建议将教程中的示例代码复制到 **LeaferJS 项目** 的 index.ts 文件中运行、调试效果。
+
+**[3. 开发一个画龙点睛的小游戏](https://leaferjs.com/ui/contest/guide.md)**
+
+给你一条会飞的龙，看你能做出什么好玩的小游戏分享给我们 ◠‿◠
+
 ## 快速安装
 
-🚀 想马上使用，请安装 [leafer-ui](https://leaferjs.com/ui/guide/install/ui/start.html)，开始你的探索之旅。
+🚀 想马上在产品中使用，请安装 [leafer-ui](https://leaferjs.com/ui/guide/install/ui/start.html)，开始你的探索之旅。
 
-## 场景版
+## 场景包
 
-编辑图形的场景，推荐安装更省心的 [leafer-editor](https://leaferjs.com/ui/guide/install/editor/start.html)，已集成了图形编辑器相关插件。
+高效绘图场景，推荐安装更轻量的 [leafer-draw](https://leaferjs.com/ui/guide/type/draw/start.html) （49KB min+gzip）。
 
-单纯绘图的场景，推荐安装更轻量的 [leafer-draw](https://leaferjs.com/ui/guide/type/draw/start.html) （49KB min+gzip）。
+游戏开发场景，推荐安装更省心的 [leafer-game](https://leaferjs.com/ui/guide/install/game/start.md)，已集成了游戏相关插件。
+
+图形编辑场景，推荐安装更省心的 [leafer-editor](https://leaferjs.com/ui/guide/install/editor/start.html)，已集成了图形编辑器相关插件。
 
 ## 入门场景
 
