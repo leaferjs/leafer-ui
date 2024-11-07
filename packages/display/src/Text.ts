@@ -141,7 +141,6 @@ export class Text extends UI implements IText {
 
         const { bounds } = data.__textDrawData
         const b = layout.boxBounds
-        console.log(bounds, autoWidth, autoHeight)
 
         if (data.__lineHeight < fontSize) spread(bounds, fontSize / 2)
 
