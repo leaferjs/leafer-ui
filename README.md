@@ -1,10 +1,10 @@
 # leafer-ui
 
-一款好用的 Canvas 引擎，革新的体验。高效绘图 、UI 交互（小游戏、互动应用、组态）、图形编辑，前端开发必备～
+一款好用的 Canvas 引擎，革新的体验。高效绘图 、UI 交互（小游戏、互动应用、组态）、图形编辑，前端开发必备
 
 [![LeaferJS](https://www.leaferjs.com/image/leaferjs.jpg?d=1111)](https://www.leaferjs.com)
 
-[**leafer-ui**](https://leaferjs.com/ui/guide/install/ui/start.html) 是基于核心库 [leafer](https://github.com/leaferjs/leafer) 开发的一套绚丽多彩的 UI 绘图、交互框架。作为[LeaferJS](https://www.leaferjs.com) 的表现层，可结合 AI 绘图、生成界面，表现力丰富、性能强劲，可媲美当前主流设计软件。
+<!-- [**leafer-ui**](https://leaferjs.com/ui/guide/install/ui/start.html) 是基于核心库 [leafer](https://github.com/leaferjs/leafer) 开发的一套绚丽多彩的 UI 绘图、交互框架。作为[LeaferJS](https://www.leaferjs.com) 的表现层，可结合 AI 绘图、生成界面，表现力丰富、性能强劲，可媲美当前主流设计软件。 -->
 
 提供了丰富的 UI 绘图元素，和开箱即用的功能，如自动布局、图形编辑、SVG 导出，方便与 Figma、Sketch 等产品进行数据交换。并为跨平台开发提供了统一的交互事件，如拖拽、旋转、缩放手势等。
 
@@ -86,7 +86,7 @@ leafer-ui 致力于实现一套简洁、开放、现代化的 UI 绘图语言标
 
 [leafer-in](https://github.com/leaferjs/leafer-in) 插件仓库。
 
-[leafer-x](https://github.com/leaferjs/leafer-in) 社区插件提交仓库。
+[leafer-x](https://github.com/leaferjs/leafer-x) 社区插件提交仓库。
 
 ## License
 
