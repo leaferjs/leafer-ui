@@ -78,20 +78,18 @@ leafer-ui 致力于实现一套简洁、开放、现代化的 UI 绘图语言标
 
 我们正在坚定的向这个目标持续前进，可以通过 [开发计划](https://www.leaferjs.com/ui/plan/) 了解更多信息。
 
-### 资源
+### 相关仓库
 
-[官方网站](https://www.leaferjs.com)
+[LeaferJS](https://github.com/leaferjs/LeaferJS) 主仓库，可直接运行。
 
-[快速上手](https://www.leaferjs.com/ui/guide)
+[leafer](https://github.com/leaferjs/leafer) 核心仓库。
 
-[快速安装](https://www.leaferjs.com/ui/guide/start.html)
+[leafer-in](https://github.com/leaferjs/leafer-in) 插件仓库。
 
-[LeaferJS 主仓库](https://github.com/leaferjs/LeaferJS)
-
-[leafer 仓库](https://github.com/leaferjs/leafer)
-
-[leafer-in 官方插件仓库](https://github.com/leaferjs/leafer-in)
+[leafer-x](https://github.com/leaferjs/leafer-in) 提交插件仓库。
 
 ### License
 
-leafer-ui 是采用 MIT 许可的开源项目，可以永久免费使用。
+leafer-ui 采用 MIT 开源许可协议，这意味着你可以免费使用，且能用于商业场景。
+
+Copyright © 2023-present Chao (Leafer) Wan
