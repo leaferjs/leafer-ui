@@ -22,9 +22,7 @@
 
 [2. 学习 LeaferJS 快速入门教程](https://leaferjs.com/ui/guide/basic/app.md)
 
-跟随官网教程步骤（文档底部有下一步引导按钮）从浅到深的一步步学习。
-
-建议将教程中的示例代码复制到 **LeaferJS 项目** 的 index.ts 文件中运行、调试效果。
+跟随官网教程步骤（文档底部有下一步引导按钮）从浅到深的学习，动手调试每一段示例代码。
 
 [3. 开发一个画龙点睛的小游戏](https://leaferjs.com/ui/contest/guide.md)
 
