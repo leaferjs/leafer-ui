@@ -6,8 +6,6 @@
 
 提供了丰富的 UI 绘图元素，和开箱即用的功能，如自动布局、图形编辑、SVG 导出等，方便与 PS、 Figma、Sketch 等产品进行对接。并为跨平台开发提供了统一的交互事件，如拖拽、旋转、缩放手势等。
 
-v1.0 正式版已发布 🎉🎉🎉
-
 📗 [图文并茂、由浅入深的了解 LeaferJS](https://leaferjs.com/ui/blog/2024-07-09.html)
 
 📙 [全新动画、状态、过渡、游戏功能](https://leaferjs.com/ui/blog/2024-09-20.html)
