@@ -35,9 +35,7 @@ export const RectRender: IRectRenderModule = {
                         this.__clip(canvas, options)
                         canvas.strokeRect(half, half, width, height)
                         canvas.restore()
-                    } else {
-                        canvas.strokeRect(half, half, width, height)
-                    }
+                    } else canvas.strokeRect(half, half, width, height)
                     break
                 case 'outside':
                     canvas.strokeRect(-half, -half, width + __strokeWidth, height + __strokeWidth)
