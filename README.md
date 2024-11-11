@@ -4,11 +4,7 @@
 
 [![LeaferJS](https://www.leaferjs.com/image/leaferjs.jpg?d=1111)](https://www.leaferjs.com)
 
-<!-- [**leafer-ui**](https://leaferjs.com/ui/guide/install/ui/start.html) 是基于核心库 [leafer](https://github.com/leaferjs/leafer) 开发的一套绚丽多彩的 UI 绘图、交互框架。作为[LeaferJS](https://www.leaferjs.com) 的表现层，可结合 AI 绘图、生成界面，表现力丰富、性能强劲，可媲美当前主流设计软件。 -->
-
-提供了丰富的 UI 绘图元素，和开箱即用的功能，如自动布局、图形编辑、SVG 导出，方便与 Figma、Sketch 等产品进行数据交换。并为跨平台开发提供了统一的交互事件，如拖拽、旋转、缩放手势等。
-
-可用于高效绘图 、UI 交互（小游戏、互动应用、组态）、图形编辑。随着生态的不断发展，未来将支撑可视化开发网页、应用、游戏、动画。
+提供了丰富的 UI 绘图元素，和开箱即用的功能，如自动布局、图形编辑、SVG 导出等，方便与 PS、 Figma、Sketch 等产品进行对接。并为跨平台开发提供了统一的交互事件，如拖拽、旋转、缩放手势等。
 
 v1.0 正式版已发布 🎉🎉🎉
 
