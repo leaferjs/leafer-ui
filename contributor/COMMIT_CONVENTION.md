@@ -2,6 +2,14 @@
 
 > This is adapted from [Angular's commit convention](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-angular).
 
+### Pull Request
+
+1. fork 代码
+2. 创建自己的分支: git checkout -b feat/xxxx
+3. 提交你的修改: git commit -am 'feat(type): add xxxxx'
+4. 推送您的分支: git push origin feat/xxxx
+5. 提交 pull request
+
 ### 常用提交类型
 
 - feat: 增加新功能

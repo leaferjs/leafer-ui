@@ -82,6 +82,22 @@ LeaferJS 致力于实现一套简洁、开放、现代化的 UI 绘图语言标�
 
 [leafer-x](https://github.com/leaferjs/leafer-x) 社区插件提交仓库。
 
+## 贡献
+
+[社区行为准则](./contributor/CODE_OF_CONDUCT.md)
+
+[代码提交规范](./contributor/COMMIT_CONVENTION.md)
+
+[提问的智慧](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/main/README-zh_CN.md#%E6%8F%90%E9%97%AE%E7%9A%84%E6%99%BA%E6%85%A7)
+
+有问题、建议可以 提交 [issue](/https://github.com/leaferjs/leafer-ui/issues) 讨论，它更加开放与透明，能够帮助社区沉淀经验，避免重复劳动。
+
+## 致谢
+
+[每一位贡献代码的用户](https://github.com/leaferjs/leafer-ui/graphs/contributors)
+
+[每一位参与社区的用户](https://www.leaferjs.com/ui/contribute/)
+
 ## License
 
 MIT 开源许可协议，可以免费使用，且能用于商业场景。
