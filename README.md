@@ -72,7 +72,7 @@ Flex 自动布局、中心绘制，后端批量生成，渐变、内外阴影、
 
 [leafer-x](https://github.com/leaferjs/leafer-x) 社区插件提交仓库。
 
-[test](https://github.com/leaferjs/leafer-in) 自动化测试仓库。
+[test](https://github.com/leaferjs/test) 自动化测试仓库。
 
 ## 使命与愿景
 
