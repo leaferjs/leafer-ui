@@ -60,6 +60,20 @@ Flex 自动布局、中心绘制，后端批量生成，渐变、内外阴影、
 
 欢迎加入 [技术交流群](https://leaferjs.com/#contact) ，与小伙伴们建立联系，共同学习进步，偶尔会有特殊福利。
 
+## 仓库组成
+
+[LeaferJS](https://github.com/leaferjs/LeaferJS) 主集成仓库，可直接运行代码。
+
+[leafer](https://github.com/leaferjs/leafer) 核心仓库。
+
+[leafer-ui](https://github.com/leaferjs/leafer-ui) UI 仓库。
+
+[leafer-in](https://github.com/leaferjs/leafer-in) 插件仓库。
+
+[leafer-x](https://github.com/leaferjs/leafer-x) 社区插件提交仓库。
+
+[test](https://github.com/leaferjs/leafer-in) 自动化测试仓库。
+
 ## 使命与愿景
 
 LeaferJS 致力于实现一套简洁、开放、现代化的 UI 绘图语言标准，表现力丰富，便于 AI 理解，人类可视化使用，并为数字化产品开发提供跨平台、轻量化、高性能的运行时。
@@ -72,15 +86,19 @@ LeaferJS 致力于实现一套简洁、开放、现代化的 UI 绘图语言标�
 
 我们正在坚定的向这个目标持续前进，可以通过 [开发计划](https://www.leaferjs.com/ui/plan/) 了解更多信息。
 
-## 相关仓库
+## 卓越文化
 
-[LeaferJS](https://github.com/leaferjs/LeaferJS) 主仓库，可直接运行代码。
+我们追求慢慢打造出这样的团队与社区氛围:
 
-[leafer](https://github.com/leaferjs/leafer) 核心仓库。
+**真诚坚韧、追求卓越、热爱生活、与众不同、倾听、互帮互助、懂得取舍、不怕失败、结果导向**
 
-[leafer-in](https://github.com/leaferjs/leafer-in) 插件仓库。
+我们相信当一个人身心强健，对这个世界充满无限好奇的时候，会产生出源源不断的生命力和创造力，所以我们鼓励追求卓越与热爱生活，也许我们会因为健身、美食、旅行、摄影、音乐、写作、绘画、舞蹈、游戏等热爱而了解彼此，也许我们还会有自己的乐队、画展、读书会...
 
-[leafer-x](https://github.com/leaferjs/leafer-x) 社区插件提交仓库。
+我们要一起去攀登一座座别人从未到达过的高峰，同时我们也了解自己的能力边界，将聪明才智都聚焦到我们最感兴趣，也对用户最有价值的那个点上，在那里做出前人未曾有过的东西。
+
+我们知道成功并非一蹴而就，所以我们接纳路途中的失败、偶尔的躺平，只要拥有坚韧的气质和永不放弃的精神，从失败中吸取教训，不断成长，积累一个个小小的胜利，就一定会抵达目的地。
+
+如果你喜欢这样的文化，欢迎阅读 [贡献指南](https://www.leaferjs.com/ui/contribute/guide.html)，可以一起参与进来。
 
 ## 贡献指南
 
