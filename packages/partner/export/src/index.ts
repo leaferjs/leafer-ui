@@ -9,13 +9,9 @@ const debug = Debug.get('@leafer-ui/export')
 
 canvas.export = function (filename: IExportFileType | string, options?: IExportOptions | number | boolean): string | Promise<any> {
     const { quality, blob } = FileHelper.getExportOptions(options)
-    if (filename.includes('.')) {
-        return this.saveAs(filename, quality)
-    } else if (blob) {
-        return this.toBlob(filename as IExportFileType, quality)
-    } else {
-        return this.toDataURL(filename as IExportImageType, quality)
-    }
+    if (filename.includes('.')) return this.saveAs(filename, quality)
+    else if (blob) return this.toBlob(filename as IExportFileType, quality)
+    else return this.toDataURL(filename as IExportImageType, quality)
 }
 
 canvas.toBlob = function (type?: IExportFileType, quality?: number): Promise<IBlob> {
