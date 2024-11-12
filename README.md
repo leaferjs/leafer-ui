@@ -82,7 +82,9 @@ LeaferJS 致力于实现一套简洁、开放、现代化的 UI 绘图语言标�
 
 [leafer-x](https://github.com/leaferjs/leafer-x) 社区插件提交仓库。
 
-## 贡献
+## 贡献指南
+
+当你使用 LeaferJS 时, 你就已成为了 这个充满活力的大家庭 的一员，踏入这座建设中的“技术城堡”。只有通过每位成员的热情参与与贡献，这座城堡才能逐步走向完善。
 
 [社区行为准则](./contributor/CODE_OF_CONDUCT.md)
 
@@ -92,7 +94,7 @@ LeaferJS 致力于实现一套简洁、开放、现代化的 UI 绘图语言标�
 
 有问题、建议可以 提交 [issue](/https://github.com/leaferjs/leafer-ui/issues) 讨论，它更加开放与透明，能够帮助社区沉淀经验，避免重复劳动。
 
-## 致谢
+## 致谢用户
 
 [每一位贡献代码的用户](https://github.com/leaferjs/leafer-ui/graphs/contributors)
 
