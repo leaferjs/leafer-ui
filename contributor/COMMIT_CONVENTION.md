@@ -23,7 +23,7 @@ Appears under "Features" header, `drag` subheader:
 
 ```
 feat(drag): add 'hover' option
-``
+```
 
 Appears under "Bug Fixes" header, `editor` subheader, with a link to issue #16:
 
