@@ -1,8 +1,8 @@
-## Git Commit Message Convention
+# Git Commit Message Convention
 
 > This is adapted from [Angular's commit convention](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-angular).
 
-## 常用提交类型
+### 常用提交类型
 
 - feat: 增加新功能
 - fix: 修复问题/BUG
