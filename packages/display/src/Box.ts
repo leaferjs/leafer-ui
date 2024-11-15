@@ -26,7 +26,7 @@ export class Box extends Group implements IBox {
     @dataType(false)
     public resizeChildren?: IBoolean
 
-    @dataType(false)
+    // @leafer-in/editor rewrite
     public textBox?: IBoolean
 
     @affectRenderBoundsType('show')
