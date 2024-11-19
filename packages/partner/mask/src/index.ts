@@ -1,4 +1,4 @@
-import { ILeaf, ILeaferCanvas, IRenderOptions } from '@leafer/interface'
+import { ILeaf, ILeaferCanvas, IMaskType, IRenderOptions } from '@leafer/interface'
 import { LeafBoundsHelper } from '@leafer/core'
 
 import { Group } from '@leafer-ui/draw'
@@ -9,13 +9,13 @@ const { excludeRenderBounds } = LeafBoundsHelper
 
 Group.prototype.__renderMask = function (canvas: ILeaferCanvas, options: IRenderOptions): void {
 
-    let child: ILeaf, maskCanvas: ILeaferCanvas, contentCanvas: ILeaferCanvas, maskOpacity: number, currentMask: IMaskMode
+    let child: ILeaf, maskCanvas: ILeaferCanvas, contentCanvas: ILeaferCanvas, maskOpacity: number, currentMask: IMaskMode, mask: boolean | IMaskType
     const { children } = this
 
     for (let i = 0, len = children.length; i < len; i++) {
-        child = children[i]
+        child = children[i], mask = child.__.mask
 
-        if (child.__.mask) {
+        if (mask) {
 
             if (currentMask) {
                 maskEnd(this, currentMask, canvas, contentCanvas, maskCanvas, maskOpacity)
@@ -24,7 +24,7 @@ Group.prototype.__renderMask = function (canvas: ILeaferCanvas, options: IRender
 
             // mask start
 
-            if (child.__.mask === 'path') {
+            if (mask === 'path' || mask === 'clipping-path') {
 
                 if (child.opacity < 1) {
 
@@ -49,7 +49,7 @@ Group.prototype.__renderMask = function (canvas: ILeaferCanvas, options: IRender
 
             }
 
-            if (child.__.mask !== 'clipping') continue
+            if (!(mask === 'clipping' || mask === 'clipping-path')) continue
         }
 
         if (excludeRenderBounds(child, options)) continue
