@@ -174,8 +174,10 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
 
     public autoBox?: IAutoBoxData | IConstraint
 
+    @boundsType()
     public widthRange?: IRangeSize
 
+    @boundsType()
     public heightRange?: IRangeSize
 
 
