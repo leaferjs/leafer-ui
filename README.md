@@ -70,7 +70,9 @@ LeaferJS 致力于实现一套简洁、开放、现代化的 UI 绘图语言标�
 
 我们的目标不仅是让它成为前沿的 2D 和未来的 3D 引擎技术，还希望它能够为开发者带来极致的开发体验，助力开发者快速构建 AI 时代的网页、应用、设计、画布、游戏和动画等可视化生产力工具（如下一代 local-first 的 Figma、Miro、Notion、Unity、Adobe、Canva、Webflow 等）。
 
-我们正在坚定的向这个目标持续前进，可以通过 [开发计划](https://www.leaferjs.com/ui/plan/) 了解更多信息。
+![覆盖场景](https://www.leaferjs.com/ui/image/blog/20241120/plan.jpg)
+
+这是一段漫长而又充满乐趣的旅程，我们正在年复一年、坚定地向这个目标持续前进，可以通过 [开发计划](https://www.leaferjs.com/ui/plan/) 了解更多信息。
 
 ## 卓越文化
 
