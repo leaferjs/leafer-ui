@@ -32,12 +32,8 @@ export class UIData extends LeafData implements IUIData {
     public get __hasStroke(): boolean { return (this as IUIData).stroke && (this as IUIData).strokeWidth as unknown as boolean }
     public get __hasMultiPaint(): boolean { // fix: opacity
         const t = this as IUIData
-        if (t.__useEffect) return true
-
-        let count = 0
-        if (t.fill && !(t.fill instanceof Array)) count++
-        if (this.__hasStroke && !(t.stroke instanceof Array)) count++
-        return count !== 1
+        if ((t.__isFills && t.fill.length > 1) || (t.__isStrokes && t.stroke.length > 1) || t.__useEffect) return true
+        return t.fill && this.__hasStroke
     }
 
     public __pixelFill?: boolean // png / svg / webp
