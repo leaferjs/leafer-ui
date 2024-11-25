@@ -34,18 +34,15 @@ export class UIEvent extends Event implements IUIEvent {
     }
 
     public getBoxPoint(relative?: ILeaf): IPointData {
-        if (!relative) relative = this.current
-        return relative.getBoxPoint(this)
+        return (relative || this.current).getBoxPoint(this)
     }
 
     public getInnerPoint(relative?: ILeaf): IPointData {
-        if (!relative) relative = this.current
-        return relative.getInnerPoint(this)
+        return (relative || this.current).getInnerPoint(this)
     }
 
     public getLocalPoint(relative?: ILeaf): IPointData {
-        if (!relative) relative = this.current
-        return relative.getLocalPoint(this)
+        return (relative || this.current).getLocalPoint(this)
     }
 
     public getPagePoint(): IPointData {
@@ -56,6 +53,7 @@ export class UIEvent extends Event implements IUIEvent {
     public getInner(relative?: ILeaf): IPointData { return this.getInnerPoint(relative) }
     public getLocal(relative?: ILeaf): IPointData { return this.getLocalPoint(relative) }
     public getPage(): IPointData { return this.getPagePoint() }
+    // ---
 
     static changeName(oldName: string, newName: string): void {
         EventCreator.changeName(oldName, newName)
