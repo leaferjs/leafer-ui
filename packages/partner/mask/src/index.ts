@@ -4,7 +4,7 @@ import { LeafBoundsHelper } from '@leafer/core'
 import { Group } from '@leafer-ui/draw'
 
 
-type IMaskMode = 'path' | 'alpha' | 'opacity-path'
+type IMaskMode = 'path' | 'alpha' | 'grayscale' | 'opacity-path'
 const { excludeRenderBounds } = LeafBoundsHelper
 
 Group.prototype.__renderMask = function (canvas: ILeaferCanvas, options: IRenderOptions): void {
@@ -42,7 +42,7 @@ Group.prototype.__renderMask = function (canvas: ILeaferCanvas, options: IRender
 
             } else { // pixel
 
-                currentMask = 'alpha'
+                currentMask = mask === 'grayscale' ? 'grayscale' : 'alpha'
                 if (!maskCanvas) maskCanvas = getCanvas(canvas)
                 if (!contentCanvas) contentCanvas = getCanvas(canvas)
                 child.__render(maskCanvas, options)
@@ -63,6 +63,8 @@ Group.prototype.__renderMask = function (canvas: ILeaferCanvas, options: IRender
 
 function maskEnd(leaf: ILeaf, maskMode: IMaskMode, canvas: ILeaferCanvas, contentCanvas: ILeaferCanvas, maskCanvas: ILeaferCanvas, maskOpacity: number): void {
     switch (maskMode) {
+        case 'grayscale':
+            maskCanvas.useGrayscaleAlpha(leaf.__nowWorld)
         case 'alpha':
             usePixelMask(leaf, canvas, contentCanvas, maskCanvas); break
         case 'opacity-path':
