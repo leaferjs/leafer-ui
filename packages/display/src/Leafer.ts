@@ -223,7 +223,6 @@ export class Leafer extends Group implements ILeafer {
     protected __onResize(event: IResizeEvent): void {
         this.emitEvent(event)
         DataHelper.copyAttrs(this.__, event, canvasSizeAttrs)
-        if (!event.width || !event.height) debug.warn('w = 0 or h = 0')
         setTimeout(() => { if (this.canvasManager) this.canvasManager.clearRecycled() }, 0)
     }
 
