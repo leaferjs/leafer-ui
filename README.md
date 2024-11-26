@@ -100,11 +100,11 @@ LeaferJS 致力于实现一套简洁、开放、现代化的 UI 绘图语言标�
 
 有问题、建议可以 提交 [issue](/https://github.com/leaferjs/leafer-ui/issues) 讨论，它更加开放与透明，能够帮助社区沉淀经验，避免重复劳动。
 
-## 致谢用户
+## 致谢贡献者
 
-[每一位贡献代码的用户](https://github.com/leaferjs/leafer-ui/graphs/contributors)
+[每一位贡献代码的社区成员](https://github.com/leaferjs/leafer-ui/graphs/contributors)
 
-[每一位参与社区的用户](https://www.leaferjs.com/ui/contribute/)
+[每一位参与生态的社区成员](https://www.leaferjs.com/ui/contribute/)
 
 ## License
 
