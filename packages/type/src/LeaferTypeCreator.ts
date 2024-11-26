@@ -14,7 +14,8 @@ export const LeaferTypeCreator = {
     list: {} as ILeaferTypeList,
 
     register(name: string, fn: ILeaferTypeFunction): void {
-        list[name] ? debug.repeat(name) : list[name] = fn
+        list[name] && debug.repeat(name)
+        list[name] = fn
     },
 
     run(name: string, leafer: ILeaferBase): void {
