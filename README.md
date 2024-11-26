@@ -2,7 +2,7 @@
 
 一款好用的 Canvas 引擎，革新的开发体验，可用于高效绘图 、UI 交互（小游戏、互动应用、组态）、图形编辑。
 
-[![LeaferJS](https://www.leaferjs.com/image/leaferjs.jpg?d=1111)](https://www.leaferjs.com)
+[![LeaferJS](https://www.leaferjs.com/image/leaferjs.jpg?d=1126)](https://www.leaferjs.com)
 
 提供了丰富的 UI 绘图元素，和开箱即用的功能，如自动布局、图形编辑、SVG 导出等，方便与 PS、 Figma、Sketch 等产品进行对接。并为跨平台开发提供了统一的交互事件，如拖拽、旋转、缩放手势等。
 
