@@ -1,5 +1,5 @@
 import { IDragEvent, IPointData, ILeaf, ILeafList, IObject, IBoundsData } from '@leafer/interface'
-import { registerUIEvent, LeafList, BoundsHelper } from '@leafer/core'
+import { registerUIEvent, LeafList, BoundsHelper, PointHelper } from '@leafer/core'
 
 import { PointerEvent } from './PointerEvent'
 
@@ -38,10 +38,9 @@ export class DragEvent extends PointerEvent implements IDragEvent {
     }
 
     static getValidMove(leaf: ILeaf, start: IPointData, total: IPointData): IPointData {
-        const { draggable, dragBounds, x, y } = leaf
-        const move = leaf.getLocalPoint(total, null, true)
-        move.x += start.x - x
-        move.y += start.y - y
+        const { draggable, dragBounds } = leaf, move = leaf.getLocalPoint(total, null, true)
+        PointHelper.move(move, start.x - leaf.x, start.y - leaf.y)
+
         if (dragBounds) this.getMoveInDragBounds(leaf.__local, dragBounds === 'parent' ? leaf.parent.boxBounds : dragBounds, move, true)
         if (draggable === 'x') move.y = 0
         if (draggable === 'y') move.x = 0
@@ -49,8 +48,7 @@ export class DragEvent extends PointerEvent implements IDragEvent {
     }
 
     static getMoveInDragBounds(childBox: IBoundsData, dragBounds: IBoundsData, move: IPointData, change?: boolean): IPointData {
-        const x = childBox.x + move.x, y = childBox.y + move.y
-        const right = x + childBox.width, bottom = y + childBox.height
+        const x = childBox.x + move.x, y = childBox.y + move.y, right = x + childBox.width, bottom = y + childBox.height
         const boundsRight = dragBounds.x + dragBounds.width, boundsBottom = dragBounds.y + dragBounds.height
 
         if (!change) move = { ...move }
@@ -100,9 +98,7 @@ export class DragEvent extends PointerEvent implements IDragEvent {
     }
 
     public getPageBounds(): IBoundsData {
-        const total = this.getPageTotal()
-        const start = this.getPagePoint()
-        const bounds = {} as IBoundsData
+        const total = this.getPageTotal(), start = this.getPagePoint(), bounds = {} as IBoundsData
         BoundsHelper.set(bounds, start.x - total.x, start.y - total.y, total.x, total.y)
         BoundsHelper.unsign(bounds)
         return bounds
