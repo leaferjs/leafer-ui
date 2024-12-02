@@ -64,7 +64,7 @@ export interface IEditorBase extends IGroup, ISelectorProxy {
     toBottom(): void
 }
 
-export interface IEditorConfig {
+export interface IEditorConfig extends IObject {
     editSize?: IEditSize
     dualEvent?: boolean
     keyEvent?: boolean
@@ -117,6 +117,9 @@ export interface IEditorConfig {
     flipable?: boolean
     rotateable?: boolean | 'rotate'
     skewable?: boolean
+
+    textEditor?: IObject
+    pathEditor?: IObject
 }
 
 export interface IEditPointInputData extends IBoxInputData {
