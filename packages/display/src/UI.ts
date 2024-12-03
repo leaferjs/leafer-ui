@@ -308,8 +308,9 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
 
     public motion?: INumber | IUnitData
 
-    public motionRotation?: INumber | IBoolean
+    public motionPrecision?: INumber
 
+    public motionRotation?: INumber | IBoolean
 
     // @leafer-in/state rewrite
 
