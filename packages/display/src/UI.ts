@@ -306,11 +306,13 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
 
     public motionPath?: boolean
 
-    public motion?: INumber | IUnitData
-
     public motionPrecision?: INumber
 
+
+    public motion?: INumber | IUnitData
+
     public motionRotation?: INumber | IBoolean
+
 
     // @leafer-in/state rewrite
 
