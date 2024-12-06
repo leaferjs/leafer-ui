@@ -105,6 +105,7 @@ export interface IPathDataArrow {
     connect?: IPathDataArrowOffset // 箭头与线条的连接点位置
     offset?: IPathDataArrowOffset  // 箭头偏移距离，与末端对齐
     path: IPathCommandData
+    dashPath?: IPathCommandData // 采用虚线时，需增加填充的内容
 }
 
 export interface IPathDataArrowOffset {

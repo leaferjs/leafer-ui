@@ -22,6 +22,9 @@ export function stroke(stroke: string, ui: IUI, canvas: ILeaferCanvas): void {
 
                 canvas.setStroke(stroke, __strokeWidth, options)
                 canvas.stroke()
+
+                if (options.__useArrow) strokeArrow(ui, canvas)
+
                 break
 
             case 'inside':
@@ -74,6 +77,8 @@ export function strokes(strokes: ILeafPaint[], ui: IUI, canvas: ILeaferCanvas): 
             case 'center':
                 canvas.setStroke(undefined, __strokeWidth, options)
                 drawStrokesStyle(strokes, false, ui, canvas)
+
+                if (options.__useArrow) strokeArrow(ui, canvas)
                 break
 
             case 'inside':
@@ -107,4 +112,14 @@ export function strokes(strokes: ILeafPaint[], ui: IUI, canvas: ILeaferCanvas): 
 
     }
 
+}
+
+
+function strokeArrow(ui: IUI, canvas: ILeaferCanvas): void {
+    if (ui.__.dashPattern) {  // fix: dashPattern Arrow
+        canvas.beginPath()
+        ui.__drawPathByData(canvas, ui.__.__pathForArrow)
+        canvas.dashPattern = null
+        canvas.stroke()
+    }
 }
