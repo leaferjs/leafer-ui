@@ -100,7 +100,7 @@ interface IRobotAttrData {
     action?: IRobotActionName
     now?: number
     FPS?: number
-    loop?: boolean
+    loop?: boolean | number
 }
 
 export interface IRobotActions {
@@ -108,9 +108,9 @@ export interface IRobotActions {
 }
 
 export interface IRobotAnimation {
-    keys: IKeyframeId[]
+    keyframes: IKeyframeId[]
     loop?: boolean | number
-    speed?: number
+    FPS?: number
 }
 
 export type IRobotActionName = string
