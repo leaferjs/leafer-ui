@@ -39,7 +39,7 @@ export class Text extends UI implements IText {
     declare public hitFill?: IHitType
 
     @boundsType('')
-    public text?: IString
+    public text?: IString | INumber
 
     @boundsType('L')
     public fontFamily?: IString

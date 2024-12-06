@@ -11,7 +11,7 @@ import { decorationText } from './TextDecoration'
 
 const { top, right, bottom, left } = Direction4
 
-export function getDrawData(content: string, style: ITextData): ITextDrawData {
+export function getDrawData(content: string | number, style: ITextData): ITextDrawData {
 
     if (typeof content !== 'string') content = String(content)
 

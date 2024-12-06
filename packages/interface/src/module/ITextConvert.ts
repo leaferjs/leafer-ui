@@ -1,5 +1,5 @@
 import { ITextData, ITextDrawData } from '../IUI'
 
 export interface ITextConvertModule {
-    getDrawData(content: string, style: ITextData): ITextDrawData
+    getDrawData(content: string | number, style: ITextData): ITextDrawData
 }
