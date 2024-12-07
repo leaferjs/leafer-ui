@@ -42,7 +42,8 @@
 
 ## 互动交流
 
-有问题、建议可以 [提交 issue](https://github.com/leaferjs/leafer-ui/issues)，留下你的贡献足迹。
+有问题、建议可以 [提交 issue](https://github.com/leaferjs/leafer-ui/issues)，留下你的贡献足迹，了解 [提问的智慧](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/main/README-zh_CN.md#%E6%8F%90%E9%97%AE%E7%9A%84%E6%99%BA%E6%85%A7)
+。
 
 欢迎加入 [技术交流群](https://leaferjs.com/#contact) ，与小伙伴们建立联系，共同学习进步，偶尔会有特殊福利。
 
