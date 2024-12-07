@@ -1,6 +1,6 @@
 {
   "name": "@leafer-ui/color",
-  "version": "1.0.10",
+  "version": "1.1.0",
   "description": "@leafer-ui/color",
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
@@ -18,9 +18,9 @@
     "leaferjs"
   ],
   "dependencies": {
-    "@leafer-ui/draw": "1.0.10"
+    "@leafer-ui/draw": "1.1.0"
   },
   "devDependencies": {
-     "@leafer-ui/interface": "1.0.10"
+     "@leafer-ui/interface": "1.1.0"
   }
 }
