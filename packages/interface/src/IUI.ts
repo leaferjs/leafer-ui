@@ -387,7 +387,7 @@ export interface IUI extends IUIAttrData, IFillAttrData, IStrokeAttrData, ICorne
 
     reset(data?: IUIInputData): void
 
-    set(data: IUIInputData, isTemp?: boolean): void
+    set(data: IUIInputData, transition?: ITransition | 'temp'): void
     toJSON(options?: IJSONOptions): IUIJSONData
 
     get(name?: string | string[] | IUIInputData): IUIInputData | IValue

@@ -1,7 +1,7 @@
 import { IJSONOptions, IPickOptions, IPickResult, IPointData } from '@leafer/interface'
 import { Branch, useModule, dataProcessor, registerUI } from '@leafer/core'
 
-import { IGroup, IGroupData, IGroupInputData, IUI, IUIInputData, IUIJSONData, IFindCondition, IFindUIMethod } from '@leafer-ui/interface'
+import { IGroup, IGroupData, IGroupInputData, IUI, IUIInputData, IUIJSONData, ITransition, IFindCondition, IFindUIMethod } from '@leafer-ui/interface'
 import { GroupData } from '@leafer-ui/data'
 
 import { UI } from './UI'
@@ -36,19 +36,19 @@ export class Group extends UI implements IGroup {   // tip: rewrited Box
 
     // data
 
-    public set(data: IUIInputData, isTemp?: boolean): void {
+    public set(data: IUIInputData, transition?: ITransition | 'temp'): void {
         if (data.children) {
             const { children } = data
 
             delete data.children
             this.children ? this.clear() : this.__setBranch()
 
-            super.set(data, isTemp)
+            super.set(data, transition)
 
             children.forEach(child => this.add(child))
             data.children = children
 
-        } else super.set(data, isTemp)
+        } else super.set(data, transition)
     }
 
     public toJSON(options?: IJSONOptions): IUIJSONData {
