@@ -16,15 +16,15 @@
 
 ## 快速入门
 
-[1. 准备在线 Playground 环境](https://leaferjs.com/ui/guide/runtime.md)
+[1. 准备在线 Playground 环境](https://leaferjs.com/ui/guide/runtime.html)
 
 可通过 **Cloud Studio** 模版创建一个 **LeaferJS 项目**，用于运行、练习后续的示例代码。
 
-[2. 学习 LeaferJS 快速入门教程](https://leaferjs.com/ui/guide/basic/app.md)
+[2. 学习 LeaferJS 快速入门教程](https://leaferjs.com/ui/guide/basic/app.html)
 
 跟随官网教程步骤（文档底部有下一步引导按钮）从浅到深的学习，动手调试每一段示例代码。
 
-[3. 开发一个画龙点睛的小游戏](https://leaferjs.com/ui/contest/guide.md)
+[3. 开发一个画龙点睛的小游戏](https://leaferjs.com/ui/contest/guide.html)
 
 给你一条会飞的龙，看你能做出什么好玩的小游戏分享给我们 ◠‿◠
 
@@ -34,9 +34,9 @@
 
 ## 场景包
 
-高效绘图场景，推荐安装更轻量的 [leafer-draw](https://leaferjs.com/ui/guide/type/draw/start.html) （49KB min+gzip）。
+高效绘图场景，推荐安装更轻量的 [leafer-draw](https://leaferjs.com/ui/guide/install/draw/start.html) （49KB min+gzip）。
 
-游戏开发场景，推荐安装更省心的 [leafer-game](https://leaferjs.com/ui/guide/install/game/start.md)，已集成了游戏相关插件。
+游戏开发场景，推荐安装更省心的 [leafer-game](https://leaferjs.com/ui/guide/install/game/start.html)，已集成了游戏相关插件。
 
 图形编辑场景，推荐安装更省心的 [leafer-editor](https://leaferjs.com/ui/guide/install/editor/start.html)，已集成了图形编辑器相关插件。
 
