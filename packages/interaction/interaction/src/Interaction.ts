@@ -518,8 +518,9 @@ export class InteractionBase implements IInteraction {
     }
 
     protected __onResize(): void {
+        const { dragOut } = this.m
         this.shrinkCanvasBounds = new Bounds(this.canvas.bounds)
-        this.shrinkCanvasBounds.spread(-2)
+        this.shrinkCanvasBounds.spread(-(typeof dragOut === 'number' ? dragOut : 2))
     }
 
     protected __listenEvents(): void {

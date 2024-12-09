@@ -65,9 +65,7 @@ export class Dragger {
             }
         }
 
-        if (!this.moving) {
-            this.dragStart(data, canDrag)
-        }
+        if (!this.moving) this.dragStart(data, canDrag)
 
         this.drag(data)
     }
