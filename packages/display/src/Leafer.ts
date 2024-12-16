@@ -199,7 +199,11 @@ export class Leafer extends Group implements ILeafer {
 
     override forceRender(bounds?: IBoundsData): void {
         this.renderer.addBlock(bounds ? new Bounds(bounds) : this.canvas.bounds)
-        if (this.viewReady) this.renderer.update()
+        if (this.viewReady) this.renderer.render()
+    }
+
+    public requestRender(change = false): void {
+        if (this.renderer) this.renderer.update(change)
     }
 
     public updateCursor(cursor?: ICursorType): void {
@@ -309,7 +313,10 @@ export class Leafer extends Group implements ILeafer {
 
             const { imageReady } = this
             if (imageReady && !this.viewCompleted) this.__checkViewCompleted()
-            if (!imageReady) this.viewCompleted = false
+            if (!imageReady) {
+                this.viewCompleted = false
+                this.requestRender()
+            }
         }
     }
 
@@ -360,6 +367,7 @@ export class Leafer extends Group implements ILeafer {
                 if (list[i] === item) { list.splice(i, 1); break }
             }
         } else list.push(item)
+        this.requestRender()
     }
 
     // need view plugin
