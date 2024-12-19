@@ -39,7 +39,7 @@ export class UIData extends LeafData implements IUIData {
     public __pixelFill?: boolean // png / svg / webp
     public __pixelStroke?: boolean
 
-    public get __clipAfterFill(): boolean { return ((this as IUIData).cornerRadius || (this as IUIData).__pathInputed) as unknown as boolean } // 用于 __drawAfterFill()
+    public get __clipAfterFill(): boolean { const t = this as IUIData; return (t.cornerRadius || t.innerShadow || t.__pathInputed) as unknown as boolean } // 用于 __drawAfterFill()
 
     public __needComputePaint: boolean
 
