@@ -60,20 +60,10 @@ export class Leafer extends Group implements ILeafer {
 
     public userConfig: ILeaferConfig
     public config: ILeaferConfig = {
-        type: 'design',
         start: true,
         hittable: true,
         smooth: true,
         lazySpeard: 100,
-        zoom: {
-            min: 0.01,
-            max: 256
-        },
-        move: {
-            holdSpaceKey: true,
-            holdMiddleKey: true,
-            autoDistance: 2
-        }
     }
 
     public autoLayout?: IAutoBounds
@@ -105,12 +95,14 @@ export class Leafer extends Group implements ILeafer {
         if (this.canvas) return
 
         this.__setLeafer(this)
-        if (userConfig) DataHelper.assign(this.config, userConfig)
 
         let start: boolean
         const { config } = this
 
-        this.initType(config.type) // LeaferType
+        if (userConfig) {
+            this.initType(userConfig.type) // LeaferType
+            DataHelper.assign(config, userConfig)
+        }
 
         // render / layout
         const canvas = this.canvas = Creator.canvas(config)
