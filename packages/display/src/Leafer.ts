@@ -64,6 +64,10 @@ export class Leafer extends Group implements ILeafer {
         hittable: true,
         smooth: true,
         lazySpeard: 100,
+
+        // block type
+        wheel: { preventDefault: false },
+        touch: { preventDefault: 'auto' }
     }
 
     public autoLayout?: IAutoBounds

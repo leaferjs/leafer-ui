@@ -30,8 +30,8 @@ export class App extends Leafer implements IApp {
         if (userConfig) {
             const { ground, tree, sky, editor } = userConfig
             if (ground) this.ground = this.addLeafer(ground)
-            if (tree || editor) this.tree = this.addLeafer(tree)
-            if (sky || editor) this.sky = this.addLeafer(sky || { type: 'draw', usePartRender: false })
+            if (tree || editor) this.tree = this.addLeafer(tree || { type: userConfig.type || 'design' })
+            if (sky || editor) this.sky = this.addLeafer(sky || { usePartRender: false })
             if (editor) this.sky.add(this.editor = Creator.editor(editor) as IEditorBase)
         }
     }
