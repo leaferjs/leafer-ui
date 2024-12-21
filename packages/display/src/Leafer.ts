@@ -28,6 +28,7 @@ export class Leafer extends Group implements ILeafer {
 
     public get isLeafer(): boolean { return true }
 
+    public parentApp?: IApp
     declare public parent?: IApp
 
     public running: boolean
@@ -63,11 +64,7 @@ export class Leafer extends Group implements ILeafer {
         start: true,
         hittable: true,
         smooth: true,
-        lazySpeard: 100,
-
-        // block type
-        wheel: { preventDefault: false },
-        touch: { preventDefault: 'auto' }
+        lazySpeard: 100
     }
 
     public autoLayout?: IAutoBounds
@@ -98,13 +95,21 @@ export class Leafer extends Group implements ILeafer {
     public init(userConfig?: ILeaferConfig, parentApp?: IApp): void {
         if (this.canvas) return
 
-        this.__setLeafer(this)
-
         let start: boolean
         const { config } = this
 
+        this.__setLeafer(this)
+
+        if (parentApp) {
+            this.parentApp = parentApp
+            this.__bindApp(parentApp)
+            start = parentApp.running
+        }
+
         if (userConfig) {
+            this.parent = parentApp
             this.initType(userConfig.type) // LeaferType
+            this.parent = undefined
             DataHelper.assign(config, userConfig)
         }
 
@@ -121,10 +126,7 @@ export class Leafer extends Group implements ILeafer {
         this.view = canvas.view
 
         // interaction / manager
-        if (parentApp) {
-            this.__bindApp(parentApp)
-            start = parentApp.running
-        } else {
+        if (!parentApp) {
             this.selector = Creator.selector(this)
             this.interaction = Creator.interaction(this, canvas, this.selector, config)
 
@@ -440,7 +442,7 @@ export class Leafer extends Group implements ILeafer {
 
                     this.canvas.destroy()
 
-                    this.config.view = this.view = null
+                    this.config.view = this.view = this.parentApp = null
                     if (this.userConfig) this.userConfig.view = null
 
                     super.destroy()

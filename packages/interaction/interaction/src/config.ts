@@ -6,7 +6,6 @@ export const config: IInteractionConfig = {
         moveSpeed: 0.5,
         rotateSpeed: 0.5,
         delta: { x: 80 / 4, y: 8.0 }, // 基准速度（会影响zoomSpeed)，可根据不同系统、浏览器细化定制
-        preventDefault: true
     },
     pointer: {
         hitRadius: 5,
@@ -17,12 +16,13 @@ export const config: IInteractionConfig = {
         dragHover: true,
         dragDistance: 2,
         swipeDistance: 20,
-        preventDefaultMenu: true
     },
     touch: {
-        preventDefault: true
+        preventDefault: 'auto'
     },
     multiTouch: {},
+    move: { autoDistance: 2 },
+    zoom: {},
     cursor: true,
     keyEvent: true
 }
