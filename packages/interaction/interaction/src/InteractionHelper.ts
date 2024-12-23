@@ -55,15 +55,10 @@ export const InteractionHelper = {
     },
 
     getSwipeDirection(angle: number): string {
-        if (angle < -45 && angle > -135) {
-            return SwipeEvent.UP
-        } else if (angle > 45 && angle < 135) {
-            return SwipeEvent.DOWN
-        } else if (angle <= 45 && angle >= -45) {
-            return SwipeEvent.RIGHT
-        } else {
-            return SwipeEvent.LEFT
-        }
+        if (angle < -45 && angle > -135) return SwipeEvent.UP
+        else if (angle > 45 && angle < 135) return SwipeEvent.DOWN
+        else if (angle <= 45 && angle >= -45) return SwipeEvent.RIGHT
+        else return SwipeEvent.LEFT
     },
 
     getSwipeEventData(startPoint: IPointData, lastDragData: IDragEvent, event: IPointerEvent): ISwipeEvent {
