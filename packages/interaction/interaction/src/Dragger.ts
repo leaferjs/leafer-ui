@@ -12,25 +12,25 @@ const { getDragEventData, getDropEventData, getSwipeEventData } = InteractionHel
 
 export class Dragger {
 
-    protected interaction: InteractionBase
+    public interaction: InteractionBase
 
     public moving: boolean
     public dragging: boolean
 
     public dragData: IDragEvent
-    protected downData: IPointerEvent
+    public downData: IPointerEvent
 
     public draggableList: ILeafList
     public realDraggableList: ILeafList
     protected dragOverPath: ILeafList
     protected dragEnterPath: ILeafList
 
-    protected dragStartPoints: IPointDataMap
-    protected autoMoveTimer: ITimer
+    public dragStartPoints: IPointDataMap
+    public autoMoveTimer: ITimer
 
     public canAnimate: boolean
     public canDragOut: boolean
-    protected animateWait: IFunction
+    public animateWait: IFunction
 
     constructor(interaction: InteractionBase) {
         this.interaction = interaction
@@ -97,7 +97,7 @@ export class Dragger {
         }
     }
 
-    protected drag(data: IPointerEvent): void {
+    public drag(data: IPointerEvent): void {
         const { interaction, dragData, downData } = this
         const { path, throughPath } = downData
         this.dragData = getDragEventData(downData, dragData, data)
