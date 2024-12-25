@@ -1,5 +1,5 @@
 import { IPointerEvent, IDragEvent, ILeaf, ILeafList, ITimer, IFunction, IPointDataMap, IMoveEvent } from '@leafer/interface'
-import { BoundsHelper, PointHelper, LeafList } from '@leafer/core'
+import { PointHelper, LeafList } from '@leafer/core'
 
 import { MoveEvent, DragEvent, DropEvent, PointerButton } from '@leafer-ui/event'
 
@@ -219,45 +219,15 @@ export class Dragger {
     }
 
 
-    public checkDragOut(data: IPointerEvent): void {
-        const { interaction } = this
-        this.autoMoveCancel()
-        if (this.dragging && !interaction.shrinkCanvasBounds.hitPoint(data)) this.autoMoveOnDragOut(data)
-    }
+    // @leafer-in/viewport will rewrite
 
+    public checkDragOut(_data: IPointerEvent): void { }
 
-    protected autoMoveOnDragOut(data: IPointerEvent): void {
-        const { interaction, downData, canDragOut } = this
-        const { autoDistance, dragOut } = interaction.config.move
-        if (!dragOut || !canDragOut || !autoDistance) return
+    public autoMoveOnDragOut(_data: IPointerEvent): void { }
 
-        const bounds = interaction.shrinkCanvasBounds
-        const { x, y } = bounds
-        const right = BoundsHelper.maxX(bounds)
-        const bottom = BoundsHelper.maxY(bounds)
+    public autoMoveCancel(): void { }
 
-        const moveX = data.x < x ? autoDistance : (right < data.x ? -autoDistance : 0)
-        const moveY = data.y < y ? autoDistance : (bottom < data.y ? -autoDistance : 0)
-        let totalX = 0, totalY = 0
-
-        this.autoMoveTimer = setInterval(() => {
-            totalX += moveX
-            totalY += moveY
-
-            PointHelper.move(downData, moveX, moveY)
-            PointHelper.move(this.dragData, moveX, moveY)
-
-            interaction.move({ ...data, moveX, moveY, totalX, totalY, moveType: 'drag' })
-            interaction.pointerMoveReal(data)
-        }, 10)
-    }
-
-    protected autoMoveCancel(): void {
-        if (this.autoMoveTimer) {
-            clearInterval(this.autoMoveTimer)
-            this.autoMoveTimer = 0
-        }
-    }
+    // ---
 
     public destroy(): void {
         this.dragReset()
