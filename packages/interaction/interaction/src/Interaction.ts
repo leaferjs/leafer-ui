@@ -1,18 +1,16 @@
-import { IUIEvent, IPointerEvent, ILeaf, IInteraction, IInteractionConfig, ILeafList, IMoveEvent, IZoomEvent, IRotateEvent, ISelector, IBounds, IEventListenerId, IInteractionCanvas, ITimer, IKeepTouchData, IKeyEvent, IPickOptions, ICursorType, IBooleanMap, IPickBottom, IClientPointData, IPointData, ILeaferConfig, IMoveConfig, IPointerConfig } from '@leafer/interface'
+import { IUIEvent, IPointerEvent, ILeaf, IInteraction, IInteractionConfig, ITransformer, ILeafList, IMoveEvent, IZoomEvent, IRotateEvent, IWheelEvent, ISelector, IBounds, IEventListenerId, IInteractionCanvas, ITimer, IKeepTouchData, IKeyEvent, IPickOptions, ICursorType, IBooleanMap, IPickBottom, IClientPointData, IPointData, ILeaferConfig, IMoveConfig, IPointerConfig } from '@leafer/interface'
 import { LeaferEvent, ResizeEvent, LeafList, Bounds, PointHelper, DataHelper } from '@leafer/core'
 
 import { IApp } from '@leafer-ui/interface'
 import { PointerEvent, DropEvent, KeyEvent, PointerButton, Keyboard } from '@leafer-ui/event'
 
-import { Transformer } from './Transformer'
 import { Dragger } from './Dragger'
 import { emit } from './emit'
 import { InteractionHelper } from './InteractionHelper'
-import { MultiTouchHelper } from './MultiTouchHelper'
 import { config } from './config'
 
 
-const { pathHasEventType, getMoveEventData, getZoomEventData, getRotateEventData, pathCanDrag, pathHasOutside } = InteractionHelper
+const { pathHasEventType, pathCanDrag, pathHasOutside } = InteractionHelper
 export class InteractionBase implements IInteraction {
 
     public target: ILeaf
@@ -61,8 +59,8 @@ export class InteractionBase implements IInteraction {
     protected tapCount = 0
     protected tapTimer: ITimer
 
-    protected dragger: Dragger
-    protected transformer: Transformer
+    public dragger: Dragger
+    public transformer: ITransformer
 
     protected __eventIds: IEventListenerId[]
     protected defaultPath: ILeafList
@@ -75,7 +73,7 @@ export class InteractionBase implements IInteraction {
         this.selector = selector
         this.defaultPath = new LeafList(target)
 
-        this.transformer = new Transformer(this)
+        this.createTransformer()
         this.dragger = new Dragger(this)
 
         if (userConfig) this.config = DataHelper.default(userConfig, this.config)
@@ -202,14 +200,6 @@ export class InteractionBase implements IInteraction {
     }
 
 
-    public multiTouch(data: IUIEvent, list: IKeepTouchData[]): void {
-        if (this.config.multiTouch.disabled) return
-        const { move, angle, scale, center } = MultiTouchHelper.getData(list)
-        this.rotate(getRotateEventData(center, angle, data))
-        this.zoom(getZoomEventData(center, scale, data))
-        this.move(getMoveEventData(center, move, data))
-    }
-
     // context menu
     public menu(data: IPointerEvent): void {
         this.findPath(data)
@@ -225,24 +215,23 @@ export class InteractionBase implements IInteraction {
         }
     }
 
-    // window transform
+    // @leafer-in/viewport will rewrite:  transform viewport
 
-    public move(data: IMoveEvent): void {
-        this.transformer.move(data)
-    }
+    public createTransformer(): void { }
 
-    public zoom(data: IZoomEvent): void {
-        this.transformer.zoom(data)
-    }
+    public move(_data: IMoveEvent): void { }
 
-    public rotate(data: IRotateEvent): void {
-        this.transformer.rotate(data)
-    }
+    public zoom(_data: IZoomEvent): void { }
 
-    public transformEnd(): void {
-        this.transformer.transformEnd()
-    }
+    public rotate(_data: IRotateEvent): void { }
 
+    public transformEnd(): void { }
+
+    public wheel(_data: IWheelEvent): void { }
+
+    public multiTouch(_data: IUIEvent, _list: IKeepTouchData[]): void { }
+
+    // ---
 
     // key
 
@@ -545,7 +534,7 @@ export class InteractionBase implements IInteraction {
             this.stop()
             this.__removeListenEvents()
             this.dragger.destroy()
-            this.transformer.destroy()
+            if (this.transformer) this.transformer.destroy()
             this.downData = this.overPath = this.enterPath = null
         }
     }

@@ -1,38 +1,10 @@
-import { IEvent, IPointerEvent, IMoveEvent, IZoomEvent, IRotateEvent, IDragEvent, ISwipeEvent, IUIEvent, IPointData, ILeafList, IDropEvent, IObject } from '@leafer/interface'
+import { IPointerEvent, IDragEvent, ISwipeEvent, IUIEvent, IPointData, ILeafList, IDropEvent, IObject } from '@leafer/interface'
 import { PointHelper, LeafList } from '@leafer/core'
 
 import { SwipeEvent, DragEvent } from '@leafer-ui/event'
 
 
 export const InteractionHelper = {
-
-    getMoveEventData(center: IPointData, move: IPointData, event: IEvent): IMoveEvent {
-        return {
-            ...event,
-            x: center.x,
-            y: center.y,
-            moveX: move.x,
-            moveY: move.y
-        } as IMoveEvent
-    },
-
-    getRotateEventData(center: IPointData, angle: number, event: IEvent): IRotateEvent {
-        return {
-            ...event,
-            x: center.x,
-            y: center.y,
-            rotation: angle
-        } as IRotateEvent
-    },
-
-    getZoomEventData(center: IPointData, scale: number, event: IEvent): IZoomEvent {
-        return {
-            ...event,
-            x: center.x,
-            y: center.y,
-            scale,
-        } as IZoomEvent
-    },
 
     getDragEventData(startPoint: IPointData, lastPoint: IPointData, event: IPointerEvent): IDragEvent {
         return {

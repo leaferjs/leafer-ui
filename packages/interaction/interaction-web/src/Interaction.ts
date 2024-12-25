@@ -3,7 +3,6 @@ import { MathHelper } from '@leafer/core'
 import { InteractionBase, InteractionHelper, Cursor } from '@leafer-ui/core'
 
 import { PointerEventHelper } from './PointerEventHelper'
-import { WheelEventHelper } from './WheelEventHelper'
 import { KeyEventHelper } from './KeyEventHelper'
 
 
@@ -14,7 +13,7 @@ interface IGestureEvent extends IClientPointData, UIEvent {
 }
 
 
-const { getMoveEventData, getZoomEventData, getRotateEventData, pathCanDrag } = InteractionHelper
+const { pathCanDrag } = InteractionHelper
 
 export class Interaction extends InteractionBase {
 
@@ -281,15 +280,12 @@ export class Interaction extends InteractionBase {
     // wheel
     protected onWheel(e: WheelEvent): void {
         this.preventDefaultWheel(e)
-
-        const { wheel } = this.config
-        if (wheel.disabled) return
-
-        const scale = wheel.getScale ? wheel.getScale(e, wheel) : WheelEventHelper.getScale(e, wheel)
-        const local = this.getLocal(e)
-
-        const eventBase = InteractionHelper.getBase(e)
-        scale !== 1 ? this.zoom(getZoomEventData(local, scale, eventBase)) : this.move(getMoveEventData(local, wheel.getMove ? wheel.getMove(e, wheel) : WheelEventHelper.getMove(e, wheel), eventBase))
+        this.wheel({
+            ...InteractionHelper.getBase(e),
+            ...this.getLocal(e),
+            deltaX: e.deltaX,
+            deltaY: e.deltaY
+        })
     }
 
 
@@ -306,16 +302,14 @@ export class Interaction extends InteractionBase {
         if (this.useMultiTouch) return
         this.preventDefaultWheel(e)
 
-        const local = this.getLocal(e)
         const eventBase = InteractionHelper.getBase(e)
-        const changeScale = e.scale / this.lastGestureScale
-        const changeAngle = e.rotation - this.lastGestureRotation
+        Object.assign(eventBase, this.getLocal(e))
 
-        let { rotateSpeed } = this.config.wheel
-        rotateSpeed = MathHelper.within(rotateSpeed, 0, 1)
+        const scale = (e.scale / this.lastGestureScale)
+        const rotation = (e.rotation - this.lastGestureRotation) / Math.PI * 180 * (MathHelper.within(this.config.wheel.rotateSpeed, 0, 1) / 4 + 0.1)
 
-        this.zoom(getZoomEventData(local, changeScale * changeScale, eventBase))
-        this.rotate(getRotateEventData(local, changeAngle / Math.PI * 180 * (rotateSpeed / 4 + 0.1), eventBase))
+        this.zoom({ ...eventBase, scale: scale * scale })
+        this.rotate({ ...eventBase, rotation })
 
         this.lastGestureScale = e.scale
         this.lastGestureRotation = e.rotation
