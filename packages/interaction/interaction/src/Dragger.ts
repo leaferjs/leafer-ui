@@ -150,17 +150,8 @@ export class Dragger {
 
     public dragEnd(data: IPointerEvent, speed?: number): void {
         if (!this.dragging && !this.moving) return
-
-        const { moveX, moveY } = this.dragData
-        if (this.interaction.config.move.dragAnimate && this.canAnimate && this.moving && (Math.abs(moveX) > 1 || Math.abs(moveY) > 1)) {
-            data = { ...data }
-            speed = (speed || (data.pointerType === 'touch' ? 2 : 1)) * 0.9
-            PointHelper.move(data, moveX * speed, moveY * speed)
-
-            this.drag(data)
-            this.animate(() => { this.dragEnd(data, 1) })
-
-        } else this.dragEndReal(data)
+        if (this.checkDragEndAnimate(data, speed)) return
+        this.dragEndReal(data)
     }
 
     protected dragEndReal(data?: IPointerEvent): void {
@@ -192,12 +183,6 @@ export class Dragger {
         this.animate(null, 'off')
     }
 
-    protected animate(func?: IFunction, off?: 'off'): void { // dragEnd animation
-        const animateWait = func || this.animateWait
-        if (animateWait) this.interaction.target.nextRender(animateWait, null, off)
-        this.animateWait = func
-    }
-
 
     protected swipe(data: IPointerEvent, downData: IPointerEvent, dragData: IDragEvent, endDragData: IDragEvent): void {
         const { interaction } = this
@@ -220,6 +205,10 @@ export class Dragger {
 
 
     // @leafer-in/viewport will rewrite
+
+    public checkDragEndAnimate(_data: IPointerEvent, _speed?: number): boolean { return false }
+
+    public animate(_func?: IFunction, _off?: 'off'): void { }  // dragEnd animation
 
     public checkDragOut(_data: IPointerEvent): void { }
 
