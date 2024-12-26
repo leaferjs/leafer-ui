@@ -195,9 +195,12 @@ export class Leafer extends Group implements ILeafer {
         Object.keys(data).forEach(key => (this as any)[key] = data[key])
     }
 
-    override forceRender(bounds?: IBoundsData): void {
-        this.renderer.addBlock(bounds ? new Bounds(bounds) : this.canvas.bounds)
-        if (this.viewReady) this.renderer.render()
+    override forceRender(bounds?: IBoundsData, sync?: boolean): void {
+        const { renderer } = this
+        if (renderer) {
+            renderer.addBlock(bounds ? new Bounds(bounds) : this.canvas.bounds)
+            if (this.viewReady) sync ? renderer.render() : renderer.update()
+        }
     }
 
     public requestRender(change = false): void {

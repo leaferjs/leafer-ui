@@ -69,8 +69,8 @@ export class App extends Leafer implements IApp {
         this.children.forEach(leafer => leafer.lockLayout())
     }
 
-    override forceRender(bounds?: IBoundsData): void {
-        this.children.forEach(leafer => leafer.forceRender(bounds))
+    override forceRender(bounds?: IBoundsData, sync?: boolean): void {
+        this.children.forEach(leafer => leafer.forceRender(bounds, sync))
     }
 
     public addLeafer(merge?: ILeaferConfig): Leafer {
