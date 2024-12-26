@@ -1,6 +1,6 @@
 // Implemented in partner
 import { IPaintModule, IPaintImageModule, IPaintGradientModule, IEffectModule, ITextConvertModule, IExportModule, IColorConvertModule, IPathArrowModule, IStateModule, IUI, IString, IBoolean, IUnitData, ITransitionModule, ITransitionFunction } from "@leafer-ui/interface"
-import { needPlugin } from '@leafer/core'
+import { Plugin } from '@leafer/core'
 
 export const TextConvert = {} as ITextConvertModule
 
@@ -30,8 +30,8 @@ export const Effect = {} as IEffectModule
 export const Export = {} as IExportModule
 
 export const State = {
-    setStyleName(_leaf: IUI, _styleName: IString, _value: IBoolean): void { return needPlugin('state') },
-    set(_leaf: IUI, _stateName: IString): void { return needPlugin('state') }
+    setStyleName(_leaf: IUI, _styleName: IString, _value: IBoolean): void { return Plugin.need('state') },
+    set(_leaf: IUI, _stateName: IString): void { return Plugin.need('state') }
 } as IStateModule
 
 export const Transition = {
