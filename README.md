@@ -24,10 +24,6 @@
 
 跟随官网教程步骤（文档底部有下一步引导按钮）从浅到深的学习，动手调试每一段示例代码。
 
-[3. 开发一个画龙点睛的小游戏](https://leaferjs.com/ui/contest/guide.html)
-
-给你一条会飞的龙，看你能做出什么好玩的小游戏分享给我们 ◠‿◠
-
 ## 快速安装
 
 🚀 想马上在产品中使用，请安装 [leafer-ui](https://leaferjs.com/ui/guide/install/ui/start.html)，开始你的探索之旅。
