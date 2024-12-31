@@ -1,5 +1,5 @@
 import { ILeaferCanvas, ILeaferCanvasConfig, INumber, IRenderOptions, IPointData, ICanvasContext2D, ICanvasContext2DSettings, IScreenSizeData } from '@leafer/interface'
-import { Creator, ImageEvent, LeaferImage, Matrix, dataProcessor, registerUI } from '@leafer/core'
+import { Creator, ImageEvent, LeaferImage, Matrix, dataProcessor, dataType, registerUI } from '@leafer/core'
 
 import { ICanvas, ICanvasData, ICanvasInputData, IUI } from '@leafer-ui/interface'
 import { CanvasData } from '@leafer-ui/data'
@@ -27,6 +27,9 @@ export class Canvas extends Rect implements ICanvas {
 
     @resizeType(true)
     public smooth?: boolean
+
+    @dataType(false)
+    public safeResize?: boolean
 
     @resizeType()
     public contextSettings?: ICanvasContext2DSettings
@@ -81,9 +84,9 @@ export class Canvas extends Rect implements ICanvas {
     public __updateSize(): void {
         const { canvas } = this
         if (canvas) {
-            const { smooth } = this.__
+            const { smooth, safeResize } = this.__
+            canvas.resize(this.__ as IScreenSizeData, safeResize)
             if (canvas.smooth !== smooth) canvas.smooth = smooth
-            canvas.resize(this.__ as IScreenSizeData)
         }
     }
 

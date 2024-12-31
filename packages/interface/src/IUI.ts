@@ -290,6 +290,7 @@ export interface ICanvas extends ICanvasAttrData, IRect {
 }
 interface ICanvasAttrData {
     smooth?: boolean
+    safeResize?: boolean
     contextSettings?: ICanvasContext2DSettings
     url?: string
 }
