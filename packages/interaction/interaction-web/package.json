@@ -1,6 +1,6 @@
 {
   "name": "@leafer-ui/interaction-web",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "@leafer-ui/interaction-web",
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
@@ -18,10 +18,10 @@
     "leaferjs"
   ],
   "dependencies": {
-    "@leafer/core": "1.2.1",
-    "@leafer-ui/core": "1.2.1"
+    "@leafer/core": "1.2.2",
+    "@leafer-ui/core": "1.2.2"
   },
   "devDependencies": {
-     "@leafer/interface": "1.2.1"
+     "@leafer/interface": "1.2.2"
   }
 }
