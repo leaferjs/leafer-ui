@@ -318,7 +318,7 @@ export class Leafer extends Group implements ILeafer {
                 this.viewCompleted = false
                 this.requestRender()
             }
-        } else if (!this.view) this.requestRender() // fix: 小程序等需要异步获取 view 的情况
+        } else this.requestRender() // fix: 小程序等需要异步获取 view 的情况
     }
 
     protected __checkViewCompleted(emit: boolean = true): void {
