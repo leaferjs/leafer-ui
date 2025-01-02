@@ -1,7 +1,7 @@
 import { ILeaferCanvas, IPathDrawer, IPathCommandData, IBoolean, INumber, IString, IBoundsData, IUnitData } from '@leafer/interface'
 import { BoundsHelper, boundsType, surfaceType, dataProcessor, registerUI, affectStrokeBoundsType, dataType, hitType, MathHelper } from '@leafer/core'
 
-import { IFill, IText, IFontWeight, ITextCase, ITextDecoration, ITextData, ITextInputData, ITextAlign, IVerticalAlign, ITextDrawData, IOverflow, IStrokeAlign, IHitType, ITextWrap } from '@leafer-ui/interface'
+import { IFill, IText, IFontWeight, ITextCase, ITextDecoration, ITextData, ITextInputData, ITextAlign, IVerticalAlign, ITextDrawData, IOverflow, IStrokeAlign, IHitType, ITextWrap, IWritingMode } from '@leafer-ui/interface'
 import { TextData } from '@leafer-ui/data'
 
 import { TextConvert, UnitConvert } from '@leafer-ui/external'
@@ -70,6 +70,9 @@ export class Text extends UI implements IText {
 
     @boundsType(0)
     public paraSpacing?: INumber
+
+    @boundsType('x')
+    public writingMode?: IWritingMode
 
     @boundsType('left')
     public textAlign?: ITextAlign

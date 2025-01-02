@@ -1,5 +1,5 @@
 import { INumber, IBoolean, IString, IFourNumber, IUnitData } from '@leafer/interface'
-import { IStrokeAlign, IStrokeCap, IStrokeJoin, IBlurEffect, IFontWeight, ITextCase, ITextDecoration, IShadowEffect, IGrayscaleEffect, ITextAlign, IVerticalAlign, IOverflow, ITextWrap, IStroke, IFill, IArrowType } from './type/IType'
+import { IStrokeAlign, IStrokeCap, IStrokeJoin, IBlurEffect, IFontWeight, ITextCase, ITextDecoration, IShadowEffect, IGrayscaleEffect, ITextAlign, IVerticalAlign, IOverflow, ITextWrap, IStroke, IFill, IArrowType, IWritingMode } from './type/IType'
 import { ILeafStrokePaint, ILeafShadowEffect, ILeafPaint } from './type/IComputedType'
 import { IDashPatternString, IShadowString, IColorString, IStrokeWidthString, ICornerRadiusString } from './type/IStringType'
 
@@ -97,6 +97,7 @@ export interface ITextStyleAttrData {
     paraIndent?: INumber
     paraSpacing?: INumber
 
+    writingMode?: IWritingMode
     textAlign?: ITextAlign
     verticalAlign?: IVerticalAlign
     autoSizeAlign?: IBoolean
@@ -117,6 +118,7 @@ export interface ITextStyleInputData {
     paraIndent?: INumber
     paraSpacing?: INumber
 
+    writingMode?: IWritingMode
     textAlign?: ITextAlign
     verticalAlign?: IVerticalAlign
     autoSizeAlign?: IBoolean
@@ -137,6 +139,7 @@ export interface ITextStyleComputedData {
     paraIndent?: number
     paraSpacing?: number
 
+    writingMode?: IWritingMode
     textAlign?: ITextAlign
     verticalAlign?: IVerticalAlign
     autoSizeAlign?: boolean // 自动宽高的文本，是否仍进行整体对齐操作

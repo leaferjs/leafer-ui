@@ -1,4 +1,4 @@
-import { IPointData, IPathCommandData, IWindingRule, IBlendMode, IExportFileType, ISizeData, IFourNumber, IAlign, IUnitPointData, IObject } from '@leafer/interface'
+import { IPointData, IPathCommandData, IWindingRule, IBlendMode, IExportFileType, ISizeData, IFourNumber, IAlign, IUnitPointData, IObject, IAxis, IAxisReverse } from '@leafer/interface'
 import { IColorString, IPaintString } from './IStringType'
 
 export type IPaint = ISolidPaint | IGradientPaint | IImagePaint
@@ -132,6 +132,7 @@ export type IFontWeightString =
     | 'black'
 export type ITextDecoration = 'none' | 'under' | 'delete'
 export type ITextWrap = 'normal' | 'none' | 'break'
+export type IWritingMode = IAxis | IAxisReverse
 
 // 路径
 export interface IVectorPath {
