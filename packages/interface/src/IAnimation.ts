@@ -142,6 +142,7 @@ export interface IAnimate extends IAnimateOptions, IEventer {
 
     readonly frames: IComputedKeyframe[]
 
+    readonly style: IUIInputData
     readonly fromStyle: IUIInputData
     readonly toStyle: IUIInputData
     readonly endingStyle: IUIInputData
