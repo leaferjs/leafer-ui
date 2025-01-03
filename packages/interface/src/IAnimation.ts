@@ -134,7 +134,7 @@ export interface IAnimateEventFunction {
 
 
 export interface IAnimate extends IAnimateOptions, IEventer {
-    target: IUI
+    target: IUI | IObject
 
     keyframes: IKeyframe[]
     config?: IAnimateOptions
@@ -157,7 +157,7 @@ export interface IAnimate extends IAnimateOptions, IEventer {
 
     readonly realEnding: IAnimateEnding
 
-    init(target: IUI, keyframe: IUIInputData | IKeyframe[], options?: ITransition, isTemp?: boolean): void
+    init(target: IUI | IObject, keyframe: IUIInputData | IKeyframe[], options?: ITransition, isTemp?: boolean): void
 
     play(): void
     pause(): void
