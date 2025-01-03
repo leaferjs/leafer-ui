@@ -37,18 +37,20 @@ export class Group extends UI implements IGroup {   // tip: rewrited Box
     // data
 
     public set(data: IUIInputData, transition?: ITransition | 'temp'): void {
-        if (data.children) {
-            const { children } = data
+        if (data) {
+            if (data.children) {
+                const { children } = data
 
-            delete data.children
-            this.children ? this.clear() : this.__setBranch()
+                delete data.children
+                this.children ? this.clear() : this.__setBranch()
 
-            super.set(data, transition)
+                super.set(data, transition)
 
-            children.forEach(child => this.add(child))
-            data.children = children
+                children.forEach(child => this.add(child))
+                data.children = children
 
-        } else super.set(data, transition)
+            } else super.set(data, transition)
+        }
     }
 
     public toJSON(options?: IJSONOptions): IUIJSONData {

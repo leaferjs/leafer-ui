@@ -381,13 +381,15 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
 
 
     public set(data: IUIInputData, transition?: ITransition | 'temp'): void {
-        if (transition) {
-            if (transition === 'temp') {
-                this.lockNormalStyle = true
-                Object.assign(this, data)
-                this.lockNormalStyle = false
-            } else this.animate(data, transition)
-        } else Object.assign(this, data)
+        if (data) {
+            if (transition) {
+                if (transition === 'temp') {
+                    this.lockNormalStyle = true
+                    Object.assign(this, data)
+                    this.lockNormalStyle = false
+                } else this.animate(data, transition)
+            } else Object.assign(this, data)
+        }
     }
 
     public get(name?: string | string[] | IUIInputData): IUIInputData | IValue {
