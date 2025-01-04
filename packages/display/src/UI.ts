@@ -292,9 +292,9 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
 
     // @leafer-in/animate rewrite
 
-    public animation?: IAnimation
+    public animation?: IAnimation | IAnimation[]
 
-    public animationOut?: IAnimation
+    public animationOut?: IAnimation | IAnimation[]
 
 
     public transition?: ITransition
@@ -467,7 +467,7 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
 
     // @leafer-in/animate rewrite
 
-    public animate(_keyframe?: IUIInputData | IKeyframe[] | IAnimation, _options?: ITransition, _type?: IAnimateType, _isTemp?: boolean): IAnimate {
+    public animate(_keyframe?: IUIInputData | IKeyframe[] | IAnimation | IAnimation[], _options?: ITransition, _type?: IAnimateType, _isTemp?: boolean): IAnimate {
         return Plugin.need('animate')
     }
 

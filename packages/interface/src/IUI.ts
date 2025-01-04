@@ -373,8 +373,8 @@ export interface IUI extends IUIAttrData, IFillAttrData, IStrokeAttrData, ICorne
     proxyData?: IUIInputData
     __proxyData?: IUIInputData
 
-    animation?: IAnimation
-    animationOut?: IAnimation
+    animation?: IAnimation | IAnimation[]
+    animationOut?: IAnimation | IAnimation[]
 
     editConfig?: IEditorConfig
     editOuter: string
@@ -409,7 +409,7 @@ export interface IUI extends IUIAttrData, IFillAttrData, IStrokeAttrData, ICorne
     __drawAfterFill?(canvas: ILeaferCanvas, options: IRenderOptions): void
     __drawContent?(canvas: ILeaferCanvas, options: IRenderOptions): void
 
-    animate(keyframe?: IUIInputData | IKeyframe[] | IAnimation, options?: ITransition, type?: IAnimateType, isTemp?: boolean): IAnimate
+    animate(keyframe?: IUIInputData | IKeyframe[] | IAnimation | IAnimation[], options?: ITransition, type?: IAnimateType, isTemp?: boolean): IAnimate
     killAnimate(type?: IAnimateType): void
 
     export(filename: string, options?: IExportOptions | number | boolean): Promise<IExportResult>
@@ -431,8 +431,8 @@ export type IStateName = string
 
 
 interface IUIAttrData {
-    animation?: IAnimation
-    animationOut?: IAnimation
+    animation?: IAnimation | IAnimation[]
+    animationOut?: IAnimation | IAnimation[]
 
     transition?: ITransition
     transitionOut?: ITransition
