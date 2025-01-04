@@ -1,8 +1,8 @@
 export { HitCanvasManager } from './HitCanvasManager'
 
-export * from './LeafHit'
-export * from './UIHit'
-export * from './RectHit'
+import './LeafHit'
+import './UIHit'
+import './RectHit'
 
-export * from './find'
-export * from './canvas'
+import './pick'
+import './canvas'

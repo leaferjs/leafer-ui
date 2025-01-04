@@ -127,8 +127,8 @@ export class App extends Leafer implements IApp {
         super.__onResize(event)
     }
 
-    protected __checkUpdateLayout(): void {
-        this.children.forEach(leafer => leafer.__layout.update())
+    public updateLayout(): void {
+        this.children.forEach(leafer => leafer.updateLayout())
     }
 
     protected __getChildConfig(userConfig?: ILeaferConfig): ILeaferConfig {

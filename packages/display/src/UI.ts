@@ -401,11 +401,11 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
 
     // hit rewrite
 
-    public find(_condition: number | string | IFindCondition | IFindUIMethod, _options?: any): IUI[] { return undefined }
+    public find(_condition: number | string | IFindCondition | IFindUIMethod, _options?: any): IUI[] { return Plugin.need('find') }
 
     public findTag(tag: string | string[]): IUI[] { return this.find({ tag }) }
 
-    public findOne(_condition: number | string | IFindCondition | IFindUIMethod, _options?: any): IUI | undefined { return undefined }
+    public findOne(_condition: number | string | IFindCondition | IFindUIMethod, _options?: any): IUI | undefined { return Plugin.need('find') }
 
     public findId(id: number | string): IUI | undefined { return this.findOne({ id }) }
 

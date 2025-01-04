@@ -397,11 +397,6 @@ export class Leafer extends Group implements ILeafer {
     // miniapp rewrite
     public receiveEvent(_event: any): void { }
 
-
-    protected __checkUpdateLayout(): void {
-        this.__layout.update()
-    }
-
     protected emitLeafer(type: string): void {
         this.emitEvent(new LeaferEvent(type, this))
     }
@@ -416,7 +411,6 @@ export class Leafer extends Group implements ILeafer {
         this.__eventIds.push(
             this.on_(WatchEvent.DATA, this.__onWatchData, this),
             this.on_(RenderEvent.NEXT, this.__onNextRender, this),
-            this.on_(LayoutEvent.CHECK_UPDATE, this.__checkUpdateLayout, this)
         )
     }
 
