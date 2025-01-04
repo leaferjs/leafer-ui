@@ -1,5 +1,5 @@
 // leaferui's partner, allow replace
-import { Paint, PaintImage, PaintGradient, Effect, TextConvert, ColorConvert, Export } from '@leafer-ui/draw'
+import { Paint, PaintImage, PaintGradient, Effect, TextConvert, ColorConvert } from '@leafer-ui/draw'
 
 import { PaintModule } from '@leafer-ui/paint'
 import { PaintImageModule } from '@leafer-ui/image'
@@ -9,7 +9,6 @@ import '@leafer-ui/mask'
 
 import { TextConvertModule } from '@leafer-ui/text'
 import { ColorConvertModule } from '@leafer-ui/color'
-import { ExportModule } from '@leafer-ui/export'
 
 
 Object.assign(TextConvert, TextConvertModule)
@@ -20,4 +19,3 @@ Object.assign(PaintImage, PaintImageModule)
 Object.assign(PaintGradient, PaintGradientModule)
 
 Object.assign(Effect, EffectModule)
-Object.assign(Export, ExportModule)

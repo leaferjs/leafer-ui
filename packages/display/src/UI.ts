@@ -476,8 +476,9 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
 
     // create
 
-    public export(filename: IExportFileType | string, options?: IExportOptions | number | boolean): Promise<IExportResult> {
-        return Export.export(this, filename, options)
+    // @leafer-in/export will rewrite
+    public export(_filename: IExportFileType | string, _options?: IExportOptions | number | boolean): Promise<IExportResult> {
+        return Plugin.need('export')
     }
 
     public clone(data?: IUIInputData): IUI {
