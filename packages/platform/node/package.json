@@ -36,6 +36,7 @@
     "@leafer-ui/core": "1.2.2",
     "@leafer-ui/partner": "1.2.2",
     "@leafer-ui/interface": "1.2.2",
+    "@leafer-in/export": "1.2.2",
     "@leafer-in/interface": "1.2.2"
   }
 }

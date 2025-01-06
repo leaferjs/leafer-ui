@@ -471,7 +471,7 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
         return Plugin.need('animate')
     }
 
-    public killAnimate(_type?: IAnimateType): void { }
+    public killAnimate(_type?: IAnimateType, _killStyle?: IUIInputData): void { }
 
 
     // create

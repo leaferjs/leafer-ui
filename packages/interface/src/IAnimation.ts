@@ -163,7 +163,7 @@ export interface IAnimate extends IAnimateOptions, IEventer {
     pause(): void
     stop(): void
     seek(time: number | IPercentData): void
-    kill(): void
+    kill(complete?: boolean, killStyle?: IUIInputData): void
 
     destroy(complete?: boolean): void
 }
