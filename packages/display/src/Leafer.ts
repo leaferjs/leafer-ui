@@ -293,7 +293,6 @@ export class Leafer extends Group implements ILeafer {
     }
 
     protected __onReady(): void {
-        if (this.ready) return
         this.ready = true
         this.emitLeafer(LeaferEvent.BEFORE_READY)
         this.emitLeafer(LeaferEvent.READY)
@@ -306,6 +305,19 @@ export class Leafer extends Group implements ILeafer {
         this.viewReady = true
         this.emitLeafer(LeaferEvent.VIEW_READY)
         WaitHelper.run(this.__viewReadyWait)
+    }
+
+    protected __onLayoutEnd(): void {
+        const { grow, growWidth, growHeight } = this.config
+        if (grow) {
+            let { width, height, pixelRatio } = this
+            const bounds = grow === 'box' ? this.worldBoxBounds : this.__world
+            if (growWidth !== false) width = Math.max(1, bounds.x + bounds.width)
+            if (growHeight !== false) height = Math.max(1, bounds.y + bounds.height)
+            this.__doResize({ width, height, pixelRatio })
+        }
+
+        if (!this.ready) this.__onReady()
     }
 
     protected __onNextRender(): void {
@@ -405,11 +417,11 @@ export class Leafer extends Group implements ILeafer {
         const runId = Run.start('FirstCreate ' + this.innerName)
         this.once(LeaferEvent.START, () => Run.end(runId))
         this.once(LayoutEvent.START, () => this.updateLazyBounds())
-        this.once(LayoutEvent.END, () => this.__onReady())
         this.once(RenderEvent.START, () => this.__onCreated())
         this.once(RenderEvent.END, () => this.__onViewReady())
         this.__eventIds.push(
             this.on_(WatchEvent.DATA, this.__onWatchData, this),
+            this.on_(LayoutEvent.END, this.__onLayoutEnd, this),
             this.on_(RenderEvent.NEXT, this.__onNextRender, this),
         )
     }
