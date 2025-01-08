@@ -68,6 +68,9 @@ export interface IComputedKeyframe {
     delay?: number
     duration?: number
 
+    swing?: number
+    loop?: number
+
     autoDelay?: number
     autoDuration?: number
 
