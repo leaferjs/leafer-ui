@@ -25,7 +25,7 @@ export interface IAnimateOptions {
     ending?: IAnimateEnding
 
     reverse?: boolean
-    swing?: boolean
+    swing?: boolean | number
 
     loop?: boolean | number
     loopDelay?: number
@@ -50,6 +50,9 @@ export interface IAnimateKeyframe {
     easing?: IAnimateEasing
     delay?: number
     duration?: number
+
+    swing?: number
+    loop?: number
 
     autoDelay?: number
     autoDuration?: number
