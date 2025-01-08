@@ -15,7 +15,7 @@ export function layoutChar(drawData: ITextDrawData, style: ITextData, width: num
         if (row.words) {
 
             indentWidth = paraIndent && row.paraStart ? paraIndent : 0
-            addWordWidth = (width && textAlign === 'justify' && row.words.length > 1) ? (width - row.width - indentWidth) / (row.words.length - 1) : 0
+            addWordWidth = (width && (textAlign === 'justify' || textAlign === 'both') && row.words.length > 1) ? (width - row.width - indentWidth) / (row.words.length - 1) : 0
             mode = (letterSpacing || row.isOverflow) ? CharMode : (addWordWidth > 0.01 ? WordMode : TextMode)
             if (row.isOverflow && !letterSpacing) row.textMode = true
 
@@ -44,7 +44,7 @@ export function layoutChar(drawData: ITextDrawData, style: ITextData, width: num
 
                     }
 
-                    if (!row.paraEnd && addWordWidth) {
+                    if (addWordWidth && (!row.paraEnd || textAlign === 'both')) {
                         charX += addWordWidth
                         row.width += addWordWidth
                     }

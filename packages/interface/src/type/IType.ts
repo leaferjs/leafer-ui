@@ -115,7 +115,7 @@ export interface IPathDataArrowOffset {
 }
 
 // 文本
-export type ITextAlign = 'left' | 'center' | 'right' | 'justify'
+export type ITextAlign = 'left' | 'center' | 'right' | 'justify' | 'both'
 export type IVerticalAlign = 'top' | 'middle' | 'bottom'
 export type ITextCase = | 'upper' | 'lower' | 'title' | 'none' | 'small-caps'
 export type IFontWeight = IFontWeightNumer | IFontWeightString
