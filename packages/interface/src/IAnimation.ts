@@ -141,7 +141,6 @@ export interface IAnimateEventFunction {
 
 export interface IAnimate extends IAnimateOptions, IEventer {
     target: IUI | IObject
-    list?: IAnimate[] // AnimateList 专用
 
     keyframes: IKeyframe[]
     config?: IAnimateOptions
@@ -172,5 +171,12 @@ export interface IAnimate extends IAnimateOptions, IEventer {
     seek(time: number | IPercentData): void
     kill(complete?: boolean, killStyle?: IUIInputData): void
 
+
+
     destroy(complete?: boolean): void
+}
+
+export interface IAnimateList extends IAnimate {
+    list: IAnimate[]
+    updateList(animation?: IAnimation[] | IAnimate[], isTemp?: boolean): void
 }

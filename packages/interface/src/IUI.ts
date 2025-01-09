@@ -410,7 +410,7 @@ export interface IUI extends IUIAttrData, IFillAttrData, IStrokeAttrData, ICorne
     __drawContent?(canvas: ILeaferCanvas, options: IRenderOptions): void
 
     animate(keyframe?: IUIInputData | IKeyframe[] | IAnimation | IAnimation[], options?: ITransition, type?: IAnimateType, isTemp?: boolean): IAnimate
-    killAnimate(type?: IAnimateType, killStyle?: IUIInputData): void
+    killAnimate(type?: IAnimateType, nextStyle?: IUIInputData): void
 
     export(filename: string, options?: IExportOptions | number | boolean): Promise<IExportResult>
     clone(data?: IUIInputData): IUI
