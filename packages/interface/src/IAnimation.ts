@@ -141,6 +141,7 @@ export interface IAnimateEventFunction {
 
 export interface IAnimate extends IAnimateOptions, IEventer {
     target: IUI | IObject
+    list?: IAnimate[] // AnimateList 专用
 
     keyframes: IKeyframe[]
     config?: IAnimateOptions
