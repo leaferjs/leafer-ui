@@ -30,7 +30,7 @@
 
 ## 场景包
 
-高效绘图场景，推荐直接安装更轻量的 [leafer-draw](https://leaferjs.com/ui/guide/install/draw/start.html) （51KB min+gzip）。
+高效绘图场景，推荐直接安装更轻量的 [leafer-draw](https://leaferjs.com/ui/guide/install/draw/start.html) （50KB min+gzip）。
 
 游戏开发场景，推荐直接安装更省心的 [leafer-game](https://leaferjs.com/ui/guide/install/game/start.html)，已集成了游戏相关插件。
 
