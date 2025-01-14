@@ -57,6 +57,10 @@
 
 [test](https://github.com/leaferjs/test) 自动化测试仓库。
 
+[code](https://github.com/leaferjs/code) 示例代码仓库。
+
+[docs](https://github.com/leaferjs/docs) 在线文档仓库。
+
 ## 使命与愿景
 
 LeaferJS 致力于实现一套简洁、开放、现代化的 UI 绘图语言标准，表现力丰富，便于 AI 理解，人类可视化使用，并为数字化产品开发提供跨平台、轻量化、高性能的运行时。
