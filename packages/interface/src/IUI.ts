@@ -445,6 +445,7 @@ interface IUIAttrData {
     focusStyle?: IStateStyle
     selectedStyle?: IStateStyle
     disabledStyle?: IStateStyle
+    placeholderStyle?: IStateStyle
 }
 
 export interface IFindUIMethod {
