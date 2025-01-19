@@ -2,6 +2,7 @@ import { IBoundsData, ILeaferCanvas, IMatrixWithBoundsData, IOffsetBoundsData } 
 import { BoundsHelper } from '@leafer/core'
 
 import { IUI, ICachedShape } from '@leafer-ui/interface'
+import { ColorConvert } from '@leafer-ui/draw'
 
 import { drawWorldShadow } from './Shadow'
 
@@ -43,7 +44,7 @@ export function innerShadow(ui: IUI, current: ILeaferCanvas, shape: ICachedShape
             copyBounds = bounds
         }
 
-        other.fillWorld(copyBounds, item.color, 'source-in')
+        other.fillWorld(copyBounds, ColorConvert.string(item.color), 'source-in')
 
         if (ui.__worldFlipped) {
             current.copyWorldByReset(other, copyBounds, nowWorld, item.blendMode)
