@@ -60,6 +60,8 @@ export class Box extends Group implements IBox {
 
             if (data.__autoSide) {
 
+                if (data.__hasSurface) this.__extraUpdate() // Box自身存在样式，需要额外更新
+
                 super.__updateBoxBounds()
 
                 const { boxBounds } = this.__layout

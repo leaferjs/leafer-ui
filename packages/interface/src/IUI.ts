@@ -475,6 +475,7 @@ export interface IUIData extends IUIAttrData, IUIComputedData, ILeafData {
 
     __drawAfterFill?: boolean
     readonly __clipAfterFill?: boolean
+    readonly __hasSurface?: boolean
 
     __isOverflow?: boolean
     __blendLayer?: boolean
