@@ -41,7 +41,7 @@ export class Text extends UI implements IText {
     @boundsType('')
     public text?: IString | INumber
 
-    @boundsType('L')
+    @boundsType('caption')
     public fontFamily?: IString
 
     @boundsType(12)
