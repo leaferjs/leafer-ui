@@ -256,7 +256,7 @@ export class Leafer extends Group implements ILeafer {
     override __setAttr(attrName: string, newValue: IValue): boolean {
         if (this.canvas) {
             if (canvasSizeAttrs.includes(attrName)) {
-                if (!newValue) debug.warn(attrName + ' is 0')
+                // if (!newValue) debug.warn(attrName + ' is 0')
                 this.__changeCanvasSize(attrName, newValue as number)
             } else if (attrName === 'fill') {
                 this.__changeFill(newValue as string)
