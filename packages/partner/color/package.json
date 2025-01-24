@@ -18,9 +18,9 @@
     "leaferjs"
   ],
   "dependencies": {
-    "@leafer-ui/draw": "1.3.3"
+    "@leafer-ui/draw": "workspace:*"
   },
   "devDependencies": {
-     "@leafer-ui/interface": "1.3.3"
+     "@leafer-ui/interface": "workspace:*"
   }
 }

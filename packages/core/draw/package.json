@@ -25,10 +25,10 @@
     "leaferjs"
   ],
   "dependencies": {
-    "@leafer/core": "1.3.3",
-    "@leafer-ui/display": "1.3.3",
-    "@leafer-ui/display-module": "1.3.3",
-    "@leafer-ui/decorator": "1.3.3",
-    "@leafer-ui/external": "1.3.3"
+    "@leafer/core": "workspace:*",
+    "@leafer-ui/display": "workspace:*",
+    "@leafer-ui/display-module": "workspace:*",
+    "@leafer-ui/decorator": "workspace:*",
+    "@leafer-ui/external": "workspace:*"
   }
 }

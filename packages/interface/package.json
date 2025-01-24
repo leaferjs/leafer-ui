@@ -18,6 +18,6 @@
     "leaferjs"
   ],
   "dependencies": {
-    "@leafer/interface": "1.3.3"
+    "@leafer/interface": "workspace:*"
   }
 }
