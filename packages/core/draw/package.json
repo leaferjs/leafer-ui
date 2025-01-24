@@ -5,10 +5,10 @@
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
   "type": "module",
-  "main": "lib/draw.esm.js",
+  "main": "lib/draw.esm.min.js",
   "exports": {
-    "import": "./lib/draw.esm.js",
-    "require": "./lib/draw.cjs",
+    "import": "./lib/draw.esm.min.js",
+    "require": "./lib/draw.min.cjs",
     "types": "./types/index.d.ts"
   },
   "types": "types/index.d.ts",

@@ -4,15 +4,15 @@
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
   "type": "module",
-  "main": "dist/web.esm.js",
+  "main": "dist/web.esm.min.js",
   "exports": {
-    "import": "./dist/web.esm.js",
-    "require": "./dist/web.cjs",
+    "import": "./dist/web.esm.min.js",
+    "require": "./dist/web.min.cjs",
     "types": "./types/index.d.ts"
   },
   "types": "types/index.d.ts",
-  "unpkg": "dist/web.js",
-  "jsdelivr": "dist/web.js",
+  "unpkg": "dist/web.min.js",
+  "jsdelivr": "dist/web.min.js",
   "files": ["src","types","dist"],
   "repository": {
     "type": "git",

@@ -5,10 +5,10 @@
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
   "type": "module",
-  "main": "lib/core.esm.js",
+  "main": "lib/core.esm.min.js",
   "exports": {
-    "import": "./lib/core.esm.js",
-    "require": "./lib/core.cjs",
+    "import": "./lib/core.esm.min.js",
+    "require": "./lib/core.min.cjs",
     "types": "./types/index.d.ts"
   },
   "types": "types/index.d.ts",

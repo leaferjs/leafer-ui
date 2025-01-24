@@ -5,15 +5,15 @@
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
   "type": "module",
-  "main": "dist/worker.esm.js",
+  "main": "dist/worker.esm.min.js",
   "exports": {
-    "import": "./dist/worker.esm.js",
-    "require": "./dist/worker.cjs",
+    "import": "./dist/worker.esm.min.js",
+    "require": "./dist/worker.min.cjs",
     "types": "./types/index.d.ts"
   },
   "types": "types/index.d.ts",
-  "unpkg": "dist/worker.js",
-  "jsdelivr": "dist/worker.js",
+  "unpkg": "dist/worker.min.js",
+  "jsdelivr": "dist/worker.min.js",
   "files": ["src","types","dist"],
   "repository": {
     "type": "git",

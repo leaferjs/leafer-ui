@@ -5,15 +5,15 @@
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
   "type": "module",
-  "main": "dist/miniapp.esm.js",
+  "main": "dist/miniapp.esm.min.js",
   "exports": {
-    "import": "./dist/miniapp.esm.js",
-    "require": "./dist/miniapp.cjs",
+    "import": "./dist/miniapp.esm.min.js",
+    "require": "./dist/miniapp.min.cjs",
     "types": "./types/index.d.ts"
   },
   "types": "types/index.d.ts",
-  "unpkg": "dist/miniapp.esm.js",
-  "jsdelivr": "dist/miniapp.esm.js",
+  "unpkg": "dist/miniapp.esm.min.js",
+  "jsdelivr": "dist/miniapp.esm.min.js",
   "files": ["src","types","dist"],
   "repository": {
     "type": "git",
