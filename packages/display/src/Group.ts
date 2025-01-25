@@ -1,7 +1,7 @@
-import { IJSONOptions, IPickOptions, IPickResult, IPointData } from '@leafer/interface'
+import { IJSONOptions, IPickOptions, IPickResult, IPointData, ITransition } from '@leafer/interface'
 import { Branch, useModule, dataProcessor, registerUI } from '@leafer/core'
 
-import { IGroup, IGroupData, IGroupInputData, IUI, IUIInputData, IUIJSONData, ITransition, IFindCondition, IFindUIMethod } from '@leafer-ui/interface'
+import { IGroup, IGroupData, IGroupInputData, IUI, IUIInputData, IUIJSONData, IFindCondition, IFindUIMethod } from '@leafer-ui/interface'
 import { GroupData } from '@leafer-ui/data'
 
 import { UI } from './UI'
