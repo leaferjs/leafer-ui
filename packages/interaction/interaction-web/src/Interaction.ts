@@ -41,6 +41,7 @@ export class Interaction extends InteractionBase {
             'pointerdown': this.onPointerDown,
             'mousedown': this.onMouseDown,
             'touchstart': this.onTouchStart,
+            'pointerleave': this.onPointerLeave,
 
             'contextmenu': this.onContextMenu,
 
@@ -150,10 +151,15 @@ export class Interaction extends InteractionBase {
         this.pointerDown(PointerEventHelper.convert(e, this.getLocal(e)))
     }
 
-    protected onPointerMove(e: PointerEvent): void {
+    protected onPointerMove(e: PointerEvent, isLeave?: boolean): void {
         if (this.config.pointer.touch || this.useMultiTouch || this.preventWindowPointer(e)) return
         this.usePointer || (this.usePointer = true)
-        this.pointerMove(PointerEventHelper.convert(e, this.getLocal(e, true)))
+        const data = PointerEventHelper.convert(e, this.getLocal(e, true))
+        isLeave ? this.pointerHover(data) : this.pointerMove(data)
+    }
+
+    protected onPointerLeave(e: PointerEvent): void {
+        this.onPointerMove(e, true)
     }
 
     protected onPointerUp(e: PointerEvent): void {

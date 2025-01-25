@@ -132,11 +132,10 @@ export class InteractionBase implements IInteraction {
     }
 
     public pointerMoveReal(data: IPointerEvent): void {
-        const { dragHover, dragDistance } = this.p
         this.emit(PointerEvent.BEFORE_MOVE, data, this.defaultPath)
 
         if (this.downData) {
-            const canDrag = PointHelper.getDistance(this.downData, data) > dragDistance
+            const canDrag = PointHelper.getDistance(this.downData, data) > this.p.dragDistance
             if (canDrag) {
                 if (this.waitTap) this.pointerWaitCancel()
                 this.waitRightTap = false
@@ -151,9 +150,9 @@ export class InteractionBase implements IInteraction {
 
             this.emit(PointerEvent.MOVE, data)
 
-            if (!(this.dragging && !dragHover)) this.pointerHover(data)
+            this.pointerHover(data)
 
-            if (this.dragger.dragging) {
+            if (this.dragging) {
                 this.dragger.dragOverOrOut(data)
                 this.dragger.dragEnterOrLeave(data)
             }
@@ -266,7 +265,8 @@ export class InteractionBase implements IInteraction {
 
     // helper
     protected pointerHover(data: IPointerEvent): void {
-        if (this.canHover) {
+        if (this.canHover && !(this.dragging && !this.p.dragHover)) {
+            data.path || (data.path = new LeafList()) // 离开画布的情况
             this.pointerOverOrOut(data)
             this.pointerEnterOrLeave(data)
         }
