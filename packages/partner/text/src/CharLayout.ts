@@ -9,13 +9,13 @@ export function layoutChar(drawData: ITextDrawData, style: ITextData, width: num
 
     const { rows } = drawData
     const { textAlign, paraIndent, letterSpacing } = style
-    let charX: number, addWordWidth: number, indentWidth: number, mode: number, wordChar: ITextCharData
+    let charX: number, addWordWidth: number, indentWidth: number, mode: number, wordChar: ITextCharData, wordsLength: number
 
     rows.forEach(row => {
         if (row.words) {
 
-            indentWidth = paraIndent && row.paraStart ? paraIndent : 0
-            addWordWidth = (width && (textAlign === 'justify' || textAlign === 'both') && row.words.length > 1) ? (width - row.width - indentWidth) / (row.words.length - 1) : 0
+            indentWidth = paraIndent && row.paraStart ? paraIndent : 0, wordsLength = row.words.length
+            addWordWidth = (width && (textAlign === 'justify' || textAlign === 'both') && wordsLength > 1) ? (width - row.width - indentWidth) / (wordsLength - 1) : 0
             mode = (letterSpacing || row.isOverflow) ? CharMode : (addWordWidth > 0.01 ? WordMode : TextMode)
             if (row.isOverflow && !letterSpacing) row.textMode = true
 
@@ -30,7 +30,7 @@ export function layoutChar(drawData: ITextDrawData, style: ITextData, width: num
                 charX = row.x
                 row.data = []
 
-                row.words.forEach(word => {
+                row.words.forEach((word, index) => {
 
                     if (mode === WordMode) {
 
@@ -44,7 +44,7 @@ export function layoutChar(drawData: ITextDrawData, style: ITextData, width: num
 
                     }
 
-                    if (addWordWidth && (!row.paraEnd || textAlign === 'both')) {
+                    if (addWordWidth && (!row.paraEnd || textAlign === 'both') && (index !== wordsLength - 1)) {
                         charX += addWordWidth
                         row.width += addWordWidth
                     }
