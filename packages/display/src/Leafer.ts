@@ -308,12 +308,12 @@ export class Leafer extends Group implements ILeafer {
     }
 
     protected __onLayoutEnd(): void {
-        const { grow, growWidth, growHeight } = this.config
+        const { grow, width: fixedWidth, height: fixedHeight } = this.config
         if (grow) {
             let { width, height, pixelRatio } = this
             const bounds = grow === 'box' ? this.worldBoxBounds : this.__world
-            if (growWidth !== false) width = Math.max(1, bounds.x + bounds.width)
-            if (growHeight !== false) height = Math.max(1, bounds.y + bounds.height)
+            if (!fixedWidth) width = Math.max(1, bounds.x + bounds.width)
+            if (!fixedHeight) height = Math.max(1, bounds.y + bounds.height)
             this.__doResize({ width, height, pixelRatio })
         }
 
