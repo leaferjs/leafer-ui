@@ -4,6 +4,8 @@
 
 [![LeaferJS](https://www.leaferjs.com/image/leaferjs.jpg?d=1126)](https://www.leaferjs.com)
 
+[![leaferjs](/svg/leaferjs.svg?d=013007)](/sponsor/)
+
 提供了丰富的 UI 绘图元素，和开箱即用的功能，如自动布局、图形编辑、SVG 导出等，方便与 PS、 Figma、Sketch 等产品进行对接。并为跨平台开发提供了统一的交互事件，如拖拽、旋转、缩放手势等。
 
 📗 [图文并茂、由浅入深的了解 LeaferJS](https://leaferjs.com/ui/blog/2024-07-09.html)
@@ -28,7 +30,7 @@
 
 🚀 想马上在产品中使用，请安装 [leafer-ui](https://leaferjs.com/ui/guide/install/ui/start.html)，开始你的探索之旅。
 
-## 场景包
+### 场景包
 
 高效绘图场景，推荐直接安装更轻量的 [leafer-draw](https://leaferjs.com/ui/guide/install/draw/start.html) （50KB min+gzip）。
 
@@ -36,12 +38,51 @@
 
 图形编辑场景，推荐直接安装更省心的 [leafer-editor](https://leaferjs.com/ui/guide/install/editor/start.html)，已集成了图形编辑器相关插件。
 
-## 互动交流
 
-有 Bug、建议可以 [提交 issue](https://github.com/leaferjs/leafer-ui/issues)，留下你的贡献足迹，了解 [提问的智慧](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/main/README-zh_CN.md#%E6%8F%90%E9%97%AE%E7%9A%84%E6%99%BA%E6%85%A7)
-。
+## 社区提问
 
-欢迎加入 [技术交流群](https://leaferjs.com/#contact) ，与小伙伴们建立联系，共同学习进步，偶尔会有特殊福利。
+欢迎加入 [技术交流群](https://leaferjs.com/#contact) ，与小伙伴们建立联系，讨论、改进产品，共同学习进步，偶尔会有福利。
+
+### 每周 4 天工作制
+
+LeaferJS 计划试行每周 4 天工作制（周一、二、四、五），寻求支持请留意工作时间。
+
+### 一. 反馈问题与建议
+
+有 Bug、建议请 [提交 issue](https://github.com/leaferjs/leafer-ui/issues) 进行反馈，留下你的贡献足迹，一起让 LeaferJS 变得越来越好。
+
+::: tip 提交模版
+**【Bug/建议】xxxxxxxxxxx 标题 xxxxxxxxxxxxxx**
+
+环境：电脑 + window 11 + chrome 131 + leaferjs 1.4.0
+
+复现：提供复现逻辑和可直接运行的代码，提高解决效率
+
+:::
+
+### 二. 求助使用问题？
+
+针对使用过程中遇到不懂的问题或缺失功能，我们提供了以下求助渠道，同时也招募社区管理员。
+
+#### 1. 社区支持（推荐）
+
+[前往知乎](https://www.zhihu.com/search?type=content&q=leaferjs%E9%97%AE%E9%A2%98) 创建一个问题:
+
+::: warning 提交模版
+**【leaferjs 问题】xxxxxxxxxxx 标题 xxxxxxxxxxxxxx**
+
+环境：电脑 + window 11 + chrome 131 + leaferjs 1.4.0
+
+:::
+
+我和社区管理员们会安排固定的时间查看、回复大家的问题，也可将链接转发到 [技术交流群](https://leaferjs.com/#contact) 里。
+
+同时这些问题也会被搜索引擎收录，以后网上搜索一下就能找到答案，省去重复劳动。
+
+#### 2. 官方支持
+
+由于我们的资源时间有限，并且有很多关键工作要做，只能优先服务好 [金牌以上赞助用户](https://leaferjs.com/ui/sponsor/index.md#开发赞助) 、社区管理员，后续资源充足了，可以招募更多的专业人员参与，以及开发各种从 0 到 1 的场景教程。
+
 
 ## 仓库组成
 
