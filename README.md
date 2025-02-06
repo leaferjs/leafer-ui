@@ -50,14 +50,16 @@ LeaferJS 计划试行每周 4 天工作制（周一、二、四、五），寻�
 
 有 Bug、建议请 [提交 issue](https://github.com/leaferjs/leafer-ui/issues) 进行反馈，留下你的贡献足迹，一起让 LeaferJS 变得越来越好。
 
-::: tip 提交模版
-**【Bug/建议】xxxxxxxxxxx 标题 xxxxxxxxxxxxxx**
+```
+提交模版:
+
+【Bug/建议】xxxxxxxxxxx 标题 xxxxxxxxxxxxxx
 
 环境：电脑 + window 11 + chrome 131 + leaferjs 1.4.0
 
 复现：提供复现逻辑和可直接运行的代码，提高解决效率
 
-:::
+```
 
 ### 二. 求助使用问题？
 
@@ -67,12 +69,14 @@ LeaferJS 计划试行每周 4 天工作制（周一、二、四、五），寻�
 
 [前往知乎](https://www.zhihu.com/search?type=content&q=leaferjs%E9%97%AE%E9%A2%98) 创建一个问题:
 
-::: warning 提交模版
-**【leaferjs 问题】xxxxxxxxxxx 标题 xxxxxxxxxxxxxx**
+```
+提交模版:
+
+【leaferjs 问题】xxxxxxxxxxx 标题 xxxxxxxxxxxxxx
 
 环境：电脑 + window 11 + chrome 131 + leaferjs 1.4.0
 
-:::
+```
 
 我和社区管理员们会安排固定的时间查看、回复大家的问题，也可将链接转发到 [技术交流群](https://leaferjs.com/#contact) 里。
 
