@@ -9,6 +9,7 @@
 3. 提交你的修改: git commit -am 'feat(type): add xxxxx'
 4. 推送您的分支: git push origin feat/xxxx
 5. 提交 pull request
+6. 首次提交需同意 [贡献者许可协议](https://cla-assistant.io/leaferjs/leafer-ui)， 我们才能合并的了代码
 
 ### 常用提交类型
 
