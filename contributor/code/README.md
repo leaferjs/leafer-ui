@@ -14,7 +14,7 @@ https://www.leaferjs.com/playground/
 
 **第一步：** 通过 [Cloud Studio](https://cloudstudio.net/?templateId=10064) 在线模版项目 或 [本地环境](https://www.leaferjs.com/ui/guide/runtime.html#%E6%9C%AC%E5%9C%B0%E7%8E%AF%E5%A2%83) 进行开发。
 
-**第二步：** 开发完成并测试合格后，阅读 [代码提交规范](https://github.com/leaferjs/leafer-ui/blob/main/contributor/COMMIT_CONVENTION.md), 将代码（单文件） pull request。
+**第二步：** 开发完成并测试合格后，阅读 [代码提交规范](https://github.com/leaferjs/leafer-ui/blob/main/contributor/COMMIT_CONVENTION.md)， 将代码（单文件） pull request。
 
 **第三步：** 等待合并收录代码（低质量的代码有可能被拒），收录成功后将会出现在 playground 环境的 [社区列表](https://www.leaferjs.com/playground/#community) 中，比较有场景代表的会被同时收录到首页场景案例中。
 
