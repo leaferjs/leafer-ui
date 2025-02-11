@@ -80,7 +80,7 @@ LeaferJS 试行 [4 天工作制](https://www.leaferjs.com/ui/blog/2025-02-06.htm
 
 #### 1. 社区支持（推荐）
 
-为让更多的人参与解答，同时让搜索引擎收录问题，避免重复劳动，推荐公开求助你的问题。
+为让更多的人可以参与解答，同时让搜索引擎收录问题（避免重复劳动），请公开求助你的问题。
 
 [前往知乎](https://www.zhihu.com/topic/736459154/unanswered) 创建一个问题并绑定话题 [#LeaferJS](https://www.zhihu.com/topic/736459154/unanswered):
 
@@ -190,7 +190,10 @@ LeaferJS 致力于实现一套简洁、开放、现代化的 UI 绘图语言标�
     </p>
 <p><h3 align="center">银牌赞助</h3></p>
 <p style="display: flex;flex-wrap: wrap;justify-content: center;gap: 5px;">
-<a target="_blank" href="https://frameelf.com/">
+<a target="_blank" href="https://www.u-tools.cn/plugins/detail/%E6%88%AA%E5%9B%BE%E5%B7%A5%E5%85%B7%20Plus/index.html">
+        <img width="40" title="截图工具 Plus" src="https://www.leaferjs.com/image/sponsor/user/135.png" loading="lazy" />
+    </a>
+    <a target="_blank" href="https://frameelf.com/">
         <img width="40" title="边框水印精灵" src="https://www.leaferjs.com/image/sponsor/user/134.jpg" loading="lazy" />
     </a>
     <a target="_blank" href="">
