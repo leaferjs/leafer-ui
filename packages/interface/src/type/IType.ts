@@ -1,4 +1,4 @@
-import { IPointData, IPathCommandData, IWindingRule, IBlendMode, IExportFileType, ISizeData, IFourNumber, IAlign, IUnitPointData, IObject, IAxis, IAxisReverse } from '@leafer/interface'
+import { IPointData, IPathCommandData, IWindingRule, IBlendMode, IExportFileType, ISizeData, IFourNumber, IAlign, IUnitPointData, IObject, IAxis, IAxisReverse, ILeaferCanvas, ILeaferImage } from '@leafer/interface'
 import { IColorString, IPaintString } from './IStringType'
 
 export type IPaint = ISolidPaint | IGradientPaint | IImagePaint
@@ -59,7 +59,11 @@ export interface IColorStop {
 // ---
 export interface IImagePaint extends IPaintBase {
     type: "image"
-    url: string
+
+    url?: string
+    canvas?: ILeaferCanvas | IObject
+    image?: ILeaferImage | IObject
+
     mode?: IImagePaintMode
     format?: IExportFileType
 
