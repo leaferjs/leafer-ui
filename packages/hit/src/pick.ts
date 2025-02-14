@@ -7,7 +7,7 @@ function getSelector(ui: IUI): ISelector {
 }
 
 Group.prototype.pick = function (hitPoint: IPointData, options?: IPickOptions): IPickResult {
-    this.leafer || this.updateLayout()
+    Platform.backgrounder || this.updateLayout()
     options || (options = emptyData)
     return getSelector(this).getByPoint(hitPoint, options.hitRadius || 0, { ...options, target: this })
 }

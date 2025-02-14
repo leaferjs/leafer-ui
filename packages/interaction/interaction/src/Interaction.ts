@@ -1,5 +1,5 @@
 import { IUIEvent, IPointerEvent, ILeaf, IInteraction, IInteractionConfig, ITransformer, ILeafList, IMoveEvent, IZoomEvent, IRotateEvent, IWheelEvent, ISelector, IBounds, IEventListenerId, IInteractionCanvas, ITimer, IKeepTouchData, IKeyEvent, IPickOptions, ICursorType, IBooleanMap, IPickBottom, IClientPointData, IPointData, ILeaferConfig, IMoveConfig, IPointerConfig } from '@leafer/interface'
-import { LeaferEvent, ResizeEvent, LeafList, Bounds, PointHelper, DataHelper } from '@leafer/core'
+import { LeaferEvent, ResizeEvent, LeafList, Bounds, PointHelper, DataHelper, Platform } from '@leafer/core'
 
 import { IApp } from '@leafer-ui/interface'
 import { PointerEvent, DropEvent, KeyEvent, PointerButton, Keyboard } from '@leafer-ui/event'
@@ -353,7 +353,8 @@ export class InteractionBase implements IInteraction {
     // update
     public findPath(data: IPointerEvent, options?: IPickOptions): ILeafList {
         const { hitRadius, through } = this.p
-        const { bottomList } = this
+        const { bottomList, target } = this
+        if (!Platform.backgrounder && !data.origin) target && target.updateLayout() // 模拟交互
         const find = this.selector.getByPoint(data, hitRadius, { bottomList, name: data.type, ...(options || { through }) })
         if (find.throughPath) data.throughPath = find.throughPath
         data.path = find.path
