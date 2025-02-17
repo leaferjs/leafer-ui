@@ -14,7 +14,7 @@
 
 如果你觉得不错，请帮我们点个 [Star](https://github.com/leaferjs/leafer-ui) 🌟 ，让这个库被更多的人看见 ✨ ✨ ✨
 
-[![github](https://img.shields.io/github/stars/leaferjs/leafer-ui?style=social)](https://github.com/leaferjs/leafer-ui)
+[![github](https://www.leaferjs.com/svg/github-stars.svg)](https://github.com/leaferjs/leafer-ui)
 
 ## 快速入门
 
