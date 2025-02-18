@@ -384,7 +384,7 @@ export class Leafer extends Group implements ILeafer {
     }
 
     // need view plugin
-    public zoom(_zoomType: IZoomType, _padding?: IFourNumber, _fixedScale?: boolean): IBoundsData {
+    public zoom(_zoomType: IZoomType, _padding?: IFourNumber, _fixedScale?: boolean, _transition?: ITransition): IBoundsData {
         return Plugin.need('view')
     }
 
