@@ -14,7 +14,9 @@
 
 如果你觉得不错，请帮我们点个 [Star](https://github.com/leaferjs/leafer-ui) 🌟 ，让这个库被更多的人看见 ✨ ✨ ✨
 
-[![github](https://www.leaferjs.com/svg/github-stars.svg)](https://github.com/leaferjs/leafer-ui)
+<a target="_blank" href="https://github.com/leaferjs/leafer-ui">
+  <img width="120" title="github" src="https://www.leaferjs.com/svg/github-stars.svg" />
+</a>
 
 ## 快速入门
 
@@ -30,13 +32,13 @@
 
 🚀 想马上在产品中使用，请安装 [leafer-ui](https://leaferjs.com/ui/guide/install/ui/start.html)（60KB min+gzip），开始你的探索之旅。
 
-### 场景包
+<!-- ### 场景包
 
 高效绘图场景，推荐直接安装更轻量的 [leafer-draw](https://leaferjs.com/ui/guide/install/draw/start.html) （50KB min+gzip）。
 
 游戏开发场景，推荐直接安装更省心的 [leafer-game](https://leaferjs.com/ui/guide/install/game/start.html)，已集成了游戏相关插件。
 
-图形编辑场景，推荐直接安装更省心的 [leafer-editor](https://leaferjs.com/ui/guide/install/editor/start.html)，已集成了图形编辑器相关插件。
+图形编辑场景，推荐直接安装更省心的 [leafer-editor](https://leaferjs.com/ui/guide/install/editor/start.html)，已集成了图形编辑器相关插件。 -->
 
 ## 仓库组成
 
