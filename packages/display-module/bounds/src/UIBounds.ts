@@ -1,5 +1,7 @@
 import { IUIBoundsModule } from "@leafer-ui/interface"
 
+import { Filter } from '@leafer-ui/external'
+
 
 export const UIBounds: IUIBoundsModule = {
 
@@ -26,11 +28,13 @@ export const UIBounds: IUIBoundsModule = {
 
     __updateRenderSpread(): number {
         let width: number = 0
-        const { shadow, innerShadow, blur, backgroundBlur } = this.__
+        const { shadow, innerShadow, blur, backgroundBlur, filter } = this.__
 
         if (shadow) shadow.forEach(item => width = Math.max(width, Math.max(Math.abs(item.y), Math.abs(item.x)) + (item.spread > 0 ? item.spread : 0) + item.blur * 1.5))
 
         if (blur) width = Math.max(width, blur)
+
+        if (filter) width += Filter.getSpread(filter)
 
         let shapeWidth = width = Math.ceil(width)
 

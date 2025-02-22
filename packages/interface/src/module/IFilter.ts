@@ -6,8 +6,9 @@ import { ICachedShape } from '../ICachedShape'
 
 export interface IFilterModule {
     list: IFilterProcessorMap
-    register(name: string, fn: IFilterFunction): void
+    register(name: string, filterProcessor: IFilterProcessor): void
     apply(filters: IFilter[], ui: IUI, bounds: IMatrixWithBoundsScaleData, currentCanvas: ILeaferCanvas, originCanvas: ILeaferCanvas, shape: ICachedShape): void
+    getSpread(filters: IFilter[]): number
 }
 
 interface IFilterProcessorMap {
@@ -15,7 +16,8 @@ interface IFilterProcessorMap {
 }
 
 export interface IFilterProcessor {
-    fn: IFilterFunction
+    apply: IFilterFunction,
+    getSpread(filter: IFilter): number
 }
 
 export interface IFilterFunction {

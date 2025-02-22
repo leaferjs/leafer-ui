@@ -1,5 +1,5 @@
 // Implemented in partner
-import { IPaintModule, IPaintImageModule, IPaintGradientModule, IEffectModule, ITextConvertModule, IExportModule, IColorConvertModule, IPathArrowModule, IStateModule, IUnitData, ITransitionModule, ITransitionFunction, IFilterModule } from "@leafer-ui/interface"
+import { IPaintModule, IPaintImageModule, IPaintGradientModule, IEffectModule, ITextConvertModule, IExportModule, IColorConvertModule, IPathArrowModule, IStateModule, IUnitData, ITransitionModule, IFilterModule } from "@leafer-ui/interface"
 import { Plugin } from '@leafer/core'
 
 
