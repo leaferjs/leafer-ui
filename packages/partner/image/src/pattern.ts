@@ -18,7 +18,7 @@ export function createPattern(ui: IUI, paint: ILeafPaint, pixelRatio: number): b
         scaleY = abs(scaleY)
 
         const { image, data } = paint
-        let imageScale: number, imageMatrix: IMatrixData, { width, height, scaleX: sx, scaleY: sy, opacity, transform, repeat } = data
+        let imageScale: number, imageMatrix: IMatrixData, { width, height, scaleX: sx, scaleY: sy, transform, repeat } = data
 
         if (sx) {
             imageMatrix = get()
@@ -68,7 +68,7 @@ export function createPattern(ui: IUI, paint: ILeafPaint, pixelRatio: number): b
             scale(imageMatrix, 1 / scaleX, 1 / scaleY)
         }
 
-        const canvas = image.getCanvas(ceil(width) || 1, ceil(height) || 1, opacity)
+        const canvas = image.getCanvas(ceil(width) || 1, ceil(height) || 1, data.opacity, data.filters)
         const pattern = image.getPattern(canvas, repeat || (Platform.origin.noRepeat || 'no-repeat'), imageMatrix, paint)
 
         paint.style = pattern

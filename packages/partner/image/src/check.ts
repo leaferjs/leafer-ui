@@ -40,7 +40,7 @@ export function checkImage(ui: IUI, canvas: ILeaferCanvas, paint: ILeafPaint, al
             if (paint.blendMode) canvas.blendMode = paint.blendMode
             if (data.opacity) canvas.opacity *= data.opacity
             if (data.transform) canvas.transform(data.transform)
-            canvas.drawImage(paint.image.view as any, 0, 0, data.width, data.height)
+            canvas.drawImage(paint.image.getFull(data.filters), 0, 0, data.width, data.height)
             canvas.restore()
             return true
         } else {

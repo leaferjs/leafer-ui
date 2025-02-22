@@ -23,7 +23,7 @@ export function getPatternData(paint: IImagePaint, box: IBoundsData, image: ILea
     if (paint.padding) box = tempBox.set(box).shrink(paint.padding)
     if (paint.mode === 'strench' as string) paint.mode = 'stretch' // 兼容代码，后续可移除
 
-    const { opacity, mode, align, offset, scale, size, rotation, repeat } = paint
+    const { opacity, mode, align, offset, scale, size, rotation, repeat, filters } = paint
     const sameBox = box.width === width && box.height === height
 
     const data: ILeafPaintPatternData = { mode }
@@ -86,6 +86,7 @@ export function getPatternData(paint: IImagePaint, box: IBoundsData, image: ILea
     data.width = width
     data.height = height
     if (opacity) data.opacity = opacity
+    if (filters) data.filters = filters
     if (repeat) data.repeat = typeof repeat === 'string' ? (repeat === 'x' ? 'repeat-x' : 'repeat-y') : 'repeat'
     return data
 }
