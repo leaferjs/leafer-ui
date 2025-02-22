@@ -1,7 +1,7 @@
 import { ILeaferCanvas, IRenderOptions } from '@leafer/interface'
 
 import { IUIRenderModule, ILeafPaint, ILeafStrokePaint, IUI } from '@leafer-ui/interface'
-import { Paint, Effect } from '@leafer-ui/external'
+import { Paint, Effect, Filter } from '@leafer-ui/external'
 
 
 export const UIRender: IUIRenderModule = {
@@ -10,8 +10,8 @@ export const UIRender: IUIRenderModule = {
         const data = this.__
 
         if (data.__useEffect) {
-            const { shadow, innerShadow, blur, backgroundBlur } = this.__
-            data.__useEffect = !!(shadow || innerShadow || blur || backgroundBlur)
+            const { shadow, innerShadow, blur, backgroundBlur, filter } = this.__
+            data.__useEffect = !!(shadow || innerShadow || blur || backgroundBlur || filter)
         }
 
         data.__checkSingle()
@@ -29,7 +29,7 @@ export const UIRender: IUIRenderModule = {
         drawFast(this, canvas, options)
     },
 
-    __draw(canvas: ILeaferCanvas, options: IRenderOptions): void {
+    __draw(canvas: ILeaferCanvas, options: IRenderOptions, originCanvas?: ILeaferCanvas): void {
         const data = this.__
 
         if (data.__complex) {
@@ -45,7 +45,7 @@ export const UIRender: IUIRenderModule = {
                 const shape = Paint.shape(this, canvas, options)
                 this.__nowWorld = this.__getNowWorld(options) // restore
 
-                const { shadow, innerShadow } = data
+                const { shadow, innerShadow, filter } = data
 
                 if (shadow) Effect.shadow(this, canvas, shape)
 
@@ -56,6 +56,8 @@ export const UIRender: IUIRenderModule = {
                 if (innerShadow) Effect.innerShadow(this, canvas, shape)
 
                 if (stroke) data.__isStrokes ? Paint.strokes(stroke as ILeafStrokePaint[], this, canvas) : Paint.stroke(stroke as string, this, canvas)
+
+                if (filter) Filter.apply(filter, this, this.__nowWorld, canvas, originCanvas, shape)
 
                 if (shape.worldCanvas) shape.worldCanvas.recycle()
                 shape.canvas.recycle()

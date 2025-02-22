@@ -47,6 +47,7 @@ export { IStateModule } from './module/IState'
 
 export { IPaintModule, IPaintImageModule, IPaintGradientModule } from './module/IPaint'
 export { IEffectModule } from './module/IEffect'
+export { IFilterModule, IFilterProcessor, IFilterFunction } from './module/IFilter'
 export { ICachedShape } from './ICachedShape'
 
 export { IEditorBase, IEditorConfig, IEditBoxBase, IEditPoint, IEditPointInputData, IEditPointType, IEditToolFunction, IEditorConfigFunction } from './editor/IEditor'

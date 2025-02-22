@@ -1,18 +1,16 @@
 // Implemented in partner
-import { IPaintModule, IPaintImageModule, IPaintGradientModule, IEffectModule, ITextConvertModule, IExportModule, IColorConvertModule, IPathArrowModule, IStateModule, IUI, IString, IBoolean, IUnitData, ITransitionModule, ITransitionFunction } from "@leafer-ui/interface"
+import { IPaintModule, IPaintImageModule, IPaintGradientModule, IEffectModule, ITextConvertModule, IExportModule, IColorConvertModule, IPathArrowModule, IStateModule, IUnitData, ITransitionModule, ITransitionFunction, IFilterModule } from "@leafer-ui/interface"
 import { Plugin } from '@leafer/core'
+
 
 export const TextConvert = {} as ITextConvertModule
 
 export const ColorConvert = {} as IColorConvertModule
 
 export const UnitConvert = {
-
     number(value: number | IUnitData, percentRefer?: number): number {
-        if (typeof value === 'object') return value.type === 'percent' ? value.value * percentRefer : value.value
-        return value
+        return typeof value === 'object' ? (value.type === 'percent' ? value.value * percentRefer : value.value) : value
     }
-
 }
 
 
@@ -27,15 +25,15 @@ export const PaintGradient = {} as IPaintGradientModule
 
 export const Effect = {} as IEffectModule
 
+export const Filter = {
+    apply(): void { Plugin.need('filter') }
+} as unknown as IFilterModule
+
 export const Export = {} as IExportModule
 
 export const State = {
-    setStyleName(_leaf: IUI, _styleName: IString, _value: IBoolean): void { return Plugin.need('state') },
-    set(_leaf: IUI, _stateName: IString): void { return Plugin.need('state') }
-} as IStateModule
+    setStyleName(): void { return Plugin.need('state') },
+    set(): void { return Plugin.need('state') }
+} as unknown as IStateModule
 
-export const Transition = {
-    list: {},
-    register(attrName: string, fn: ITransitionFunction): void { Transition.list[attrName] = fn },
-    get(attrName: string): ITransitionFunction { return Transition.list[attrName] }
-} as ITransitionModule
+export const Transition = {} as ITransitionModule

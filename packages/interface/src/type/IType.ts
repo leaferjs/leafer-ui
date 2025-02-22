@@ -1,4 +1,4 @@
-import { IPointData, IPathCommandData, IWindingRule, IBlendMode, IExportFileType, ISizeData, IFourNumber, IAlign, IUnitPointData, IObject, IAxis, IAxisReverse } from '@leafer/interface'
+import { IPointData, IPathCommandData, IWindingRule, IBlendMode, IExportFileType, ISizeData, IFourNumber, IAlign, IUnitPointData, IObject, IAxis, IAxisReverse, IFilter } from '@leafer/interface'
 import { IColorString, IPaintString } from './IStringType'
 
 export type IPaint = ISolidPaint | IGradientPaint | IImagePaint
@@ -164,6 +164,8 @@ export interface IGrayscaleEffect {
     visible?: boolean
 }
 
-export type IEffect = IObject
+export interface IEffect extends IFilter {
+
+}
 
 export type IOverflow = 'show' | 'hide'

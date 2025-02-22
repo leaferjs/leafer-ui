@@ -1,7 +1,7 @@
-import { INumber, IValue, IBoolean, IPathCommandData, IPathString, IPointData, IPathCommandObject } from '@leafer/interface'
+import { INumber, IValue, IBoolean, IPathCommandData, IPathString, IPointData, IPathCommandObject, IObject, IFilter } from '@leafer/interface'
 import { PathConvert, LeafData, Debug } from '@leafer/core'
 
-import { IShadowEffect, IUI, IUIData, ILeafPaint } from '@leafer-ui/interface'
+import { IUI, IUIData, ILeafPaint } from '@leafer-ui/interface'
 import { Paint, PaintImage } from '@leafer-ui/external'
 
 
@@ -136,20 +136,17 @@ export class UIData extends LeafData implements IUIData {
 
 
     protected setShadow(value: IValue) {
-        this.__setInput('shadow', value)
-        if (value instanceof Array) {
-            if (value.some((item: IShadowEffect) => item.visible === false)) value = value.filter((item: IShadowEffect) => item.visible !== false)
-            this._shadow = value.length ? value : null
-        } else this._shadow = value && (value as IShadowEffect).visible !== false ? [value] : null
+        setArray(this, 'shadow', value)
     }
 
     protected setInnerShadow(value: IValue) {
-        this.__setInput('innerShadow', value)
-        if (value instanceof Array) {
-            if (value.some((item: IShadowEffect) => item.visible === false)) value = value.filter((item: IShadowEffect) => item.visible !== false)
-            this._innerShadow = value.length ? value : null
-        } else this._innerShadow = value && (value as IShadowEffect).visible !== false ? [value] : null
+        setArray(this, 'innerShadow', value)
     }
+
+    protected setFilter(value: IValue) {
+        setArray(this, 'filter', value)
+    }
+
 
     // custom
 
@@ -160,4 +157,14 @@ export class UIData extends LeafData implements IUIData {
         this.__needComputePaint = false
     }
 
+}
+
+
+function setArray(data: IUIData, key: string, value: IValue) {
+    data.__setInput(key, value)
+    if (value instanceof Array) {
+        if (value.some((item: IFilter) => item.visible === false)) value = value.filter((item: IFilter) => item.visible !== false)
+        value.length || (value = null)
+    } else value = value && (value as IFilter).visible !== false ? [value] : null;
+    (data as IObject)['_' + key] = value
 }
