@@ -41,7 +41,7 @@ export class DragEvent extends PointerEvent implements IDragEvent {
         const { draggable, dragBounds } = leaf, move = leaf.getLocalPoint(total, null, true)
         PointHelper.move(move, start.x - leaf.x, start.y - leaf.y)
 
-        if (dragBounds) this.getMoveInDragBounds(leaf.__local, dragBounds === 'parent' ? leaf.parent.boxBounds : dragBounds, move, true)
+        if (dragBounds) this.getMoveInDragBounds(leaf.__localBoxBounds, dragBounds === 'parent' ? leaf.parent.boxBounds : dragBounds, move, true)
         if (draggable === 'x') move.y = 0
         if (draggable === 'y') move.x = 0
         return move
