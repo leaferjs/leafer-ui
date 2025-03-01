@@ -194,7 +194,10 @@ LeaferJS 致力于实现一套简洁、开放、现代化的 UI 绘图语言标�
     </p>
 <p><h3 align="center">银牌赞助</h3></p>
 <p style="display: flex;flex-wrap: wrap;justify-content: center;gap: 5px;">
-<a target="_blank" href="https://www.u-tools.cn/plugins/detail/%E6%88%AA%E5%9B%BE%E5%B7%A5%E5%85%B7%20Plus/index.html">
+<a target="_blank" href="">
+        <img width="40" title="dev_chen" src="https://www.leaferjs.com/image/sponsor/user/137.jpg" loading="lazy" />
+    </a>
+    <a target="_blank" href="https://www.u-tools.cn/plugins/detail/%E6%88%AA%E5%9B%BE%E5%B7%A5%E5%85%B7%20Plus/index.html">
         <img width="40" title="截图工具 Plus" src="https://www.leaferjs.com/image/sponsor/user/135.png" loading="lazy" />
     </a>
     <a target="_blank" href="https://frameelf.com/">
