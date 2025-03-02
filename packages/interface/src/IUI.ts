@@ -376,10 +376,6 @@ export interface IUI extends IUIAttrData, IFillAttrData, IStrokeAttrData, ICorne
     animation?: IAnimation | IAnimation[]
     animationOut?: IAnimation | IAnimation[]
 
-    editConfig?: IEditorConfig
-    editOuter: string
-    editInner: string
-
     children?: IUI[]
 
     __animate?: IAnimate
@@ -446,6 +442,10 @@ interface IUIAttrData {
     selectedStyle?: IStateStyle
     disabledStyle?: IStateStyle
     placeholderStyle?: IStateStyle
+
+    editConfig?: IEditorConfig
+    editOuter?: string
+    editInner?: string
 }
 
 export interface IFindUIMethod {
