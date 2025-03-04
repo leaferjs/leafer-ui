@@ -14,9 +14,15 @@
 
 如果你觉得不错，请帮我们点个 [Star](https://github.com/leaferjs/leafer-ui) 🌟 ，让这个库被更多的人看见 ✨ ✨ ✨
 
+<div style="display:flex; gap: 12px">
+<a target="_blank" href="https://gitee.com/leaferjs/leafer-ui">
+  <img width="100" title="gitee" src="https://gitee.com/leaferjs/leafer-ui/badge/star.svg?theme=white" />
+</a>
+
 <a target="_blank" href="https://github.com/leaferjs/leafer-ui">
   <img width="120" title="github" src="https://www.leaferjs.com/svg/github-stars.svg" />
 </a>
+</div>
 
 ## 快速入门
 
