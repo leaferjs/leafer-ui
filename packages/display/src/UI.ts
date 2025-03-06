@@ -365,11 +365,11 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
 
     //  @leafer-in/editor rewrite
 
-    public get editConfig(): IEditorConfig { return undefined }
+    public editConfig: IEditorConfig
 
-    public get editOuter(): string { return '' }
+    public editOuter: string
 
-    public get editInner(): string { return '' }
+    public editInner: string
 
 
     constructor(data?: IUIInputData) {
