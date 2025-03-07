@@ -1,5 +1,5 @@
 import { ILeaferCanvas, IRenderer, ILayouter, ISelector, IWatcher, IInteraction, ILeaferConfig, ICanvasManager, IHitCanvasManager, IAutoBounds, IScreenSizeData, IResizeEvent, IEventListenerId, ITimer, IValue, IObject, IControl, IPointData, ILeaferType, ICursorType, IBoundsData, INumber, IZoomType, IFourNumber, IBounds, IClientPointData, ITransition } from '@leafer/interface'
-import { AutoBounds, LayoutEvent, ResizeEvent, LeaferEvent, CanvasManager, ImageManager, Resource, DataHelper, Creator, Run, Debug, RenderEvent, registerUI, boundsType, canvasSizeAttrs, dataProcessor, WaitHelper, WatchEvent, Bounds, LeafList, Plugin } from '@leafer/core'
+import { AutoBounds, LayoutEvent, ResizeEvent, LeaferEvent, CanvasManager, ImageManager, Resource, DataHelper, Creator, Run, Debug, RenderEvent, registerUI, boundsType, canvasSizeAttrs, dataProcessor, WaitHelper, WatchEvent, Bounds, LeafList, Plugin, getBoundsData } from '@leafer/core'
 
 import { ILeaferInputData, ILeaferData, IFunction, IUIInputData, ILeafer, IApp, IEditorBase } from '@leafer-ui/interface'
 import { LeaferData } from '@leafer-ui/data'
@@ -72,7 +72,7 @@ export class Leafer extends Group implements ILeafer {
 
     public get FPS(): number { return this.renderer ? this.renderer.FPS : 60 }
     public get cursorPoint(): IPointData { return (this.interaction && this.interaction.hoverData) || { x: this.width / 2, y: this.height / 2 } }
-    public get clientBounds(): IBoundsData { return this.canvas && this.canvas.getClientBounds() }
+    public get clientBounds(): IBoundsData { return (this.canvas && this.canvas.getClientBounds(true)) || getBoundsData() }
     public leafs = 0
 
     public __eventIds: IEventListenerId[] = []
@@ -400,6 +400,11 @@ export class Leafer extends Group implements ILeafer {
 
     public getPagePointByClient(clientPoint: IClientPointData, updateClient?: boolean): IPointData {
         return this.getPagePoint(this.getWorldPointByClient(clientPoint, updateClient))
+    }
+
+    public getClientPointByWorld(worldPoint: IPointData): IPointData {
+        const { x, y } = this.clientBounds
+        return { x: x + worldPoint.x, y: y + worldPoint.y }
     }
 
     public updateClientBounds(): void {
