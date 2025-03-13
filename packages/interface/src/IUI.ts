@@ -409,6 +409,7 @@ export interface IUI extends IUIAttrData, IFillAttrData, IStrokeAttrData, ICorne
     killAnimate(type?: IAnimateType, nextStyle?: IUIInputData): void
 
     export(filename: string, options?: IExportOptions | number | boolean): Promise<IExportResult>
+    syncExport(filename: string, options?: IExportOptions | number | boolean): IExportResult
     clone(data?: IUIInputData): IUI
 }
 

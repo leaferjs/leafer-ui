@@ -484,6 +484,10 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
         return Plugin.need('export')
     }
 
+    public syncExport(_filename: IExportFileType | string, _options?: IExportOptions | number | boolean): IExportResult {
+        return Plugin.need('export')
+    }
+
     public clone(data?: IUIInputData): IUI {
         const json = DataHelper.clone(this.toJSON())
         if (data) Object.assign(json, data)

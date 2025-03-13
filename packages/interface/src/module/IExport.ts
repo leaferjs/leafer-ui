@@ -4,4 +4,5 @@ import { ILeaf, IExportFileType, IExportOptions, IExportResult } from '@leafer/i
 export interface IExportModule {
     running?: boolean
     export(leaf: ILeaf, filename: IExportFileType | string, options?: IExportOptions | number | boolean): Promise<IExportResult>
+    syncExport(filename: string, options?: IExportOptions | number | boolean): IExportResult
 }
