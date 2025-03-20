@@ -30,7 +30,7 @@ export function clipText(drawData: ITextDrawData, style: ITextData, x: number, w
                     charRight = char.x + char.width
                     if (i === end && charRight < right) {
                         break
-                    } else if (charRight < right && char.char !== ' ') {
+                    } else if ((charRight < right && char.char !== ' ') || !i) { // 至少保留一个文字
                         row.data.splice(i + 1)
                         row.width -= char.width
                         break

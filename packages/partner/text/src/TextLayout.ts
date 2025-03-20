@@ -3,17 +3,17 @@ import { ITextData, ITextDrawData, ITextRowData } from '@leafer-ui/interface'
 
 export function layoutText(drawData: ITextDrawData, style: ITextData): void {
 
-    const { rows, bounds } = drawData
+    const { rows, bounds } = drawData, countRows = rows.length
     const { __lineHeight, __baseLine, __letterSpacing, __clipText, textAlign, verticalAlign, paraSpacing, autoSizeAlign } = style
 
-    let { x, y, width, height } = bounds, realHeight = __lineHeight * rows.length + (paraSpacing ? paraSpacing * (drawData.paraNumber - 1) : 0)
+    let { x, y, width, height } = bounds, realHeight = __lineHeight * countRows + (paraSpacing ? paraSpacing * (drawData.paraNumber - 1) : 0)
     let starY: number = __baseLine
 
     // verticalAlign
 
     if (__clipText && realHeight > height) {
         realHeight = Math.max(height, __lineHeight)
-        drawData.overflow = rows.length
+        if (countRows > 1) drawData.overflow = countRows
     } else if (height || autoSizeAlign) {
         switch (verticalAlign) {
             case 'middle': y += (height - realHeight) / 2; break
@@ -26,7 +26,7 @@ export function layoutText(drawData: ITextDrawData, style: ITextData): void {
 
     let row: ITextRowData, rowX: number, rowWidth: number, layoutWidth = (width || autoSizeAlign) ? width : drawData.maxWidth
 
-    for (let i = 0, len = rows.length; i < len; i++) {
+    for (let i = 0, len = countRows; i < len; i++) {
         row = rows[i]
         row.x = x
 
