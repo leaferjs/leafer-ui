@@ -1,5 +1,5 @@
 // Implemented in partner
-import { IPaintModule, IPaintImageModule, IPaintGradientModule, IEffectModule, ITextConvertModule, IExportModule, IColorConvertModule, IPathArrowModule, IStateModule, IUnitData, ITransitionModule, IFilterModule } from "@leafer-ui/interface"
+import { IPaintModule, IPaintImageModule, IPaintGradientModule, IEffectModule, ITextConvertModule, IExportModule, IColorConvertModule, IPathArrowModule, IStateModule, IUnitData, ITransitionModule, ITransitionFunction, IFilterModule } from "@leafer-ui/interface"
 import { Plugin } from '@leafer/core'
 
 
@@ -36,4 +36,8 @@ export const State = {
     set(): void { return Plugin.need('state') }
 } as unknown as IStateModule
 
-export const Transition = {} as ITransitionModule
+export const Transition = {
+    list: {},
+    register(attrName: string, fn: ITransitionFunction): void { Transition.list[attrName] = fn },
+    get(attrName: string): ITransitionFunction { return Transition.list[attrName] }
+} as ITransitionModule
