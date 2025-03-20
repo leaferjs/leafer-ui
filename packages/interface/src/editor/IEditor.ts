@@ -1,4 +1,4 @@
-import { IGroup, IUI, IBox, IRectInputData, ISelectorProxy, IEditSize, ICursorType, IAlign, IUnitPointData, IDragEvent, IRotateEvent, IStroke, IFill, ILeaf, ILeafList, IObject, IBoxInputData, IGroupInputData, IImageCursor, IRect, IBoundsData, IKeyEvent, IUIInputData, IZoomEvent, IColorString, IDirection4 } from '@leafer-ui/interface'
+import { IGroup, IUI, IBox, IRectInputData, ISelectorProxy, IEditSize, ICursorType, IAlign, IUnitPointData, IDragEvent, IRotateEvent, IStroke, IFill, ILeaf, ILeafList, IObject, IBoxInputData, IGroupInputData, IImageCursor, IRect, IBoundsData, IKeyEvent, IUIInputData, IZoomEvent, IColorString, IDirection4, IPointData, ILayoutBoundsData } from '@leafer-ui/interface'
 
 export interface IEditorBase extends IGroup, ISelectorProxy {
     config: IEditorConfig
@@ -14,13 +14,13 @@ export interface IEditorBase extends IGroup, ISelectorProxy {
     readonly editing: boolean
     innerEditing: boolean
     readonly groupOpening: boolean
-    resizeDirection?: number
 
     readonly multiple: boolean
     readonly single: boolean
 
     readonly dragging: boolean
     readonly moving: boolean
+    readonly dragPoint: IEditPoint // 正在拖拽的控制点
 
     element?: IUI
     buttons: IGroup
@@ -149,12 +149,16 @@ export interface IEditBoxBase extends IGroup {
     rotatePoints: IEditPoint[]
     resizeLines: IEditPoint[]
 
+    enterPoint: IEditPoint
+    dragPoint: IEditPoint // 正在拖拽的控制点
+
+    dragStartPoint: IPointData
+    dragStartBounds: ILayoutBoundsData
+
     readonly flipped: boolean
     readonly flippedX: boolean
     readonly flippedY: boolean
     readonly flippedOne: boolean
-
-    enterPoint: IEditPoint
 
     getPointStyle(userStyle?: IBoxInputData): IBoxInputData
     getPointsStyle(): IBoxInputData[]
