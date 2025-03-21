@@ -50,4 +50,4 @@ export { IEffectModule } from './module/IEffect'
 export { IFilterModule, IFilterProcessor, IFilterFunction } from './module/IFilter'
 export { ICachedShape } from './ICachedShape'
 
-export { IEditorBase, IEditorConfig, IEditBoxBase, IEditPoint, IEditPointInputData, IEditPointType, IEditToolFunction, IEditorConfigFunction } from './editor/IEditor'
+export { IEditorBase, IEditorConfig, IEditBoxBase, IEditPoint, IEditPointInputData, IEditPointType, IEditorDragStartData, IEditToolFunction, IEditorConfigFunction } from './editor/IEditor'

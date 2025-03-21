@@ -154,8 +154,7 @@ export interface IEditBoxBase extends IGroup {
     enterPoint: IEditPoint
     dragPoint: IEditPoint // 正在拖拽的控制点
 
-    dragStartPoint: IPointData
-    dragStartBounds: ILayoutBoundsData
+    dragStartData: IEditorDragStartData
 
     readonly flipped: boolean
     readonly flippedX: boolean
@@ -172,6 +171,14 @@ export interface IEditBoxBase extends IGroup {
 
     onArrow(e: IKeyEvent): void
 
+}
+
+export interface IEditorDragStartData {
+    x: number
+    y: number
+    point: IPointData
+    bounds: ILayoutBoundsData
+    rotation: number
 }
 
 export interface IEditorConfigFunction {
