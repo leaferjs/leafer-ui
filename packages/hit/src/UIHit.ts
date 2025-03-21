@@ -41,8 +41,6 @@ ui.__updateHitCanvas = function (): void {
 }
 
 ui.__hit = function (inner: IRadiusPointData): boolean {
-    if (Platform.name === 'miniapp') this.__drawHitPath(this.__hitCanvas) // fix: 小程序需要实时更新
-
     // hit pixel
 
     const data = this.__
