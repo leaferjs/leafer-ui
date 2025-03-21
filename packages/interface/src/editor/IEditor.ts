@@ -105,6 +105,7 @@ export interface IEditorConfig extends IObject {
     rotateGap?: number
 
     selector?: boolean
+    editBox?: boolean
     hover?: boolean
     hoverStyle?: IUIInputData
     select?: 'press' | 'tap'
