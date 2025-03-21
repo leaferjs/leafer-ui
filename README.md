@@ -78,7 +78,7 @@ LeaferJS 试行 [4 天工作制](https://www.leaferjs.com/ui/blog/2025-02-06.htm
 
 【Bug/建议】xxxxxxxxxxx 标题 xxxxxxxxxxxxxx
 
-环境：电脑 + window 11 + chrome 131 + leaferjs 1.4.2
+环境：电脑 + window 11 + chrome 131 + leaferjs 1.5.0
 
 复现步骤：请提供详细的复现逻辑及可直接运行的代码，以便更快解决问题。
 ```
@@ -98,7 +98,7 @@ LeaferJS 试行 [4 天工作制](https://www.leaferjs.com/ui/blog/2025-02-06.htm
 
 【leaferjs】xxxxxxxxxxx 标题 xxxxxxxxxxxxxx
 
-环境：电脑 + window 11 + chrome 131 + leaferjs 1.4.2
+环境：电脑 + window 11 + chrome 131 + leaferjs 1.5.0
 
 #LeaferJS （点击知乎提问框底部的 # 号，可绑定话题）
 ```
