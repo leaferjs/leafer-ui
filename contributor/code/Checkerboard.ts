@@ -1,7 +1,7 @@
 // #自定义方格背景作为透明图片背景 [棋盘格] (https://shenzilong.cn/index/leaferjs/%E5%A6%82%E4%BD%95%E7%BB%98%E5%88%B6%E9%80%8F%E6%98%8E%E8%83%8C%E6%99%AF-%E6%B7%B1%E6%B5%85%E7%9B%B8%E9%97%B4%E7%9A%84%E6%96%B9%E6%A0%BC.html#20250319220001-bacxpac)
 // @崮生-子虚 (https://shenzilong.cn/)
 import { App, Rect, ResizeEvent, Platform } from 'leafer-ui'
-import '@leafer-in/editor' // 导入图形编辑器插件 //
+import '@leafer-in/editor' // 导入图形编辑器插件
 import '@leafer-in/viewport' // 导入视口插件 (可选)
 
 // 创建一个用于平铺的方格图片
@@ -25,7 +25,6 @@ const svg = Platform.toURL(
 )
 
 const app = new App({ view: window, ground: {}, editor: {} })
-
 
 // 添加方格背景层
 const background = Rect.one({ hittable: false, fill: { type: 'image', url: svg, mode: 'repeat' } })
