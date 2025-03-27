@@ -53,7 +53,7 @@ export function drawTextStroke(ui: IUI, canvas: ILeaferCanvas): void {
         if (row.text) canvas.strokeText(row.text, row.x, row.y)
         else if (row.data) row.data.forEach(charData => { canvas.strokeText(charData.char, charData.x, row.y) })
 
-        if (decorationY) canvas.strokeRect(row.x, row.y + decorationY, row.width, decorationHeight)
+        if (decorationY) decorationY.forEach(value => canvas.strokeRect(row.x, row.y + value, row.width, decorationHeight))
     }
 
 }

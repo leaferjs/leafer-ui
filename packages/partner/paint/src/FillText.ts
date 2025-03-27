@@ -14,7 +14,7 @@ export function fillText(ui: IUI, canvas: ILeaferCanvas): void {
         if (row.text) canvas.fillText(row.text, row.x, row.y)
         else if (row.data) row.data.forEach(charData => { canvas.fillText(charData.char, charData.x, row.y) })
 
-        if (decorationY) canvas.fillRect(row.x, row.y + decorationY, row.width, decorationHeight)
+        if (decorationY) decorationY.forEach(value => canvas.fillRect(row.x, row.y + value, row.width, decorationHeight))
     }
 
 }
