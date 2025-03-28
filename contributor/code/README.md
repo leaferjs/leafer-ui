@@ -16,7 +16,7 @@ https://www.leaferjs.com/examples
 
 **第二步：** 开发完成并测试合格后，阅读 [代码提交规范](https://github.com/leaferjs/leafer-ui/blob/main/contributor/COMMIT_CONVENTION.md)， 将代码（单文件） pull request。
 
-**第三步：** 等待合并收录代码，收录成功后将会出现在 [社区示例代码列表](https://www.leaferjs.com/examples/#community) 中，比较有场景代表的会被同时收录到首页场景案例中。
+**第三步：** 等待合并收录代码（低质量的代码有可能被拒），收录成功后将会出现在 [社区示例代码列表](https://www.leaferjs.com/examples/#community) 中，比较有场景代表的会被同时收录到首页场景案例中。
 
 ## 示例代码要求
 
