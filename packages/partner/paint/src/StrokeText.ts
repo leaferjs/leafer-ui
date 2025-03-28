@@ -44,16 +44,19 @@ function drawAlignStroke(align: IStrokeAlign, stroke: string | ILeafPaint[], isS
 
 export function drawTextStroke(ui: IUI, canvas: ILeaferCanvas): void {
 
-    let row: ITextRowData
-    const { rows, decorationY, decorationHeight } = ui.__.__textDrawData
+    let row: ITextRowData, data = ui.__.__textDrawData
+    const { rows, decorationY } = data
 
     for (let i = 0, len = rows.length; i < len; i++) {
         row = rows[i]
 
         if (row.text) canvas.strokeText(row.text, row.x, row.y)
         else if (row.data) row.data.forEach(charData => { canvas.strokeText(charData.char, charData.x, row.y) })
+    }
 
-        if (decorationY) decorationY.forEach(value => canvas.strokeRect(row.x, row.y + value, row.width, decorationHeight))
+    if (decorationY) {
+        const { decorationHeight } = data
+        rows.forEach(row => decorationY.forEach(value => canvas.strokeRect(row.x, row.y + value, row.width, decorationHeight)))
     }
 
 }

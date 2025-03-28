@@ -134,7 +134,14 @@ export type IFontWeightString =
     | 'bold'
     | 'extra-bold'
     | 'black'
-export type ITextDecoration = 'none' | 'under' | 'delete' | 'under-delete'
+
+export type ITextDecoration = ITextDecorationType | ITextDecorationData
+export type ITextDecorationType = 'none' | 'under' | 'delete' | 'under-delete'
+export interface ITextDecorationData {
+    type: ITextDecorationType
+    color: IColor
+}
+
 export type ITextWrap = 'normal' | 'none' | 'break'
 export type IWritingMode = IAxis | IAxisReverse
 

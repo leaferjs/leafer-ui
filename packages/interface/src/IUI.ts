@@ -8,7 +8,7 @@ import {
     IEffectAttrData, IEffectInputData, IEffectComputedData,
     ITextStyleAttrData, ITextStyleInputData, ITextStyleComputedData
 } from './ICommonAttr'
-import { IOverflow } from './type/IType'
+import { IOverflow, ITextDecorationType } from './type/IType'
 import { IAnimation, IAnimate, IKeyframe, IKeyframeId, IAnimateType } from './IAnimation'
 import { ILeafer } from './app/ILeafer'
 import { IEditorConfig } from './editor/IEditor'
@@ -264,6 +264,7 @@ export interface ITextDrawData {
     font: string
     maxWidth?: number // 获取最大的行宽，自动宽度 且非 autoSizeAlign 时才有值
     decorationY?: number[]
+    decorationColor?: string
     decorationHeight?: number
     overflow?: number // overflowed row number, not index
 }
