@@ -133,7 +133,7 @@ export interface IEditPoint extends IBox {
     pointType: IEditPointType
 }
 
-export type IEditPointType = 'rotate' | 'resize' | 'resize-rotate' | 'button'
+export type IEditPointType = 'resize' | 'rotate' | 'skew' | 'resize-rotate' | 'button'
 
 export interface IEditBoxBase extends IGroup {
     editor: IEditorBase
