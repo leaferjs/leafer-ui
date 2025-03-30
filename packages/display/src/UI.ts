@@ -249,7 +249,7 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     @strokeType()
     public dashPattern?: INumber[] | IDashPatternString
 
-    @strokeType()
+    @strokeType(0)
     public dashOffset?: INumber
 
     @strokeType(10)

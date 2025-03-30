@@ -8,7 +8,7 @@ import {
     IEffectAttrData, IEffectInputData, IEffectComputedData,
     ITextStyleAttrData, ITextStyleInputData, ITextStyleComputedData
 } from './ICommonAttr'
-import { IOverflow, ITextDecorationType } from './type/IType'
+import { IOverflow } from './type/IType'
 import { IAnimation, IAnimate, IKeyframe, IKeyframeId, IAnimateType } from './IAnimation'
 import { ILeafer } from './app/ILeafer'
 import { IEditorConfig } from './editor/IEditor'
