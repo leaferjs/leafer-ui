@@ -129,22 +129,22 @@ export interface IEditorConfig extends IObject {
     pathEditor?: IObject
 }
 
-export interface IEditorMoveData extends IPointData {
+export interface IEditorMoveData extends IPointData, IObject {
     target: IUI
 }
 
-export interface IEditorScaleData extends IScaleData {
+export interface IEditorScaleData extends IScaleData, IObject {
     target: IUI
     origin: IPointData | IAlign
 }
 
-export interface IEditorRotationData {
+export interface IEditorRotationData extends IObject {
     target: IUI
     origin: IPointData | IAlign
     rotation: number
 }
 
-export interface IEditorSkewData extends ISkewData {
+export interface IEditorSkewData extends ISkewData, IObject {
     target: IUI
     origin: IPointData | IAlign
 }
