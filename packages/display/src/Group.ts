@@ -1,5 +1,5 @@
-import { IJSONOptions, IPickOptions, IPickResult, IPointData, ITransition } from '@leafer/interface'
-import { Branch, useModule, dataProcessor, registerUI } from '@leafer/core'
+import { IJSONOptions, IPickOptions, IPickResult, IPointData, INumber, ITransition } from '@leafer/interface'
+import { Branch, useModule, dataProcessor, registerUI, boundsType } from '@leafer/core'
 
 import { IGroup, IGroupData, IGroupInputData, IUI, IUIInputData, IUIJSONData, IFindCondition, IFindUIMethod } from '@leafer-ui/interface'
 import { GroupData } from '@leafer-ui/data'
@@ -17,6 +17,13 @@ export class Group extends UI implements IGroup {   // tip: rewrited Box
 
     @dataProcessor(GroupData)
     declare public __: IGroupData
+
+    // size
+    @boundsType(0)
+    declare public width?: INumber
+
+    @boundsType(0)
+    declare public height?: INumber
 
     declare public children: IUI[]
 

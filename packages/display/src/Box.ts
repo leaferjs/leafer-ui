@@ -1,5 +1,5 @@
-import { ILeaferCanvas, IRenderOptions, IBoundsData, IBoolean } from '@leafer/interface'
-import { rewrite, rewriteAble, registerUI, BoundsHelper, dataProcessor, affectRenderBoundsType, dataType } from '@leafer/core'
+import { ILeaferCanvas, IRenderOptions, IBoundsData, IBoolean, INumber } from '@leafer/interface'
+import { rewrite, rewriteAble, registerUI, BoundsHelper, dataProcessor, affectRenderBoundsType, dataType, boundsType } from '@leafer/core'
 
 import { IBox, IBoxData, IBoxInputData, IOverflow } from '@leafer-ui/interface'
 import { BoxData } from '@leafer-ui/data'
@@ -22,6 +22,13 @@ export class Box extends Group implements IBox {
 
     @dataProcessor(BoxData)
     declare public __: IBoxData
+
+    // size
+    @boundsType(100)
+    declare public width?: INumber
+
+    @boundsType(100)
+    declare public height?: INumber
 
     @dataType(false)
     public resizeChildren?: IBoolean
@@ -56,7 +63,7 @@ export class Box extends Group implements IBox {
     public __updateBoxBounds(_secondLayout?: boolean): void {
         const data = this.__
 
-        if (this.children.length) {
+        if (this.children.length && !this.pathInputed) {
 
             if (data.__autoSide) {
 
