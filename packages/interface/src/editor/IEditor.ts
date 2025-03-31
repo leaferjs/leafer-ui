@@ -1,4 +1,4 @@
-import { IGroup, IUI, IBox, IRectInputData, ISelectorProxy, IEditSize, ICursorType, IAlign, IUnitPointData, IDragEvent, IRotateEvent, IStroke, IFill, ILeaf, ILeafList, IObject, IBoxInputData, IGroupInputData, IImageCursor, IRect, IBoundsData, IKeyEvent, IUIInputData, IZoomEvent, IColorString, IDirection4, IPointData, ILayoutBoundsData } from '@leafer-ui/interface'
+import { IGroup, IUI, IBox, IRectInputData, ISelectorProxy, IEditSize, ICursorType, IAlign, IUnitPointData, IDragEvent, IRotateEvent, IStroke, IFill, ILeaf, ILeafList, IObject, IBoxInputData, IGroupInputData, IImageCursor, IRect, IBoundsData, IKeyEvent, IUIInputData, IZoomEvent, IColorString, IDirection4, IPointData, IScaleData, ISkewData, ILayoutBoundsData } from '@leafer-ui/interface'
 
 export interface IEditorBase extends IGroup, ISelectorProxy {
     config: IEditorConfig
@@ -120,9 +120,52 @@ export interface IEditorConfig extends IObject {
     rotateable?: boolean | 'rotate'
     skewable?: boolean
 
+    beforeMove?: IEditorBeforeMove
+    beforeScale?: IEditorBeforeScale
+    beforeRotate?: IEditorBeforeRotate
+    beforeSkew?: IEditorBeforeSkew
+
     textEditor?: IObject
     pathEditor?: IObject
 }
+
+export interface IEditorMoveData extends IPointData {
+    target: IUI
+}
+
+export interface IEditorScaleData extends IScaleData {
+    target: IUI
+    origin: IPointData | IAlign
+}
+
+export interface IEditorRotationData {
+    target: IUI
+    origin: IPointData | IAlign
+    rotation: number
+}
+
+export interface IEditorSkewData extends ISkewData {
+    target: IUI
+    origin: IPointData | IAlign
+}
+
+
+export interface IEditorBeforeMove {
+    (data: IEditorMoveData): IPointData | boolean | void
+}
+
+export interface IEditorBeforeScale {
+    (data: IEditorScaleData): IScaleData | boolean | void
+}
+
+export interface IEditorBeforeRotate {
+    (data: IEditorRotationData): number | boolean | void
+}
+
+export interface IEditorBeforeSkew {
+    (data: IEditorSkewData): ISkewData | boolean | void
+}
+
 
 export interface IEditPointInputData extends IBoxInputData {
     direction?: number
