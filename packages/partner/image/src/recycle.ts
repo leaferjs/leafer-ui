@@ -28,7 +28,7 @@ export function recycleImage(attrName: IPaintAttr, data: IUIData): IBooleanMap {
                         if (!(input instanceof Array)) input = [input]
                     }
                     image.unload(paints[i].loadId, !input.some((item: IImagePaint) => item.url === url))
-                }
+                } else paints[i].style = null // fix: 小程序垃圾回收
             }
 
         }
