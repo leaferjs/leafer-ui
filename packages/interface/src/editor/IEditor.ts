@@ -66,7 +66,6 @@ export interface IEditorBase extends IGroup, ISelectorProxy {
 
 export interface IEditorConfig extends IObject {
     editSize?: IEditSize
-    dualEvent?: boolean
     keyEvent?: boolean
 
     stroke?: IStroke
@@ -110,6 +109,7 @@ export interface IEditorConfig extends IObject {
     hoverStyle?: IUIInputData
     select?: 'press' | 'tap'
     selectedStyle?: IUIInputData
+    multipleSelect?: boolean
     boxSelect?: boolean
     continuousSelect?: boolean // 点击可以连续选择
     openInner?: 'double' | 'long' // 双击/长按打开内部
