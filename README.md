@@ -63,62 +63,6 @@
 
 [docs](https://github.com/leaferjs/docs) 在线文档仓库。
 
-## 社区提问指南
-
-### ⏰ 每周 4 天工作制
-
-LeaferJS 试行 [4 天工作制](https://www.leaferjs.com/ui/blog/2025-02-06.html)（周一、二、四、五），寻求支持请留意时间，感谢你的支持与理解。
-
-### 一. 反馈 Bug 与建议
-
-发现 Bug 或有改进建议？欢迎在 GitHub 上 [提交 issue](https://github.com/leaferjs/leafer-ui/issues)，你的贡献能让 LeaferJS 变得更强大！
-
-```
-提交模版
-
-【Bug/建议】xxxxxxxxxxx 标题 xxxxxxxxxxxxxx
-
-环境：电脑 + window 11 + chrome 131 + leaferjs 1.5.2
-
-复现步骤：请提供详细的复现逻辑及可直接运行的代码，以便更快解决问题。
-```
-
-### 二. 求助使用问题？
-
-使用过程中遇到不懂的问题或缺失功能？我们提供了多种求助渠道，同时也招募社区管理员参与。
-
-#### 1. 社区支持（推荐）
-
-为让更多的人可以参与解答，同时让搜索引擎收录问题（避免重复劳动），请公开求助你的问题。
-
-[前往知乎](https://www.zhihu.com/topic/736459154/unanswered) 创建一个问题并绑定话题 [#LeaferJS](https://www.zhihu.com/topic/736459154/unanswered):
-
-```
-提交模版
-
-【leaferjs】xxxxxxxxxxx 标题 xxxxxxxxxxxxxx
-
-环境：电脑 + window 11 + chrome 131 + leaferjs 1.5.2
-
-#LeaferJS （点击知乎提问框底部的 # 号，可绑定话题）
-```
-
-我和社区管理员们会安排固定的时间查看、回复大家的问题，也可将链接转发到 [LeaferJS 技术交流群](https://leaferjs.com/#contact) 里。多次有效回答问题即视为有意愿成为 LeaferJS 社区管理员，可 [联系我们](https://leaferjs.com/#contact) 进管理群。
-
-#### 2. 官方支持
-
-由于资源有限，我们优先为 [金牌以上赞助用户](https://www.leaferjs.com/ui/sponsor/#%E5%BC%80%E5%8F%91%E8%B5%9E%E5%8A%A9) 和社区管理员提供支持（如优先修复 Bug、补充缺失功能）。随着资源增加，我们将招募更多专业人员，并开发系统化的 LeaferJS 场景教程。
-
-#### 3. 询问 AI （即将上线）
-
-我们计划训练、对接外部 AI 助手，预计 **未来几个月内** 上线，可自动解答 LeaferJS 相关问题。
-
-### 三、技术交流
-
-欢迎加入 [LeaferJS 技术交流群](https://leaferjs.com/#contact)，与社区开发者交流、分享经验、改进产品。
-
-偶尔还有 **福利活动**，不容错过！
-
 ## 使命与愿景
 
 LeaferJS 致力于实现一套简洁、开放、现代化的 UI 绘图语言标准，表现力丰富，便于 AI 理解，人类可视化使用，并为数字化产品开发提供跨平台、轻量化、高性能的运行时。
