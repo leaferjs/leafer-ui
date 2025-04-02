@@ -18,12 +18,12 @@
     "leaferjs"
   ],
   "dependencies": {
-    "@leafer/core": "workspace:*",
-    "@leafer-ui/display": "workspace:*",
-    "@leafer-ui/data": "workspace:*"
+    "@leafer/core": "1.5.3",
+    "@leafer-ui/display": "1.5.3",
+    "@leafer-ui/data": "1.5.3"
   },
   "devDependencies": {
-     "@leafer/interface": "workspace:*",
-     "@leafer-ui/interface": "workspace:*"
+     "@leafer/interface": "1.5.3",
+     "@leafer-ui/interface": "1.5.3"
   }
 }

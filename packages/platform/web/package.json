@@ -18,15 +18,15 @@
     "leaferjs"
   ],
   "dependencies": {
-    "@leafer/core": "workspace:*",
-    "@leafer/web": "workspace:*",
-    "@leafer/partner": "workspace:*",
-    "@leafer/interface": "workspace:*",
-    "@leafer-ui/draw": "workspace:*",
-    "@leafer-ui/core": "workspace:*",
-    "@leafer-ui/interaction-web": "workspace:*",
-    "@leafer-ui/partner": "workspace:*",
-    "@leafer-ui/interface": "workspace:*",
-    "@leafer-in/interface": "workspace:*"
+    "@leafer/core": "1.5.3",
+    "@leafer/web": "1.5.3",
+    "@leafer/partner": "1.5.3",
+    "@leafer/interface": "1.5.3",
+    "@leafer-ui/draw": "1.5.3",
+    "@leafer-ui/core": "1.5.3",
+    "@leafer-ui/interaction-web": "1.5.3",
+    "@leafer-ui/partner": "1.5.3",
+    "@leafer-ui/interface": "1.5.3",
+    "@leafer-in/interface": "1.5.3"
   }
 }

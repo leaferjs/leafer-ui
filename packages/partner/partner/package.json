@@ -18,13 +18,13 @@
     "leaferjs"
   ],
   "dependencies": {
-    "@leafer-ui/draw": "workspace:*",
-    "@leafer-ui/paint": "workspace:*",
-    "@leafer-ui/effect": "workspace:*",
-    "@leafer-ui/text": "workspace:*",
-    "@leafer-ui/color": "workspace:*"
+    "@leafer-ui/draw": "1.5.3",
+    "@leafer-ui/paint": "1.5.3",
+    "@leafer-ui/effect": "1.5.3",
+    "@leafer-ui/text": "1.5.3",
+    "@leafer-ui/color": "1.5.3"
   },
   "devDependencies": {
-     "@leafer-ui/interface": "workspace:*"
+     "@leafer-ui/interface": "1.5.3"
   }
 }

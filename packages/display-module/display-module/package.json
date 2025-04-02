@@ -18,8 +18,8 @@
     "leaferjs"
   ],
   "dependencies": {
-    "@leafer-ui/data": "workspace:*",
-    "@leafer-ui/bounds": "workspace:*",
-    "@leafer-ui/render": "workspace:*"
+    "@leafer-ui/data": "1.5.3",
+    "@leafer-ui/bounds": "1.5.3",
+    "@leafer-ui/render": "1.5.3"
   }
 }

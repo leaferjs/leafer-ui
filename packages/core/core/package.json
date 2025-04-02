@@ -25,10 +25,10 @@
     "leaferjs"
   ],
   "dependencies": {
-    "@leafer-ui/draw": "workspace:*",
-    "@leafer-ui/app": "workspace:*",
-    "@leafer-ui/interaction": "workspace:*",
-    "@leafer-ui/event": "workspace:*",
-    "@leafer-ui/hit": "workspace:*"
+    "@leafer-ui/draw": "1.5.3",
+    "@leafer-ui/app": "1.5.3",
+    "@leafer-ui/interaction": "1.5.3",
+    "@leafer-ui/event": "1.5.3",
+    "@leafer-ui/hit": "1.5.3"
   }
 }
