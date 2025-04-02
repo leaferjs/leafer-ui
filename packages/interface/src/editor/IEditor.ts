@@ -120,6 +120,7 @@ export interface IEditorConfig extends IObject {
     rotateable?: boolean | 'rotate'
     skewable?: boolean
 
+    beforeSelect?: IEditorBeforeSelect
     beforeMove?: IEditorBeforeMove
     beforeScale?: IEditorBeforeScale
     beforeRotate?: IEditorBeforeRotate
@@ -127,6 +128,10 @@ export interface IEditorConfig extends IObject {
 
     textEditor?: IObject
     pathEditor?: IObject
+}
+
+export interface IEditorSelectData {
+    target: IUI | IUI[]
 }
 
 export interface IEditorMoveData extends IPointData, IObject {
@@ -149,6 +154,9 @@ export interface IEditorSkewData extends ISkewData, IObject {
     origin: IPointData | IAlign
 }
 
+export interface IEditorBeforeSelect {
+    (data: IEditorSelectData): IUI | IUI[] | boolean | void
+}
 
 export interface IEditorBeforeMove {
     (data: IEditorMoveData): IPointData | boolean | void

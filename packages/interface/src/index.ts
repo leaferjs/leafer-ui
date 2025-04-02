@@ -50,4 +50,4 @@ export { IEffectModule } from './module/IEffect'
 export { IFilterModule, IFilterProcessor, IFilterFunction } from './module/IFilter'
 export { ICachedShape } from './ICachedShape'
 
-export { IEditorBase, IEditorConfig, IEditBoxBase, IEditPoint, IEditPointInputData, IEditPointType, IEditorDragStartData, IEditToolFunction, IEditorConfigFunction, IEditorBeforeMove, IEditorBeforeScale, IEditorBeforeRotate, IEditorBeforeSkew, IEditorMoveData, IEditorScaleData, IEditorRotationData, IEditorSkewData } from './editor/IEditor'
+export { IEditorBase, IEditorConfig, IEditBoxBase, IEditPoint, IEditPointInputData, IEditPointType, IEditorDragStartData, IEditToolFunction, IEditorConfigFunction, IEditorBeforeSelect, IEditorBeforeMove, IEditorBeforeScale, IEditorBeforeRotate, IEditorBeforeSkew, IEditorSelectData, IEditorMoveData, IEditorScaleData, IEditorRotationData, IEditorSkewData } from './editor/IEditor'
