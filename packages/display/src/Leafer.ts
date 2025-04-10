@@ -64,7 +64,8 @@ export class Leafer extends Group implements ILeafer {
         start: true,
         hittable: true,
         smooth: true,
-        lazySpeard: 100
+        lazySpeard: 100,
+        // pixelSnap: false // 是否对齐像素，避免图片存在浮点坐标导致模糊
     }
 
     public autoLayout?: IAutoBounds
