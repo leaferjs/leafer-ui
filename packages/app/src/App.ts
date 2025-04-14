@@ -1,7 +1,7 @@
 import { ILeaferConfig, IResizeEvent, ILeaferCanvas, IRenderOptions, ILeaferBase, IBoundsData } from '@leafer/interface'
 import { Creator, DataHelper, Debug, LayoutEvent, PropertyEvent, RenderEvent, canvasSizeAttrs, registerUI } from '@leafer/core'
 
-import { IApp, IAppConfig, IAppInputData, IEditorBase, ILeafer } from '@leafer-ui/interface'
+import { IApp, IAppConfig, IAppForEachFn, IAppInputData, IEditorBase, ILeafer } from '@leafer-ui/interface'
 
 import { Leafer } from '@leafer-ui/draw'
 
@@ -51,26 +51,26 @@ export class App extends Leafer implements IApp {
 
     override start(): void {
         super.start()
-        this.children.forEach(leafer => leafer.start())
+        this.forEach(leafer => leafer.start())
     }
 
     override stop(): void {
-        this.children.forEach(leafer => leafer.stop())
+        this.forEach(leafer => leafer.stop())
         super.stop()
     }
 
     override unlockLayout(): void {
         super.unlockLayout()
-        this.children.forEach(leafer => leafer.unlockLayout())
+        this.forEach(leafer => leafer.unlockLayout())
     }
 
     override lockLayout(): void {
         super.lockLayout()
-        this.children.forEach(leafer => leafer.lockLayout())
+        this.forEach(leafer => leafer.lockLayout())
     }
 
     override forceRender(bounds?: IBoundsData, sync?: boolean): void {
-        this.children.forEach(leafer => leafer.forceRender(bounds, sync))
+        this.forEach(leafer => leafer.forceRender(bounds, sync))
     }
 
     public addLeafer(merge?: ILeaferConfig): Leafer {
@@ -93,8 +93,12 @@ export class App extends Leafer implements IApp {
         this.__listenChildEvents(leafer)
     }
 
+    public forEach(fn: IAppForEachFn): void {
+        this.children.forEach(fn)
+    }
+
     protected __onPropertyChange(): void {
-        if (Debug.showHitView) this.children.forEach(leafer => leafer.forceUpdate('surface'))
+        if (Debug.showHitView) this.forEach(leafer => leafer.forceUpdate('surface'))
     }
 
     protected __onCreated(): void {
@@ -118,17 +122,17 @@ export class App extends Leafer implements IApp {
         if (canvas.context) {
             const m = options.matrix
             if (m) canvas.setTransform(m.a, m.b, m.c, m.d, m.e, m.f) // screenshot
-            this.children.forEach(leafer => canvas.copyWorld(leafer.canvas))
+            this.forEach(leafer => canvas.copyWorld(leafer.canvas))
         }
     }
 
     public __onResize(event: IResizeEvent): void {
-        this.children.forEach(leafer => leafer.resize(event))
+        this.forEach(leafer => leafer.resize(event))
         super.__onResize(event)
     }
 
     public updateLayout(): void {
-        this.children.forEach(leafer => leafer.updateLayout())
+        this.forEach(leafer => leafer.updateLayout())
     }
 
     protected __getChildConfig(userConfig?: ILeaferConfig): ILeaferConfig {

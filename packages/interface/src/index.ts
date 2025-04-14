@@ -1,6 +1,6 @@
 export * from '@leafer/interface'
 
-export { IApp, IAppConfig } from './app/IApp'
+export { IApp, IAppConfig, IAppForEachFn } from './app/IApp'
 export { ILeafer } from './app/ILeafer'
 
 export {
