@@ -136,7 +136,7 @@ export class App extends Leafer implements IApp {
     }
 
     protected __getChildConfig(userConfig?: ILeaferConfig): ILeaferConfig {
-        let config = { ...this.config }
+        const config = { ...this.config }
         config.hittable = config.realCanvas = undefined
         if (userConfig) DataHelper.assign(config, userConfig)
 

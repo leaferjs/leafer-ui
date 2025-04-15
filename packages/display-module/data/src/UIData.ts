@@ -94,12 +94,13 @@ export class UIData extends LeafData implements IUIData {
                 this.__removeInput('fill')
                 PaintImage.recycleImage('fill', this)
                 this.__isFills = false
-                if (this.__pixelFill) this.__pixelFill = false
+                this.__pixelFill && (this.__pixelFill = false)
             }
             this._fill = value
         } else if (typeof value === 'object') {
             this.__setInput('fill', value)
-            this.__leaf.__layout.boxChanged || this.__leaf.__layout.boxChange()
+            const layout = this.__leaf.__layout
+            layout.boxChanged || layout.boxChange()
             this.__isFills = true
             this._fill || (this._fill = emptyPaint)
         }
@@ -111,12 +112,13 @@ export class UIData extends LeafData implements IUIData {
                 this.__removeInput('stroke')
                 PaintImage.recycleImage('stroke', this)
                 this.__isStrokes = false
-                if (this.__pixelStroke) this.__pixelStroke = false
+                this.__pixelStroke && (this.__pixelStroke = false)
             }
             this._stroke = value
         } else if (typeof value === 'object') {
             this.__setInput('stroke', value)
-            this.__leaf.__layout.boxChanged || this.__leaf.__layout.boxChange()
+            const layout = this.__leaf.__layout
+            layout.boxChanged || layout.boxChange()
             this.__isStrokes = true
             this._stroke || (this._stroke = emptyPaint)
         }
