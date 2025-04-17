@@ -12,8 +12,9 @@ const tempPoint = {} as IPointData
 const tempScaleData = {} as IScaleData
 
 export function createData(leafPaint: ILeafPaint, image: ILeaferImage, paint: IImagePaint, box: IBoundsData): void {
-    const { blendMode, sync } = paint
+    const { blendMode, changeful, sync } = paint
     if (blendMode) leafPaint.blendMode = blendMode
+    if (changeful) leafPaint.changeful = changeful
     if (sync) leafPaint.sync = sync
     leafPaint.data = getPatternData(paint, box, image)
 }

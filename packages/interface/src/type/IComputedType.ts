@@ -15,6 +15,7 @@ export interface ILeafPaint {
     loadId?: number
     patternId?: string
     patternTask?: ITaskItem
+    changeful?: boolean // 会频繁变化，不生成图案（有特殊性能优化，一般用于游戏精灵、动图场景）
     sync?: boolean // 同步显示图片，不走任务列表生成图案
     data?: ILeafPaintPatternData
 }

@@ -78,7 +78,7 @@ export interface IImagePaint extends IPaintBase {
 
     repeat?: IRepeat
 
-    changeful?: boolean // 会频繁变化 url（有特殊性能优化，一般用于游戏精灵、动图场景）
+    changeful?: boolean // 会频繁变化，不生成图案（有特殊性能优化，一般用于游戏精灵、动图场景）
     sync?: boolean // 同步显示，不走任务列表生成图案
 }
 export interface IImageFilters {

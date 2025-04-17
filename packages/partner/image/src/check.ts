@@ -1,47 +1,41 @@
-
 import { ILeaferCanvas } from '@leafer/interface'
 import { ImageManager, Platform } from '@leafer/core'
 
-import { IUI, ILeafPaint } from '@leafer-ui/interface'
+import { IUI, ILeafPaint, ILeafPaintPatternData } from '@leafer-ui/interface'
 import { Export } from '@leafer-ui/draw'
 
 import { createPattern } from './pattern'
 
+
 const { abs } = Math
 
-export function checkImage(ui: IUI, canvas: ILeaferCanvas, paint: ILeafPaint, allowPaint?: boolean): boolean {
+export function checkImage(ui: IUI, canvas: ILeaferCanvas, paint: ILeafPaint, allowDraw?: boolean): boolean {
     const { scaleX, scaleY } = ImageManager.patternLocked ? ui.__world : ui.__nowWorld
-    const { pixelRatio } = canvas
+    const { pixelRatio } = canvas, { data } = paint
 
-    if (!paint.data || (paint.patternId === scaleX + '-' + scaleY + '-' + pixelRatio && !Export.running)) {
-        return false
+    if (!data || (paint.patternId === scaleX + '-' + scaleY + '-' + pixelRatio && !Export.running)) {
+        return false // 生成图案中
     } else {
 
-        const { data } = paint
-
-        if (allowPaint) {
-            if (!data.repeat) {
-                let { width, height } = data
-                width *= abs(scaleX) * pixelRatio
-                height *= abs(scaleY) * pixelRatio
-                if (data.scaleX) {
-                    width *= data.scaleX
-                    height *= data.scaleY
-                }
-                allowPaint = (width * height > Platform.image.maxCacheSize) || Export.running
+        if (allowDraw) {
+            if (data.repeat) {
+                allowDraw = false
             } else {
-                allowPaint = false
+                if (!(paint.changeful || Export.running)) {
+                    let { width, height } = data
+                    width *= abs(scaleX) * pixelRatio
+                    height *= abs(scaleY) * pixelRatio
+                    if (data.scaleX) {
+                        width *= data.scaleX
+                        height *= data.scaleY
+                    }
+                    allowDraw = (width * height > Platform.image.maxCacheSize)
+                }
             }
         }
 
-        if (allowPaint) {
-            canvas.save()
-            ui.windingRule ? canvas.clip(ui.windingRule) : canvas.clip()
-            if (paint.blendMode) canvas.blendMode = paint.blendMode
-            if (data.opacity) canvas.opacity *= data.opacity
-            if (data.transform) canvas.transform(data.transform)
-            canvas.drawImage(paint.image.getFull(data.filters), 0, 0, data.width, data.height)
-            canvas.restore()
+        if (allowDraw) {
+            drawImage(ui, canvas, paint, data) // 直接绘制图像，不生成图案
             return true
         } else {
             if (!paint.style || paint.sync || Export.running) {
@@ -58,4 +52,15 @@ export function checkImage(ui: IUI, canvas: ILeaferCanvas, paint: ILeafPaint, al
             return false
         }
     }
+}
+
+
+function drawImage(ui: IUI, canvas: ILeaferCanvas, paint: ILeafPaint, data: ILeafPaintPatternData): void { // 后续可优化
+    canvas.save()
+    ui.windingRule ? canvas.clip(ui.windingRule) : canvas.clip()
+    if (paint.blendMode) canvas.blendMode = paint.blendMode
+    if (data.opacity) canvas.opacity *= data.opacity
+    if (data.transform) canvas.transform(data.transform)
+    canvas.drawImage(paint.image.getFull(data.filters), 0, 0, data.width, data.height)
+    canvas.restore()
 }
