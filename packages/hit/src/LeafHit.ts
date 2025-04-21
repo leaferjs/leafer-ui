@@ -8,26 +8,27 @@ const inner = {} as IRadiusPointData
 const leaf = Leaf.prototype
 
 leaf.__hitWorld = function (point: IRadiusPointData): boolean {
-    if (!this.__.hitSelf) return false
+    const data = this.__
+    if (!data.hitSelf) return false
 
-    if (this.__.hitRadius) {
+    const world = this.__world, layout = this.__layout
+    const isSmall = world.width < 10 && world.height < 10
+
+    if (data.hitRadius) {
         copy(inner, point), point = inner
-        setRadius(point, this.__.hitRadius)
+        setRadius(point, data.hitRadius)
     }
 
-    toInnerRadiusPointOf(point, this.__world, inner)
+    toInnerRadiusPointOf(point, world, inner)
 
-    const { width, height } = this.__world
-    const isSmall = width < 10 && height < 10
-
-    if (this.__.hitBox || isSmall) {
-        if (BoundsHelper.hitRadiusPoint(this.__layout.boxBounds, inner)) return true
+    if (data.hitBox || isSmall) {
+        if (BoundsHelper.hitRadiusPoint(layout.boxBounds, inner)) return true
         if (isSmall) return false
     }
 
-    if (this.__layout.hitCanvasChanged || !this.__hitCanvas) {
+    if (layout.hitCanvasChanged || !this.__hitCanvas) {
         this.__updateHitCanvas()
-        if (!this.__layout.boundsChanged) this.__layout.hitCanvasChanged = false
+        if (!layout.boundsChanged) layout.hitCanvasChanged = false
     }
 
     return this.__hit(inner)
