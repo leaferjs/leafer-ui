@@ -24,6 +24,14 @@ export function resizeType(defaultValue?: IValue) {
     }))
 }
 
+export function boxStyleType(defaultValue?: IValue) {
+    return decorateLeafAttr(defaultValue, (key: string) => attr({
+        set(value: IValue) {
+            this.__setAttr(key, value)
+        }
+    }))
+}
+
 export function zoomLayerType() {
     return (target: IUI, key: string) => {
         const privateKey = '_' + key

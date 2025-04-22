@@ -104,9 +104,6 @@ export interface ITextStyleAttrData {
 
     textWrap?: ITextWrap
     textOverflow?: IOverflow | string
-
-    boxFill?: IFill
-    boxStroke?: IStroke
 }
 export interface ITextStyleInputData {
     fontFamily?: IString
@@ -128,9 +125,6 @@ export interface ITextStyleInputData {
 
     textWrap?: ITextWrap
     textOverflow?: IOverflow | string
-
-    boxFill?: IFill
-    boxStroke?: IStroke
 }
 export interface ITextStyleComputedData {
     fontFamily?: string
@@ -152,9 +146,6 @@ export interface ITextStyleComputedData {
 
     textWrap?: ITextWrap
     textOverflow?: IOverflow | string
-
-    boxFill?: IColorString | ILeafPaint[]
-    boxStroke?: IColorString | ILeafPaint[]
 }
 
 // effect---

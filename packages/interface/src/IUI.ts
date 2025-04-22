@@ -209,6 +209,7 @@ interface ITextAttrData {
     text?: string | number
     padding?: IFourNumber
     resizeFontSize?: boolean
+    boxStyle?: IUIInputData
 }
 
 export interface ITextData extends ITextAttrData, ITextStyleComputedData, IUIData {
