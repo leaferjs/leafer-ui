@@ -2,7 +2,6 @@ import { ILeaferCanvas, IPathDrawer, IPathCommandData, IBoolean, INumber, IStrin
 import { BoundsHelper, boundsType, surfaceType, dataProcessor, registerUI, affectStrokeBoundsType, dataType, hitType, MathHelper } from '@leafer/core'
 
 import { IFill, IText, IFontWeight, ITextCase, ITextDecoration, ITextData, ITextInputData, ITextAlign, IVerticalAlign, ITextDrawData, IOverflow, IStrokeAlign, IHitType, ITextWrap, IWritingMode, IUI, IBackgroundBoxStyle } from '@leafer-ui/interface'
-import { boxStyleType } from '@leafer-ui/decorator'
 import { TextData } from '@leafer-ui/data'
 
 import { TextConvert, UnitConvert, Export } from '@leafer-ui/external'
@@ -27,7 +26,7 @@ export class Text extends UI implements IText {
     @boundsType(0)
     declare public height?: INumber
 
-    @boxStyleType()
+    @surfaceType()
     public boxStyle: IBackgroundBoxStyle
 
     @dataType(false)

@@ -1,4 +1,6 @@
-import { IFontWeight, ITextData } from '@leafer-ui/interface'
+import { UICreator } from '@leafer/core'
+
+import { IFontWeight, ITextData, IUI, IText, IObject } from '@leafer-ui/interface'
 
 import { UIData } from "./UIData"
 
@@ -29,6 +31,32 @@ export class TextData extends UIData implements ITextData {
             if (this.__input) this.__removeInput('fontWeight')
             this._fontWeight = value
         }
+    }
+
+    setBoxStyle(value: IUI) {
+        const t = this.__leaf as IText, { boxStyle } = this as ITextData
+        let bgBox = t.__bgBox
+
+        if (value) {
+
+            if (boxStyle) {
+                for (let key in boxStyle) (bgBox as IObject)[key] = undefined
+            } else {
+                bgBox = t.__bgBox = UICreator.get('Rect', 0 as any) as IUI // 传递 0 可以优化内存占用
+                bgBox.__layout.boxBounds = t.__layout.boxBounds
+            }
+
+            bgBox.set(value)
+
+        } else {
+
+            if (bgBox) {
+                t.__bgBox = bgBox.__layout.boxBounds = undefined
+                bgBox.destroy()
+            }
+
+        }
+
     }
 
 }
