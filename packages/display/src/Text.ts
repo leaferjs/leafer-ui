@@ -1,11 +1,11 @@
 import { ILeaferCanvas, IPathDrawer, IPathCommandData, IBoolean, INumber, IString, IBoundsData, IUnitData, IRadiusPointData, IRenderOptions } from '@leafer/interface'
 import { BoundsHelper, boundsType, surfaceType, dataProcessor, registerUI, affectStrokeBoundsType, dataType, hitType, MathHelper } from '@leafer/core'
 
-import { IFill, IText, IFontWeight, ITextCase, ITextDecoration, ITextData, ITextInputData, ITextAlign, IVerticalAlign, ITextDrawData, IOverflow, IStrokeAlign, IHitType, ITextWrap, IWritingMode, IUIInputData, IUI, IBackgroundBoxStyle } from '@leafer-ui/interface'
+import { IFill, IText, IFontWeight, ITextCase, ITextDecoration, ITextData, ITextInputData, ITextAlign, IVerticalAlign, ITextDrawData, IOverflow, IStrokeAlign, IHitType, ITextWrap, IWritingMode, IUI, IBackgroundBoxStyle } from '@leafer-ui/interface'
 import { boxStyleType } from '@leafer-ui/decorator'
 import { TextData } from '@leafer-ui/data'
 
-import { TextConvert, UnitConvert } from '@leafer-ui/external'
+import { TextConvert, UnitConvert, Export } from '@leafer-ui/external'
 
 import { UI } from './UI'
 
@@ -92,6 +92,8 @@ export class Text extends UI implements IText {
 
     @boundsType('show')
     public textOverflow?: IOverflow | string
+
+    public textEditing: boolean
 
     public __bgBox?: IUI
 
@@ -203,6 +205,7 @@ export class Text extends UI implements IText {
     public __draw(canvas: ILeaferCanvas, options: IRenderOptions, originCanvas?: ILeaferCanvas): void {
         const bgBox = this.__bgBox
         if (bgBox) bgBox.__draw(canvas, options, originCanvas)
+        if (this.textEditing && !Export.running) return
         super.__draw(canvas, options, originCanvas)
     }
 

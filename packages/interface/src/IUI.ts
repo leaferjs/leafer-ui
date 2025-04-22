@@ -211,6 +211,7 @@ interface ITextAttrData {
     padding?: IFourNumber
     resizeFontSize?: boolean
     boxStyle?: IBackgroundBoxStyle
+    textEditing?: boolean
 }
 
 export interface IBackgroundBoxStyle extends IFillAttrData, IStrokeAttrData, ICornerRadiusAttrData {
