@@ -7,11 +7,11 @@ export const RectRender: IRectRenderModule = {
 
     __drawFast(canvas: ILeaferCanvas, options: IRenderOptions): void {
 
-        let { width, height, fill, stroke, __drawAfterFill } = this.__
+        let { fill, stroke, __drawAfterFill } = this.__, { x, y, width, height } = this.__layout.boxBounds
 
         if (fill) {
             canvas.fillStyle = fill
-            canvas.fillRect(0, 0, width, height)
+            canvas.fillRect(x, y, width, height)
         }
 
         if (__drawAfterFill) this.__drawAfterFill(canvas, options)
@@ -33,12 +33,12 @@ export const RectRender: IRectRenderModule = {
                     if (width < 0 || height < 0) {
                         canvas.save()
                         this.__clip(canvas, options)
-                        canvas.strokeRect(half, half, width, height)
+                        canvas.strokeRect(x + half, y + half, width, height)
                         canvas.restore()
-                    } else canvas.strokeRect(half, half, width, height)
+                    } else canvas.strokeRect(x + half, y + half, width, height)
                     break
                 case 'outside':
-                    canvas.strokeRect(-half, -half, width + __strokeWidth, height + __strokeWidth)
+                    canvas.strokeRect(x - half, y - half, width + __strokeWidth, height + __strokeWidth)
                     break
             }
 

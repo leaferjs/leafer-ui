@@ -12,7 +12,7 @@ export {
     IStar, IStarInputData, IStarData,
     IPath, IPathInputData, IPathData,
     IPen, IPenInputData, IPenData,
-    IText, ITextInputData, ITextData, ITextRowData, ITextWordData, ITextCharData, ITextDrawData,
+    IText, ITextInputData, ITextData, ITextRowData, ITextWordData, ITextCharData, ITextDrawData, IBackgroundBoxStyle,
     IImage, IImageInputData, IImageData,
     ICanvas, ICanvasInputData, ICanvasData,
     IFrame, IFrameInputData, IFrameData,

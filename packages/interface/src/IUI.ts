@@ -204,12 +204,17 @@ export interface IPenInputData extends IGroupInputData { }
 // Text
 export interface IText extends ITextAttrData, ITextStyleAttrData, IUI {
     __: ITextData
+    __bgBox?: IUI
 }
 interface ITextAttrData {
     text?: string | number
     padding?: IFourNumber
     resizeFontSize?: boolean
-    boxStyle?: IUIInputData
+    boxStyle?: IBackgroundBoxStyle
+}
+
+export interface IBackgroundBoxStyle extends IFillAttrData, IStrokeAttrData, ICornerRadiusAttrData {
+
 }
 
 export interface ITextData extends ITextAttrData, ITextStyleComputedData, IUIData {

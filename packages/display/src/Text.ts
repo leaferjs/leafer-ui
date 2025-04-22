@@ -1,7 +1,7 @@
-import { ILeaferCanvas, IPathDrawer, IPathCommandData, IBoolean, INumber, IString, IBoundsData, IUnitData } from '@leafer/interface'
+import { ILeaferCanvas, IPathDrawer, IPathCommandData, IBoolean, INumber, IString, IBoundsData, IUnitData, IRadiusPointData, IRenderOptions } from '@leafer/interface'
 import { BoundsHelper, boundsType, surfaceType, dataProcessor, registerUI, affectStrokeBoundsType, dataType, hitType, MathHelper } from '@leafer/core'
 
-import { IFill, IText, IFontWeight, ITextCase, ITextDecoration, ITextData, ITextInputData, ITextAlign, IVerticalAlign, ITextDrawData, IOverflow, IStrokeAlign, IHitType, ITextWrap, IWritingMode, IStroke, IRectInputData, IUIInputData } from '@leafer-ui/interface'
+import { IFill, IText, IFontWeight, ITextCase, ITextDecoration, ITextData, ITextInputData, ITextAlign, IVerticalAlign, ITextDrawData, IOverflow, IStrokeAlign, IHitType, ITextWrap, IWritingMode, IUIInputData, IUI, IBackgroundBoxStyle } from '@leafer-ui/interface'
 import { boxStyleType } from '@leafer-ui/decorator'
 import { TextData } from '@leafer-ui/data'
 
@@ -27,14 +27,14 @@ export class Text extends UI implements IText {
     @boundsType(0)
     declare public height?: INumber
 
+    @boxStyleType()
+    public boxStyle: IBackgroundBoxStyle
+
     @dataType(false)
     public resizeFontSize?: IBoolean
 
     @surfaceType('#000000')
     declare public fill?: IFill
-
-    @boxStyleType()
-    public boxStyle: IUIInputData
 
     @affectStrokeBoundsType('outside')
     declare public strokeAlign?: IStrokeAlign
@@ -92,6 +92,8 @@ export class Text extends UI implements IText {
 
     @boundsType('show')
     public textOverflow?: IOverflow | string
+
+    public __bgBox?: IUI
 
     public get textDrawData(): ITextDrawData {
         this.__layout.update()
@@ -184,6 +186,29 @@ export class Text extends UI implements IText {
 
     public __updateRenderBounds(): void {
         copyAndSpread(this.__layout.renderBounds, this.__.__textBoxBounds, this.__layout.renderSpread)
+    }
+
+    public __hit(inner: IRadiusPointData): boolean {
+        const bgBox = this.__bgBox
+        if (bgBox && bgBox.__hit(inner)) return true
+        return super.__hit(inner)
+    }
+
+    public __updateChange(): void {
+        const bgBox = this.__bgBox
+        if (bgBox) bgBox.__updateChange()
+        super.__updateChange()
+    }
+
+    public __draw(canvas: ILeaferCanvas, options: IRenderOptions, originCanvas?: ILeaferCanvas): void {
+        const bgBox = this.__bgBox
+        if (bgBox) bgBox.__draw(canvas, options, originCanvas)
+        super.__draw(canvas, options, originCanvas)
+    }
+
+    public destroy(): void {
+        if (this.boxStyle) this.boxStyle = null
+        super.destroy()
     }
 
 }

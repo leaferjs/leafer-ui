@@ -1,7 +1,7 @@
 import { IValue, IObject } from '@leafer/interface'
-import { defineKey, decorateLeafAttr, attr } from '@leafer/core'
+import { defineKey, decorateLeafAttr, attr, UICreator } from '@leafer/core'
 
-import { ICanvas, IUI, IApp } from '@leafer-ui/interface'
+import { ICanvas, IUI, IApp, IText } from '@leafer-ui/interface'
 
 
 export function effectType(defaultValue?: IValue) {
@@ -26,7 +26,30 @@ export function resizeType(defaultValue?: IValue) {
 
 export function boxStyleType(defaultValue?: IValue) {
     return decorateLeafAttr(defaultValue, (key: string) => attr({
-        set(value: IValue) {
+        set(value: IUI) {
+            const t = this as IText, { boxStyle } = t.__
+            let bgBox = t.__bgBox
+
+            if (value) {
+
+                if (boxStyle) {
+                    for (let key in boxStyle) (bgBox as IObject)[key] = undefined
+                } else {
+                    bgBox = t.__bgBox = UICreator.get('Rect', 0 as any) as IUI
+                    bgBox.__layout.boxBounds = this.__layout.boxBounds
+                }
+
+                bgBox.set(value)
+
+            } else {
+
+                if (bgBox) {
+                    t.__bgBox = bgBox.__layout.boxBounds = undefined
+                    bgBox.destroy()
+                }
+
+            }
+
             this.__setAttr(key, value)
         }
     }))

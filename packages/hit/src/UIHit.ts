@@ -41,13 +41,13 @@ ui.__updateHitCanvas = function (): void {
 }
 
 ui.__hit = function (inner: IRadiusPointData): boolean {
-    // hit pixel
 
     const data = this.__
+
+    // hit pixel
     if (data.__isHitPixel && this.__hitPixel(inner)) return true
 
     // hit path
-
     const { hitFill } = data
     const needHitFillPath = ((data.fill || data.__isCanvas) && (hitFill === 'path' || (hitFill === 'pixel' && !(data.__pixelFill || data.__isCanvas)))) || hitFill === 'all'
     if (needHitFillPath && this.__hitFill(inner)) return true
