@@ -204,7 +204,7 @@ export interface IPenInputData extends IGroupInputData { }
 // Text
 export interface IText extends ITextAttrData, ITextStyleAttrData, IUI {
     __: ITextData
-    __bgBox?: IUI
+    __box?: IUI
 }
 interface ITextAttrData {
     text?: string | number
@@ -214,7 +214,7 @@ interface ITextAttrData {
     textEditing?: boolean
 }
 
-export interface IBackgroundBoxStyle extends IFillAttrData, IStrokeAttrData, ICornerRadiusAttrData {
+export interface IBackgroundBoxStyle extends IRectInputData {
 
 }
 

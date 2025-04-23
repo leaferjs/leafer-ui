@@ -14,7 +14,7 @@ export function innerShadow(ui: IUI, current: ILeaferCanvas, shape: ICachedShape
 
     let copyBounds: IBoundsData, spreadScale: number
 
-    const { __nowWorld: nowWorld, __layout: __layout } = ui
+    const { __nowWorld: nowWorld, __layout } = ui
     const { innerShadow } = ui.__
     const { worldCanvas, bounds, shapeBounds, scaleX, scaleY } = shape
 

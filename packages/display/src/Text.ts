@@ -9,7 +9,7 @@ import { TextConvert, UnitConvert, Export } from '@leafer-ui/external'
 import { UI } from './UI'
 
 
-const { copyAndSpread, includes, isSame, spread, setList } = BoundsHelper
+const { copyAndSpread, includes, spread, setList } = BoundsHelper
 
 @registerUI()
 export class Text extends UI implements IText {
@@ -94,7 +94,7 @@ export class Text extends UI implements IText {
 
     public textEditing: boolean
 
-    public __bgBox?: IUI
+    public __box?: IUI
 
     public get textDrawData(): ITextDrawData {
         this.__layout.update()
@@ -149,16 +149,16 @@ export class Text extends UI implements IText {
 
         this.__updateTextDrawData() // layout text
 
-        const { bounds } = data.__textDrawData
+        const { bounds: contentBounds } = data.__textDrawData
         const b = layout.boxBounds
 
-        if (data.__lineHeight < fontSize) spread(bounds, fontSize / 2)
+        if (data.__lineHeight < fontSize) spread(contentBounds, fontSize / 2)
 
         if (autoWidth || autoHeight) {
-            b.x = autoWidth ? bounds.x : 0
-            b.y = autoHeight ? bounds.y : 0
-            b.width = autoWidth ? bounds.width : data.width
-            b.height = autoHeight ? bounds.height : data.height
+            b.x = autoWidth ? contentBounds.x : 0
+            b.y = autoHeight ? contentBounds.y : 0
+            b.width = autoWidth ? contentBounds.width : data.width
+            b.height = autoHeight ? contentBounds.height : data.height
 
             if (padding) {
                 const [top, right, bottom, left] = data.__padding
@@ -170,40 +170,45 @@ export class Text extends UI implements IText {
 
         if (italic) b.width += fontSize * 0.16 // 倾斜会导致文本的bounds增大
 
-        const contentBounds = includes(b, bounds) ? b : bounds
-        if (!isSame(contentBounds, layout.contentBounds)) {
-            layout.contentBounds = contentBounds
+        if (includes(b, contentBounds)) data.__textBoxBounds = b
+        else {
+            setList(data.__textBoxBounds = {} as IBoundsData, [b, contentBounds])
             layout.renderChanged = true
-            setList(data.__textBoxBounds = {} as IBoundsData, [b, bounds])
-        } else data.__textBoxBounds = contentBounds
+        }
 
+        layout.contentBounds = contentBounds
+
+    }
+
+    public __updateStrokeSpread(): number {
+        const width = super.__updateStrokeSpread()
+        return this.__box ? Math.max(this.__box.__updateStrokeSpread(), width) : width
     }
 
     public __updateRenderSpread(): number {
         let width = super.__updateRenderSpread()
+        if (this.__box) width = Math.max(this.__box.__updateRenderSpread(), width)
         if (!width) width = this.__layout.boxBounds === this.__layout.contentBounds ? 0 : 1
         return width
     }
 
     public __updateRenderBounds(): void {
-        copyAndSpread(this.__layout.renderBounds, this.__.__textBoxBounds, this.__layout.renderSpread)
+        const { renderBounds, renderSpread, strokeSpread } = this.__layout
+        copyAndSpread(renderBounds, this.__.__textBoxBounds, renderSpread + (strokeSpread || 0))
+        if (this.__box) this.__box.__layout.renderBounds = this.__layout.renderBounds
     }
 
     public __hit(inner: IRadiusPointData): boolean {
-        const bgBox = this.__bgBox
-        if (bgBox && bgBox.__hit(inner)) return true
+        if (this.__box && this.__box.__hit(inner)) return true
         return super.__hit(inner)
     }
 
-    public __updateChange(): void {
-        const bgBox = this.__bgBox
-        if (bgBox) bgBox.__updateChange()
-        super.__updateChange()
-    }
-
     public __draw(canvas: ILeaferCanvas, options: IRenderOptions, originCanvas?: ILeaferCanvas): void {
-        const bgBox = this.__bgBox
-        if (bgBox) bgBox.__draw(canvas, options, originCanvas)
+        const box = this.__box
+        if (box) {
+            box.__nowWorld = this.__nowWorld
+            box.__draw(canvas, options, originCanvas)
+        }
         if (this.textEditing && !Export.running) return
         super.__draw(canvas, options, originCanvas)
     }

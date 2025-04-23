@@ -7,7 +7,8 @@ export const RectRender: IRectRenderModule = {
 
     __drawFast(canvas: ILeaferCanvas, options: IRenderOptions): void {
 
-        let { fill, stroke, __drawAfterFill } = this.__, { x, y, width, height } = this.__layout.boxBounds
+        let { x, y, width, height } = this.__layout.boxBounds
+        const { fill, stroke, __drawAfterFill } = this.__
 
         if (fill) {
             canvas.fillStyle = fill
