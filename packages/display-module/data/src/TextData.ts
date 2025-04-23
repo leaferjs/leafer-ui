@@ -1,6 +1,6 @@
 import { UICreator } from '@leafer/core'
 
-import { IFontWeight, ITextData, IUI, IText, IObject } from '@leafer-ui/interface'
+import { IFontWeight, ITextData, IUI, IText, IObject, IBackgroundBoxStyle } from '@leafer-ui/interface'
 
 import { UIData } from "./UIData"
 
@@ -22,6 +22,7 @@ export class TextData extends UIData implements ITextData {
     public get __useNaturalRatio() { return false }
 
     protected _fontWeight?: number
+    protected _boxStyle?: IBackgroundBoxStyle
 
     setFontWeight(value: IFontWeight): void {
         if (typeof value === 'string') {
@@ -62,6 +63,8 @@ export class TextData extends UIData implements ITextData {
             }
 
         }
+
+        this._boxStyle = value
 
     }
 
