@@ -34,16 +34,16 @@ export class TextData extends UIData implements ITextData {
     }
 
     setBoxStyle(value: IUI) {
-        const t = this.__leaf as IText, { boxStyle } = this as ITextData
+        const t = this.__leaf as IText
         let box = t.__box
 
         if (value) {
 
+            const { boxStyle } = this as ITextData
             if (box) for (let key in boxStyle) (box as IObject)[key] = undefined
             else box = t.__box = UICreator.get('Rect', 0 as any) as IUI // 传递 0 可以优化内存占用
 
             const layout = t.__layout, boxLayout = box.__layout
-
             if (!boxStyle) {
                 boxLayout.boxBounds = layout.boxBounds
                 box.__world = t.__world

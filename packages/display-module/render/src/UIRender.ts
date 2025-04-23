@@ -18,11 +18,8 @@ export const UIRender: IUIRenderModule = {
 
         const complex = data.__isFills || data.__isStrokes || data.cornerRadius || data.__useEffect
 
-        if (complex) {
-            data.__complex = true
-        } else {
-            data.__complex && (data.__complex = false)
-        }
+        if (complex) data.__complex = true
+        else data.__complex && (data.__complex = false)
     },
 
     __drawFast(canvas: ILeaferCanvas, options: IRenderOptions): void {

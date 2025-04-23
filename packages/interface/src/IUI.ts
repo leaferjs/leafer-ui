@@ -486,7 +486,6 @@ export interface IUIData extends IUIAttrData, IUIComputedData, ILeafData {
     readonly __clipAfterFill?: boolean
     readonly __hasSurface?: boolean
 
-    __isOverflow?: boolean
     __blendLayer?: boolean
 
     __boxStroke?: boolean // box闭合描边，可不用计算miterLimit造成的渲染包围盒变化

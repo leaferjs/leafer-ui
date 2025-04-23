@@ -92,7 +92,10 @@ export class Text extends UI implements IText {
     @boundsType('show')
     public textOverflow?: IOverflow | string
 
+    //  @leafer-in/text-editor rewrite
     public textEditing: boolean
+
+    public isOverflow: boolean
 
     public __box?: IUI
 
@@ -152,6 +155,8 @@ export class Text extends UI implements IText {
         const { bounds: contentBounds } = data.__textDrawData
         const b = layout.boxBounds
 
+        layout.contentBounds = contentBounds
+
         if (data.__lineHeight < fontSize) spread(contentBounds, fontSize / 2)
 
         if (autoWidth || autoHeight) {
@@ -170,14 +175,13 @@ export class Text extends UI implements IText {
 
         if (italic) b.width += fontSize * 0.16 // 倾斜会导致文本的bounds增大
 
-        if (includes(b, contentBounds)) data.__textBoxBounds = b
-        else {
+        const isOverflow = !includes(b, contentBounds)
+        if (isOverflow) {
             setList(data.__textBoxBounds = {} as IBoundsData, [b, contentBounds])
             layout.renderChanged = true
-        }
+        } else data.__textBoxBounds = b
 
-        layout.contentBounds = contentBounds
-
+        !this.isOverflow !== !isOverflow && (this.isOverflow = isOverflow) // 节省赋值
     }
 
     public __updateStrokeSpread(): number {
@@ -188,7 +192,7 @@ export class Text extends UI implements IText {
     public __updateRenderSpread(): number {
         let width = super.__updateRenderSpread()
         if (this.__box) width = Math.max(this.__box.__updateRenderSpread(), width)
-        if (!width) width = this.__layout.boxBounds === this.__layout.contentBounds ? 0 : 1
+        if (!width) width = this.isOverflow ? 1 : 0
         return width
     }
 
@@ -214,7 +218,7 @@ export class Text extends UI implements IText {
     }
 
     public destroy(): void {
-        if (this.boxStyle) this.boxStyle = null
+        this.boxStyle = null
         super.destroy()
     }
 
