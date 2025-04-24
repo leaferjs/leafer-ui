@@ -1,4 +1,4 @@
-import { ILeaferCanvas, IPathDrawer, IPathCommandData, IBoolean, INumber, IString, IBoundsData, IUnitData, IRenderOptions } from '@leafer/interface'
+import { ILeaferCanvas, IBoolean, INumber, IString, IBoundsData, IUnitData, IRenderOptions } from '@leafer/interface'
 import { BoundsHelper, boundsType, surfaceType, dataProcessor, registerUI, affectStrokeBoundsType, dataType, hitType, MathHelper } from '@leafer/core'
 
 import { IFill, IText, IFontWeight, ITextCase, ITextDecoration, ITextData, ITextInputData, ITextAlign, IVerticalAlign, ITextDrawData, IOverflow, IStrokeAlign, IHitType, ITextWrap, IWritingMode, IBackgroundBoxStyle } from '@leafer-ui/interface'
@@ -97,32 +97,11 @@ export class Text extends UI implements IText {
 
     public isOverflow: boolean
 
-
-    public get textDrawData(): ITextDrawData {
-        this.__layout.update()
-        return this.__.__textDrawData
-    }
+    public get textDrawData(): ITextDrawData { this.updateLayout(); return this.__.__textDrawData }
 
 
     constructor(data?: ITextInputData) {
         super(data)
-    }
-
-    public __drawHitPath(canvas: ILeaferCanvas): void {
-        const { __lineHeight, fontSize, __baseLine, __textDrawData: data } = this.__
-
-        canvas.beginPath()
-
-        if (this.__.__letterSpacing < 0) {
-            this.__drawPathByData(canvas)
-        } else {
-            data.rows.forEach(row => canvas.rect(row.x, row.y - __baseLine, row.width, __lineHeight < fontSize ? fontSize : __lineHeight))
-        }
-    }
-
-    public __drawPathByData(drawer: IPathDrawer, _data?: IPathCommandData): void {
-        const { x, y, width, height } = this.__layout.boxBounds
-        drawer.rect(x, y, width, height)
     }
 
     public __drawRenderPath(canvas: ILeaferCanvas): void {
@@ -181,6 +160,11 @@ export class Text extends UI implements IText {
         } else data.__textBoxBounds = b
 
         !this.isOverflow !== !isOverflow && (this.isOverflow = isOverflow) // 节省赋值
+    }
+
+    public __onUpdateSize(): void {
+        if (this.__box) this.__box.__onUpdateSize()
+        super.__onUpdateSize()
     }
 
     public __updateRenderSpread(): number {
