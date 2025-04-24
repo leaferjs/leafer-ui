@@ -353,6 +353,7 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     public set scale(value: INumber | IPointData) { MathHelper.assignScale(this as IScaleData, value) }
     public get scale(): INumber | IPointData { return this.__.scale }
 
+    public __box?: IUI // 背景box, 一般用于文本背景框
     public __animate?: IAnimate
 
     public get pen(): IPathCreator {

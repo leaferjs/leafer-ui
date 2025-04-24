@@ -46,8 +46,9 @@ export class TextData extends UIData implements ITextData {
 
             const layout = t.__layout, boxLayout = box.__layout
             if (!boxStyle) {
-                boxLayout.boxBounds = layout.boxBounds
+                box.parent = t as any
                 box.__world = t.__world
+                boxLayout.boxBounds = layout.boxBounds
             }
 
             box.set(value)
@@ -58,7 +59,7 @@ export class TextData extends UIData implements ITextData {
         } else {
 
             if (box) {
-                t.__box = null
+                t.__box = box.parent = null
                 box.destroy()
             }
 

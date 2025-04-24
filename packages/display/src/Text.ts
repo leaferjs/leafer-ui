@@ -1,7 +1,7 @@
-import { ILeaferCanvas, IPathDrawer, IPathCommandData, IBoolean, INumber, IString, IBoundsData, IUnitData, IRadiusPointData, IRenderOptions } from '@leafer/interface'
+import { ILeaferCanvas, IPathDrawer, IPathCommandData, IBoolean, INumber, IString, IBoundsData, IUnitData, IRenderOptions } from '@leafer/interface'
 import { BoundsHelper, boundsType, surfaceType, dataProcessor, registerUI, affectStrokeBoundsType, dataType, hitType, MathHelper } from '@leafer/core'
 
-import { IFill, IText, IFontWeight, ITextCase, ITextDecoration, ITextData, ITextInputData, ITextAlign, IVerticalAlign, ITextDrawData, IOverflow, IStrokeAlign, IHitType, ITextWrap, IWritingMode, IUI, IBackgroundBoxStyle } from '@leafer-ui/interface'
+import { IFill, IText, IFontWeight, ITextCase, ITextDecoration, ITextData, ITextInputData, ITextAlign, IVerticalAlign, ITextDrawData, IOverflow, IStrokeAlign, IHitType, ITextWrap, IWritingMode, IBackgroundBoxStyle } from '@leafer-ui/interface'
 import { TextData } from '@leafer-ui/data'
 
 import { TextConvert, UnitConvert, Export } from '@leafer-ui/external'
@@ -97,7 +97,6 @@ export class Text extends UI implements IText {
 
     public isOverflow: boolean
 
-    public __box?: IUI
 
     public get textDrawData(): ITextDrawData {
         this.__layout.update()
@@ -184,27 +183,16 @@ export class Text extends UI implements IText {
         !this.isOverflow !== !isOverflow && (this.isOverflow = isOverflow) // 节省赋值
     }
 
-    public __updateStrokeSpread(): number {
-        const width = super.__updateStrokeSpread()
-        return this.__box ? Math.max(this.__box.__updateStrokeSpread(), width) : width
-    }
-
     public __updateRenderSpread(): number {
         let width = super.__updateRenderSpread()
-        if (this.__box) width = Math.max(this.__box.__updateRenderSpread(), width)
         if (!width) width = this.isOverflow ? 1 : 0
         return width
     }
 
     public __updateRenderBounds(): void {
-        const { renderBounds, renderSpread, strokeSpread } = this.__layout
-        copyAndSpread(renderBounds, this.__.__textBoxBounds, renderSpread + (strokeSpread || 0))
-        if (this.__box) this.__box.__layout.renderBounds = this.__layout.renderBounds
-    }
-
-    public __hit(inner: IRadiusPointData): boolean {
-        if (this.__box && this.__box.__hit(inner)) return true
-        return super.__hit(inner)
+        const { renderBounds, renderSpread } = this.__layout
+        copyAndSpread(renderBounds, this.__.__textBoxBounds, renderSpread)
+        if (this.__box) this.__box.__layout.renderBounds = renderBounds
     }
 
     public __draw(canvas: ILeaferCanvas, options: IRenderOptions, originCanvas?: ILeaferCanvas): void {

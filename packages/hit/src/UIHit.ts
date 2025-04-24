@@ -1,14 +1,16 @@
 import { IRadiusPointData } from '@leafer/interface'
-import { Platform, Matrix, tempBounds } from '@leafer/core'
-import { UI, ImageManager } from '@leafer-ui/draw'
+import { Platform, Matrix, ImageManager, tempBounds } from '@leafer/core'
+import { UI } from '@leafer-ui/draw'
 
 
 const matrix = new Matrix()
 const ui = UI.prototype
 
 ui.__updateHitCanvas = function (): void {
-    const data = this.__, { hitCanvasManager } = this.leafer
 
+    if (this.__box) this.__box.__updateHitCanvas()
+
+    const data = this.__, { hitCanvasManager } = this.leafer || this.parent.leafer // 兼容 boxStyle
     const isHitPixelFill = (data.__pixelFill || data.__isCanvas) && data.hitFill === 'pixel'
     const isHitPixelStroke = data.__pixelStroke && data.hitStroke === 'pixel'
     const isHitPixel = isHitPixelFill || isHitPixelStroke
@@ -42,9 +44,10 @@ ui.__updateHitCanvas = function (): void {
 
 ui.__hit = function (inner: IRadiusPointData): boolean {
 
-    const data = this.__
+    if (this.__box && this.__box.__hit(inner)) return true
 
     // hit pixel
+    const data = this.__
     if (data.__isHitPixel && this.__hitPixel(inner)) return true
 
     // hit path

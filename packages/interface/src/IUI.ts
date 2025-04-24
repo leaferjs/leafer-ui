@@ -204,7 +204,6 @@ export interface IPenInputData extends IGroupInputData { }
 // Text
 export interface IText extends ITextAttrData, ITextStyleAttrData, IUI {
     __: ITextData
-    __box?: IUI
 }
 interface ITextAttrData {
     text?: string | number
@@ -386,6 +385,7 @@ export interface IUI extends IUIAttrData, IFillAttrData, IStrokeAttrData, ICorne
 
     children?: IUI[]
 
+    __box?: IUI // 背景box, 一般用于文本背景框
     __animate?: IAnimate
 
     readonly pen: IPathCreator

@@ -7,7 +7,7 @@ export const UIBounds: IUIBoundsModule = {
 
     __updateStrokeSpread(): number {
         let width = 0, boxWidth = 0
-        const data = this.__, { strokeAlign, strokeWidth } = data
+        const data = this.__, { strokeAlign, strokeWidth } = data, box = this.__box
 
         if ((data.stroke || data.hitStroke === 'all') && strokeWidth && strokeAlign !== 'inside') {
             boxWidth = width = strokeAlign === 'center' ? strokeWidth / 2 : strokeWidth
@@ -20,6 +20,11 @@ export const UIBounds: IUIBoundsModule = {
         }
 
         if (data.__useArrow) width += strokeWidth * 5 // 后期需要精细化
+
+        if (box) {
+            width = Math.max(box.__layout.strokeSpread = box.__updateStrokeSpread(), width)
+            boxWidth = box.__layout.strokeBoxSpread
+        }
 
         this.__layout.strokeBoxSpread = boxWidth
 
@@ -44,7 +49,9 @@ export const UIBounds: IUIBoundsModule = {
 
         this.__layout.renderShapeSpread = shapeWidth
 
-        return width + (this.__layout.strokeSpread || 0)
+        width += this.__layout.strokeSpread || 0
+
+        return this.__box ? Math.max(this.__box.__updateRenderSpread(), width) : width
     }
 
 }
