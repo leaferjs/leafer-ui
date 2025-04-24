@@ -35,8 +35,7 @@ export class TextData extends UIData implements ITextData {
     }
 
     setBoxStyle(value: IUI) {
-        const t = this.__leaf as IText
-        let box = t.__box
+        let t = this.__leaf as IText, box = t.__box
 
         if (value) {
 
@@ -45,24 +44,16 @@ export class TextData extends UIData implements ITextData {
             else box = t.__box = UICreator.get('Rect', 0 as any) as IUI // 传递 0 可以优化内存占用
 
             const layout = t.__layout, boxLayout = box.__layout
-            if (!boxStyle) {
-                box.parent = t as any
-                box.__world = t.__world
-                boxLayout.boxBounds = layout.boxBounds
-            }
+            if (!boxStyle) box.parent = t as any, box.__world = t.__world, boxLayout.boxBounds = layout.boxBounds
 
             box.set(value)
             if (boxLayout.strokeChanged) layout.strokeChange()
             if (boxLayout.renderChanged) layout.renderChange()
             box.__updateChange()
 
-        } else {
-
-            if (box) {
-                t.__box = box.parent = null
-                box.destroy()
-            }
-
+        } else if (box) {
+            t.__box = box.parent = null
+            box.destroy()
         }
 
         this._boxStyle = value

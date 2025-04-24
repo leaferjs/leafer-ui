@@ -153,13 +153,11 @@ export class Text extends UI implements IText {
 
         if (italic) b.width += fontSize * 0.16 // 倾斜会导致文本的bounds增大
 
-        const isOverflow = !includes(b, contentBounds)
-        if (isOverflow) {
-            setList(data.__textBoxBounds = {} as IBoundsData, [b, contentBounds])
-            layout.renderChanged = true
-        } else data.__textBoxBounds = b
+        const isOverflow = !includes(b, contentBounds) || undefined
+        if (isOverflow) setList(data.__textBoxBounds = {} as IBoundsData, [b, contentBounds]), layout.renderChanged = true
+        else data.__textBoxBounds = b
 
-        !this.isOverflow !== !isOverflow && (this.isOverflow = isOverflow) // 节省赋值
+        this.isOverflow !== isOverflow && (this.isOverflow = isOverflow) // 节省赋值
     }
 
     public __onUpdateSize(): void {
@@ -181,16 +179,13 @@ export class Text extends UI implements IText {
 
     public __draw(canvas: ILeaferCanvas, options: IRenderOptions, originCanvas?: ILeaferCanvas): void {
         const box = this.__box
-        if (box) {
-            box.__nowWorld = this.__nowWorld
-            box.__draw(canvas, options, originCanvas)
-        }
+        if (box) box.__nowWorld = this.__nowWorld, box.__draw(canvas, options, originCanvas)
         if (this.textEditing && !Export.running) return
         super.__draw(canvas, options, originCanvas)
     }
 
     public destroy(): void {
-        this.boxStyle = null
+        if (this.boxStyle) this.boxStyle = null
         super.destroy()
     }
 
