@@ -2,7 +2,8 @@ import { IGroup, IUI, IBox, IRectInputData, ISelectorProxy, IEditSize, ICursorTy
 
 export interface IEditorBase extends IGroup, ISelectorProxy {
     config: IEditorConfig
-    readonly mergeConfig: IEditorConfig // 实际使用，合并了选中元素上的editConfig
+    readonly mergeConfig: IEditorConfig // 实际使用，合并了选中元素上的editConfig，频繁访问会消耗性能
+    readonly mergedConfig: IEditorConfig // 合并之后的缓存配置
 
     hoverTarget?: IUI
     target?: IUI | IUI[]
