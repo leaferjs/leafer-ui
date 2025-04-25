@@ -1,5 +1,5 @@
 import { ILeaferCanvas } from '@leafer/interface'
-import { ImageManager, Platform } from '@leafer/core'
+import { ImageManager, Platform, ResizeEvent } from '@leafer/core'
 
 import { IUI, ILeafPaint, ILeafPaintPatternData } from '@leafer-ui/interface'
 import { Export } from '@leafer-ui/draw'
@@ -21,7 +21,7 @@ export function checkImage(ui: IUI, canvas: ILeaferCanvas, paint: ILeafPaint, al
             if (data.repeat) {
                 allowDraw = false
             } else {
-                if (!(paint.changeful || Export.running)) {
+                if (!(paint.changeful || ResizeEvent.isResizing(ui) || Export.running)) {
                     let { width, height } = data
                     width *= abs(scaleX) * pixelRatio
                     height *= abs(scaleY) * pixelRatio

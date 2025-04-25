@@ -30,6 +30,7 @@ export interface IEditorBase extends IGroup, ISelectorProxy {
     editBox: IEditBoxBase
     editTool?: IObject
     innerEditor?: IObject
+    editMask: IUI
 
     select(target: IUI | IUI[]): void
     cancel(): void

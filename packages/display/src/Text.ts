@@ -104,10 +104,6 @@ export class Text extends UI implements IText {
         super(data)
     }
 
-    public __drawRenderPath(canvas: ILeaferCanvas): void {
-        canvas.font = this.__.__font
-    }
-
     public __updateTextDrawData(): void {
         const data = this.__
         const { lineHeight, letterSpacing, fontFamily, fontSize, fontWeight, italic, textCase, textOverflow, padding } = data
@@ -122,7 +118,7 @@ export class Text extends UI implements IText {
         data.__textDrawData = TextConvert.getDrawData(data.text, this.__)
     }
 
-    public __updateBoxBounds(): void {
+    override __updateBoxBounds(): void {
 
         const data = this.__
         const layout = this.__layout
@@ -160,31 +156,35 @@ export class Text extends UI implements IText {
         this.isOverflow !== isOverflow && (this.isOverflow = isOverflow) // 节省赋值
     }
 
-    public __onUpdateSize(): void {
+    override __onUpdateSize(): void {
         if (this.__box) this.__box.__onUpdateSize()
         super.__onUpdateSize()
     }
 
-    public __updateRenderSpread(): number {
+    override __updateRenderSpread(): number {
         let width = super.__updateRenderSpread()
         if (!width) width = this.isOverflow ? 1 : 0
         return width
     }
 
-    public __updateRenderBounds(): void {
+    override __updateRenderBounds(): void {
         const { renderBounds, renderSpread } = this.__layout
         copyAndSpread(renderBounds, this.__.__textBoxBounds, renderSpread)
         if (this.__box) this.__box.__layout.renderBounds = renderBounds
     }
 
-    public __draw(canvas: ILeaferCanvas, options: IRenderOptions, originCanvas?: ILeaferCanvas): void {
+    override __drawRenderPath(canvas: ILeaferCanvas): void {
+        canvas.font = this.__.__font
+    }
+
+    override __draw(canvas: ILeaferCanvas, options: IRenderOptions, originCanvas?: ILeaferCanvas): void {
         const box = this.__box
         if (box) box.__nowWorld = this.__nowWorld, box.__draw(canvas, options, originCanvas)
         if (this.textEditing && !Export.running) return
         super.__draw(canvas, options, originCanvas)
     }
 
-    public destroy(): void {
+    override destroy(): void {
         if (this.boxStyle) this.boxStyle = null
         super.destroy()
     }
