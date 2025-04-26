@@ -137,7 +137,7 @@ export class InteractionBase implements IInteraction {
         if (this.downData) {
             const canDrag = PointHelper.getDistance(this.downData, data) > this.p.dragDistance
             if (canDrag) {
-                if (this.waitTap) this.pointerWaitCancel()
+                if (this.waitTap || this.longPressTimer) this.pointerWaitCancel()
                 this.waitRightTap = false
             }
 
