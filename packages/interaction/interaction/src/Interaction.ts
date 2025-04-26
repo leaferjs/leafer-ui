@@ -96,8 +96,8 @@ export class InteractionBase implements IInteraction {
     public pointerDown(data?: IPointerEvent, useDefaultPath?: boolean): void {
         if (!data) data = this.hoverData
         if (!data) return
-        PointerButton.defaultLeft(data)
 
+        PointerButton.defaultLeft(data)
         this.updateDownData(data)
         this.checkPath(data, useDefaultPath)
 
@@ -454,7 +454,9 @@ export class InteractionBase implements IInteraction {
 
     public getLocal(clientPoint: IClientPointData, updateClient?: boolean): IPointData {
         const clientBounds = this.canvas.getClientBounds(updateClient)
-        return { x: clientPoint.clientX - clientBounds.x, y: clientPoint.clientY - clientBounds.y }
+        const point = { x: clientPoint.clientX - clientBounds.x, y: clientPoint.clientY - clientBounds.y }
+        if (this.config.pointRound) PointHelper.round(point)
+        return point
     }
 
 

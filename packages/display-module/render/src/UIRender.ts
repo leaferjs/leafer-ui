@@ -7,12 +7,15 @@ import { Paint, Effect, Filter } from '@leafer-ui/external'
 export const UIRender: IUIRenderModule = {
 
     __updateChange(): void {
-        const data = this.__
+        const data = this.__, w = this.__world
 
         if (data.__useEffect) {
             const { shadow, innerShadow, blur, backgroundBlur, filter } = this.__
             data.__useEffect = !!(shadow || innerShadow || blur || backgroundBlur || filter)
         }
+
+        const half = data.__hasHalfPixel
+        w.half !== half && (w.half = half)
 
         data.__checkSingle()
 

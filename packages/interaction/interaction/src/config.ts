@@ -24,5 +24,6 @@ export const config: IInteractionConfig = {
     move: { autoDistance: 2 },
     zoom: {},
     cursor: true,
-    keyEvent: true
+    keyEvent: true,
+    pointRound: true
 }
