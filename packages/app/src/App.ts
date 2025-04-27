@@ -1,5 +1,5 @@
 import { ILeaferConfig, IResizeEvent, ILeaferCanvas, IRenderOptions, ILeaferBase, IBoundsData } from '@leafer/interface'
-import { Creator, DataHelper, Debug, LayoutEvent, PropertyEvent, RenderEvent, canvasSizeAttrs, registerUI } from '@leafer/core'
+import { Creator, DataHelper, LayoutEvent, RenderEvent, canvasSizeAttrs, registerUI } from '@leafer/core'
 
 import { IApp, IAppConfig, IAppForEachFn, IAppInputData, IEditorBase, ILeafer } from '@leafer-ui/interface'
 
@@ -45,8 +45,6 @@ export class App extends Leafer implements IApp {
         this.leafer = this
         this.watcher.disable()
         this.layouter.disable()
-
-        this.__eventIds.push(this.on_(PropertyEvent.CHANGE, this.__onPropertyChange, this))
     }
 
     override start(): void {
@@ -95,10 +93,6 @@ export class App extends Leafer implements IApp {
 
     public forEach(fn: IAppForEachFn): void {
         this.children.forEach(fn)
-    }
-
-    protected __onPropertyChange(): void {
-        if (Debug.showHitView) this.forEach(leafer => leafer.forceUpdate('surface'))
     }
 
     protected __onCreated(): void {
