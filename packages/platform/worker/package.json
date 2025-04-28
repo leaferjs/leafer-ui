@@ -29,7 +29,8 @@
   ],
   "dependencies": {
     "@leafer/core": "1.5.3",
-    "@leafer/worker": "1.5.3",
+    "@leafer/canvas-worker": "1.5.3",
+    "@leafer/image-worker": "1.5.3",
     "@leafer/partner": "1.5.3",
     "@leafer/interface": "1.5.3",
     "@leafer-ui/draw": "1.5.3",

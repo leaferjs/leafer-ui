@@ -29,7 +29,8 @@
   ],
   "dependencies": {
     "@leafer/core": "1.5.3",
-    "@leafer/miniapp": "1.5.3",
+    "@leafer/canvas-miniapp": "1.5.3",
+    "@leafer/image-miniapp": "1.5.3",
     "@leafer/partner": "1.5.3",
     "@leafer/interface": "1.5.3",
     "@leafer-ui/draw": "1.5.3",

@@ -1,6 +1,6 @@
 export * from '@leafer-ui/interface'
 
-export * from '@leafer/web'
+export * from './core'
 export * from '@leafer/partner'
 
 export * from '@leafer-ui/core'
@@ -8,7 +8,7 @@ export * from '@leafer-ui/interaction-web'
 export * from '@leafer-ui/partner'
 
 import { ICreator } from '@leafer/interface'
-import { useCanvas, Creator, LeaferCanvas } from '@leafer/web'
+import { useCanvas, Creator, LeaferCanvas } from './core'
 import { HitCanvasManager } from '@leafer-ui/core'
 import { Interaction } from '@leafer-ui/interaction-web'
 
