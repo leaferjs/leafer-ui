@@ -14,7 +14,7 @@ export const UIRender: IUIRenderModule = {
             data.__useEffect = !!(shadow || innerShadow || blur || backgroundBlur || filter)
         }
 
-        const half = data.__hasHalfPixel
+        const half = data.__hasHalf
         w.half !== half && (w.half = half)
 
         data.__checkSingle()
