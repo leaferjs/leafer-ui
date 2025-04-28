@@ -65,7 +65,7 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     public dim?: IBoolean | INumber // 是否弱化内容，可设置具体透明度
 
     @surfaceType(false)
-    public bright?: IBoolean // 突出显示内容，不受dim影响
+    public dimskip?: IBoolean // 跳过弱化，突出显示内容，不受dim影响
 
 
     @sortType(0)
