@@ -137,7 +137,7 @@ export class InteractionBase implements IInteraction {
         if (this.downData) {
             const canDrag = PointHelper.getDistance(this.downData, data) > this.p.dragDistance
             if (canDrag) {
-                if (this.waitTap || this.longPressTimer) this.pointerWaitCancel()
+                this.pointerWaitCancel()
                 this.waitRightTap = false
             }
 
@@ -481,9 +481,11 @@ export class InteractionBase implements IInteraction {
     }
 
     protected tapWaitCancel(): void {
-        clearTimeout(this.tapTimer)
-        this.waitTap = false
-        this.tapCount = 0
+        if (this.waitTap) {
+            clearTimeout(this.tapTimer)
+            this.waitTap = false
+            this.tapCount = 0
+        }
     }
 
     protected longPressWait(data: IPointerEvent): void {
@@ -505,8 +507,10 @@ export class InteractionBase implements IInteraction {
     }
 
     protected longPressWaitCancel(): void {
-        clearTimeout(this.longPressTimer)
-        this.longPressed = false
+        if (this.longPressTimer) {
+            clearTimeout(this.longPressTimer)
+            this.longPressed = false
+        }
     }
 
     protected __onResize(): void {
