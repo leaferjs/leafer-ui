@@ -346,6 +346,7 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
 
     public disabledStyle?: IStateStyle
 
+    @surfaceType()
     public placeholderStyle?: IStateStyle
 
 

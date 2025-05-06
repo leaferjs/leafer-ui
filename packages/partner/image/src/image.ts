@@ -23,6 +23,10 @@ export function image(ui: IUI, attrName: string, paint: IImagePaint, boxBounds: 
         leafPaint = cache.leafPaint
     } else {
         leafPaint = { type: paint.type, image }
+        if (ui.placeholderStyle) {
+            const p = ui.placeholderStyle[attrName]
+            if (typeof p === 'string') leafPaint.style = p // 图片占位符颜色
+        }
 
         cache = image.use > 1 ? { leafPaint, paint, boxBounds: box.set(boxBounds) } : null // 只保留最后一个cache
     }
