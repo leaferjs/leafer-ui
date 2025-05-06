@@ -24,9 +24,11 @@ export class Image extends Rect implements IImage {
 
     constructor(data?: IImageInputData) {
         super(data)
-        this.on(ImageEvent.LOADED, (e: ImageEvent) => {
-            if (e.attrName === 'fill' && e.attrValue.url === this.url) this.image = e.image
-        })
+        this.on_(ImageEvent.LOADED, this.__onLoaded, this)
+    }
+
+    public __onLoaded(e: ImageEvent): void {
+        if (e.attrName === 'fill' && e.attrValue.url === this.url) this.image = e.image
     }
 
     public destroy(): void {
