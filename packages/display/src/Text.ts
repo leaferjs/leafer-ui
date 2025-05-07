@@ -44,6 +44,9 @@ export class Text extends UI implements IText {
     @boundsType('')
     public text?: IString | INumber
 
+    @boundsType('')
+    public placeholder?: IString
+
     @boundsType('caption')
     public fontFamily?: IString
 
@@ -115,7 +118,7 @@ export class Text extends UI implements IText {
         data.__font = `${italic ? 'italic ' : ''}${textCase === 'small-caps' ? 'small-caps ' : ''}${fontWeight !== 'normal' ? fontWeight + ' ' : ''}${fontSize}px ${fontFamily}`
         data.__clipText = textOverflow !== 'show' && !data.__autoSize
 
-        data.__textDrawData = TextConvert.getDrawData(data.text, this.__)
+        data.__textDrawData = TextConvert.getDrawData(data.text === '' ? data.placeholder : data.text, this.__)
     }
 
     override __updateBoxBounds(): void {

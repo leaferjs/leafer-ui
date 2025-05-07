@@ -207,6 +207,7 @@ export interface IText extends ITextAttrData, ITextStyleAttrData, IUI {
 }
 interface ITextAttrData {
     text?: string | number
+    placeholder?: string
     padding?: IFourNumber
     resizeFontSize?: boolean
     boxStyle?: IBackgroundBoxStyle
