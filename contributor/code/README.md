@@ -39,7 +39,7 @@ leafer.add(Rect.one({ fill: '#32cd79', draggable: true }, 100, 100))
 填充信息后的例子：
 
 ```ts
-// #创建一个应用 (https://...)
+// #创建一个引擎 (https://...)
 // @Leafer (https://...)
 import { Leafer, Rect } from 'leafer-ui'
 
