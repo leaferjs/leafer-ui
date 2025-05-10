@@ -12,6 +12,7 @@ export interface IStateModule {
     isFocus(leaf: ILeaf, button?: ILeaf | boolean): boolean
     isHover(leaf: ILeaf, button?: ILeaf | boolean): boolean
     isPress(leaf: ILeaf, button?: ILeaf | boolean): boolean
+    isPlacehold(leaf: ILeaf, button?: ILeaf | boolean): boolean
 
     isDrag(leaf: ILeaf, button?: boolean | ILeaf): boolean
 

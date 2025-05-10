@@ -1,6 +1,6 @@
 import { UICreator } from '@leafer/core'
 
-import { IFontWeight, ITextData, IUI, IText, IObject, IBackgroundBoxStyle } from '@leafer-ui/interface'
+import { IFontWeight, ITextData, IUI, IText, IObject, IBackgroundBoxStyle, IFontWeightNumer } from '@leafer-ui/interface'
 
 import { UIData } from "./UIData"
 
@@ -27,11 +27,9 @@ export class TextData extends UIData implements ITextData {
     setFontWeight(value: IFontWeight): void {
         if (typeof value === 'string') {
             this.__setInput('fontWeight', value)
-            this._fontWeight = fontWeightMap[value] || 400
-        } else {
-            if (this.__input) this.__removeInput('fontWeight')
-            this._fontWeight = value
-        }
+            value = fontWeightMap[value] as IFontWeightNumer || 400
+        } else if (this.__input) this.__removeInput('fontWeight')
+        this._fontWeight = value
     }
 
     setBoxStyle(value: IUI) {
