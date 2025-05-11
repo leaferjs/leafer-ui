@@ -1,7 +1,7 @@
 import { ILeaferConfig, IResizeEvent, ILeaferCanvas, IRenderOptions, ILeaferBase, IBoundsData } from '@leafer/interface'
 import { Creator, DataHelper, LayoutEvent, RenderEvent, canvasSizeAttrs, registerUI } from '@leafer/core'
 
-import { IApp, IAppConfig, IAppForEachFn, IAppInputData, IEditorBase, ILeafer } from '@leafer-ui/interface'
+import { IApp, IAppConfig, IAppForEachFunction, IAppInputData, IEditorBase, ILeafer } from '@leafer-ui/interface'
 
 import { Leafer } from '@leafer-ui/draw'
 
@@ -91,7 +91,7 @@ export class App extends Leafer implements IApp {
         this.__listenChildEvents(leafer)
     }
 
-    public forEach(fn: IAppForEachFn): void {
+    public forEach(fn: IAppForEachFunction): void {
         this.children.forEach(fn)
     }
 

@@ -80,6 +80,7 @@ export interface IImagePaint extends IPaintBase {
 
     changeful?: boolean // 会频繁变化，不生成图案（有特殊性能优化，一般用于游戏精灵、动图场景）
     sync?: boolean // 同步显示，不走任务列表生成图案
+    showProgress?: boolean // 是否显示进度
 }
 export interface IImageFilters {
     exposure?: number // 曝光

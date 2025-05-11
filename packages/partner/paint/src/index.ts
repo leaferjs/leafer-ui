@@ -1,6 +1,6 @@
 import { IPaintModule } from '@leafer-ui/interface'
 
-import { fill, fills } from './Fill'
+import { fill, fills, fillPathOrText } from './Fill'
 import { fillText } from './FillText'
 import { stroke, strokes } from './Stroke'
 import { strokeText, drawTextStroke } from './StrokeText'
@@ -12,6 +12,7 @@ export const PaintModule: IPaintModule = {
     compute,
     fill,
     fills,
+    fillPathOrText,
     fillText,
     stroke,
     strokes,

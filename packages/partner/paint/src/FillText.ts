@@ -1,12 +1,14 @@
 import { ILeaferCanvas } from '@leafer/interface'
 
-import { IUI, ITextRowData } from '@leafer-ui/interface'
+import { ITextRowData, IText } from '@leafer-ui/interface'
 
 
-export function fillText(ui: IUI, canvas: ILeaferCanvas): void {
+export function fillText(ui: IText, canvas: ILeaferCanvas): void {
 
-    let row: ITextRowData, data = ui.__.__textDrawData
-    const { rows, decorationY } = data
+    const data = ui.__, { rows, decorationY } = data.__textDrawData
+    if (data.__isPlacehold && data.placeholderColor) canvas.fillStyle = data.placeholderColor
+
+    let row: ITextRowData
 
     for (let i = 0, len = rows.length; i < len; i++) {
         row = rows[i]
@@ -16,7 +18,7 @@ export function fillText(ui: IUI, canvas: ILeaferCanvas): void {
     }
 
     if (decorationY) {
-        const { decorationColor, decorationHeight } = data
+        const { decorationColor, decorationHeight } = data.__textDrawData
         if (decorationColor) canvas.fillStyle = decorationColor
         rows.forEach(row => decorationY.forEach(value => canvas.fillRect(row.x, row.y + value, row.width, decorationHeight)))
     }

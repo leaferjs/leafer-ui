@@ -6,7 +6,7 @@ import { IEditorConfig } from '../editor/IEditor'
 export interface IApp extends ILeafer {
     children: ILeafer[]
     realCanvas: boolean
-    forEach(fn: IAppForEachFn): void
+    forEach(fn: IAppForEachFunction): void
 }
 
 export interface IAppConfig extends ILeaferConfig {
@@ -16,6 +16,6 @@ export interface IAppConfig extends ILeaferConfig {
     editor?: IEditorConfig
 }
 
-export interface IAppForEachFn {
+export interface IAppForEachFunction {
     (value: ILeafer, index: number, array: ILeafer[]): void
 }

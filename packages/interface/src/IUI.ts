@@ -12,6 +12,7 @@ import { IOverflow } from './type/IType'
 import { IAnimation, IAnimate, IKeyframe, IKeyframeId, IAnimateType } from './IAnimation'
 import { ILeafer } from './app/ILeafer'
 import { IEditorConfig } from './editor/IEditor'
+import { IColorString } from './type/IStringType'
 
 // Line
 export interface ILine extends ILineAttrData, IUI {
@@ -224,6 +225,7 @@ export interface ITextData extends ITextAttrData, ITextStyleComputedData, IUIDat
     __letterSpacing?: number
     __padding?: number[]
     __clipText?: boolean
+    __isPlacehold?: boolean
     __textBoxBounds?: IBoundsData
 }
 export interface ITextInputData extends ITextAttrData, ITextStyleInputData, IUIBaseInputData {
@@ -414,6 +416,8 @@ export interface IUI extends IUIAttrData, IFillAttrData, IStrokeAttrData, ICorne
     __drawAfterFill?(canvas: ILeaferCanvas, options: IRenderOptions): void
     __drawContent?(canvas: ILeaferCanvas, options: IRenderOptions): void
 
+    drawImagePlaceholder(canvas: ILeaferCanvas, image: ILeaferImage): void
+
     animate(keyframe?: IUIInputData | IKeyframe[] | IAnimation | IAnimation[], options?: ITransition, type?: IAnimateType, isTemp?: boolean): IAnimate
     killAnimate(type?: IAnimateType, nextStyle?: IUIInputData): void
 
@@ -452,6 +456,7 @@ interface IUIAttrData {
     selectedStyle?: IStateStyle
     disabledStyle?: IStateStyle
     placeholderStyle?: IStateStyle
+    placeholderColor?: IColorString
 
     editConfig?: IEditorConfig
     editOuter?: string

@@ -12,6 +12,7 @@ export interface IPaintModule {
     fill(fill: string, ui: IUI, canvas: ILeaferCanvas,): void
     fills(fills: ILeafPaint[], ui: IUI, canvas: ILeaferCanvas): void
 
+    fillPathOrText(ui: IUI, canvas: ILeaferCanvas): void
     fillText(ui: IUI, canvas: ILeaferCanvas): void
 
     stroke(stroke: string, ui: IUI, canvas: ILeaferCanvas): void
@@ -26,7 +27,7 @@ export interface IPaintModule {
 
 export interface IPaintImageModule {
     image(ui: IUI, attrName: string, paint: IImagePaint, boxBounds: IBoundsData, firstUse: boolean): ILeafPaint
-    checkImage(ui: IUI, canvas: ILeaferCanvas, paint: ILeafPaint, allowPaint?: boolean): boolean
+    checkImage(ui: IUI, canvas: ILeaferCanvas, paint: ILeafPaint, allowPaint?: boolean): boolean // 返回true表示已进行了原生绘制
     createPattern(ui: IUI, paint: ILeafPaint, pixelRatio: number): boolean
     recycleImage(attrName: IPaintAttr, data: IUIData): IBooleanMap
 
