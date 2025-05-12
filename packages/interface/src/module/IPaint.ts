@@ -19,6 +19,7 @@ export interface IPaintModule {
     strokes(strokes: ILeafPaint[], ui: IUI, canvas: ILeaferCanvas): void
 
     strokeText(stroke: string | ILeafPaint[], ui: IUI, canvas: ILeaferCanvas): void
+    strokeArrow?(stroke: string | ILeafPaint[], ui: IUI, canvas: ILeaferCanvas): void
     drawTextStroke(ui: IUI, canvas: ILeaferCanvas): void
 
     shape(ui: IUI, current: ILeaferCanvas, renderOptions: IRenderOptions): ICachedShape

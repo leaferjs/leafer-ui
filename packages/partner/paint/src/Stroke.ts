@@ -1,6 +1,7 @@
 import { ILeaferCanvas } from '@leafer/interface'
 
 import { IUI, ILeafPaint } from '@leafer-ui/interface'
+import { Paint } from '@leafer-ui/external'
 
 import { strokeText, drawStrokesStyle } from './StrokeText'
 
@@ -23,7 +24,7 @@ export function stroke(stroke: string, ui: IUI, canvas: ILeaferCanvas): void {
                 canvas.setStroke(stroke, __strokeWidth, options)
                 canvas.stroke()
 
-                if (options.__useArrow) strokeArrow(ui, canvas)
+                if (options.__useArrow) Paint.strokeArrow(stroke, ui, canvas)
 
                 break
 
@@ -78,7 +79,7 @@ export function strokes(strokes: ILeafPaint[], ui: IUI, canvas: ILeaferCanvas): 
                 canvas.setStroke(undefined, __strokeWidth, options)
                 drawStrokesStyle(strokes, false, ui, canvas)
 
-                if (options.__useArrow) strokeArrow(ui, canvas)
+                if (options.__useArrow) Paint.strokeArrow(strokes, ui, canvas)
                 break
 
             case 'inside':
@@ -112,14 +113,4 @@ export function strokes(strokes: ILeafPaint[], ui: IUI, canvas: ILeaferCanvas): 
 
     }
 
-}
-
-
-function strokeArrow(ui: IUI, canvas: ILeaferCanvas): void {
-    if (ui.__.dashPattern) {  // fix: dashPattern Arrow
-        canvas.beginPath()
-        ui.__drawPathByData(canvas, ui.__.__pathForArrow)
-        canvas.dashPattern = null
-        canvas.stroke()
-    }
 }
