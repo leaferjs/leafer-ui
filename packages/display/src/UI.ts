@@ -346,10 +346,14 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
 
     public disabledStyle?: IStateStyle
 
+
     public placeholderStyle?: IStateStyle
 
     @surfaceType()
     public placeholderColor?: IColorString
+
+    @dataType(100)
+    public placeholderDelay?: INumber
 
 
     public button?: IBoolean

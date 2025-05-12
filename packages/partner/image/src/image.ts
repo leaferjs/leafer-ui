@@ -68,12 +68,17 @@ export function image(ui: IUI, attrName: string, paint: IImagePaint, boxBounds: 
             }
         )
 
-        if (ui.placeholderColor) setTimeout(() => {
-            if (!(image.ready || image.isPlacehold)) {
-                image.isPlacehold = true
-                ui.forceUpdate('surface')
-            }
-        }, 100)
+        if (ui.placeholderColor) {
+            if (!ui.placeholderDelay) image.isPlacehold = true
+            else setTimeout(() => {
+                if (!image.ready) {
+                    image.isPlacehold = true
+                    ui.forceUpdate('surface')
+                }
+            }, ui.placeholderDelay)
+        }
+
+
 
     }
 

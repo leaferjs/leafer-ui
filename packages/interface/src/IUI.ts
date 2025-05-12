@@ -457,6 +457,7 @@ interface IUIAttrData {
     disabledStyle?: IStateStyle
     placeholderStyle?: IStateStyle
     placeholderColor?: IColorString
+    placeholderDelay?: number
 
     editConfig?: IEditorConfig
     editOuter?: string
