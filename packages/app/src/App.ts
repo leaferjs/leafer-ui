@@ -1,7 +1,7 @@
 import { ILeaferConfig, IResizeEvent, ILeaferCanvas, IRenderOptions, ILeaferBase, IBoundsData } from '@leafer/interface'
 import { Creator, DataHelper, LayoutEvent, RenderEvent, canvasSizeAttrs, registerUI } from '@leafer/core'
 
-import { IApp, IAppConfig, IAppForEachFunction, IAppInputData, IEditorBase, ILeafer } from '@leafer-ui/interface'
+import { IApp, IAppConfig, IAppForEachFunction, IAppInputData, ILeafer } from '@leafer-ui/interface'
 
 import { Leafer } from '@leafer-ui/draw'
 
@@ -32,7 +32,7 @@ export class App extends Leafer implements IApp {
             if (ground) this.ground = this.addLeafer(ground)
             if (tree || editor) this.tree = this.addLeafer(tree || { type: userConfig.type || 'design' })
             if (sky || editor) this.sky = this.addLeafer(sky)
-            if (editor) this.sky.add(this.editor = Creator.editor(editor) as IEditorBase)
+            if (editor) Creator.editor(editor, this)
         }
     }
 
