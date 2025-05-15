@@ -1,4 +1,4 @@
-import { IEventer, IEventMap, IObject, IPercentData, ITransition, IAnimateEasing, IAnimateEasingFunction, IAnimateEnding, IAnimateOptions } from '@leafer/interface'
+import { IEventer, IEventParamsMap, IObject, IPercentData, ITransition, IAnimateEasing, IAnimateEasingFunction, IAnimateEnding, IAnimateOptions } from '@leafer/interface'
 
 import { IUIInputData, IUI } from './IUI'
 
@@ -59,7 +59,7 @@ export interface IAnimate extends IAnimateOptions, IEventer {
 
     keyframes: IKeyframe[]
     config?: IAnimateOptions
-    event?: IEventMap
+    event?: IEventParamsMap
 
     readonly frames: IComputedKeyframe[]
 

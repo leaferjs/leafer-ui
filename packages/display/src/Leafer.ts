@@ -421,20 +421,23 @@ export class Leafer extends Group implements ILeafer {
 
     protected __listenEvents(): void {
         const runId = Run.start('FirstCreate ' + this.innerName)
-        this.once(LeaferEvent.START, () => Run.end(runId))
-        this.once(LayoutEvent.START, () => this.updateLazyBounds())
-        this.once(RenderEvent.START, () => this.__onCreated())
-        this.once(RenderEvent.END, () => this.__onViewReady())
+        this.once([
+            [LeaferEvent.START, () => Run.end(runId)],
+            [LayoutEvent.START, this.updateLazyBounds, this],
+            [RenderEvent.START, this.__onCreated, this],
+            [RenderEvent.END, this.__onViewReady, this]
+        ])
         this.__eventIds.push(
-            this.on_(WatchEvent.DATA, this.__onWatchData, this),
-            this.on_(LayoutEvent.END, this.__onLayoutEnd, this),
-            this.on_(RenderEvent.NEXT, this.__onNextRender, this),
+            this.on_([
+                [WatchEvent.DATA, this.__onWatchData, this],
+                [LayoutEvent.END, this.__onLayoutEnd, this],
+                [RenderEvent.NEXT, this.__onNextRender, this]
+            ])
         )
     }
 
     protected __removeListenEvents(): void {
         this.off_(this.__eventIds)
-        this.__eventIds.length = 0
     }
 
     override destroy(sync?: boolean): void {
