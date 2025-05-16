@@ -113,11 +113,7 @@ export class App extends Leafer implements IApp {
     }
 
     override __render(canvas: ILeaferCanvas, options: IRenderOptions): void {
-        if (canvas.context) {
-            const m = options.matrix
-            if (m) canvas.setTransform(m.a, m.b, m.c, m.d, m.e, m.f) // screenshot
-            this.forEach(leafer => canvas.copyWorld(leafer.canvas))
-        }
+        if (canvas.context) this.forEach(leafer => options.matrix ? leafer.__render(canvas, options) : canvas.copyWorld(leafer.canvas, options && options.bounds))
     }
 
     public __onResize(event: IResizeEvent): void {
