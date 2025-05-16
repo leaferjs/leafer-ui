@@ -47,6 +47,11 @@ export class App extends Leafer implements IApp {
         this.layouter.disable()
     }
 
+    override __updateLocalBounds(): void {
+        this.forEach(leafer => leafer.updateLayout())
+        super.__updateLocalBounds()
+    }
+
     override start(): void {
         super.start()
         this.forEach(leafer => leafer.start())
