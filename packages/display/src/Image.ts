@@ -1,5 +1,5 @@
 import { ILeaferImage, IString } from '@leafer/interface'
-import { ImageEvent, boundsType, dataProcessor, registerUI } from '@leafer/core'
+import { boundsType, dataProcessor, registerUI } from '@leafer/core'
 
 import { IImage, IImageInputData, IImageData } from '@leafer-ui/interface'
 import { ImageData } from '@leafer-ui/data'
@@ -18,22 +18,12 @@ export class Image extends Rect implements IImage {
     @boundsType('')
     public url: IString
 
-    public get ready(): boolean { return this.image ? this.image.ready : false }
+    public get ready(): boolean { const { image } = this; return image && image.ready }
 
-    public image?: ILeaferImage
+    public get image(): ILeaferImage { const { fill } = this.__; return fill instanceof Array && fill[0].image }
 
     constructor(data?: IImageInputData) {
         super(data)
-        this.on_(ImageEvent.LOADED, this.__onLoaded, this)
-    }
-
-    public __onLoaded(e: ImageEvent): void {
-        if (e.attrName === 'fill' && e.attrValue.url === this.url) this.image = e.image
-    }
-
-    public destroy(): void {
-        this.image = null
-        super.destroy()
     }
 
 }

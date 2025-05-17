@@ -36,7 +36,7 @@ export class Canvas extends Rect implements ICanvas {
 
     public canvas?: ILeaferCanvas
 
-    public context?: ICanvasContext2D
+    public get context(): ICanvasContext2D { return this.canvas.context }
 
     public get ready(): boolean { return !this.url }
 
@@ -45,7 +45,6 @@ export class Canvas extends Rect implements ICanvas {
     constructor(data?: ICanvasInputData) {
         super(data)
         this.canvas = Creator.canvas(this.__ as ILeaferCanvasConfig)
-        this.context = this.canvas.context
         if (data && data.url) this.drawImage(data.url)
     }
 
@@ -93,7 +92,7 @@ export class Canvas extends Rect implements ICanvas {
     public destroy(): void {
         if (this.canvas) {
             this.canvas.destroy()
-            this.canvas = this.context = null
+            this.canvas = null
         }
         super.destroy()
     }

@@ -281,8 +281,8 @@ export interface ITextDrawData {
 // Image
 export interface IImage extends IImageAttrData, IRect {
     __: IImageData
-    ready: boolean
-    image?: ILeaferImage
+    readonly ready: boolean
+    readonly image?: ILeaferImage
 }
 interface IImageAttrData {
     url?: string
@@ -295,7 +295,7 @@ export interface IImageInputData extends IImageAttrData, IUIBaseInputData { }
 export interface ICanvas extends ICanvasAttrData, IRect {
     __: ICanvasData
     canvas?: ILeaferCanvas
-    context?: ICanvasContext2D
+    readonly context?: ICanvasContext2D
     __updateSize(): void
 }
 interface ICanvasAttrData {
