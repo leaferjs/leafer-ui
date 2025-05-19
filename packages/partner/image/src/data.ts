@@ -1,5 +1,5 @@
 import { IBoundsData, ILeaferImage, IPointData, IScaleData } from '@leafer/interface'
-import { MatrixHelper, MathHelper, Bounds, AlignHelper } from '@leafer/core'
+import { MatrixHelper, MathHelper, Bounds, AlignHelper, BoundsHelper } from '@leafer/core'
 
 import { IImagePaint, ILeafPaint, ILeafPaintPatternData } from '@leafer-ui/interface'
 
@@ -10,6 +10,7 @@ const { get, translate } = MatrixHelper
 const tempBox = new Bounds()
 const tempPoint = {} as IPointData
 const tempScaleData = {} as IScaleData
+const imageBounds = {} as IBoundsData
 
 export function createData(leafPaint: ILeafPaint, image: ILeaferImage, paint: IImagePaint, box: IBoundsData): void {
     const { blendMode, changeful, sync } = paint
@@ -29,14 +30,13 @@ export function getPatternData(paint: IImagePaint, box: IBoundsData, image: ILea
 
     const data: ILeafPaintPatternData = { mode }
     const swapSize = align !== 'center' && (rotation || 0) % 180 === 90
-    const swapWidth = swapSize ? height : width, swapHeight = swapSize ? width : height
+    imageBounds.width = swapSize ? height : width, imageBounds.height = swapSize ? width : height
 
     let x = 0, y = 0, scaleX: number, scaleY: number
 
-    if (!mode || mode === 'cover' || mode === 'fit') {
+    if (!mode || mode === 'cover' || mode === 'fit') { // mode 默认值为 cover
         if (!sameBox || rotation) {
-            const sw = box.width / swapWidth, sh = box.height / swapHeight
-            scaleX = scaleY = mode === 'fit' ? Math.min(sw, sh) : Math.max(sw, sh)
+            scaleX = scaleY = BoundsHelper.getPutScale(box, imageBounds, mode !== 'fit')
             x += (box.width - width * scaleX) / 2, y += (box.height - height * scaleY) / 2
         }
     } else if (scale || size) {
@@ -46,7 +46,7 @@ export function getPatternData(paint: IImagePaint, box: IBoundsData, image: ILea
     }
 
     if (align) {
-        const imageBounds = { x, y, width: swapWidth, height: swapHeight }
+        imageBounds.x = x, imageBounds.y = y
         if (scaleX) imageBounds.width *= scaleX, imageBounds.height *= scaleY
         AlignHelper.toPoint(align, imageBounds, box, tempPoint, true)
         x += tempPoint.x, y += tempPoint.y
