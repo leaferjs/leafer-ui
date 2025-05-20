@@ -1,5 +1,5 @@
 import { IBoundsData, ILeaferImage, IPointData, IScaleData } from '@leafer/interface'
-import { MatrixHelper, MathHelper, Bounds, AlignHelper, BoundsHelper } from '@leafer/core'
+import { MatrixHelper, MathHelper, Bounds, AlignHelper, BoundsHelper, PointHelper } from '@leafer/core'
 
 import { IImagePaint, ILeafPaint, ILeafPaintPatternData } from '@leafer-ui/interface'
 
@@ -10,7 +10,7 @@ const { get, translate } = MatrixHelper
 const tempBox = new Bounds()
 const tempPoint = {} as IPointData
 const tempScaleData = {} as IScaleData
-const imageBounds = {} as IBoundsData
+const tempImage = {} as IBoundsData
 
 export function createData(leafPaint: ILeafPaint, image: ILeaferImage, paint: IImagePaint, box: IBoundsData): void {
     const { blendMode, changeful, sync } = paint
@@ -21,23 +21,23 @@ export function createData(leafPaint: ILeafPaint, image: ILeaferImage, paint: II
 }
 
 export function getPatternData(paint: IImagePaint, box: IBoundsData, image: ILeaferImage): ILeafPaintPatternData {
-    let { width, height } = image
     if (paint.padding) box = tempBox.set(box).shrink(paint.padding)
     if (paint.mode === 'strench' as string) paint.mode = 'stretch' // 兼容代码，后续可移除
 
+    let { width, height } = image
     const { opacity, mode, align, offset, scale, size, rotation, repeat, filters } = paint
     const sameBox = box.width === width && box.height === height
 
     const data: ILeafPaintPatternData = { mode }
     const swapSize = align !== 'center' && (rotation || 0) % 180 === 90
-    imageBounds.width = swapSize ? height : width, imageBounds.height = swapSize ? width : height
+    BoundsHelper.set(tempImage, 0, 0, swapSize ? height : width, swapSize ? width : height)
 
-    let x = 0, y = 0, scaleX: number, scaleY: number
+    let scaleX: number, scaleY: number
 
     if (!mode || mode === 'cover' || mode === 'fit') { // mode 默认值为 cover
         if (!sameBox || rotation) {
-            scaleX = scaleY = BoundsHelper.getPutScale(box, imageBounds, mode !== 'fit')
-            x += (box.width - width * scaleX) / 2, y += (box.height - height * scaleY) / 2
+            scaleX = scaleY = BoundsHelper.getPutScale(box, tempImage, mode !== 'fit')
+            BoundsHelper.toPutPoint(box, image, scaleX, tempImage)
         }
     } else if (scale || size) {
         MathHelper.getScaleData(scale, size, image, tempScaleData)
@@ -46,13 +46,12 @@ export function getPatternData(paint: IImagePaint, box: IBoundsData, image: ILea
     }
 
     if (align) {
-        imageBounds.x = x, imageBounds.y = y
-        if (scaleX) imageBounds.width *= scaleX, imageBounds.height *= scaleY
-        AlignHelper.toPoint(align, imageBounds, box, tempPoint, true)
-        x += tempPoint.x, y += tempPoint.y
+        if (scaleX) tempImage.width *= scaleX, tempImage.height *= scaleY
+        AlignHelper.toPoint(align, tempImage, box, tempPoint, true)
+        PointHelper.move(tempImage, tempPoint)
     }
 
-    if (offset) x += offset.x, y += offset.y
+    if (offset) PointHelper.move(tempImage, offset)
 
     switch (mode) {
         case 'stretch':
@@ -60,16 +59,16 @@ export function getPatternData(paint: IImagePaint, box: IBoundsData, image: ILea
             break
         case 'normal':
         case 'clip':
-            if (x || y || scaleX || rotation) clipMode(data, box, x, y, scaleX, scaleY, rotation)
+            if (tempImage.x || tempImage.y || scaleX || rotation) clipMode(data, box, tempImage.x, tempImage.y, scaleX, scaleY, rotation)
             break
         case 'repeat':
-            if (!sameBox || scaleX || rotation) repeatMode(data, box, width, height, x, y, scaleX, scaleY, rotation, align)
+            if (!sameBox || scaleX || rotation) repeatMode(data, box, width, height, tempImage.x, tempImage.y, scaleX, scaleY, rotation, align)
             if (!repeat) data.repeat = 'repeat'
             break
         case 'fit':
         case 'cover':
         default:
-            if (scaleX) fillOrFitMode(data, box, x, y, scaleX, scaleY, rotation)
+            if (scaleX) fillOrFitMode(data, box, tempImage.x, tempImage.y, scaleX, scaleY, rotation)
     }
 
     if (!data.transform) {
