@@ -178,4 +178,4 @@ export interface IEffect extends IFilter {
 
 }
 
-export type IOverflow = 'show' | 'hide'
+export type IOverflow = 'show' | 'hide' | 'scroll' | 'auto'
