@@ -504,6 +504,9 @@ export interface IUIData extends IUIAttrData, IUIComputedData, ILeafData {
 
     __needComputePaint?: boolean
     __computePaint(): void
+
+    __setPaint(attrName: 'fill' | 'stroke', value: IValue): void
+    __removePaint(attrName: 'fill' | 'stroke', removeInput?: boolean): void
 }
 export interface IUIComputedData extends IUIAttrData, IFillComputedData, IBorderComputedData, IStrokeComputedData, ITextStyleComputedData, ICornerRadiusComputedData, IEffectComputedData, ILeafComputedData {
 

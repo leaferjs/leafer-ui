@@ -91,37 +91,19 @@ export class UIData extends LeafData implements IUIData {
     protected setFill(value: IValue) {
         if (this.__naturalWidth) this.__removeNaturalSize()
         if (typeof value === 'string' || !value) {
-            if (this.__isFills) {
-                this.__removeInput('fill')
-                PaintImage.recycleImage('fill', this)
-                this.__isFills = false
-                this.__pixelFill && (this.__pixelFill = false)
-            }
+            this.__isFills && this.__removePaint('fill', true)
             this._fill = value
         } else if (typeof value === 'object') {
-            this.__setInput('fill', value)
-            const layout = this.__leaf.__layout
-            layout.boxChanged || layout.boxChange()
-            this.__isFills = true
-            this._fill || (this._fill = emptyPaint)
+            this.__setPaint('fill', value)
         }
     }
 
     protected setStroke(value: IValue) {
         if (typeof value === 'string' || !value) {
-            if (this.__isStrokes) {
-                this.__removeInput('stroke')
-                PaintImage.recycleImage('stroke', this)
-                this.__isStrokes = false
-                this.__pixelStroke && (this.__pixelStroke = false)
-            }
+            this.__isStrokes && this.__removePaint('stroke', true)
             this._stroke = value
         } else if (typeof value === 'object') {
-            this.__setInput('stroke', value)
-            const layout = this.__leaf.__layout
-            layout.boxChanged || layout.boxChange()
-            this.__isStrokes = true
-            this._stroke || (this._stroke = emptyPaint)
+            this.__setPaint('stroke', value)
         }
     }
 
@@ -160,6 +142,31 @@ export class UIData extends LeafData implements IUIData {
         this.__needComputePaint = false
     }
 
+    public __setPaint(attrName: 'fill' | 'stroke', value: IValue): void {
+        this.__setInput(attrName, value)
+        const layout = this.__leaf.__layout
+        layout.boxChanged || layout.boxChange()
+        if (value instanceof Array && !value.length) {
+            this.__removePaint(attrName)
+        } else {
+            if (attrName === 'fill') this.__isFills = true, this._fill || (this._fill = emptyPaint)
+            else this.__isStrokes = true, this._stroke || (this._stroke = emptyPaint)
+        }
+    }
+
+    public __removePaint(attrName: 'fill' | 'stroke', removeInput?: boolean): void {
+        if (removeInput) this.__removeInput(attrName)
+        PaintImage.recycleImage(attrName, this)
+        if (attrName === 'fill') {
+            this.__isFills = false
+            this.__pixelFill && (this.__pixelFill = false)
+            this._fill = undefined
+        } else {
+            this.__isStrokes = false
+            this.__pixelStroke && (this.__pixelStroke = false)
+            this._stroke = undefined
+        }
+    }
 }
 
 
@@ -167,7 +174,7 @@ function setArray(data: IUIData, key: string, value: IValue) {
     data.__setInput(key, value)
     if (value instanceof Array) {
         if (value.some((item: IFilter) => item.visible === false)) value = value.filter((item: IFilter) => item.visible !== false)
-        value.length || (value = null)
-    } else value = value && (value as IFilter).visible !== false ? [value] : null;
+        value.length || (value = undefined)
+    } else value = value && (value as IFilter).visible !== false ? [value] : undefined;
     (data as IObject)['_' + key] = value
 }
