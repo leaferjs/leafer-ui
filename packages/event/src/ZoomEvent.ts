@@ -1,10 +1,10 @@
 import { IZoomEvent } from '@leafer/interface'
 import { registerUIEvent } from '@leafer/core'
 
-import { UIEvent } from './UIEvent'
+import { PointerEvent } from './PointerEvent'
 
 @registerUIEvent()
-export class ZoomEvent extends UIEvent implements IZoomEvent {
+export class ZoomEvent extends PointerEvent implements IZoomEvent {
 
     static BEFORE_ZOOM = 'zoom.before_zoom'
 
