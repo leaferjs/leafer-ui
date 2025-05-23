@@ -1,4 +1,4 @@
-import { IBoundsData, ILeaferImage, IPointData, IScaleData } from '@leafer/interface'
+import { IBoundsData, ILeaferImage, IScaleData } from '@leafer/interface'
 import { MatrixHelper, MathHelper, Bounds, AlignHelper, BoundsHelper, PointHelper } from '@leafer/core'
 
 import { IImagePaint, ILeafPaint, ILeafPaintPatternData } from '@leafer-ui/interface'
@@ -8,7 +8,6 @@ import { clipMode, fillOrFitMode, repeatMode } from './mode'
 
 const { get, translate } = MatrixHelper
 const tempBox = new Bounds()
-const tempPoint = {} as IPointData
 const tempScaleData = {} as IScaleData
 const tempImage = {} as IBoundsData
 
@@ -36,19 +35,21 @@ export function getPatternData(paint: IImagePaint, box: IBoundsData, image: ILea
 
     if (!mode || mode === 'cover' || mode === 'fit') { // mode 默认值为 cover
         if (!sameBox || rotation) {
-            scaleX = scaleY = BoundsHelper.getPutScale(box, tempImage, mode !== 'fit')
-            BoundsHelper.toPutPoint(box, image, scaleX, tempImage)
+            scaleX = scaleY = BoundsHelper.getFitScale(box, tempImage, mode !== 'fit')
+            BoundsHelper.put(box, image, align, scaleX, false, tempImage)
+            BoundsHelper.scale(tempImage, scaleX, scaleY, true)
         }
-    } else if (scale || size) {
-        MathHelper.getScaleData(scale, size, image, tempScaleData)
-        scaleX = tempScaleData.scaleX
-        scaleY = tempScaleData.scaleY
-    }
+    } else {
+        if (scale || size) {
+            MathHelper.getScaleData(scale, size, image, tempScaleData)
+            scaleX = tempScaleData.scaleX
+            scaleY = tempScaleData.scaleY
+        }
 
-    if (align) {
-        if (scaleX) tempImage.width *= scaleX, tempImage.height *= scaleY
-        AlignHelper.toPoint(align, tempImage, box, tempPoint, true)
-        PointHelper.move(tempImage, tempPoint)
+        if (align) {
+            if (scaleX) BoundsHelper.scale(tempImage, scaleX, scaleY, true)
+            AlignHelper.toPoint(align, tempImage, box, tempImage, true, true)
+        }
     }
 
     if (offset) PointHelper.move(tempImage, offset)

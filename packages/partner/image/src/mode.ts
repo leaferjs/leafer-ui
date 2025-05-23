@@ -1,4 +1,4 @@
-import { IBoundsData, IPointData, IMatrixData, IAlign, } from '@leafer/interface'
+import { IBoundsData, IPointData, IMatrixData, IAlign } from '@leafer/interface'
 import { MatrixHelper } from '@leafer/core'
 
 import { ILeafPaintPatternData } from '@leafer-ui/interface'
