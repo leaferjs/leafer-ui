@@ -1,4 +1,5 @@
 import { ILeaferCanvas } from '@leafer/interface'
+import { Platform } from '@leafer-ui/core'
 
 import { IUI, ITextRowData, ILeafPaint, IStrokeAlign, ILeafStrokePaint } from '@leafer-ui/interface'
 import { PaintImage } from "@leafer-ui/draw"
@@ -36,7 +37,7 @@ function drawAlignStroke(align: IStrokeAlign, stroke: string | ILeafPaint[], isS
     fillText(ui, out)
     out.blendMode = 'normal'
 
-    if (ui.__worldFlipped) canvas.copyWorldByReset(out, ui.__nowWorld)
+    if (ui.__worldFlipped || Platform.fullImageShadow) canvas.copyWorldByReset(out, ui.__nowWorld)
     else canvas.copyWorldToInner(out, ui.__nowWorld, ui.__layout.renderBounds)
 
     out.recycle(ui.__nowWorld)
