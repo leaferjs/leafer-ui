@@ -11,8 +11,8 @@ ui.__updateHitCanvas = function (): void {
     if (this.__box) this.__box.__updateHitCanvas()
 
     const data = this.__, { hitCanvasManager } = this.leafer || this.parent.leafer // 兼容 boxStyle
-    const isHitPixelFill = (data.__pixelFill || data.__isCanvas) && data.hitFill === 'pixel'
-    const isHitPixelStroke = data.__pixelStroke && data.hitStroke === 'pixel'
+    const isHitPixelFill = (data.__isAlphaPixelFill || data.__isCanvas) && data.hitFill === 'pixel'
+    const isHitPixelStroke = data.__isAlphaPixelStroke && data.hitStroke === 'pixel'
     const isHitPixel = isHitPixelFill || isHitPixelStroke
 
     if (!this.__hitCanvas) this.__hitCanvas = isHitPixel ? hitCanvasManager.getPixelType(this, { contextSettings: { willReadFrequently: true } }) : hitCanvasManager.getPathType(this)
@@ -52,11 +52,11 @@ ui.__hit = function (inner: IRadiusPointData): boolean {
 
     // hit path
     const { hitFill } = data
-    const needHitFillPath = ((data.fill || data.__isCanvas) && (hitFill === 'path' || (hitFill === 'pixel' && !(data.__pixelFill || data.__isCanvas)))) || hitFill === 'all'
+    const needHitFillPath = ((data.fill || data.__isCanvas) && (hitFill === 'path' || (hitFill === 'pixel' && !(data.__isAlphaPixelFill || data.__isCanvas)))) || hitFill === 'all'
     if (needHitFillPath && this.__hitFill(inner)) return true
 
     const { hitStroke, __strokeWidth } = data
-    const needHitStrokePath = (data.stroke && (hitStroke === 'path' || (hitStroke === 'pixel' && !data.__pixelStroke))) || hitStroke === 'all'
+    const needHitStrokePath = (data.stroke && (hitStroke === 'path' || (hitStroke === 'pixel' && !data.__isAlphaPixelStroke))) || hitStroke === 'all'
     if (!needHitFillPath && !needHitStrokePath) return false
 
     const radiusWidth = inner.radiusX * 2

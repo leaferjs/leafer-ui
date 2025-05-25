@@ -6,7 +6,7 @@ import { Paint, PaintImage, ColorConvert } from '@leafer-ui/external'
 
 
 const { parse, objectToCanvasData } = PathConvert
-const { stintSet } = DataHelper, { hasTransparentStr } = ColorConvert
+const { stintSet } = DataHelper, { hasTransparent } = ColorConvert
 const emptyPaint: ILeafPaint = {}
 const debug = Debug.get('UIData')
 export class UIData extends LeafData implements IUIData {
@@ -19,9 +19,6 @@ export class UIData extends LeafData implements IUIData {
 
     public __isFills?: boolean
     public __isStrokes?: boolean
-
-    public __isTransparentFill?: boolean  // 半透明的 
-    public __isTransparentStroke?: boolean
 
     public get __strokeWidth(): number {
         const { strokeWidth, strokeWidthFixed } = this as IUIData
@@ -41,8 +38,11 @@ export class UIData extends LeafData implements IUIData {
         return t.fill && this.__hasStroke
     }
 
-    public __pixelFill?: boolean // png / svg / webp
-    public __pixelStroke?: boolean
+    public __isAlphaPixelFill?: boolean // png / svg / webp
+    public __isAlphaPixelStroke?: boolean
+
+    public __isTransparentFill?: boolean  // 半透明的 
+    public __isTransparentStroke?: boolean
 
     public get __clipAfterFill(): boolean { const t = this as IUIData; return (t.cornerRadius || t.innerShadow || t.__pathInputed) as unknown as boolean } // 用于 __drawAfterFill()
     public get __hasSurface(): boolean { const t = this as IUIData; return (t.fill || t.stroke) as unknown as boolean }
@@ -95,7 +95,7 @@ export class UIData extends LeafData implements IUIData {
     protected setFill(value: IValue) {
         if (this.__naturalWidth) this.__removeNaturalSize()
         if (typeof value === 'string' || !value) {
-            stintSet(this, '__isTransparentFill', hasTransparentStr(value as string))
+            stintSet(this, '__isTransparentFill', hasTransparent(value as string))
             this.__isFills && this.__removePaint('fill', true)
             this._fill = value
         } else if (typeof value === 'object') {
@@ -105,7 +105,7 @@ export class UIData extends LeafData implements IUIData {
 
     protected setStroke(value: IValue) {
         if (typeof value === 'string' || !value) {
-            stintSet(this, '__isTransparentStroke', hasTransparentStr(value as string))
+            stintSet(this, '__isTransparentStroke', hasTransparent(value as string))
             this.__isStrokes && this.__removePaint('stroke', true)
             this._stroke = value
         } else if (typeof value === 'object') {
@@ -145,7 +145,7 @@ export class UIData extends LeafData implements IUIData {
         const { fill, stroke } = this.__input
         if (fill) Paint.compute('fill', this.__leaf)
         if (stroke) Paint.compute('stroke', this.__leaf)
-        this.__needComputePaint = false
+        this.__needComputePaint = undefined
     }
 
     public __setPaint(attrName: 'fill' | 'stroke', value: IValue): void {
@@ -164,13 +164,11 @@ export class UIData extends LeafData implements IUIData {
         if (removeInput) this.__removeInput(attrName)
         PaintImage.recycleImage(attrName, this)
         if (attrName === 'fill') {
-            this.__isFills = false
-            this.__pixelFill && (this.__pixelFill = false)
-            this._fill = undefined
+            stintSet(this, '__isAlphaPixelFill', undefined)
+            this._fill = this.__isFills = undefined
         } else {
-            this.__isStrokes = false
-            this.__pixelStroke && (this.__pixelStroke = false)
-            this._stroke = undefined
+            stintSet(this, '__isAlphaPixelStroke', undefined)
+            this._stroke = this.__isStrokes = undefined
         }
     }
 }

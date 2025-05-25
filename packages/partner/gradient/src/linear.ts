@@ -5,36 +5,36 @@ import { IGradientPaint, ILeafPaint, IColorStop, IColorString } from '@leafer-ui
 import { ColorConvert } from '@leafer-ui/draw'
 
 
-const { toPoint } = AroundHelper
+const { toPoint } = AroundHelper, { hasTransparent } = ColorConvert
 const realFrom = {} as IPointData
 const realTo = {} as IPointData
 
 export function linearGradient(paint: IGradientPaint, box: IBoundsData): ILeafPaint {
 
-    let { from, to, type, blendMode, opacity } = paint
+    let { from, to, type, opacity } = paint
 
     toPoint(from || 'top', box, realFrom)
     toPoint(to || 'bottom', box, realTo)
 
     const style = Platform.canvas.createLinearGradient(realFrom.x, realFrom.y, realTo.x, realTo.y)
-    applyStops(style, paint.stops, opacity)
-
     const data: ILeafPaint = { type, style }
-    if (blendMode) data.blendMode = blendMode
+
+    applyStops(data, style, paint.stops, opacity)
+
     return data
 
 }
 
-export function applyStops(gradient: IObject, stops: IColorStop[] | IColorString[], opacity: number): void {
+export function applyStops(data: ILeafPaint, gradient: IObject, stops: IColorStop[] | IColorString[], opacity: number): void {
     if (stops) {
-        let stop: IColorStop | string
+        let stop: IColorStop | string, color: string, offset: number, isTransparent: boolean
         for (let i = 0, len = stops.length; i < len; i++) {
             stop = stops[i]
-            if (typeof stop === 'string') {
-                gradient.addColorStop(i / (len - 1), ColorConvert.string(stop, opacity))
-            } else {
-                gradient.addColorStop(stop.offset, ColorConvert.string(stop.color, opacity))
-            }
+            if (typeof stop === 'string') offset = i / (len - 1), color = ColorConvert.string(stop, opacity)
+            else offset = stop.offset, color = ColorConvert.string(stop.color, opacity)
+            gradient.addColorStop(offset, color)
+            if (!isTransparent && hasTransparent(color)) isTransparent = true
         }
+        if (isTransparent) data.isTransparent = true
     }
 }

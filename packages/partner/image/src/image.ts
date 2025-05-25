@@ -23,6 +23,7 @@ export function image(ui: IUI, attrName: string, paint: IImagePaint, boxBounds: 
         leafPaint = cache.leafPaint
     } else {
         leafPaint = { type: paint.type, image }
+        if (image.hasAlphaPixel) leafPaint.isTransparent = true
 
         cache = image.use > 1 ? { leafPaint, paint, boxBounds: box.set(boxBounds) } : null // 只保留最后一个cache
     }
@@ -54,7 +55,7 @@ export function image(ui: IUI, attrName: string, paint: IImagePaint, boxBounds: 
                 ignoreRender(ui, false)
                 if (!ui.destroyed) {
                     if (checkSizeAndCreateData(ui, attrName, paint, image, leafPaint, boxBounds)) {
-                        if (image.hasOpacityPixel) ui.__layout.hitCanvasChanged = true
+                        if (image.hasAlphaPixel) ui.__layout.hitCanvasChanged = true
                         ui.forceUpdate('surface')
                     }
                     onLoadSuccess(ui, event)

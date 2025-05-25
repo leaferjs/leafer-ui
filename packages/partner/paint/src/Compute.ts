@@ -1,13 +1,16 @@
+import { DataHelper } from '@leafer/core'
+
 import { IUI, IPaint, ILeafPaint, IRGB, IBooleanMap, IObject, IPaintAttr } from '@leafer-ui/interface'
 import { ColorConvert, PaintImage, PaintGradient } from '@leafer-ui/draw'
 
 
 let recycleMap: IBooleanMap
+const { stintSet } = DataHelper, { hasTransparent } = ColorConvert
 
 export function compute(attrName: IPaintAttr, ui: IUI): void {
     const data = ui.__, leafPaints: ILeafPaint[] = []
 
-    let paints: IPaint[] = data.__input[attrName], hasOpacityPixel: boolean
+    let paints: IPaint[] = data.__input[attrName], isAlphaPixel: boolean, isTransparent: boolean
     if (!(paints instanceof Array)) paints = [paints]
 
     recycleMap = PaintImage.recycleImage(attrName, data)
@@ -19,28 +22,54 @@ export function compute(attrName: IPaintAttr, ui: IUI): void {
 
     (data as IObject)['_' + attrName] = leafPaints.length ? leafPaints : undefined
 
-    if (leafPaints.length && leafPaints[0].image) hasOpacityPixel = leafPaints[0].image.hasOpacityPixel
-    attrName === 'fill' ? data.__pixelFill = hasOpacityPixel : data.__pixelStroke = hasOpacityPixel
+    if (leafPaints.length) {
+        if (leafPaints.every(item => item.isTransparent)) {
+            if (leafPaints.some(item => item.image)) isAlphaPixel = true
+            isTransparent = true
+        }
+    }
+
+    if (attrName === 'fill') {
+        stintSet(data, '__isAlphaPixelFill', isAlphaPixel)
+        stintSet(data, '__isTransparentFill', isTransparent)
+    } else {
+        stintSet(data, '__isAlphaPixelStroke', isAlphaPixel)
+        stintSet(data, '__isTransparentStroke', isTransparent)
+    }
 }
 
 
 function getLeafPaint(attrName: string, paint: IPaint, ui: IUI): ILeafPaint {
     if (typeof paint !== 'object' || paint.visible === false || paint.opacity === 0) return undefined
+
+    let data: ILeafPaint
     const { boxBounds } = ui.__layout
 
     switch (paint.type) {
-        case 'solid':
-            let { type, blendMode, color, opacity } = paint
-            return { type, blendMode, style: ColorConvert.string(color, opacity) }
         case 'image':
-            return PaintImage.image(ui, attrName, paint, boxBounds, !recycleMap || !recycleMap[paint.url])
+            data = PaintImage.image(ui, attrName, paint, boxBounds, !recycleMap || !recycleMap[paint.url])
+            break
         case 'linear':
-            return PaintGradient.linearGradient(paint, boxBounds)
+            data = PaintGradient.linearGradient(paint, boxBounds)
+            break
         case 'radial':
-            return PaintGradient.radialGradient(paint, boxBounds)
+            data = PaintGradient.radialGradient(paint, boxBounds)
+            break
         case 'angular':
-            return PaintGradient.conicGradient(paint, boxBounds)
+            data = PaintGradient.conicGradient(paint, boxBounds)
+            break
+        case 'solid':
+            const { type, blendMode, color, opacity } = paint
+            data = { type, blendMode, style: ColorConvert.string(color, opacity) }
+            break
         default:
-            return (paint as IRGB).r !== undefined ? { type: 'solid', style: ColorConvert.string(paint) } : undefined
+            if ((paint as IRGB).r !== undefined) data = { type: 'solid', style: ColorConvert.string(paint) }
     }
+
+    if (data) {
+        if (typeof data.style === 'string' && hasTransparent(data.style)) data.isTransparent = true
+        if (paint.blendMode) data.blendMode = paint.blendMode
+    }
+
+    return data
 }

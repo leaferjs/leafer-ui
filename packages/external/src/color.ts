@@ -1,14 +1,7 @@
-import { IColor } from '@leafer-ui/interface'
+export function hasTransparent(color?: string): boolean {
 
-export function hasTransparent(color: IColor): boolean {
-
-    return typeof color === 'object' ? color.a !== undefined && color.a < 1 : hasTransparentStr(color)
-
-}
-
-export function hasTransparentStr(color?: string): boolean {
-
-    if (!color || color.length === 7) return false
+    if (!color || color.length === 7 || color.length === 4) return false
+    if (color === 'transparent') return true  // transparent keyword
 
     const first = color[0]
 
@@ -28,8 +21,7 @@ export function hasTransparentStr(color?: string): boolean {
             if (i > -1) return parseFloat(color.slice(i + 1)) < 1
         }
 
-    } else if (color === 'transparent') return true  // transparent keyword
-
+    }
 
     return false
 

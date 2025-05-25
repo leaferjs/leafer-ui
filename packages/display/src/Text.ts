@@ -156,7 +156,6 @@ export class Text extends UI implements IText {
 
         if (this.isOverflow) setList(data.__textBoxBounds = {} as IBoundsData, [b, contentBounds]), layout.renderChanged = true
         else data.__textBoxBounds = b
-        console.log(this.isOverflow)
     }
 
     override __onUpdateSize(): void {

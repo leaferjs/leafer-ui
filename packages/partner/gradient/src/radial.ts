@@ -15,18 +15,18 @@ const realTo = {} as IPointData
 
 export function radialGradient(paint: IGradientPaint, box: IBoundsData): ILeafPaint {
 
-    let { from, to, type, opacity, blendMode, stretch } = paint
+    let { from, to, type, opacity, stretch } = paint
 
     toPoint(from || 'center', box, realFrom)
     toPoint(to || 'bottom', box, realTo)
 
     const style = Platform.canvas.createRadialGradient(realFrom.x, realFrom.y, 0, realFrom.x, realFrom.y, getDistance(realFrom, realTo))
-    applyStops(style, paint.stops, opacity)
-
     const data: ILeafPaint = { type, style }
+
+    applyStops(data, style, paint.stops, opacity)
+
     const transform = getTransform(box, realFrom, realTo, stretch, true)
     if (transform) data.transform = transform
-    if (blendMode) data.blendMode = blendMode
 
     return data
 

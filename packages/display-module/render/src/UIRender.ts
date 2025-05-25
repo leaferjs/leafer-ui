@@ -91,9 +91,9 @@ export const UIRender: IUIRenderModule = {
 
             this.__drawRenderPath(canvas)
 
-            if (fill && !ignoreFill) this.__.__pixelFill ? Paint.fills(fill as ILeafPaint[], this, canvas) : Paint.fill('#000000', this, canvas)
+            if (fill && !ignoreFill) this.__.__isAlphaPixelFill ? Paint.fills(fill as ILeafPaint[], this, canvas) : Paint.fill('#000000', this, canvas)
             if (this.__.__isCanvas) this.__drawAfterFill(canvas, options)
-            if (stroke && !ignoreStroke) this.__.__pixelStroke ? Paint.strokes(stroke as ILeafStrokePaint[], this, canvas) : Paint.stroke('#000000', this, canvas)
+            if (stroke && !ignoreStroke) this.__.__isAlphaPixelStroke ? Paint.strokes(stroke as ILeafStrokePaint[], this, canvas) : Paint.stroke('#000000', this, canvas)
         }
     },
 

@@ -481,14 +481,14 @@ export interface IUIData extends IUIAttrData, IUIComputedData, ILeafData {
     readonly __hasHalf: number // 是否存在半逻辑像素渲染（奇数线宽的居中线条），可以半像素为起点绘制，防止模糊
 
 
-    __pixelFill?: boolean // png / svg / webp
-    __pixelStroke?: boolean
+    __isAlphaPixelFill?: boolean // png / svg / webp
+    __isAlphaPixelStroke?: boolean
+
+    __isTransparentFill?: boolean  // 半透明的填充色 
+    __isTransparentStroke?: boolean
 
     __isHitPixel?: boolean
     __isCanvas?: boolean // canvas 等需单独绘制的元素
-
-    __isTransparentFill?: boolean  // 半透明的 
-    __isTransparentStroke?: boolean
 
     __fillAfterStroke?: boolean // 填充在描边之后绘制，一般用于高性能的外描边场景
     __drawAfterFill?: boolean
