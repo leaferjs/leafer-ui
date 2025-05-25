@@ -487,10 +487,11 @@ export interface IUIData extends IUIAttrData, IUIComputedData, ILeafData {
     __isHitPixel?: boolean
     __isCanvas?: boolean // canvas 等需单独绘制的元素
 
-    __opacityFill?: boolean  // 半透明的
-    __opacityStroke?: boolean
+    __isOpacityFill?: boolean  // 半透明的
+    __isOpacityStroke?: boolean
 
     __drawAfterFill?: boolean
+    __fillAfterStroke?: boolean // 填充在描边之后绘制，一般用于高性能的外描边场景
     readonly __clipAfterFill?: boolean
     readonly __hasSurface?: boolean
 

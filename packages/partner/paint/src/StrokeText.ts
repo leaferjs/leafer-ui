@@ -8,30 +8,29 @@ import { fillText } from './FillText'
 
 
 export function strokeText(stroke: string | ILeafPaint[], ui: IUI, canvas: ILeaferCanvas): void {
-    const { strokeAlign } = ui.__
-    const isStrokes = typeof stroke !== 'string'
-    switch (strokeAlign) {
+    switch (ui.__.strokeAlign) {
         case 'center':
-            canvas.setStroke(isStrokes ? undefined : stroke, ui.__.strokeWidth, ui.__)
-            isStrokes ? drawStrokesStyle(stroke as ILeafPaint[], true, ui, canvas) : drawTextStroke(ui, canvas)
+            drawCenter(stroke, 1, ui, canvas)
             break
         case 'inside':
-            drawAlignStroke('inside', stroke, isStrokes, ui, canvas)
+            drawAlign(stroke, 'inside', ui, canvas)
             break
         case 'outside':
-            drawAlignStroke('outside', stroke, isStrokes, ui, canvas)
+            ui.__.__fillAfterStroke ? drawCenter(stroke, 2, ui, canvas) : drawAlign(stroke, 'outside', ui, canvas)
             break
     }
 }
 
-function drawAlignStroke(align: IStrokeAlign, stroke: string | ILeafPaint[], isStrokes: boolean, ui: IUI, canvas: ILeaferCanvas): void {
-    const { __strokeWidth, __font } = ui.__
+function drawCenter(stroke: string | ILeafPaint[], strokeWidthScale: number, ui: IUI, canvas: ILeaferCanvas): void {
+    const data = ui.__
+    canvas.setStroke(!data.__isStrokes && stroke as string, data.strokeWidth * strokeWidthScale, data)
+    data.__isStrokes ? drawStrokesStyle(stroke as ILeafPaint[], true, ui, canvas) : drawTextStroke(ui, canvas)
+}
 
+function drawAlign(stroke: string | ILeafPaint[], align: IStrokeAlign, ui: IUI, canvas: ILeaferCanvas): void {
     const out = canvas.getSameCanvas(true, true)
-    out.setStroke(isStrokes ? undefined : stroke, __strokeWidth * 2, ui.__)
-
-    out.font = __font
-    isStrokes ? drawStrokesStyle(stroke as ILeafPaint[], true, ui, out) : drawTextStroke(ui, out)
+    out.font = ui.__.__font
+    drawCenter(stroke, 2, ui, out)
 
     out.blendMode = align === 'outside' ? 'destination-out' : 'destination-in'
     fillText(ui, out)
@@ -42,6 +41,7 @@ function drawAlignStroke(align: IStrokeAlign, stroke: string | ILeafPaint[], isS
 
     out.recycle(ui.__nowWorld)
 }
+
 
 export function drawTextStroke(ui: IUI, canvas: ILeaferCanvas): void {
 

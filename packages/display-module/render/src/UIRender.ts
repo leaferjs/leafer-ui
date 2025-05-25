@@ -10,7 +10,7 @@ export const UIRender: IUIRenderModule = {
         const data = this.__, w = this.__world
 
         if (data.__useEffect) {
-            const { shadow, innerShadow, blur, backgroundBlur, filter } = this.__
+            const { shadow, innerShadow, blur, backgroundBlur, filter } = data
             data.__useEffect = !!(shadow || innerShadow || blur || backgroundBlur || filter)
         }
 
@@ -36,7 +36,7 @@ export const UIRender: IUIRenderModule = {
 
             if (data.__needComputePaint) data.__computePaint()
 
-            const { fill, stroke, __drawAfterFill } = data
+            const { fill, stroke, __drawAfterFill, __fillAfterStroke } = data
 
             this.__drawRenderPath(canvas)
 
@@ -49,13 +49,15 @@ export const UIRender: IUIRenderModule = {
 
                 if (shadow) Effect.shadow(this, canvas, shape)
 
+                if (__fillAfterStroke) data.__isStrokes ? Paint.strokes(stroke as ILeafStrokePaint[], this, canvas) : Paint.stroke(stroke as string, this, canvas)
+
                 if (fill) data.__isFills ? Paint.fills(fill as ILeafPaint[], this, canvas) : Paint.fill(fill as string, this, canvas)
 
                 if (__drawAfterFill) this.__drawAfterFill(canvas, options)
 
                 if (innerShadow) Effect.innerShadow(this, canvas, shape)
 
-                if (stroke) data.__isStrokes ? Paint.strokes(stroke as ILeafStrokePaint[], this, canvas) : Paint.stroke(stroke as string, this, canvas)
+                if (stroke && !__fillAfterStroke) data.__isStrokes ? Paint.strokes(stroke as ILeafStrokePaint[], this, canvas) : Paint.stroke(stroke as string, this, canvas)
 
                 if (filter) Filter.apply(filter, this, this.__nowWorld, canvas, originCanvas, shape)
 
@@ -64,19 +66,19 @@ export const UIRender: IUIRenderModule = {
 
             } else {
 
+                if (__fillAfterStroke) data.__isStrokes ? Paint.strokes(stroke as ILeafStrokePaint[], this, canvas) : Paint.stroke(stroke as string, this, canvas)
+
                 if (fill) data.__isFills ? Paint.fills(fill as ILeafPaint[], this, canvas) : Paint.fill(fill as string, this, canvas)
                 if (__drawAfterFill) this.__drawAfterFill(canvas, options)
-                if (stroke) data.__isStrokes ? Paint.strokes(stroke as ILeafStrokePaint[], this, canvas) : Paint.stroke(stroke as string, this, canvas)
+
+                if (stroke && !__fillAfterStroke) data.__isStrokes ? Paint.strokes(stroke as ILeafStrokePaint[], this, canvas) : Paint.stroke(stroke as string, this, canvas)
 
             }
 
         } else {
 
-            if (data.__pathInputed) {
-                drawFast(this, canvas, options)
-            } else {
-                this.__drawFast(canvas, options)
-            }
+            if (data.__pathInputed) drawFast(this, canvas, options)
+            else this.__drawFast(canvas, options)
 
         }
     },
@@ -108,11 +110,14 @@ export const UIRender: IUIRenderModule = {
 
 
 function drawFast(ui: IUI, canvas: ILeaferCanvas, options: IRenderOptions): void {
-    const { fill, stroke, __drawAfterFill } = ui.__
+    const { fill, stroke, __drawAfterFill, __fillAfterStroke } = ui.__
 
     ui.__drawRenderPath(canvas)
 
+    if (__fillAfterStroke) Paint.stroke(stroke as string, ui, canvas)
+
     if (fill) Paint.fill(fill as string, ui, canvas)
     if (__drawAfterFill) ui.__drawAfterFill(canvas, options)
-    if (stroke) Paint.stroke(stroke as string, ui, canvas)
+
+    if (stroke && !__fillAfterStroke) Paint.stroke(stroke as string, ui, canvas)
 }

@@ -8,54 +8,24 @@ import { strokeText, drawStrokesStyle } from './StrokeText'
 
 
 export function stroke(stroke: string, ui: IUI, canvas: ILeaferCanvas): void {
-    const options = ui.__
-    const { __strokeWidth, strokeAlign, __font } = options
-    if (!__strokeWidth) return
+    const data = ui.__
+    if (!data.__strokeWidth) return
 
-    if (__font) {
+    if (data.__font) {
 
         strokeText(stroke, ui, canvas)
 
     } else {
 
-        switch (strokeAlign) {
-
+        switch (data.strokeAlign) {
             case 'center':
-
-                canvas.setStroke(stroke, __strokeWidth, options)
-                canvas.stroke()
-
-                if (options.__useArrow) Paint.strokeArrow(stroke, ui, canvas)
-
+                drawCenter(stroke, 1, ui, canvas)
                 break
-
             case 'inside':
-
-                canvas.save()
-                canvas.setStroke(stroke, __strokeWidth * 2, options)
-
-                options.windingRule ? canvas.clip(options.windingRule) : canvas.clip()
-                canvas.stroke()
-
-                canvas.restore()
-
+                drawInside(stroke, ui, canvas)
                 break
-
             case 'outside':
-                const out = canvas.getSameCanvas(true, true)
-                out.setStroke(stroke, __strokeWidth * 2, options)
-
-                ui.__drawRenderPath(out)
-
-                out.stroke()
-
-                options.windingRule ? out.clip(options.windingRule) : out.clip()
-                out.clearWorld(ui.__layout.renderBounds)
-
-                if (ui.__worldFlipped || Platform.fullImageShadow) canvas.copyWorldByReset(out, ui.__nowWorld)
-                else canvas.copyWorldToInner(out, ui.__nowWorld, ui.__layout.renderBounds)
-
-                out.recycle(ui.__nowWorld)
+                drawOutside(stroke, ui, canvas)
                 break
         }
 
@@ -64,54 +34,47 @@ export function stroke(stroke: string, ui: IUI, canvas: ILeaferCanvas): void {
 
 
 export function strokes(strokes: ILeafPaint[], ui: IUI, canvas: ILeaferCanvas): void {
-    const options = ui.__
-    const { __strokeWidth, strokeAlign, __font } = options
-    if (!__strokeWidth) return
+    stroke(strokes as any, ui, canvas)
+}
 
-    if (__font) {
 
-        strokeText(strokes, ui, canvas)
+function drawCenter(stroke: string | ILeafPaint[], strokeWidthScale: number, ui: IUI, canvas: ILeaferCanvas) {
+    const data = ui.__
+    canvas.setStroke(!data.__isStrokes && stroke as string, data.__strokeWidth * strokeWidthScale, data)
+    data.__isStrokes ? drawStrokesStyle(stroke as ILeafPaint[], false, ui, canvas) : canvas.stroke()
+
+    if (data.__useArrow) Paint.strokeArrow(stroke, ui, canvas)
+
+}
+
+function drawInside(stroke: string | ILeafPaint[], ui: IUI, canvas: ILeaferCanvas) {
+    const data = ui.__
+    canvas.save()
+    data.windingRule ? canvas.clip(data.windingRule) : canvas.clip()
+
+    drawCenter(stroke, 2, ui, canvas)
+    canvas.restore()
+}
+
+function drawOutside(stroke: string | ILeafPaint[], ui: IUI, canvas: ILeaferCanvas) {
+    const data = ui.__
+    if (data.__fillAfterStroke) {
+
+        drawCenter(stroke, 2, ui, canvas)
 
     } else {
+        const { renderBounds } = ui.__layout
+        const out = canvas.getSameCanvas(true, true)
+        ui.__drawRenderPath(out)
 
-        switch (strokeAlign) {
+        drawCenter(stroke, 2, ui, out)
 
-            case 'center':
-                canvas.setStroke(undefined, __strokeWidth, options)
-                drawStrokesStyle(strokes, false, ui, canvas)
+        data.windingRule ? out.clip(data.windingRule) : out.clip()
+        out.clearWorld(renderBounds)
 
-                if (options.__useArrow) Paint.strokeArrow(strokes, ui, canvas)
-                break
+        if (ui.__worldFlipped || Platform.fullImageShadow) canvas.copyWorldByReset(out, ui.__nowWorld)
+        else canvas.copyWorldToInner(out, ui.__nowWorld, renderBounds)
 
-            case 'inside':
-                canvas.save()
-                canvas.setStroke(undefined, __strokeWidth * 2, options)
-                options.windingRule ? canvas.clip(options.windingRule) : canvas.clip()
-
-                drawStrokesStyle(strokes, false, ui, canvas)
-
-                canvas.restore()
-                break
-
-            case 'outside':
-                const { renderBounds } = ui.__layout
-                const out = canvas.getSameCanvas(true, true)
-                ui.__drawRenderPath(out)
-
-                out.setStroke(undefined, __strokeWidth * 2, options)
-
-                drawStrokesStyle(strokes, false, ui, out)
-
-                options.windingRule ? out.clip(options.windingRule) : out.clip()
-                out.clearWorld(renderBounds)
-
-                if (ui.__worldFlipped || Platform.fullImageShadow) canvas.copyWorldByReset(out, ui.__nowWorld)
-                else canvas.copyWorldToInner(out, ui.__nowWorld, renderBounds)
-
-                out.recycle(ui.__nowWorld)
-                break
-        }
-
+        out.recycle(ui.__nowWorld)
     }
-
 }
