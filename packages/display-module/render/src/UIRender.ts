@@ -1,28 +1,28 @@
 import { ILeaferCanvas, IRenderOptions } from '@leafer/interface'
+import { DataHelper } from '@leafer/core'
 
 import { IUIRenderModule, ILeafPaint, ILeafStrokePaint, IUI } from '@leafer-ui/interface'
 import { Paint, Effect, Filter } from '@leafer-ui/external'
 
+const { stintSet } = DataHelper
 
 export const UIRender: IUIRenderModule = {
 
     __updateChange(): void {
-        const data = this.__, w = this.__world
+        const data = this.__
 
         if (data.__useEffect) {
             const { shadow, innerShadow, blur, backgroundBlur, filter } = data
             data.__useEffect = !!(shadow || innerShadow || blur || backgroundBlur || filter)
         }
 
-        const half = data.__hasHalf
-        w.half !== half && (w.half = half)
+        stintSet(this.__world, 'half', data.__hasHalf)
+
+        stintSet(data, '__fillAfterStroke', data.stroke && data.strokeAlign === 'outside' && data.fill && !data.__isTransparentFill)
 
         data.__checkSingle()
 
-        const complex = data.__isFills || data.__isStrokes || data.cornerRadius || data.__useEffect
-
-        if (complex) data.__complex = true
-        else data.__complex && (data.__complex = false)
+        stintSet(data, '__complex', data.__isFills || data.__isStrokes || data.cornerRadius || data.__useEffect)
     },
 
     __drawFast(canvas: ILeaferCanvas, options: IRenderOptions): void {

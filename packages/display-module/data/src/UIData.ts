@@ -1,11 +1,12 @@
 import { INumber, IValue, IBoolean, IPathCommandData, IPathString, IPointData, IPathCommandObject, IObject, IFilter } from '@leafer/interface'
-import { PathConvert, LeafData, Debug } from '@leafer/core'
+import { PathConvert, DataHelper, LeafData, Debug } from '@leafer/core'
 
 import { IUI, IUIData, ILeafPaint } from '@leafer-ui/interface'
-import { Paint, PaintImage } from '@leafer-ui/external'
+import { Paint, PaintImage, ColorConvert } from '@leafer-ui/external'
 
 
 const { parse, objectToCanvasData } = PathConvert
+const { stintSet } = DataHelper, { hasTransparentStr } = ColorConvert
 const emptyPaint: ILeafPaint = {}
 const debug = Debug.get('UIData')
 export class UIData extends LeafData implements IUIData {
@@ -18,6 +19,9 @@ export class UIData extends LeafData implements IUIData {
 
     public __isFills?: boolean
     public __isStrokes?: boolean
+
+    public __isTransparentFill?: boolean  // 半透明的 
+    public __isTransparentStroke?: boolean
 
     public get __strokeWidth(): number {
         const { strokeWidth, strokeWidthFixed } = this as IUIData
@@ -91,6 +95,7 @@ export class UIData extends LeafData implements IUIData {
     protected setFill(value: IValue) {
         if (this.__naturalWidth) this.__removeNaturalSize()
         if (typeof value === 'string' || !value) {
+            stintSet(this, '__isTransparentFill', hasTransparentStr(value as string))
             this.__isFills && this.__removePaint('fill', true)
             this._fill = value
         } else if (typeof value === 'object') {
@@ -100,6 +105,7 @@ export class UIData extends LeafData implements IUIData {
 
     protected setStroke(value: IValue) {
         if (typeof value === 'string' || !value) {
+            stintSet(this, '__isTransparentStroke', hasTransparentStr(value as string))
             this.__isStrokes && this.__removePaint('stroke', true)
             this._stroke = value
         } else if (typeof value === 'object') {

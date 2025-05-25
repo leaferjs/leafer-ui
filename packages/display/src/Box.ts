@@ -1,5 +1,5 @@
 import { ILeaferCanvas, IRenderOptions, IBoundsData, IBoolean, INumber } from '@leafer/interface'
-import { rewrite, rewriteAble, registerUI, BoundsHelper, dataProcessor, affectRenderBoundsType, dataType, boundsType } from '@leafer/core'
+import { rewrite, rewriteAble, registerUI, BoundsHelper, dataProcessor, affectRenderBoundsType, dataType, boundsType, DataHelper } from '@leafer/core'
 
 import { IBox, IBoxData, IBoxInputData, IOverflow } from '@leafer-ui/interface'
 import { BoxData } from '@leafer-ui/data'
@@ -102,11 +102,11 @@ export class Box extends Group implements IBox {
             copy(childrenRenderBounds, renderBounds)
             this.__updateRectRenderBounds()
 
-            isOverflow = !includes(renderBounds, childrenRenderBounds) || undefined
+            isOverflow = !includes(renderBounds, childrenRenderBounds)
             if (isOverflow && this.__.overflow !== 'hide') add(renderBounds, childrenRenderBounds)
         } else this.__updateRectRenderBounds()
 
-        this.isOverflow !== isOverflow && (this.isOverflow = isOverflow) // 节省赋值
+        DataHelper.stintSet(this, 'isOverflow', isOverflow)
     }
 
     @rewrite(rect.__updateRenderBounds)

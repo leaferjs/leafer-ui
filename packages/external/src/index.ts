@@ -1,11 +1,15 @@
 // Implemented in partner
 import { IPaintModule, IPaintImageModule, IPaintGradientModule, IEffectModule, ITextConvertModule, IExportModule, IColorConvertModule, IPathArrowModule, IStateModule, IUnitData, ITransitionModule, ITransitionFunction, IFilterModule } from "@leafer-ui/interface"
 import { Plugin } from '@leafer/core'
+import { hasTransparentStr, hasTransparent } from './color'
 
 
 export const TextConvert = {} as ITextConvertModule
 
-export const ColorConvert = {} as IColorConvertModule
+export const ColorConvert = {
+    hasTransparent,
+    hasTransparentStr
+} as IColorConvertModule
 
 export const UnitConvert = {
     number(value: number | IUnitData, percentRefer?: number): number {

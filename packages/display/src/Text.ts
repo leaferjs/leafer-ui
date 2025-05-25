@@ -1,5 +1,5 @@
 import { ILeaferCanvas, IBoolean, INumber, IString, IBoundsData, IUnitData, IRenderOptions } from '@leafer/interface'
-import { BoundsHelper, boundsType, surfaceType, dataProcessor, registerUI, affectStrokeBoundsType, dataType, hitType, MathHelper } from '@leafer/core'
+import { BoundsHelper, boundsType, surfaceType, dataProcessor, registerUI, affectStrokeBoundsType, dataType, hitType, MathHelper, DataHelper } from '@leafer/core'
 
 import { IFill, IText, IFontWeight, ITextCase, ITextDecoration, ITextData, ITextInputData, ITextAlign, IVerticalAlign, ITextDrawData, IOverflow, IStrokeAlign, IHitType, ITextWrap, IWritingMode, IBackgroundBoxStyle } from '@leafer-ui/interface'
 import { TextData } from '@leafer-ui/data'
@@ -152,11 +152,11 @@ export class Text extends UI implements IText {
 
         if (italic) b.width += fontSize * 0.16 // 倾斜会导致文本的bounds增大
 
-        const isOverflow = !includes(b, contentBounds) || undefined
-        if (isOverflow) setList(data.__textBoxBounds = {} as IBoundsData, [b, contentBounds]), layout.renderChanged = true
-        else data.__textBoxBounds = b
+        DataHelper.stintSet(this, 'isOverflow', !includes(b, contentBounds))
 
-        this.isOverflow !== isOverflow && (this.isOverflow = isOverflow) // 节省赋值
+        if (this.isOverflow) setList(data.__textBoxBounds = {} as IBoundsData, [b, contentBounds]), layout.renderChanged = true
+        else data.__textBoxBounds = b
+        console.log(this.isOverflow)
     }
 
     override __onUpdateSize(): void {
