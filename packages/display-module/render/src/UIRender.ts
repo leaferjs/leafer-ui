@@ -2,7 +2,7 @@ import { ILeaferCanvas, IRenderOptions } from '@leafer/interface'
 import { DataHelper } from '@leafer/core'
 
 import { IUIRenderModule, ILeafPaint, ILeafStrokePaint, IUI } from '@leafer-ui/interface'
-import { Paint, Effect, Filter } from '@leafer-ui/external'
+import { Paint, Effect, Filter, ColorConvert } from '@leafer-ui/external'
 
 const { stintSet } = DataHelper
 
@@ -12,8 +12,9 @@ export const UIRender: IUIRenderModule = {
         const data = this.__
 
         if (data.__useEffect) {
-            const { shadow, innerShadow, blur, backgroundBlur, filter } = data
-            data.__useEffect = !!(shadow || innerShadow || blur || backgroundBlur || filter)
+            const { shadow, fill, stroke } = data, otherEffect = data.innerShadow || data.blur || data.backgroundBlur || data.filter
+            stintSet(data, '__isFastShadow', shadow && !otherEffect && shadow.length < 2 && !shadow[0].spread && !(shadow[0].box && data.__isTransparentFill) && fill && !(fill instanceof Array && fill.length > 1) && (this.useFastShadow || !stroke || (stroke && data.strokeAlign === 'inside')))
+            data.__useEffect = !!(shadow || otherEffect)
         }
 
         stintSet(this.__world, 'half', data.__hasHalf)
@@ -36,11 +37,11 @@ export const UIRender: IUIRenderModule = {
 
             if (data.__needComputePaint) data.__computePaint()
 
-            const { fill, stroke, __drawAfterFill, __fillAfterStroke } = data
+            const { fill, stroke, __drawAfterFill, __fillAfterStroke, __isFastShadow } = data
 
             this.__drawRenderPath(canvas)
 
-            if (data.__useEffect) {
+            if (data.__useEffect && !__isFastShadow) {
 
                 const shape = Paint.shape(this, canvas, options)
                 this.__nowWorld = this.__getNowWorld(options) // restore
@@ -68,7 +69,15 @@ export const UIRender: IUIRenderModule = {
 
                 if (__fillAfterStroke) data.__isStrokes ? Paint.strokes(stroke as ILeafStrokePaint[], this, canvas) : Paint.stroke(stroke as string, this, canvas)
 
+                if (__isFastShadow) {
+                    const shadow = data.shadow[0], { scaleX, scaleY } = this.__nowWorld
+                    canvas.save(), canvas.setWorldShadow(shadow.x * scaleX, shadow.y * scaleY, shadow.blur * scaleX, ColorConvert.string(shadow.color))
+                }
+
                 if (fill) data.__isFills ? Paint.fills(fill as ILeafPaint[], this, canvas) : Paint.fill(fill as string, this, canvas)
+
+                if (__isFastShadow) canvas.restore()
+
                 if (__drawAfterFill) this.__drawAfterFill(canvas, options)
 
                 if (stroke && !__fillAfterStroke) data.__isStrokes ? Paint.strokes(stroke as ILeafStrokePaint[], this, canvas) : Paint.stroke(stroke as string, this, canvas)

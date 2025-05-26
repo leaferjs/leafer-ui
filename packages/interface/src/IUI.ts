@@ -379,6 +379,7 @@ export interface IUI extends IUIAttrData, IFillAttrData, IStrokeAttrData, ICorne
     zoomLayer?: IGroup
     readonly isFrame?: boolean
     isOverflow?: boolean
+    useFastShadow?: boolean // 将忽略 stroke 产生的阴影，只对单个 fill 有效
 
     proxyData?: IUIInputData
     __proxyData?: IUIInputData
@@ -489,6 +490,7 @@ export interface IUIData extends IUIAttrData, IUIComputedData, ILeafData {
 
     __isHitPixel?: boolean
     __isCanvas?: boolean // canvas 等需单独绘制的元素
+    __isFastShadow?: boolean // 高性能绘制阴影，需满足一定的条件
 
     __fillAfterStroke?: boolean // 填充在描边之后绘制，一般用于高性能的外描边场景
     __drawAfterFill?: boolean

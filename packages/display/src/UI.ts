@@ -359,6 +359,15 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     public button?: IBoolean
 
 
+    //  @leafer-in/editor rewrite
+
+    public editConfig: IEditorConfig
+
+    public editOuter: string
+
+    public editInner: string
+
+
     // 预留给用户使用的数据对象
     @dataType({})
     public data: IObject
@@ -366,6 +375,8 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
 
     public set scale(value: INumber | IPointData) { MathHelper.assignScale(this as IScaleData, value) }
     public get scale(): INumber | IPointData { return this.__.scale }
+
+    public useFastShadow?: boolean // 将忽略 stroke 产生的阴影，只对单个 fill 有效
 
     public __box?: IUI // 背景box, 一般用于文本背景框
     public __animate?: IAnimate
@@ -376,15 +387,6 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
         if (!path) this.__drawPathByBox(pen)
         return pen
     }
-
-
-    //  @leafer-in/editor rewrite
-
-    public editConfig: IEditorConfig
-
-    public editOuter: string
-
-    public editInner: string
 
 
     constructor(data?: IUIInputData) {

@@ -24,7 +24,7 @@ export function shadow(ui: IUI, current: ILeaferCanvas, shape: ICachedShape): vo
 
     shadow.forEach((item, index) => {
 
-        other.setWorldShadow((offsetOutBounds.offsetX + item.x * scaleX), (offsetOutBounds.offsetY + item.y * scaleY), item.blur * scaleX, ColorConvert.string(item.color),)
+        other.setWorldShadow((offsetOutBounds.offsetX + item.x * scaleX), (offsetOutBounds.offsetY + item.y * scaleY), item.blur * scaleX, ColorConvert.string(item.color))
 
         spreadScale = item.spread ? 1 + item.spread * 2 / (__layout.boxBounds.width + (__layout.strokeBoxSpread || 0) * 2) : 0
 
