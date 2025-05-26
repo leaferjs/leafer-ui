@@ -1,6 +1,6 @@
 {
   "name": "@leafer-ui/effect",
-  "version": "1.6.2",
+  "version": "1.6.3",
   "description": "@leafer-ui/effect",
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
@@ -18,11 +18,11 @@
     "leaferjs"
   ],
   "dependencies": {
-    "@leafer/core": "1.6.2",
-    "@leafer-ui/draw": "1.6.2"
+    "@leafer/core": "1.6.3",
+    "@leafer-ui/draw": "1.6.3"
   },
   "devDependencies": {
-     "@leafer/interface": "1.6.2",
-     "@leafer-ui/interface": "1.6.2"
+     "@leafer/interface": "1.6.3",
+     "@leafer-ui/interface": "1.6.3"
   }
 }
