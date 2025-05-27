@@ -95,7 +95,7 @@ export class Text extends UI implements IText {
     @boundsType('show')
     public textOverflow?: IOverflow | string
 
-    //  @leafer-in/text-editor rewrite
+    @surfaceType(false)
     public textEditing: boolean
 
     public isOverflow: boolean
