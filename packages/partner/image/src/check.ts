@@ -57,7 +57,7 @@ export function checkImage(ui: IUI, canvas: ILeaferCanvas, paint: ILeafPaint, al
 
 function drawImage(ui: IUI, canvas: ILeaferCanvas, paint: ILeafPaint, data: ILeafPaintPatternData): void { // 后续可优化
     canvas.save()
-    ui.windingRule ? canvas.clip(ui.windingRule) : canvas.clip()
+    canvas.clipUI(ui)
     if (paint.blendMode) canvas.blendMode = paint.blendMode
     if (data.opacity) canvas.opacity *= data.opacity
     if (data.transform) canvas.transform(data.transform)

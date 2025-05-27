@@ -1,10 +1,9 @@
 import { ILeaferCanvas } from '@leafer/interface'
-import { Platform } from '@leafer-ui/core'
 
 import { IUI, ILeafPaint } from '@leafer-ui/interface'
 import { Paint } from '@leafer-ui/external'
 
-import { strokeText, drawStrokesStyle } from './StrokeText'
+import { strokeText, drawStrokesStyle, copyWorld } from './StrokeText'
 
 
 export function stroke(stroke: string, ui: IUI, canvas: ILeaferCanvas): void {
@@ -48,9 +47,8 @@ function drawCenter(stroke: string | ILeafPaint[], strokeWidthScale: number, ui:
 }
 
 function drawInside(stroke: string | ILeafPaint[], ui: IUI, canvas: ILeaferCanvas) {
-    const data = ui.__
     canvas.save()
-    data.windingRule ? canvas.clip(data.windingRule) : canvas.clip()
+    canvas.clipUI(ui)
 
     drawCenter(stroke, 2, ui, canvas)
     canvas.restore()
@@ -69,11 +67,10 @@ function drawOutside(stroke: string | ILeafPaint[], ui: IUI, canvas: ILeaferCanv
 
         drawCenter(stroke, 2, ui, out)
 
-        data.windingRule ? out.clip(data.windingRule) : out.clip()
+        out.clipUI(data)
         out.clearWorld(renderBounds)
 
-        if (ui.__worldFlipped || Platform.fullImageShadow) canvas.copyWorldByReset(out, ui.__nowWorld)
-        else canvas.copyWorldToInner(out, ui.__nowWorld, renderBounds)
+        copyWorld(canvas, out, ui)
 
         out.recycle(ui.__nowWorld)
     }

@@ -36,10 +36,15 @@ function drawAlign(stroke: string | ILeafPaint[], align: IStrokeAlign, ui: IUI, 
     fillText(ui, out)
     out.blendMode = 'normal'
 
-    if (ui.__worldFlipped || Platform.fullImageShadow) canvas.copyWorldByReset(out, ui.__nowWorld)
-    else canvas.copyWorldToInner(out, ui.__nowWorld, ui.__layout.renderBounds)
+    copyWorld(canvas, out, ui)
 
     out.recycle(ui.__nowWorld)
+}
+
+
+export function copyWorld(canvas: ILeaferCanvas, out: ILeaferCanvas, ui: IUI): void {
+    if (ui.__worldFlipped || Platform.fullImageShadow) canvas.copyWorldByReset(out, ui.__nowWorld)
+    else canvas.copyWorldToInner(out, ui.__nowWorld, ui.__layout.renderBounds)
 }
 
 

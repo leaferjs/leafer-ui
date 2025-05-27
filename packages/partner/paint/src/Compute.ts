@@ -16,8 +16,7 @@ export function compute(attrName: IPaintAttr, ui: IUI): void {
     recycleMap = PaintImage.recycleImage(attrName, data)
 
     for (let i = 0, len = paints.length, item: ILeafPaint; i < len; i++) {
-        item = getLeafPaint(attrName, paints[i], ui)
-        if (item) leafPaints.push(item)
+        (item = getLeafPaint(attrName, paints[i], ui)) && leafPaints.push(item)
     }
 
     (data as IObject)['_' + attrName] = leafPaints.length ? leafPaints : undefined
@@ -59,8 +58,8 @@ function getLeafPaint(attrName: string, paint: IPaint, ui: IUI): ILeafPaint {
             data = PaintGradient.conicGradient(paint, boxBounds)
             break
         case 'solid':
-            const { type, blendMode, color, opacity } = paint
-            data = { type, blendMode, style: ColorConvert.string(color, opacity) }
+            const { type, color, opacity } = paint
+            data = { type, style: ColorConvert.string(color, opacity) }
             break
         default:
             if ((paint as IRGB).r !== undefined) data = { type: 'solid', style: ColorConvert.string(paint) }
