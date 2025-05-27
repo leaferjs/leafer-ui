@@ -1,5 +1,5 @@
 import { ILeaferCanvas } from '@leafer/interface'
-import { Platform } from '@leafer-ui/core'
+import { Platform } from "@leafer/core"
 
 import { IUI, ITextRowData, ILeafPaint, IStrokeAlign, ILeafStrokePaint } from '@leafer-ui/interface'
 import { PaintImage } from "@leafer-ui/draw"

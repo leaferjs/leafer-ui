@@ -1,7 +1,7 @@
 import { ILeaferCanvas } from '@leafer/interface'
 
 import { IUI, ILeafPaint } from '@leafer-ui/interface'
-import { Paint } from '@leafer-ui/external'
+import { Paint } from '@leafer-ui/draw'
 
 import { strokeText, drawStrokesStyle, copyWorld } from './StrokeText'
 

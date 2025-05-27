@@ -1,6 +1,7 @@
+import { Platform, Creator } from '@leafer/core'
 
 import { IPointData, IPickOptions, IPickResult, ISelector, IUI } from '@leafer-ui/interface'
-import { Group, Creator, Platform, emptyData } from '@leafer-ui/draw'
+import { Group, emptyData } from '@leafer-ui/draw'
 
 function getSelector(ui: IUI): ISelector {
     return ui.leafer ? ui.leafer.selector : (Platform.selector || (Platform.selector = Creator.selector()))
