@@ -109,7 +109,7 @@ export const UIRender: IUIRenderModule = {
     __drawAfterFill(canvas: ILeaferCanvas, options: IRenderOptions): void {
         if (this.__.__clipAfterFill) {
             canvas.save()
-            canvas.clipUI()
+            canvas.clipUI(this)
             this.__drawContent(canvas, options)
             canvas.restore()
         } else this.__drawContent(canvas, options)
