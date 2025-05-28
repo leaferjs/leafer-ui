@@ -4,7 +4,7 @@ import { BoundsHelper, boundsType, surfaceType, dataProcessor, registerUI, affec
 import { IFill, IText, IFontWeight, ITextCase, ITextDecoration, ITextData, ITextInputData, ITextAlign, IVerticalAlign, ITextDrawData, IOverflow, IStrokeAlign, IHitType, ITextWrap, IWritingMode, IBackgroundBoxStyle } from '@leafer-ui/interface'
 import { TextData } from '@leafer-ui/data'
 
-import { TextConvert, UnitConvert, Export } from '@leafer-ui/external'
+import { TextConvert, UnitConvert } from '@leafer-ui/external'
 
 import { UI } from './UI'
 
@@ -182,7 +182,7 @@ export class Text extends UI implements IText {
     override __draw(canvas: ILeaferCanvas, options: IRenderOptions, originCanvas?: ILeaferCanvas): void {
         const box = this.__box
         if (box) box.__nowWorld = this.__nowWorld, box.__draw(canvas, options, originCanvas)
-        if (this.textEditing && !Export.running) return
+        if (this.textEditing && !options.exporting) return
         super.__draw(canvas, options, originCanvas)
     }
 
