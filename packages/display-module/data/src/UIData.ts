@@ -30,12 +30,9 @@ export class UIData extends LeafData implements IUIData {
         } else return strokeWidth
     }
 
-    public get __hasStroke(): boolean { return (this as IUIData).stroke && (this as IUIData).strokeWidth as unknown as boolean }
-    public get __hasHalf(): number { const t = this as IUIData; return (t.stroke && t.strokeAlign === 'center' && t.strokeWidth % 2) || undefined }
     public get __hasMultiPaint(): boolean { // fix: opacity
         const t = this as IUIData
-        if ((t.__isFills && t.fill.length > 1) || (t.__isStrokes && t.stroke.length > 1) || t.__useEffect) return true
-        return t.fill && this.__hasStroke
+        return (t.fill && this.__useStroke) || (t.__isFills && t.fill.length > 1) || (t.__isStrokes && t.stroke.length > 1) || t.__useEffect
     }
 
     public __isAlphaPixelFill?: boolean // png / svg / webp

@@ -235,13 +235,13 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
 
     // stroke
 
-    @strokeType()
+    @strokeType(undefined, true)
     public stroke?: IStroke
 
     @strokeType('inside')
     public strokeAlign?: IStrokeAlign
 
-    @strokeType(1)
+    @strokeType(1, true)
     public strokeWidth?: IFourNumber | IStrokeWidthString
 
     @strokeType(false)

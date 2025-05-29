@@ -11,15 +11,17 @@ export const UIRender: IUIRenderModule = {
     __updateChange(): void {
         const data = this.__
 
+        if (data.__useStroke) {
+            const useStroke = data.__useStroke = !!(data.stroke && data.strokeWidth)
+            stintSet(this.__world, 'half', useStroke && data.strokeAlign === 'center' && data.strokeWidth % 2)  // 是否存在半逻辑像素渲染（奇数线宽的居中线条），可以半像素为起点绘制，防止模糊
+            stintSet(data, '__fillAfterStroke', useStroke && data.strokeAlign === 'outside' && data.fill && !data.__isTransparentFill)
+        }
+
         if (data.__useEffect) {
             const { shadow, fill, stroke } = data, otherEffect = data.innerShadow || data.blur || data.backgroundBlur || data.filter
             stintSet(data, '__isFastShadow', shadow && !otherEffect && shadow.length < 2 && !shadow[0].spread && !(shadow[0].box && data.__isTransparentFill) && fill && !(fill instanceof Array && fill.length > 1) && (this.useFastShadow || !stroke || (stroke && data.strokeAlign === 'inside')))
             data.__useEffect = !!(shadow || otherEffect)
         }
-
-        stintSet(this.__world, 'half', data.__hasHalf)
-
-        stintSet(data, '__fillAfterStroke', data.stroke && data.strokeAlign === 'outside' && data.fill && !data.__isTransparentFill)
 
         data.__checkSingle()
 

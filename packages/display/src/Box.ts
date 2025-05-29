@@ -141,7 +141,7 @@ export class Box extends Group implements IBox {
     public __drawContent(canvas: ILeaferCanvas, options: IRenderOptions): void {
         this.__renderGroup(canvas, options)
 
-        if (this.__.__hasStroke) { // 还原绘制路径
+        if (this.__.__useStroke) { // 还原绘制路径
             canvas.setWorld(this.__nowWorld)
             this.__drawRenderPath(canvas)
         }

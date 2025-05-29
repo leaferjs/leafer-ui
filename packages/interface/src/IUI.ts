@@ -478,9 +478,6 @@ export interface IUIData extends IUIAttrData, IUIComputedData, ILeafData {
     __isStrokes?: boolean
 
     readonly __strokeWidth: number
-    readonly __hasStroke: boolean
-    readonly __hasHalf: number // 是否存在半逻辑像素渲染（奇数线宽的居中线条），可以半像素为起点绘制，防止模糊
-
 
     __isAlphaPixelFill?: boolean // png / svg / webp
     __isAlphaPixelStroke?: boolean
