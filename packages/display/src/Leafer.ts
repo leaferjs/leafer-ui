@@ -1,4 +1,4 @@
-import { ILeaferCanvas, IRenderer, ILayouter, ISelector, IWatcher, IInteraction, ILeaferConfig, ICanvasManager, IHitCanvasManager, IAutoBounds, IScreenSizeData, IResizeEvent, IEventListenerId, ITimer, IValue, IObject, IControl, IPointData, ILeaferType, ICursorType, IBoundsData, INumber, IZoomType, IFourNumber, IBounds, IClientPointData, ITransition } from '@leafer/interface'
+import { ILeaferCanvas, IRenderer, ILayouter, ISelector, IWatcher, IInteraction, ILeaferConfig, ICanvasManager, IHitCanvasManager, IAutoBounds, IScreenSizeData, IResizeEvent, IEventListenerId, ITimer, IValue, IObject, IControl, IPointData, ILeaferType, ICursorType, IBoundsData, INumber, IZoomType, IZoomOptions, IFourNumber, IBounds, IClientPointData, ITransition } from '@leafer/interface'
 import { AutoBounds, LayoutEvent, ResizeEvent, LeaferEvent, CanvasManager, ImageManager, Resource, DataHelper, Creator, Run, Debug, RenderEvent, registerUI, boundsType, canvasSizeAttrs, dataProcessor, WaitHelper, WatchEvent, Bounds, LeafList, Plugin, getBoundsData } from '@leafer/core'
 
 import { ILeaferInputData, ILeaferData, IFunction, IUIInputData, ILeafer, IApp, IEditorBase } from '@leafer-ui/interface'
@@ -385,7 +385,7 @@ export class Leafer extends Group implements ILeafer {
     }
 
     // need view plugin
-    public zoom(_zoomType: IZoomType, _padding?: IFourNumber, _fixedScale?: boolean, _transition?: ITransition): IBoundsData {
+    public zoom(_zoomType: IZoomType, _optionsOrPadding?: IZoomOptions | IFourNumber, _scroll?: 'x' | 'y' | boolean, _transition?: ITransition): IBoundsData {
         return Plugin.need('view')
     }
 
