@@ -446,7 +446,7 @@ export class Leafer extends Group implements ILeafer {
                 Leafer.list.remove(this)
                 try {
                     this.stop()
-                    this.emitEvent(new LeaferEvent(LeaferEvent.END, this))
+                    this.emitLeafer(LeaferEvent.END)
                     this.__removeListenEvents()
 
                     this.__controllers.forEach(item => !(this.parent && item === this.interaction) && item.destroy())
