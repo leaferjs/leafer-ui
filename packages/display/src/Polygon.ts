@@ -53,9 +53,10 @@ export class Polygon extends UI implements IPolygon {
                 lineTo(path, rx + rx * sin((i * 2 * PI) / sides), ry - ry * cos((i * 2 * PI) / sides))
             }
 
+            closePath(path)
+
         }
 
-        closePath(path)
     }
 
     @rewrite(line.__updateRenderPath)
