@@ -94,18 +94,14 @@ export const UIRender: IUIRenderModule = {
         }
     },
 
-    __renderShape(canvas: ILeaferCanvas, options: IRenderOptions, ignoreFill?: boolean, ignoreStroke?: boolean): void {
-        if (this.__worldOpacity) {
-            canvas.setWorld(this.__nowWorld = this.__getNowWorld(options))
+    __drawShape(canvas: ILeaferCanvas, options: IRenderOptions): void {
+        this.__drawRenderPath(canvas)
 
-            const { fill, stroke } = this.__
+        const data = this.__, { fill, stroke } = data
 
-            this.__drawRenderPath(canvas)
-
-            if (fill && !ignoreFill) this.__.__isAlphaPixelFill ? Paint.fills(fill as ILeafPaint[], this, canvas) : Paint.fill('#000000', this, canvas)
-            if (this.__.__isCanvas) this.__drawAfterFill(canvas, options)
-            if (stroke && !ignoreStroke) this.__.__isAlphaPixelStroke ? Paint.strokes(stroke as ILeafStrokePaint[], this, canvas) : Paint.stroke('#000000', this, canvas)
-        }
+        if (fill && !options.ignoreFill) data.__isAlphaPixelFill ? Paint.fills(fill as ILeafPaint[], this, canvas) : Paint.fill('#000000', this, canvas)
+        if (data.__isCanvas) this.__drawAfterFill(canvas, options)
+        if (stroke && !options.ignoreStroke) data.__isAlphaPixelStroke ? Paint.strokes(stroke as ILeafStrokePaint[], this, canvas) : Paint.stroke('#000000', this, canvas)
     },
 
     __drawAfterFill(canvas: ILeaferCanvas, options: IRenderOptions): void {
