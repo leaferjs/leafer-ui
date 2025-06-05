@@ -186,6 +186,11 @@ export class Text extends UI implements IText {
         super.__draw(canvas, options, originCanvas)
     }
 
+    override  __drawShape(canvas: ILeaferCanvas, options: IRenderOptions): void {
+        if (options.shape) this.__box && this.__box.__drawShape(canvas, options)
+        super.__drawShape(canvas, options)
+    }
+
     override destroy(): void {
         if (this.boxStyle) this.boxStyle = null
         super.destroy()
