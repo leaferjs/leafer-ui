@@ -456,11 +456,11 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     }
 
     public __updateRenderPath(): void {
-        if (this.__.path) {
-            const data = this.__
+        const data = this.__
+        if (data.path) {
             data.__pathForRender = data.cornerRadius ? PathCorner.smooth(data.path, data.cornerRadius, data.cornerSmoothing) : data.path
             if (data.__useArrow) PathArrow.addArrows(this, !data.cornerRadius)
-        }
+        } else data.__pathForRender && (data.__pathForRender = undefined)
     }
 
     public __drawRenderPath(canvas: ILeaferCanvas): void {
