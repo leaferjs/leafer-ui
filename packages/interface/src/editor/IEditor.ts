@@ -1,4 +1,4 @@
-import { IGroup, IUI, IBox, IRectInputData, ISelectorProxy, IEditSize, ICursorType, IAlign, IUnitPointData, IDragEvent, IRotateEvent, IStroke, IFill, ILeaf, ILeafList, IObject, IBoxInputData, IGroupInputData, IImageCursor, IRect, IBoundsData, IKeyEvent, IUIInputData, IZoomEvent, IColorString, IDirection4, IPointData, IScaleData, ISkewData, ILayoutBoundsData } from '@leafer-ui/interface'
+import { IGroup, IUI, IBox, IRectInputData, ISelectorProxy, IEditSize, ICursorType, IAlign, IUnitPointData, IDragEvent, IRotateEvent, IStroke, IFill, ILeaf, ILeafList, IObject, IBoxInputData, IGroupInputData, IImageCursor, IRect, IKeyEvent, IUIInputData, IZoomEvent, IColorString, IDirection4, IPointData, IScaleData, ISkewData, ILayoutBoundsData } from '@leafer-ui/interface'
 
 export interface IEditorBase extends IGroup, ISelectorProxy {
     config: IEditorConfig
@@ -214,6 +214,8 @@ export interface IEditBoxBase extends IGroup {
     readonly mergeConfig: IEditorConfig // 合并了config与编辑器的mergeConfig，频繁访问会消耗性能
     readonly mergedConfig: IEditorConfig // 实际使用，合并之后的缓存配置
 
+    target: IUI // 操作的元素，默认为editor.element
+
     readonly flipped: boolean
     readonly flippedX: boolean
     readonly flippedY: boolean
@@ -224,7 +226,7 @@ export interface IEditBoxBase extends IGroup {
     getMiddlePointsStyle(): IBoxInputData[]
 
     load(): void
-    update(bounds: IBoundsData): void
+    update(): void
     unload(): void
 
     onArrow(e: IKeyEvent): void
