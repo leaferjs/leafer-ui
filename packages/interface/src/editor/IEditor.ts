@@ -189,6 +189,7 @@ export interface IEditPoint extends IBox {
 export type IEditPointType = 'resize' | 'rotate' | 'skew' | 'resize-rotate' | 'button'
 
 export interface IEditBoxBase extends IGroup {
+
     editor: IEditorBase
     dragging: boolean
     moving: boolean
@@ -208,6 +209,10 @@ export interface IEditBoxBase extends IGroup {
     dragPoint: IEditPoint // 正在拖拽的控制点
 
     dragStartData: IEditorDragStartData
+
+    config: IEditorConfig
+    readonly mergeConfig: IEditorConfig // 合并了config与编辑器的mergeConfig，频繁访问会消耗性能
+    readonly mergedConfig: IEditorConfig // 实际使用，合并之后的缓存配置
 
     readonly flipped: boolean
     readonly flippedX: boolean
