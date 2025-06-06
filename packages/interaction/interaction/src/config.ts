@@ -8,6 +8,7 @@ export const config: IInteractionConfig = {
         delta: { x: 80 / 4, y: 8.0 }, // 基准速度（会影响zoomSpeed)，可根据不同系统、浏览器细化定制
     },
     pointer: {
+        type: 'pointer',
         snap: true,
         hitRadius: 5,
         tapTime: 120,

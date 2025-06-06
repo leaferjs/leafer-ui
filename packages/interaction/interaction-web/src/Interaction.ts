@@ -26,6 +26,10 @@ export class Interaction extends InteractionBase {
     protected useMultiTouch: boolean
     protected useTouch: boolean
 
+    protected get notPointer(): boolean { const { p } = this; return p.type !== 'pointer' || p.touch || this.useMultiTouch }
+    protected get notTouch(): boolean { const { p } = this; return p.type === 'mouse' || this.usePointer }
+    protected get notMouse(): boolean { return this.usePointer || this.useTouch }
+
     protected touchTimer: ITimer
     protected touches?: Touch[]
     protected lastGestureScale: number
@@ -146,13 +150,13 @@ export class Interaction extends InteractionBase {
     protected onPointerDown(e: PointerEvent): void {
         this.preventDefaultPointer(e)
 
-        if (this.config.pointer.touch || this.useMultiTouch) return
+        if (this.notPointer) return
         this.usePointer || (this.usePointer = true)
         this.pointerDown(PointerEventHelper.convert(e, this.getLocal(e)))
     }
 
     protected onPointerMove(e: PointerEvent, isLeave?: boolean): void {
-        if (this.config.pointer.touch || this.useMultiTouch || this.preventWindowPointer(e)) return
+        if (this.notPointer || this.preventWindowPointer(e)) return
         this.usePointer || (this.usePointer = true)
         const data = PointerEventHelper.convert(e, this.getLocal(e, true))
         isLeave ? this.pointerHover(data) : this.pointerMove(data)
@@ -164,7 +168,7 @@ export class Interaction extends InteractionBase {
 
     protected onPointerUp(e: PointerEvent): void {
         if (this.downData) this.preventDefaultPointer(e)
-        if (this.config.pointer.touch || this.useMultiTouch || this.preventWindowPointer(e)) return
+        if (this.notPointer || this.preventWindowPointer(e)) return
         this.pointerUp(PointerEventHelper.convert(e, this.getLocal(e)))
     }
 
@@ -178,23 +182,23 @@ export class Interaction extends InteractionBase {
     protected onMouseDown(e: MouseEvent): void {
         this.preventDefaultPointer(e)
 
-        if (this.useTouch || this.usePointer) return
+        if (this.notMouse) return
         this.pointerDown(PointerEventHelper.convertMouse(e, this.getLocal(e)))
     }
 
     protected onMouseMove(e: MouseEvent): void {
-        if (this.useTouch || this.usePointer || this.preventWindowPointer(e)) return
+        if (this.notMouse || this.preventWindowPointer(e)) return
         this.pointerMove(PointerEventHelper.convertMouse(e, this.getLocal(e, true)))
     }
 
     protected onMouseUp(e: MouseEvent): void {
         if (this.downData) this.preventDefaultPointer(e)
-        if (this.useTouch || this.usePointer || this.preventWindowPointer(e)) return
+        if (this.notMouse || this.preventWindowPointer(e)) return
         this.pointerUp(PointerEventHelper.convertMouse(e, this.getLocal(e)))
     }
 
     protected onMouseCancel(): void {
-        if (this.useTouch || this.usePointer) return
+        if (this.notMouse) return
         this.pointerCancel()
     }
 
@@ -208,7 +212,7 @@ export class Interaction extends InteractionBase {
 
         this.multiTouchStart(e)
 
-        if (this.usePointer) return
+        if (this.notTouch) return
         if (this.touchTimer) {
             window.clearTimeout(this.touchTimer)
             this.touchTimer = 0
@@ -220,7 +224,7 @@ export class Interaction extends InteractionBase {
     protected onTouchMove(e: TouchEvent): void {
         this.multiTouchMove(e)
 
-        if (this.usePointer || this.preventWindowPointer(e)) return
+        if (this.notTouch || this.preventWindowPointer(e)) return
         const touch = PointerEventHelper.getTouch(e)
         this.pointerMove(PointerEventHelper.convertTouch(e, this.getLocal(touch)))
     }
@@ -228,7 +232,7 @@ export class Interaction extends InteractionBase {
     protected onTouchEnd(e: TouchEvent): void {
         this.multiTouchEnd()
 
-        if (this.usePointer || this.preventWindowPointer(e)) return
+        if (this.notTouch || this.preventWindowPointer(e)) return
         if (this.touchTimer) clearTimeout(this.touchTimer)
         this.touchTimer = setTimeout(() => {
             this.useTouch = false
@@ -238,7 +242,7 @@ export class Interaction extends InteractionBase {
     }
 
     protected onTouchCancel(): void {
-        if (this.usePointer) return
+        if (this.notTouch) return
         this.pointerCancel()
     }
 
