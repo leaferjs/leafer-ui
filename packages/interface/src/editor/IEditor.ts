@@ -1,6 +1,6 @@
-import { IGroup, IUI, IBox, IRectInputData, ISelectorProxy, IEditSize, ICursorType, IAlign, IUnitPointData, IDragEvent, IRotateEvent, IStroke, IFill, ILeaf, ILeafList, IObject, IBoxInputData, IGroupInputData, IImageCursor, IRect, IKeyEvent, IUIInputData, IZoomEvent, IColorString, IDirection4, IPointData, IScaleData, ISkewData, ILayoutBoundsData } from '@leafer-ui/interface'
+import { IGroup, IUI, IBox, IRectInputData, ISelectorProxy, IEditSize, ICursorType, IAlign, IUnitPointData, IDragEvent, IMoveEvent, IRotateEvent, IStroke, IFill, ILeaf, ILeafList, IObject, IBoxInputData, IGroupInputData, IImageCursor, IRect, IKeyEvent, IUIInputData, IZoomEvent, IColorString, IDirection4, IPointData, IScaleData, ISkewData, ILayoutBoundsData, ITransition } from '@leafer-ui/interface'
 
-export interface IEditorBase extends IGroup, ISelectorProxy {
+export interface IEditorBase extends IGroup, ISelectorProxy, ITransformTool {
     config: IEditorConfig
     readonly mergeConfig: IEditorConfig // 实际使用，合并了选中元素上的editConfig，频繁访问会消耗性能
     readonly mergedConfig: IEditorConfig // 合并之后的缓存配置
@@ -46,11 +46,6 @@ export interface IEditorBase extends IGroup, ISelectorProxy {
 
     getEditSize(ui: ILeaf): IEditSize
 
-    onMove(e: IDragEvent): void
-    onScale(e: IDragEvent | IZoomEvent): void
-    onRotate(e: IDragEvent | IRotateEvent): void
-    onSkew(e: IDragEvent): void
-
     group(group?: IGroup | IGroupInputData): IGroup
     ungroup(): IUI[]
     openGroup(group: IGroup): void
@@ -65,6 +60,22 @@ export interface IEditorBase extends IGroup, ISelectorProxy {
     toTop(): void
     toBottom(): void
 }
+
+export interface ITransformTool {
+    editBox: IEditBoxBase
+    editTool?: IObject
+
+    onMove(e: IDragEvent | IMoveEvent): void
+    onScale(e: IDragEvent | IZoomEvent): void
+    onRotate(e: IDragEvent | IRotateEvent): void
+    onSkew(e: IDragEvent): void
+
+    move(x: number | IPointData, y?: number, transition?: ITransition): void
+    scaleOf(origin: IPointData | IAlign, scaleX: number, scaleY?: number | ITransition, resize?: boolean, transition?: ITransition): void
+    rotateOf(origin: IPointData | IAlign, rotation: number, transition?: ITransition): void
+    skewOf(origin: IPointData | IAlign, skewX: number, skewY?: number, resize?: boolean, transition?: ITransition): void
+}
+
 
 export interface IEditorConfig extends IObject {
     editSize?: IEditSize
@@ -191,6 +202,7 @@ export type IEditPointType = 'resize' | 'rotate' | 'skew' | 'resize-rotate' | 'b
 export interface IEditBoxBase extends IGroup {
 
     editor: IEditorBase
+
     dragging: boolean
     moving: boolean
 
@@ -215,6 +227,9 @@ export interface IEditBoxBase extends IGroup {
     readonly mergedConfig: IEditorConfig // 实际使用，合并之后的缓存配置
 
     target: IUI // 操作的元素，默认为editor.element
+    single: boolean // 是否单选元素
+
+    transformTool: ITransformTool
 
     readonly flipped: boolean
     readonly flippedX: boolean
@@ -232,6 +247,7 @@ export interface IEditBoxBase extends IGroup {
     onArrow(e: IKeyEvent): void
 
 }
+
 
 export interface IEditorDragStartData {
     x: number
