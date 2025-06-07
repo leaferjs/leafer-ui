@@ -139,6 +139,8 @@ export interface IEditorConfig extends IObject {
     beforeRotate?: IEditorBeforeRotate
     beforeSkew?: IEditorBeforeSkew
 
+    preventEditInner?: boolean // 仅阻止交互事件触发内部编辑
+
     textEditor?: IObject
     pathEditor?: IObject
 }
