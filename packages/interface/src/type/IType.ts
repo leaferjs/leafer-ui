@@ -75,6 +75,7 @@ export interface IImagePaint extends IPaintBase {
     size?: number | IOptionSizeData
     scale?: number | IPointData
     rotation?: number
+    skew?: | IPointData
 
     repeat?: IRepeat
 

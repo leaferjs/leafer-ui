@@ -23,7 +23,7 @@ export function getPatternData(paint: IImagePaint, box: IBoundsData, image: ILea
     if (paint.mode === 'strench' as string) paint.mode = 'stretch' // 兼容代码，后续可移除
 
     let { width, height } = image
-    const { opacity, mode, align, offset, scale, size, rotation, repeat, filters } = paint
+    const { opacity, mode, align, offset, scale, size, rotation, skew, repeat, filters } = paint
     const sameBox = box.width === width && box.height === height
 
     const data: ILeafPaintPatternData = { mode }
@@ -59,7 +59,7 @@ export function getPatternData(paint: IImagePaint, box: IBoundsData, image: ILea
             break
         case 'normal':
         case 'clip':
-            if (tempImage.x || tempImage.y || scaleX || rotation) clipMode(data, box, tempImage.x, tempImage.y, scaleX, scaleY, rotation)
+            if (tempImage.x || tempImage.y || scaleX || rotation || skew) clipMode(data, box, tempImage.x, tempImage.y, scaleX, scaleY, rotation, skew)
             break
         case 'repeat':
             if (!sameBox || scaleX || rotation) repeatMode(data, box, width, height, tempImage.x, tempImage.y, scaleX, scaleY, rotation, align)
