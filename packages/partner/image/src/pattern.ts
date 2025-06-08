@@ -21,6 +21,8 @@ export function createPattern(ui: IUI, paint: ILeafPaint, pixelRatio: number): b
         let imageScale: number, imageMatrix: IMatrixData, { width, height, scaleX: sx, scaleY: sy, transform, repeat } = data
 
         if (sx) {
+            sx = abs(sx) // maybe -1
+            sy = abs(sy)
             imageMatrix = get()
             copy(imageMatrix, transform)
             scale(imageMatrix, 1 / sx, 1 / sy)

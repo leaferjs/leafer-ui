@@ -9,7 +9,7 @@ export type ILeafPaintColor = IColorString | CanvasGradient | CanvasPattern
 export interface ILeafPaint {
     type?: IPaintType
     style?: ILeafPaintColor
-    transform?: IMatrixData
+    transform?: IMatrixData // 存在时表示pattern自身不能应用transform
     blendMode?: IBlendMode
     image?: ILeaferImage
     loadId?: number
@@ -19,6 +19,7 @@ export interface ILeafPaint {
     sync?: boolean // 同步显示图片，不走任务列表生成图案
     isTransparent?: boolean // 是否为透明色
     data?: ILeafPaintPatternData
+    editing?: boolean // 标记编辑中
 }
 
 export interface ILeafPaintPatternData {

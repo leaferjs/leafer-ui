@@ -60,12 +60,12 @@ export function image(ui: IUI, attrName: string, paint: IImagePaint, boxBounds: 
                     }
                     onLoadSuccess(ui, event)
                 }
-                leafPaint.loadId = null
+                leafPaint.loadId = undefined
             },
             (error) => {
                 ignoreRender(ui, false)
                 onLoadError(ui, event, error)
-                leafPaint.loadId = null
+                leafPaint.loadId = undefined
             }
         )
 
