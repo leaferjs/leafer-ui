@@ -1,7 +1,7 @@
 import { ILeaferCanvas, IPathDrawer, IPathCommandData, IHitType, INumber, IBoolean, IString, IPathString, IExportFileType, IPointData, ICursorType, IMaskType, IEraserType, IValue, IWindingRule, IPathCreator, IFourNumber, IBoundsData, IFlowType, IGap, IFlowWrap, IAxis, IConstraint, IAutoBoxData, IFlowBoxType, IPointGap, IFlowAlign, IFlowAxisAlign, IFindCondition, IAutoSize, IRangeSize, IAlign, IUnitPointData, IObject, IScaleData, IUnitData, IPathCommandObject, ITransition, IFilter, ILeaferImage } from '@leafer/interface'
 import { Leaf, PathDrawer, surfaceType, dataType, positionType, boundsType, pathType, scaleType, rotationType, opacityType, visibleType, sortType, maskType, dataProcessor, registerUI, useModule, rewrite, rewriteAble, UICreator, PathCorner, hitType, strokeType, PathConvert, eraserType, cursorType, autoLayoutType, pen, naturalBoundsType, pathInputType, MathHelper, Plugin, DataHelper } from '@leafer/core'
 
-import { IUI, IShadowEffect, IBlurEffect, IStrokeAlign, IStrokeJoin, IStrokeCap, IBlendMode, IDashPatternString, IShadowString, IGrayscaleEffect, IUIData, IGroup, IStrokeWidthString, ICornerRadiusString, IUIInputData, IExportOptions, IExportResult, IFill, IStroke, IArrowType, IFindUIMethod, ILeafer, IEditorConfig, IEditorConfigFunction, IEditToolFunction, IKeyframe, IAnimation, IAnimate, IStates, IStateName, IAnimateType, IStateStyle, IColorString } from '@leafer-ui/interface'
+import { IUI, IShadowEffect, IBlurEffect, IStrokeAlign, IStrokeJoin, IStrokeCap, IBlendMode, IDashPatternString, IShadowString, IGrayscaleEffect, IUIData, IGroup, IStrokeWidthString, ICornerRadiusString, IUIInputData, IExportOptions, IExportResult, IFill, IStroke, IArrowType, IFindUIMethod, ILeafer, IEditorConfig, IEditorConfigFunction, IEditToolFunction, IKeyframe, IAnimation, IAnimate, IStates, IStateName, IAnimateType, IStateStyle, IColorString, IAnimateList } from '@leafer-ui/interface'
 import { effectType, zoomLayerType } from '@leafer-ui/decorator'
 
 import { UIData } from '@leafer-ui/data'
@@ -379,7 +379,7 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     public useFastShadow?: boolean // 将忽略 stroke 产生的阴影，只对单个 fill 有效
 
     public __box?: IUI // 背景box, 一般用于文本背景框
-    public __animate?: IAnimate
+    public __animate?: IAnimate | IAnimateList
 
     public get pen(): IPathCreator {
         const { path } = this.__

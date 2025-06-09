@@ -56,6 +56,7 @@ export interface IComputedKeyframe {
 
 export interface IAnimate extends IAnimateOptions, IEventer {
     target: IUI | IObject
+    parent?: IAnimateList
 
     keyframes: IKeyframe[]
     config?: IAnimateOptions
@@ -92,4 +93,5 @@ export interface IAnimate extends IAnimateOptions, IEventer {
 export interface IAnimateList extends IAnimate {
     list: IAnimate[]
     updateList(animation?: IAnimation[] | IAnimate[], isTemp?: boolean): void
+    onChildEvent(type: string, _animate: IAnimate): void
 }
