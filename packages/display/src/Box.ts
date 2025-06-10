@@ -95,14 +95,14 @@ export class Box extends Group implements IBox {
 
     public __updateRenderBounds(): void {
         let isOverflow: boolean
-        const { renderBounds } = this.__layout
+        const { renderBounds, boxBounds } = this.__layout
 
         if (this.children.length) {
             super.__updateRenderBounds()
             copy(childrenRenderBounds, renderBounds)
             this.__updateRectRenderBounds()
 
-            isOverflow = !includes(renderBounds, childrenRenderBounds)
+            isOverflow = !includes(boxBounds, childrenRenderBounds)
             if (isOverflow && this.__.overflow !== 'hide') add(renderBounds, childrenRenderBounds)
         } else this.__updateRectRenderBounds()
 
