@@ -41,7 +41,7 @@ export class UIData extends LeafData implements IUIData {
     public __isTransparentFill?: boolean  // 半透明的 
     public __isTransparentStroke?: boolean
 
-    public get __clipAfterFill(): boolean { const t = this as IUIData; return (t.cornerRadius || t.innerShadow || t.__pathInputed) as unknown as boolean } // 用于 __drawAfterFill()
+    public get __clipAfterFill(): boolean { const t = this as IUIData; return (t.cornerRadius || t.innerShadow || t.__pathInputed) as unknown as boolean } // 用于 (Box | Canvas | Robot) __drawAfterFill() 时裁剪内容
     public get __hasSurface(): boolean { const t = this as IUIData; return (t.fill || t.stroke) as unknown as boolean }
 
     public __needComputePaint: boolean

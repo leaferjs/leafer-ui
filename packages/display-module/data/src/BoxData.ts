@@ -1,4 +1,4 @@
-import { IBoxData } from '@leafer-ui/interface'
+import { IBox, IBoxData } from '@leafer-ui/interface'
 
 import { GroupData } from "./GroupData"
 
@@ -7,9 +7,9 @@ export class BoxData extends GroupData implements IBoxData {
 
     public get __boxStroke(): boolean { return !(this as IBoxData).__pathInputed }
 
-    // 路径与圆角直接当溢出处理
-    public get __drawAfterFill(): boolean { const t = this as IBoxData; return (t.overflow === 'hide' && (t.__clipAfterFill || t.opacity) && t.__leaf.children.length) as unknown as boolean }
+    // 当成整体处理
+    public get __drawAfterFill(): boolean { const t = this as IBoxData; return t.__single || t.__clipAfterFill }
 
-    public get __clipAfterFill(): boolean { return this.__leaf.isOverflow || super.__clipAfterFill }
+    public get __clipAfterFill(): boolean { const t = this as IBoxData; return t.overflow === 'hide' && t.__leaf.children.length && ((t.__leaf as IBox).isOverflow || super.__clipAfterFill) as unknown as boolean }
 
 }
