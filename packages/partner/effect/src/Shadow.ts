@@ -1,5 +1,5 @@
-import { IBoundsData, ILeaferCanvas, IMatrixWithBoundsData, IOffsetBoundsData } from '@leafer/interface'
-import { BoundsHelper, Platform } from '@leafer/core'
+import { IBoundsData, ILeaferCanvas, IOffsetBoundsData } from '@leafer/interface'
+import { BoundsHelper, LeafHelper, Platform } from '@leafer/core'
 
 import { IUI, ICachedShape } from '@leafer-ui/interface'
 import { ColorConvert } from '@leafer-ui/draw'
@@ -45,8 +45,7 @@ export function shadow(ui: IUI, current: ILeaferCanvas, shape: ICachedShape): vo
             worldCanvas ? other.copyWorld(worldCanvas, nowWorld, nowWorld, 'destination-out') : other.copyWorld(shape.canvas, shapeBounds, bounds, 'destination-out')
         }
 
-        if (ui.__worldFlipped) current.copyWorldByReset(other, copyBounds, nowWorld, item.blendMode)
-        else current.copyWorldToInner(other, copyBounds as IMatrixWithBoundsData, __layout.renderBounds, item.blendMode)
+        LeafHelper.copyCanvasByWorld(ui, current, other, copyBounds, item.blendMode)
 
         if (end && index < end) other.clearWorld(copyBounds, true)
     })

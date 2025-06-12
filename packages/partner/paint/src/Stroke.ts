@@ -1,9 +1,10 @@
 import { ILeaferCanvas } from '@leafer/interface'
+import { LeafHelper } from "@leafer/core"
 
 import { IUI, ILeafPaint } from '@leafer-ui/interface'
 import { Paint } from '@leafer-ui/draw'
 
-import { strokeText, drawStrokesStyle, copyWorld } from './StrokeText'
+import { strokeText, drawStrokesStyle } from './StrokeText'
 
 
 export function stroke(stroke: string, ui: IUI, canvas: ILeaferCanvas): void {
@@ -70,7 +71,7 @@ function drawOutside(stroke: string | ILeafPaint[], ui: IUI, canvas: ILeaferCanv
         out.clipUI(data)
         out.clearWorld(renderBounds)
 
-        copyWorld(canvas, out, ui)
+        LeafHelper.copyCanvasByWorld(ui, canvas, out)
 
         out.recycle(ui.__nowWorld)
     }
