@@ -113,7 +113,10 @@ LeaferJS 致力于实现一套简洁、开放、现代化的 UI 绘图语言标�
 
 <p><h3 align="center">金牌赞助商</h3></p>
 <p style="display: flex;flex-wrap: wrap;justify-content: center;gap: 15px;">
-  <a target="_blank" href="https://github.com/dromara/yft-design">
+  <a target="_blank" href="https://design.palxp.cn">
+        <img width="180" title="迅排设计" src="https://www.leaferjs.comimage/sponsor/gold/xp.jpg" loading="lazy" />
+    </a>
+    <a target="_blank" href="https://github.com/dromara/yft-design">
         <img width="180" title="yft-design" src="https://www.leaferjs.com/image/sponsor/gold/yft.jpg" loading="lazy" />
     </a>
     <a target="_blank" href="https://www.finclip.com/landing/miniappgame?from=leafer">
@@ -143,11 +146,14 @@ LeaferJS 致力于实现一套简洁、开放、现代化的 UI 绘图语言标�
     </p>
 <p><h3 align="center">银牌赞助</h3></p>
 <p style="display: flex;flex-wrap: wrap;justify-content: center;gap: 5px;">
-    <a target="_blank" href="https://www.u-tools.cn/plugins/detail/%E6%88%AA%E5%9B%BE%E5%B7%A5%E5%85%B7%20Plus/index.html">
-        <img width="40" title="截图工具 Plus" src="https://www.leaferjs.com/image/sponsor/user/135.png" loading="lazy" />
+<a target="_blank" href="">
+        <img width="40" title="goosen" src="https://www.leaferjs.com/image/sponsor/user/122.jpeg" loading="lazy" />
     </a>
     <a target="_blank" href="">
         <img width="40" title="dev_chen" src="https://www.leaferjs.com/image/sponsor/user/137.jpg" loading="lazy" />
+    </a>
+    <a target="_blank" href="https://www.u-tools.cn/plugins/detail/%E6%88%AA%E5%9B%BE%E5%B7%A5%E5%85%B7%20Plus/index.html">
+        <img width="40" title="截图工具 Plus" src="https://www.leaferjs.com/image/sponsor/user/135.png" loading="lazy" />
     </a>
     <a target="_blank" href="https://frameelf.com/">
         <img width="40" title="边框水印精灵" src="https://www.leaferjs.com/image/sponsor/user/134.jpg" loading="lazy" />
@@ -296,7 +302,7 @@ LeaferJS 致力于实现一套简洁、开放、现代化的 UI 绘图语言标�
     </p>
 <p><h3 align="center">铜牌赞助</h3></p>
 <p style="display: flex;flex-wrap: wrap;justify-content: center;gap: 15px;">
-Lauginwing &nbsp;&nbsp;江万江 &nbsp;&nbsp;在路上 &nbsp;&nbsp;张余🌈 &nbsp;&nbsp;Jerry &nbsp;&nbsp;李狗嗨。💢 &nbsp;&nbsp;李维亮 &nbsp;&nbsp;朝夕 &nbsp;&nbsp;SaltedFish &nbsp;&nbsp;zhk &nbsp;&nbsp;格子 &nbsp;&nbsp;等等 &nbsp;&nbsp;goosen &nbsp;&nbsp;建伟F4nniu &nbsp;&nbsp;梁福斌 &nbsp;&nbsp;江万江 &nbsp;&nbsp;杨超 &nbsp;&nbsp;ToB Dev &nbsp;&nbsp;前端之虎陈随易 &nbsp;&nbsp;A☀️云☀️A &nbsp;&nbsp;ʚ LMT ɞ &nbsp;&nbsp;爱发电用户_c9c82 &nbsp;&nbsp;轻简历 &nbsp;&nbsp;爱发电用户_0fac0 &nbsp;&nbsp;wangyesheji.cn &nbsp;&nbsp;风间 &nbsp;&nbsp;爱发电用户_Tqsm &nbsp;&nbsp;爱发电用户_6KpE &nbsp;&nbsp;dongdong &nbsp;&nbsp;zwm &nbsp;&nbsp;爱发电用户_3725c &nbsp;&nbsp;Noth1ng &nbsp;&nbsp;纳西妲の√ &nbsp;&nbsp;爱发电用户_Ahb9 &nbsp;&nbsp;爱发电用户_7617d &nbsp;&nbsp;冷漠 &nbsp;&nbsp;爱发电用户_9RXB &nbsp;&nbsp;今日值得读 &nbsp;&nbsp;爱发电用户_49sT &nbsp;&nbsp;爱发电用户_NFCS &nbsp;&nbsp;爱发电用户_43ad8 &nbsp;&nbsp;爱发电用户_30455 &nbsp;&nbsp;xiaozhang &nbsp;&nbsp;砖吐筷筷 &nbsp;&nbsp;爱发电用户_b47b3 &nbsp;&nbsp;longbow1998 &nbsp;&nbsp;爱发电用户_5d755 &nbsp;&nbsp;爱发电用户_b76b8 &nbsp;&nbsp;爱发电用户_e70c2 &nbsp;&nbsp;爱发电用户_039dc &nbsp;&nbsp;花祁 &nbsp;&nbsp;爱发电用户_99f39 &nbsp;&nbsp;坤坤 &nbsp;&nbsp;爱发电用户_X6hp &nbsp;&nbsp;爱发电用户_s5u9 &nbsp;&nbsp;曹吉美爸爸 &nbsp;&nbsp;啸沧海 &nbsp;&nbsp;Ronny &nbsp;&nbsp;Biu &nbsp;&nbsp;王志强 &nbsp;&nbsp;PD.新城คิดถึง &nbsp;&nbsp;糖颂缘冥倾 &nbsp;&nbsp;ALBERT. &nbsp;&nbsp;爱发电用户_UXEV &nbsp;&nbsp;SaltedFish &nbsp;&nbsp;爱发电用户_76f9d &nbsp;&nbsp;Leafer &nbsp;&nbsp;爱发电用户_Pbm7 &nbsp;&nbsp;</p>
+黑色摩天仑 &nbsp;&nbsp;Charm &nbsp;&nbsp;Lauginwing &nbsp;&nbsp;在路上 &nbsp;&nbsp;张余🌈 &nbsp;&nbsp;Jerry &nbsp;&nbsp;李狗嗨。💢 &nbsp;&nbsp;李维亮 &nbsp;&nbsp;朝夕 &nbsp;&nbsp;SaltedFish &nbsp;&nbsp;zhk &nbsp;&nbsp;格子 &nbsp;&nbsp;等等 &nbsp;&nbsp;goosen &nbsp;&nbsp;建伟F4nniu &nbsp;&nbsp;梁福斌 &nbsp;&nbsp;江万江 &nbsp;&nbsp;杨超 &nbsp;&nbsp;ToB Dev &nbsp;&nbsp;前端之虎陈随易 &nbsp;&nbsp;A☀️云☀️A &nbsp;&nbsp;ʚ LMT ɞ &nbsp;&nbsp;爱发电用户_c9c82 &nbsp;&nbsp;轻简历 &nbsp;&nbsp;爱发电用户_0fac0 &nbsp;&nbsp;wangyesheji.cn &nbsp;&nbsp;风间 &nbsp;&nbsp;爱发电用户_Tqsm &nbsp;&nbsp;爱发电用户_6KpE &nbsp;&nbsp;dongdong &nbsp;&nbsp;zwm &nbsp;&nbsp;爱发电用户_3725c &nbsp;&nbsp;Noth1ng &nbsp;&nbsp;纳西妲の√ &nbsp;&nbsp;爱发电用户_Ahb9 &nbsp;&nbsp;爱发电用户_7617d &nbsp;&nbsp;冷漠 &nbsp;&nbsp;爱发电用户_9RXB &nbsp;&nbsp;今日值得读 &nbsp;&nbsp;爱发电用户_49sT &nbsp;&nbsp;爱发电用户_NFCS &nbsp;&nbsp;爱发电用户_43ad8 &nbsp;&nbsp;爱发电用户_30455 &nbsp;&nbsp;xiaozhang &nbsp;&nbsp;砖吐筷筷 &nbsp;&nbsp;爱发电用户_b47b3 &nbsp;&nbsp;longbow1998 &nbsp;&nbsp;爱发电用户_5d755 &nbsp;&nbsp;爱发电用户_b76b8 &nbsp;&nbsp;爱发电用户_e70c2 &nbsp;&nbsp;爱发电用户_039dc &nbsp;&nbsp;花祁 &nbsp;&nbsp;爱发电用户_99f39 &nbsp;&nbsp;坤坤 &nbsp;&nbsp;爱发电用户_X6hp &nbsp;&nbsp;爱发电用户_s5u9 &nbsp;&nbsp;曹吉美爸爸 &nbsp;&nbsp;啸沧海 &nbsp;&nbsp;Ronny &nbsp;&nbsp;Biu &nbsp;&nbsp;王志强 &nbsp;&nbsp;PD.新城คิดถึง &nbsp;&nbsp;糖颂缘冥倾 &nbsp;&nbsp;ALBERT. &nbsp;&nbsp;爱发电用户_UXEV &nbsp;&nbsp;SaltedFish &nbsp;&nbsp;爱发电用户_76f9d &nbsp;&nbsp;Leafer &nbsp;&nbsp;爱发电用户_Pbm7 &nbsp;&nbsp;</p>
 
 ## License
 
