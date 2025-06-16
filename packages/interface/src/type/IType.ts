@@ -36,7 +36,7 @@ export interface ISolidPaint extends IPaintBase {
 }
 
 export interface IStrokeSolidPaint extends ISolidPaint {
-    style: IStrokeStyle
+    style?: IStrokeStyle
 }
 
 export type IColor = IColorString | IRGB | IRGBA
@@ -60,7 +60,7 @@ export interface IGradientPaint extends IPaintBase {
 }
 
 export interface IStrokeGradientPaint extends IGradientPaint {
-    style: IStrokeStyle
+    style?: IStrokeStyle
 }
 
 export interface IColorStop {
@@ -99,7 +99,7 @@ export interface IImagePaint extends IPaintBase {
 }
 
 export interface IStrokeImagePaint extends IImagePaint {
-    style: IStrokeStyle
+    style?: IStrokeStyle
 }
 export interface IImageFilters {
     exposure?: number // 曝光
