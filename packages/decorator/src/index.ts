@@ -1,1 +1,1 @@
-export { effectType, resizeType, zoomLayerType } from './data'
+export { effectType, resizeType, zoomLayerType, createKey } from './data'

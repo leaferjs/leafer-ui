@@ -1,5 +1,5 @@
 import { IValue, IObject } from '@leafer/interface'
-import { defineKey, decorateLeafAttr, attr } from '@leafer/core'
+import { defineKey, decorateLeafAttr, attr, createDescriptor } from '@leafer/core'
 
 import { ICanvas, IUI, IApp } from '@leafer-ui/interface'
 
@@ -35,5 +35,11 @@ export function zoomLayerType() {
                     : (this.isLeafer ? ((this as IObject)[privateKey] || this) : this.leafer && this.leafer.zoomLayer)
             }
         })
+    }
+}
+
+export function createKey(defaultValue?: IValue) {
+    return (target: IUI, key: string) => {
+        defineKey(target, key, createDescriptor(key, defaultValue))
     }
 }
