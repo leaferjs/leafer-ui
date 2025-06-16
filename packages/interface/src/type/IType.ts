@@ -1,11 +1,14 @@
 import { IPointData, IPathCommandData, IWindingRule, IBlendMode, IExportFileType, IFourNumber, IAlign, IUnitPointData, IAxis, IAxisReverse, IFilter, IOptionSizeData } from '@leafer/interface'
 import { IColorString, IPaintString } from './IStringType'
+import { IStrokeStyle } from '../ICommonAttr'
 
 export type IPaint = ISolidPaint | IGradientPaint | IImagePaint
 
+export type IStrokePaint = IStrokeSolidPaint | IStrokeGradientPaint | IStrokeImagePaint
+
 export type IFill = IPaint | IPaint[] | IPaintString
 
-export type IStroke = IPaint | IPaint[] | IPaintString
+export type IStroke = IStrokePaint | IStrokePaint[] | IPaintString
 
 export type IPaintAttr = 'fill' | 'stroke'
 
@@ -32,6 +35,10 @@ export interface ISolidPaint extends IPaintBase {
     color: IColor
 }
 
+export interface IStrokeSolidPaint extends ISolidPaint {
+    style: IStrokeStyle
+}
+
 export type IColor = IColorString | IRGB | IRGBA
 export interface IRGB {
     r: number
@@ -51,6 +58,11 @@ export interface IGradientPaint extends IPaintBase {
     stretch?: number
     stops: IColorStop[] | IColorString[]
 }
+
+export interface IStrokeGradientPaint extends IGradientPaint {
+    style: IStrokeStyle
+}
+
 export interface IColorStop {
     offset: number
     color: IColor
@@ -84,6 +96,10 @@ export interface IImagePaint extends IPaintBase {
     showProgress?: boolean // 是否显示进度
 
     editing?: boolean // 标记编辑中
+}
+
+export interface IStrokeImagePaint extends IImagePaint {
+    style: IStrokeStyle
 }
 export interface IImageFilters {
     exposure?: number // 曝光

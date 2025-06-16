@@ -36,9 +36,21 @@ export interface IBorderComputedData {
 }
 
 // stroke---
-export interface IStrokeAttrData {
+export interface IStrokeAttrData extends IStrokeStyle {
     stroke?: IStroke
 
+    startArrow?: IArrowType
+    endArrow?: IArrowType
+}
+
+export interface IStrokeInputData extends IStrokeStyle {
+    stroke?: IStroke
+
+    startArrow?: IArrowType
+    endArrow?: IArrowType
+}
+
+export interface IStrokeStyle {
     strokeAlign?: IStrokeAlign
     strokeWidth?: IFourNumber | IStrokeWidthString
     strokeWidthFixed?: IBoolean
@@ -47,28 +59,15 @@ export interface IStrokeAttrData {
     dashPattern?: INumber[] | IDashPatternString
     dashOffset?: INumber
     miterLimit?: INumber
-
-    startArrow?: IArrowType
-    endArrow?: IArrowType
 }
-export interface IStrokeInputData {
-    stroke?: IStroke
-
-    strokeAlign?: IStrokeAlign
-    strokeWidth?: IFourNumber | IStrokeWidthString
-    strokeWidthFixed?: IBoolean
-    strokeCap?: IStrokeCap
-    strokeJoin?: IStrokeJoin
-    dashPattern?: INumber[] | IDashPatternString
-    dashOffset?: INumber
-    miterLimit?: INumber
-
-    startArrow?: IArrowType
-    endArrow?: IArrowType
-}
-export interface IStrokeComputedData {
+export interface IStrokeComputedData extends IStrokeComputedOptions {
     stroke?: IColorString | ILeafStrokePaint[]
 
+    startArrow?: IArrowType
+    endArrow?: IArrowType
+}
+
+export interface IStrokeComputedOptions {
     strokeAlign?: IStrokeAlign
     strokeWidth?: number
     strokeWidths?: number[]
@@ -78,9 +77,6 @@ export interface IStrokeComputedData {
     dashPattern?: number[]
     dashOffset?: number
     miterLimit?: number
-
-    startArrow?: IArrowType
-    endArrow?: IArrowType
 }
 
 // text---
