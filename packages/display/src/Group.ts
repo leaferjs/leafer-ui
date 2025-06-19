@@ -43,7 +43,7 @@ export class Group extends UI implements IGroup {   // tip: rewrited Box
 
     // data
 
-    public set(data: IUIInputData, transition?: ITransition | 'temp'): void {
+    override set(data: IUIInputData, transition?: ITransition | 'temp'): void {
         if (data) {
             if (data.children) {
                 const { children } = data
@@ -60,9 +60,9 @@ export class Group extends UI implements IGroup {   // tip: rewrited Box
         }
     }
 
-    public toJSON(options?: IJSONOptions): IUIJSONData {
+    override toJSON(options?: IJSONOptions): IUIJSONData {
         const data = super.toJSON(options)
-        data.children = this.children.map(child => child.toJSON(options))
+        if (!(this as IGroup).childlessJSON) data.children = this.children.map(child => child.toJSON(options))
         return data
     }
 
