@@ -41,6 +41,8 @@ export const UIBounds: IUIBoundsModule = {
 
         if (filter) width += Filter.getSpread(filter)
 
+        if (spread) width += spread
+
         let shapeWidth = width = Math.ceil(width)
 
         if (innerShadow) innerShadow.forEach(item => shapeWidth = Math.max(shapeWidth, Math.max(Math.abs(item.y), Math.abs(item.x)) + (item.spread < 0 ? -item.spread : 0) + item.blur * 1.5))
@@ -50,8 +52,6 @@ export const UIBounds: IUIBoundsModule = {
         this.__layout.renderShapeSpread = shapeWidth
 
         width += this.__layout.strokeSpread || 0
-
-        if (spread) width += spread
 
         return this.__box ? Math.max(this.__box.__updateRenderSpread(), width) : width
     }
