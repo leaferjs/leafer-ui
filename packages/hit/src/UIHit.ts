@@ -10,7 +10,10 @@ ui.__updateHitCanvas = function (): void {
 
     if (this.__box) this.__box.__updateHitCanvas()
 
-    const data = this.__, { hitCanvasManager } = this.leafer || this.parent.leafer // 兼容 boxStyle
+    const leafer = this.leafer || (this.parent && this.parent.leafer) // 兼容 boxStyle
+    if (!leafer) return
+
+    const data = this.__, { hitCanvasManager } = leafer
     const isHitPixelFill = (data.__isAlphaPixelFill || data.__isCanvas) && data.hitFill === 'pixel'
     const isHitPixelStroke = data.__isAlphaPixelStroke && data.hitStroke === 'pixel'
     const isHitPixel = isHitPixelFill || isHitPixelStroke

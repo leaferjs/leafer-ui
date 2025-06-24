@@ -53,7 +53,7 @@ export interface IEditorBase extends IGroup, ISelectorProxy, ITransformTool {
     closeGroup(group: IGroup): void
 
     openInnerEditor(target?: IUI, select?: boolean): void
-    closeInnerEditor(): void
+    closeInnerEditor(onlyInnerEditor?: boolean): void
 
     lock(): void
     unlock(): void
@@ -240,6 +240,8 @@ export interface IEditBoxBase extends IGroup {
     readonly flippedX: boolean
     readonly flippedY: boolean
     readonly flippedOne: boolean
+
+    readonly canUse: boolean // 编辑框是否处于激活状态
 
     getPointStyle(userStyle?: IBoxInputData): IBoxInputData
     getPointsStyle(): IBoxInputData[]

@@ -34,10 +34,10 @@ leaf.__hitWorld = function (point: IRadiusPointData): boolean {
     return this.__hit(inner)
 }
 
-leaf.__hitFill = function (inner: IRadiusPointData): boolean { return this.__hitCanvas?.hitFill(inner, this.__.windingRule) }
+leaf.__hitFill = function (inner: IRadiusPointData): boolean { const h = this.__hitCanvas; return h && h.hitFill(inner, this.__.windingRule) }
 
-leaf.__hitStroke = function (inner: IRadiusPointData, strokeWidth: number): boolean { return this.__hitCanvas?.hitStroke(inner, strokeWidth) }
+leaf.__hitStroke = function (inner: IRadiusPointData, strokeWidth: number): boolean { const h = this.__hitCanvas; return h && h.hitStroke(inner, strokeWidth) }
 
-leaf.__hitPixel = function (inner: IRadiusPointData): boolean { return this.__hitCanvas?.hitPixel(inner, this.__layout.renderBounds, this.__hitCanvas.hitScale) }
+leaf.__hitPixel = function (inner: IRadiusPointData): boolean { const h = this.__hitCanvas; return h && h.hitPixel(inner, this.__layout.renderBounds, h.hitScale) }
 
-leaf.__drawHitPath = function (canvas: ILeaferCanvas): void { if (canvas) this.__drawRenderPath(canvas) }
+leaf.__drawHitPath = function (canvas: ILeaferCanvas): void { canvas && this.__drawRenderPath(canvas) }
