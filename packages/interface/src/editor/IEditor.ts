@@ -43,6 +43,7 @@ export interface IEditorBase extends IGroup, ISelectorProxy, ITransformTool {
     update(): void
     updateEditBox(): void
     updateEditTool(): void
+    unloadEditTool(): void
 
     getEditSize(ui: ILeaf): IEditSize
 
