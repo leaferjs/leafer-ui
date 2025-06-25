@@ -380,6 +380,9 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     public set scale(value: INumber | IPointData) { MathHelper.assignScale(this as IScaleData, value) }
     public get scale(): INumber | IPointData { return this.__.scale }
 
+    public get isAutoWidth(): boolean { const t = this.__; return t.__autoWidth || t.autoWidth as boolean }
+    public get isAutoHeight(): boolean { const t = this.__; return t.__autoHeight || t.autoHeight as boolean }
+
     public useFastShadow?: boolean // 将忽略 stroke 产生的阴影，只对单个 fill 有效
 
     public __box?: IUI // 背景box, 一般用于文本背景框
