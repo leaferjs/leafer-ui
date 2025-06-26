@@ -19,9 +19,12 @@ export interface IEditorBase extends IGroup, ISelectorProxy, ITransformTool {
     readonly multiple: boolean
     readonly single: boolean
 
+    readonly dragPoint: IEditPoint // 正在拖拽的控制点
     readonly dragging: boolean
     readonly moving: boolean
-    readonly dragPoint: IEditPoint // 正在拖拽的控制点
+    readonly resizing: boolean
+    readonly rotating: boolean
+    readonly skewing: boolean
 
     element?: IUI
     buttons: IGroup
@@ -85,7 +88,7 @@ export interface IEditorConfig extends IObject {
     stroke?: IStroke
     strokeWidth?: number
 
-    padding?: IFourNumber // 编辑框与实际元素之间的padding，用于增加间隙
+    spread?: IFourNumber // 扩张编辑框的大小，与实际元素之间产生一定的间隙
 
     pointFill?: IFill
     pointSize?: number
@@ -115,9 +118,10 @@ export interface IEditorConfig extends IObject {
     rotateCursor?: IImageCursor
     skewCursor?: IImageCursor
 
-    around?: IAlign | IUnitPointData
-    lockRatio?: boolean | 'corner'
+    around?: IAlign | IUnitPointData // 缩放、旋转、倾斜时围绕的中心点
+    rotateAround?: IAlign | IUnitPointData // 单独设置旋转围绕的中心点，比 around 优先级高
     rotateGap?: number
+    lockRatio?: boolean | 'corner'
 
     selector?: boolean
     editBox?: boolean
@@ -210,6 +214,9 @@ export interface IEditBoxBase extends IGroup {
 
     dragging: boolean
     moving: boolean
+    resizing: boolean
+    rotating: boolean
+    skewing: boolean
 
     view: IGroup //  放置默认编辑工具控制点
 
