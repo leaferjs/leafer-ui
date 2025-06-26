@@ -2,7 +2,7 @@ import { IGroup, IUI, IBox, IRectInputData, ISelectorProxy, IEditSize, ICursorTy
 
 export interface IEditorBase extends IGroup, ISelectorProxy, ITransformTool {
     config: IEditorConfig
-    readonly mergeConfig: IEditorConfig // 实际使用，合并了选中元素上的editConfig，频繁访问会消耗性能
+    readonly mergeConfig: IEditorConfig // 实际使用，合并了选中元素、默认editBox上的editConfig，频繁访问会消耗性能
     readonly mergedConfig: IEditorConfig // 合并之后的缓存配置
 
     hoverTarget?: IUI
@@ -20,7 +20,10 @@ export interface IEditorBase extends IGroup, ISelectorProxy, ITransformTool {
     readonly single: boolean
 
     readonly dragPoint: IEditPoint // 正在拖拽的控制点
+
     readonly dragging: boolean
+    readonly gesturing: boolean // 手势操作元素中
+
     readonly moving: boolean
     readonly resizing: boolean
     readonly rotating: boolean
@@ -134,10 +137,10 @@ export interface IEditorConfig extends IObject {
     continuousSelect?: boolean // 点击可以连续选择
     openInner?: 'double' | 'long' // 双击/长按打开内部
 
-    moveable?: boolean | 'move'
-    resizeable?: boolean | 'zoom'
+    moveable?: boolean | 'gesture' | 'move'
+    resizeable?: boolean | 'gesture' | 'zoom'
     flipable?: boolean
-    rotateable?: boolean | 'rotate'
+    rotateable?: boolean | 'gesture' | 'rotate'
     skewable?: boolean
 
     beforeSelect?: IEditorBeforeSelect
@@ -213,6 +216,8 @@ export interface IEditBoxBase extends IGroup {
     editor: IEditorBase
 
     dragging: boolean
+    gesturing: boolean // 手势操作元素中
+
     moving: boolean
     resizing: boolean
     rotating: boolean
@@ -249,6 +254,7 @@ export interface IEditBoxBase extends IGroup {
     readonly flippedOne: boolean
 
     readonly canUse: boolean // 编辑框是否处于激活状态
+    readonly canGesture: boolean // 是否支持手势
 
     getPointStyle(userStyle?: IBoxInputData): IBoxInputData
     getPointsStyle(): IBoxInputData[]
