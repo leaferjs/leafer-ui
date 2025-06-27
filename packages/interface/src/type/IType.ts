@@ -1,4 +1,4 @@
-import { IPointData, IPathCommandData, IWindingRule, IBlendMode, IExportFileType, IFourNumber, IAlign, IUnitPointData, IAxis, IAxisReverse, IFilter, IOptionSizeData } from '@leafer/interface'
+import { IPointData, IPathCommandData, IWindingRule, IBlendMode, IExportFileType, IFourNumber, IAlign, IUnitPointData, IAxis, IAxisReverse, IFilter, IOptionSizeData, ISizeData } from '@leafer/interface'
 import { IColorString, IPaintString } from './IStringType'
 import { IStrokeStyle } from '../ICommonAttr'
 
@@ -87,6 +87,8 @@ export interface IImagePaint extends IPaintBase {
     scale?: number | IPointData
     rotation?: number
     skew?: | IPointData
+
+    clipSize?: ISizeData
 
     repeat?: IRepeat
 

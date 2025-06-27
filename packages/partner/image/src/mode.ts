@@ -1,11 +1,11 @@
-import { IBoundsData, IPointData, IMatrixData, IAlign } from '@leafer/interface'
-import { MatrixHelper } from '@leafer/core'
+import { IBoundsData, IPointData, IMatrixData, IAlign, ISizeData } from '@leafer/interface'
+import { getMatrixData, MatrixHelper } from '@leafer/core'
 
 import { ILeafPaintPatternData } from '@leafer-ui/interface'
 
 
-let origin = {} as IPointData
-const { get, rotateOfOuter, translate, scaleOfOuter, scale: scaleHelper, rotate, skew: skewHelper } = MatrixHelper
+let origin = {} as IPointData, tempMatrix = getMatrixData()
+const { get, rotateOfOuter, translate, scaleOfOuter, multiplyParent, scale: scaleHelper, rotate, skew: skewHelper } = MatrixHelper
 
 export function fillOrFitMode(data: ILeafPaintPatternData, box: IBoundsData, x: number, y: number, scaleX: number, scaleY: number, rotation: number): void {
     const transform: IMatrixData = get()
@@ -16,13 +16,17 @@ export function fillOrFitMode(data: ILeafPaintPatternData, box: IBoundsData, x: 
 }
 
 
-export function clipMode(data: ILeafPaintPatternData, box: IBoundsData, x: number, y: number, scaleX: number, scaleY: number, rotation: number, skew: IPointData): void {
+export function clipMode(data: ILeafPaintPatternData, box: IBoundsData, x: number, y: number, scaleX: number, scaleY: number, rotation: number, skew: IPointData, clipSize?: ISizeData): void {
     // rotate -> skew -> scale -> translate
     const transform: IMatrixData = get()
     if (rotation) rotate(transform, rotation)
     if (skew) skewHelper(transform, skew.x, skew.y)
     if (scaleX) scaleHelper(transform, scaleX, scaleY)
     translate(transform, box.x + x, box.y + y)
+    if (clipSize) {
+        tempMatrix.a = box.width / clipSize.width, tempMatrix.d = box.height / clipSize.height
+        multiplyParent(transform, tempMatrix)
+    }
     data.transform = transform
 }
 
