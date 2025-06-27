@@ -3,12 +3,14 @@ import { IBlendMode, ILeaferImage, IMatrixData, ITaskItem } from '@leafer/interf
 import { IColorString } from './IStringType'
 import { IStrokeAlign, IStrokeJoin, IStrokeCap, IImagePaintMode, IImageFilters } from './IType'
 import { IPaintType } from './IType'
+import { IStrokeComputedStyle } from '../ICommonAttr'
 
 export type ILeafPaintColor = IColorString | CanvasGradient | CanvasPattern
 
 export interface ILeafPaint {
     type?: IPaintType
     style?: ILeafPaintColor
+    strokeStyle?: IStrokeComputedStyle // 子描边样式选项
     transform?: IMatrixData // 存在时表示pattern自身不能应用transform
     blendMode?: IBlendMode
     image?: ILeaferImage

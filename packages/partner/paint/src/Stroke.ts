@@ -40,11 +40,14 @@ export function strokes(strokes: ILeafPaint[], ui: IUI, canvas: ILeaferCanvas): 
 
 function drawCenter(stroke: string | ILeafPaint[], strokeWidthScale: number, ui: IUI, canvas: ILeaferCanvas) {
     const data = ui.__
-    canvas.setStroke(!data.__isStrokes && stroke as string, data.__strokeWidth * strokeWidthScale, data)
-    data.__isStrokes ? drawStrokesStyle(stroke as ILeafPaint[], false, ui, canvas) : canvas.stroke()
+    if (data.__isStrokes) {
+        drawStrokesStyle(stroke as ILeafPaint[], strokeWidthScale, false, ui, canvas)
+    } else {
+        canvas.setStroke(stroke as string, data.__strokeWidth * strokeWidthScale, data)
+        canvas.stroke()
+    }
 
     if (data.__useArrow) Paint.strokeArrow(stroke, ui, canvas)
-
 }
 
 function drawInside(stroke: string | ILeafPaint[], ui: IUI, canvas: ILeaferCanvas) {

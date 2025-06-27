@@ -58,7 +58,7 @@ ui.__hit = function (inner: IRadiusPointData): boolean {
     const needHitFillPath = ((data.fill || data.__isCanvas) && (hitFill === 'path' || (hitFill === 'pixel' && !(data.__isAlphaPixelFill || data.__isCanvas)))) || hitFill === 'all'
     if (needHitFillPath && this.__hitFill(inner)) return true
 
-    const { hitStroke, __strokeWidth } = data
+    const { hitStroke, __maxStrokeWidth: strokeWidth } = data
     const needHitStrokePath = (data.stroke && (hitStroke === 'path' || (hitStroke === 'pixel' && !data.__isAlphaPixelStroke))) || hitStroke === 'all'
     if (!needHitFillPath && !needHitStrokePath) return false
 
@@ -68,15 +68,15 @@ ui.__hit = function (inner: IRadiusPointData): boolean {
     if (needHitStrokePath) {
         switch (data.strokeAlign) {
             case 'inside':
-                hitWidth += __strokeWidth * 2
+                hitWidth += strokeWidth * 2
                 if (!needHitFillPath && this.__hitFill(inner) && this.__hitStroke(inner, hitWidth)) return true
                 hitWidth = radiusWidth
                 break
             case 'center':
-                hitWidth += __strokeWidth
+                hitWidth += strokeWidth
                 break
             case 'outside':
-                hitWidth += __strokeWidth * 2
+                hitWidth += strokeWidth * 2
                 if (!needHitFillPath) {
                     if (!this.__hitFill(inner) && this.__hitStroke(inner, hitWidth)) return true
                     hitWidth = radiusWidth

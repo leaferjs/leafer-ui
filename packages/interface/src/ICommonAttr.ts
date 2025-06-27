@@ -60,14 +60,15 @@ export interface IStrokeStyle {
     dashOffset?: INumber
     miterLimit?: INumber
 }
-export interface IStrokeComputedData extends IStrokeComputedOptions {
+
+export interface IStrokeComputedData extends IStrokeComputedStyle {
     stroke?: IColorString | ILeafStrokePaint[]
 
     startArrow?: IArrowType
     endArrow?: IArrowType
 }
 
-export interface IStrokeComputedOptions {
+export interface IStrokeComputedStyle {
     strokeAlign?: IStrokeAlign
     strokeWidth?: number
     strokeWidths?: number[]

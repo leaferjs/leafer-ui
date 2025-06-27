@@ -17,6 +17,9 @@ export interface IPaintBase {
     blendMode?: IBlendMode
     visible?: boolean
     opacity?: number
+
+    style?: IStrokeStyle
+    editing?: boolean // 标记编辑中
 }
 
 export type IPaintType =
@@ -35,9 +38,7 @@ export interface ISolidPaint extends IPaintBase {
     color: IColor
 }
 
-export interface IStrokeSolidPaint extends ISolidPaint {
-    style?: IStrokeStyle
-}
+export interface IStrokeSolidPaint extends ISolidPaint { }
 
 export type IColor = IColorString | IRGB | IRGBA
 export interface IRGB {
@@ -59,9 +60,7 @@ export interface IGradientPaint extends IPaintBase {
     stops: IColorStop[] | IColorString[]
 }
 
-export interface IStrokeGradientPaint extends IGradientPaint {
-    style?: IStrokeStyle
-}
+export interface IStrokeGradientPaint extends IGradientPaint { }
 
 export interface IColorStop {
     offset: number
@@ -94,13 +93,9 @@ export interface IImagePaint extends IPaintBase {
     changeful?: boolean // 会频繁变化，不生成图案（有特殊性能优化，一般用于游戏精灵、动图场景）
     sync?: boolean // 同步显示，不走任务列表生成图案
     showProgress?: boolean // 是否显示进度
-
-    editing?: boolean // 标记编辑中
 }
 
-export interface IStrokeImagePaint extends IImagePaint {
-    style?: IStrokeStyle
-}
+export interface IStrokeImagePaint extends IImagePaint { }
 export interface IImageFilters {
     exposure?: number // 曝光
     contrast?: number // 对比度

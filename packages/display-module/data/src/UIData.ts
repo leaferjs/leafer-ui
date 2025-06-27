@@ -1,7 +1,7 @@
 import { INumber, IValue, IBoolean, IPathCommandData, IPathString, IPointData, IPathCommandObject, IObject, IFilter } from '@leafer/interface'
 import { PathConvert, DataHelper, LeafData, Debug } from '@leafer/core'
 
-import { IUI, IUIData, ILeafPaint } from '@leafer-ui/interface'
+import { IUI, IUIData, ILeafPaint, IStrokeComputedStyle } from '@leafer-ui/interface'
 import { Paint, PaintImage, ColorConvert } from '@leafer-ui/external'
 
 
@@ -20,20 +20,13 @@ export class UIData extends LeafData implements IUIData {
     public __isFills?: boolean
     public __isStrokes?: boolean
 
-    public get __strokeWidth(): number {
-        const { strokeWidth, strokeWidthFixed } = this as IUIData
-        if (strokeWidthFixed) {
-            const ui = this.__leaf
-            let { scaleX } = ui.__nowWorld || ui.__world
-            if (scaleX < 0) scaleX = -scaleX
-            return scaleX > 1 ? strokeWidth / scaleX : strokeWidth
-        } else return strokeWidth
-    }
+    public get __strokeWidth(): number { return this.__getRealStrokeWidth() }
 
-    public get __hasMultiPaint(): boolean { // fix: opacity
-        const t = this as IUIData
-        return (t.fill && this.__useStroke) || (t.__isFills && t.fill.length > 1) || (t.__isStrokes && t.stroke.length > 1) || t.__useEffect
-    }
+    public get __maxStrokeWidth(): number { const t = this as IUIData; return t.__hasMultiStrokeStyle ? Math.max(t.__hasMultiStrokeStyle, t.strokeWidth) : t.strokeWidth }
+
+    public __hasMultiStrokeStyle?: number // 是否存在多个不同的描述样式（同时存储多个描边样式中的最大宽度用于运算）
+
+    public get __hasMultiPaint(): boolean { const t = this as IUIData; return (t.fill && this.__useStroke) || (t.__isFills && t.fill.length > 1) || (t.__isStrokes && t.stroke.length > 1) || t.__useEffect } // fix: opacity
 
     public __isAlphaPixelFill?: boolean // png / svg / webp
     public __isAlphaPixelStroke?: boolean
@@ -145,6 +138,20 @@ export class UIData extends LeafData implements IUIData {
         this.__needComputePaint = undefined
     }
 
+
+    public __getRealStrokeWidth(childStyle?: IStrokeComputedStyle): number {
+        let { strokeWidth, strokeWidthFixed } = this as IUIData
+        if (childStyle) {
+            if (childStyle.strokeWidth) strokeWidth = childStyle.strokeWidth
+            if (childStyle.strokeWidthFixed !== undefined) strokeWidthFixed = childStyle.strokeWidthFixed
+        }
+        if (strokeWidthFixed) {
+            const scale = this.__leaf.getClampRenderScale()
+            return scale > 1 ? strokeWidth / scale : strokeWidth
+        } else return strokeWidth
+    }
+
+
     public __setPaint(attrName: 'fill' | 'stroke', value: IValue): void {
         this.__setInput(attrName, value)
         const layout = this.__leaf.__layout
@@ -165,6 +172,7 @@ export class UIData extends LeafData implements IUIData {
             this._fill = this.__isFills = undefined
         } else {
             stintSet(this, '__isAlphaPixelStroke', undefined)
+            stintSet(this, '__hasMultiStrokeStyle', undefined)
             this._stroke = this.__isStrokes = undefined
         }
     }

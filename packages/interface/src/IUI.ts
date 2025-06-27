@@ -6,7 +6,8 @@ import {
     ICornerRadiusAttrData, ICornerRadiusInputData, ICornerRadiusComputedData,
     IStrokeAttrData, IStrokeComputedData, IStrokeInputData,
     IEffectAttrData, IEffectInputData, IEffectComputedData,
-    ITextStyleAttrData, ITextStyleInputData, ITextStyleComputedData
+    ITextStyleAttrData, ITextStyleInputData, ITextStyleComputedData,
+    IStrokeComputedStyle
 } from './ICommonAttr'
 import { IOverflow } from './type/IType'
 import { IAnimation, IAnimate, IKeyframe, IKeyframeId, IAnimateType } from './IAnimation'
@@ -478,7 +479,10 @@ export interface IUIData extends IUIAttrData, IUIComputedData, ILeafData {
     __isFills?: boolean
     __isStrokes?: boolean
 
-    readonly __strokeWidth: number
+    readonly __strokeWidth: number // 会受 strokeWidthFixed 影响
+    readonly __maxStrokeWidth: number
+    __hasMultiStrokeStyle?: number // 是否存在多个不同的描述样式（同时存储多个描边样式中的最大宽度用于运算）
+    readonly __hasMultiPaint?: boolean
 
     __isAlphaPixelFill?: boolean // png / svg / webp
     __isAlphaPixelStroke?: boolean
@@ -505,6 +509,7 @@ export interface IUIData extends IUIAttrData, IUIComputedData, ILeafData {
 
     __needComputePaint?: boolean
     __computePaint(): void
+    __getRealStrokeWidth(childStyle?: IStrokeComputedStyle): number
 
     __setPaint(attrName: 'fill' | 'stroke', value: IValue): void
     __removePaint(attrName: 'fill' | 'stroke', removeInput?: boolean): void

@@ -7,7 +7,7 @@ export const UIBounds: IUIBoundsModule = {
 
     __updateStrokeSpread(): number {
         let width = 0, boxWidth = 0
-        const data = this.__, { strokeAlign, strokeWidth } = data, box = this.__box
+        const data = this.__, { strokeAlign, __maxStrokeWidth: strokeWidth } = data, box = this.__box
 
         if ((data.stroke || data.hitStroke === 'all') && strokeWidth && strokeAlign !== 'inside') {
             boxWidth = width = strokeAlign === 'center' ? strokeWidth / 2 : strokeWidth

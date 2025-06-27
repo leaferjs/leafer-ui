@@ -1,6 +1,6 @@
 import { DataHelper } from '@leafer/core'
 
-import { IUI, IPaint, ILeafPaint, IRGB, IBooleanMap, IObject, IPaintAttr } from '@leafer-ui/interface'
+import { IUI, IPaint, ILeafPaint, IRGB, IBooleanMap, IObject, IPaintAttr, IStrokeComputedStyle } from '@leafer-ui/interface'
 import { ColorConvert, PaintImage, PaintGradient } from '@leafer-ui/draw'
 
 
@@ -15,8 +15,18 @@ export function compute(attrName: IPaintAttr, ui: IUI): void {
 
     recycleMap = PaintImage.recycleImage(attrName, data)
 
+    let maxChildStrokeWidth: number
+
     for (let i = 0, len = paints.length, item: ILeafPaint; i < len; i++) {
-        (item = getLeafPaint(attrName, paints[i], ui)) && leafPaints.push(item)
+        if (item = getLeafPaint(attrName, paints[i], ui)) {
+            leafPaints.push(item)
+
+            // 检测多个子描边样式和宽度
+            if (item.strokeStyle) {
+                maxChildStrokeWidth || (maxChildStrokeWidth = 1)
+                if (item.strokeStyle.strokeWidth) maxChildStrokeWidth = Math.max(maxChildStrokeWidth, item.strokeStyle.strokeWidth as number)
+            }
+        }
     }
 
     (data as IObject)['_' + attrName] = leafPaints.length ? leafPaints : undefined
@@ -34,6 +44,7 @@ export function compute(attrName: IPaintAttr, ui: IUI): void {
     } else {
         stintSet(data, '__isAlphaPixelStroke', isAlphaPixel)
         stintSet(data, '__isTransparentStroke', isTransparent)
+        stintSet(data, '__hasMultiStrokeStyle', maxChildStrokeWidth)
     }
 }
 
@@ -67,6 +78,10 @@ function getLeafPaint(attrName: string, paint: IPaint, ui: IUI): ILeafPaint {
 
     if (data) {
         if (typeof data.style === 'string' && hasTransparent(data.style)) data.isTransparent = true
+        if (paint.style) {
+            if (paint.style.strokeWidth === 0) return undefined
+            data.strokeStyle = paint.style as IStrokeComputedStyle
+        }
         if (paint.blendMode) data.blendMode = paint.blendMode
     }
 

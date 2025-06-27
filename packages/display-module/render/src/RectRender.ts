@@ -19,18 +19,18 @@ export const RectRender: IRectRenderModule = {
 
         if (stroke) {
 
-            const { strokeAlign, __strokeWidth } = this.__
-            if (!__strokeWidth) return
+            const { strokeAlign, __strokeWidth: strokeWidth } = this.__
+            if (!strokeWidth) return
 
-            canvas.setStroke(stroke, __strokeWidth, this.__)
-            const half = __strokeWidth / 2
+            canvas.setStroke(stroke, strokeWidth, this.__)
+            const half = strokeWidth / 2
 
             switch (strokeAlign) {
                 case 'center':
                     canvas.strokeRect(0, 0, width, height)
                     break
                 case 'inside':
-                    width -= __strokeWidth, height -= __strokeWidth
+                    width -= strokeWidth, height -= strokeWidth
                     if (width < 0 || height < 0) {
                         canvas.save()
                         this.__clip(canvas, options)
@@ -39,7 +39,7 @@ export const RectRender: IRectRenderModule = {
                     } else canvas.strokeRect(x + half, y + half, width, height)
                     break
                 case 'outside':
-                    canvas.strokeRect(x - half, y - half, width + __strokeWidth, height + __strokeWidth)
+                    canvas.strokeRect(x - half, y - half, width + strokeWidth, height + strokeWidth)
                     break
             }
 

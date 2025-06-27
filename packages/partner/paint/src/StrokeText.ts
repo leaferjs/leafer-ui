@@ -23,8 +23,12 @@ export function strokeText(stroke: string | ILeafPaint[], ui: IUI, canvas: ILeaf
 
 function drawCenter(stroke: string | ILeafPaint[], strokeWidthScale: number, ui: IUI, canvas: ILeaferCanvas): void {
     const data = ui.__
-    canvas.setStroke(!data.__isStrokes && stroke as string, data.strokeWidth * strokeWidthScale, data)
-    data.__isStrokes ? drawStrokesStyle(stroke as ILeafPaint[], true, ui, canvas) : drawTextStroke(ui, canvas)
+    if (data.__isStrokes) {
+        drawStrokesStyle(stroke as ILeafPaint[], strokeWidthScale, true, ui, canvas)
+    } else {
+        canvas.setStroke(stroke as string, data.__strokeWidth * strokeWidthScale, data)
+        drawTextStroke(ui, canvas)
+    }
 }
 
 function drawAlign(stroke: string | ILeafPaint[], align: IStrokeAlign, ui: IUI, canvas: ILeaferCanvas): void {
@@ -61,15 +65,21 @@ export function drawTextStroke(ui: IUI, canvas: ILeaferCanvas): void {
 
 }
 
-export function drawStrokesStyle(strokes: ILeafStrokePaint[], isText: boolean, ui: IUI, canvas: ILeaferCanvas): void {
+export function drawStrokesStyle(strokes: ILeafStrokePaint[], strokeWidthScale: number, isText: boolean, ui: IUI, canvas: ILeaferCanvas): void {
     let item: ILeafStrokePaint
+    const data = ui.__, { __hasMultiStrokeStyle } = data
+    __hasMultiStrokeStyle || canvas.setStroke(undefined, data.__strokeWidth * strokeWidthScale, data)
+
     for (let i = 0, len = strokes.length; i < len; i++) {
         item = strokes[i]
 
         if (item.image && PaintImage.checkImage(ui, canvas, item, false)) continue
 
         if (item.style) {
-            canvas.strokeStyle = item.style
+            if (__hasMultiStrokeStyle) {
+                const { strokeStyle } = item
+                strokeStyle ? canvas.setStroke(item.style, data.__getRealStrokeWidth(strokeStyle) * strokeWidthScale, data, strokeStyle) : canvas.setStroke(item.style, data.__strokeWidth * strokeWidthScale, data)
+            } else canvas.strokeStyle = item.style
 
             if (item.blendMode) {
                 canvas.saveBlendMode(item.blendMode)
