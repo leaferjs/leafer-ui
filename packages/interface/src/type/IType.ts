@@ -91,6 +91,7 @@ export interface IImagePaint extends IPaintBase {
     clipSize?: ISizeData
 
     repeat?: IRepeat
+    scaleFixed?: boolean // 平铺图片不跟随画布缩放
 
     changeful?: boolean // 会频繁变化，不生成图案（有特殊性能优化，一般用于游戏精灵、动图场景）
     sync?: boolean // 同步显示，不走任务列表生成图案

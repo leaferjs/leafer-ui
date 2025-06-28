@@ -12,10 +12,11 @@ const tempScaleData = {} as IScaleData
 const tempImage = {} as IBoundsData
 
 export function createData(leafPaint: ILeafPaint, image: ILeaferImage, paint: IImagePaint, box: IBoundsData): void {
-    const { changeful, sync, editing } = paint
+    const { changeful, sync, editing, scaleFixed } = paint
     if (changeful) leafPaint.changeful = changeful
     if (sync) leafPaint.sync = sync
     if (editing) leafPaint.editing = editing
+    if (scaleFixed) leafPaint.scaleFixed = scaleFixed
     leafPaint.data = getPatternData(paint, box, image)
 }
 

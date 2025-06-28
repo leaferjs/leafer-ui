@@ -7,10 +7,8 @@ import { Export } from '@leafer-ui/draw'
 import { createPattern } from './pattern'
 
 
-const { abs } = Math
-
 export function checkImage(ui: IUI, canvas: ILeaferCanvas, paint: ILeafPaint, allowDraw?: boolean): boolean {
-    const { scaleX, scaleY } = ImageManager.patternLocked ? ui.__world : ui.__nowWorld
+    const { scaleX, scaleY } = ui.getRenderScaleData(true, paint.scaleFixed)
     const { pixelRatio } = canvas, { data } = paint
 
     if (!data || (paint.patternId === scaleX + '-' + scaleY + '-' + pixelRatio && !Export.running)) {
@@ -23,8 +21,8 @@ export function checkImage(ui: IUI, canvas: ILeaferCanvas, paint: ILeafPaint, al
             } else {
                 if (!(paint.changeful || ResizeEvent.isResizing(ui) || Export.running)) {
                     let { width, height } = data
-                    width *= abs(scaleX) * pixelRatio
-                    height *= abs(scaleY) * pixelRatio
+                    width *= scaleX * pixelRatio
+                    height *= scaleY * pixelRatio
                     if (data.scaleX) {
                         width *= data.scaleX
                         height *= data.scaleY

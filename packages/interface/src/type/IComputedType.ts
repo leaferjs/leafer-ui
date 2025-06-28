@@ -22,6 +22,7 @@ export interface ILeafPaint {
     isTransparent?: boolean // 是否为透明色
     data?: ILeafPaintPatternData
     editing?: boolean // 标记编辑中
+    scaleFixed?: boolean // 平铺图片不跟随画布缩放
 }
 
 export interface ILeafPaintPatternData {

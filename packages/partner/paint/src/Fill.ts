@@ -30,10 +30,14 @@ export function fills(fills: ILeafPaint[], ui: IUI, canvas: ILeaferCanvas): void
 
         canvas.fillStyle = item.style
 
-        if (item.transform) {
+        if (item.transform || item.scaleFixed) {
 
             canvas.save()
-            canvas.transform(item.transform)
+            if (item.transform) canvas.transform(item.transform)
+            if (item.scaleFixed) {
+                const { scaleX, scaleY } = ui.getRenderScaleData(true)
+                canvas.scale(1 / scaleX, 1 / scaleY)
+            }
             if (item.blendMode) canvas.blendMode = item.blendMode
             fillPathOrText(ui, canvas)
             canvas.restore()
