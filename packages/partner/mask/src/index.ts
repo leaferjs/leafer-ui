@@ -49,11 +49,13 @@ Group.prototype.__renderMask = function (canvas: ILeaferCanvas, options: IRender
 
             }
 
-            if (!(mask === 'clipping' || mask === 'clipping-path')) continue
+            if (mask === 'clipping' || mask === 'clipping-path') excludeRenderBounds(child, options) || child.__render(canvas, options) // 渲染自身到原画布中，不应用遮罩
+
+            continue
         }
 
-        if (excludeRenderBounds(child, options)) continue
-        child.__render(contentCanvas || canvas, options)
+        excludeRenderBounds(child, options) || child.__render(contentCanvas || canvas, options)
+
     }
 
     maskEnd(this, currentMask, canvas, contentCanvas, maskCanvas, maskOpacity)
