@@ -40,10 +40,10 @@ export function strokes(strokes: ILeafPaint[], ui: IUI, canvas: ILeaferCanvas): 
 
 function drawCenter(stroke: string | ILeafPaint[], strokeWidthScale: number, ui: IUI, canvas: ILeaferCanvas) {
     const data = ui.__
-    if (data.__isStrokes) {
-        drawStrokesStyle(stroke as ILeafPaint[], strokeWidthScale, false, ui, canvas)
+    if (typeof stroke === 'object') {
+        drawStrokesStyle(stroke, strokeWidthScale, false, ui, canvas)
     } else {
-        canvas.setStroke(stroke as string, data.__strokeWidth * strokeWidthScale, data)
+        canvas.setStroke(stroke, data.__strokeWidth * strokeWidthScale, data)
         canvas.stroke()
     }
 

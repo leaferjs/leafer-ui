@@ -23,10 +23,10 @@ export function strokeText(stroke: string | ILeafPaint[], ui: IUI, canvas: ILeaf
 
 function drawCenter(stroke: string | ILeafPaint[], strokeWidthScale: number, ui: IUI, canvas: ILeaferCanvas): void {
     const data = ui.__
-    if (data.__isStrokes) {
-        drawStrokesStyle(stroke as ILeafPaint[], strokeWidthScale, true, ui, canvas)
+    if (typeof stroke === 'object') {
+        drawStrokesStyle(stroke, strokeWidthScale, true, ui, canvas)
     } else {
-        canvas.setStroke(stroke as string, data.__strokeWidth * strokeWidthScale, data)
+        canvas.setStroke(stroke, data.__strokeWidth * strokeWidthScale, data)
         drawTextStroke(ui, canvas)
     }
 }
