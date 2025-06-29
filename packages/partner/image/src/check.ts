@@ -33,6 +33,10 @@ export function checkImage(ui: IUI, canvas: ILeaferCanvas, paint: ILeafPaint, al
         }
 
         if (allowDraw) {
+            if (ui.__.__isFastShadow) { // fix: 快速阴影时，直接 drawImage 会无阴影，需fill一下
+                canvas.fillStyle = paint.style || '#000'
+                canvas.fill()
+            }
             drawImage(ui, canvas, paint, data) // 直接绘制图像，不生成图案
             return true
         } else {

@@ -19,7 +19,7 @@ export const UIRender: IUIRenderModule = {
 
         if (data.__useEffect) {
             const { shadow, fill, stroke } = data, otherEffect = data.innerShadow || data.blur || data.backgroundBlur || data.filter
-            stintSet(data, '__isFastShadow', shadow && !otherEffect && shadow.length < 2 && !shadow[0].spread && !(shadow[0].box && data.__isTransparentFill) && fill && !(fill instanceof Array && fill.length > 1) && (this.useFastShadow || !stroke || (stroke && data.strokeAlign === 'inside')))
+            stintSet(data, '__isFastShadow', shadow && !otherEffect && shadow.length < 2 && !shadow[0].spread && fill && !data.__isTransparentFill && !(fill instanceof Array && fill.length > 1) && (this.useFastShadow || !stroke || (stroke && data.strokeAlign === 'inside'))) // 高性能阴影条件， @leafer-ui/image check.ts 中的 allowDraw 逻辑需与此处关联
             data.__useEffect = !!(shadow || otherEffect)
         }
 
