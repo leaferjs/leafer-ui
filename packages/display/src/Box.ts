@@ -61,9 +61,9 @@ export class Box extends Group implements IBox {
 
     // @leafer-in/flow will rewrite
     public __updateBoxBounds(_secondLayout?: boolean): void {
-        const data = this.__
-
         if (this.children.length && !this.pathInputed) {
+
+            const data = this.__
 
             if (data.__autoSide) {
 
@@ -95,15 +95,22 @@ export class Box extends Group implements IBox {
 
     public __updateRenderBounds(): void {
         let isOverflow: boolean
-        const { renderBounds, boxBounds } = this.__layout
 
         if (this.children.length) {
+            const data = this.__, { renderBounds, boxBounds } = this.__layout
+
             super.__updateRenderBounds()
             copy(childrenRenderBounds, renderBounds)
             this.__updateRectRenderBounds()
 
+            // 增加滚动逻辑
+            if (data.scrollY || data.scrollX) {
+                childrenRenderBounds.x += data.scrollX
+                childrenRenderBounds.y += data.scrollY
+            }
+
             isOverflow = !includes(boxBounds, childrenRenderBounds)
-            if (isOverflow && this.__.overflow !== 'hide') add(renderBounds, childrenRenderBounds)
+            if (isOverflow && data.overflow !== 'hide') add(renderBounds, childrenRenderBounds)
         } else this.__updateRectRenderBounds()
 
         DataHelper.stintSet(this, 'isOverflow', isOverflow)
