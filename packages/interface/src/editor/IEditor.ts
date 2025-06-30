@@ -58,7 +58,7 @@ export interface IEditorBase extends IGroup, ISelectorProxy, ITransformTool {
     openGroup(group: IGroup): void
     closeGroup(group: IGroup): void
 
-    openInnerEditor(target?: IUI, select?: boolean): void
+    openInnerEditor(target?: IUI, nameOrSelect?: string | boolean, select?: boolean): void
     closeInnerEditor(onlyInnerEditor?: boolean): void
 
     lock(): void
