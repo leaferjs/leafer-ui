@@ -340,6 +340,8 @@ export interface IFrameInputData extends IBoxInputData {
 // Box
 export interface IBox extends IBoxAttrData, IGroup {
     __: IBoxData
+    scrollBar?: IGroup
+    __updateScrollBar(): void
     __updateRectRenderBounds(): void
     __renderGroup(canvas: ILeaferCanvas, options: IRenderOptions): void
 }

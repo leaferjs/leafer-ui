@@ -1,7 +1,7 @@
 import { ILeaferCanvas, IRenderOptions, IBoundsData, IBoolean, INumber } from '@leafer/interface'
 import { rewrite, rewriteAble, registerUI, BoundsHelper, dataProcessor, affectRenderBoundsType, dataType, boundsType, DataHelper } from '@leafer/core'
 
-import { IBox, IBoxData, IBoxInputData, IOverflow } from '@leafer-ui/interface'
+import { IBox, IBoxData, IBoxInputData, IGroup, IOverflow } from '@leafer-ui/interface'
 import { BoxData } from '@leafer-ui/data'
 
 import { Group } from './Group'
@@ -40,6 +40,8 @@ export class Box extends Group implements IBox {
     declare public overflow?: IOverflow
 
     public isOverflow: boolean
+
+    public scrollBar?: IGroup
 
     constructor(data?: IBoxInputData) {
         super(data)
@@ -114,10 +116,16 @@ export class Box extends Group implements IBox {
         } else this.__updateRectRenderBounds()
 
         DataHelper.stintSet(this, 'isOverflow', isOverflow)
+
+        this.__updateScrollBar()
     }
 
     @rewrite(rect.__updateRenderBounds)
     public __updateRectRenderBounds(): void { }
+
+    //  need rewrite
+    public __updateScrollBar(): void { }
+
 
     @rewrite(rect.__updateChange)
     public __updateRectChange(): void { }
@@ -142,6 +150,7 @@ export class Box extends Group implements IBox {
             this.__renderRect(canvas, options)
             if (this.children.length) this.__renderGroup(canvas, options)
         }
+        if (this.scrollBar) this.scrollBar.__render(canvas, options)
     }
 
     // in __drawAfterFill()
