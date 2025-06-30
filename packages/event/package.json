@@ -1,6 +1,6 @@
 {
   "name": "@leafer-ui/event",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "description": "@leafer-ui/event",
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
@@ -18,9 +18,9 @@
     "leaferjs"
   ],
   "dependencies": {
-    "@leafer/core": "1.7.0"
+    "@leafer/core": "1.8.0"
   },
   "devDependencies": {
-     "@leafer/interface": "1.7.0"
+     "@leafer/interface": "1.8.0"
   }
 }
