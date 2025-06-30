@@ -38,7 +38,7 @@ export function zoomLayerType() {
     }
 }
 
-export function createKey(defaultValue?: IValue) {
+export function createAttr(defaultValue?: IValue) {
     return (target: IUI, key: string) => {
         defineKey(target, key, createDescriptor(key, defaultValue))
     }
