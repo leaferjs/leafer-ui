@@ -359,7 +359,7 @@ export interface IBoxInputData extends IBoxAttrData, IGroupInputData { }
 export interface IGroup extends IUI {
     __: IGroupData
     children: IUI[]
-    readonly childlessJSON?: boolean  // 子级 JSON 不导出
+    childlessJSON?: boolean  // 子级 JSON 不导出
     pick(hitPoint: IPointData, options?: IPickOptions): IPickResult
     add(child: IUI | IUI[] | IUIInputData | IUIInputData[], index?: number): void
     addAt(child: IUI | IUI[] | IUIInputData | IUIInputData[], index: number): void

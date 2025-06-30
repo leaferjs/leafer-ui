@@ -27,6 +27,8 @@ export class Group extends UI implements IGroup {   // tip: rewrited Box
 
     declare public children: IUI[]
 
+    public childlessJSON?: boolean
+
     constructor(data?: IGroupInputData) {
         super(data)
     }
@@ -62,7 +64,7 @@ export class Group extends UI implements IGroup {   // tip: rewrited Box
 
     override toJSON(options?: IJSONOptions): IUIJSONData {
         const data = super.toJSON(options)
-        if (!(this as IGroup).childlessJSON) data.children = this.children.map(child => child.toJSON(options))
+        if (!this.childlessJSON) data.children = this.children.map(child => child.toJSON(options))
         return data
     }
 
