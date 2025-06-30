@@ -144,7 +144,7 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
 
 
     @affectRenderBoundsType(0)
-    public spread?: INumber // 强行扩大渲染边界
+    public renderSpread?: INumber // 强行扩大渲染边界
 
 
     // path

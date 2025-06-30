@@ -33,7 +33,7 @@ export const UIBounds: IUIBoundsModule = {
 
     __updateRenderSpread(): number {
         let width: number = 0
-        const { shadow, innerShadow, blur, backgroundBlur, filter, spread } = this.__
+        const { shadow, innerShadow, blur, backgroundBlur, filter, renderSpread } = this.__
 
         if (shadow) shadow.forEach(item => width = Math.max(width, Math.max(Math.abs(item.y), Math.abs(item.x)) + (item.spread > 0 ? item.spread : 0) + item.blur * 1.5))
 
@@ -41,7 +41,7 @@ export const UIBounds: IUIBoundsModule = {
 
         if (filter) width += Filter.getSpread(filter)
 
-        if (spread) width += spread
+        if (renderSpread) width += renderSpread
 
         let shapeWidth = width = Math.ceil(width)
 
