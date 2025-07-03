@@ -4,7 +4,7 @@ import { IUI, ILeafPaint, IMatrixData } from '@leafer-ui/interface'
 
 
 const { get, scale, copy } = MatrixHelper
-const { ceil, abs } = Math
+const { floor, max, abs } = Math
 
 export function createPattern(ui: IUI, paint: ILeafPaint, pixelRatio: number): boolean {
     let { scaleX, scaleY } = ui.getRenderScaleData(true, paint.scaleFixed)
@@ -13,7 +13,13 @@ export function createPattern(ui: IUI, paint: ILeafPaint, pixelRatio: number): b
     if (paint.patternId !== id && !ui.destroyed) {
 
         const { image, data } = paint
-        let imageScale: number, imageMatrix: IMatrixData, { width, height, scaleX: sx, scaleY: sy, transform, repeat } = data
+        let imageScale: number, imageMatrix: IMatrixData, { width, height, scaleX: sx, scaleY: sy, transform, repeat, gap } = data
+
+        scaleX *= pixelRatio
+        scaleY *= pixelRatio
+
+        const xGap = gap && (gap.x * scaleX)
+        const yGap = gap && (gap.y * scaleY)
 
         if (sx) {
             sx = abs(sx) // maybe -1
@@ -25,8 +31,6 @@ export function createPattern(ui: IUI, paint: ILeafPaint, pixelRatio: number): b
             scaleY *= sy
         }
 
-        scaleX *= pixelRatio
-        scaleY *= pixelRatio
         width *= scaleX
         height *= scaleY
 
@@ -65,7 +69,12 @@ export function createPattern(ui: IUI, paint: ILeafPaint, pixelRatio: number): b
             scale(imageMatrix, 1 / scaleX, 1 / scaleY)
         }
 
-        const canvas = image.getCanvas(ceil(width) || 1, ceil(height) || 1, data.opacity, data.filters, data.padding)
+        if (imageMatrix) {
+            const canvasWidth = width + (xGap || 0), canvasHeight = height + (yGap || 0)
+            scale(imageMatrix, canvasWidth / max(floor(canvasWidth), 1), canvasHeight / max(floor(canvasHeight), 1)) // 缩放至floor画布宽高的状态
+        }
+
+        const canvas = image.getCanvas(width, height, data.opacity, data.filters, xGap, yGap)
         const pattern = image.getPattern(canvas, repeat || (Platform.origin.noRepeat || 'no-repeat'), imageMatrix, paint)
 
         paint.style = pattern

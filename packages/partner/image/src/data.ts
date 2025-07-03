@@ -1,4 +1,4 @@
-import { IBoundsData, IGap, ILeaferImage, IScaleData } from '@leafer/interface'
+import { IBoundsData, IGap, ILeaferImage, IPointData, IPointGap, IScaleData } from '@leafer/interface'
 import { MatrixHelper, MathHelper, Bounds, AlignHelper, BoundsHelper, PointHelper } from '@leafer/core'
 
 import { IImagePaint, ILeafPaint, ILeafPaintPatternData } from '@leafer-ui/interface'
@@ -47,7 +47,7 @@ export function getPatternData(paint: IImagePaint, box: IBoundsData, image: ILea
             scaleY = tempScaleData.scaleY
         }
 
-        if (align || gap) {
+        if (align || gap || repeat) {
             if (scaleX) BoundsHelper.scale(tempImage, scaleX, scaleY, true)
             if (align) AlignHelper.toPoint(align, tempImage, box, tempImage, true, true)
         }
@@ -66,8 +66,8 @@ export function getPatternData(paint: IImagePaint, box: IBoundsData, image: ILea
         case 'repeat':
             if (!sameBox || scaleX || rotation) repeatMode(data, box, width, height, tempImage.x, tempImage.y, scaleX, scaleY, rotation, align)
             if (!repeat) data.repeat = 'repeat'
-            if (gap) data.padding = typeof gap === 'object' ? getPaddingByGap(gap.x, gap.y, tempImage.width, tempImage.height, box) : getPaddingByGap(gap, gap, tempImage.width, tempImage.height, box)
-            break
+            const count = typeof repeat === 'object'
+            if (gap || count) data.gap = getGapData(gap, count && repeat, tempImage.width, tempImage.height, box)
         case 'fit':
         case 'cover':
         default:
@@ -95,11 +95,16 @@ export function getPatternData(paint: IImagePaint, box: IBoundsData, image: ILea
 }
 
 
-function getPaddingByGap(xGap: IGap, yGap: IGap, width: number, height: number, box: IBoundsData): number[] {
-    return [0, getGapValue(xGap, width, box.width), getGapValue(yGap, height, box.height), 0]
+function getGapData(gap: IGap | IPointGap, repeat: IPointData, width: number, height: number, box: IBoundsData): IPointData {
+    let xGap: IGap, yGap: IGap
+    if (typeof gap === 'object') xGap = gap.x, yGap = gap.y
+    else xGap = yGap = gap
+    return { x: getGapValue(xGap, width, box.width, repeat && repeat.x), y: getGapValue(yGap, height, box.height, repeat && repeat.y) }
 }
 
-function getGapValue(gap: IGap, size: number, totalSize: number): number {
-    const value = typeof gap === 'string' ? totalSize % size / (Math.floor(totalSize / size) - 1) : gap
+function getGapValue(gap: IGap, size: number, totalSize: number, rows: number): number {
+    const isStrGap = typeof gap === 'string' || rows
+    const remain = rows ? totalSize - rows * size : totalSize % size
+    const value = isStrGap ? remain / ((rows || Math.floor(totalSize / size)) - 1) : gap
     return gap === 'auto' ? (value < 0 ? 0 : value) : value
 }

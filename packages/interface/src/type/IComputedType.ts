@@ -1,4 +1,4 @@
-import { IBlendMode, IFourNumber, ILeaferImage, IMatrixData, ITaskItem } from '@leafer/interface'
+import { IBlendMode, IFourNumber, ILeaferImage, IMatrixData, IPointData, ITaskItem } from '@leafer/interface'
 
 import { IColorString } from './IStringType'
 import { IStrokeAlign, IStrokeJoin, IStrokeCap, IImagePaintMode, IImageFilters } from './IType'
@@ -30,7 +30,7 @@ export interface ILeafPaintPatternData {
     height?: number
     scaleX?: number
     scaleY?: number
-    padding?: IFourNumber
+    gap?: IPointData
     opacity?: number
     transform?: IMatrixData
     filters?: IImageFilters

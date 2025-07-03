@@ -110,7 +110,7 @@ export interface IImageFilters {
     shadows?: number // 阴影
 }
 export type IImagePaintMode = 'normal' | 'cover' | 'fit' | 'stretch' | 'clip' | 'repeat'
-export type IRepeat = boolean | 'x' | 'y'
+export type IRepeat = boolean | 'x' | 'y' | IPointData
 
 // 描边
 export type IStrokeAlign = 'inside' | 'outside' | 'center'
