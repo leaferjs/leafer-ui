@@ -1,5 +1,5 @@
 import { INumber, IValue, IBoolean, IPathCommandData, IPathString, IPointData, IPathCommandObject, IObject, IFilter } from '@leafer/interface'
-import { PathConvert, DataHelper, LeafData, Debug, isArray } from '@leafer/core'
+import { PathConvert, DataHelper, LeafData, Debug, isArray, isObject } from '@leafer/core'
 
 import { IUI, IUIData, ILeafPaint, IStrokeComputedStyle } from '@leafer-ui/interface'
 import { Paint, PaintImage, ColorConvert } from '@leafer-ui/external'
@@ -88,7 +88,7 @@ export class UIData extends LeafData implements IUIData {
             stintSet(this, '__isTransparentFill', hasTransparent(value as string))
             this.__isFills && this.__removePaint('fill', true)
             this._fill = value
-        } else if (typeof value === 'object') {
+        } else if (isObject(value)) {
             this.__setPaint('fill', value)
         }
     }
@@ -98,7 +98,7 @@ export class UIData extends LeafData implements IUIData {
             stintSet(this, '__isTransparentStroke', hasTransparent(value as string))
             this.__isStrokes && this.__removePaint('stroke', true)
             this._stroke = value
-        } else if (typeof value === 'object') {
+        } else if (isObject(value)) {
             this.__setPaint('stroke', value)
         }
     }
@@ -106,7 +106,7 @@ export class UIData extends LeafData implements IUIData {
 
     protected setPath(value: IPathCommandData | IPathCommandObject[] | IPathString) {
         const isString = typeof value === 'string'
-        if (isString || (value && typeof value[0] === 'object')) {
+        if (isString || (value && isObject(value[0]))) {
             this.__setInput('path', value)
             this._path = isString ? parse(value) : objectToCanvasData(value as IPathCommandObject[])
         } else {

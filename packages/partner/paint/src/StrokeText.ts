@@ -1,5 +1,5 @@
 import { ILeaferCanvas } from '@leafer/interface'
-import { LeafHelper } from "@leafer/core"
+import { LeafHelper, isObject } from "@leafer/core"
 
 import { IUI, ITextRowData, ILeafPaint, IStrokeAlign, ILeafStrokePaint } from '@leafer-ui/interface'
 import { PaintImage } from "@leafer-ui/draw"
@@ -23,7 +23,7 @@ export function strokeText(stroke: string | ILeafPaint[], ui: IUI, canvas: ILeaf
 
 function drawCenter(stroke: string | ILeafPaint[], strokeWidthScale: number, ui: IUI, canvas: ILeaferCanvas): void {
     const data = ui.__
-    if (typeof stroke === 'object') {
+    if (isObject(stroke)) {
         drawStrokesStyle(stroke, strokeWidthScale, true, ui, canvas)
     } else {
         canvas.setStroke(stroke, data.__strokeWidth * strokeWidthScale, data)

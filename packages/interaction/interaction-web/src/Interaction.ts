@@ -1,5 +1,5 @@
 import { IObject, IPointData, ITimer, IKeepTouchData, ICursorType, IClientPointData } from '@leafer/interface'
-import { MathHelper, isArray } from '@leafer/core'
+import { MathHelper, isArray, isObject } from '@leafer/core'
 import { InteractionBase, InteractionHelper, Cursor } from '@leafer-ui/core'
 
 import { PointerEventHelper } from './PointerEventHelper'
@@ -338,8 +338,8 @@ export class Interaction extends InteractionBase {
         super.setCursor(cursor)
         const list: ICursorType[] = []
         this.eachCursor(cursor, list)
-        if (typeof list[list.length - 1] === 'object') list.push('default')
-        this.canvas.view.style.cursor = list.map(item => (typeof item === 'object') ? `url(${item.url}) ${item.x || 0} ${item.y || 0}` : item).join(',')
+        if (isObject(list[list.length - 1])) list.push('default')
+        this.canvas.view.style.cursor = list.map(item => (isObject(item)) ? `url(${item.url}) ${item.x || 0} ${item.y || 0}` : item).join(',')
     }
 
     protected eachCursor(cursor: ICursorType | ICursorType[], list: ICursorType[], level = 0): void {

@@ -1,5 +1,5 @@
 import { IBoundsData, IGap, ILeaferImage, IPointData, IPointGap, IScaleData } from '@leafer/interface'
-import { MatrixHelper, MathHelper, Bounds, AlignHelper, BoundsHelper, PointHelper } from '@leafer/core'
+import { MatrixHelper, MathHelper, Bounds, AlignHelper, BoundsHelper, PointHelper, isObject } from '@leafer/core'
 
 import { IImagePaint, ILeafPaint, ILeafPaintPatternData } from '@leafer-ui/interface'
 
@@ -66,7 +66,7 @@ export function getPatternData(paint: IImagePaint, box: IBoundsData, image: ILea
         case 'repeat':
             if (!sameBox || scaleX || rotation) repeatMode(data, box, width, height, tempImage.x, tempImage.y, scaleX, scaleY, rotation, align)
             if (!repeat) data.repeat = 'repeat'
-            const count = typeof repeat === 'object'
+            const count = isObject(repeat)
             if (gap || count) data.gap = getGapData(gap, count && repeat, tempImage.width, tempImage.height, box)
         case 'fit':
         case 'cover':
@@ -97,7 +97,7 @@ export function getPatternData(paint: IImagePaint, box: IBoundsData, image: ILea
 
 function getGapData(gap: IGap | IPointGap, repeat: IPointData, width: number, height: number, box: IBoundsData): IPointData {
     let xGap: IGap, yGap: IGap
-    if (typeof gap === 'object') xGap = gap.x, yGap = gap.y
+    if (isObject(gap)) xGap = gap.x, yGap = gap.y
     else xGap = yGap = gap
     return { x: getGapValue(xGap, width, box.width, repeat && repeat.x), y: getGapValue(yGap, height, box.height, repeat && repeat.y) }
 }
