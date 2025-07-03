@@ -1,5 +1,5 @@
 import { IUIEvent, IPointerEvent, ILeaf, IInteraction, IInteractionConfig, ITransformer, ILeafList, IMoveEvent, IZoomEvent, IRotateEvent, IWheelEvent, ISelector, IBounds, IEventListenerId, IInteractionCanvas, ITimer, IKeepTouchData, IKeyEvent, IPickOptions, ICursorType, IBooleanMap, IPickBottom, IClientPointData, IPointData, ILeaferConfig, IMoveConfig, IPointerConfig } from '@leafer/interface'
-import { LeaferEvent, ResizeEvent, LeafList, Bounds, PointHelper, DataHelper, Platform } from '@leafer/core'
+import { LeaferEvent, ResizeEvent, LeafList, Bounds, PointHelper, DataHelper, Platform, isNumber } from '@leafer/core'
 
 import { IApp } from '@leafer-ui/interface'
 import { PointerEvent, DropEvent, KeyEvent, PointerButton, Keyboard } from '@leafer-ui/event'
@@ -516,7 +516,7 @@ export class InteractionBase implements IInteraction {
     protected __onResize(): void {
         const { dragOut } = this.m
         this.shrinkCanvasBounds = new Bounds(this.canvas.bounds)
-        this.shrinkCanvasBounds.spread(-(typeof dragOut === 'number' ? dragOut : 2))
+        this.shrinkCanvasBounds.spread(-(isNumber(dragOut) ? dragOut : 2))
     }
 
     protected __listenEvents(): void {

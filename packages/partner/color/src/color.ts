@@ -1,11 +1,11 @@
-import { isString } from '@leafer/core'
+import { isString, isNumber } from '@leafer/core'
 
 import { IColor } from '@leafer-ui/interface'
 import { ColorConvert } from '@leafer-ui/draw'
 
 
 export function string(color: IColor, opacity?: number): string {
-    const doOpacity = typeof opacity === 'number' && opacity !== 1
+    const doOpacity = isNumber(opacity) && opacity < 1
     if (isString(color)) {
         if (doOpacity && ColorConvert.object) color = ColorConvert.object(color)
         else return color

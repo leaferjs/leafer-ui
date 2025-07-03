@@ -1,4 +1,4 @@
-import { Platform, Direction4 } from '@leafer/core'
+import { Platform, Direction4, isString } from '@leafer/core'
 
 import { ITextData, ITextDrawData } from '@leafer-ui/interface'
 
@@ -13,7 +13,7 @@ const { top, right, bottom, left } = Direction4
 
 export function getDrawData(content: string | number, style: ITextData): ITextDrawData {
 
-    if (typeof content !== 'string') content = String(content)
+    if (!isString(content)) content = String(content)
 
     let x = 0, y = 0
 

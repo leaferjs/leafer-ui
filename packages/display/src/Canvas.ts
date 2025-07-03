@@ -1,5 +1,5 @@
 import { ILeaferCanvas, ILeaferCanvasConfig, INumber, IRenderOptions, IPointData, ICanvasContext2D, ICanvasContext2DSettings, IScreenSizeData } from '@leafer/interface'
-import { Creator, ImageEvent, LeaferImage, Matrix, dataProcessor, dataType, registerUI } from '@leafer/core'
+import { Creator, ImageEvent, LeaferImage, Matrix, dataProcessor, dataType, registerUI, isNumber } from '@leafer/core'
 
 import { ICanvas, ICanvasData, ICanvasInputData, IUI } from '@leafer-ui/interface'
 import { CanvasData } from '@leafer-ui/data'
@@ -62,7 +62,7 @@ export class Canvas extends Rect implements ICanvas {
 
         const m = new Matrix()
         if (offset) m.translate(offset.x, offset.y)
-        if (scale) typeof scale === 'number' ? m.scale(scale) : m.scale(scale.x, scale.y)
+        if (scale) isNumber(scale) ? m.scale(scale) : m.scale(scale.x, scale.y)
         if (rotation) m.rotate(rotation)
         matrix.multiplyParent(m)
 
