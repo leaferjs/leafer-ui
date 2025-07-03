@@ -1,5 +1,5 @@
 import { IBoundsData, IGap, ILeaferImage, IPointData, IPointGap, IScaleData } from '@leafer/interface'
-import { MatrixHelper, MathHelper, Bounds, AlignHelper, BoundsHelper, PointHelper, isObject } from '@leafer/core'
+import { MatrixHelper, MathHelper, Bounds, AlignHelper, BoundsHelper, PointHelper, isObject, isString } from '@leafer/core'
 
 import { IImagePaint, ILeafPaint, ILeafPaintPatternData } from '@leafer-ui/interface'
 
@@ -90,7 +90,7 @@ export function getPatternData(paint: IImagePaint, box: IBoundsData, image: ILea
     data.height = height
     if (opacity) data.opacity = opacity
     if (filters) data.filters = filters
-    if (repeat) data.repeat = typeof repeat === 'string' ? (repeat === 'x' ? 'repeat-x' : 'repeat-y') : 'repeat'
+    if (repeat) data.repeat = isString(repeat) ? (repeat === 'x' ? 'repeat-x' : 'repeat-y') : 'repeat'
     return data
 }
 
@@ -103,8 +103,8 @@ function getGapData(gap: IGap | IPointGap, repeat: IPointData, width: number, he
 }
 
 function getGapValue(gap: IGap, size: number, totalSize: number, rows: number): number {
-    const isStrGap = typeof gap === 'string' || rows
+    const auto = isString(gap) || rows
     const remain = rows ? totalSize - rows * size : totalSize % size
-    const value = isStrGap ? remain / ((rows || Math.floor(totalSize / size)) - 1) : gap
+    const value = auto ? remain / ((rows || Math.floor(totalSize / size)) - 1) : gap
     return gap === 'auto' ? (value < 0 ? 0 : value) : value
 }

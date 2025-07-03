@@ -1,5 +1,5 @@
 import { INumber, IValue, IBoolean, IPathCommandData, IPathString, IPointData, IPathCommandObject, IObject, IFilter } from '@leafer/interface'
-import { PathConvert, DataHelper, LeafData, Debug, isArray, isObject } from '@leafer/core'
+import { PathConvert, DataHelper, LeafData, Debug, isArray, isObject, isString } from '@leafer/core'
 
 import { IUI, IUIData, ILeafPaint, IStrokeComputedStyle } from '@leafer-ui/interface'
 import { Paint, PaintImage, ColorConvert } from '@leafer-ui/external'
@@ -84,7 +84,7 @@ export class UIData extends LeafData implements IUIData {
 
     protected setFill(value: IValue) {
         if (this.__naturalWidth) this.__removeNaturalSize()
-        if (typeof value === 'string' || !value) {
+        if (isString(value) || !value) {
             stintSet(this, '__isTransparentFill', hasTransparent(value as string))
             this.__isFills && this.__removePaint('fill', true)
             this._fill = value
@@ -94,7 +94,7 @@ export class UIData extends LeafData implements IUIData {
     }
 
     protected setStroke(value: IValue) {
-        if (typeof value === 'string' || !value) {
+        if (isString(value) || !value) {
             stintSet(this, '__isTransparentStroke', hasTransparent(value as string))
             this.__isStrokes && this.__removePaint('stroke', true)
             this._stroke = value
@@ -105,10 +105,10 @@ export class UIData extends LeafData implements IUIData {
 
 
     protected setPath(value: IPathCommandData | IPathCommandObject[] | IPathString) {
-        const isString = typeof value === 'string'
-        if (isString || (value && isObject(value[0]))) {
+        const isStr = isString(value)
+        if (isStr || (value && isObject(value[0]))) {
             this.__setInput('path', value)
-            this._path = isString ? parse(value) : objectToCanvasData(value as IPathCommandObject[])
+            this._path = isStr ? parse(value) : objectToCanvasData(value as IPathCommandObject[])
         } else {
             if (this.__input) this.__removeInput('path')
             this._path = value as IPathCommandData

@@ -1,4 +1,4 @@
-import { DataHelper, isArray } from '@leafer/core'
+import { DataHelper, isArray, isObject, isString } from '@leafer/core'
 
 import { IUI, IPaint, ILeafPaint, IRGB, IBooleanMap, IObject, IPaintAttr, IStrokeComputedStyle } from '@leafer-ui/interface'
 import { ColorConvert, PaintImage, PaintGradient } from '@leafer-ui/draw'
@@ -50,7 +50,7 @@ export function compute(attrName: IPaintAttr, ui: IUI): void {
 
 
 function getLeafPaint(attrName: string, paint: IPaint, ui: IUI): ILeafPaint {
-    if (typeof paint !== 'object' || paint.visible === false || paint.opacity === 0) return undefined
+    if (!isObject(paint) || paint.visible === false || paint.opacity === 0) return undefined
 
     let data: ILeafPaint
     const { boxBounds } = ui.__layout
@@ -77,7 +77,7 @@ function getLeafPaint(attrName: string, paint: IPaint, ui: IUI): ILeafPaint {
     }
 
     if (data) {
-        if (typeof data.style === 'string' && hasTransparent(data.style)) data.isTransparent = true
+        if (isString(data.style) && hasTransparent(data.style)) data.isTransparent = true
         if (paint.style) {
             if (paint.style.strokeWidth === 0) return undefined
             data.strokeStyle = paint.style as IStrokeComputedStyle

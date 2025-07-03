@@ -1,5 +1,5 @@
 import { IObject, IPointData, ITimer, IKeepTouchData, ICursorType, IClientPointData } from '@leafer/interface'
-import { MathHelper, isArray, isObject } from '@leafer/core'
+import { MathHelper, isArray, isObject, isString } from '@leafer/core'
 import { InteractionBase, InteractionHelper, Cursor } from '@leafer-ui/core'
 
 import { PointerEventHelper } from './PointerEventHelper'
@@ -347,7 +347,7 @@ export class Interaction extends InteractionBase {
         if (isArray(cursor)) {
             cursor.forEach(item => this.eachCursor(item, list, level))
         } else {
-            const custom = typeof cursor === 'string' && Cursor.get(cursor)
+            const custom = isString(cursor) && Cursor.get(cursor)
             if (custom && level < 2) {
                 this.eachCursor(custom, list, level)
             } else {

@@ -1,5 +1,5 @@
 import { IObject, IBoundsData, IPointData } from '@leafer/interface'
-import { AroundHelper, Platform } from '@leafer/core'
+import { AroundHelper, Platform, isString } from '@leafer/core'
 
 import { IGradientPaint, ILeafPaint, IColorStop, IColorString } from '@leafer-ui/interface'
 import { ColorConvert } from '@leafer-ui/draw'
@@ -30,7 +30,7 @@ export function applyStops(data: ILeafPaint, gradient: IObject, stops: IColorSto
         let stop: IColorStop | string, color: string, offset: number, isTransparent: boolean
         for (let i = 0, len = stops.length; i < len; i++) {
             stop = stops[i]
-            if (typeof stop === 'string') offset = i / (len - 1), color = ColorConvert.string(stop, opacity)
+            if (isString(stop)) offset = i / (len - 1), color = ColorConvert.string(stop, opacity)
             else offset = stop.offset, color = ColorConvert.string(stop.color, opacity)
             gradient.addColorStop(offset, color)
             if (!isTransparent && hasTransparent(color)) isTransparent = true
