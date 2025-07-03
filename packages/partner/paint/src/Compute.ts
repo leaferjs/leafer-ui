@@ -1,4 +1,4 @@
-import { DataHelper } from '@leafer/core'
+import { DataHelper, isArray } from '@leafer/core'
 
 import { IUI, IPaint, ILeafPaint, IRGB, IBooleanMap, IObject, IPaintAttr, IStrokeComputedStyle } from '@leafer-ui/interface'
 import { ColorConvert, PaintImage, PaintGradient } from '@leafer-ui/draw'
@@ -11,7 +11,7 @@ export function compute(attrName: IPaintAttr, ui: IUI): void {
     const data = ui.__, leafPaints: ILeafPaint[] = []
 
     let paints: IPaint[] = data.__input[attrName], isAlphaPixel: boolean, isTransparent: boolean
-    if (!(paints instanceof Array)) paints = [paints]
+    if (!isArray(paints)) paints = [paints]
 
     recycleMap = PaintImage.recycleImage(attrName, data)
 

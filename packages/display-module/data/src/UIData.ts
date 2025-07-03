@@ -1,5 +1,5 @@
 import { INumber, IValue, IBoolean, IPathCommandData, IPathString, IPointData, IPathCommandObject, IObject, IFilter } from '@leafer/interface'
-import { PathConvert, DataHelper, LeafData, Debug } from '@leafer/core'
+import { PathConvert, DataHelper, LeafData, Debug, isArray } from '@leafer/core'
 
 import { IUI, IUIData, ILeafPaint, IStrokeComputedStyle } from '@leafer-ui/interface'
 import { Paint, PaintImage, ColorConvert } from '@leafer-ui/external'
@@ -156,7 +156,7 @@ export class UIData extends LeafData implements IUIData {
         this.__setInput(attrName, value)
         const layout = this.__leaf.__layout
         layout.boxChanged || layout.boxChange()
-        if (value instanceof Array && !value.length) {
+        if (isArray(value) && !value.length) {
             this.__removePaint(attrName)
         } else {
             if (attrName === 'fill') this.__isFills = true, this._fill || (this._fill = emptyPaint)
@@ -181,7 +181,7 @@ export class UIData extends LeafData implements IUIData {
 
 function setArray(data: IUIData, key: string, value: IValue) {
     data.__setInput(key, value)
-    if (value instanceof Array) {
+    if (isArray(value)) {
         if (value.some((item: IFilter) => item.visible === false)) value = value.filter((item: IFilter) => item.visible !== false)
         value.length || (value = undefined)
     } else value = value && (value as IFilter).visible !== false ? [value] : undefined;

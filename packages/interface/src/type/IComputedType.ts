@@ -1,4 +1,4 @@
-import { IBlendMode, IFourNumber, ILeaferImage, IMatrixData, IPointData, ITaskItem } from '@leafer/interface'
+import { IBlendMode, ILeaferImage, IMatrixData, IPointData, ITaskItem } from '@leafer/interface'
 
 import { IColorString } from './IStringType'
 import { IStrokeAlign, IStrokeJoin, IStrokeCap, IImagePaintMode, IImageFilters } from './IType'

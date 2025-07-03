@@ -1,5 +1,5 @@
 import { IBooleanMap, ILeaferImage, IObject } from '@leafer/interface'
-import { ImageManager } from '@leafer/core'
+import { ImageManager, isArray } from '@leafer/core'
 
 import { IImagePaint, ILeafPaint, IPaintAttr, IUIData } from '@leafer-ui/interface'
 
@@ -7,7 +7,7 @@ import { IImagePaint, ILeafPaint, IPaintAttr, IUIData } from '@leafer-ui/interfa
 export function recycleImage(attrName: IPaintAttr, data: IUIData): IBooleanMap {
     const paints: ILeafPaint[] = (data as IObject)['_' + attrName]
 
-    if (paints instanceof Array) {
+    if (isArray(paints)) {
 
         let paint: ILeafPaint, image: ILeaferImage, recycleMap: IBooleanMap, input: IImagePaint[], url: string
 
@@ -26,7 +26,7 @@ export function recycleImage(attrName: IPaintAttr, data: IUIData): IBooleanMap {
                 if (image.loading) {
                     if (!input) {
                         input = (data.__input && data.__input[attrName]) || []
-                        if (!(input instanceof Array)) input = [input]
+                        if (!isArray(input)) input = [input]
                     }
                     image.unload(paints[i].loadId, !input.some((item: IImagePaint) => item.url === url))
                 }
