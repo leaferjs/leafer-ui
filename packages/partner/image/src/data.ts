@@ -1,4 +1,4 @@
-import { IBoundsData, ILeaferImage, IScaleData } from '@leafer/interface'
+import { IBoundsData, IGap, ILeaferImage, IScaleData } from '@leafer/interface'
 import { MatrixHelper, MathHelper, Bounds, AlignHelper, BoundsHelper, PointHelper } from '@leafer/core'
 
 import { IImagePaint, ILeafPaint, ILeafPaintPatternData } from '@leafer-ui/interface'
@@ -25,7 +25,7 @@ export function getPatternData(paint: IImagePaint, box: IBoundsData, image: ILea
     if (paint.mode === 'strench' as string) paint.mode = 'stretch' // 兼容代码，后续可移除
 
     let { width, height } = image
-    const { opacity, mode, align, offset, scale, size, rotation, skew, clipSize, repeat, filters } = paint
+    const { opacity, mode, align, offset, scale, size, rotation, skew, clipSize, repeat, gap, filters } = paint
     const sameBox = box.width === width && box.height === height
 
     const data: ILeafPaintPatternData = { mode }
@@ -47,9 +47,9 @@ export function getPatternData(paint: IImagePaint, box: IBoundsData, image: ILea
             scaleY = tempScaleData.scaleY
         }
 
-        if (align) {
+        if (align || gap) {
             if (scaleX) BoundsHelper.scale(tempImage, scaleX, scaleY, true)
-            AlignHelper.toPoint(align, tempImage, box, tempImage, true, true)
+            if (align) AlignHelper.toPoint(align, tempImage, box, tempImage, true, true)
         }
     }
 
@@ -66,6 +66,7 @@ export function getPatternData(paint: IImagePaint, box: IBoundsData, image: ILea
         case 'repeat':
             if (!sameBox || scaleX || rotation) repeatMode(data, box, width, height, tempImage.x, tempImage.y, scaleX, scaleY, rotation, align)
             if (!repeat) data.repeat = 'repeat'
+            if (gap) data.padding = typeof gap === 'object' ? getPaddingByGap(gap.x, gap.y, tempImage.width, tempImage.height, box) : getPaddingByGap(gap, gap, tempImage.width, tempImage.height, box)
             break
         case 'fit':
         case 'cover':
@@ -91,4 +92,14 @@ export function getPatternData(paint: IImagePaint, box: IBoundsData, image: ILea
     if (filters) data.filters = filters
     if (repeat) data.repeat = typeof repeat === 'string' ? (repeat === 'x' ? 'repeat-x' : 'repeat-y') : 'repeat'
     return data
+}
+
+
+function getPaddingByGap(xGap: IGap, yGap: IGap, width: number, height: number, box: IBoundsData): number[] {
+    return [0, getGapValue(xGap, width, box.width), getGapValue(yGap, height, box.height), 0]
+}
+
+function getGapValue(gap: IGap, size: number, totalSize: number): number {
+    const value = typeof gap === 'string' ? totalSize % size / (Math.floor(totalSize / size) - 1) : gap
+    return gap === 'auto' ? (value < 0 ? 0 : value) : value
 }

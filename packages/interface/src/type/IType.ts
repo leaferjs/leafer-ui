@@ -1,4 +1,4 @@
-import { IPointData, IPathCommandData, IWindingRule, IBlendMode, IExportFileType, IFourNumber, IAlign, IUnitPointData, IAxis, IAxisReverse, IFilter, IOptionSizeData, ISizeData } from '@leafer/interface'
+import { IPointData, IPathCommandData, IWindingRule, IBlendMode, IExportFileType, IFourNumber, IAlign, IUnitPointData, IAxis, IAxisReverse, IFilter, IOptionSizeData, ISizeData, IGap, IPointGap } from '@leafer/interface'
 import { IColorString, IPaintString } from './IStringType'
 import { IStrokeStyle } from '../ICommonAttr'
 
@@ -91,6 +91,7 @@ export interface IImagePaint extends IPaintBase {
     clipSize?: ISizeData
 
     repeat?: IRepeat
+    gap?: IGap | IPointGap
     scaleFixed?: boolean // 平铺图片不跟随画布缩放
 
     changeful?: boolean // 会频繁变化，不生成图案（有特殊性能优化，一般用于游戏精灵、动图场景）
