@@ -1,6 +1,7 @@
-import { ITextData, ITextDecorationType, ITextDrawData } from '@leafer-ui/interface'
+import { isObject } from '@leafer/core'
 
-import { ColorConvert, isObject } from '@leafer-ui/draw'
+import { ITextData, ITextDecorationType, ITextDrawData } from '@leafer-ui/interface'
+import { ColorConvert } from '@leafer-ui/draw'
 
 
 export function decorationText(drawData: ITextDrawData, style: ITextData): void {
