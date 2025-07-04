@@ -1,5 +1,5 @@
 import { ILeaferConfig, IResizeEvent, ILeaferCanvas, IRenderOptions, ILeaferBase, IBoundsData } from '@leafer/interface'
-import { Creator, DataHelper, LayoutEvent, RenderEvent, canvasSizeAttrs, registerUI } from '@leafer/core'
+import { Creator, DataHelper, LayoutEvent, RenderEvent, canvasSizeAttrs, registerUI, isUndefined } from '@leafer/core'
 
 import { IApp, IAppConfig, IAppForEachFunction, IAppInputData, ILeafer } from '@leafer-ui/interface'
 
@@ -92,7 +92,7 @@ export class App extends Leafer implements IApp {
         }
 
         super.add(leafer, index)
-        if (index !== undefined) leafer.canvas.childIndex = index
+        if (!isUndefined(index)) leafer.canvas.childIndex = index
         this.__listenChildEvents(leafer)
     }
 

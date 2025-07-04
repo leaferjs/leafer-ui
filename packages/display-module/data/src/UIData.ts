@@ -1,5 +1,5 @@
 import { INumber, IValue, IBoolean, IPathCommandData, IPathString, IPointData, IPathCommandObject, IObject, IFilter } from '@leafer/interface'
-import { PathConvert, DataHelper, LeafData, Debug, isArray, isObject, isString } from '@leafer/core'
+import { PathConvert, DataHelper, LeafData, Debug, isArray, isObject, isString, isUndefined } from '@leafer/core'
 
 import { IUI, IUIData, ILeafPaint, IStrokeComputedStyle } from '@leafer-ui/interface'
 import { Paint, PaintImage, ColorConvert } from '@leafer-ui/external'
@@ -143,7 +143,7 @@ export class UIData extends LeafData implements IUIData {
         let { strokeWidth, strokeWidthFixed } = this as IUIData
         if (childStyle) {
             if (childStyle.strokeWidth) strokeWidth = childStyle.strokeWidth
-            if (childStyle.strokeWidthFixed !== undefined) strokeWidthFixed = childStyle.strokeWidthFixed
+            if (!isUndefined(childStyle.strokeWidthFixed)) strokeWidthFixed = childStyle.strokeWidthFixed
         }
         if (strokeWidthFixed) {
             const scale = this.__leaf.getClampRenderScale()

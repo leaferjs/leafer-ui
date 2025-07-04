@@ -1,5 +1,5 @@
 import { IKeepTouchData, IPointData } from '@leafer/interface'
-import { InteractionBase, InteractionHelper } from '@leafer-ui/core'
+import { InteractionBase, InteractionHelper, isUndefined } from '@leafer-ui/core'
 
 import { PointerEventHelper } from './PointerEventHelper'
 
@@ -51,11 +51,7 @@ export class Interaction extends InteractionBase {
     }
 
     public getLocal(clientPoint: IClientPoint, updateClient?: boolean): IPointData {
-        if (clientPoint.x !== undefined) {
-            return { x: clientPoint.x, y: clientPoint.y } // Canvas
-        } else {
-            return super.getLocal(clientPoint, updateClient)
-        }
+        return isUndefined(clientPoint.x) ? super.getLocal(clientPoint, updateClient) : { x: clientPoint.x, y: clientPoint.y } // Canvas
     }
 
     protected getTouches(touches: any): ITouch[] {

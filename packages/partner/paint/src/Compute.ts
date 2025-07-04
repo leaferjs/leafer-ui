@@ -1,4 +1,4 @@
-import { DataHelper, isArray, isObject, isString } from '@leafer/core'
+import { DataHelper, isArray, isObject, isString, isUndefined } from '@leafer/core'
 
 import { IUI, IPaint, ILeafPaint, IRGB, IBooleanMap, IObject, IPaintAttr, IStrokeComputedStyle } from '@leafer-ui/interface'
 import { ColorConvert, PaintImage, PaintGradient } from '@leafer-ui/draw'
@@ -73,7 +73,7 @@ function getLeafPaint(attrName: string, paint: IPaint, ui: IUI): ILeafPaint {
             data = { type, style: ColorConvert.string(color, opacity) }
             break
         default:
-            if ((paint as IRGB).r !== undefined) data = { type: 'solid', style: ColorConvert.string(paint) }
+            if (!isUndefined((paint as IRGB).r)) data = { type: 'solid', style: ColorConvert.string(paint) }
     }
 
     if (data) {

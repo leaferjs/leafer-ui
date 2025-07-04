@@ -1,5 +1,5 @@
 import { IPointerEvent, IDragEvent, ISwipeEvent, IUIEvent, IPointData, ILeafList, IDropEvent, IObject } from '@leafer/interface'
-import { PointHelper, LeafList } from '@leafer/core'
+import { PointHelper, LeafList, isUndefined } from '@leafer/core'
 
 import { SwipeEvent, DragEvent } from '@leafer-ui/event'
 
@@ -52,7 +52,7 @@ export const InteractionHelper = {
             ctrlKey: e.ctrlKey,
             shiftKey: e.shiftKey,
             metaKey: e.metaKey,
-            buttons: e.buttons === undefined ? 1 : (e.buttons === 0 ? pointerUpButtons : e.buttons), // touchEvent no button and buttons, set default
+            buttons: isUndefined(e.buttons) ? 1 : (e.buttons === 0 ? pointerUpButtons : e.buttons), // touchEvent no button and buttons, set default
             origin: e
         } as IUIEvent
     },

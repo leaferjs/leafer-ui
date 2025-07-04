@@ -1,4 +1,4 @@
-import { isString, isNumber } from '@leafer/core'
+import { isString, isNumber, isUndefined } from '@leafer/core'
 
 import { IColor } from '@leafer-ui/interface'
 import { ColorConvert } from '@leafer-ui/draw'
@@ -10,7 +10,7 @@ export function string(color: IColor, opacity?: number): string {
         if (doOpacity && ColorConvert.object) color = ColorConvert.object(color)
         else return color
     }
-    let a = color.a === undefined ? 1 : color.a
+    let a = isUndefined(color.a) ? 1 : color.a
     if (doOpacity) a *= opacity
     const rgb = color.r + ',' + color.g + ',' + color.b
     return a === 1 ? 'rgb(' + rgb + ')' : 'rgba(' + rgb + ',' + a + ')'
