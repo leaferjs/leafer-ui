@@ -77,11 +77,14 @@ function getLeafPaint(attrName: string, paint: IPaint, ui: IUI): ILeafPaint {
     }
 
     if (data) {
+        // 描边样式
         if (isString(data.style) && hasTransparent(data.style)) data.isTransparent = true
         if (paint.style) {
             if (paint.style.strokeWidth === 0) return undefined
             data.strokeStyle = paint.style as IStrokeComputedStyle
         }
+
+        if (paint.editing) data.editing = paint.editing
         if (paint.blendMode) data.blendMode = paint.blendMode
     }
 
