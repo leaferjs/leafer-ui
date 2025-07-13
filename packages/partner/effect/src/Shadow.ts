@@ -59,7 +59,7 @@ export function drawWorldShadow(canvas: ILeaferCanvas, outBounds: IBoundsData, s
 
     const { bounds, shapeBounds } = shape
 
-    if (Platform.fullImageShadow || spreadScale) { // Safari, fix: 存在spreadScale时导出的问题
+    if (Platform.fullImageShadow) { // Safari
 
         copy(tempBounds, canvas.bounds)
         tempBounds.x += (outBounds.x - shapeBounds.x)
