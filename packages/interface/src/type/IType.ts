@@ -180,6 +180,7 @@ export interface IShadowEffect {
     blendMode?: IBlendMode
     visible?: boolean
     box?: boolean
+    scaleFixed?: boolean
 }
 
 export interface IBlurEffect {

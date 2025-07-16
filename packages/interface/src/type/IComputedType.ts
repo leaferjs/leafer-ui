@@ -57,4 +57,5 @@ export interface ILeafShadowEffect {
     color: IColorString
     blendMode?: IBlendMode
     box?: boolean
+    scaleFixed?: boolean
 }

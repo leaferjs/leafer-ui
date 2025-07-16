@@ -55,7 +55,7 @@ export function shadow(ui: IUI, current: ILeaferCanvas, shape: ICachedShape): vo
 }
 
 
-export function drawWorldShadow(canvas: ILeaferCanvas, outBounds: IBoundsData, spreadScale: number, shape: ICachedShape,): void {
+export function drawWorldShadow(canvas: ILeaferCanvas, outBounds: IBoundsData, spreadScale: number, shape: ICachedShape): void {
 
     const { bounds, shapeBounds } = shape
 
