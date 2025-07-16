@@ -1,4 +1,4 @@
-import { INumber, IBoolean, IString, IFourNumber, IUnitData } from '@leafer/interface'
+import { INumber, IBoolean, IString, IFourNumber, IUnitData, IScaleFixed } from '@leafer/interface'
 import { IStrokeAlign, IStrokeCap, IStrokeJoin, IBlurEffect, IFontWeight, ITextCase, ITextDecoration, IShadowEffect, IGrayscaleEffect, ITextAlign, IVerticalAlign, IOverflow, ITextWrap, IStroke, IFill, IArrowType, IWritingMode } from './type/IType'
 import { ILeafStrokePaint, ILeafShadowEffect, ILeafPaint } from './type/IComputedType'
 import { IDashPatternString, IShadowString, IColorString, IStrokeWidthString, ICornerRadiusString } from './type/IStringType'
@@ -53,7 +53,7 @@ export interface IStrokeInputData extends IStrokeStyle {
 export interface IStrokeStyle {
     strokeAlign?: IStrokeAlign
     strokeWidth?: IFourNumber | IStrokeWidthString
-    strokeWidthFixed?: IBoolean
+    strokeWidthFixed?: IScaleFixed
     strokeCap?: IStrokeCap
     strokeJoin?: IStrokeJoin
     dashPattern?: INumber[] | IDashPatternString
@@ -72,7 +72,7 @@ export interface IStrokeComputedStyle {
     strokeAlign?: IStrokeAlign
     strokeWidth?: number
     strokeWidths?: number[]
-    strokeWidthFixed?: boolean
+    strokeWidthFixed?: IScaleFixed
     strokeCap?: IStrokeCap
     strokeJoin?: IStrokeJoin
     dashPattern?: number[]

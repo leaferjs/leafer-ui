@@ -1,4 +1,4 @@
-import { IBlendMode, ILeaferImage, IMatrixData, IPointData, ITaskItem } from '@leafer/interface'
+import { IBlendMode, ILeaferImage, IMatrixData, IPointData, IScaleFixed, ITaskItem } from '@leafer/interface'
 
 import { IColorString } from './IStringType'
 import { IStrokeAlign, IStrokeJoin, IStrokeCap, IImagePaintMode, IImageFilters } from './IType'
@@ -22,7 +22,7 @@ export interface ILeafPaint {
     isTransparent?: boolean // 是否为透明色
     data?: ILeafPaintPatternData
     editing?: boolean // 标记编辑中
-    scaleFixed?: boolean // 平铺图片不跟随画布缩放
+    scaleFixed?: IScaleFixed // 平铺图片不跟随画布缩放
 }
 
 export interface ILeafPaintPatternData {
@@ -57,5 +57,5 @@ export interface ILeafShadowEffect {
     color: IColorString
     blendMode?: IBlendMode
     box?: boolean
-    scaleFixed?: boolean
+    scaleFixed?: IScaleFixed
 }
