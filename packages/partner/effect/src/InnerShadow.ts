@@ -25,11 +25,18 @@ export function innerShadow(ui: IUI, current: ILeaferCanvas, shape: ICachedShape
 
     innerShadow.forEach((item, index) => {
 
+        let otherScale = 1 // 关联 scaleFixed 逻辑
+
+        if (item.scaleFixed) {
+            const sx = Math.abs(nowWorld.scaleX)
+            if (sx > 1) otherScale = 1 / sx
+        }
+
         other.save()
 
-        other.setWorldShadow((offsetOutBounds.offsetX + item.x * scaleX), (offsetOutBounds.offsetY + item.y * scaleY), item.blur * scaleX)
+        other.setWorldShadow((offsetOutBounds.offsetX + item.x * scaleX * otherScale), (offsetOutBounds.offsetY + item.y * scaleY * otherScale), item.blur * scaleX * otherScale)
 
-        spreadScale = item.spread ? 1 - item.spread * 2 / (__layout.boxBounds.width + (__layout.strokeBoxSpread || 0) * 2) : 0
+        spreadScale = item.spread ? 1 - item.spread * 2 / (__layout.boxBounds.width + (__layout.strokeBoxSpread || 0) * 2) * otherScale : 0
 
         drawWorldShadow(other, offsetOutBounds, spreadScale, shape)
 

@@ -72,7 +72,7 @@ export const UIRender: IUIRenderModule = {
                 if (__fillAfterStroke) data.__isStrokes ? Paint.strokes(stroke as ILeafStrokePaint[], this, canvas) : Paint.stroke(stroke as string, this, canvas)
 
                 if (__isFastShadow) {
-                    const shadow = data.shadow[0], { scaleX, scaleY } = this.__nowWorld
+                    const shadow = data.shadow[0], { scaleX, scaleY } = this.getRenderScaleData(true, shadow.scaleFixed)
                     canvas.save(), canvas.setWorldShadow(shadow.x * scaleX, shadow.y * scaleY, shadow.blur * scaleX, ColorConvert.string(shadow.color))
                 }
 
