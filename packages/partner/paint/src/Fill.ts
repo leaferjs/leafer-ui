@@ -36,7 +36,7 @@ export function fills(fills: ILeafPaint[], ui: IUI, canvas: ILeaferCanvas): void
             if (item.transform) canvas.transform(item.transform)
             if (item.scaleFixed) {
                 const { scaleX, scaleY } = ui.getRenderScaleData(true)
-                canvas.scale(1 / scaleX, 1 / scaleY)
+                if (item.scaleFixed === true || (item.scaleFixed === 'zoom-in' && scaleX > 1 && scaleY > 1)) canvas.scale(1 / scaleX, 1 / scaleY)
             }
             if (item.blendMode) canvas.blendMode = item.blendMode
             fillPathOrText(ui, canvas)
