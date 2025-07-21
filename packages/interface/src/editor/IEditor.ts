@@ -1,4 +1,4 @@
-import { IGroup, IUI, IBox, IRectInputData, ISelectorProxy, IEditSize, ICursorType, IAlign, IUnitPointData, IDragEvent, IMoveEvent, IRotateEvent, IStroke, IFill, ILeaf, ILeafList, IObject, IBoxInputData, IGroupInputData, IImageCursor, IRect, IKeyEvent, IUIInputData, IZoomEvent, IColorString, IDirection4, IPointData, IScaleData, ISkewData, ILayoutBoundsData, ITransition, IFourNumber, IPointerEvent, IShortcutKeys } from '@leafer-ui/interface'
+import { IGroup, IUI, IBox, IRectInputData, ISelectorProxy, IEditSize, ICursorType, IAlign, IUnitPointData, IDragEvent, IMoveEvent, IRotateEvent, IStroke, IFill, ILeaf, ILeafList, IObject, IBoxInputData, IGroupInputData, IImageCursor, IRect, IKeyEvent, IUIInputData, IZoomEvent, IColorString, IDirection4, IPointData, IScaleData, ISkewData, ILayoutBoundsData, ITransition, IFourNumber, IShortcutKeys, IShortcutKeysCheck, IUIEvent } from '@leafer-ui/interface'
 
 export interface IEditorBase extends IGroup, ISelectorProxy, ITransformTool {
     config: IEditorConfig
@@ -133,7 +133,7 @@ export interface IEditorConfig extends IObject {
     select?: 'press' | 'tap'
     selectedStyle?: IUIInputData
     multipleSelect?: boolean
-    multipleSelectKey?: IEditorMultipleSelectKey | IShortcutKeys
+
     boxSelect?: boolean
     continuousSelect?: boolean // 点击可以连续选择
     openInner?: 'double' | 'long' // 双击/长按打开内部
@@ -143,6 +143,9 @@ export interface IEditorConfig extends IObject {
     flipable?: boolean
     rotateable?: boolean | 'gesture' | 'rotate'
     skewable?: boolean
+
+    multipleSelectKey?: IShortcutKeysCheck | IShortcutKeys
+    rotateKey?: IShortcutKeysCheck | IShortcutKeys
 
     beforeSelect?: IEditorBeforeSelect
     beforeMove?: IEditorBeforeMove
@@ -154,10 +157,6 @@ export interface IEditorConfig extends IObject {
 
     textEditor?: IObject
     pathEditor?: IObject
-}
-
-export interface IEditorMultipleSelectKey {
-    (e: IPointerEvent): boolean
 }
 
 export interface IEditorSelectData {
@@ -270,6 +269,7 @@ export interface IEditBoxBase extends IGroup {
     unload(): void
 
     onArrow(e: IKeyEvent): void
+    isHoldRotateKey(e: IUIEvent): boolean
 
 }
 
