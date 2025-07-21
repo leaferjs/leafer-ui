@@ -1,4 +1,4 @@
-import { ILeaf, ILeafList, IPointData, IUIEvent } from '@leafer/interface'
+import { ILeaf, ILeafList, IPointData, IUIEvent, IShortcutKeys, IShortcutKeysCheck } from '@leafer/interface'
 import { Event, EventCreator } from '@leafer/core'
 
 import { Keyboard } from './Keyboard'
@@ -31,6 +31,11 @@ export class UIEvent extends Event implements IUIEvent {
     constructor(params: IUIEvent) {
         super(params.type)
         Object.assign(this, params)
+    }
+
+
+    public isHoldKeys(shortcutKeys?: IShortcutKeysCheck | IShortcutKeys): boolean {
+        return Keyboard.isHoldKeys(shortcutKeys, this)
     }
 
     public getBoxPoint(relative?: ILeaf): IPointData {

@@ -1,4 +1,4 @@
-import { IBooleanMap, IShortcutKeys } from '@leafer/interface'
+import { IBooleanMap, IShortcutKeyCodes, IShortcutKeys, IShortcutKeysCheck, IUIEvent } from '@leafer/interface'
 
 
 const downKeyMap: IBooleanMap = {}
@@ -9,13 +9,13 @@ export const Keyboard = {
         return Keyboard.isHold('Space')
     },
 
-    isHold(code: string): boolean {
+    isHold(code: IShortcutKeyCodes): boolean {
         return downKeyMap[code]
     },
 
-    // 是否按住快捷键，如 ctrl + F | shift + F
-    isHoldShortcutKeys(_shortcutKeys?: IShortcutKeys): boolean {
-        return undefined // 语义化的快捷键组合，需插件扩展
+    // 是否按住快捷键，可扩展语义化快捷键组合 ctrl + F || shift + F
+    isHoldKeys(shortcutKeys: IShortcutKeysCheck | IShortcutKeys, e?: IUIEvent): boolean {
+        return e ? (shortcutKeys as IShortcutKeysCheck)(e) : undefined
     },
 
     setDownCode(code: string): void {

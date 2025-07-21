@@ -1,4 +1,4 @@
-import { IKeyEvent } from '@leafer/interface'
+import { IKeyCodes, IKeyEvent } from '@leafer/interface'
 import { registerUIEvent } from '@leafer/core'
 
 import { UIEvent } from './UIEvent'
@@ -11,7 +11,7 @@ export class KeyEvent extends UIEvent implements IKeyEvent {
     static HOLD = 'key.hold'
     static UP = 'key.up'
 
-    public readonly code: string
+    public readonly code: IKeyCodes
     public readonly key: string
 
 }
