@@ -1,4 +1,4 @@
-import { IKeyEvent } from '@leafer/interface'
+import { IKeyCodes, IKeyEvent } from '@leafer/interface'
 import { InteractionHelper } from '@leafer-ui/core'
 
 
@@ -8,7 +8,7 @@ export const KeyEventHelper = {
         const base = InteractionHelper.getBase(e)
         const data: IKeyEvent = {
             ...base,
-            code: e.code,
+            code: e.code as IKeyCodes,
             key: e.key
         }
         return data
