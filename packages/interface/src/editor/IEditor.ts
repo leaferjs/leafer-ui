@@ -115,6 +115,8 @@ export interface IEditorConfig extends IObject {
 
     hideOnMove?: boolean
     hideOnSmall?: boolean | number
+    hideRotatePoints?: boolean // 是否隐藏透明的旋转控制点
+    hideResizeLines?: boolean  // 是否隐藏透明的resize线条
 
     moveCursor?: ICursorType
     resizeCursor?: IImageCursor
