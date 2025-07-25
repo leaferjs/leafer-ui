@@ -88,6 +88,8 @@ export interface IImagePaint extends IPaintBase {
     rotation?: number
     skew?: | IPointData
 
+    freeTransform?: boolean // 平铺模式下是否进行自由变换，默认90度、缩放会进行特殊处理
+
     clipSize?: ISizeData
 
     repeat?: IRepeat

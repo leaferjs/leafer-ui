@@ -63,10 +63,11 @@ export function getPatternData(paint: IImagePaint, box: IBoundsData, image: ILea
             if (tempImage.x || tempImage.y || scaleX || clipSize || rotation || skew) clipMode(data, box, tempImage.x, tempImage.y, scaleX, scaleY, rotation, skew, paint.clipSize)
             break
         case 'repeat':
-            if (!sameBox || scaleX || rotation) repeatMode(data, box, width, height, tempImage.x, tempImage.y, scaleX, scaleY, rotation, align)
+            if (!sameBox || scaleX || rotation || skew) repeatMode(data, box, width, height, tempImage.x, tempImage.y, scaleX, scaleY, rotation, skew, align, paint.freeTransform)
             if (!repeat) data.repeat = 'repeat'
             const count = isObject(repeat)
             if (gap || count) data.gap = getGapData(gap, count && repeat, tempImage.width, tempImage.height, box)
+            break
         case 'fit':
         case 'cover':
         default:
