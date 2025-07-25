@@ -19,7 +19,7 @@ export function checkImage(ui: IUI, canvas: ILeaferCanvas, paint: ILeafPaint, al
             if (data.repeat) {
                 allowDraw = false
             } else {
-                if (!(paint.changeful || ResizeEvent.isResizing(ui) || Export.running)) {
+                if (!(paint.changeful || (Platform.name === 'miniapp' && ResizeEvent.isResizing(ui)) || Export.running)) { //  小程序resize过程中直接绘制原图（绕过垃圾回收bug)
                     let { width, height } = data
                     width *= scaleX * pixelRatio
                     height *= scaleY * pixelRatio
