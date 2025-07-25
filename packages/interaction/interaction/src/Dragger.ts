@@ -1,5 +1,5 @@
 import { IPointerEvent, IDragEvent, ILeaf, ILeafList, ITimer, IFunction, IPointDataMap, IMoveEvent, ITransition } from '@leafer/interface'
-import { PointHelper, LeafList } from '@leafer/core'
+import { PointHelper, LeafList, LeafHelper, isNumber } from '@leafer/core'
 
 import { MoveEvent, DragEvent, DropEvent, PointerButton } from '@leafer-ui/event'
 
@@ -120,8 +120,14 @@ export class Dragger {
         const list = this.realDraggableList
         if (list.length && running) {
             const { totalX, totalY } = this.dragData, { dragLimitAnimate } = interaction.p
-            const checkLimit = !dragLimitAnimate || !!isDragEnd, transition = isDragEnd && dragLimitAnimate
-            list.forEach(leaf => leaf.draggable && leaf.move(DragEvent.getValidMove(leaf, this.dragStartPoints[leaf.innerId], { x: totalX, y: totalY }, checkLimit), undefined, transition as ITransition))
+            const checkLimitMove = !dragLimitAnimate || !!isDragEnd
+            list.forEach(leaf => {
+                if (leaf.draggable) {
+                    const move = DragEvent.getValidMove(leaf, this.dragStartPoints[leaf.innerId], { x: totalX, y: totalY }, checkLimitMove)
+                    if (dragLimitAnimate && isDragEnd) LeafHelper.animateMove(leaf, move, isNumber(dragLimitAnimate) ? dragLimitAnimate : 0.3)
+                    else leaf.move(move)
+                }
+            })
         }
     }
 

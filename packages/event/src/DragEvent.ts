@@ -37,14 +37,18 @@ export class DragEvent extends PointerEvent implements IDragEvent {
         this.data = data
     }
 
-    static getValidMove(leaf: ILeaf, start: IPointData, total: IPointData): IPointData {
-        const { draggable, dragBounds } = leaf, move = leaf.getLocalPoint(total, null, true)
+    static getValidMove(leaf: ILeaf, start: IPointData, total: IPointData, checkLimit = true): IPointData {
+        const move = leaf.getLocalPoint(total, null, true)
         PointHelper.move(move, start.x - leaf.x, start.y - leaf.y)
+        if (checkLimit) this.limitMove(leaf, move) // 检查拖拽限制
+        return move
+    }
 
+    static limitMove(leaf: ILeaf, move: IPointData): void {
+        const { draggable, dragBounds } = leaf
         if (dragBounds) this.getMoveInDragBounds(leaf.__localBoxBounds, dragBounds === 'parent' ? leaf.parent.boxBounds : dragBounds, move, true)
         if (draggable === 'x') move.y = 0
         if (draggable === 'y') move.x = 0
-        return move
     }
 
     static getMoveInDragBounds(childBox: IBoundsData, dragBounds: IBoundsData, move: IPointData, change?: boolean): IPointData {
