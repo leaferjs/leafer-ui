@@ -206,7 +206,7 @@ export class Dragger {
 
     // @leafer-in/viewport will rewrite
 
-    public checkDragEndAnimate(_data: IPointerEvent, _speed?: number): boolean { return false }
+    public checkDragEndAnimate(_data: IPointerEvent, _speed?: number): boolean | number { return false }
 
     public animate(_func?: IFunction, _off?: 'off'): void { }  // dragEnd animation
 
