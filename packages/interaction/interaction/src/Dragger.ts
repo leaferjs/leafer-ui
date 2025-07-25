@@ -1,4 +1,4 @@
-import { IPointerEvent, IDragEvent, ILeaf, ILeafList, ITimer, IFunction, IPointDataMap, IMoveEvent } from '@leafer/interface'
+import { IPointerEvent, IDragEvent, ILeaf, ILeafList, ITimer, IFunction, IPointDataMap, IMoveEvent, ITransition } from '@leafer/interface'
 import { PointHelper, LeafList } from '@leafer/core'
 
 import { MoveEvent, DragEvent, DropEvent, PointerButton } from '@leafer-ui/event'
@@ -115,12 +115,13 @@ export class Dragger {
         }
     }
 
-    protected dragReal(): void {
-        const { running } = this.interaction
+    protected dragReal(isDragEnd?: boolean): void {
+        const { interaction } = this, { running } = interaction
         const list = this.realDraggableList
         if (list.length && running) {
-            const { totalX, totalY } = this.dragData
-            list.forEach(leaf => leaf.draggable && leaf.move(DragEvent.getValidMove(leaf, this.dragStartPoints[leaf.innerId], { x: totalX, y: totalY })))
+            const { totalX, totalY } = this.dragData, { dragLimitAnimate } = interaction.p
+            const checkLimit = !dragLimitAnimate || !!isDragEnd, transition = isDragEnd && dragLimitAnimate
+            list.forEach(leaf => leaf.draggable && leaf.move(DragEvent.getValidMove(leaf, this.dragStartPoints[leaf.innerId], { x: totalX, y: totalY }, checkLimit), undefined, transition as ITransition))
         }
     }
 
@@ -172,6 +173,7 @@ export class Dragger {
             const dropList = this.getList()
 
             this.dragging = false
+            this.dragReal(true)
             interaction.emit(DragEvent.END, endDragData)
 
             this.swipe(data, downData, dragData, endDragData)
