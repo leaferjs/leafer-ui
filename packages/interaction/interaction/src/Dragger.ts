@@ -1,4 +1,4 @@
-import { IPointerEvent, IDragEvent, ILeaf, ILeafList, ITimer, IFunction, IPointDataMap, IMoveEvent, ITransition } from '@leafer/interface'
+import { IPointerEvent, IDragEvent, ILeaf, ILeafList, ITimer, IFunction, IPointDataMap, IMoveEvent } from '@leafer/interface'
 import { PointHelper, LeafList, LeafHelper, isNumber } from '@leafer/core'
 
 import { MoveEvent, DragEvent, DropEvent, PointerButton } from '@leafer-ui/event'
@@ -179,7 +179,7 @@ export class Dragger {
             const dropList = this.getList()
 
             this.dragging = false
-            this.dragReal(true)
+            if (interaction.p.dragLimitAnimate) this.dragReal(true)
             interaction.emit(DragEvent.END, endDragData)
 
             this.swipe(data, downData, dragData, endDragData)
