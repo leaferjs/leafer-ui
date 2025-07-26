@@ -49,7 +49,7 @@ Group.prototype.__renderMask = function (canvas: ILeaferCanvas, options: IRender
 
             }
 
-            if (mask === 'clipping' || mask === 'clipping-path') excludeRenderBounds(child, options) || child.__render(canvas, options) // 渲染自身到原画布中，不应用遮罩
+            if (mask === 'clipping' || mask === 'clipping-path') excludeRenderBounds(child, options) || child.__render(contentCanvas || canvas, options) // 渲染自身到原画布中，不应用遮罩
 
             continue
         }
