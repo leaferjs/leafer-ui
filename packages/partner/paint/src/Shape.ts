@@ -1,5 +1,5 @@
 import { IBoundsData, ILeaferCanvas, IRenderOptions, IMatrix } from '@leafer/interface'
-import { BoundsHelper } from '@leafer/core'
+import { BoundsHelper, Matrix } from '@leafer/core'
 
 import { IUI, ICachedShape } from '@leafer-ui/interface'
 
@@ -10,7 +10,7 @@ export function shape(ui: IUI, current: ILeaferCanvas, options: IRenderOptions):
     const canvas = current.getSameCanvas()
     const nowWorld = ui.__nowWorld
 
-    let bounds: IBoundsData, fitMatrix: IMatrix, shapeBounds: IBoundsData, worldCanvas: ILeaferCanvas
+    let bounds: IBoundsData, matrix: IMatrix, fitMatrix: IMatrix, shapeBounds: IBoundsData, worldCanvas: ILeaferCanvas
 
     let { scaleX, scaleY } = nowWorld
     if (scaleX < 0) scaleX = -scaleX
@@ -39,21 +39,22 @@ export function shape(ui: IUI, current: ILeaferCanvas, options: IRenderOptions):
         shapeBounds = getOuterOf(nowWorld, fitMatrix)
         bounds = getByMove(shapeBounds, -fitMatrix.e, -fitMatrix.f)
 
-        if (options.matrix) {
-            const { matrix } = options
-            fitMatrix.multiply(matrix)
-            fitScaleX *= matrix.scaleX
-            fitScaleY *= matrix.scaleY
-        }
+        const userMatrix = options.matrix
+        if (userMatrix) {
+            matrix = new Matrix(fitMatrix) // 仅用于渲染
+            matrix.multiply(userMatrix)
+            fitScaleX *= userMatrix.scaleX
+            fitScaleY *= userMatrix.scaleY
+        } else matrix = fitMatrix
 
-        options = { ...options, matrix: fitMatrix.withScale(fitScaleX, fitScaleY) }
-
+        matrix.withScale(fitScaleX, fitScaleY)
+        options = { ...options, matrix }
     }
 
     ui.__renderShape(canvas, options)
 
     return {
-        canvas, matrix: fitMatrix, bounds,
+        canvas, matrix, fitMatrix, bounds,
         worldCanvas, shapeBounds, scaleX, scaleY
     }
 }

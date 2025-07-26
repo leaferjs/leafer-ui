@@ -73,9 +73,9 @@ export function drawWorldShadow(canvas: ILeaferCanvas, outBounds: IBoundsData, s
         tempBounds.y += (outBounds.y - shapeBounds.y)
 
         if (spreadScale) {
-            const { matrix } = shape
-            tempBounds.x -= (bounds.x + (matrix ? matrix.e : 0) + bounds.width / 2) * (spreadScale - 1)
-            tempBounds.y -= (bounds.y + (matrix ? matrix.f : 0) + bounds.height / 2) * (spreadScale - 1)
+            const { fitMatrix } = shape
+            tempBounds.x -= (bounds.x + (fitMatrix ? fitMatrix.e : 0) + bounds.width / 2) * (spreadScale - 1)
+            tempBounds.y -= (bounds.y + (fitMatrix ? fitMatrix.f : 0) + bounds.height / 2) * (spreadScale - 1)
             tempBounds.width *= spreadScale
             tempBounds.height *= spreadScale
         }

@@ -88,7 +88,7 @@ if (userAgent.indexOf("Firefox") > -1) {
     Platform.conicGradientRotate90 = true
     Platform.intWheelDeltaY = true
     Platform.syncDomFont = true
-} else if (userAgent.indexOf("AppleWebKit") > -1) {
+} else if (/iPhone|iPad|iPod/.test(navigator.userAgent) || (/Macintosh/.test(navigator.userAgent) && /Version\/[\d.]+.*Safari/.test(navigator.userAgent))) {
     Platform.fullImageShadow = true // 苹果内核渲染阴影
 }
 

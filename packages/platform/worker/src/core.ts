@@ -72,8 +72,8 @@ const { userAgent } = navigator
 if (userAgent.indexOf("Firefox") > -1) {
     Platform.conicGradientRotate90 = true
     Platform.intWheelDeltaY = true
-} else if (userAgent.indexOf("Safari") > -1 && userAgent.indexOf("Chrome") === -1) {
-    Platform.fullImageShadow = true
+} else if (/iPhone|iPad|iPod/.test(navigator.userAgent) || (/Macintosh/.test(navigator.userAgent) && /Version\/[\d.]+.*Safari/.test(navigator.userAgent))) {
+    Platform.fullImageShadow = true // 苹果内核渲染阴影
 }
 
 if (userAgent.indexOf('Windows') > -1) {
