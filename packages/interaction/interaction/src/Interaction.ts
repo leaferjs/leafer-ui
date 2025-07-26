@@ -237,6 +237,8 @@ export class InteractionBase implements IInteraction {
     public keyDown(data: IKeyEvent): void {
         if (!this.config.keyEvent) return
 
+        this.emit(KeyEvent.BEFORE_DOWN, data, this.defaultPath) // 键盘按下前出发，还没有setDownCode
+
         const { code } = data
         if (!this.downKeyMap[code]) {
             this.downKeyMap[code] = true
@@ -253,6 +255,8 @@ export class InteractionBase implements IInteraction {
 
     public keyUp(data: IKeyEvent): void {
         if (!this.config.keyEvent) return
+
+        this.emit(KeyEvent.BEFORE_UP, data, this.defaultPath) // 键盘弹起前出发，还没有setUpCode
 
         const { code } = data
         this.downKeyMap[code] = false
