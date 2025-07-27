@@ -1,6 +1,6 @@
-import { dataProcessor, registerUI, affectRenderBoundsType, surfaceType } from '@leafer/core'
+import { dataProcessor, registerUI, affectRenderBoundsType, surfaceType, hitType } from '@leafer/core'
 
-import { IFrame, IFrameData, IFrameInputData, IFill, IOverflow } from '@leafer-ui/interface'
+import { IFrame, IFrameData, IFrameInputData, IFill, IOverflow, INumber } from '@leafer-ui/interface'
 import { FrameData } from '@leafer-ui/data'
 
 import { Box } from './Box'
@@ -21,6 +21,9 @@ export class Frame extends Box implements IFrame {
 
     @affectRenderBoundsType('hide')
     declare public overflow?: IOverflow
+
+    @hitType(false)
+    declare public hitBest?: INumber
 
     constructor(data?: IFrameInputData) {
         super(data)
