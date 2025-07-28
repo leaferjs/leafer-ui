@@ -1,8 +1,6 @@
-import { IRadiusPointData, ILeaferCanvas, IPointData } from '@leafer/interface'
-import { Leaf, PointHelper, BoundsHelper } from '@leafer/core'
+import { IRadiusPointData, ILeaferCanvas, IPointData, IBranch } from '@leafer/interface'
+import { Leaf, PointHelper, BoundsHelper, Platform } from '@leafer/core'
 
-import { IGroup } from '@leafer-ui/interface'
-import { getSelector } from './pick'
 
 const { toInnerRadiusPointOf, copy, setRadius } = PointHelper
 const { hitRadiusPoint, hitPoint } = BoundsHelper
@@ -19,7 +17,7 @@ leaf.hit = function (worldPoint: IPointData, hitRadius: number = 0): boolean {
     const world = this.__world
     if (hitRadius ? !hitRadiusPoint(world, worldRadiusPoint) : !hitPoint(world, worldRadiusPoint)) return false
 
-    return this.isBranch ? getSelector(this).hitPoint({ ...worldRadiusPoint }, hitRadius, { target: this as unknown as IGroup }) : this.__hitWorld(worldRadiusPoint)
+    return this.isBranch ? Platform.getSelector(this).hitPoint({ ...worldRadiusPoint }, hitRadius, { target: this as unknown as IBranch }) : this.__hitWorld(worldRadiusPoint)
 }
 
 leaf.__hitWorld = function (point: IRadiusPointData): boolean {

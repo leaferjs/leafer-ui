@@ -1,5 +1,7 @@
 export { HitCanvasManager } from './HitCanvasManager'
 
+import './selector'
+
 import './LeafHit'
 import './UIHit'
 import './RectHit'

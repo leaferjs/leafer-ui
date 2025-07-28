@@ -226,9 +226,6 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     @hitType()
     public hitRadius?: INumber
 
-    @hitType(true)
-    public hitBest?: INumber
-
     @cursorType('')
     public cursor?: ICursorType | ICursorType[]
 
