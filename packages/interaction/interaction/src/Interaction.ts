@@ -459,6 +459,12 @@ export class InteractionBase implements IInteraction {
     public getLocal(clientPoint: IClientPointData, updateClient?: boolean): IPointData {
         const clientBounds = this.canvas.getClientBounds(updateClient)
         const point = { x: clientPoint.clientX - clientBounds.x, y: clientPoint.clientY - clientBounds.y }
+
+        // 兼容clientBounds进行了transform的情况
+        const { bounds } = this.canvas
+        point.x *= bounds.width / clientBounds.width
+        point.y *= bounds.height / clientBounds.height
+
         if (this.p.snap) PointHelper.round(point)
         return point
     }
