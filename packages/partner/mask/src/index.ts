@@ -1,4 +1,4 @@
-import { ILeaf, ILeaferCanvas, IMaskType, IRenderOptions } from '@leafer/interface'
+import { IBlendMode, ILeaf, ILeaferCanvas, IMaskType, IRenderOptions } from '@leafer/interface'
 import { LeafBoundsHelper } from '@leafer/core'
 
 import { Group } from '@leafer-ui/draw'
@@ -6,6 +6,7 @@ import { Group } from '@leafer-ui/draw'
 
 type IMaskMode = 'path' | 'alpha' | 'grayscale' | 'opacity-path'
 const { excludeRenderBounds } = LeafBoundsHelper
+let usedGrayscaleAlpha: boolean
 
 Group.prototype.__renderMask = function (canvas: ILeaferCanvas, options: IRenderOptions): void {
 
@@ -18,20 +19,20 @@ Group.prototype.__renderMask = function (canvas: ILeaferCanvas, options: IRender
         if (mask) {
 
             if (currentMask) {
-                maskEnd(this, currentMask, canvas, contentCanvas, maskCanvas, maskOpacity)
+                maskEnd(this, currentMask, canvas, contentCanvas, maskCanvas, maskOpacity, undefined, true)
                 maskCanvas = contentCanvas = null
             }
 
             // mask start
+            maskOpacity = child.__.opacity
+            usedGrayscaleAlpha = false
 
             if (mask === 'path' || mask === 'clipping-path') {
 
-                if (child.opacity < 1) {
+                if (maskOpacity < 1) {
 
                     currentMask = 'opacity-path'
-                    maskOpacity = child.opacity
                     if (!contentCanvas) contentCanvas = getCanvas(canvas)
-
 
                 } else {
                     currentMask = 'path'
@@ -49,30 +50,38 @@ Group.prototype.__renderMask = function (canvas: ILeaferCanvas, options: IRender
 
             }
 
-            if (mask === 'clipping' || mask === 'clipping-path') excludeRenderBounds(child, options) || child.__render(contentCanvas || canvas, options) // 渲染自身到原画布中，不应用遮罩
+            if (mask === 'clipping' || mask === 'clipping-path') excludeRenderBounds(child, options) || child.__render(canvas, options) // 剪贴蒙版，需要渲染自身到原画布中，如果应用遮罩会造成透明度减半
 
             continue
         }
 
+        const childBlendMode = maskOpacity === 1 && child.__.__blendMode
+
+        // 元素存在混合模式，将先前的内容绘制到原画布
+        if (childBlendMode) maskEnd(this, currentMask, canvas, contentCanvas, maskCanvas, maskOpacity, undefined, false)
+
         excludeRenderBounds(child, options) || child.__render(contentCanvas || canvas, options)
+
+        // 元素存在混合模式，应用遮罩后直接与原画布混合
+        if (childBlendMode) maskEnd(this, currentMask, canvas, contentCanvas, maskCanvas, maskOpacity, childBlendMode as IBlendMode, false)
 
     }
 
-    maskEnd(this, currentMask, canvas, contentCanvas, maskCanvas, maskOpacity)
+    maskEnd(this, currentMask, canvas, contentCanvas, maskCanvas, maskOpacity, undefined, true)
 
 }
 
 
-function maskEnd(leaf: ILeaf, maskMode: IMaskMode, canvas: ILeaferCanvas, contentCanvas: ILeaferCanvas, maskCanvas: ILeaferCanvas, maskOpacity: number): void {
+function maskEnd(leaf: ILeaf, maskMode: IMaskMode, canvas: ILeaferCanvas, contentCanvas: ILeaferCanvas, maskCanvas: ILeaferCanvas, maskOpacity: number, blendMode: IBlendMode, recycle: boolean): void {
     switch (maskMode) {
         case 'grayscale':
-            maskCanvas.useGrayscaleAlpha(leaf.__nowWorld)
+            if (!usedGrayscaleAlpha) usedGrayscaleAlpha = true, maskCanvas.useGrayscaleAlpha(leaf.__nowWorld)
         case 'alpha':
-            usePixelMask(leaf, canvas, contentCanvas, maskCanvas); break
+            usePixelMask(leaf, canvas, contentCanvas, maskCanvas, blendMode, recycle); break
         case 'opacity-path':
-            copyContent(leaf, canvas, contentCanvas, maskOpacity); break
+            copyContent(leaf, canvas, contentCanvas, maskOpacity, blendMode, recycle); break
         case 'path':
-            canvas.restore()
+            if (recycle) canvas.restore()
     }
 }
 
@@ -82,23 +91,23 @@ function getCanvas(canvas: ILeaferCanvas): ILeaferCanvas {
 }
 
 
-function usePixelMask(leaf: ILeaf, canvas: ILeaferCanvas, content: ILeaferCanvas, mask: ILeaferCanvas): void {
+function usePixelMask(leaf: ILeaf, canvas: ILeaferCanvas, content: ILeaferCanvas, mask: ILeaferCanvas, blendMode: IBlendMode, recycle: boolean): void {
     const realBounds = leaf.__nowWorld
     content.resetTransform()
     content.opacity = 1
     content.useMask(mask, realBounds)
-    mask.recycle(realBounds)
+    if (recycle) mask.recycle(realBounds)
 
-    copyContent(leaf, canvas, content, 1)
+    copyContent(leaf, canvas, content, 1, blendMode, recycle)
 }
 
 
-function copyContent(leaf: ILeaf, canvas: ILeaferCanvas, content: ILeaferCanvas, maskOpacity: number): void {
+function copyContent(leaf: ILeaf, canvas: ILeaferCanvas, content: ILeaferCanvas, maskOpacity: number, blendMode: IBlendMode, recycle: boolean): void {
     const realBounds = leaf.__nowWorld
 
     canvas.resetTransform()
     canvas.opacity = maskOpacity
-    canvas.copyWorld(content, realBounds)
+    canvas.copyWorld(content, realBounds, undefined, blendMode)
 
-    content.recycle(realBounds)
+    recycle ? content.recycle(realBounds) : content.clearWorld(realBounds, true)
 }
