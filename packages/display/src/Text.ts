@@ -115,7 +115,7 @@ export class Text extends UI implements IText {
         data.__letterSpacing = UnitConvert.number(letterSpacing, fontSize)
         data.__padding = padding ? MathHelper.fourNumber(padding) : undefined
         data.__baseLine = data.__lineHeight - (data.__lineHeight - fontSize * 0.7) / 2 // 基线位置
-        data.__font = `${italic ? 'italic ' : ''}${textCase === 'small-caps' ? 'small-caps ' : ''}${fontWeight !== 'normal' ? fontWeight + ' ' : ''}${fontSize}px ${fontFamily}`
+        data.__font = `${italic ? 'italic ' : ''}${textCase === 'small-caps' ? 'small-caps ' : ''}${fontWeight !== 'normal' ? fontWeight + ' ' : ''}${fontSize || 12}px ${fontFamily || 'caption'}`
         data.__clipText = textOverflow !== 'show' && !data.__autoSize
 
         data.__textDrawData = TextConvert.getDrawData((data.__isPlacehold = data.placeholder && data.text === '') ? data.placeholder : data.text, this.__)
