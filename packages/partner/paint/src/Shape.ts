@@ -1,5 +1,5 @@
 import { IBoundsData, ILeaferCanvas, IRenderOptions, IMatrix } from '@leafer/interface'
-import { BoundsHelper, Matrix } from '@leafer/core'
+import { BoundsHelper, Matrix, Platform } from '@leafer/core'
 
 import { IUI, ICachedShape } from '@leafer-ui/interface'
 
@@ -8,15 +8,13 @@ const { getSpread, getOuterOf, getByMove, getIntersectData } = BoundsHelper
 
 export function shape(ui: IUI, current: ILeaferCanvas, options: IRenderOptions): ICachedShape {
     const canvas = current.getSameCanvas()
-    const nowWorld = ui.__nowWorld
+    const nowWorld = ui.__nowWorld, currentBounds = current.bounds
 
     let bounds: IBoundsData, matrix: IMatrix, fitMatrix: IMatrix, shapeBounds: IBoundsData, worldCanvas: ILeaferCanvas
 
-    let { scaleX, scaleY } = nowWorld
-    if (scaleX < 0) scaleX = -scaleX
-    if (scaleY < 0) scaleY = -scaleY
+    let { scaleX, scaleY } = ui.getRenderScaleData(true)
 
-    if (current.bounds.includes(nowWorld)) {
+    if (currentBounds.includes(nowWorld)) {
 
         worldCanvas = canvas
         bounds = shapeBounds = nowWorld
@@ -24,8 +22,17 @@ export function shape(ui: IUI, current: ILeaferCanvas, options: IRenderOptions):
     } else {
 
         const { renderShapeSpread: spread } = ui.__layout
-        const worldClipBounds = getIntersectData(spread ? getSpread(current.bounds, scaleX === scaleY ? spread * scaleX : [spread * scaleY, spread * scaleX]) : current.bounds, nowWorld)
-        fitMatrix = current.bounds.getFitMatrix(worldClipBounds)
+
+        let worldClipBounds: IBoundsData // 作为绘制阴影的裁剪形状
+
+        if (Platform.fullImageShadow) { // fix: iOS Safari 18.5 以上, 只裁剪部分区域渲染阴影会有问题
+            worldClipBounds = nowWorld
+        } else {
+            const spreadBounds = spread ? getSpread(currentBounds, scaleX === scaleY ? spread * scaleX : [spread * scaleY, spread * scaleX]) : currentBounds
+            worldClipBounds = getIntersectData(spreadBounds, nowWorld)
+        }
+
+        fitMatrix = currentBounds.getFitMatrix(worldClipBounds)
         let { a: fitScaleX, d: fitScaleY } = fitMatrix
 
         if (fitMatrix.a < 1) {
