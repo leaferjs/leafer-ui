@@ -54,7 +54,7 @@ export function shadow(ui: IUI, current: ILeaferCanvas, shape: ICachedShape): vo
 
         LeafHelper.copyCanvasByWorld(ui, current, other, copyBounds, item.blendMode)
 
-        if (end && index < end) other.clearWorld(copyBounds, true)
+        if (end && index < end) other.clearWorld(copyBounds)
     })
 
     other.recycle(copyBounds)

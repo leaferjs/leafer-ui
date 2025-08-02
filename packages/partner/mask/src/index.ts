@@ -109,5 +109,5 @@ function copyContent(leaf: ILeaf, canvas: ILeaferCanvas, content: ILeaferCanvas,
     canvas.opacity = maskOpacity
     canvas.copyWorld(content, realBounds, undefined, blendMode)
 
-    recycle ? content.recycle(realBounds) : content.clearWorld(realBounds, true)
+    recycle ? content.recycle(realBounds) : content.clearWorld(realBounds)
 }

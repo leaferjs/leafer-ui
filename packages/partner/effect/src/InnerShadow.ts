@@ -55,7 +55,7 @@ export function innerShadow(ui: IUI, current: ILeaferCanvas, shape: ICachedShape
 
         LeafHelper.copyCanvasByWorld(ui, current, other, copyBounds, item.blendMode)
 
-        if (end && index < end) other.clearWorld(copyBounds, true)
+        if (end && index < end) other.clearWorld(copyBounds)
 
     })
 
