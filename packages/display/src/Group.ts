@@ -27,6 +27,8 @@ export class Group extends UI implements IGroup {   // tip: rewrited Box
 
     declare public children: IUI[]
 
+    declare public topChildren?: IUI[]
+
     public childlessJSON?: boolean
 
     constructor(data?: IGroupInputData) {
