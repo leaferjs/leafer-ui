@@ -10,6 +10,6 @@ export class BoxData extends GroupData implements IBoxData {
     // 当成整体处理
     public get __drawAfterFill(): boolean { const t = this as IBoxData; return t.__single || t.__clipAfterFill }
 
-    public get __clipAfterFill(): boolean { const t = this as IBoxData; return t.overflow === 'hide' && t.__leaf.children.length && ((t.__leaf as IBox).isOverflow || super.__clipAfterFill) as unknown as boolean }
+    public get __clipAfterFill(): boolean { const t = this as IBoxData; return t.overflow !== 'show' && t.__leaf.children.length && ((t.__leaf as IBox).isOverflow || super.__clipAfterFill) as unknown as boolean }
 
 }
