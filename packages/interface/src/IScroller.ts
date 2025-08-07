@@ -11,12 +11,14 @@ export interface IScrollConfig {
     sideMargin?: number // 滚动条两侧的间距
     minSize?: number // 最小显示size
     scaleFixed?: IScaleFixed
+    hideOnActionEnd?: boolean | 'hover' | 'scroll'  // 操作结束时自动隐藏
 }
 
 export type IScrollTheme = 'light' | 'dark' | (string & {})
 
 export interface IScroller extends IGroup {
     config: IScrollConfig
+    mergedConfig: IScrollConfig
 
     // 滚动条
     scrollXBar: IBox
