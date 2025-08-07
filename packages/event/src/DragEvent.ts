@@ -2,6 +2,7 @@ import { IDragEvent, IPointData, ILeaf, ILeafList, IObject, IBoundsData } from '
 import { registerUIEvent, LeafList, BoundsHelper, PointHelper } from '@leafer/core'
 
 import { PointerEvent } from './PointerEvent'
+import { DragBoundsHelper } from '@leafer-ui/interaction'
 
 
 const tempMove = {} as IPointData
@@ -45,31 +46,10 @@ export class DragEvent extends PointerEvent implements IDragEvent {
     }
 
     static limitMove(leaf: ILeaf, move: IPointData): void {
-        const { draggable, dragBounds } = leaf
-        if (dragBounds) this.getMoveInDragBounds(leaf.__localBoxBounds, dragBounds === 'parent' ? leaf.parent.boxBounds : dragBounds, move, true)
+        const { draggable, dragBounds, dragBoundsType } = leaf
+        if (dragBounds) DragBoundsHelper.getValidMove(leaf.__localBoxBounds, dragBounds === 'parent' ? leaf.parent.boxBounds : dragBounds, dragBoundsType, move, true)
         if (draggable === 'x') move.y = 0
         if (draggable === 'y') move.x = 0
-    }
-
-    static getMoveInDragBounds(childBox: IBoundsData, dragBounds: IBoundsData, move: IPointData, change?: boolean): IPointData {
-        const x = childBox.x + move.x, y = childBox.y + move.y, right = x + childBox.width, bottom = y + childBox.height
-        const boundsRight = dragBounds.x + dragBounds.width, boundsBottom = dragBounds.y + dragBounds.height
-
-        if (!change) move = { ...move }
-
-        if (BoundsHelper.includes(childBox, dragBounds)) { // childBox > dragBounds
-            if (x > dragBounds.x) move.x += dragBounds.x - x
-            else if (right < boundsRight) move.x += boundsRight - right
-            if (y > dragBounds.y) move.y += dragBounds.y - y
-            else if (bottom < boundsBottom) move.y += boundsBottom - bottom
-        } else {
-            if (x < dragBounds.x) move.x += dragBounds.x - x
-            else if (right > boundsRight) move.x += boundsRight - right
-            if (y < dragBounds.y) move.y += dragBounds.y - y
-            else if (bottom > boundsBottom) move.y += boundsBottom - bottom
-        }
-
-        return move
     }
 
     public getPageMove(total?: boolean): IPointData {
