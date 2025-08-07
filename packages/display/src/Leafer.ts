@@ -391,7 +391,7 @@ export class Leafer extends Group implements ILeafer {
 
 
     // interaction window rewrite
-    public getValidMove(moveX: number, moveY: number): IPointData { return { x: moveX, y: moveY } }
+    public getValidMove(moveX: number, moveY: number, _checkLimit?: boolean): IPointData { return { x: moveX, y: moveY } }
     public getValidScale(changeScale: number): number { return changeScale }
 
 

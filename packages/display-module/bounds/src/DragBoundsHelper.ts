@@ -1,5 +1,4 @@
-import { IPointData, IBoundsData, IDragBoundsType } from '@leafer/interface'
-import { BoundsHelper } from '@leafer/core'
+import { IPointData, IBoundsData, IDragBoundsType, ILeaf } from '@leafer/interface'
 
 
 export const DragBoundsHelper = {
@@ -10,22 +9,41 @@ export const DragBoundsHelper = {
 
         if (!change) move = { ...move }
 
-        if (BoundsHelper.includes(content, dragBounds)) { // childBox 包含 dragBounds
-            if (dragBoundsType !== 'outer') { // inner / auto 模式
-                if (x > dragBounds.x) move.x += dragBounds.x - x
-                else if (right < boundsRight) move.x += boundsRight - right
+        const isBiggerWidth = content.width > dragBounds.width
+        const isBiggerHeight = content.height > dragBounds.height
 
-                if (y > dragBounds.y) move.y += dragBounds.y - y
-                else if (bottom < boundsBottom) move.y += boundsBottom - bottom
-            }
+        if (isBiggerWidth && dragBoundsType !== 'outer') {  // inner / auto 模式
+            if (x > dragBounds.x) move.x += dragBounds.x - x
+            else if (right < boundsRight) move.x += boundsRight - right
         } else {
             if (x < dragBounds.x) move.x += dragBounds.x - x
             else if (right > boundsRight) move.x += boundsRight - right
+        }
 
+        if (isBiggerHeight && dragBoundsType !== 'outer') { // inner / auto 模式
+            if (y > dragBounds.y) move.y += dragBounds.y - y
+            else if (bottom < boundsBottom) move.y += boundsBottom - bottom
+        } else {
             if (y < dragBounds.y) move.y += dragBounds.y - y
             else if (bottom > boundsBottom) move.y += boundsBottom - bottom
         }
 
         return move
+    },
+
+    // draggable限制
+    draggableMove(leaf: ILeaf, move: IPointData) {
+        const { draggable } = leaf
+        if (draggable === 'x' || !draggable) move.y = 0
+        if (draggable === 'y' || !draggable) move.x = 0
+    },
+
+    // 拖拽区域限制
+    limitMove(leaf: ILeaf, move: IPointData): void {
+        const { dragBounds, dragBoundsType } = leaf
+        if (dragBounds) D.getValidMove(leaf.__localBoxBounds, dragBounds === 'parent' ? leaf.parent.boxBounds : dragBounds, dragBoundsType, move, true)
+        D.draggableMove(leaf, move)
     }
 }
+
+const D = DragBoundsHelper
