@@ -34,6 +34,8 @@ export interface IScroller extends IGroup {
     ratioX: number
     ratioY: number
 
-    changeTheme(theme: IScrollTheme): void
+    dragScrolling: boolean
+
+    updateConfig(): void
     update(check: boolean): void
 }
