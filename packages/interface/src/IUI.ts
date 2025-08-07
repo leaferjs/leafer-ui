@@ -14,6 +14,7 @@ import { IAnimation, IAnimate, IKeyframe, IKeyframeId, IAnimateType } from './IA
 import { ILeafer } from './app/ILeafer'
 import { IEditorConfig } from './editor/IEditor'
 import { IColorString } from './type/IStringType'
+import { IScrollConfig, IScroller } from './IScroller'
 
 // Line
 export interface ILine extends ILineAttrData, IUI {
@@ -340,16 +341,17 @@ export interface IFrameInputData extends IBoxInputData {
 // Box
 export interface IBox extends IBoxAttrData, IGroup {
     __: IBoxData
-    hasScrollBar?: boolean
-    scrollBar?: IGroup
-    __checkScrollBar(): void
-    __updateScrollBar(): void
+    scroller?: IScroller
+    hasScroller?: boolean
+    __checkScroll(): void
+    __updateScroll(): void
     __updateRectRenderBounds(): void
     __renderGroup(canvas: ILeaferCanvas, options: IRenderOptions): void
 }
 
 interface IBoxAttrData {
     overflow?: IOverflow
+    scrollConfig?: IScrollConfig
     resizeChildren?: IBoolean
     textBox?: IBoolean // 编辑器中，textBox双击会直接进入编辑文本状态，如便利贴文本
 }
@@ -549,7 +551,7 @@ export type IUITag =
     | 'Video'
 
 
-export interface IUIInputData extends IRectInputData, IEllipseInputData, IPolygonInputData, IStarInputData, ILineInputData, IPathInputData, ITextInputData, IImageInputData, IGroupInputData, IFrameInputData, IArrowInputData, IGIFInputData, IVideoInputData, IRobotInputData, IUIBaseInputData, IObject {
+export interface IUIInputData extends IRectInputData, IEllipseInputData, IPolygonInputData, IStarInputData, ILineInputData, IPathInputData, ITextInputData, IImageInputData, IGroupInputData, IBoxInputData, IFrameInputData, IFlowInputData, IArrowInputData, IGIFInputData, IVideoInputData, IRobotInputData, IUIBaseInputData, IObject {
     children?: IUIInputData[]
 }
 

@@ -34,6 +34,7 @@ export { ILeafFill, ILeafPaint, ILeafPaintPatternData, ILeafPaintColor, ILeafStr
 export { IStrokeAttrData, IStrokeInputData, IStrokeComputedData, IStrokeComputedStyle, IStrokeStyle, ITextStyleAttrData, ITextStyleInputData, ITextStyleComputedData, IEffectAttrData, IEffectInputData, IEffectComputedData } from './ICommonAttr'
 
 export { IAnimation, IAnimate, IAnimateList, IAnimateType, IKeyframe, IKeyframeId, IAnimateKeyframe, IComputedKeyframe, IStyleAnimation, IKeyframesAnimation } from './IAnimation'
+export { IScroller, IScrollConfig, IScrollTheme } from './IScroller'
 
 export { IUIRenderModule, IRectRenderModule, IImageRenderModule, ITextRenderModule, IGroupRenderModule, IFrameRenderModule } from './module/IUIRender'
 export { IUIBoundsModule } from './module/IUIBounds'

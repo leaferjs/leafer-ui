@@ -1,16 +1,15 @@
-import { ILeaferCanvas, IRenderOptions, IBoundsData, IBoolean, INumber } from '@leafer/interface'
-import { rewrite, rewriteAble, registerUI, BoundsHelper, dataProcessor, affectRenderBoundsType, dataType, boundsType, DataHelper } from '@leafer/core'
+import { ILeaferCanvas, IRenderOptions, IBoolean, INumber, IScrollPointData } from '@leafer/interface'
+import { rewrite, rewriteAble, registerUI, BoundsHelper, dataProcessor, affectRenderBoundsType, dataType, boundsType, DataHelper, getBoundsData } from '@leafer/core'
 
-import { IBox, IBoxData, IBoxInputData, IGroup, IOverflow } from '@leafer-ui/interface'
+import { IBox, IBoxData, IBoxInputData, IOverflow, IScrollConfig, IScroller } from '@leafer-ui/interface'
 import { BoxData } from '@leafer-ui/data'
 
 import { Group } from './Group'
 import { Rect } from './Rect'
 
 
-const { copy, add, includes } = BoundsHelper
+const { add, includes, scroll } = BoundsHelper
 const rect = Rect.prototype, group = Group.prototype
-const childrenRenderBounds = {} as IBoundsData
 
 @rewriteAble()
 @registerUI()
@@ -39,9 +38,13 @@ export class Box extends Group implements IBox {
     @affectRenderBoundsType('show')
     declare public overflow?: IOverflow
 
-    public isOverflow: boolean
+    public isOverflow?: boolean
 
-    public scrollBar?: IGroup
+    // scroller rewrite
+    public scrollConfig?: IScrollConfig
+
+    public scroller?: IScroller
+    public hasScroller?: boolean
 
     constructor(data?: IBoxInputData) {
         super(data)
@@ -99,32 +102,36 @@ export class Box extends Group implements IBox {
         let isOverflow: boolean
 
         if (this.children.length) {
-            const data = this.__, { renderBounds, boxBounds } = this.__layout
+            const data = this.__, layout = this.__layout, { renderBounds, boxBounds } = layout
 
-            super.__updateRenderBounds()
-            copy(childrenRenderBounds, renderBounds)
+            const childrenRenderBounds = layout.childrenRenderBounds || (layout.childrenRenderBounds = getBoundsData())
+            super.__updateRenderBounds(childrenRenderBounds)
+            scroll(childrenRenderBounds, data as IScrollPointData)  // 增加滚动逻辑
+
             this.__updateRectRenderBounds()
 
-            // 增加滚动逻辑
-            if (data.scrollY || data.scrollX) {
-                childrenRenderBounds.x += data.scrollX
-                childrenRenderBounds.y += data.scrollY
-            }
-
             isOverflow = !includes(boxBounds, childrenRenderBounds)
-            if (isOverflow && data.overflow !== 'hide') add(renderBounds, childrenRenderBounds)
+            if (isOverflow && data.overflow === 'show') add(renderBounds, childrenRenderBounds)
         } else this.__updateRectRenderBounds()
 
         DataHelper.stintSet(this, 'isOverflow', isOverflow)
 
-        this.__updateScrollBar()
+        this.__checkScroll()
     }
 
     @rewrite(rect.__updateRenderBounds)
     public __updateRectRenderBounds(): void { }
 
+    public __updateWorldBounds(): void {
+        if (this.hasScroller) this.__updateScroll()
+        super.__updateWorldBounds()
+    }
+
+
     //  need rewrite
-    public __updateScrollBar(): void { }
+    public __checkScroll(): void { }
+
+    public __updateScroll(): void { }
 
 
     @rewrite(rect.__updateChange)
@@ -150,7 +157,7 @@ export class Box extends Group implements IBox {
             this.__renderRect(canvas, options)
             if (this.children.length) this.__renderGroup(canvas, options)
         }
-        if (this.scrollBar) this.scrollBar.__render(canvas, options)
+        if (this.hasScroller) this.scroller.__render(canvas, options)
     }
 
     // in __drawAfterFill()
