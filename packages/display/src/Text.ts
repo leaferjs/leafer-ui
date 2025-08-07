@@ -1,7 +1,7 @@
 import { ILeaferCanvas, IBoolean, INumber, IString, IBoundsData, IUnitData, IRenderOptions } from '@leafer/interface'
 import { BoundsHelper, boundsType, surfaceType, dataProcessor, registerUI, affectStrokeBoundsType, dataType, hitType, MathHelper, DataHelper } from '@leafer/core'
 
-import { IFill, IText, IFontWeight, ITextCase, ITextDecoration, ITextData, ITextInputData, ITextAlign, IVerticalAlign, ITextDrawData, IOverflow, IStrokeAlign, IHitType, ITextWrap, IWritingMode, IBackgroundBoxStyle } from '@leafer-ui/interface'
+import { IFill, IText, IFontWeight, ITextCase, ITextDecoration, ITextData, ITextInputData, ITextAlign, IVerticalAlign, ITextDrawData, ITextOverflow, IStrokeAlign, IHitType, ITextWrap, IWritingMode, IBackgroundBoxStyle } from '@leafer-ui/interface'
 import { TextData } from '@leafer-ui/data'
 
 import { TextConvert, UnitConvert } from '@leafer-ui/external'
@@ -93,7 +93,7 @@ export class Text extends UI implements IText {
     public textWrap?: ITextWrap
 
     @boundsType('show')
-    public textOverflow?: IOverflow | string
+    public textOverflow?: ITextOverflow
 
     @surfaceType(false)
     public textEditing: boolean
