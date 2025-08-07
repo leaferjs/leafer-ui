@@ -31,18 +31,18 @@ export const DragBoundsHelper = {
         return move
     },
 
-    // draggable限制
-    draggableMove(leaf: ILeaf, move: IPointData) {
+    // 按轴移动
+    axisMove(leaf: ILeaf, move: IPointData) {
         const { draggable } = leaf
-        if (draggable === 'x' || !draggable) move.y = 0
-        if (draggable === 'y' || !draggable) move.x = 0
+        if (draggable === 'x') move.y = 0
+        if (draggable === 'y') move.x = 0
     },
 
-    // 拖拽区域限制
+    // 拖拽区域内移动
     limitMove(leaf: ILeaf, move: IPointData): void {
         const { dragBounds, dragBoundsType } = leaf
         if (dragBounds) D.getValidMove(leaf.__localBoxBounds, dragBounds === 'parent' ? leaf.parent.boxBounds : dragBounds, dragBoundsType, move, true)
-        D.draggableMove(leaf, move)
+        D.axisMove(leaf, move)
     }
 }
 

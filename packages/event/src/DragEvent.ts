@@ -42,7 +42,7 @@ export class DragEvent extends PointerEvent implements IDragEvent {
         const move = leaf.getLocalPoint(total, null, true)
         PointHelper.move(move, start.x - leaf.x, start.y - leaf.y)
         if (checkLimit) this.limitMove(leaf, move)
-        DragBoundsHelper.draggableMove(leaf, move)
+        DragBoundsHelper.axisMove(leaf, move)
         return move
     }
 
