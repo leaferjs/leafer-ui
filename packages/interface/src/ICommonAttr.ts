@@ -1,5 +1,5 @@
 import { INumber, IBoolean, IString, IFourNumber, IUnitData, IScaleFixed } from '@leafer/interface'
-import { IStrokeAlign, IStrokeCap, IStrokeJoin, IBlurEffect, IFontWeight, ITextCase, ITextDecoration, IShadowEffect, IGrayscaleEffect, ITextAlign, IVerticalAlign, IOverflow, ITextWrap, IStroke, IFill, IArrowType, IWritingMode, ITextOverflow } from './type/IType'
+import { IStrokeAlign, IStrokeCap, IStrokeJoin, IBlurEffect, IFontWeight, ITextCase, ITextDecoration, IShadowEffect, IGrayscaleEffect, ITextAlign, IVerticalAlign, ITextWrap, IStroke, IFill, IArrowType, IWritingMode, ITextOverflow } from './type/IType'
 import { ILeafStrokePaint, ILeafShadowEffect, ILeafPaint } from './type/IComputedType'
 import { IDashPatternString, IShadowString, IColorString, IStrokeWidthString, ICornerRadiusString } from './type/IStringType'
 

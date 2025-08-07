@@ -1,8 +1,8 @@
 import { IDragEvent, IPointData, ILeaf, ILeafList, IObject, IBoundsData } from '@leafer/interface'
 import { registerUIEvent, LeafList, BoundsHelper, PointHelper } from '@leafer/core'
+import { DragBoundsHelper } from '@leafer-ui/draw'
 
 import { PointerEvent } from './PointerEvent'
-import { DragBoundsHelper } from '@leafer-ui/interaction'
 
 
 const tempMove = {} as IPointData

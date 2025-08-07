@@ -14,7 +14,7 @@ import { IAnimation, IAnimate, IKeyframe, IKeyframeId, IAnimateType } from './IA
 import { ILeafer } from './app/ILeafer'
 import { IEditorConfig } from './editor/IEditor'
 import { IColorString } from './type/IStringType'
-import { IScroller, IScrollConfig, IScrollTheme } from './IScroller'
+import { IScroller, IScrollConfig } from './IScroller'
 
 // Line
 export interface ILine extends ILineAttrData, IUI {

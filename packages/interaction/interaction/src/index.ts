@@ -1,5 +1,4 @@
 export { InteractionBase } from './Interaction'
 export { InteractionHelper } from './InteractionHelper'
-export { DragBoundsHelper } from './DragBoundsHelper'
 export { Cursor } from './Cursor'
 export { Dragger } from './Dragger'
