@@ -519,14 +519,15 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
         return Plugin.need('export')
     }
 
-    public clone(data?: IUIInputData): IUI {
+    public clone(data?: IUIInputData): this {
         const json = DataHelper.clone(this.toJSON())
         if (data) Object.assign(json, data)
-        return UI.one(json)
+        return UI.one(json) as this
     }
 
-    static one(data: IUIInputData, x?: number, y?: number, width?: number, height?: number): IUI {
-        return UICreator.get(data.tag || this.prototype.__tag, data, x, y, width, height) as IUI
+    // this 参数定义，在编译的时候会移除
+    static one<T extends UI>(this: new (...args: any[]) => T, data: IUIInputData, x?: number, y?: number, width?: number, height?: number): T {
+        return UICreator.get(data.tag || this.prototype.__tag, data, x, y, width, height) as T
     }
 
     static registerUI(): void {
