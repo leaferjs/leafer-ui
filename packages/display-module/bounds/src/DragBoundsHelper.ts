@@ -1,4 +1,5 @@
 import { IPointData, IBoundsData, IDragBoundsType, ILeaf } from '@leafer/interface'
+import { MathHelper } from '@leafer/core'
 
 
 export const DragBoundsHelper = {
@@ -27,6 +28,10 @@ export const DragBoundsHelper = {
             if (y < dragBounds.y) move.y += dragBounds.y - y
             else if (bottom > boundsBottom) move.y += boundsBottom - bottom
         }
+
+        // 避免出现很小为0的小数
+        move.x = MathHelper.float(move.x)
+        move.y = MathHelper.float(move.y)
 
         return move
     },
