@@ -11,6 +11,7 @@ export interface IScrollConfig {
     sideMargin?: number // 滚动条两侧的间距
     minSize?: number // 最小显示size
     scaleFixed?: IScaleFixed
+    scrollType?: 'drag' | 'move' | 'both' // 滚动类型
     hideOnActionEnd?: boolean | 'hover' | 'scroll'  // 操作结束时自动隐藏
 }
 

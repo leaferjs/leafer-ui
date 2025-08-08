@@ -128,7 +128,7 @@ export class Box extends Group implements IBox {
     }
 
 
-    //  need rewrite
+    //  scroller will rewrite
     public __checkScroll(): void { }
 
     public __updateScroll(): void { }
