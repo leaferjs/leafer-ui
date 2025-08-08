@@ -1,4 +1,4 @@
-import { IGroup, IUI, IBox, IRectInputData, ISelectorProxy, IEditSize, ICursorType, IAlign, IUnitPointData, IDragEvent, IMoveEvent, IRotateEvent, IStroke, IFill, ILeaf, ILeafList, IObject, IBoxInputData, IGroupInputData, IImageCursor, IRect, IKeyEvent, IUIInputData, IZoomEvent, IColorString, IDirection4, IPointData, IScaleData, ISkewData, ILayoutBoundsData, ITransition, IFourNumber, IShortcutKeys, IShortcutKeysCheck, IUIEvent } from '@leafer-ui/interface'
+import { IGroup, IUI, IBox, IRectInputData, ISelectorProxy, IEditSize, ICursorType, IAlign, IUnitPointData, IDragEvent, IMoveEvent, IRotateEvent, IStroke, IFill, ILeaf, ILeafList, IObject, IBoxInputData, IGroupInputData, IImageCursor, IRect, IKeyEvent, IUIInputData, IZoomEvent, IColorString, IDirection4, IPointData, IScaleData, ISkewData, ILayoutBoundsData, ITransition, IFourNumber, IShortcutKeys, IShortcutKeysCheck, IUIEvent, ILeafer } from '@leafer-ui/interface'
 
 export interface IEditorBase extends IGroup, ISelectorProxy, ITransformTool {
     config: IEditorConfig
@@ -37,6 +37,8 @@ export interface IEditorBase extends IGroup, ISelectorProxy, ITransformTool {
     editTool?: IObject
     innerEditor?: IObject
     editMask: IUI
+
+    readonly targetLeafer: ILeafer
 
     select(target: IUI | IUI[]): void
     cancel(): void
