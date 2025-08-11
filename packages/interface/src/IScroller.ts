@@ -12,6 +12,7 @@ export interface IScrollConfig {
     minSize?: number // 最小显示size
     scaleFixed?: IScaleFixed
     scrollType?: 'drag' | 'move' | 'both' // 滚动类型
+    stopDefault?: boolean, // 阻止自身之外的默认滚动
     hideOnActionEnd?: boolean | 'hover' | 'scroll'  // 操作结束时自动隐藏
 }
 
