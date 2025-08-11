@@ -153,6 +153,9 @@ export interface IEditorConfig extends IObject {
     rotateKey?: IShortcutKeysCheck | IShortcutKeys
 
     beforeSelect?: IEditorBeforeSelect
+    beforeEditOuter?: IEditorBeforeEditOuter
+    beforeEditInner?: IEditorBeforeEditInner
+
     beforeMove?: IEditorBeforeMove
     beforeScale?: IEditorBeforeScale
     beforeRotate?: IEditorBeforeRotate
@@ -167,6 +170,13 @@ export interface IEditorConfig extends IObject {
 export interface IEditorSelectData {
     target: IUI | IUI[]
 }
+
+export interface IEditorEditOuterData {
+    target: IUI
+    name: string
+}
+
+export type IEditorEditInnerData = IEditorEditOuterData
 
 export interface IEditorMoveData extends IPointData, IObject {
     target: IUI
@@ -190,6 +200,14 @@ export interface IEditorSkewData extends ISkewData, IObject {
 
 export interface IEditorBeforeSelect {
     (data: IEditorSelectData): IUI | IUI[] | boolean | void
+}
+
+export interface IEditorBeforeEditOuter {
+    (data: IEditorEditOuterData): string | boolean | void
+}
+
+export interface IEditorBeforeEditInner {
+    (data: IEditorEditInnerData): string | boolean | void
 }
 
 export interface IEditorBeforeMove {
