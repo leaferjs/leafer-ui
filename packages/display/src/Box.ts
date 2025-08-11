@@ -107,7 +107,7 @@ export class Box extends Group implements IBox {
             const childrenRenderBounds = layout.childrenRenderBounds || (layout.childrenRenderBounds = getBoundsData())
             super.__updateRenderBounds(childrenRenderBounds)
 
-            if (data.scrollX || data.scrollY) {  // 增加滚动逻辑
+            if (data.overflow.includes('scroll')) {  // 增加滚动逻辑
                 add(childrenRenderBounds, boxBounds)
                 scroll(childrenRenderBounds, data as IScrollPointData)
             }

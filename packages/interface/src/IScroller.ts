@@ -7,6 +7,7 @@ export interface IScrollConfig {
     theme?: IScrollTheme // 主题
     style?: IBoxInputData // 滚动条样式
     size?: number // 滚动条的size
+    cornerRadius?: number // 默认取size的一半
     endsMargin?: number // 滚动条两端的间距
     sideMargin?: number // 滚动条两侧的间距
     minSize?: number // 最小显示size
