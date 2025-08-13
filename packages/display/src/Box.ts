@@ -8,7 +8,7 @@ import { Group } from './Group'
 import { Rect } from './Rect'
 
 
-const { add, addPoint, includes, scroll } = BoundsHelper
+const { add, includes, scroll } = BoundsHelper
 const rect = Rect.prototype, group = Group.prototype
 
 @rewriteAble()
@@ -40,7 +40,7 @@ export class Box extends Group implements IBox {
 
     public isOverflow?: boolean
 
-    // scroller rewrite
+    // scroller will rewrite
     public scrollConfig?: IScrollConfig
 
     public scroller?: IScroller
@@ -108,7 +108,7 @@ export class Box extends Group implements IBox {
             super.__updateRenderBounds(childrenRenderBounds)
 
             if (isScrollMode = overflow.includes('scroll')) {  // 检查滚动逻辑
-                addPoint(childrenRenderBounds, boxBounds)
+                add(childrenRenderBounds, boxBounds)
                 scroll(childrenRenderBounds, data as IScrollPointData)
             }
 
