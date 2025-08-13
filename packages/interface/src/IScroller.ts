@@ -42,5 +42,5 @@ export interface IScroller extends IGroup {
     dragScrolling: boolean
 
     updateConfig(): void
-    update(check: boolean): void
+    update(check?: boolean): void
 }

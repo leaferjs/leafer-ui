@@ -8,7 +8,7 @@ import { Group } from './Group'
 import { Rect } from './Rect'
 
 
-const { add, includes, scroll } = BoundsHelper
+const { add, addPoint, includes, scroll } = BoundsHelper
 const rect = Rect.prototype, group = Group.prototype
 
 @rewriteAble()
@@ -99,43 +99,36 @@ export class Box extends Group implements IBox {
     public __updateStrokeBounds(): void { }
 
     public __updateRenderBounds(): void {
-        let isOverflow: boolean
+        let isOverflow: boolean, isScrollMode: boolean
 
         if (this.children.length) {
-            const data = this.__, layout = this.__layout, { renderBounds, boxBounds } = layout
+            const data = this.__, layout = this.__layout, { renderBounds, boxBounds } = layout, { overflow } = data
 
             const childrenRenderBounds = layout.childrenRenderBounds || (layout.childrenRenderBounds = getBoundsData())
             super.__updateRenderBounds(childrenRenderBounds)
 
-            if (data.overflow.includes('scroll')) {  // 增加滚动逻辑
-                add(childrenRenderBounds, boxBounds)
+            if (isScrollMode = overflow.includes('scroll')) {  // 检查滚动逻辑
+                addPoint(childrenRenderBounds, boxBounds)
                 scroll(childrenRenderBounds, data as IScrollPointData)
             }
 
             this.__updateRectRenderBounds()
 
             isOverflow = !includes(boxBounds, childrenRenderBounds)
-            if (isOverflow && data.overflow === 'show') add(renderBounds, childrenRenderBounds)
+            if (isOverflow && overflow === 'show') add(renderBounds, childrenRenderBounds)
         } else this.__updateRectRenderBounds()
 
         DataHelper.stintSet(this, 'isOverflow', isOverflow)
 
-        this.__checkScroll()
+        this.__checkScroll(isScrollMode)
     }
 
     @rewrite(rect.__updateRenderBounds)
     public __updateRectRenderBounds(): void { }
 
-    public __updateWorldBounds(): void {
-        if (this.hasScroller) this.__updateScroll()
-        super.__updateWorldBounds()
-    }
-
 
     //  scroller will rewrite
-    public __checkScroll(): void { }
-
-    public __updateScroll(): void { }
+    public __checkScroll(_isScrollMode: boolean): void { }
 
 
     @rewrite(rect.__updateChange)

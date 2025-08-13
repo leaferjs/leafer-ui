@@ -343,8 +343,7 @@ export interface IBox extends IBoxAttrData, IGroup {
     __: IBoxData
     scroller?: IScroller
     hasScroller?: boolean
-    __checkScroll(): void
-    __updateScroll(): void
+    __checkScroll(isScrollMode: boolean): void
     __updateRectRenderBounds(): void
     __renderGroup(canvas: ILeaferCanvas, options: IRenderOptions): void
 }
