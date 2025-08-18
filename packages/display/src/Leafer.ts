@@ -65,6 +65,7 @@ export class Leafer extends Group implements ILeafer {
         hittable: true,
         smooth: true,
         lazySpeard: 100,
+        // maxFPS: 60, // 最大的运行帧率
         // pixelSnap: false // 是否对齐像素，避免图片存在浮点坐标导致模糊
     }
 
