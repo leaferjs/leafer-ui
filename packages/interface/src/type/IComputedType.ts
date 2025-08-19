@@ -58,4 +58,7 @@ export interface ILeafShadowEffect {
     blendMode?: IBlendMode
     box?: boolean
     scaleFixed?: IScaleFixed
+
+    skew?: IPointData // 倾斜阴影
+    rotation?: number // 旋转阴影
 }

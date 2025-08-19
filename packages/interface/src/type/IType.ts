@@ -86,7 +86,7 @@ export interface IImagePaint extends IPaintBase {
     size?: number | IOptionSizeData
     scale?: number | IPointData
     rotation?: number
-    skew?: | IPointData
+    skew?: IPointData
 
     freeTransform?: boolean // 平铺模式下是否进行自由变换，默认90度、缩放会进行特殊处理
 
@@ -183,6 +183,9 @@ export interface IShadowEffect {
     visible?: boolean
     box?: boolean
     scaleFixed?: IScaleFixed
+
+    skew?: IPointData // 倾斜阴影
+    rotation?: number // 旋转阴影
 }
 
 export interface IBlurEffect {
