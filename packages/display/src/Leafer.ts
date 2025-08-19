@@ -456,10 +456,10 @@ export class Leafer extends Group implements ILeafer {
                     if (!this.parent) {
                         if (this.selector) this.selector.destroy()
                         if (this.hitCanvasManager) this.hitCanvasManager.destroy()
-                        this.canvasManager.destroy()
+                        if (this.canvasManager) this.canvasManager.destroy()
                     }
 
-                    this.canvas.destroy()
+                    if (this.canvas) this.canvas.destroy()
 
                     this.config.view = this.view = this.parentApp = null
                     if (this.userConfig) this.userConfig.view = null
