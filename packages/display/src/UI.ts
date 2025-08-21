@@ -410,16 +410,10 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
     public reset(_data?: IUIInputData): void { }
 
 
-    public set(data: IUIInputData, transition?: ITransition | 'temp'): void {
-        if (data) {
-            if (transition) {
-                if (transition === 'temp') {
-                    this.lockNormalStyle = true
-                    Object.assign(this, data)
-                    this.lockNormalStyle = false
-                } else this.animate(data, transition)
-            } else Object.assign(this, data)
-        }
+    // @leafer-in/animate will rewrite
+
+    public set(data: IUIInputData, _transition?: ITransition | 'temp'): void {
+        if (data) Object.assign(this, data)
     }
 
     public get(name?: string | string[] | IUIInputData): IUIInputData | IValue {
@@ -501,7 +495,8 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
 
     // @leafer-in/animate rewrite
 
-    public animate(_keyframe?: IUIInputData | IKeyframe[] | IAnimation | IAnimation[], _options?: ITransition, _type?: IAnimateType, _isTemp?: boolean): IAnimate {
+    public animate(keyframe?: IUIInputData | IKeyframe[] | IAnimation | IAnimation[], _options?: ITransition, _type?: IAnimateType, _isTemp?: boolean): IAnimate {
+        this.set(keyframe as IUIInputData)
         return Plugin.need('animate')
     }
 
