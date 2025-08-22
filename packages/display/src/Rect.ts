@@ -10,15 +10,11 @@ import { UI } from './UI'
 @useModule(RectRender)
 @rewriteAble()
 @registerUI()
-export class Rect extends UI implements IRect { // tip: rewrited Box
+export class Rect<TInputData = IRectInputData> extends UI<TInputData> implements IRect { // tip: rewrited Box
 
     public get __tag() { return 'Rect' }
 
     @dataProcessor(RectData)
     declare public __: IRectData
-
-    constructor(data?: IRectInputData) {
-        super(data)
-    }
 
 }

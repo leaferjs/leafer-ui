@@ -12,7 +12,7 @@ const { moveTo, lineTo, closePath } = PathCommandDataHelper
 
 
 @registerUI()
-export class Star extends UI implements IStar {
+export class Star<TInputData = IStarInputData> extends UI<TInputData> implements IStar {
 
     public get __tag() { return 'Star' }
 
@@ -25,9 +25,6 @@ export class Star extends UI implements IStar {
     @pathType(0.382)
     public innerRadius?: INumber
 
-    constructor(data?: IStarInputData) {
-        super(data)
-    }
 
     public __updatePath() {
 

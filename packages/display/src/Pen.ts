@@ -8,7 +8,7 @@ import { Path } from './Path'
 
 @useModule(PathCreator, ['set', 'path', 'paint'])
 @registerUI()
-export class Pen extends Group implements IPen {
+export class Pen<TInputData = IPenInputData> extends Group<TInputData> implements IPen {
 
     public get __tag() { return 'Pen' }
 
@@ -23,9 +23,6 @@ export class Pen extends Group implements IPen {
 
     public __path: IPathCommandData
 
-    constructor(data?: IPenInputData) {
-        super(data)
-    }
 
     public setStyle(data: IPathInputData): Pen {
         const path = this.pathElement = new Path(data)

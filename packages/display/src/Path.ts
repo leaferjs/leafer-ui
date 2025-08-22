@@ -7,7 +7,7 @@ import { UI } from './UI'
 
 
 @registerUI()
-export class Path extends UI implements IPath {
+export class Path<TInputData = IPathInputData> extends UI<TInputData> implements IPath {
 
     public get __tag() { return 'Path' }
 
@@ -16,9 +16,5 @@ export class Path extends UI implements IPath {
 
     @affectStrokeBoundsType('center')
     declare public strokeAlign?: IStrokeAlign
-
-    constructor(data?: IPathInputData) {
-        super(data)
-    }
 
 }

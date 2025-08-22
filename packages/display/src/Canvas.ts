@@ -9,7 +9,7 @@ import { Rect } from './Rect'
 
 
 @registerUI()
-export class Canvas extends Rect implements ICanvas {
+export class Canvas<TInputData = ICanvasInputData> extends Rect<TInputData> implements ICanvas {
 
     public get __tag() { return 'Canvas' }
 
@@ -42,10 +42,10 @@ export class Canvas extends Rect implements ICanvas {
 
     public url?: string // 用于临时加载canvas的base64数据，完成后会置空
 
-    constructor(data?: ICanvasInputData) {
+    constructor(data?: TInputData) {
         super(data)
         this.canvas = Creator.canvas(this.__ as ILeaferCanvasConfig)
-        if (data && data.url) this.drawImage(data.url)
+        if (data && (data as ICanvasInputData).url) this.drawImage((data as ICanvasInputData).url)
     }
 
     public drawImage(url: string): void {

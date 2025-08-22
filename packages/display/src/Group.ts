@@ -9,7 +9,7 @@ import { UI } from './UI'
 
 @useModule(Branch)
 @registerUI()
-export class Group extends UI implements IGroup {   // tip: rewrited Box
+export class Group<TInputData = IGroupInputData> extends UI<TInputData> implements IGroup {   // tip: rewrited Box
 
     public get __tag() { return 'Group' }
 
@@ -31,9 +31,6 @@ export class Group extends UI implements IGroup {   // tip: rewrited Box
 
     public childlessJSON?: boolean
 
-    constructor(data?: IGroupInputData) {
-        super(data)
-    }
 
     public reset(data?: IGroupInputData): void {
         this.__setBranch()

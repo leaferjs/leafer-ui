@@ -14,7 +14,7 @@ const line = Line.prototype
 
 @rewriteAble()
 @registerUI()
-export class Polygon extends UI implements IPolygon {
+export class Polygon<TInputData = IPolygonInputData> extends UI<TInputData> implements IPolygon {
 
     public get __tag() { return 'Polygon' }
 
@@ -30,9 +30,6 @@ export class Polygon extends UI implements IPolygon {
     @pathType(0)
     public curve?: boolean | number
 
-    constructor(data?: IPolygonInputData) {
-        super(data)
-    }
 
     public __updatePath(): void {
 

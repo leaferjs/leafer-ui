@@ -8,7 +8,7 @@ import { Rect } from './Rect'
 
 
 @registerUI()
-export class Image extends Rect implements IImage {
+export class Image<TInputData = IImageInputData> extends Rect<TInputData> implements IImage {
 
     public get __tag() { return 'Image' }
 
@@ -21,10 +21,6 @@ export class Image extends Rect implements IImage {
     public get ready(): boolean { const { image } = this; return image && image.ready }
 
     public get image(): ILeaferImage { const { fill } = this.__; return isArray(fill) && fill[0].image }
-
-    constructor(data?: IImageInputData) {
-        super(data)
-    }
 
 }
 

@@ -13,7 +13,7 @@ import { Export, Paint, PathArrow } from '@leafer-ui/external'
 @useModule(UIBounds)
 @useModule(UIRender)
 @rewriteAble()
-export class UI extends Leaf implements IUI { // tip: rewrited Box
+export class UI<TInputData = IUIInputData> extends Leaf<TInputData> implements IUI { // tip: rewrited Box
 
     @dataProcessor(UIData)
     declare public __: IUIData
@@ -396,11 +396,6 @@ export class UI extends Leaf implements IUI { // tip: rewrited Box
         pen.set(this.path = path || [])
         if (!path) this.__drawPathByBox(pen)
         return pen
-    }
-
-
-    constructor(data?: IUIInputData) {
-        super(data)
     }
 
 

@@ -14,7 +14,7 @@ const { toBounds } = PathBounds
 
 
 @registerUI()
-export class Line extends UI implements ILine { // tip: rewrited Polygon
+export class Line<TInputData = ILineInputData> extends UI<TInputData> implements ILine { // tip: rewrited Polygon
 
     public get __tag() { return 'Line' }
 
@@ -52,10 +52,6 @@ export class Line extends UI implements ILine { // tip: rewrited Polygon
         if (this.height) this.height = 0
     }
 
-
-    constructor(data?: ILineInputData) {
-        super(data)
-    }
 
     public __updatePath(): void {
 

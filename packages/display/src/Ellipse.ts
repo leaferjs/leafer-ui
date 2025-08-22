@@ -10,7 +10,7 @@ import { UI } from './UI'
 const { moveTo, closePath, ellipse } = PathCommandDataHelper
 
 @registerUI()
-export class Ellipse extends UI implements IEllipse {
+export class Ellipse<TInputData = IEllipseInputData> extends UI<TInputData> implements IEllipse {
 
     public get __tag() { return 'Ellipse' }
 
@@ -26,9 +26,6 @@ export class Ellipse extends UI implements IEllipse {
     @pathType(0)
     public endAngle?: INumber
 
-    constructor(data?: IEllipseInputData) {
-        super(data)
-    }
 
     public __updatePath(): void {
 

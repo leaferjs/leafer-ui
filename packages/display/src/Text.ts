@@ -12,7 +12,7 @@ import { UI } from './UI'
 const { copyAndSpread, includes, spread, setList } = BoundsHelper
 
 @registerUI()
-export class Text extends UI implements IText {
+export class Text<TConstructorData = ITextInputData> extends UI<TConstructorData> implements IText {
 
     public get __tag() { return 'Text' }
 
@@ -102,10 +102,6 @@ export class Text extends UI implements IText {
 
     public get textDrawData(): ITextDrawData { this.updateLayout(); return this.__.__textDrawData }
 
-
-    constructor(data?: ITextInputData) {
-        super(data)
-    }
 
     public __updateTextDrawData(): void {
         const data = this.__

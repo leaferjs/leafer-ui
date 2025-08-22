@@ -13,7 +13,7 @@ const rect = Rect.prototype, group = Group.prototype
 
 @rewriteAble()
 @registerUI()
-export class Box extends Group implements IBox {
+export class Box<TInputData = IBoxInputData> extends Group<TInputData> implements IBox {
 
     public get __tag() { return 'Box' }
 
@@ -46,7 +46,7 @@ export class Box extends Group implements IBox {
     public scroller?: IScroller
     public hasScroller?: boolean
 
-    constructor(data?: IBoxInputData) {
+    constructor(data?: TInputData) {
         super(data)
         this.__layout.renderChanged || this.__layout.renderChange()
     }

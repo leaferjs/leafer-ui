@@ -7,7 +7,7 @@ import { Box } from './Box'
 
 
 @registerUI()
-export class Frame extends Box implements IFrame {
+export class Frame<TInputData = IFrameInputData> extends Box<TInputData> implements IFrame {
 
     public get __tag() { return 'Frame' }
 
@@ -22,7 +22,4 @@ export class Frame extends Box implements IFrame {
     @affectRenderBoundsType('hide')
     declare public overflow?: IOverflow
 
-    constructor(data?: IFrameInputData) {
-        super(data)
-    }
 }
