@@ -458,7 +458,7 @@ export class UI<TInputData = IUIInputData> extends Leaf<TInputData> implements I
         const data = this.__
         if (data.path) {
             data.__pathForRender = data.cornerRadius ? PathCorner.smooth(data.path, data.cornerRadius, data.cornerSmoothing) : data.path
-            if (data.__useArrow) PathArrow.addArrows(this, !data.cornerRadius)
+            if (data.__useArrow) PathArrow.addArrows(this)
         } else data.__pathForRender && (data.__pathForRender = undefined)
     }
 

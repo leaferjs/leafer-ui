@@ -33,15 +33,16 @@ export class Polygon<TInputData = IPolygonInputData> extends UI<TInputData> impl
 
     public __updatePath(): void {
 
-        const path: number[] = this.__.path = []
+        const data = this.__
+        const path: number[] = data.path = []
 
-        if (this.__.points) {
+        if (data.points) {
 
-            drawPoints(path, this.__.points, false, true)
+            drawPoints(path, data.points, data.curve, true)
 
         } else {
 
-            const { width, height, sides } = this.__
+            const { width, height, sides } = data
             const rx = width / 2, ry = height / 2
 
             moveTo(path, rx, 0)

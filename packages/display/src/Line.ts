@@ -5,7 +5,6 @@ import { ILine, ILineData, ILineInputData, IStrokeAlign } from '@leafer-ui/inter
 import { LineData } from '@leafer-ui/data'
 
 import { UI } from './UI'
-import { PathArrow } from '@leafer-ui/external'
 
 
 const { moveTo, lineTo, drawPoints } = PathCommandDataHelper
@@ -60,7 +59,7 @@ export class Line<TInputData = ILineInputData> extends UI<TInputData> implements
 
         if (data.points) {
 
-            drawPoints(path, data.points, false, data.closed)
+            drawPoints(path, data.points, data.curve, data.closed)
 
         } else {
 
@@ -68,14 +67,6 @@ export class Line<TInputData = ILineInputData> extends UI<TInputData> implements
             lineTo(path, this.width, 0)
         }
 
-    }
-
-    public __updateRenderPath(): void {
-        const data = this.__
-        if (!this.pathInputed && data.points && data.curve) {
-            drawPoints(data.__pathForRender = [], data.points, data.curve, data.closed)
-            if (data.__useArrow) PathArrow.addArrows(this, false)
-        } else super.__updateRenderPath()
     }
 
     public __updateBoxBounds(): void {
