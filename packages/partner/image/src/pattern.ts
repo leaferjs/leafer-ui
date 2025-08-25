@@ -74,7 +74,7 @@ export function createPattern(ui: IUI, paint: ILeafPaint, pixelRatio: number): b
             scale(imageMatrix, canvasWidth / max(floor(canvasWidth), 1), canvasHeight / max(floor(canvasHeight), 1)) // 缩放至floor画布宽高的状态
         }
 
-        const canvas = image.getCanvas(width, height, data.opacity, data.filters, xGap, yGap)
+        const canvas = image.getCanvas(width, height, data.opacity, data.filters, xGap, yGap, ui.leafer && ui.leafer.config.smooth)
         const pattern = image.getPattern(canvas, repeat || (Platform.origin.noRepeat || 'no-repeat'), imageMatrix, paint)
 
         paint.style = pattern
