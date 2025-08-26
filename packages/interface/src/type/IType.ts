@@ -120,7 +120,13 @@ export type IStrokeCap = 'none' | 'round' | 'square'
 export type IStrokeJoin = 'bevel' | 'round' | 'miter'
 
 // 箭头
-export type IArrowType = IPathDataArrow | 'none' | 'angle' | 'angle-side' | 'arrow' | 'triangle' | 'triangle-flip' | 'circle' | 'circle-line' | 'square' | 'square-line' | 'diamond' | 'diamond-line' | 'mark'
+export type IArrowType = 'none' | 'angle' | 'angle-side' | 'arrow' | 'triangle' | 'triangle-flip' | 'circle' | 'circle-line' | 'square' | 'square-line' | 'diamond' | 'diamond-line' | 'mark' | (string & {})
+export type IArrowStyle = IPathDataArrow | IArrowType | IArrowTypeData
+
+export interface IArrowTypeData {
+    type: IArrowType
+    scale?: number
+}
 
 export interface IPathDataArrowMap {
     [name: string]: IPathDataArrow

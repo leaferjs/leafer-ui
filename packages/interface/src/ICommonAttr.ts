@@ -1,5 +1,5 @@
 import { INumber, IBoolean, IString, IFourNumber, IUnitData, IScaleFixed } from '@leafer/interface'
-import { IStrokeAlign, IStrokeCap, IStrokeJoin, IBlurEffect, IFontWeight, ITextCase, ITextDecoration, IShadowEffect, IGrayscaleEffect, ITextAlign, IVerticalAlign, ITextWrap, IStroke, IFill, IArrowType, IWritingMode, ITextOverflow } from './type/IType'
+import { IStrokeAlign, IStrokeCap, IStrokeJoin, IBlurEffect, IFontWeight, ITextCase, ITextDecoration, IShadowEffect, IGrayscaleEffect, ITextAlign, IVerticalAlign, ITextWrap, IStroke, IFill, IArrowStyle, IWritingMode, ITextOverflow } from './type/IType'
 import { ILeafStrokePaint, ILeafShadowEffect, ILeafPaint } from './type/IComputedType'
 import { IDashPatternString, IShadowString, IColorString, IStrokeWidthString, ICornerRadiusString } from './type/IStringType'
 
@@ -39,15 +39,15 @@ export interface IBorderComputedData {
 export interface IStrokeAttrData extends IStrokeStyle {
     stroke?: IStroke
 
-    startArrow?: IArrowType
-    endArrow?: IArrowType
+    startArrow?: IArrowStyle
+    endArrow?: IArrowStyle
 }
 
 export interface IStrokeInputData extends IStrokeStyle {
     stroke?: IStroke
 
-    startArrow?: IArrowType
-    endArrow?: IArrowType
+    startArrow?: IArrowStyle
+    endArrow?: IArrowStyle
 }
 
 export interface IStrokeStyle {
@@ -64,8 +64,8 @@ export interface IStrokeStyle {
 export interface IStrokeComputedData extends IStrokeComputedStyle {
     stroke?: IColorString | ILeafStrokePaint[]
 
-    startArrow?: IArrowType
-    endArrow?: IArrowType
+    startArrow?: IArrowStyle
+    endArrow?: IArrowStyle
 }
 
 export interface IStrokeComputedStyle {
