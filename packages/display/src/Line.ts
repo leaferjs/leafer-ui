@@ -1,5 +1,5 @@
 import { IPointData, INumber } from '@leafer/interface'
-import { PathBounds, PathCommandDataHelper, PointHelper, boundsType, pathType, affectStrokeBoundsType, dataProcessor, registerUI, getPointData } from '@leafer/core'
+import { PathCommandDataHelper, PointHelper, boundsType, pathType, affectStrokeBoundsType, dataProcessor, registerUI, getPointData } from '@leafer/core'
 
 import { ILine, ILineData, ILineInputData, IStrokeAlign } from '@leafer-ui/interface'
 import { LineData } from '@leafer-ui/data'
@@ -9,7 +9,6 @@ import { UI } from './UI'
 
 const { moveTo, lineTo, drawPoints } = PathCommandDataHelper
 const { rotate, getAngle, getDistance, defaultPoint } = PointHelper
-const { toBounds } = PathBounds
 
 
 @registerUI()
@@ -67,12 +66,6 @@ export class Line<TInputData = ILineInputData> extends UI<TInputData> implements
             lineTo(path, this.width, 0)
         }
 
-    }
-
-    public __updateBoxBounds(): void {
-        if (this.points) {
-            toBounds(this.__.__pathForRender, this.__layout.boxBounds)
-        } else super.__updateBoxBounds()
     }
 
 }

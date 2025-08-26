@@ -1,8 +1,8 @@
 import { IPolygonData } from '@leafer-ui/interface'
 
-import { UIData } from "./UIData"
+import { LineData } from './LineData'
 
 
-export class PolygonData extends UIData implements IPolygonData {
+export class PolygonData extends LineData implements IPolygonData {
 
 }
