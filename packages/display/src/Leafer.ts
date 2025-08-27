@@ -1,4 +1,4 @@
-import { ILeaferCanvas, IRenderer, ILayouter, ISelector, IWatcher, IInteraction, ILeaferConfig, ICanvasManager, IHitCanvasManager, IAutoBounds, IScreenSizeData, IResizeEvent, IEventListenerId, ITimer, IValue, IObject, IControl, IPointData, ILeaferType, ICursorType, IBoundsData, INumber, IZoomType, IZoomOptions, IFourNumber, IBounds, IClientPointData, ITransition } from '@leafer/interface'
+import { ILeaferCanvas, IRenderer, ILayouter, ISelector, IWatcher, IInteraction, ILeaferConfig, ICanvasManager, IHitCanvasManager, IAutoBounds, IScreenSizeData, IResizeEvent, IEventListenerId, ITimer, IValue, IObject, IControl, IPointData, ILeaferType, ICursorType, IBoundsData, INumber, IZoomType, IZoomOptions, IFourNumber, IBounds, IClientPointData, ITransition, ICanvasSizeAttr } from '@leafer/interface'
 import { AutoBounds, LayoutEvent, ResizeEvent, LeaferEvent, CanvasManager, ImageManager, Resource, DataHelper, Creator, Run, Debug, RenderEvent, registerUI, boundsType, canvasSizeAttrs, dataProcessor, WaitHelper, WatchEvent, Bounds, LeafList, Plugin, getBoundsData } from '@leafer/core'
 
 import { ILeaferInputData, ILeaferData, IFunction, IUIInputData, ILeafer, IApp, IEditorBase } from '@leafer-ui/interface'
@@ -124,7 +124,7 @@ export class Leafer extends Group implements ILeafer {
         )
 
         if (this.isApp) this.__setApp()
-        this.__checkAutoLayout(config, parentApp)
+        this.__checkAutoLayout()
         this.view = canvas.view
 
         // interaction / manager
@@ -248,7 +248,8 @@ export class Leafer extends Group implements ILeafer {
         this.__level = 1
     }
 
-    protected __checkAutoLayout(config: ILeaferConfig, parentApp?: IApp): void {
+    protected __checkAutoLayout(): void {
+        const { config, parentApp } = this
         if (!parentApp) {
             if (!config.width || !config.height) this.autoLayout = new AutoBounds(config)
             this.canvas.startAutoLayout(this.autoLayout, this.__onResize.bind(this))
@@ -259,7 +260,7 @@ export class Leafer extends Group implements ILeafer {
         if (this.canvas) {
             if (canvasSizeAttrs.includes(attrName)) {
                 // if (!newValue) debug.warn(attrName + ' is 0')
-                this.__changeCanvasSize(attrName, newValue as number)
+                this.__changeCanvasSize(attrName as ICanvasSizeAttr, newValue as number)
             } else if (attrName === 'fill') {
                 this.__changeFill(newValue as string)
             } else if (attrName === 'hittable') {
@@ -277,10 +278,11 @@ export class Leafer extends Group implements ILeafer {
         return super.__getAttr(attrName)
     }
 
-    protected __changeCanvasSize(attrName: string, newValue: number): void {
-        const data = DataHelper.copyAttrs({}, this.canvas, canvasSizeAttrs)
-        data[attrName] = (this.config as IObject)[attrName] = newValue
-        if (newValue) this.canvas.stopAutoLayout()
+    protected __changeCanvasSize(attrName: ICanvasSizeAttr, newValue: number): void {
+        const { config, canvas } = this
+        const data = DataHelper.copyAttrs({}, canvas, canvasSizeAttrs)
+        data[attrName] = config[attrName] = newValue
+        config.width && config.height ? canvas.stopAutoLayout() : this.__checkAutoLayout()
         this.__doResize(data as IScreenSizeData)
     }
 
