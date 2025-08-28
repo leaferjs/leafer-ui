@@ -4,7 +4,7 @@ import { IUI, ILeafPaint, IMatrixData } from '@leafer-ui/interface'
 
 
 const { get, scale, copy } = MatrixHelper
-const { floor, max, abs } = Math
+const { floor, ceil, max, abs } = Math
 
 export function createPattern(ui: IUI, paint: ILeafPaint, pixelRatio: number): boolean {
     let { scaleX, scaleY } = ui.getRenderScaleData(true, paint.scaleFixed)
@@ -17,9 +17,6 @@ export function createPattern(ui: IUI, paint: ILeafPaint, pixelRatio: number): b
 
         scaleX *= pixelRatio
         scaleY *= pixelRatio
-
-        const xGap = gap && (gap.x * scaleX)
-        const yGap = gap && (gap.y * scaleY)
 
         if (sx) {
             sx = abs(sx) // maybe -1
@@ -42,7 +39,10 @@ export function createPattern(ui: IUI, paint: ILeafPaint, pixelRatio: number): b
 
         let maxSize = Platform.image.maxPatternSize
 
-        if (!image.isSVG) {
+        if (image.isSVG) {
+            const ws = width / image.width
+            if (ws > 1) imageScale = ws / ceil(ws) // fix: svg按整数倍放大，避免产生加深线条
+        } else {
             const imageSize = image.width * image.height
             if (maxSize > imageSize) maxSize = imageSize
         }
@@ -61,17 +61,25 @@ export function createPattern(ui: IUI, paint: ILeafPaint, pixelRatio: number): b
             scaleY /= sy
         }
 
+        // 间距
+        const xGap = gap && (gap.x * scaleX)
+        const yGap = gap && (gap.y * scaleY)
+
         if (transform || scaleX !== 1 || scaleY !== 1) {
+
+            // 缩放至floor画布宽高的状态
+            const canvasWidth = width + (xGap || 0)
+            const canvasHeight = height + (yGap || 0)
+            scaleX /= canvasWidth / max(floor(canvasWidth), 1)
+            scaleY /= canvasHeight / max(floor(canvasHeight), 1)
+
             if (!imageMatrix) {
                 imageMatrix = get()
                 if (transform) copy(imageMatrix, transform)
             }
-            scale(imageMatrix, 1 / scaleX, 1 / scaleY)
-        }
 
-        if (imageMatrix) {
-            const canvasWidth = width + (xGap || 0), canvasHeight = height + (yGap || 0)
-            scale(imageMatrix, canvasWidth / max(floor(canvasWidth), 1), canvasHeight / max(floor(canvasHeight), 1)) // 缩放至floor画布宽高的状态
+            scale(imageMatrix, 1 / scaleX, 1 / scaleY)
+
         }
 
         const canvas = image.getCanvas(width, height, data.opacity, data.filters, xGap, yGap, ui.leafer && ui.leafer.config.smooth)
