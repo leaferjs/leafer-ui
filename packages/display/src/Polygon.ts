@@ -5,12 +5,10 @@ import { IPolygon, IPolygonData, IPolygonInputData } from '@leafer-ui/interface'
 import { PolygonData } from '@leafer-ui/data'
 
 import { UI } from './UI'
-import { Line } from './Line'
 
 
 const { sin, cos, PI } = Math
 const { moveTo, lineTo, closePath, drawPoints } = PathCommandDataHelper
-const line = Line.prototype
 
 @rewriteAble()
 @registerUI()
@@ -56,11 +54,5 @@ export class Polygon<TInputData = IPolygonInputData> extends UI<TInputData> impl
         }
 
     }
-
-    @rewrite(line.__updateRenderPath)
-    public __updateRenderPath(): void { }
-
-    @rewrite(line.__updateBoxBounds)
-    public __updateBoxBounds(): void { }
 
 }
