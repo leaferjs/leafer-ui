@@ -1,5 +1,5 @@
 import { INumber, IPointData } from '@leafer/interface'
-import { PathCommandDataHelper, dataProcessor, pathType, registerUI, rewrite, rewriteAble } from '@leafer/core'
+import { PathCommandDataHelper, dataProcessor, pathType, registerUI, rewriteAble } from '@leafer/core'
 
 import { IPolygon, IPolygonData, IPolygonInputData } from '@leafer-ui/interface'
 import { PolygonData } from '@leafer-ui/data'
