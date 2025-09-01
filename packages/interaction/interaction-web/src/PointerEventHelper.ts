@@ -5,11 +5,11 @@ import { InteractionHelper } from '@leafer-ui/core'
 export const PointerEventHelper = {
 
     convert(e: PointerEvent, local: IPointData): IPointerEvent {
-        const base = InteractionHelper.getBase(e)
+        const base = InteractionHelper.getBase(e), { x, y } = local
         const data: IPointerEvent = {
             ...base,
-            x: local.x,
-            y: local.y,
+            x,
+            y,
             width: e.width,
             height: e.height,
             pointerType: e.pointerType as PointerType,
@@ -26,11 +26,11 @@ export const PointerEventHelper = {
     },
 
     convertMouse(e: MouseEvent, local: IPointData): IPointerEvent {
-        const base = InteractionHelper.getBase(e)
+        const base = InteractionHelper.getBase(e), { x, y } = local
         return {
             ...base,
-            x: local.x,
-            y: local.y,
+            x,
+            y,
             width: 1,
             height: 1,
             pointerType: 'mouse',
@@ -40,11 +40,11 @@ export const PointerEventHelper = {
 
     convertTouch(e: TouchEvent, local: IPointData): IPointerEvent {
         const touch = PointerEventHelper.getTouch(e)
-        const base = InteractionHelper.getBase(e)
+        const base = InteractionHelper.getBase(e), { x, y } = local
         return {
             ...base,
-            x: local.x,
-            y: local.y,
+            x,
+            y,
             width: 1,
             height: 1,
             pointerType: 'touch',
