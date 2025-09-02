@@ -154,11 +154,6 @@ export class Text<TConstructorData = ITextInputData> extends UI<TConstructorData
         else data.__textBoxBounds = b
     }
 
-    override __onUpdateSize(): void {
-        if (this.__box) this.__box.__onUpdateSize()
-        super.__onUpdateSize()
-    }
-
     override __updateRenderSpread(): number {
         let width = super.__updateRenderSpread()
         if (!width) width = this.isOverflow ? 1 : 0
@@ -169,6 +164,12 @@ export class Text<TConstructorData = ITextInputData> extends UI<TConstructorData
         const { renderBounds, renderSpread } = this.__layout
         copyAndSpread(renderBounds, this.__.__textBoxBounds, renderSpread)
         if (this.__box) this.__box.__layout.renderBounds = renderBounds
+    }
+
+    override __updateChange(): void {
+        super.__updateChange()
+        const box = this.__box
+        if (box) box.__onUpdateSize(), box.__updateChange()
     }
 
     override __drawRenderPath(canvas: ILeaferCanvas): void {

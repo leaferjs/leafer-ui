@@ -46,8 +46,6 @@ export class TextData extends UIData implements ITextData {
 
             box.set(value)
             if (boxLayout.strokeChanged) layout.strokeChange()
-            if (boxLayout.renderChanged) layout.renderChange()
-            box.__updateChange()
 
         } else if (box) {
             t.__box = box.parent = null
