@@ -167,6 +167,7 @@ export type ITextDecorationType = 'none' | 'under' | 'delete' | 'under-delete'
 export interface ITextDecorationData {
     type: ITextDecorationType
     color: IColor
+    offset?: number
 }
 
 export type ITextWrap = 'normal' | 'none' | 'break'
