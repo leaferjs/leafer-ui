@@ -1,6 +1,6 @@
 {
   "name": "@leafer-ui/bounds",
-  "version": "1.9.5",
+  "version": "1.9.6",
   "description": "@leafer-ui/bounds",
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
@@ -18,9 +18,9 @@
     "leaferjs"
   ],
   "dependencies": {
-    "@leafer/core": "1.9.5"
+    "@leafer/core": "1.9.6"
   },
   "devDependencies": {
-     "@leafer-ui/interface": "1.9.5"
+     "@leafer-ui/interface": "1.9.6"
   }
 }
