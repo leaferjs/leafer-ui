@@ -35,7 +35,7 @@
 
 ## 快速安装
 
-🚀 想马上在产品中使用，请安装 [leafer-ui](https://leaferjs.com/ui/guide/install/ui/start.html)（60KB min+gzip），开始你的探索之旅。
+🚀 想马上在产品中使用，请安装 [leafer-ui](https://leaferjs.com/ui/guide/install/ui/start.html)（66KB min+gzip），开始你的探索之旅。
 
 <!-- ### 场景包
 
