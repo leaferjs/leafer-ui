@@ -1,4 +1,4 @@
-import { IBlendMode, ILeaferImage, IMatrixData, IPointData, IScaleFixed, ITaskItem } from '@leafer/interface'
+import { IBlendMode, IDirection, ILeaferImage, IMatrixData, IPointData, IScaleFixed, ITaskItem } from '@leafer/interface'
 
 import { IColorString } from './IStringType'
 import { IStrokeAlign, IStrokeJoin, IStrokeCap, IImagePaintMode, IImageFilters } from './IType'
@@ -59,6 +59,9 @@ export interface ILeafShadowEffect {
     box?: boolean
     scaleFixed?: IScaleFixed
 
-    skew?: IPointData // 倾斜阴影
-    rotation?: number // 旋转阴影
+    // 斜切、旋转阴影
+    skewX?: number
+    skewY?: number
+    rotation?: number
+    origin?: IDirection // 斜切、旋转原点方位，相对元素的box包围盒，默认为 bottom
 }
