@@ -1,5 +1,5 @@
-import { ILeaferCanvas, IRenderer, ILayouter, ISelector, IWatcher, IInteraction, ILeaferConfig, ICanvasManager, IHitCanvasManager, IAutoBounds, IScreenSizeData, IResizeEvent, IEventListenerId, ITimer, IValue, IObject, IControl, IPointData, ILeaferType, ICursorType, IBoundsData, INumber, IZoomType, IZoomOptions, IFourNumber, IBounds, IClientPointData, ITransition, ICanvasSizeAttr } from '@leafer/interface'
-import { AutoBounds, LayoutEvent, ResizeEvent, LeaferEvent, CanvasManager, ImageManager, Resource, DataHelper, Creator, Run, Debug, RenderEvent, registerUI, boundsType, canvasSizeAttrs, dataProcessor, WaitHelper, WatchEvent, Bounds, LeafList, Plugin, getBoundsData } from '@leafer/core'
+import { ILeaferCanvas, IRenderer, ILayouter, ISelector, IWatcher, IInteraction, ILeaferConfig, ICanvasManager, IHitCanvasManager, IAutoBounds, IScreenSizeData, IResizeEvent, IEventListenerId, ITimer, IValue, IObject, IControl, IPointData, ILeaferType, ICursorType, IBoundsData, INumber, IZoomType, IZoomOptions, IFourNumber, IBounds, IClientPointData, ITransition, ICanvasSizeAttr, ILeaferMode } from '@leafer/interface'
+import { AutoBounds, LayoutEvent, ResizeEvent, LeaferEvent, CanvasManager, ImageManager, Resource, DataHelper, Creator, Run, Debug, RenderEvent, registerUI, boundsType, canvasSizeAttrs, dataProcessor, WaitHelper, WatchEvent, Bounds, LeafList, Plugin, getBoundsData, dataType } from '@leafer/core'
 
 import { ILeaferInputData, ILeaferData, IFunction, IUIInputData, ILeafer, IApp, IEditorBase } from '@leafer-ui/interface'
 import { LeaferData } from '@leafer-ui/data'
@@ -22,6 +22,9 @@ export class Leafer extends Group implements ILeafer {
 
     @boundsType()
     declare public pixelRatio?: INumber
+
+    @dataType('normal')
+    public mode: ILeaferMode
 
     public get isApp(): boolean { return false }
     public get app(): ILeafer { return this.parent || this }
@@ -268,7 +271,7 @@ export class Leafer extends Group implements ILeafer {
             } else if (attrName === 'zIndex') {
                 this.canvas.zIndex = newValue as any
                 setTimeout(() => this.parent && this.parent.__updateSortChildren())
-            }
+            } else if (attrName === 'mode') this.emit(LeaferEvent.UPDATE_MODE, { mode: newValue })
         }
         return super.__setAttr(attrName, newValue)
     }
