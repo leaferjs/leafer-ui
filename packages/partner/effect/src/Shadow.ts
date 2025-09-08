@@ -1,8 +1,8 @@
 import { IBoundsData, ILeaferCanvas, IOffsetBoundsData } from '@leafer/interface'
 import { BoundsHelper, LeafHelper, Platform } from '@leafer/core'
 
-import { IUI, ICachedShape } from '@leafer-ui/interface'
-import { ColorConvert } from '@leafer-ui/draw'
+import { IUI, ICachedShape, ILeafShadowEffect } from '@leafer-ui/interface'
+import { ColorConvert, Effect } from '@leafer-ui/draw'
 
 
 const { copy, toOffsetOutBounds } = BoundsHelper
@@ -52,13 +52,21 @@ export function shadow(ui: IUI, current: ILeaferCanvas, shape: ICachedShape): vo
             worldCanvas ? other.copyWorld(worldCanvas, nowWorld, nowWorld, 'destination-out') : other.copyWorld(shape.canvas, shapeBounds, bounds, 'destination-out')
         }
 
-        LeafHelper.copyCanvasByWorld(ui, current, other, copyBounds, item.blendMode)
+        if (Effect.isTransformShadow(item)) Effect.renderTransformShadow(ui, current, other, copyBounds, item)
+        else LeafHelper.copyCanvasByWorld(ui, current, other, copyBounds, item.blendMode)
 
         if (end && index < end) other.clearWorld(copyBounds)
     })
 
     other.recycle(copyBounds)
 
+}
+
+
+export function getShadowSpread(_ui: IUI, shadow: ILeafShadowEffect[]): number {
+    let width = 0
+    shadow.forEach(item => width = Math.max(width, Math.max(Math.abs(item.y), Math.abs(item.x)) + (item.spread > 0 ? item.spread : 0) + item.blur * 1.5))
+    return width
 }
 
 

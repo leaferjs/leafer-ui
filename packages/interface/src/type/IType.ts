@@ -1,4 +1,4 @@
-import { IPointData, IPathCommandData, IWindingRule, IBlendMode, IExportFileType, IFourNumber, IAlign, IUnitPointData, IAxis, IAxisReverse, IFilter, IOptionSizeData, ISizeData, IGap, IPointGap, IScaleFixed } from '@leafer/interface'
+import { IPointData, IPathCommandData, IWindingRule, IBlendMode, IExportFileType, IFourNumber, IAlign, IUnitPointData, IAxis, IAxisReverse, IFilter, IOptionSizeData, ISizeData, IGap, IPointGap, IScaleFixed, IDirection } from '@leafer/interface'
 import { IColorString, IPaintString } from './IStringType'
 import { IStrokeStyle } from '../ICommonAttr'
 
@@ -191,8 +191,11 @@ export interface IShadowEffect {
     box?: boolean
     scaleFixed?: IScaleFixed
 
-    skew?: IPointData // 倾斜阴影
-    rotation?: number // 旋转阴影
+    // 斜切、旋转阴影
+    skewX?: number
+    skewY?: number
+    rotation?: number
+    origin?: IDirection // 斜切、旋转原点方位，相对元素的box包围盒，默认为 bottom
 }
 
 export interface IBlurEffect {
