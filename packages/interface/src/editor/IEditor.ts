@@ -1,4 +1,4 @@
-import { IGroup, IUI, IBox, IRectInputData, ISelectorProxy, IEditSize, ICursorType, IAlign, IUnitPointData, IDragEvent, IMoveEvent, IRotateEvent, IStroke, IFill, ILeaf, ILeafList, IObject, IBoxInputData, IGroupInputData, IImageCursor, IRect, IKeyEvent, IUIInputData, IZoomEvent, IColorString, IDirection4, IPointData, IScaleData, ISkewData, ILayoutBoundsData, ITransition, IFourNumber, IShortcutKeys, IShortcutKeysCheck, IUIEvent, ILeafer } from '@leafer-ui/interface'
+import { IGroup, IUI, IBox, IRectInputData, ISelectorProxy, IEditSize, ICursorType, IAlign, IUnitPointData, IDragEvent, IMoveEvent, IRotateEvent, IStroke, IFill, ILeaf, ILeafList, IObject, IBoxInputData, IGroupInputData, IImageCursor, IKeyEvent, IUIInputData, IZoomEvent, IColorString, IDirection4, IPointData, IScaleData, ISkewData, ILayoutBoundsData, ITransition, IFourNumber, IShortcutKeys, IShortcutKeysCheck, IUIEvent, ILeafer } from '@leafer-ui/interface'
 
 export interface IEditorBase extends IGroup, ISelectorProxy, ITransformTool {
     config: IEditorConfig
@@ -101,6 +101,7 @@ export interface IEditorConfig extends IObject {
 
     point?: IEditPointInputData | IEditPointInputData[]
     middlePoint?: IEditPointInputData | IEditPointInputData[]
+    resizeLine?: IEditPointInputData
 
     rect?: IBoxInputData
     area?: IRectInputData
@@ -236,7 +237,7 @@ export interface IEditPoint extends IBox {
     pointType: IEditPointType
 }
 
-export type IEditPointType = 'resize' | 'rotate' | 'skew' | 'resize-rotate' | 'button'
+export type IEditPointType = 'move' | 'resize' | 'rotate' | 'skew' | 'resize-rotate' | 'button'
 
 export interface IEditBoxBase extends IGroup {
 
@@ -253,7 +254,7 @@ export interface IEditBoxBase extends IGroup {
     view: IGroup //  放置默认编辑工具控制点
 
     circle: IEditPoint
-    rect: IRect
+    rect: IEditPoint
 
     buttons: IGroup
 
