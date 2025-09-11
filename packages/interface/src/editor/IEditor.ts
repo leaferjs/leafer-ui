@@ -5,8 +5,9 @@ export interface IEditorBase extends IGroup, ISelectorProxy, ITransformTool {
     readonly mergeConfig: IEditorConfig // 实际使用，合并了选中元素、默认editBox上的editConfig，频繁访问会消耗性能
     readonly mergedConfig: IEditorConfig // 合并之后的缓存配置
 
-    hoverTarget?: IUI
     target?: IUI | IUI[]
+    hoverTarget?: IUI
+    dimTarget?: IGroup | IGroup[] // 需要淡化的容器
 
     readonly list: IUI[]
     leafList: ILeafList
@@ -47,6 +48,9 @@ export interface IEditorBase extends IGroup, ISelectorProxy, ITransformTool {
     shiftItem(item: IUI): void
     addItem(item: IUI): void
     removeItem(item: IUI): void
+
+    setDimOthers(value: boolean | number): void
+    setBright(value: boolean): void
 
     update(): void
     updateEditBox(): void
@@ -105,7 +109,10 @@ export interface IEditorConfig extends IObject {
 
     rect?: IBoxInputData
     area?: IRectInputData
+
     mask?: boolean | IColorString
+    dimOthers?: boolean | number // 是否弱化其他内容，突出显示选中元素
+    bright?: boolean // 仅突出显示选中元素
 
     circle?: IEditPointInputData
     circleDirection?: IDirection4
