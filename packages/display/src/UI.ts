@@ -61,13 +61,14 @@ export class UI<TInputData = IUIInputData> extends Leaf<TInputData> implements I
     public locked?: IBoolean
 
 
+    // @leafer-in/bright will rewrite
+
     @dimType(false)
     public dim?: IBoolean | INumber // 是否弱化内容，可设置具体透明度
 
     @dimType(false)
     public dimskip?: IBoolean // 跳过弱化，突出显示内容，不受dim影响
 
-    @dimType(false)
     public bright?: IBoolean // 突出显示内容，并置顶渲染，不受dim影响
 
 
