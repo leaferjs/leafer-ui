@@ -1,4 +1,4 @@
-import { ILeaferCanvas, IRenderOptions, IBooleanMap, IBoundsData, ILeaferImage, IAlign, IPointData, IMatrixData, ISizeData } from '@leafer/interface'
+import { ILeaferCanvas, IRenderOptions, IBooleanMap, IBoundsData, ILeaferImage, IAlign, IPointData, IMatrixData } from '@leafer/interface'
 
 import { ILeafPaint, ILeafPaintPatternData } from '../type/IComputedType'
 import { IUI, IUIData } from '../IUI'

@@ -24,6 +24,9 @@ Group.prototype.__renderMask = function (canvas: ILeaferCanvas, options: IRender
             }
 
             // mask start
+
+            if (mask === 'clipping' || mask === 'clipping-path') excludeRenderBounds(child, options) || child.__render(canvas, options) // 剪贴蒙版，需要渲染自身到原画布中，如果应用遮罩会造成透明度减半。clipping-path 支持渲染外描边。
+
             maskOpacity = child.__.opacity
             usedGrayscaleAlpha = false
 
@@ -49,8 +52,6 @@ Group.prototype.__renderMask = function (canvas: ILeaferCanvas, options: IRender
                 child.__render(maskCanvas, options)
 
             }
-
-            if (mask === 'clipping' || mask === 'clipping-path') excludeRenderBounds(child, options) || child.__render(canvas, options) // 剪贴蒙版，需要渲染自身到原画布中，如果应用遮罩会造成透明度减半
 
             continue
         }
