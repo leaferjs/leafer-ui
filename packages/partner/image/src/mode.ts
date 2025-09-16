@@ -1,4 +1,4 @@
-import { IBoundsData, IPointData, IMatrixData, IAlign, ISizeData } from '@leafer/interface'
+import { IBoundsData, IPointData, IMatrixData, IAlign } from '@leafer/interface'
 import { getMatrixData, MatrixHelper } from '@leafer/core'
 
 import { ILeafPaintPatternData } from '@leafer-ui/interface'
@@ -15,11 +15,11 @@ export function fillOrFitMode(data: ILeafPaintPatternData, box: IBoundsData, x: 
     data.transform = transform
 }
 
-export function clipMode(data: ILeafPaintPatternData, box: IBoundsData, x: number, y: number, scaleX: number, scaleY: number, rotation: number, skew: IPointData, clipSize?: ISizeData): void {
+export function clipMode(data: ILeafPaintPatternData, box: IBoundsData, x: number, y: number, scaleX: number, scaleY: number, rotation: number, skew: IPointData, clipScaleX?: number, clipScaleY?: number): void {
     const transform: IMatrixData = get()
     layout(transform, box, x, y, scaleX, scaleY, rotation, skew)
-    if (clipSize) {
-        tempMatrix.a = box.width / clipSize.width, tempMatrix.d = box.height / clipSize.height
+    if (clipScaleX) {
+        tempMatrix.a = clipScaleX, tempMatrix.d = clipScaleY
         multiplyParent(transform, tempMatrix)
     }
     data.transform = transform

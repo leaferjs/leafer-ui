@@ -60,7 +60,12 @@ export function getPatternData(paint: IImagePaint, box: IBoundsData, image: ILea
             break
         case 'normal':
         case 'clip':
-            if (tempImage.x || tempImage.y || scaleX || clipSize || rotation || skew) clipMode(data, box, tempImage.x, tempImage.y, scaleX, scaleY, rotation, skew, paint.clipSize)
+            if (tempImage.x || tempImage.y || scaleX || clipSize || rotation || skew) {
+                let clipScaleX: number, clipScaleY: number
+                if (clipSize) clipScaleX = box.width / clipSize.width, clipScaleY = box.height / clipSize.height
+                clipMode(data, box, tempImage.x, tempImage.y, scaleX, scaleY, rotation, skew, clipScaleX, clipScaleY)
+                if (clipScaleX) scaleX = scaleX ? scaleX * clipScaleX : scaleX, scaleY = scaleY ? scaleY * clipScaleY : clipScaleY
+            }
             break
         case 'repeat':
             if (!sameBox || scaleX || rotation || skew) repeatMode(data, box, width, height, tempImage.x, tempImage.y, scaleX, scaleY, rotation, skew, align, paint.freeTransform)
