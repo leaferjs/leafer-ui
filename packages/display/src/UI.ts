@@ -409,7 +409,7 @@ export class UI<TInputData = IUIInputData> extends Leaf<TInputData> implements I
     public reset(_data?: IUIInputData): void { }
 
 
-    // @leafer-in/animate will rewrite
+    // @leafer-in/animate and @leafer-in/state will rewrite
 
     public set(data: IUIInputData, _transition?: ITransition | 'temp'): void {
         if (data) Object.assign(this, data)
