@@ -1,11 +1,11 @@
-import { IBoundsData, ILeaferCanvas, IOffsetBoundsData } from '@leafer/interface'
+import { IBoundsData, IFourNumber, ILeaferCanvas, IOffsetBoundsData } from '@leafer/interface'
 import { BoundsHelper, LeafHelper, Platform } from '@leafer/core'
 
 import { IUI, ICachedShape, ILeafShadowEffect } from '@leafer-ui/interface'
 import { ColorConvert, Effect } from '@leafer-ui/draw'
 
 
-const { copy, toOffsetOutBounds } = BoundsHelper
+const { copy, toOffsetOutBounds } = BoundsHelper, { max } = Math
 const tempBounds = {} as IBoundsData
 const offsetOutBounds = {} as IOffsetBoundsData
 
@@ -63,10 +63,16 @@ export function shadow(ui: IUI, current: ILeaferCanvas, shape: ICachedShape): vo
 }
 
 
-export function getShadowSpread(_ui: IUI, shadow: ILeafShadowEffect[]): number {
-    let width = 0
-    shadow.forEach(item => width = Math.max(width, Math.max(Math.abs(item.y), Math.abs(item.x)) + (item.spread > 0 ? item.spread : 0) + item.blur * 1.5))
-    return width
+export function getShadowSpread(_ui: IUI, shadow: ILeafShadowEffect[], spreadSign: 1 | -1 = 1): IFourNumber {
+    let top = 0, right = 0, bottom = 0, left = 0, spread: number, blur: number
+    shadow.forEach(item => {
+        spread = (item.spread || 0) * spreadSign, blur = item.blur * 1.5
+        top = max(top, spread + blur - item.y)
+        right = max(right, spread + blur + item.x)
+        bottom = max(bottom, spread + blur + item.y)
+        left = max(left, spread + blur - item.x)
+    })
+    return (top === right && right === bottom && bottom === left) ? top : [top, right, bottom, left]
 }
 
 

@@ -1,10 +1,10 @@
-import { IBoundsData, ILeaferCanvas, IOffsetBoundsData } from '@leafer/interface'
+import { IBoundsData, IFourNumber, ILeaferCanvas, IOffsetBoundsData } from '@leafer/interface'
 import { BoundsHelper, LeafHelper } from '@leafer/core'
 
-import { IUI, ICachedShape } from '@leafer-ui/interface'
+import { IUI, ICachedShape, ILeafShadowEffect } from '@leafer-ui/interface'
 import { ColorConvert } from '@leafer-ui/draw'
 
-import { drawWorldShadow } from './Shadow'
+import { drawWorldShadow, getShadowSpread } from './Shadow'
 
 
 const { toOffsetOutBounds } = BoundsHelper
@@ -63,4 +63,6 @@ export function innerShadow(ui: IUI, current: ILeaferCanvas, shape: ICachedShape
 
 }
 
-
+export function getInnerShadowSpread(ui: IUI, innerShadow: ILeafShadowEffect[]): IFourNumber {
+    return getShadowSpread(ui, innerShadow, -1)
+}
