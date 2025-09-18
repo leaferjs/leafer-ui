@@ -1,5 +1,5 @@
 import { IBoundsData, ILeaferCanvas, IRenderOptions, IMatrix } from '@leafer/interface'
-import { BoundsHelper, Matrix, Platform } from '@leafer/core'
+import { BoundsHelper, FourNumberHelper, Matrix, Platform } from '@leafer/core'
 
 import { IUI, ICachedShape } from '@leafer-ui/interface'
 
@@ -28,7 +28,8 @@ export function shape(ui: IUI, current: ILeaferCanvas, options: IRenderOptions):
         if (Platform.fullImageShadow) { // fix: iOS Safari 18.5 以上, 只裁剪部分区域渲染阴影会有问题
             worldClipBounds = nowWorld
         } else {
-            const spreadBounds = spread ? getSpread(currentBounds, scaleX === scaleY ? spread * scaleX : [spread * scaleY, spread * scaleX]) : currentBounds
+
+            const spreadBounds = spread ? getSpread(currentBounds, FourNumberHelper.swapAndScale(spread, scaleX, scaleY)) : currentBounds  // spread需要反向交换值
             worldClipBounds = getIntersectData(spreadBounds, nowWorld)
         }
 

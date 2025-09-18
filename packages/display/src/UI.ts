@@ -148,7 +148,7 @@ export class UI<TInputData = IUIInputData> extends Leaf<TInputData> implements I
 
 
     @affectRenderBoundsType(0)
-    public renderSpread?: INumber // 强行扩大渲染边界
+    public renderSpread?: IFourNumber // 强行扩大渲染边界
 
 
     // path

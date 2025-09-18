@@ -1,4 +1,4 @@
-import { ILeaferCanvas, IRenderOptions, IBoolean, INumber, IScrollPointData } from '@leafer/interface'
+import { ILeaferCanvas, IRenderOptions, IBoolean, INumber, IScrollPointData, IFourNumber } from '@leafer/interface'
 import { rewrite, rewriteAble, registerUI, BoundsHelper, dataProcessor, affectRenderBoundsType, dataType, boundsType, DataHelper, getBoundsData } from '@leafer/core'
 
 import { IBox, IBoxData, IBoxInputData, IOverflow, IScrollConfig, IScroller } from '@leafer-ui/interface'
@@ -52,12 +52,12 @@ export class Box<TInputData = IBoxInputData> extends Group<TInputData> implement
     }
 
     @rewrite(rect.__updateStrokeSpread)
-    public __updateStrokeSpread(): number { return 0 }
+    public __updateStrokeSpread(): IFourNumber { return 0 }
 
     @rewrite(rect.__updateRenderSpread)
-    public __updateRectRenderSpread(): number { return 0 }
+    public __updateRectRenderSpread(): IFourNumber { return 0 }
 
-    public __updateRenderSpread(): number { return this.__updateRectRenderSpread() || -1 }
+    public __updateRenderSpread(): IFourNumber { return this.__updateRectRenderSpread() || -1 }
 
 
     @rewrite(rect.__updateBoxBounds)

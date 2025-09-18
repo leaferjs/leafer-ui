@@ -1,4 +1,4 @@
-import { ILeaferCanvas, IBoolean, INumber, IString, IBoundsData, IUnitData, IRenderOptions } from '@leafer/interface'
+import { ILeaferCanvas, IBoolean, INumber, IString, IBoundsData, IUnitData, IRenderOptions, IFourNumber } from '@leafer/interface'
 import { BoundsHelper, boundsType, surfaceType, dataProcessor, registerUI, affectStrokeBoundsType, dataType, hitType, MathHelper, DataHelper } from '@leafer/core'
 
 import { IFill, IText, IFontWeight, ITextCase, ITextDecoration, ITextData, ITextInputData, ITextAlign, IVerticalAlign, ITextDrawData, ITextOverflow, IStrokeAlign, IHitType, ITextWrap, IWritingMode, IBackgroundBoxStyle } from '@leafer-ui/interface'
@@ -154,10 +154,10 @@ export class Text<TConstructorData = ITextInputData> extends UI<TConstructorData
         else data.__textBoxBounds = b
     }
 
-    override __updateRenderSpread(): number {
-        let width = super.__updateRenderSpread()
-        if (!width) width = this.isOverflow ? 1 : 0
-        return width
+    override __updateRenderSpread(): IFourNumber {
+        let spread = super.__updateRenderSpread()
+        if (!spread) spread = this.isOverflow ? 1 : 0
+        return spread
     }
 
     override __updateRenderBounds(): void {

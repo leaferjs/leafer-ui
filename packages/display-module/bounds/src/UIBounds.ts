@@ -1,59 +1,65 @@
-import { IUIBoundsModule } from "@leafer-ui/interface"
+import { IFourNumber } from '@leafer/interface'
+import { FourNumberHelper } from '@leafer/core'
 
+import { IUIBoundsModule } from "@leafer-ui/interface"
 import { Effect, Filter } from '@leafer-ui/external'
 
 
+const { max, add } = FourNumberHelper
+
 export const UIBounds: IUIBoundsModule = {
 
-    __updateStrokeSpread(): number {
-        let width = 0, boxWidth = 0
+    __updateStrokeSpread(): IFourNumber {
+        let spread: IFourNumber = 0, boxSpread = 0
         const data = this.__, { strokeAlign, __maxStrokeWidth: strokeWidth } = data, box = this.__box
 
         if ((data.stroke || data.hitStroke === 'all') && strokeWidth && strokeAlign !== 'inside') {
-            boxWidth = width = strokeAlign === 'center' ? strokeWidth / 2 : strokeWidth
+            boxSpread = spread = strokeAlign === 'center' ? strokeWidth / 2 : strokeWidth
 
             if (!data.__boxStroke) {
-                const miterLimitAddWidth = data.__isLinePath ? 0 : 10 * width  // =  Math.sin((miterLimit = 10) * OneRadian / 2) * Math.sqrt(strokeWidth) - width 后期需继续精确优化
+                const miterLimitAddWidth = data.__isLinePath ? 0 : 10 * spread  // =  Math.sin((miterLimit = 10) * OneRadian / 2) * Math.sqrt(strokeWidth) - width 后期需继续精确优化
                 const storkeCapAddWidth = data.strokeCap === 'none' ? 0 : strokeWidth
-                width += Math.max(miterLimitAddWidth, storkeCapAddWidth)
+                spread += Math.max(miterLimitAddWidth, storkeCapAddWidth)
             }
         }
 
-        if (data.__useArrow) width += strokeWidth * 5 // 后期需要精细化
+        if (data.__useArrow) spread += strokeWidth * 5 // 后期需要精细化
 
         if (box) {
-            width = Math.max(box.__layout.strokeSpread = box.__updateStrokeSpread(), width)
-            boxWidth = box.__layout.strokeBoxSpread
+            spread = max(spread, box.__layout.strokeSpread = box.__updateStrokeSpread())
+            boxSpread = Math.max(boxSpread, box.__layout.strokeBoxSpread)
         }
 
-        this.__layout.strokeBoxSpread = boxWidth
+        this.__layout.strokeBoxSpread = boxSpread
 
-        return width
+        return spread
     },
 
-    __updateRenderSpread(): number {
-        let width: number = 0
-        const { shadow, innerShadow, blur, backgroundBlur, filter, renderSpread } = this.__
+    __updateRenderSpread(): IFourNumber {
+        let spread: IFourNumber = 0
+        const { shadow, innerShadow, blur, backgroundBlur, filter, renderSpread } = this.__, { strokeSpread } = this.__layout, box = this.__box
 
-        if (shadow) width = Effect.getShadowSpread(this, shadow)
+        if (shadow) spread = Effect.getShadowSpread(this, shadow)
 
-        if (blur) width = Math.max(width, blur)
+        if (blur) spread = max(spread, blur)
 
-        if (filter) width += Filter.getSpread(filter)
+        if (filter) spread = add(spread, Filter.getSpread(filter))
 
-        if (renderSpread) width += renderSpread
+        if (renderSpread) spread = add(spread, renderSpread)
 
-        let shapeWidth = width = Math.ceil(width)
 
-        if (innerShadow) innerShadow.forEach(item => shapeWidth = Math.max(shapeWidth, Math.max(Math.abs(item.y), Math.abs(item.x)) + (item.spread < 0 ? -item.spread : 0) + item.blur * 1.5))
+        let shapeSpread = spread
 
-        if (backgroundBlur) shapeWidth = Math.max(shapeWidth, backgroundBlur)
+        if (innerShadow) shapeSpread = max(shapeSpread, Effect.getInnerShadowSpread(this, innerShadow))
 
-        this.__layout.renderShapeSpread = shapeWidth
+        if (backgroundBlur) shapeSpread = max(shapeSpread, backgroundBlur)
 
-        width += this.__layout.strokeSpread || 0
+        this.__layout.renderShapeSpread = shapeSpread
 
-        return this.__box ? Math.max(this.__box.__updateRenderSpread(), width) : width
+
+        if (strokeSpread) spread = add(spread, strokeSpread)
+
+        return box ? max(box.__updateRenderSpread(), spread) : spread
     }
 
 }
