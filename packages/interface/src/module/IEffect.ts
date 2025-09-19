@@ -1,4 +1,4 @@
-import { ILeaferCanvas, IBoundsData, IFourNumber } from '@leafer/interface'
+import { ILeaferCanvas, IFourNumber, IBoundsData, IMatrixData } from '@leafer/interface'
 
 import { IUI } from '../IUI'
 import { ICachedShape } from '../ICachedShape'
@@ -12,9 +12,9 @@ export interface IEffectModule {
     backgroundBlur(ui: IUI, current: ILeaferCanvas, shape: ICachedShape): void
 
     // shadow
-    getShadowSpread(ui: IUI, shadow: ILeafShadowEffect[], spreadSign?: 1 | -1): IFourNumber
+    getShadowRenderSpread(ui: IUI, shadow: ILeafShadowEffect[], spreadSign?: 1 | -1): IFourNumber
+    getShadowTransform(ui: IUI, canvas: ILeaferCanvas, shape: ICachedShape, shadow: ILeafShadowEffect, outBounds: IBoundsData, otherScale: number, isInnerShaodw?: boolean): IMatrixData
     isTransformShadow(shadow: ILeafShadowEffect): boolean
-    renderTransformShadow?(ui: IUI, current: ILeaferCanvas, fromCanvas: ILeaferCanvas, fromWorld: IBoundsData, shadow: ILeafShadowEffect): void
 
     getInnerShadowSpread(ui: IUI, innerShadow: ILeafShadowEffect[]): IFourNumber
 }

@@ -1,6 +1,6 @@
 import { IEffectModule, ILeafShadowEffect } from '@leafer-ui/interface'
 
-import { shadow, getShadowSpread } from './Shadow'
+import { shadow, getShadowRenderSpread, getShadowTransform } from './Shadow'
 import { innerShadow, getInnerShadowSpread } from './InnerShadow'
 import { blur } from './Blur'
 import { backgroundBlur } from './BackgroundBlur'
@@ -13,7 +13,8 @@ export const EffectModule: IEffectModule = {
     backgroundBlur,
 
     // @leafer-in/shadow will rewrite
-    getShadowSpread,
+    getShadowRenderSpread,
+    getShadowTransform,
     isTransformShadow(_shadow: ILeafShadowEffect): boolean { return undefined },
 
     getInnerShadowSpread

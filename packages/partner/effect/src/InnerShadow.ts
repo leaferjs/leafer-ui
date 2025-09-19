@@ -1,10 +1,10 @@
-import { IBoundsData, IFourNumber, ILeaferCanvas, IOffsetBoundsData } from '@leafer/interface'
+import { IBoundsData, IMatrixData, ILeaferCanvas, IOffsetBoundsData } from '@leafer/interface'
 import { BoundsHelper, LeafHelper } from '@leafer/core'
 
-import { IUI, ICachedShape, ILeafShadowEffect } from '@leafer-ui/interface'
+import { IUI, ICachedShape } from '@leafer-ui/interface'
 import { ColorConvert } from '@leafer-ui/draw'
 
-import { drawWorldShadow, getShadowSpread } from './Shadow'
+import { drawWorldShadow, getShadowRenderSpread, getShadowTransform } from './Shadow'
 
 
 const { toOffsetOutBounds } = BoundsHelper
@@ -12,16 +12,16 @@ const offsetOutBounds = {} as IOffsetBoundsData
 
 export function innerShadow(ui: IUI, current: ILeaferCanvas, shape: ICachedShape): void {
 
-    let copyBounds: IBoundsData, spreadScale: number
+    let copyBounds: IBoundsData, transform: IMatrixData
 
-    const { __nowWorld: nowWorld, __layout } = ui
+    const { __nowWorld: nowWorld } = ui
     const { innerShadow } = ui.__
-    const { worldCanvas, bounds, shapeBounds, scaleX, scaleY } = shape
+    const { worldCanvas, bounds, renderBounds, shapeBounds, scaleX, scaleY } = shape
 
     const other = current.getSameCanvas()
     const end = innerShadow.length - 1
 
-    toOffsetOutBounds(bounds, offsetOutBounds)
+    toOffsetOutBounds(bounds, offsetOutBounds, renderBounds)
 
     innerShadow.forEach((item, index) => {
 
@@ -36,19 +36,22 @@ export function innerShadow(ui: IUI, current: ILeaferCanvas, shape: ICachedShape
 
         other.setWorldShadow((offsetOutBounds.offsetX + item.x * scaleX * otherScale), (offsetOutBounds.offsetY + item.y * scaleY * otherScale), item.blur * scaleX * otherScale)
 
-        spreadScale = item.spread ? 1 - item.spread * 2 / (__layout.boxBounds.width + (__layout.strokeBoxSpread || 0) * 2) * otherScale : 0
+        transform = getShadowTransform(ui, other, shape, item, offsetOutBounds, otherScale, true)
+        if (transform) other.setTransform(transform)
 
-        drawWorldShadow(other, offsetOutBounds, spreadScale, shape)
+        drawWorldShadow(other, offsetOutBounds, shape)
+
+        if (transform) other.resetTransform()
 
         other.restore()
 
         if (worldCanvas) {
-            other.copyWorld(other, bounds, nowWorld, 'copy')
+            other.copyWorld(other, renderBounds, nowWorld, 'copy')
             other.copyWorld(worldCanvas, nowWorld, nowWorld, 'source-out')
             copyBounds = nowWorld
         } else {
             other.copyWorld(shape.canvas, shapeBounds, bounds, 'source-out')
-            copyBounds = bounds
+            copyBounds = renderBounds
         }
 
         other.fillWorld(copyBounds, ColorConvert.string(item.color), 'source-in')
@@ -63,6 +66,4 @@ export function innerShadow(ui: IUI, current: ILeaferCanvas, shape: ICachedShape
 
 }
 
-export function getInnerShadowSpread(ui: IUI, innerShadow: ILeafShadowEffect[]): IFourNumber {
-    return getShadowSpread(ui, innerShadow, -1)
-}
+export const getInnerShadowSpread = getShadowRenderSpread

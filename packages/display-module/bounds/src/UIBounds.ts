@@ -39,13 +39,15 @@ export const UIBounds: IUIBoundsModule = {
         let spread: IFourNumber = 0
         const { shadow, innerShadow, blur, backgroundBlur, filter, renderSpread } = this.__, { strokeSpread } = this.__layout, box = this.__box
 
-        if (shadow) spread = Effect.getShadowSpread(this, shadow)
+        if (shadow) spread = Effect.getShadowRenderSpread(this, shadow)
 
         if (blur) spread = max(spread, blur)
 
         if (filter) spread = add(spread, Filter.getSpread(filter))
 
         if (renderSpread) spread = add(spread, renderSpread)
+
+        if (strokeSpread) spread = add(spread, strokeSpread)
 
 
         let shapeSpread = spread
@@ -55,9 +57,6 @@ export const UIBounds: IUIBoundsModule = {
         if (backgroundBlur) shapeSpread = max(shapeSpread, backgroundBlur)
 
         this.__layout.renderShapeSpread = shapeSpread
-
-
-        if (strokeSpread) spread = add(spread, strokeSpread)
 
         return box ? max(box.__updateRenderSpread(), spread) : spread
     }
