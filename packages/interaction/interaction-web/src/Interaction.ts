@@ -1,4 +1,4 @@
-import { IObject, IPointData, ITimer, IKeepTouchData, ICursorType, IClientPointData } from '@leafer/interface'
+import { IObject, IPointData, ITimer, IKeepTouchData, ICursorType, IClientPointData, IZoomEvent, IRotateEvent } from '@leafer/interface'
 import { MathHelper, isArray, isObject, isString } from '@leafer/core'
 import { InteractionBase, InteractionHelper, Cursor } from '@leafer-ui/core'
 
@@ -318,8 +318,8 @@ export class Interaction extends InteractionBase {
         const scale = (e.scale / this.lastGestureScale)
         const rotation = (e.rotation - this.lastGestureRotation) / Math.PI * 180 * (MathHelper.within(this.config.wheel.rotateSpeed, 0, 1) / 4 + 0.1)
 
-        this.zoom({ ...eventBase, scale: scale * scale })
-        this.rotate({ ...eventBase, rotation })
+        this.zoom({ ...eventBase, scale: scale * scale } as IZoomEvent)
+        this.rotate({ ...eventBase, rotation } as IRotateEvent)
 
         this.lastGestureScale = e.scale
         this.lastGestureRotation = e.rotation

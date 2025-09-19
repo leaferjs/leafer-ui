@@ -38,9 +38,9 @@ export class DragEvent extends PointerEvent implements IDragEvent {
         this.data = data
     }
 
-    static getValidMove(leaf: ILeaf, start: IPointData, total: IPointData, checkLimit = true): IPointData {
-        const move = leaf.getLocalPoint(total, null, true)
-        PointHelper.move(move, start.x - leaf.x, start.y - leaf.y)
+    static getValidMove(leaf: ILeaf, localStart: IPointData, worldTotal: IPointData, checkLimit = true): IPointData {
+        const move = leaf.getLocalPoint(worldTotal, null, true)
+        PointHelper.move(move, localStart.x - leaf.x, localStart.y - leaf.y)
         if (checkLimit) this.limitMove(leaf, move)
         DragBoundsHelper.axisMove(leaf, move)
         return move

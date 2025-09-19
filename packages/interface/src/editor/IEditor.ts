@@ -308,9 +308,10 @@ export interface IEditBoxBase extends IGroup {
 export interface IEditorDragStartData {
     x: number
     y: number
-    point: IPointData
-    bounds: ILayoutBoundsData
-    rotation: number
+    totalOffset: IPointData // 缩放、旋转造成的总偏移量，一般用于手势操作的move纠正
+    point: IPointData  // 用于移动
+    bounds: ILayoutBoundsData // 用于resize
+    rotation: number // 用于旋转
 }
 
 export interface IEditorConfigFunction {
