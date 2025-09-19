@@ -14,5 +14,6 @@ export class RotateEvent extends PointerEvent implements IRotateEvent {
     static END = 'rotate.end'
 
     readonly rotation: number
+    readonly totalRotation: number
 
 }

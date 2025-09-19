@@ -13,5 +13,6 @@ export class ZoomEvent extends PointerEvent implements IZoomEvent {
     static END = 'zoom.end'
 
     readonly scale: number
+    readonly totalScale: number
 
 }

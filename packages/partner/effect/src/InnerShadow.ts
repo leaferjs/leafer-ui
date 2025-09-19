@@ -41,8 +41,6 @@ export function innerShadow(ui: IUI, current: ILeaferCanvas, shape: ICachedShape
 
         drawWorldShadow(other, offsetOutBounds, shape)
 
-        if (transform) other.resetTransform()
-
         other.restore()
 
         if (worldCanvas) {
