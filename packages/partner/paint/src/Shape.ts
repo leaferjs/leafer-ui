@@ -4,33 +4,36 @@ import { BoundsHelper, FourNumberHelper, Matrix, Platform } from '@leafer/core'
 import { IUI, ICachedShape } from '@leafer-ui/interface'
 
 
-const { getSpread, getOuterOf, getByMove, getIntersectData } = BoundsHelper
+const { getSpread, copyAndSpread, toOuterOf, getOuterOf, getByMove, move, getIntersectData } = BoundsHelper
+const tempBounds = {} as IBoundsData
 
 export function shape(ui: IUI, current: ILeaferCanvas, options: IRenderOptions): ICachedShape {
     const canvas = current.getSameCanvas()
-    const nowWorld = ui.__nowWorld, currentBounds = current.bounds
+    const currentBounds = current.bounds, nowWorld = ui.__nowWorld, layout = ui.__layout
+    const nowWorldShapeBounds = ui.__nowWorldShapeBounds || (ui.__nowWorldShapeBounds = {} as IBoundsData)
 
-    let bounds: IBoundsData, matrix: IMatrix, fitMatrix: IMatrix, shapeBounds: IBoundsData, worldCanvas: ILeaferCanvas
+    toOuterOf(layout.strokeSpread ? (copyAndSpread(tempBounds, layout.boxBounds, layout.strokeSpread), tempBounds) : layout.boxBounds, nowWorld, nowWorldShapeBounds)
+
+    let bounds: IBoundsData, renderBounds: IBoundsData, matrix: IMatrix, fitMatrix: IMatrix, shapeBounds: IBoundsData, worldCanvas: ILeaferCanvas
 
     let { scaleX, scaleY } = ui.getRenderScaleData(true)
 
-    if (currentBounds.includes(nowWorld)) {
+    if (currentBounds.includes(nowWorldShapeBounds)) {
 
         worldCanvas = canvas
-        bounds = shapeBounds = nowWorld
+        bounds = shapeBounds = nowWorldShapeBounds
+        renderBounds = nowWorld
 
     } else {
-
-        const { renderShapeSpread: spread } = ui.__layout
 
         let worldClipBounds: IBoundsData // 作为绘制阴影的裁剪形状
 
         if (Platform.fullImageShadow) { // fix: iOS Safari 18.5 以上, 只裁剪部分区域渲染阴影会有问题
-            worldClipBounds = nowWorld
+            worldClipBounds = nowWorldShapeBounds
         } else {
 
-            const spreadBounds = spread ? getSpread(currentBounds, FourNumberHelper.swapAndScale(spread, scaleX, scaleY)) : currentBounds  // spread需要反向交换值
-            worldClipBounds = getIntersectData(spreadBounds, nowWorld)
+            const spreadBounds = layout.renderShapeSpread ? getSpread(currentBounds, FourNumberHelper.swapAndScale(layout.renderShapeSpread, scaleX, scaleY)) : currentBounds  // spread需要反向交换值
+            worldClipBounds = getIntersectData(spreadBounds, nowWorldShapeBounds)
         }
 
         fitMatrix = currentBounds.getFitMatrix(worldClipBounds)
@@ -44,8 +47,13 @@ export function shape(ui: IUI, current: ILeaferCanvas, options: IRenderOptions):
             scaleY *= fitScaleY
         }
 
-        shapeBounds = getOuterOf(nowWorld, fitMatrix)
+
+        shapeBounds = getOuterOf(nowWorldShapeBounds, fitMatrix)
         bounds = getByMove(shapeBounds, -fitMatrix.e, -fitMatrix.f)
+
+        renderBounds = getOuterOf(nowWorld, fitMatrix)
+        move(renderBounds, -fitMatrix.e, -fitMatrix.f)
+
 
         const userMatrix = options.matrix
         if (userMatrix) {
@@ -62,7 +70,7 @@ export function shape(ui: IUI, current: ILeaferCanvas, options: IRenderOptions):
     ui.__renderShape(canvas, options)
 
     return {
-        canvas, matrix, fitMatrix, bounds,
+        canvas, matrix, fitMatrix, bounds, renderBounds,
         worldCanvas, shapeBounds, scaleX, scaleY
     }
 }
