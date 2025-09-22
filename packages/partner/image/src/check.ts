@@ -18,17 +18,15 @@ export function checkImage(ui: IUI, canvas: ILeaferCanvas, paint: ILeafPaint, al
         if (allowDraw) {
             if (data.repeat) {
                 allowDraw = false
-            } else {
-                if (!(paint.changeful || (Platform.name === 'miniapp' && ResizeEvent.isResizing(ui)) || Export.running)) { //  小程序resize过程中直接绘制原图（绕过垃圾回收bug)
-                    let { width, height } = data
-                    width *= scaleX * pixelRatio
-                    height *= scaleY * pixelRatio
-                    if (data.scaleX) {
-                        width *= data.scaleX
-                        height *= data.scaleY
-                    }
-                    allowDraw = (width * height > Platform.image.maxCacheSize)
+            } else if (!(paint.changeful || (Platform.name === 'miniapp' && ResizeEvent.isResizing(ui)) || Export.running)) { //  小程序resize过程中直接绘制原图（绕过垃圾回收bug)
+                let { width, height } = data
+                width *= scaleX * pixelRatio
+                height *= scaleY * pixelRatio
+                if (data.scaleX) {
+                    width *= data.scaleX
+                    height *= data.scaleY
                 }
+                allowDraw = (width * height > Platform.image.maxCacheSize)
             }
         }
 
