@@ -144,6 +144,7 @@ export interface IEditorConfig extends IObject {
     hover?: boolean
     hoverStyle?: IUIInputData
     select?: 'press' | 'tap'
+    selectKeep?: boolean
     selectedStyle?: IUIInputData
     multipleSelect?: boolean
 
