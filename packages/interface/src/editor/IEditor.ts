@@ -159,6 +159,7 @@ export interface IEditorConfig extends IObject {
 
     multipleSelectKey?: IShortcutKeysCheck | IShortcutKeys
     rotateKey?: IShortcutKeysCheck | IShortcutKeys
+    diagonalRotateKey?: IShortcutKeysCheck | IShortcutKeys // 对角旋转的快捷键
 
     beforeSelect?: IEditorBeforeSelect
     beforeEditOuter?: IEditorBeforeEditOuter
