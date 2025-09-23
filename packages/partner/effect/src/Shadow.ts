@@ -2,7 +2,7 @@ import { IBoundsData, IFourNumber, ILeaferCanvas, IMatrixData, IOffsetBoundsData
 import { BoundsHelper, LeafHelper, Matrix, Platform } from '@leafer/core'
 
 import { IUI, ICachedShape, ILeafShadowEffect } from '@leafer-ui/interface'
-import { ColorConvert } from '@leafer-ui/draw'
+import { ColorConvert, Effect } from '@leafer-ui/draw'
 
 
 const { copy, move, toOffsetOutBounds } = BoundsHelper, { max } = Math
@@ -31,9 +31,9 @@ export function shadow(ui: IUI, current: ILeaferCanvas, shape: ICachedShape): vo
             if (sx > 1) otherScale = 1 / sx
         }
 
-        other.setWorldShadow((offsetOutBounds.offsetX + item.x * scaleX * otherScale), (offsetOutBounds.offsetY + item.y * scaleY * otherScale), item.blur * scaleX * otherScale, ColorConvert.string(item.color))
+        other.setWorldShadow((offsetOutBounds.offsetX + (item.x || 0) * scaleX * otherScale), (offsetOutBounds.offsetY + (item.y || 0) * scaleY * otherScale), (item.blur || 0) * scaleX * otherScale, ColorConvert.string(item.color))
 
-        transform = getShadowTransform(ui, other, shape, item, offsetOutBounds, otherScale)
+        transform = Effect.getShadowTransform(ui, other, shape, item, offsetOutBounds, otherScale)
         if (transform) other.setTransform(transform)
 
         drawWorldShadow(other, offsetOutBounds, shape)

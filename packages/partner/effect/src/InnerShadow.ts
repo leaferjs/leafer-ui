@@ -2,9 +2,9 @@ import { IBoundsData, IMatrixData, ILeaferCanvas, IOffsetBoundsData } from '@lea
 import { BoundsHelper, LeafHelper } from '@leafer/core'
 
 import { IUI, ICachedShape } from '@leafer-ui/interface'
-import { ColorConvert } from '@leafer-ui/draw'
+import { ColorConvert, Effect } from '@leafer-ui/draw'
 
-import { drawWorldShadow, getShadowRenderSpread, getShadowTransform } from './Shadow'
+import { drawWorldShadow, getShadowRenderSpread } from './Shadow'
 
 
 const { toOffsetOutBounds } = BoundsHelper
@@ -34,9 +34,9 @@ export function innerShadow(ui: IUI, current: ILeaferCanvas, shape: ICachedShape
 
         other.save()
 
-        other.setWorldShadow((offsetOutBounds.offsetX + item.x * scaleX * otherScale), (offsetOutBounds.offsetY + item.y * scaleY * otherScale), item.blur * scaleX * otherScale)
+        other.setWorldShadow((offsetOutBounds.offsetX + (item.x || 0) * scaleX * otherScale), (offsetOutBounds.offsetY + (item.y || 0) * scaleY * otherScale), (item.blur || 0) * scaleX * otherScale)
 
-        transform = getShadowTransform(ui, other, shape, item, offsetOutBounds, otherScale, true)
+        transform = Effect.getShadowTransform(ui, other, shape, item, offsetOutBounds, otherScale, true)
         if (transform) other.setTransform(transform)
 
         drawWorldShadow(other, offsetOutBounds, shape)

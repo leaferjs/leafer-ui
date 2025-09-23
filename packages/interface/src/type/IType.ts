@@ -181,19 +181,19 @@ export interface IVectorPath {
 
 // 特效
 export interface IShadowEffect {
-    x: number
-    y: number
-    blur: number
+    x?: number
+    y?: number
+    blur?: number
     spread?: number
-    color: IColorString | IColor
+    color?: IColorString | IColor
     blendMode?: IBlendMode
     visible?: boolean
     box?: boolean
     scaleFixed?: IScaleFixed
 
-    // 斜切、旋转阴影
-    skewX?: number
-    skewY?: number
+    // 斜切、缩放、旋转阴影
+    skew?: IPointData
+    scale?: IPointData
     rotation?: number
     origin?: IDirection // 斜切、旋转原点方位，相对元素的box包围盒，默认为 bottom
 }

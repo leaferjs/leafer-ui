@@ -50,18 +50,18 @@ export interface ILeafStrokePaint extends ILeafPaint {
 }
 
 export interface ILeafShadowEffect {
-    x: number
-    y: number
-    blur: number
+    x?: number
+    y?: number
+    blur?: number
     spread?: number
-    color: IColorString
+    color?: IColorString
     blendMode?: IBlendMode
     box?: boolean
     scaleFixed?: IScaleFixed
 
-    // 斜切、旋转阴影
-    skewX?: number
-    skewY?: number
+    // 斜切、缩放、旋转阴影
+    skew?: IPointData
+    scale?: IPointData
     rotation?: number
     origin?: IDirection // 斜切、旋转原点方位，相对元素的box包围盒，默认为 bottom
 }
