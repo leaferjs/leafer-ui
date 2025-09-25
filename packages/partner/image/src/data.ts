@@ -64,7 +64,7 @@ export function getPatternData(paint: IImagePaint, box: IBoundsData, image: ILea
                 let clipScaleX: number, clipScaleY: number
                 if (clipSize) clipScaleX = box.width / clipSize.width, clipScaleY = box.height / clipSize.height
                 clipMode(data, box, tempImage.x, tempImage.y, scaleX, scaleY, rotation, skew, clipScaleX, clipScaleY)
-                if (clipScaleX) scaleX = scaleX ? scaleX * clipScaleX : scaleX, scaleY = scaleY ? scaleY * clipScaleY : clipScaleY
+                if (clipScaleX) scaleX = scaleX ? scaleX * clipScaleX : clipScaleX, scaleY = scaleY ? scaleY * clipScaleY : clipScaleY
             }
             break
         case 'repeat':
