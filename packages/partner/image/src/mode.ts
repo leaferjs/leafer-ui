@@ -5,7 +5,7 @@ import { ILeafPaintPatternData } from '@leafer-ui/interface'
 
 
 let origin = {} as IPointData, tempMatrix = getMatrixData()
-const { get, rotateOfOuter, translate, scaleOfOuter, multiplyParent, scale: scaleHelper, rotate, skew: skewHelper } = MatrixHelper
+const { get, set, rotateOfOuter, translate, scaleOfOuter, multiplyParent, scale: scaleHelper, rotate, skew: skewHelper } = MatrixHelper
 
 export function stretchMode(data: ILeafPaintPatternData, box: IBoundsData, scaleX: number, scaleY: number): void {
     const transform: IMatrixData = get()
@@ -26,8 +26,11 @@ export function clipMode(data: ILeafPaintPatternData, box: IBoundsData, x: numbe
     const transform: IMatrixData = get()
     layout(transform, box, x, y, scaleX, scaleY, rotation, skew)
     if (clipScaleX) {
-        tempMatrix.a = clipScaleX, tempMatrix.d = clipScaleY
-        multiplyParent(transform, tempMatrix)
+        if (rotation || skew) {
+            set(tempMatrix)
+            scaleOfOuter(tempMatrix, box, clipScaleX, clipScaleY)
+            multiplyParent(transform, tempMatrix)
+        } else scaleOfOuter(transform, box, clipScaleX, clipScaleY)
     }
     data.transform = transform
 }
