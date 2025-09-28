@@ -140,6 +140,7 @@ export interface IEditorConfig extends IObject {
     rotateGap?: number
     lockRatio?: boolean | 'corner'
     dragLimitAnimate?: boolean | number // 限制拖动范围的元素，可在拖拽结束时进行动画归位，默认采用 app.config.pointer.dragLimitAnimate 的值
+    ignorePixelSnap?: boolean
 
     selector?: boolean
     editBox?: boolean
