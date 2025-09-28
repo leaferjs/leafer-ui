@@ -3,7 +3,7 @@ import { MatrixHelper, MathHelper, Bounds, AlignHelper, BoundsHelper, PointHelpe
 
 import { IImagePaint, ILeafPaint, ILeafPaintPatternData } from '@leafer-ui/interface'
 
-import { clipMode, fillOrFitMode, repeatMode } from './mode'
+import { clipMode, fillOrFitMode, repeatMode, stretchMode } from './mode'
 
 
 const { get, translate } = MatrixHelper
@@ -56,7 +56,10 @@ export function getPatternData(paint: IImagePaint, box: IBoundsData, image: ILea
 
     switch (mode) {
         case 'stretch':
-            if (!sameBox) width = box.width, height = box.height
+            if (!sameBox) {
+                scaleX = box.width / width, scaleY = box.height / height
+                stretchMode(data, box, scaleX, scaleY)
+            }
             break
         case 'normal':
         case 'clip':
@@ -80,19 +83,17 @@ export function getPatternData(paint: IImagePaint, box: IBoundsData, image: ILea
     }
 
     if (!data.transform) {
-        if (box.x || box.y) {
-            data.transform = get()
-            translate(data.transform, box.x, box.y)
-        }
-    }
-
-    if (scaleX && mode !== 'stretch') {
-        data.scaleX = scaleX
-        data.scaleY = scaleY
+        if (box.x || box.y) translate(data.transform = get(), box.x, box.y)
     }
 
     data.width = width
     data.height = height
+
+    if (scaleX) {
+        data.scaleX = scaleX
+        data.scaleY = scaleY
+    }
+
     if (opacity) data.opacity = opacity
     if (filters) data.filters = filters
     if (repeat) data.repeat = isString(repeat) ? (repeat === 'x' ? 'repeat-x' : 'repeat-y') : 'repeat'
