@@ -108,6 +108,8 @@ export interface IEditorConfig extends IObject {
     resizeLine?: IEditPointInputData
 
     rect?: IBoxInputData
+    rectThrough?: boolean // 是否穿透rect（穿透后，可以拾取到rect下面的元素，默认单选元素时穿透）
+
     area?: IRectInputData
 
     mask?: boolean | IColorString
