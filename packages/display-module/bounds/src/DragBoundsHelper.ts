@@ -3,7 +3,7 @@ import { Bounds, MathHelper } from '@leafer/core'
 
 
 const { float } = MathHelper
-const tempContent = new Bounds(), tempMerge = new Bounds(), tempIntersect = new Bounds()
+const tempContent = new Bounds(), tempDragBounds = new Bounds()
 
 export const DragBoundsHelper = {
 
@@ -15,9 +15,9 @@ export const DragBoundsHelper = {
     },
 
     // 拖拽区域内缩放
-    limitScaleOf(leaf: ILeaf, origin: IPointData, scale: IPointData): void {
+    limitScaleOf(leaf: ILeaf, origin: IPointData, scale: IPointData, lockRatio?: boolean): void {
         const { dragBounds, dragBoundsType } = leaf
-        if (dragBounds) D.getValidScaleOf(leaf.__localBoxBounds, D.getDragBounds(leaf), dragBoundsType, leaf.getLocalPointByInner(leaf.getInnerPointByBox(origin)), scale, true)
+        if (dragBounds) D.getValidScaleOf(leaf.__localBoxBounds, D.getDragBounds(leaf), dragBoundsType, leaf.getLocalPointByInner(leaf.getInnerPointByBox(origin)), scale, lockRatio, true)
     },
 
     // 按轴移动
@@ -65,29 +65,63 @@ export const DragBoundsHelper = {
         return move
     },
 
-    getValidScaleOf(content: IBoundsData, dragBounds: IBoundsData, dragBoundsType: IDragBoundsType, origin: IPointData, scale: IPointData, change?: boolean): IPointData {
+    getValidScaleOf(content: IBoundsData, dragBounds: IBoundsData, dragBoundsType: IDragBoundsType, origin: IPointData, scale: IPointData, lockRatio?: boolean, change?: boolean): IPointData {
         if (!change) scale = { ...scale }
+
+        tempDragBounds.set(dragBounds)
+        tempContent.set(content).scaleOf(origin, scale.x, scale.y).unsign()
+
+        const { minX, minY, maxX, maxY, width, height } = tempContent
+        const originLeftScale = (origin.x - content.x) / content.width, originRightScale = 1 - originLeftScale
+        const originTopScale = (origin.y - content.y) / content.height, originBottomScale = 1 - originTopScale
 
         let fitScaleX: number, fitScaleY: number
 
-        tempContent.set(content).scaleOf(origin, scale.x, scale.y).unsign()
-        tempMerge.set(tempContent).add(dragBounds)
-        tempIntersect.set(tempContent).intersect(dragBounds)
+        let minScale: number, maxScale: number, minAdd: number, maxAdd: number
 
         if (D.isInnerMode(content, dragBounds, dragBoundsType, 'width')) {  // inner 模式
-            fitScaleX = tempMerge.width / tempContent.width
+
+            minAdd = float(minX - tempDragBounds.minX)
+            maxAdd = float(tempDragBounds.maxX - maxX)
+
+            minScale = originLeftScale && minAdd > 0 ? 1 + minAdd / (originLeftScale * width) : 1
+            maxScale = originRightScale && maxAdd > 0 ? 1 + maxAdd / (originRightScale * width) : 1
+            fitScaleX = Math.max(minScale, maxScale)
+
         } else { // outer 模式
-            fitScaleX = tempIntersect.width / tempContent.width
+
+            minAdd = float(tempDragBounds.minX - minX)
+            maxAdd = float(maxX - tempDragBounds.maxX)
+
+            minScale = originLeftScale && minAdd > 0 ? 1 - minAdd / (originLeftScale * width) : 1
+            maxScale = originRightScale && maxAdd > 0 ? 1 - maxAdd / (originRightScale * width) : 1
+            fitScaleX = Math.min(minScale, maxScale)
         }
 
         if (D.isInnerMode(content, dragBounds, dragBoundsType, 'height')) { // inner 模式
-            fitScaleY = tempMerge.height / tempContent.height
+
+            minAdd = float(minY - tempDragBounds.minY)
+            maxAdd = float(tempDragBounds.maxY - maxY)
+
+            minScale = originTopScale && minAdd > 0 ? 1 + minAdd / (originTopScale * height) : 1
+            maxScale = originBottomScale && maxAdd > 0 ? 1 + maxAdd / (originBottomScale * height) : 1
+
+            fitScaleY = Math.max(minScale, maxScale)
+
+            if (lockRatio) fitScaleX = fitScaleY = Math.max(fitScaleX, fitScaleY)
+
         } else { // outer 模式
-            fitScaleY = tempIntersect.height / tempContent.height
+
+            minAdd = float(tempDragBounds.minY - minY)
+            maxAdd = float(maxY - tempDragBounds.maxY)
+
+            minScale = originTopScale && minAdd > 0 ? 1 - minAdd / (originTopScale * height) : 1
+            maxScale = originBottomScale && maxAdd > 0 ? 1 - maxAdd / (originBottomScale * height) : 1
+            fitScaleY = Math.min(minScale, maxScale)
         }
 
-        scale.x = float(tempIntersect.width) ? scale.x * fitScaleX : 1
-        scale.y = float(tempIntersect.height) ? scale.y * fitScaleY : 1
+        scale.x *= fitScaleX
+        scale.y *= fitScaleY
 
         return scale
     }
