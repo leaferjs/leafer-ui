@@ -415,8 +415,8 @@ export class UI<TInputData = IUIInputData> extends Leaf<TInputData> implements I
         if (data) Object.assign(this, data)
     }
 
-    public get(name?: string | string[] | IUIInputData): IUIInputData | IValue {
-        return isString(name) ? this.__.__getInput(name) : this.__.__getInputData(name)
+    public get<K extends keyof this>(name?: K | K[] | IUIInputData): IUIInputData | this[K] {
+        return isString(name) ? this.__.__getInput(name) : this.__.__getInputData(name as string[] | undefined)
     }
 
     public createProxyData(): IUIInputData { return undefined }

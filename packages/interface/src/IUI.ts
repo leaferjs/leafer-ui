@@ -406,7 +406,9 @@ export interface IUI extends IUIAttrData, IFillAttrData, IStrokeAttrData, ICorne
     set(data: IUIInputData, transition?: ITransition | 'temp'): void
     toJSON(options?: IJSONOptions): IUIJSONData
 
-    get(name?: string | string[] | IUIInputData): IUIInputData | IValue
+    get<K extends keyof this>(name: K): this[K]
+    get<K extends keyof this>(name?: K[] | IUIInputData): IUIInputData
+
     createProxyData(): IUIInputData
 
     find(condition: number | string | IFindCondition | IFindUIMethod, options?: any): IUI[]
