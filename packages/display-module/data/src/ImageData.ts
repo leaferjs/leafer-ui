@@ -19,14 +19,14 @@ export class ImageData extends RectData implements IImageData {
     }
 
     public __getData(): IObject {
-        const data = super.__getData()
-        delete data.fill
+        const data: IImageInputData = super.__getData()
+        if (data.url) delete data.fill
         return data
     }
 
     public __getInputData(names?: string[] | IObject, options?: IJSONOptions): IObject {
-        const data = super.__getInputData(names, options)
-        delete data.fill
+        const data: IImageInputData = super.__getInputData(names, options)
+        if (data.url) delete data.fill
         return data
     }
 }
