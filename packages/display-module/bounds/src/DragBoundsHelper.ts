@@ -1,8 +1,8 @@
 import { IPointData, IBoundsData, IDragBoundsType, ILeaf, ISide } from '@leafer/interface'
-import { Bounds, MathHelper } from '@leafer/core'
+import { Bounds, MathHelper, isFinite } from '@leafer/core'
 
 
-const { float } = MathHelper
+const { float, sign } = MathHelper, { min, max, abs } = Math
 const tempContent = new Bounds(), tempDragBounds = new Bounds()
 
 export const DragBoundsHelper = {
@@ -58,7 +58,7 @@ export const DragBoundsHelper = {
             else if (bottom > boundsBottom) move.y += boundsBottom - bottom
         }
 
-        // 避免出现很小为0的小数
+        // 避免出现为0的抖动小数
         move.x = float(move.x)
         move.y = float(move.y)
 
@@ -69,59 +69,72 @@ export const DragBoundsHelper = {
         if (!change) scale = { ...scale }
 
         tempDragBounds.set(dragBounds)
-        tempContent.set(content).scaleOf(origin, scale.x, scale.y).unsign()
+        tempContent.set(content).scaleOf(origin, scale.x, scale.y)
 
-        const { minX, minY, maxX, maxY, width, height } = tempContent
         const originLeftScale = (origin.x - content.x) / content.width, originRightScale = 1 - originLeftScale
         const originTopScale = (origin.y - content.y) / content.height, originBottomScale = 1 - originTopScale
 
-        let fitScaleX: number, fitScaleY: number
-
-        let minScale: number, maxScale: number, minAdd: number, maxAdd: number
+        let correctScaleX: number, correctScaleY: number, aScale: number, bScale: number, aSize: number, bSize: number
 
         if (D.isInnerMode(content, dragBounds, dragBoundsType, 'width')) {  // inner 模式
 
-            minAdd = float(minX - tempDragBounds.minX)
-            maxAdd = float(tempDragBounds.maxX - maxX)
+            correctScaleX = scale.x < 0 ? 1 / scale.x : 1
+            if (scale.x < 0) tempContent.scaleOf(origin, correctScaleX, 1) // 阻止镜像
 
-            minScale = originLeftScale && minAdd > 0 ? 1 + minAdd / (originLeftScale * width) : 1
-            maxScale = originRightScale && maxAdd > 0 ? 1 + maxAdd / (originRightScale * width) : 1
-            fitScaleX = Math.max(minScale, maxScale)
+            aSize = float(tempContent.minX - tempDragBounds.minX)
+            bSize = float(tempDragBounds.maxX - tempContent.maxX)
+
+            aScale = originLeftScale && aSize > 0 ? 1 + aSize / (originLeftScale * tempContent.width) : 1
+            bScale = originRightScale && bSize > 0 ? 1 + bSize / (originRightScale * tempContent.width) : 1
+            correctScaleX *= max(aScale, bScale)
 
         } else { // outer 模式
 
-            minAdd = float(tempDragBounds.minX - minX)
-            maxAdd = float(maxX - tempDragBounds.maxX)
+            if (scale.x < 0) tempContent.unsign()
 
-            minScale = originLeftScale && minAdd > 0 ? 1 - minAdd / (originLeftScale * width) : 1
-            maxScale = originRightScale && maxAdd > 0 ? 1 - maxAdd / (originRightScale * width) : 1
-            fitScaleX = Math.min(minScale, maxScale)
+            aSize = float(tempDragBounds.minX - tempContent.minX)
+            bSize = float(tempContent.maxX - tempDragBounds.maxX)
+
+            aScale = originLeftScale && aSize > 0 ? 1 - aSize / (originLeftScale * tempContent.width) : 1
+            bScale = originRightScale && bSize > 0 ? 1 - bSize / (originRightScale * tempContent.width) : 1
+            correctScaleX = min(aScale, bScale)
+
         }
 
         if (D.isInnerMode(content, dragBounds, dragBoundsType, 'height')) { // inner 模式
 
-            minAdd = float(minY - tempDragBounds.minY)
-            maxAdd = float(tempDragBounds.maxY - maxY)
+            correctScaleY = scale.y < 0 ? 1 / scale.y : 1
+            if (scale.y < 0) tempContent.scaleOf(origin, 1, correctScaleY) // 阻止镜像
 
-            minScale = originTopScale && minAdd > 0 ? 1 + minAdd / (originTopScale * height) : 1
-            maxScale = originBottomScale && maxAdd > 0 ? 1 + maxAdd / (originBottomScale * height) : 1
+            aSize = float(tempContent.minY - tempDragBounds.minY)
+            bSize = float(tempDragBounds.maxY - tempContent.maxY)
 
-            fitScaleY = Math.max(minScale, maxScale)
+            aScale = originTopScale && aSize > 0 ? 1 + aSize / (originTopScale * tempContent.height) : 1
+            bScale = originBottomScale && bSize > 0 ? 1 + bSize / (originBottomScale * tempContent.height) : 1
 
-            if (lockRatio) fitScaleX = fitScaleY = Math.max(fitScaleX, fitScaleY)
+            correctScaleY *= max(aScale, bScale)
+
+            if (lockRatio) {
+                aScale = max(abs(correctScaleX), abs(correctScaleY))
+                correctScaleX = sign(correctScaleX) * aScale
+                correctScaleY = sign(correctScaleY) * aScale
+            }
 
         } else { // outer 模式
 
-            minAdd = float(tempDragBounds.minY - minY)
-            maxAdd = float(maxY - tempDragBounds.maxY)
+            if (scale.y < 0) tempContent.unsign()
 
-            minScale = originTopScale && minAdd > 0 ? 1 - minAdd / (originTopScale * height) : 1
-            maxScale = originBottomScale && maxAdd > 0 ? 1 - maxAdd / (originBottomScale * height) : 1
-            fitScaleY = Math.min(minScale, maxScale)
+            aSize = float(tempDragBounds.minY - tempContent.minY)
+            bSize = float(tempContent.maxY - tempDragBounds.maxY)
+
+            aScale = originTopScale && aSize > 0 ? 1 - aSize / (originTopScale * tempContent.height) : 1
+            bScale = originBottomScale && bSize > 0 ? 1 - bSize / (originBottomScale * tempContent.height) : 1
+            correctScaleY = min(aScale, bScale)
+
         }
 
-        scale.x *= fitScaleX
-        scale.y *= fitScaleY
+        scale.x *= isFinite(correctScaleX) ? correctScaleX : 1
+        scale.y *= isFinite(correctScaleY) ? correctScaleY : 1
 
         return scale
     }
