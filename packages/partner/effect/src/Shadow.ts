@@ -67,7 +67,8 @@ export function shadow(ui: IUI, current: ILeaferCanvas, shape: ICachedShape): vo
 export function getShadowRenderSpread(_ui: IUI, shadow: ILeafShadowEffect[]): IFourNumber {
     let top = 0, right = 0, bottom = 0, left = 0, x: number, y: number, spread: number, blur: number
     shadow.forEach(item => {
-        x = item.x || 0, y = item.y || 0, spread = item.spread || 0, blur = (item.blur || 0) * 1.5
+        x = item.x || 0, y = item.y || 0, blur = (item.blur || 0) * 1.6, spread = max(item.spread || 0, 0) // spread must > 0
+
         top = max(top, spread + blur - y)
         right = max(right, spread + blur + x)
         bottom = max(bottom, spread + blur + y)
