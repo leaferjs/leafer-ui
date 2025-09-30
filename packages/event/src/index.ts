@@ -10,3 +10,4 @@ export { KeyEvent } from './KeyEvent'
 
 export { Keyboard } from './Keyboard'
 export { PointerButton } from './PointerButton'
+export { DragBoundsHelper } from './DragBoundsHelper'

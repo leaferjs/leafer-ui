@@ -1,7 +1,7 @@
 import { IDragEvent, IPointData, ILeaf, ILeafList, IObject, IBoundsData } from '@leafer/interface'
 import { registerUIEvent, LeafList, BoundsHelper, PointHelper } from '@leafer/core'
-import { DragBoundsHelper } from '@leafer-ui/draw'
 
+import { DragBoundsHelper } from './DragBoundsHelper'
 import { PointerEvent } from './PointerEvent'
 
 
