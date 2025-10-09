@@ -1,8 +1,8 @@
 import { IPointData, IBoundsData, IDragBoundsType, ILeaf, ISide } from '@leafer/interface'
-import { Bounds, MathHelper, isFinite } from '@leafer/core'
+import { Bounds, BoundsHelper, MathHelper, isFinite } from '@leafer/core'
 
 
-const { float, sign } = MathHelper, { min, max, abs } = Math
+const { min, max, abs } = Math, { float, sign } = MathHelper, { minX, maxX, minY, maxY } = BoundsHelper
 const tempContent = new Bounds(), tempDragBounds = new Bounds()
 
 export const DragBoundsHelper = {
@@ -74,12 +74,11 @@ export const DragBoundsHelper = {
         const originLeftScale = (origin.x - content.x) / content.width, originRightScale = 1 - originLeftScale
         const originTopScale = (origin.y - content.y) / content.height, originBottomScale = 1 - originTopScale
 
-        let correctScaleX: number, correctScaleY: number, aScale: number, bScale: number, aSize: number, bSize: number
+        let correctScaleX = 1, correctScaleY = 1, aScale: number, bScale: number, aSize: number, bSize: number
 
         if (D.isInnerMode(content, dragBounds, dragBoundsType, 'width')) {  // inner 模式
 
-            correctScaleX = scale.x < 0 ? 1 / scale.x : 1
-            if (scale.x < 0) tempContent.scaleOf(origin, correctScaleX, 1) // 阻止镜像
+            if (scale.x < 0) tempContent.scaleOf(origin, correctScaleX = 1 / scale.x, 1) // 阻止镜像
 
             aSize = float(tempContent.minX - tempDragBounds.minX)
             bSize = float(tempDragBounds.maxX - tempContent.maxX)
@@ -90,21 +89,23 @@ export const DragBoundsHelper = {
 
         } else { // outer 模式
 
-            if (scale.x < 0) tempContent.unsign()
+            if (scale.x < 0) {
+                if (float(minX(content) - minX(dragBounds)) <= 0 || float(maxX(dragBounds) - maxX(content)) <= 0) tempContent.scaleOf(origin, correctScaleX = 1 / scale.x, 1) // 到达边界时阻止镜像
+                tempContent.unsign()
+            }
 
             aSize = float(tempDragBounds.minX - tempContent.minX)
             bSize = float(tempContent.maxX - tempDragBounds.maxX)
 
             aScale = originLeftScale && aSize > 0 ? 1 - aSize / (originLeftScale * tempContent.width) : 1
             bScale = originRightScale && bSize > 0 ? 1 - bSize / (originRightScale * tempContent.width) : 1
-            correctScaleX = min(aScale, bScale)
+            correctScaleX *= min(aScale, bScale)
 
         }
 
         if (D.isInnerMode(content, dragBounds, dragBoundsType, 'height')) { // inner 模式
 
-            correctScaleY = scale.y < 0 ? 1 / scale.y : 1
-            if (scale.y < 0) tempContent.scaleOf(origin, 1, correctScaleY) // 阻止镜像
+            if (scale.y < 0) tempContent.scaleOf(origin, 1, correctScaleY = 1 / scale.y) // 阻止镜像
 
             aSize = float(tempContent.minY - tempDragBounds.minY)
             bSize = float(tempDragBounds.maxY - tempContent.maxY)
@@ -122,14 +123,17 @@ export const DragBoundsHelper = {
 
         } else { // outer 模式
 
-            if (scale.y < 0) tempContent.unsign()
+            if (scale.y < 0) {
+                if (float(minY(content) - minY(dragBounds)) <= 0 || float(maxY(dragBounds) - maxY(content)) <= 0) tempContent.scaleOf(origin, 1, correctScaleY = 1 / scale.y) // 到达边界时阻止镜像
+                tempContent.unsign()
+            }
 
             aSize = float(tempDragBounds.minY - tempContent.minY)
             bSize = float(tempContent.maxY - tempDragBounds.maxY)
 
             aScale = originTopScale && aSize > 0 ? 1 - aSize / (originTopScale * tempContent.height) : 1
             bScale = originBottomScale && bSize > 0 ? 1 - bSize / (originBottomScale * tempContent.height) : 1
-            correctScaleY = min(aScale, bScale)
+            correctScaleY *= min(aScale, bScale)
 
         }
 
