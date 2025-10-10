@@ -79,7 +79,7 @@ export function getShadowRenderSpread(_ui: IUI, shadow: ILeafShadowEffect[]): IF
 
 export function getShadowTransform(ui: IUI, canvas: ILeaferCanvas, _shape: ICachedShape, shadow: ILeafShadowEffect, outBounds: IBoundsData, otherScale: number, isInnerShaodw?: boolean): IMatrixData {
     if (shadow.spread) {
-        const spread = shadow.spread * 2 * otherScale * (isInnerShaodw ? -1 : 1), { width, height } = ui.__layout
+        const spread = shadow.spread * 2 * otherScale * (isInnerShaodw ? -1 : 1), { width, height } = ui.__layout.strokeBounds
         tempMatrix.set().scaleOfOuter({ x: (outBounds.x + outBounds.width / 2) * canvas.pixelRatio, y: (outBounds.y + outBounds.height / 2) * canvas.pixelRatio }, 1 + spread / width, 1 + spread / height)
         return tempMatrix
     }
