@@ -1,6 +1,6 @@
 {
   "name": "@leafer-ui/paint",
-  "version": "1.9.10",
+  "version": "1.9.11",
   "description": "@leafer-ui/paint",
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
@@ -18,11 +18,11 @@
     "leaferjs"
   ],
   "dependencies": {
-    "@leafer/core": "1.9.10",
-    "@leafer-ui/draw": "1.9.10"
+    "@leafer/core": "1.9.11",
+    "@leafer-ui/draw": "1.9.11"
   },
   "devDependencies": {
-     "@leafer/interface": "1.9.10",
-     "@leafer-ui/interface": "1.9.10"
+     "@leafer/interface": "1.9.11",
+     "@leafer-ui/interface": "1.9.11"
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "@leafer-ui/external",
-  "version": "1.9.10",
+  "version": "1.9.11",
   "description": "@leafer-ui/external",
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
@@ -18,9 +18,9 @@
     "leaferjs"
   ],
   "dependencies": {
-    "@leafer/core": "1.9.10"
+    "@leafer/core": "1.9.11"
   },
   "devDependencies": {
-     "@leafer-ui/interface": "1.9.10"
+     "@leafer-ui/interface": "1.9.11"
   }
 }
