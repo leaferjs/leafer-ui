@@ -79,15 +79,14 @@ export function getShadowRenderSpread(_ui: IUI, shadow: ILeafShadowEffect[]): IF
 
 export function getShadowTransform(ui: IUI, canvas: ILeaferCanvas, _shape: ICachedShape, shadow: ILeafShadowEffect, outBounds: IBoundsData, otherScale: number, isInnerShaodw?: boolean): IMatrixData {
     if (shadow.spread) {
-        const spreadScale = 1 + shadow.spread * 2 / ui.__layout.strokeBounds.width * otherScale * (isInnerShaodw ? -1 : 1)
-        tempMatrix.set().scaleOfOuter({ x: (outBounds.x + outBounds.width / 2) * canvas.pixelRatio, y: (outBounds.y + outBounds.height / 2) * canvas.pixelRatio }, spreadScale)
+        const spread = shadow.spread * 2 * otherScale * (isInnerShaodw ? -1 : 1), { width, height } = ui.__layout
+        tempMatrix.set().scaleOfOuter({ x: (outBounds.x + outBounds.width / 2) * canvas.pixelRatio, y: (outBounds.y + outBounds.height / 2) * canvas.pixelRatio }, 1 + spread / width, 1 + spread / height)
         return tempMatrix
     }
     return undefined
 }
 
 export function drawWorldShadow(canvas: ILeaferCanvas, outBounds: IBoundsData, shape: ICachedShape): void {
-
     const { shapeBounds } = shape
     let from: IBoundsData, to: IBoundsData
 
