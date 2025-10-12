@@ -1,6 +1,6 @@
 {
   "name": "leafer-ui",
-  "version": "1.9.11",
+  "version": "1.9.12",
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
   "type": "module",
@@ -33,15 +33,15 @@
     "engine"
   ],
   "dependencies": {
-    "@leafer/core": "1.9.11",
-    "@leafer/partner": "1.9.11",
-    "@leafer/interface": "1.9.11",
-    "@leafer-ui/draw": "1.9.11",
-    "@leafer-ui/core": "1.9.11",
-    "@leafer-ui/web": "1.9.11",
-    "@leafer-ui/interaction-web": "1.9.11",
-    "@leafer-ui/partner": "1.9.11",
-    "@leafer-ui/interface": "1.9.11",
-    "@leafer-in/interface": "1.9.11"
+    "@leafer/core": "1.9.12",
+    "@leafer/partner": "1.9.12",
+    "@leafer/interface": "1.9.12",
+    "@leafer-ui/draw": "1.9.12",
+    "@leafer-ui/core": "1.9.12",
+    "@leafer-ui/web": "1.9.12",
+    "@leafer-ui/interaction-web": "1.9.12",
+    "@leafer-ui/partner": "1.9.12",
+    "@leafer-ui/interface": "1.9.12",
+    "@leafer-in/interface": "1.9.12"
   }
 }
