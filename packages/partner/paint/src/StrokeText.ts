@@ -2,9 +2,7 @@ import { ILeaferCanvas, IRenderOptions } from '@leafer/interface'
 import { LeafHelper, isObject } from "@leafer/core"
 
 import { IUI, ITextRowData, ILeafPaint, IStrokeAlign, ILeafStrokePaint } from '@leafer-ui/interface'
-import { PaintImage } from "@leafer-ui/draw"
-
-import { fillText } from './FillText'
+import { PaintImage, Paint } from "@leafer-ui/draw"
 
 
 export function strokeText(stroke: string | ILeafPaint[], ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void {
@@ -24,10 +22,10 @@ export function strokeText(stroke: string | ILeafPaint[], ui: IUI, canvas: ILeaf
 function drawCenter(stroke: string | ILeafPaint[], strokeWidthScale: number, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void {
     const data = ui.__
     if (isObject(stroke)) {
-        drawStrokesStyle(stroke, strokeWidthScale, true, ui, canvas, renderOptions)
+        Paint.drawStrokesStyle(stroke, strokeWidthScale, true, ui, canvas, renderOptions)
     } else {
         canvas.setStroke(stroke, data.__strokeWidth * strokeWidthScale, data)
-        drawTextStroke(ui, canvas)
+        Paint.drawTextStroke(ui, canvas, renderOptions)
     }
 }
 
@@ -37,7 +35,7 @@ function drawAlign(stroke: string | ILeafPaint[], align: IStrokeAlign, ui: IUI, 
     drawCenter(stroke, 2, ui, out, renderOptions)
 
     out.blendMode = align === 'outside' ? 'destination-out' : 'destination-in'
-    fillText(ui, out, renderOptions)
+    Paint.fillText(ui, out, renderOptions)
     out.blendMode = 'normal'
 
     LeafHelper.copyCanvasByWorld(ui, canvas, out)
@@ -46,7 +44,7 @@ function drawAlign(stroke: string | ILeafPaint[], align: IStrokeAlign, ui: IUI, 
 }
 
 
-export function drawTextStroke(ui: IUI, canvas: ILeaferCanvas): void {
+export function drawTextStroke(ui: IUI, canvas: ILeaferCanvas, _renderOptions: IRenderOptions): void {
 
     let row: ITextRowData, data = ui.__.__textDrawData
     const { rows, decorationY } = data
@@ -83,10 +81,10 @@ export function drawStrokesStyle(strokes: ILeafStrokePaint[], strokeWidthScale: 
 
             if (item.blendMode) {
                 canvas.saveBlendMode(item.blendMode)
-                isText ? drawTextStroke(ui, canvas) : canvas.stroke()
+                isText ? Paint.drawTextStroke(ui, canvas, renderOptions) : canvas.stroke()
                 canvas.restoreBlendMode()
             } else {
-                isText ? drawTextStroke(ui, canvas) : canvas.stroke()
+                isText ? Paint.drawTextStroke(ui, canvas, renderOptions) : canvas.stroke()
             }
         }
     }

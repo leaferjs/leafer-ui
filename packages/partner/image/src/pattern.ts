@@ -2,6 +2,7 @@ import { ILeaferCanvas, IRenderOptions } from '@leafer/interface'
 import { Platform, MatrixHelper, ImageManager } from '@leafer/core'
 
 import { IUI, ILeafPaint, IMatrixData } from '@leafer-ui/interface'
+import { PaintImage } from "@leafer-ui/draw"
 
 
 const { get, scale, copy } = MatrixHelper
@@ -11,7 +12,7 @@ export function createPatternTask(paint: ILeafPaint, ui: IUI, canvas: ILeaferCan
     if (!paint.patternTask) {
         paint.patternTask = ImageManager.patternTasker.add(async () => {
             paint.patternTask = null
-            if (canvas.bounds.hit(ui.__nowWorld)) createPattern(paint, ui, canvas, renderOptions)
+            if (canvas.bounds.hit(ui.__nowWorld)) PaintImage.createPattern(paint, ui, canvas, renderOptions)
             ui.forceUpdate('surface')
         }, 300)
     }
@@ -93,7 +94,7 @@ export function createPattern(paint: ILeafPaint, ui: IUI, canvas: ILeaferCanvas,
 
         }
 
-        createPatternStyle(paint, imageMatrix, width, height, xGap, yGap, ui, canvas, renderOptions)
+        PaintImage.createPatternStyle(paint, imageMatrix, width, height, xGap, yGap, ui, canvas, renderOptions)
 
         paint.patternId = id
 

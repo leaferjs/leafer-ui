@@ -4,8 +4,6 @@ import { LeafHelper, isObject } from "@leafer/core"
 import { IUI, ILeafPaint } from '@leafer-ui/interface'
 import { Paint } from '@leafer-ui/draw'
 
-import { strokeText, drawStrokesStyle } from './StrokeText'
-
 
 export function stroke(stroke: string, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void {
     const data = ui.__
@@ -13,7 +11,7 @@ export function stroke(stroke: string, ui: IUI, canvas: ILeaferCanvas, renderOpt
 
     if (data.__font) {
 
-        strokeText(stroke, ui, canvas, renderOptions)
+        Paint.strokeText(stroke, ui, canvas, renderOptions)
 
     } else {
 
@@ -34,14 +32,14 @@ export function stroke(stroke: string, ui: IUI, canvas: ILeaferCanvas, renderOpt
 
 
 export function strokes(strokes: ILeafPaint[], ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void {
-    stroke(strokes as any, ui, canvas, renderOptions)
+    Paint.stroke(strokes as any, ui, canvas, renderOptions)
 }
 
 
 function drawCenter(stroke: string | ILeafPaint[], strokeWidthScale: number, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions) {
     const data = ui.__
     if (isObject(stroke)) {
-        drawStrokesStyle(stroke, strokeWidthScale, false, ui, canvas, renderOptions)
+        Paint.drawStrokesStyle(stroke, strokeWidthScale, false, ui, canvas, renderOptions)
     } else {
         canvas.setStroke(stroke, data.__strokeWidth * strokeWidthScale, data)
         canvas.stroke()

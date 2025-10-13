@@ -1,6 +1,6 @@
 import { ILeaferCanvas, IRenderOptions, IBooleanMap, IBoundsData, ILeaferImage, IAlign, IPointData, IMatrixData } from '@leafer/interface'
 
-import { ILeafPaint, ILeafPaintPatternData } from '../type/IComputedType'
+import { ILeafPaint, ILeafStrokePaint, ILeafPaintPatternData } from '../type/IComputedType'
 import { IUI, IUIData } from '../IUI'
 import { ICachedShape } from '../ICachedShape'
 import { IGradientPaint, IImagePaint, IPaintAttr } from '../type/IType'
@@ -20,6 +20,7 @@ export interface IPaintModule {
 
     strokeText(stroke: string | ILeafPaint[], ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void
     strokeArrow?(stroke: string | ILeafPaint[], ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void
+    drawStrokesStyle(strokes: ILeafStrokePaint[], strokeWidthScale: number, isText: boolean, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void
     drawTextStroke(ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void
 
     shape(ui: IUI, current: ILeaferCanvas, renderOptions: IRenderOptions): ICachedShape

@@ -1,9 +1,7 @@
 import { ILeaferCanvas, IRenderOptions } from '@leafer/interface'
 
 import { ILeafPaint, IUI } from '@leafer-ui/interface'
-import { PaintImage } from "@leafer-ui/draw"
-
-import { fillText } from './FillText'
+import { PaintImage, Paint } from "@leafer-ui/draw"
 
 
 export function fill(fill: string, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void {
@@ -59,5 +57,5 @@ export function fills(fills: ILeafPaint[], ui: IUI, canvas: ILeaferCanvas, rende
 
 
 export function fillPathOrText(ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void {
-    ui.__.__font ? fillText(ui, canvas, renderOptions) : (ui.__.windingRule ? canvas.fill(ui.__.windingRule) : canvas.fill())
+    ui.__.__font ? Paint.fillText(ui, canvas, renderOptions) : (ui.__.windingRule ? canvas.fill(ui.__.windingRule) : canvas.fill())
 }

@@ -2,8 +2,7 @@ import { ILeaferCanvas, IRenderOptions } from '@leafer/interface'
 import { Platform, ResizeEvent } from '@leafer/core'
 
 import { IUI, ILeafPaint } from '@leafer-ui/interface'
-
-import { createPatternTask, createPattern } from './pattern'
+import { PaintImage } from "@leafer-ui/draw"
 
 
 export function checkImage(paint: ILeafPaint, allowDraw: boolean, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): boolean {
@@ -30,13 +29,13 @@ export function checkImage(paint: ILeafPaint, allowDraw: boolean, ui: IUI, canva
         }
 
         if (allowDraw) {
-            drawImage(paint, ui, canvas) // 直接绘制图像，不生成图案
+            PaintImage.drawImage(paint, ui, canvas) // 直接绘制图像，不生成图案
             return true
         } else {
             if (!paint.style || paint.sync || exporting) {
-                createPattern(paint, ui, canvas, renderOptions)
+                PaintImage.createPattern(paint, ui, canvas, renderOptions)
             } else {
-                createPatternTask(paint, ui, canvas, renderOptions)
+                PaintImage.createPatternTask(paint, ui, canvas, renderOptions)
             }
             return false
         }
