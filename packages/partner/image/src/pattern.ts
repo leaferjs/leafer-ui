@@ -1,4 +1,5 @@
-import { Platform, MatrixHelper } from '@leafer/core'
+import { ILeaferCanvas, IRenderOptions } from '@leafer/interface'
+import { Platform, MatrixHelper, ImageManager } from '@leafer/core'
 
 import { IUI, ILeafPaint, IMatrixData } from '@leafer-ui/interface'
 
@@ -6,9 +7,19 @@ import { IUI, ILeafPaint, IMatrixData } from '@leafer-ui/interface'
 const { get, scale, copy } = MatrixHelper
 const { floor, ceil, max, abs } = Math
 
-export function createPattern(ui: IUI, paint: ILeafPaint, pixelRatio: number): boolean {
+export function createPatternTask(paint: ILeafPaint, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void {
+    if (!paint.patternTask) {
+        paint.patternTask = ImageManager.patternTasker.add(async () => {
+            paint.patternTask = null
+            if (canvas.bounds.hit(ui.__nowWorld)) createPattern(paint, ui, canvas, renderOptions)
+            ui.forceUpdate('surface')
+        }, 300)
+    }
+}
+
+export function createPattern(paint: ILeafPaint, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): boolean {
     let { scaleX, scaleY } = ui.getRenderScaleData(true, paint.scaleFixed)
-    const id = scaleX + '-' + scaleY + '-' + pixelRatio
+    const { pixelRatio } = canvas, id = scaleX + '-' + scaleY + '-' + pixelRatio
 
     if (paint.patternId !== id && !ui.destroyed) {
 
@@ -82,10 +93,8 @@ export function createPattern(ui: IUI, paint: ILeafPaint, pixelRatio: number): b
 
         }
 
-        const canvas = image.getCanvas(width, height, data.opacity, data.filters, xGap, yGap, ui.leafer && ui.leafer.config.smooth)
-        const pattern = image.getPattern(canvas, repeat || (Platform.origin.noRepeat || 'no-repeat'), imageMatrix, paint)
+        createPatternStyle(paint, imageMatrix, width, height, xGap, yGap, ui, canvas, renderOptions)
 
-        paint.style = pattern
         paint.patternId = id
 
         return true
@@ -96,4 +105,11 @@ export function createPattern(ui: IUI, paint: ILeafPaint, pixelRatio: number): b
 
     }
 
+}
+
+export function createPatternStyle(paint: ILeafPaint, transform: IMatrixData, width: number, height: number, xGap: number, yGap: number, ui: IUI, _canvas: ILeaferCanvas, _renderOptions: IRenderOptions): void {
+    const { image, data } = paint
+    const imageCanvas = image.getCanvas(width, height, data.opacity, data.filters, xGap, yGap, ui.leafer && ui.leafer.config.smooth)
+    const pattern = image.getPattern(imageCanvas, data.repeat || (Platform.origin.noRepeat || 'no-repeat'), transform, paint)
+    paint.style = pattern
 }

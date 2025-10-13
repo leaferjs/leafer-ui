@@ -1,9 +1,9 @@
-import { ILeaferCanvas } from '@leafer/interface'
+import { ILeaferCanvas, IRenderOptions } from '@leafer/interface'
 
 import { ITextRowData, IText } from '@leafer-ui/interface'
 
 
-export function fillText(ui: IText, canvas: ILeaferCanvas): void {
+export function fillText(ui: IText, canvas: ILeaferCanvas, _renderOptions: IRenderOptions): void {
 
     const data = ui.__, { rows, decorationY } = data.__textDrawData
     if (data.__isPlacehold && data.placeholderColor) canvas.fillStyle = data.placeholderColor

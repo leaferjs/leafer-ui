@@ -1,24 +1,23 @@
-import { ILeaferCanvas } from '@leafer/interface'
-import { ImageManager, Platform, ResizeEvent } from '@leafer/core'
+import { ILeaferCanvas, IRenderOptions } from '@leafer/interface'
+import { Platform, ResizeEvent } from '@leafer/core'
 
-import { IUI, ILeafPaint, ILeafPaintPatternData } from '@leafer-ui/interface'
-import { Export } from '@leafer-ui/draw'
+import { IUI, ILeafPaint } from '@leafer-ui/interface'
 
-import { createPattern } from './pattern'
+import { createPatternTask, createPattern } from './pattern'
 
 
-export function checkImage(ui: IUI, canvas: ILeaferCanvas, paint: ILeafPaint, allowDraw?: boolean): boolean {
+export function checkImage(paint: ILeafPaint, allowDraw: boolean, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): boolean {
     const { scaleX, scaleY } = ui.getRenderScaleData(true, paint.scaleFixed)
-    const { pixelRatio } = canvas, { data } = paint
+    const { pixelRatio } = canvas, { data } = paint, { exporting } = renderOptions
 
-    if (!data || (paint.patternId === scaleX + '-' + scaleY + '-' + pixelRatio && !Export.running)) {
+    if (!data || (paint.patternId === scaleX + '-' + scaleY + '-' + pixelRatio && !exporting)) {
         return false // 生成图案中
     } else {
 
         if (allowDraw) {
             if (data.repeat) {
                 allowDraw = false
-            } else if (!(paint.changeful || (Platform.name === 'miniapp' && ResizeEvent.isResizing(ui)) || Export.running)) { //  小程序resize过程中直接绘制原图（绕过垃圾回收bug)
+            } else if (!(paint.changeful || (Platform.name === 'miniapp' && ResizeEvent.isResizing(ui)) || exporting)) { //  小程序resize过程中直接绘制原图（绕过垃圾回收bug)
                 let { width, height } = data
                 width *= scaleX * pixelRatio
                 height *= scaleY * pixelRatio
@@ -31,31 +30,27 @@ export function checkImage(ui: IUI, canvas: ILeaferCanvas, paint: ILeafPaint, al
         }
 
         if (allowDraw) {
-            if (ui.__.__isFastShadow) { // fix: 快速阴影时，直接 drawImage 会无阴影，需fill一下
-                canvas.fillStyle = paint.style || '#000'
-                canvas.fill()
-            }
-            drawImage(ui, canvas, paint, data) // 直接绘制图像，不生成图案
+            drawImage(paint, ui, canvas) // 直接绘制图像，不生成图案
             return true
         } else {
-            if (!paint.style || paint.sync || Export.running) {
-                createPattern(ui, paint, pixelRatio)
+            if (!paint.style || paint.sync || exporting) {
+                createPattern(paint, ui, canvas, renderOptions)
             } else {
-                if (!paint.patternTask) {
-                    paint.patternTask = ImageManager.patternTasker.add(async () => {
-                        paint.patternTask = null
-                        if (canvas.bounds.hit(ui.__nowWorld)) createPattern(ui, paint, pixelRatio)
-                        ui.forceUpdate('surface')
-                    }, 300)
-                }
+                createPatternTask(paint, ui, canvas, renderOptions)
             }
             return false
         }
     }
 }
 
+export function drawImage(paint: ILeafPaint, ui: IUI, canvas: ILeaferCanvas): void {
+    const { data } = paint
 
-function drawImage(ui: IUI, canvas: ILeaferCanvas, paint: ILeafPaint, data: ILeafPaintPatternData): void { // 后续可优化
+    if (ui.__.__isFastShadow) { // fix: 快速阴影时，直接 drawImage 会无阴影，需fill一下
+        canvas.fillStyle = paint.style || '#000'
+        canvas.fill()
+    }
+
     canvas.save()
     canvas.clipUI(ui)
     if (paint.blendMode) canvas.blendMode = paint.blendMode
