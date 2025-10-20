@@ -25,7 +25,7 @@ export function createPattern(paint: ILeafPaint, ui: IUI, canvas: ILeaferCanvas,
     if (paint.patternId !== id && !ui.destroyed) {
 
         const { image, data } = paint
-        let imageScale: number, imageMatrix: IMatrixData, { width, height, scaleX: sx, scaleY: sy, transform, repeat, gap } = data
+        let imageScale: number, imageMatrix: IMatrixData, { width, height, } = image, { scaleX: sx, scaleY: sy, transform, repeat, gap } = data
 
         if (sx) {
             sx = abs(sx) // maybe -1

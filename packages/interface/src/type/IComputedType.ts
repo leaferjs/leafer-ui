@@ -26,8 +26,6 @@ export interface ILeafPaint {
 }
 
 export interface ILeafPaintPatternData {
-    width?: number
-    height?: number
     scaleX?: number
     scaleY?: number
     gap?: IPointData

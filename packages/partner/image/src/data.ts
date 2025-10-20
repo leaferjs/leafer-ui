@@ -85,9 +85,6 @@ export function getPatternData(paint: IImagePaint, box: IBoundsData, image: ILea
         if (box.x || box.y) translate(data.transform = get(), box.x, box.y)
     }
 
-    data.width = width
-    data.height = height
-
     if (scaleX) {
         data.scaleX = scaleX
         data.scaleY = scaleY

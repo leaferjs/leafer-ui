@@ -7,7 +7,7 @@ import { PaintImage } from "@leafer-ui/draw"
 
 export function checkImage(paint: ILeafPaint, allowDraw: boolean, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): boolean {
     const { scaleX, scaleY } = PaintImage.getImageRenderScaleData(paint, ui, canvas)
-    const { data } = paint, { exporting } = renderOptions
+    const { image, data } = paint, { exporting } = renderOptions
 
     if (!data || (paint.patternId === scaleX + '-' + scaleY && !exporting)) {
         return false // 生成图案中
@@ -17,7 +17,7 @@ export function checkImage(paint: ILeafPaint, allowDraw: boolean, ui: IUI, canva
             if (data.repeat) {
                 allowDraw = false
             } else if (!(paint.changeful || (Platform.name === 'miniapp' && ResizeEvent.isResizing(ui)) || exporting)) { //  小程序resize过程中直接绘制原图（绕过垃圾回收bug)
-                allowDraw = (data.width * scaleX * data.height * scaleY > Platform.image.maxCacheSize)
+                allowDraw = (image.width * scaleX * image.height * scaleY > Platform.image.maxCacheSize)
             }
         }
 
@@ -43,7 +43,7 @@ export function drawImage(paint: ILeafPaint, ui: IUI, canvas: ILeaferCanvas, _re
     if (paint.blendMode) canvas.blendMode = paint.blendMode
     if (data.opacity) canvas.opacity *= data.opacity
     if (data.transform) canvas.transform(data.transform)
-    canvas.drawImage(paint.image.getFull(data.filters), 0, 0, data.width, data.height)
+    canvas.drawImage(paint.image.getFull(data.filters), 0, 0)
     canvas.restore()
 }
 
