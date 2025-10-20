@@ -22,7 +22,7 @@ export function getPatternData(paint: IImagePaint, box: IBoundsData, image: ILea
     if (paint.padding) box = tempBox.set(box).shrink(paint.padding)
     if (paint.mode === 'strench' as string) paint.mode = 'stretch' // 兼容代码，后续可移除
 
-    let { width, height } = image
+    const { width, height } = image
     const { opacity, mode, align, offset, scale, size, rotation, skew, clipSize, repeat, gap, filters } = paint
     const sameBox = box.width === width && box.height === height
 

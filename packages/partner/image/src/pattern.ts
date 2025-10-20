@@ -1,4 +1,4 @@
-import { ILeaferCanvas, IRenderOptions } from '@leafer/interface'
+import { IFunction, ILeaferCanvas, IRenderOptions } from '@leafer/interface'
 import { Platform, MatrixHelper, ImageManager } from '@leafer/core'
 
 import { IUI, ILeafPaint, IMatrixData } from '@leafer-ui/interface'
@@ -18,17 +18,14 @@ export function createPatternTask(paint: ILeafPaint, ui: IUI, canvas: ILeaferCan
     }
 }
 
-export function createPattern(paint: ILeafPaint, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): boolean {
-    let { scaleX, scaleY } = ui.getRenderScaleData(true, paint.scaleFixed)
-    const { pixelRatio } = canvas, id = scaleX + '-' + scaleY + '-' + pixelRatio
+export function createPattern(paint: ILeafPaint, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions, resolve?: IFunction): boolean {
+    let { scaleX, scaleY } = PaintImage.getImageRenderScaleData(paint, ui, canvas)
+    const id = scaleX + '-' + scaleY
 
     if (paint.patternId !== id && !ui.destroyed) {
 
         const { image, data } = paint
         let imageScale: number, imageMatrix: IMatrixData, { width, height, scaleX: sx, scaleY: sy, transform, repeat, gap } = data
-
-        scaleX *= pixelRatio
-        scaleY *= pixelRatio
 
         if (sx) {
             sx = abs(sx) // maybe -1
@@ -36,8 +33,6 @@ export function createPattern(paint: ILeafPaint, ui: IUI, canvas: ILeaferCanvas,
             imageMatrix = get()
             copy(imageMatrix, transform)
             scale(imageMatrix, 1 / sx, 1 / sy)
-            scaleX *= sx
-            scaleY *= sy
         }
 
         width *= scaleX
@@ -46,7 +41,10 @@ export function createPattern(paint: ILeafPaint, ui: IUI, canvas: ILeaferCanvas,
         const size = width * height
 
         if (!repeat) {
-            if (size > Platform.image.maxCacheSize) return false // same as check()
+            if (size > Platform.image.maxCacheSize) {
+                resolve && resolve()
+                return false // same as check()
+            }
         }
 
         let maxSize = Platform.image.maxPatternSize
@@ -94,23 +92,24 @@ export function createPattern(paint: ILeafPaint, ui: IUI, canvas: ILeaferCanvas,
 
         }
 
-        PaintImage.createPatternStyle(paint, imageMatrix, width, height, xGap, yGap, ui, canvas, renderOptions)
-
         paint.patternId = id
+        PaintImage.createPatternStyle(paint, imageMatrix, width, height, xGap, yGap, ui, canvas, renderOptions, resolve)
 
         return true
 
     } else {
 
+        resolve && resolve()
         return false
 
     }
 
 }
 
-export function createPatternStyle(paint: ILeafPaint, transform: IMatrixData, width: number, height: number, xGap: number, yGap: number, ui: IUI, _canvas: ILeaferCanvas, _renderOptions: IRenderOptions): void {
+export function createPatternStyle(paint: ILeafPaint, transform: IMatrixData, width: number, height: number, xGap: number, yGap: number, ui: IUI, _canvas: ILeaferCanvas, _renderOptions: IRenderOptions, resolve?: IFunction): void {
     const { image, data } = paint
     const imageCanvas = image.getCanvas(width, height, data.opacity, data.filters, xGap, yGap, ui.leafer && ui.leafer.config.smooth)
     const pattern = image.getPattern(imageCanvas, data.repeat || (Platform.origin.noRepeat || 'no-repeat'), transform, paint)
     paint.style = pattern
+    resolve && resolve()
 }

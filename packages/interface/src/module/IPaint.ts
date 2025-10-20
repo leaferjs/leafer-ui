@@ -1,4 +1,4 @@
-import { ILeaferCanvas, IRenderOptions, IBooleanMap, IBoundsData, ILeaferImage, IAlign, IPointData, IMatrixData } from '@leafer/interface'
+import { ILeaferCanvas, IRenderOptions, IBooleanMap, IBoundsData, ILeaferImage, IAlign, IPointData, IMatrixData, IScaleData, IFunction } from '@leafer/interface'
 
 import { ILeafPaint, ILeafStrokePaint, ILeafPaintPatternData } from '../type/IComputedType'
 import { IUI, IUIData } from '../IUI'
@@ -31,12 +31,13 @@ export interface IPaintImageModule {
     image(ui: IUI, attrName: string, paint: IImagePaint, boxBounds: IBoundsData, firstUse: boolean): ILeafPaint
 
     checkImage(paint: ILeafPaint, allowDraw: boolean, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): boolean // 返回true表示已进行了原生绘制
-    drawImage(paint: ILeafPaint, ui: IUI, canvas: ILeaferCanvas): void
+    drawImage(paint: ILeafPaint, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void
+    getImageRenderScaleData(paint: ILeafPaint, ui: IUI, canvas?: ILeaferCanvas, renderOptions?: IRenderOptions): IScaleData // 当前图片渲染的比例数据，必须马上分解使用
     recycleImage(attrName: IPaintAttr, data: IUIData): IBooleanMap
 
     createPatternTask(paint: ILeafPaint, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void
-    createPattern(paint: ILeafPaint, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): boolean
-    createPatternStyle(paint: ILeafPaint, transform: IMatrixData, width: number, height: number, xGap: number, yGap: number, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void
+    createPattern(paint: ILeafPaint, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions, resolve?: IFunction): boolean
+    createPatternStyle(paint: ILeafPaint, transform: IMatrixData, width: number, height: number, xGap: number, yGap: number, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions, resolve?: IFunction): void
 
     createData(leafPaint: ILeafPaint, image: ILeaferImage, paint: IImagePaint, box: IBoundsData): void
     getPatternData(paint: IImagePaint, box: IBoundsData, image: ILeaferImage): ILeafPaintPatternData
