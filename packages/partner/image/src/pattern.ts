@@ -19,7 +19,7 @@ export function createPatternTask(paint: ILeafPaint, ui: IUI, canvas: ILeaferCan
 }
 
 export function createPattern(paint: ILeafPaint, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions, resolve?: IFunction): boolean {
-    let { scaleX, scaleY } = PaintImage.getImageRenderScaleData(paint, ui, canvas)
+    let { scaleX, scaleY } = PaintImage.getImageRenderScaleData(paint, ui, canvas, renderOptions)
     const id = scaleX + '-' + scaleY
 
     if (paint.patternId !== id && !ui.destroyed) {

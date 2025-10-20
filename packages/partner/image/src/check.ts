@@ -6,7 +6,7 @@ import { PaintImage } from "@leafer-ui/draw"
 
 
 export function checkImage(paint: ILeafPaint, allowDraw: boolean, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): boolean {
-    const { scaleX, scaleY } = PaintImage.getImageRenderScaleData(paint, ui, canvas)
+    const { scaleX, scaleY } = PaintImage.getImageRenderScaleData(paint, ui, canvas, renderOptions)
     const { image, data } = paint, { exporting } = renderOptions
 
     if (!data || (paint.patternId === scaleX + '-' + scaleY && !exporting)) {
@@ -29,7 +29,7 @@ export function checkImage(paint: ILeafPaint, allowDraw: boolean, ui: IUI, canva
             PaintImage.drawImage(paint, ui, canvas, renderOptions) // 直接绘制图像，不生成图案
             return true
         } else {
-            if (!paint.style || paint.sync || exporting) PaintImage.createPattern(paint, ui, canvas, renderOptions)
+            if (paint.sync || exporting) PaintImage.createPattern(paint, ui, canvas, renderOptions)
             else PaintImage.createPatternTask(paint, ui, canvas, renderOptions)
             return false
         }
