@@ -426,7 +426,7 @@ export interface IUI extends IUIAttrData, IFillAttrData, IStrokeAttrData, ICorne
     __drawAfterFill?(canvas: ILeaferCanvas, options: IRenderOptions): void
     __drawContent?(canvas: ILeaferCanvas, options: IRenderOptions): void
 
-    drawImagePlaceholder(canvas: ILeaferCanvas, image: ILeaferImage): void
+    drawImagePlaceholder(image: ILeaferImage, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void
 
     animate(keyframe?: IUIInputData | IKeyframe[] | IAnimation | IAnimation[], options?: ITransition, type?: IAnimateType, isTemp?: boolean): IAnimate
     killAnimate(type?: IAnimateType, nextStyle?: IUIInputData): void

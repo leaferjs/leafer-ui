@@ -2,8 +2,7 @@ import { IBoundsData, IImageEvent, ILeaferImage, IObject } from '@leafer/interfa
 import { Bounds, BoundsHelper, ImageEvent, ImageManager } from '@leafer/core'
 
 import { IUI, IImagePaint, ILeafPaint } from '@leafer-ui/interface'
-
-import { createData } from './data'
+import { PaintImage } from "@leafer-ui/draw"
 
 
 interface IImagePaintCache {
@@ -102,7 +101,7 @@ function checkSizeAndCreateData(ui: IUI, attrName: string, paint: IImagePaint, i
         }
     }
 
-    if (!leafPaint.data) createData(leafPaint, image, paint, boxBounds)
+    if (!leafPaint.data) PaintImage.createData(leafPaint, image, paint, boxBounds)
     return true
 }
 

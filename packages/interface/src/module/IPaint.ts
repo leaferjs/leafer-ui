@@ -1,6 +1,6 @@
-import { ILeaferCanvas, IRenderOptions, IBooleanMap, IBoundsData, ILeaferImage, IAlign, IPointData, IMatrixData } from '@leafer/interface'
+import { ILeaferCanvas, IRenderOptions, IBooleanMap, IBoundsData, ILeaferImage, IAlign, IPointData, IMatrixData, IScaleData, IFunction } from '@leafer/interface'
 
-import { ILeafPaint, ILeafPaintPatternData } from '../type/IComputedType'
+import { ILeafPaint, ILeafStrokePaint, ILeafPaintPatternData } from '../type/IComputedType'
 import { IUI, IUIData } from '../IUI'
 import { ICachedShape } from '../ICachedShape'
 import { IGradientPaint, IImagePaint, IPaintAttr } from '../type/IType'
@@ -9,18 +9,19 @@ import { IGradientPaint, IImagePaint, IPaintAttr } from '../type/IType'
 export interface IPaintModule {
     compute(attrName: IPaintAttr, ui: IUI): void
 
-    fill(fill: string, ui: IUI, canvas: ILeaferCanvas,): void
-    fills(fills: ILeafPaint[], ui: IUI, canvas: ILeaferCanvas): void
+    fill(fill: string, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void
+    fills(fills: ILeafPaint[], ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void
 
-    fillPathOrText(ui: IUI, canvas: ILeaferCanvas): void
-    fillText(ui: IUI, canvas: ILeaferCanvas): void
+    fillPathOrText(ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void
+    fillText(ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void
 
-    stroke(stroke: string, ui: IUI, canvas: ILeaferCanvas): void
-    strokes(strokes: ILeafPaint[], ui: IUI, canvas: ILeaferCanvas): void
+    stroke(stroke: string, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void
+    strokes(strokes: ILeafPaint[], ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void
 
-    strokeText(stroke: string | ILeafPaint[], ui: IUI, canvas: ILeaferCanvas): void
-    strokeArrow?(stroke: string | ILeafPaint[], ui: IUI, canvas: ILeaferCanvas): void
-    drawTextStroke(ui: IUI, canvas: ILeaferCanvas): void
+    strokeText(stroke: string | ILeafPaint[], ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void
+    strokeArrow?(stroke: string | ILeafPaint[], ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void
+    drawStrokesStyle(strokes: ILeafStrokePaint[], strokeWidthScale: number, isText: boolean, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void
+    drawTextStroke(ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void
 
     shape(ui: IUI, current: ILeaferCanvas, renderOptions: IRenderOptions): ICachedShape
 }
@@ -28,9 +29,15 @@ export interface IPaintModule {
 
 export interface IPaintImageModule {
     image(ui: IUI, attrName: string, paint: IImagePaint, boxBounds: IBoundsData, firstUse: boolean): ILeafPaint
-    checkImage(ui: IUI, canvas: ILeaferCanvas, paint: ILeafPaint, allowPaint?: boolean): boolean // 返回true表示已进行了原生绘制
-    createPattern(ui: IUI, paint: ILeafPaint, pixelRatio: number): boolean
+
+    checkImage(paint: ILeafPaint, allowDraw: boolean, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): boolean // 返回true表示已进行了原生绘制
+    drawImage(paint: ILeafPaint, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void
+    getImageRenderScaleData(paint: ILeafPaint, ui: IUI, canvas?: ILeaferCanvas, renderOptions?: IRenderOptions): IScaleData // 当前图片渲染的比例数据，必须马上分解使用
     recycleImage(attrName: IPaintAttr, data: IUIData): IBooleanMap
+
+    createPatternTask(paint: ILeafPaint, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void
+    createPattern(paint: ILeafPaint, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions, resolve?: IFunction): boolean
+    createPatternStyle(paint: ILeafPaint, transform: IMatrixData, width: number, height: number, xGap: number, yGap: number, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions, resolve?: IFunction): void
 
     createData(leafPaint: ILeafPaint, image: ILeaferImage, paint: IImagePaint, box: IBoundsData): void
     getPatternData(paint: IImagePaint, box: IBoundsData, image: ILeaferImage): ILeafPaintPatternData
