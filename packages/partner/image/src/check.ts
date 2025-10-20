@@ -5,7 +5,7 @@ import { IUI, ILeafPaint } from '@leafer-ui/interface'
 import { PaintImage } from "@leafer-ui/draw"
 
 
-export function checkImage(paint: ILeafPaint, allowDraw: boolean, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): boolean {
+export function checkImage(paint: ILeafPaint, drawImage: boolean, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): boolean {
     const { scaleX, scaleY } = PaintImage.getImageRenderScaleData(paint, ui, canvas, renderOptions)
     const { image, data } = paint, { exporting } = renderOptions
 
@@ -13,15 +13,15 @@ export function checkImage(paint: ILeafPaint, allowDraw: boolean, ui: IUI, canva
         return false // 生成图案中
     } else {
 
-        if (allowDraw) {
+        if (drawImage) {
             if (data.repeat) {
-                allowDraw = false
+                drawImage = false
             } else if (!(paint.changeful || (Platform.name === 'miniapp' && ResizeEvent.isResizing(ui)) || exporting)) { //  小程序resize过程中直接绘制原图（绕过垃圾回收bug)
-                allowDraw = (image.width * scaleX * image.height * scaleY > Platform.image.maxCacheSize)
+                drawImage = Platform.image.isLarge(image, scaleX, scaleY)
             }
         }
 
-        if (allowDraw) {
+        if (drawImage) {
             if (ui.__.__isFastShadow) { // fix: 快速阴影时，直接 drawImage 会无阴影，需fill一下
                 canvas.fillStyle = paint.style || '#000'
                 canvas.fill()
@@ -48,16 +48,15 @@ export function drawImage(paint: ILeafPaint, ui: IUI, canvas: ILeaferCanvas, _re
 }
 
 export function getImageRenderScaleData(paint: ILeafPaint, ui: IUI, canvas?: ILeaferCanvas, _renderOptions?: IRenderOptions): IScaleData {
-    const renderScaleData = ui.getRenderScaleData(true, paint.scaleFixed)
+    const scaleData = ui.getRenderScaleData(true, paint.scaleFixed), { data } = paint
     if (canvas) {
         const { pixelRatio } = canvas
-        renderScaleData.scaleX *= pixelRatio
-        renderScaleData.scaleY *= pixelRatio
+        scaleData.scaleX *= pixelRatio
+        scaleData.scaleY *= pixelRatio
     }
-    if (paint.data.scaleX) {
-        const { data } = paint
-        renderScaleData.scaleX *= Math.abs(data.scaleX)
-        renderScaleData.scaleY *= Math.abs(data.scaleY)
+    if (data && data.scaleX) {
+        scaleData.scaleX *= Math.abs(data.scaleX)
+        scaleData.scaleY *= Math.abs(data.scaleY)
     }
-    return renderScaleData
+    return scaleData
 }
