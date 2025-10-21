@@ -1,12 +1,12 @@
 import { IFunction, ILeaferCanvas, IRenderOptions } from '@leafer/interface'
-import { Platform, MatrixHelper, ImageManager } from '@leafer/core'
+import { Platform, MatrixHelper, MathHelper, ImageManager } from '@leafer/core'
 
 import { IUI, ILeafPaint, IMatrixData } from '@leafer-ui/interface'
 import { PaintImage } from "@leafer-ui/draw"
 
 
 const { get, scale, copy } = MatrixHelper
-const { floor, max } = Math
+const { getFloorScale } = MathHelper, { abs } = Math
 
 export function createPatternTask(paint: ILeafPaint, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void {
     if (!paint.patternTask) {
@@ -34,27 +34,28 @@ export function createPattern(paint: ILeafPaint, ui: IUI, canvas: ILeaferCanvas,
 
 }
 
-export function createPatternStyle(paint: ILeafPaint, scaleX: number, scaleY: number, ui: IUI, _canvas: ILeaferCanvas, _renderOptions: IRenderOptions, resolve?: IFunction): void {
-    const { image, data } = paint, { transform, gap } = data, fixScale = PaintImage.getPatternFixScale(paint, scaleX, scaleY)
-    let imageMatrix: IMatrixData, { width, height } = image
+export function createPatternStyle(paint: ILeafPaint, imageScaleX: number, imageScaleY: number, ui: IUI, _canvas: ILeaferCanvas, _renderOptions: IRenderOptions, resolve?: IFunction): void {
+    const { image, data } = paint, { transform, gap } = data, fixScale = PaintImage.getPatternFixScale(paint, imageScaleX, imageScaleY)
+    let imageMatrix: IMatrixData, xGap: number, yGap: number, { width, height } = image
 
-    if (fixScale) scaleX *= fixScale, scaleY *= fixScale
+    if (fixScale) imageScaleX *= fixScale, imageScaleY *= fixScale
 
-    width *= scaleX
-    height *= scaleY
+    width *= imageScaleX
+    height *= imageScaleY
 
     // 平铺间距
-    const xGap = gap && (gap.x * scaleX)
-    const yGap = gap && (gap.y * scaleY)
+    if (gap) {
+        xGap = gap.x * imageScaleX / abs(data.scaleX || 1)
+        yGap = gap.y * imageScaleY / abs(data.scaleY || 1)
+    }
 
-    if (transform || scaleX !== 1 || scaleY !== 1) {
-        const canvasWidth = width + (xGap || 0), canvasHeight = height + (yGap || 0)
-        scaleX *= max(floor(canvasWidth), 1) / canvasWidth // 缩放至floor画布宽高的状态
-        scaleY *= max(floor(canvasHeight), 1) / canvasHeight
+    if (transform || imageScaleX !== 1 || imageScaleY !== 1) {
+        imageScaleX *= getFloorScale(width + (xGap || 0)) // 缩放至floor画布宽高的状态
+        imageScaleY *= getFloorScale(height + (yGap || 0))
 
         imageMatrix = get()
         if (transform) copy(imageMatrix, transform)
-        scale(imageMatrix, 1 / scaleX, 1 / scaleY)
+        scale(imageMatrix, 1 / imageScaleX, 1 / imageScaleY)
     }
 
     const imageCanvas = image.getCanvas(width, height, data.opacity, data.filters, xGap, yGap, ui.leafer && ui.leafer.config.smooth)
@@ -63,16 +64,16 @@ export function createPatternStyle(paint: ILeafPaint, scaleX: number, scaleY: nu
     resolve && resolve()
 }
 
-export function getPatternFixScale(paint: ILeafPaint, scaleX: number, scaleY: number): number {
+export function getPatternFixScale(paint: ILeafPaint, imageScaleX: number, imageScaleY: number): number {
     const { image } = paint
     let fixScale: number, maxSize = Platform.image.maxPatternSize, imageSize = image.width * image.height
 
     if (image.isSVG) {
-        if (scaleX > 1) fixScale = Math.ceil(scaleX) / scaleX // fix: svg按整数倍放大，避免产生加深线条
+        if (imageScaleX > 1) fixScale = Math.ceil(imageScaleX) / imageScaleX // fix: svg按整数倍放大，避免产生加深线条
     } else {
         if (maxSize > imageSize) maxSize = imageSize // 防止大于元素自身宽高
     }
 
-    if ((imageSize *= scaleX * scaleY) > maxSize) fixScale = Math.sqrt(maxSize / imageSize)
+    if ((imageSize *= imageScaleX * imageScaleY) > maxSize) fixScale = Math.sqrt(maxSize / imageSize)
     return fixScale
 }
