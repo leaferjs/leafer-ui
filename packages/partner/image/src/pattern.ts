@@ -27,14 +27,6 @@ export function createPattern(paint: ILeafPaint, ui: IUI, canvas: ILeaferCanvas,
         const { image, data } = paint
         let imageScale: number, imageMatrix: IMatrixData, { width, height, } = image, { scaleX: sx, scaleY: sy, transform, repeat, gap } = data
 
-        if (sx) {
-            sx = abs(sx) // maybe -1
-            sy = abs(sy)
-            imageMatrix = get()
-            copy(imageMatrix, transform)
-            scale(imageMatrix, 1 / sx, 1 / sy)
-        }
-
         width *= scaleX
         height *= scaleY
 
@@ -67,6 +59,12 @@ export function createPattern(paint: ILeafPaint, ui: IUI, canvas: ILeaferCanvas,
         }
 
         if (sx) {
+            sx = abs(sx) // maybe -1
+            sy = abs(sy)
+            imageMatrix = get()
+            copy(imageMatrix, transform)
+            scale(imageMatrix, 1 / sx, 1 / sy)
+
             scaleX /= sx
             scaleY /= sy
         }
