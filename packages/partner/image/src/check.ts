@@ -29,7 +29,7 @@ export function checkImage(paint: ILeafPaint, drawImage: boolean, ui: IUI, canva
             PaintImage.drawImage(paint, ui, canvas, renderOptions) // 直接绘制图像，不生成图案
             return true
         } else {
-            if (paint.sync || exporting) PaintImage.createPattern(paint, ui, canvas, renderOptions)
+            if (!paint.style || paint.sync || exporting) PaintImage.createPattern(paint, ui, canvas, renderOptions)
             else PaintImage.createPatternTask(paint, ui, canvas, renderOptions)
             return false
         }
@@ -37,13 +37,13 @@ export function checkImage(paint: ILeafPaint, drawImage: boolean, ui: IUI, canva
 }
 
 export function drawImage(paint: ILeafPaint, ui: IUI, canvas: ILeaferCanvas, _renderOptions: IRenderOptions): void {
-    const { data } = paint
+    const { data, image } = paint
     canvas.save()
     canvas.clipUI(ui)
     if (paint.blendMode) canvas.blendMode = paint.blendMode
     if (data.opacity) canvas.opacity *= data.opacity
     if (data.transform) canvas.transform(data.transform)
-    canvas.drawImage(paint.image.getFull(data.filters), 0, 0)
+    canvas.drawImage(paint.image.getFull(data.filters), 0, 0, image.width, image.height) // svg need size
     canvas.restore()
 }
 

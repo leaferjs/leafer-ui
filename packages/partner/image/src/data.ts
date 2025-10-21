@@ -58,7 +58,7 @@ export function getPatternData(paint: IImagePaint, box: IBoundsData, image: ILea
             if (!sameBox) {
                 scaleX = box.width / width, scaleY = box.height / height
                 PaintImage.stretchMode(data, box, scaleX, scaleY)
-            }
+            } else if (scaleX) scaleX = scaleY = undefined
             break
         case 'normal':
         case 'clip':

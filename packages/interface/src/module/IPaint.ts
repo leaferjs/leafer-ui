@@ -37,7 +37,8 @@ export interface IPaintImageModule {
 
     createPatternTask(paint: ILeafPaint, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void
     createPattern(paint: ILeafPaint, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions, resolve?: IFunction): boolean
-    createPatternStyle(paint: ILeafPaint, transform: IMatrixData, width: number, height: number, xGap: number, yGap: number, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions, resolve?: IFunction): void
+    createPatternStyle(paint: ILeafPaint, scaleX: number, scaleY: number, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions, resolve?: IFunction): void
+    getPatternFixScale(paint: ILeafPaint, scaleX: number, scaleY: number): number
 
     createData(leafPaint: ILeafPaint, image: ILeaferImage, paint: IImagePaint, box: IBoundsData): void
     getPatternData(paint: IImagePaint, box: IBoundsData, image: ILeaferImage): ILeafPaintPatternData
