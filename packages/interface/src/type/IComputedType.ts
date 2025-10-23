@@ -14,6 +14,7 @@ export interface ILeafPaint {
     transform?: IMatrixData // 存在时表示pattern自身不能应用transform
     blendMode?: IBlendMode
     image?: ILeaferImage
+    level?: number
     loadId?: number
     patternId?: string
     patternTask?: ITaskItem
