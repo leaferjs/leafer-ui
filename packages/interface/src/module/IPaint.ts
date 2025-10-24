@@ -31,7 +31,7 @@ export interface IPaintImageModule {
     image(ui: IUI, attrName: string, paint: IImagePaint, boxBounds: IBoundsData, firstUse: boolean): ILeafPaint
 
     checkImage(paint: ILeafPaint, allowDraw: boolean, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): boolean // 返回true表示已进行了原生绘制
-    drawImage(paint: ILeafPaint, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void
+    drawImage(paint: ILeafPaint, imageScaleX: number, imageScaleY: number, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void
     getImageRenderScaleData(paint: ILeafPaint, ui: IUI, canvas?: ILeaferCanvas, renderOptions?: IRenderOptions): IScaleData // 当前图片渲染的比例数据，必须马上分解使用
     recycleImage(attrName: IPaintAttr, data: IUIData): IBooleanMap
 

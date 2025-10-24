@@ -26,7 +26,7 @@ export function checkImage(paint: ILeafPaint, drawImage: boolean, ui: IUI, canva
                 canvas.fillStyle = paint.style || '#000'
                 canvas.fill()
             }
-            PaintImage.drawImage(paint, ui, canvas, renderOptions) // 直接绘制图像，不生成图案
+            PaintImage.drawImage(paint, scaleX, scaleY, ui, canvas, renderOptions) // 直接绘制图像，不生成图案
             return true
         } else {
             if (!paint.style || paint.sync || exporting) PaintImage.createPattern(paint, ui, canvas, renderOptions)
@@ -36,7 +36,7 @@ export function checkImage(paint: ILeafPaint, drawImage: boolean, ui: IUI, canva
     }
 }
 
-export function drawImage(paint: ILeafPaint, ui: IUI, canvas: ILeaferCanvas, _renderOptions: IRenderOptions): void {
+export function drawImage(paint: ILeafPaint, _imageScaleX: number, _imageScaleY: number, ui: IUI, canvas: ILeaferCanvas, _renderOptions: IRenderOptions): void {
     const { data, image } = paint
     canvas.save()
     canvas.clipUI(ui)
