@@ -1,4 +1,4 @@
-import { IFunction, ILeaferCanvas, IRenderOptions } from '@leafer/interface'
+import { ILeaferCanvas, IRenderOptions } from '@leafer/interface'
 import { Platform, MatrixHelper, MathHelper, ImageManager } from '@leafer/core'
 
 import { IUI, ILeafPaint, IMatrixData } from '@leafer-ui/interface'
@@ -18,8 +18,7 @@ export function createPatternTask(paint: ILeafPaint, ui: IUI, canvas: ILeaferCan
     }
 }
 
-
-export function createPattern(paint: ILeafPaint, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions, resolve?: IFunction): void {
+export function createPattern(paint: ILeafPaint, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void {
     let { scaleX, scaleY } = PaintImage.getImageRenderScaleData(paint, ui, canvas, renderOptions), id = scaleX + '-' + scaleY
 
     if (paint.patternId !== id && !ui.destroyed) {
@@ -56,8 +55,6 @@ export function createPattern(paint: ILeafPaint, ui: IUI, canvas: ILeaferCanvas,
 
         }
     }
-
-    resolve && resolve()
 }
 
 export function getPatternFixScale(paint: ILeafPaint, imageScaleX: number, imageScaleY: number): number {
