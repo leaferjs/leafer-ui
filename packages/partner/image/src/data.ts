@@ -90,7 +90,7 @@ export function getPatternData(paint: IImagePaint, box: IBoundsData, image: ILea
         data.scaleY = scaleY
     }
 
-    if (opacity) data.opacity = opacity
+    if (opacity && opacity < 1) data.opacity = opacity
     if (filters) data.filters = filters
     if (repeat) data.repeat = isString(repeat) ? (repeat === 'x' ? 'repeat-x' : 'repeat-y') : 'repeat'
     return data

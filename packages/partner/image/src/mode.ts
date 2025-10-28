@@ -8,9 +8,10 @@ let origin = {} as IPointData, tempMatrix = getMatrixData()
 const { get, set, rotateOfOuter, translate, scaleOfOuter, multiplyParent, scale: scaleHelper, rotate, skew: skewHelper } = MatrixHelper
 
 export function stretchMode(data: ILeafPaintPatternData, box: IBoundsData, scaleX: number, scaleY: number): void {
-    const transform: IMatrixData = get()
-    translate(transform, box.x, box.y)
-    if (scaleX) scaleHelper(transform, scaleX, scaleY)
+    const transform: IMatrixData = get(), { x, y } = box
+    if (x || y) translate(transform, x, y)
+    else transform.onlyScale = true
+    scaleHelper(transform, scaleX, scaleY)
     data.transform = transform
 }
 

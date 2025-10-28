@@ -37,14 +37,22 @@ export function checkImage(paint: ILeafPaint, drawImage: boolean, ui: IUI, canva
 }
 
 export function drawImage(paint: ILeafPaint, _imageScaleX: number, _imageScaleY: number, ui: IUI, canvas: ILeaferCanvas, _renderOptions: IRenderOptions): void {
-    const { data, image } = paint
-    canvas.save()
-    canvas.clipUI(ui)
-    if (paint.blendMode) canvas.blendMode = paint.blendMode
-    if (data.opacity) canvas.opacity *= data.opacity
-    if (data.transform) canvas.transform(data.transform)
-    canvas.drawImage(paint.image.getFull(data.filters), 0, 0, image.width, image.height) // svg need size
-    canvas.restore()
+    const { data, image, blendMode } = paint, { opacity, transform } = data, view = image.getFull(data.filters), u = ui.__
+    let { width, height } = image, clipUI: any
+
+    if ((transform && !transform.onlyScale) || (clipUI = u.path || u.cornerRadius) || opacity || blendMode) {
+        canvas.save()
+        clipUI && canvas.clipUI(ui)
+        blendMode && (canvas.blendMode = blendMode)
+        opacity && (canvas.opacity *= opacity)
+        transform && canvas.transform(transform)
+        canvas.drawImage(view, 0, 0, width, height) // svg need size
+        canvas.restore()
+    } else { // 简单矩形
+        if (data.scaleX) width *= data.scaleX, height *= data.scaleY
+        canvas.drawImage(view, 0, 0, width, height)
+    }
+
 }
 
 export function getImageRenderScaleData(paint: ILeafPaint, ui: IUI, canvas?: ILeaferCanvas, _renderOptions?: IRenderOptions): IScaleData {
