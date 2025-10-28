@@ -146,7 +146,15 @@ export interface IPathDataArrowOffset {
 }
 
 // 文本
-export type ITextAlign = 'left' | 'center' | 'right' | 'justify' | 'both'
+export type ITextAlign =
+    | 'left'
+    | 'center'
+    | 'right'
+    | 'justify' // 两端对齐，最后一行不处理，适合段落文本，英文会均分单词
+    | 'justify-letter' // 字符级对齐
+    | 'both' // 所有行两端对齐，适合单行文本，英文会均分单词
+    | 'both-letter' // 字符级对齐
+
 export type IVerticalAlign = 'top' | 'middle' | 'bottom'
 export type ITextCase = | 'upper' | 'lower' | 'title' | 'none' | 'small-caps'
 export type IFontWeight = IFontWeightNumer | IFontWeightString
