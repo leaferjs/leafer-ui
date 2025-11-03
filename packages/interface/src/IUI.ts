@@ -229,6 +229,9 @@ export interface ITextData extends ITextAttrData, ITextStyleComputedData, IUIDat
     __clipText?: boolean
     __isPlacehold?: boolean
     __textBoxBounds?: IBoundsData
+    __justify?: boolean // 是否两端对齐文本
+    __justifyLast?: boolean // 最后一行是否两端对齐
+    __justifyLetter?: boolean // 英文是否通过加大字符间距两端对齐
 }
 export interface ITextInputData extends ITextAttrData, ITextStyleInputData, IUIBaseInputData {
 
