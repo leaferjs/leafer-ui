@@ -22,11 +22,9 @@ export function createRows(drawData: ITextDrawData, content: string, style: ITex
     findMaxWidth = !bounds.width && !style.autoSizeAlign
 
     const { __letterSpacing, paraIndent, textCase } = style
-    const { canvas } = Platform
-    const { width, height } = bounds
-    const charMode = width || height || __letterSpacing || (textCase !== 'none')
+    const { canvas } = Platform, { width } = bounds
 
-    if (charMode) {
+    if (style.__isCharMode) {
 
         const wrap = style.textWrap !== 'none'
         const breakAll = style.textWrap === 'break'

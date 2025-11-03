@@ -9,14 +9,24 @@ export function layoutChar(drawData: ITextDrawData, style: ITextData, width: num
 
     const { rows } = drawData
     const { textAlign, paraIndent, letterSpacing } = style
-    let charX: number, addWordWidth: number, indentWidth: number, mode: number, wordChar: ITextCharData, wordsLength: number
+
+    const justifyLast = width && textAlign.includes('both')  // 最后一行是否两端对齐
+    const justify = justifyLast || (width && textAlign.includes('justify')) // 是否两端对齐文本
+    const justifyLetter = justify && textAlign.includes('letter') // 英文是否通过加大字符间距两端对齐
+
+    let charX: number, remainingWidth: number, addWordWidth: number, addLetterWidth: number, indentWidth: number, mode: number, wordChar: ITextCharData, wordsLength: number, isLastWord: boolean, canJustify: boolean
 
     rows.forEach(row => {
         if (row.words) {
 
             indentWidth = paraIndent && row.paraStart ? paraIndent : 0, wordsLength = row.words.length
-            addWordWidth = (width && (textAlign === 'justify' || textAlign === 'both') && wordsLength > 1) ? (width - row.width - indentWidth) / (wordsLength - 1) : 0
-            mode = (letterSpacing || row.isOverflow) ? CharMode : (addWordWidth > 0.01 ? WordMode : TextMode)
+            if (justify) {
+                canJustify = !row.paraEnd || justifyLast
+                remainingWidth = width - row.width - indentWidth
+                if (justifyLetter) addLetterWidth = remainingWidth / (row.words.reduce((total, item) => total + item.data.length, 0) - 1) //  remainingWidth / （lettersLength - 1）
+                else addWordWidth = wordsLength > 1 ? remainingWidth / (wordsLength - 1) : 0
+            }
+            mode = (letterSpacing || row.isOverflow || justifyLetter) ? CharMode : (addWordWidth ? WordMode : TextMode)
             if (row.isOverflow && !letterSpacing) row.textMode = true
 
             if (mode === TextMode) {
@@ -40,13 +50,18 @@ export function layoutChar(drawData: ITextDrawData, style: ITextData, width: num
 
                     } else {
 
-                        charX = toChar(word.data, charX, row.data, row.isOverflow)
+                        charX = toChar(word.data, charX, row.data, row.isOverflow, canJustify && addLetterWidth)
 
                     }
 
-                    if (addWordWidth && (!row.paraEnd || textAlign === 'both') && (index !== wordsLength - 1)) {
-                        charX += addWordWidth
-                        row.width += addWordWidth
+                    if (canJustify) {
+                        isLastWord = index === wordsLength - 1
+
+                        if (addWordWidth) {
+                            if (!isLastWord) charX += addWordWidth, row.width += addWordWidth
+                        } else if (addLetterWidth) {
+                            row.width += addLetterWidth * (word.data.length - (isLastWord ? 1 : 0))
+                        }
                     }
 
                 })
@@ -75,13 +90,14 @@ function toWordChar(data: ITextCharData[], charX: number, wordChar: ITextCharDat
     return charX
 }
 
-function toChar(data: ITextCharData[], charX: number, rowData: ITextCharData[], isOverflow?: boolean): number {
+function toChar(data: ITextCharData[], charX: number, rowData: ITextCharData[], isOverflow?: boolean, addLetterWidth?: number): number {
     data.forEach(char => {
         if (isOverflow || char.char !== ' ') {
             char.x = charX
             rowData.push(char)
         }
         charX += char.width
+        addLetterWidth && (charX += addLetterWidth)
     })
     return charX
 }

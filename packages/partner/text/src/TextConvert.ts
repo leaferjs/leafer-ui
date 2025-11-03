@@ -20,13 +20,13 @@ export function getDrawData(content: string | number, style: ITextData): ITextDr
     let width = style.__getInput('width') || 0
     let height = style.__getInput('height') || 0
 
-    const { textDecoration, __font, __padding: padding } = style
+    const { __padding: padding } = style
 
     if (padding) {
-        if (width) x = padding[left], width -= (padding[right] + padding[left])
+        if (width) x = padding[left], width -= (padding[right] + padding[left]), !width && (width = 0.01) // 防止变为自动宽度
         else if (!style.autoSizeAlign) x = padding[left]
 
-        if (height) y = padding[top], height -= (padding[top] + padding[bottom])
+        if (height) y = padding[top], height -= (padding[top] + padding[bottom]), !height && (height = 0.01)
         else if (!style.autoSizeAlign) y = padding[top]
     }
 
@@ -34,7 +34,7 @@ export function getDrawData(content: string | number, style: ITextData): ITextDr
         bounds: { x, y, width, height },
         rows: [],
         paraNumber: 0,
-        font: Platform.canvas.font = __font
+        font: Platform.canvas.font = style.__font
     }
 
     createRows(drawData, content, style) // set rows, paraNumber
@@ -43,11 +43,11 @@ export function getDrawData(content: string | number, style: ITextData): ITextDr
 
     layoutText(drawData, style) // set bounds
 
-    layoutChar(drawData, style, width, height) // set char.x
+    if (style.__isCharMode) layoutChar(drawData, style, width, height) // set char.x
 
     if (drawData.overflow) clipText(drawData, style, x, width)
 
-    if (textDecoration !== 'none') decorationText(drawData, style)
+    if (style.textDecoration !== 'none') decorationText(drawData, style)
 
     return drawData
 
