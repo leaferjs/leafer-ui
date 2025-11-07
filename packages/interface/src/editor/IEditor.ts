@@ -108,7 +108,7 @@ export interface IEditorConfig extends IObject {
 
     point?: IEditPointInputData | IEditPointInputData[]
     middlePoint?: IEditPointInputData | IEditPointInputData[]
-    resizeLine?: IEditPointInputData
+    resizeLine?: IEditPointInputData | IEditPointInputData[]
 
     rect?: IBoxInputData
     rectThrough?: boolean // 是否穿透rect（穿透后，可以拾取到rect下面的元素，默认单选元素时穿透）
