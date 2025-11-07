@@ -54,6 +54,8 @@ export interface IEditorBase extends IGroup, ISelectorProxy, ITransformTool {
 
     update(): void
     updateEditBox(): void
+
+    getEditTool(name: string): IObject
     updateEditTool(): void
     unloadEditTool(): void
 
@@ -64,6 +66,7 @@ export interface IEditorBase extends IGroup, ISelectorProxy, ITransformTool {
     openGroup(group: IGroup): void
     closeGroup(group: IGroup): void
 
+    getInnerEditor(name: string): IObject
     openInnerEditor(target?: IUI, nameOrSelect?: string | boolean, select?: boolean): void
     closeInnerEditor(onlyInnerEditor?: boolean): void
 
