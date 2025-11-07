@@ -1,6 +1,6 @@
 {
   "name": "@leafer-ui/display-module",
-  "version": "1.9.12",
+  "version": "1.10.0",
   "description": "@leafer-ui/display-module",
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
@@ -18,8 +18,8 @@
     "leaferjs"
   ],
   "dependencies": {
-    "@leafer-ui/data": "1.9.12",
-    "@leafer-ui/bounds": "1.9.12",
-    "@leafer-ui/render": "1.9.12"
+    "@leafer-ui/data": "1.10.0",
+    "@leafer-ui/bounds": "1.10.0",
+    "@leafer-ui/render": "1.10.0"
   }
 }
