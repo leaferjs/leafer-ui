@@ -1,7 +1,7 @@
 import { IBlendMode, IDirection, ILeaferImage, IMatrixData, IPointData, IScaleFixed, ITaskItem } from '@leafer/interface'
 
 import { IColorString } from './IStringType'
-import { IStrokeAlign, IStrokeJoin, IStrokeCap, IImagePaintMode, IImageFilters } from './IType'
+import { IStrokeAlign, IStrokeJoin, IStrokeCap, IImagePaintMode, IImageFilters, IPaint } from './IType'
 import { IPaintType } from './IType'
 import { IStrokeComputedStyle } from '../ICommonAttr'
 
@@ -12,18 +12,14 @@ export interface ILeafPaint {
     style?: ILeafPaintColor
     strokeStyle?: IStrokeComputedStyle // 子描边样式选项
     transform?: IMatrixData // 存在时表示pattern自身不能应用transform
-    blendMode?: IBlendMode
     image?: ILeaferImage
     level?: number
     loadId?: number
     patternId?: string
     patternTask?: ITaskItem
-    changeful?: boolean // 会频繁变化，不生成图案（有特殊性能优化，一般用于游戏精灵、动图场景）
-    sync?: boolean // 同步显示图片，不走任务列表生成图案
     isTransparent?: boolean // 是否为透明色
     data?: ILeafPaintPatternData
-    editing?: boolean // 标记编辑中
-    scaleFixed?: IScaleFixed // 平铺图片不跟随画布缩放
+    paint?: IPaint // 原始paint对象
 }
 
 export interface ILeafPaintPatternData {
