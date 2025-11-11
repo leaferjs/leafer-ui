@@ -11,16 +11,18 @@ export function fill(fill: string, ui: IUI, canvas: ILeaferCanvas, renderOptions
 
 
 export function fills(fills: ILeafPaint[], ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void {
-    let item: ILeafPaint, originPaint: IImagePaint
+    let item: ILeafPaint, originPaint: IImagePaint, countImage: number
     for (let i = 0, len = fills.length; i < len; i++) {
         item = fills[i], originPaint = item.originPaint as IImagePaint
 
         if (item.image) {
 
+            countImage ? countImage++ : countImage = 1
+
             if (PaintImage.checkImage(item, !ui.__.__font, ui, canvas, renderOptions)) continue
 
             if (!item.style) {
-                if (!i && item.image.isPlacehold) ui.drawImagePlaceholder(item.image, canvas, renderOptions) // 图片加载中或加载失败
+                if (countImage === 1 && item.image.isPlacehold) ui.drawImagePlaceholder(item, canvas, renderOptions) // 图片加载中或加载失败
                 continue
             }
 
