@@ -20,6 +20,7 @@ export interface IPaintBase {
 
     style?: IStrokeStyle
     editing?: boolean // 标记编辑中
+    scaleFixed?: IScaleFixed // 不跟随画布缩放
 }
 
 export type IPaintType =
@@ -94,7 +95,6 @@ export interface IImagePaint extends IPaintBase {
 
     repeat?: IRepeat
     gap?: IGap | IPointGap
-    scaleFixed?: IScaleFixed // 平铺图片不跟随画布缩放
 
     changeful?: boolean // 会频繁变化，不生成图案（有特殊性能优化，一般用于游戏精灵、动图场景）
     sync?: boolean // 同步显示，不走任务列表生成图案

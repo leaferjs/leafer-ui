@@ -19,7 +19,7 @@ export interface ILeafPaint {
     patternTask?: ITaskItem
     isTransparent?: boolean // 是否为透明色
     data?: ILeafPaintPatternData
-    paint?: IPaint // 原始paint对象
+    originPaint?: IPaint // 原始paint对象
 }
 
 export interface ILeafPaintPatternData {

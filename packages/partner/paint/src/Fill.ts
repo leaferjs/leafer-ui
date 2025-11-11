@@ -1,6 +1,6 @@
 import { ILeaferCanvas, IRenderOptions } from '@leafer/interface'
 
-import { ILeafPaint, IUI } from '@leafer-ui/interface'
+import { IImagePaint, ILeafPaint, IUI } from '@leafer-ui/interface'
 import { PaintImage, Paint } from "@leafer-ui/draw"
 
 
@@ -11,9 +11,9 @@ export function fill(fill: string, ui: IUI, canvas: ILeaferCanvas, renderOptions
 
 
 export function fills(fills: ILeafPaint[], ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void {
-    let item: ILeafPaint
+    let item: ILeafPaint, originPaint: IImagePaint
     for (let i = 0, len = fills.length; i < len; i++) {
-        item = fills[i]
+        item = fills[i], originPaint = item.originPaint as IImagePaint
 
         if (item.image) {
 
@@ -28,23 +28,23 @@ export function fills(fills: ILeafPaint[], ui: IUI, canvas: ILeaferCanvas, rende
 
         canvas.fillStyle = item.style
 
-        if (item.transform || item.scaleFixed) {
+        if (item.transform || originPaint.scaleFixed) {
 
             canvas.save()
             if (item.transform) canvas.transform(item.transform)
-            if (item.scaleFixed) {
+            if (originPaint.scaleFixed) {
                 const { scaleX, scaleY } = ui.getRenderScaleData(true)
-                if (item.scaleFixed === true || (item.scaleFixed === 'zoom-in' && scaleX > 1 && scaleY > 1)) canvas.scale(1 / scaleX, 1 / scaleY)
+                if (originPaint.scaleFixed === true || (originPaint.scaleFixed === 'zoom-in' && scaleX > 1 && scaleY > 1)) canvas.scale(1 / scaleX, 1 / scaleY)
             }
-            if (item.blendMode) canvas.blendMode = item.blendMode
+            if (originPaint.blendMode) canvas.blendMode = originPaint.blendMode
             fillPathOrText(ui, canvas, renderOptions)
             canvas.restore()
 
         } else {
 
-            if (item.blendMode) {
+            if (originPaint.blendMode) {
 
-                canvas.saveBlendMode(item.blendMode)
+                canvas.saveBlendMode(originPaint.blendMode)
                 fillPathOrText(ui, canvas, renderOptions)
                 canvas.restoreBlendMode()
 

@@ -52,41 +52,41 @@ export function compute(attrName: IPaintAttr, ui: IUI): void {
 function getLeafPaint(attrName: string, paint: IPaint, ui: IUI): ILeafPaint {
     if (!isObject(paint) || paint.visible === false || paint.opacity === 0) return undefined
 
-    let data: ILeafPaint
+    let leafPaint: ILeafPaint
     const { boxBounds } = ui.__layout
 
     switch (paint.type) {
         case 'image':
-            data = PaintImage.image(ui, attrName, paint, boxBounds, !recycleMap || !recycleMap[paint.url])
+            leafPaint = PaintImage.image(ui, attrName, paint, boxBounds, !recycleMap || !recycleMap[paint.url])
             break
         case 'linear':
-            data = PaintGradient.linearGradient(paint, boxBounds)
+            leafPaint = PaintGradient.linearGradient(paint, boxBounds)
             break
         case 'radial':
-            data = PaintGradient.radialGradient(paint, boxBounds)
+            leafPaint = PaintGradient.radialGradient(paint, boxBounds)
             break
         case 'angular':
-            data = PaintGradient.conicGradient(paint, boxBounds)
+            leafPaint = PaintGradient.conicGradient(paint, boxBounds)
             break
         case 'solid':
             const { type, color, opacity } = paint
-            data = { type, style: ColorConvert.string(color, opacity) }
+            leafPaint = { type, style: ColorConvert.string(color, opacity) }
             break
         default:
-            if (!isUndefined((paint as IRGB).r)) data = { type: 'solid', style: ColorConvert.string(paint) }
+            if (!isUndefined((paint as IRGB).r)) leafPaint = { type: 'solid', style: ColorConvert.string(paint) }
     }
 
-    if (data) {
+    if (leafPaint) {
+        // 原始paint
+        leafPaint.originPaint = paint
+
         // 描边样式
-        if (isString(data.style) && hasTransparent(data.style)) data.isTransparent = true
+        if (isString(leafPaint.style) && hasTransparent(leafPaint.style)) leafPaint.isTransparent = true
         if (paint.style) {
             if (paint.style.strokeWidth === 0) return undefined
-            data.strokeStyle = paint.style as IStrokeComputedStyle
+            leafPaint.strokeStyle = paint.style as IStrokeComputedStyle
         }
-
-        if (paint.editing) data.editing = paint.editing
-        if (paint.blendMode) data.blendMode = paint.blendMode
     }
 
-    return data
+    return leafPaint
 }

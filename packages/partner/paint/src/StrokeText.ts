@@ -79,8 +79,8 @@ export function drawStrokesStyle(strokes: ILeafStrokePaint[], strokeWidthScale: 
                 strokeStyle ? canvas.setStroke(item.style, data.__getRealStrokeWidth(strokeStyle) * strokeWidthScale, data, strokeStyle) : canvas.setStroke(item.style, data.__strokeWidth * strokeWidthScale, data)
             } else canvas.strokeStyle = item.style
 
-            if (item.blendMode) {
-                canvas.saveBlendMode(item.blendMode)
+            if (item.originPaint.blendMode) {
+                canvas.saveBlendMode(item.originPaint.blendMode)
                 isText ? Paint.drawTextStroke(ui, canvas, renderOptions) : canvas.stroke()
                 canvas.restoreBlendMode()
             } else {
