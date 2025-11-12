@@ -40,7 +40,7 @@ export function drawImage(paint: ILeafPaint, _imageScaleX: number, _imageScaleY:
     const { data, image } = paint, { blendMode } = paint.originPaint as IImagePaint, { opacity, transform } = data, view = image.getFull(data.filters), u = ui.__
     let { width, height } = image, clipUI: any
 
-    if ((transform && !transform.onlyScale) || (clipUI = u.path || u.cornerRadius) || opacity || blendMode) {
+    if ((clipUI = (transform && !transform.onlyScale) || u.path || u.cornerRadius) || opacity || blendMode) {
         canvas.save()
         clipUI && canvas.clipUI(ui)
         blendMode && (canvas.blendMode = blendMode)
