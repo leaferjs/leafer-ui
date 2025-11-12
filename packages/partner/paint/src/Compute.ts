@@ -32,20 +32,25 @@ export function compute(attrName: IPaintAttr, ui: IUI): void {
     (data as IObject)['_' + attrName] = leafPaints.length ? leafPaints : undefined
 
     if (leafPaints.length) {
+
         if (leafPaints.every(item => item.isTransparent)) {
             if (leafPaints.some(item => item.image)) isAlphaPixel = true
             isTransparent = true
         }
+
+        if (attrName === 'fill') {
+            stintSet(data, '__isAlphaPixelFill', isAlphaPixel)
+            stintSet(data, '__isTransparentFill', isTransparent)
+        } else {
+            stintSet(data, '__isAlphaPixelStroke', isAlphaPixel)
+            stintSet(data, '__isTransparentStroke', isTransparent)
+            stintSet(data, '__hasMultiStrokeStyle', maxChildStrokeWidth)
+        }
+
+    } else {
+        data.__removePaint(attrName, false)
     }
 
-    if (attrName === 'fill') {
-        stintSet(data, '__isAlphaPixelFill', isAlphaPixel)
-        stintSet(data, '__isTransparentFill', isTransparent)
-    } else {
-        stintSet(data, '__isAlphaPixelStroke', isAlphaPixel)
-        stintSet(data, '__isTransparentStroke', isTransparent)
-        stintSet(data, '__hasMultiStrokeStyle', maxChildStrokeWidth)
-    }
 }
 
 
