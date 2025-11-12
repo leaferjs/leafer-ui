@@ -1,6 +1,6 @@
 {
   "name": "@leafer-ui/node",
-  "version": "1.10.0",
+  "version": "1.10.1",
   "description": "@leafer-ui/node",
   "author": "Chao (Leafer) Wan",
   "license": "MIT",
@@ -28,16 +28,16 @@
     "leaferjs"
   ],
   "dependencies": {
-    "@leafer/core": "1.10.0",
-    "@leafer/canvas-node": "1.10.0",
-    "@leafer/image-node": "1.10.0",
-    "@leafer/partner": "1.10.0",
-    "@leafer/interface": "1.10.0",
-    "@leafer-ui/draw": "1.10.0",
-    "@leafer-ui/core": "1.10.0",
-    "@leafer-ui/partner": "1.10.0",
-    "@leafer-ui/interface": "1.10.0",
-    "@leafer-in/export": "1.10.0",
-    "@leafer-in/interface": "1.10.0"
+    "@leafer/core": "1.10.1",
+    "@leafer/canvas-node": "1.10.1",
+    "@leafer/image-node": "1.10.1",
+    "@leafer/partner": "1.10.1",
+    "@leafer/interface": "1.10.1",
+    "@leafer-ui/draw": "1.10.1",
+    "@leafer-ui/core": "1.10.1",
+    "@leafer-ui/partner": "1.10.1",
+    "@leafer-ui/interface": "1.10.1",
+    "@leafer-in/export": "1.10.1",
+    "@leafer-in/interface": "1.10.1"
   }
 }
