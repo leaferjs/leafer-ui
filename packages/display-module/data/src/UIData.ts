@@ -7,7 +7,7 @@ import { Paint, PaintImage, ColorConvert } from '@leafer-ui/external'
 
 const { parse, objectToCanvasData } = PathConvert
 const { stintSet } = DataHelper, { hasTransparent } = ColorConvert
-const emptyPaint: ILeafPaint = {}
+const emptyPaint: ILeafPaint = { originPaint: {} as any }
 const debug = Debug.get('UIData')
 export class UIData extends LeafData implements IUIData {
 
