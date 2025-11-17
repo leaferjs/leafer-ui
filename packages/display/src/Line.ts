@@ -12,7 +12,7 @@ const { rotate, getAngle, getDistance, defaultPoint } = PointHelper
 
 
 @registerUI()
-export class Line<TInputData = ILineInputData> extends UI<TInputData> implements ILine { // tip: rewrited Polygon
+export class Line<TInputData = ILineInputData> extends UI<TInputData> implements ILine {
 
     public get __tag() { return 'Line' }
 
