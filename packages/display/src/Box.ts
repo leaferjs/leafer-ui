@@ -107,7 +107,7 @@ export class Box<TInputData = IBoxInputData> extends Group<TInputData> implement
             const childrenRenderBounds = layout.childrenRenderBounds || (layout.childrenRenderBounds = getBoundsData())
             super.__updateRenderBounds(childrenRenderBounds)
 
-            if (isScrollMode = overflow.includes('scroll')) {  // 检查滚动逻辑
+            if (isScrollMode = overflow && overflow.includes('scroll')) {  // 检查滚动逻辑
                 add(childrenRenderBounds, boxBounds)
                 scroll(childrenRenderBounds, data as IScrollPointData)
             }
