@@ -38,6 +38,7 @@ export class PointerEvent extends UIEvent implements IPointerEvent {
     public readonly width: number
     public readonly height: number
     public readonly pointerType: PointerType
+    public readonly press?: boolean
     public readonly multiTouch?: boolean
     public readonly pressure: number
     public readonly tangentialPressure?: number
