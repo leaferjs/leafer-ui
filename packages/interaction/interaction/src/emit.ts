@@ -10,11 +10,9 @@ export function emit(type: string, data: IUIEvent, path?: ILeafList, excludePath
 
     let leaf: ILeaf
     data.type = type
-    if (path) {
-        data = { ...data, path }
-    } else {
-        path = data.path
-    }
+
+    if (path) data = { ...data, path }
+    else path = data.path
 
     data.target = path.indexAt(0)
 

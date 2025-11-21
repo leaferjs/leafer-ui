@@ -45,6 +45,7 @@ export interface IEditorBase extends IGroup, ISelectorProxy, ITransformTool {
     cancel(): void
 
     hasItem(item: IUI): boolean
+    getItem(index?: number): IUI
     shiftItem(item: IUI): void
     addItem(item: IUI): void
     removeItem(item: IUI): void
