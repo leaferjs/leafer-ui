@@ -105,10 +105,12 @@ export class Dragger {
         this.dragData.path = path
 
         if (this.moving) {
+            data.moving = true;
             (this.dragData as IMoveEvent).moveType = 'drag'
             interaction.emit(MoveEvent.BEFORE_MOVE, this.dragData)
             interaction.emit(MoveEvent.MOVE, this.dragData)
         } else if (this.dragging) {
+            data.dragging = true
             this.dragReal()
             interaction.emit(DragEvent.BEFORE_DRAG, this.dragData)
             interaction.emit(DragEvent.DRAG, this.dragData)

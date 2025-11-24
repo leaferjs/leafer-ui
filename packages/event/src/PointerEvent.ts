@@ -38,7 +38,8 @@ export class PointerEvent extends UIEvent implements IPointerEvent {
     public readonly width: number
     public readonly height: number
     public readonly pointerType: PointerType
-    public readonly press?: boolean
+    public readonly moving?: boolean // 是否处于平移视图状态
+    public readonly dragging?: boolean // 是否处于拖拽状态
     public readonly multiTouch?: boolean
     public readonly pressure: number
     public readonly tangentialPressure?: number

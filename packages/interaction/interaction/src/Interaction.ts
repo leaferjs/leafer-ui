@@ -122,10 +122,7 @@ export class InteractionBase implements IInteraction {
         if (!data) return
 
         const { downData } = this
-        if (downData) {
-            data.press = true
-            PointerButton.defaultLeft(data)
-        }
+        if (downData) PointerButton.defaultLeft(data)
 
         const hit = this.canvas.bounds.hitPoint(data)
         if (hit || downData) {
