@@ -1,4 +1,4 @@
-import { INumber, IValue, IBoolean, IPathCommandData, IPathString, IPointData, IPathCommandObject, IObject, IFilter } from '@leafer/interface'
+import { INumber, IValue, IBoolean, IPathCommandData, IPathString, IPointData, IPathCommandObject, IObject, IFilter, IPathCommandNode } from '@leafer/interface'
 import { PathConvert, DataHelper, LeafData, Debug, isArray, isObject, isString, isUndefined } from '@leafer/core'
 
 import { IUI, IUIData, ILeafPaint, IStrokeComputedStyle } from '@leafer-ui/interface'
@@ -104,7 +104,7 @@ export class UIData extends LeafData implements IUIData {
     }
 
 
-    protected setPath(value: IPathCommandData | IPathCommandObject[] | IPathString) {
+    protected setPath(value: IPathCommandData | IPathCommandNode[] | IPathCommandObject[] | IPathString) {
         const isStr = isString(value)
         if (isStr || (value && isObject(value[0]))) {
             this.__setInput('path', value)
