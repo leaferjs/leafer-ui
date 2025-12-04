@@ -19,7 +19,7 @@
     <img width="98"  titel="gitee" src="https://www.leaferjs.com/svg/gitee-stars.svg" />
 </a> -->
 <a target="_blank" href="https://github.com/leaferjs/leafer-ui" aria-label="github"  rel="noopener">
-  <img width="120" title="github" src="https://www.leaferjs.com/svg/github-stars.svg?d=0912" />
+  <img width="120" title="github" src="https://www.leaferjs.com/svg/github-stars.svg?d=1204" />
 </a>
 </div>
 
