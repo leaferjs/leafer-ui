@@ -17,7 +17,7 @@ export function checkImage(paint: ILeafPaint, drawImage: boolean, ui: IUI, canva
             if (data.repeat) {
                 drawImage = false
             } else if (!((originPaint as IImagePaint).changeful || (Platform.name === 'miniapp' && ResizeEvent.isResizing(ui)) || exporting)) { //  小程序resize过程中直接绘制原图（绕过垃圾回收bug)
-                drawImage = Platform.image.isLarge(image, scaleX, scaleY)
+                drawImage = Platform.image.isLarge(image, scaleX, scaleY) || image.width * scaleX > 8096 || image.height * scaleY > 8096 // 大长图单边超过8096生成pattern会有问题
             }
         }
 
