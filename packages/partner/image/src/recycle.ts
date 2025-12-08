@@ -20,7 +20,7 @@ export function recycleImage(attrName: IPaintAttr, data: IUIData): IBooleanMap {
             if (url) {
                 if (!recycleMap) recycleMap = {}
                 recycleMap[url] = true
-                ImageManager.recycle(image)
+                ImageManager.recyclePaint(paint)
 
                 // stop load
                 if (image.loading) {

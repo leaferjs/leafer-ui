@@ -13,7 +13,10 @@ export interface ILeafPaint {
     strokeStyle?: IStrokeComputedStyle // 子描边样式选项
     transform?: IMatrixData // 存在时表示pattern自身不能应用transform
     image?: ILeaferImage
-    level?: number
+
+    level?: number // pattern level
+    drawLevel?: number // drawImage level
+
     loadId?: number
     patternId?: string
     patternTask?: ITaskItem
