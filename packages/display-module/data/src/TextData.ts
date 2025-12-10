@@ -1,8 +1,10 @@
+import { IJSONOptions } from '@leafer/interface'
 import { UICreator, isString } from '@leafer/core'
 
-import { IFontWeight, ITextData, IUI, IText, IObject, IBackgroundBoxStyle, IFontWeightNumer } from '@leafer-ui/interface'
+import { IFontWeight, ITextData, IUI, IText, IObject, IBackgroundBoxStyle, IFontWeightNumer, ITextInputData } from '@leafer-ui/interface'
 
 import { UIData } from "./UIData"
+
 
 
 const fontWeightMap = {
@@ -54,6 +56,12 @@ export class TextData extends UIData implements ITextData {
 
         this._boxStyle = value
 
+    }
+
+    public __getInputData(names?: string[] | IObject, options?: IJSONOptions): IObject {
+        const data: ITextInputData = super.__getInputData(names, options)
+        if (data.textEditing) delete data.textEditing
+        return data
     }
 
 }
