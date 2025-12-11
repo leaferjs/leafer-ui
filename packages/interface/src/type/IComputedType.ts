@@ -20,6 +20,8 @@ export interface ILeafPaint {
     loadId?: number
     patternId?: string
     patternTask?: ITaskItem
+    progressTimer?: any
+
     isTransparent?: boolean // 是否为透明色
     data?: ILeafPaintPatternData
     originPaint?: IPaint // 原始paint对象
