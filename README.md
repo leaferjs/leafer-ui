@@ -15,9 +15,6 @@
 如果你觉得不错，请帮我们点个 [Star](https://github.com/leaferjs/leafer-ui) 🌟 ，让这个库被更多的人看见 ✨ ✨ ✨
 
 <div style="display:flex; gap: 12px">
-<!-- <a href="https://gitee.com/leaferjs/leafer-ui" aria-label="gitee"  target="_blank" rel="noopener" >
-    <img width="98"  titel="gitee" src="https://www.leaferjs.com/svg/gitee-stars.svg" />
-</a> -->
 <a target="_blank" href="https://github.com/leaferjs/leafer-ui" aria-label="github"  rel="noopener">
   <img width="120" title="github" src="https://www.leaferjs.com/svg/github-stars.svg?d=1204" />
 </a>
@@ -27,7 +24,7 @@
 
 [1. 准备在线 Playground 环境](https://leaferjs.com/ui/guide/runtime.html)
 
-可通过 **Cloud Studio** 模版创建一个 **LeaferJS 项目**，用于运行、练习后续的示例代码。
+用于运行、练习后续的示例代码。
 
 [2. 学习 LeaferJS 快速入门教程](https://leaferjs.com/ui/guide/basic/app.html)
 
