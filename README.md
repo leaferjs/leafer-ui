@@ -32,7 +32,9 @@
 
 ## 快速安装
 
-🚀 想马上在产品中使用，请安装 [leafer-ui](https://leaferjs.com/ui/guide/install/ui/start.html)（66KB min+gzip），开始你的探索之旅。
+🚀 想马上在产品中使用，请安装 [leafer-ui](https://leaferjs.com/ui/guide/install/ui/start.html)（66KB min+gzip 零依赖），开始你的探索之旅。
+
+也可直接安装 [leafer](https://leaferjs.com/ui/guide/install/leafer/start.md) 全量包, 会自动安装 `leafer-ui` 包和 `@leafer-in/*` 所有插件包。
 
 <!-- ### 场景包
 
