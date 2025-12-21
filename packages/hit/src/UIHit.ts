@@ -45,7 +45,7 @@ ui.__updateHitCanvas = function (): void {
 
 }
 
-ui.__hit = function (inner: IRadiusPointData): boolean {
+ui.__hit = function (inner: IRadiusPointData, forceHitFill?: boolean): boolean {
 
     if (this.__box && this.__box.__hit(inner)) return true
 
@@ -55,7 +55,7 @@ ui.__hit = function (inner: IRadiusPointData): boolean {
 
     // hit path
     const { hitFill } = data
-    const needHitFillPath = ((data.fill || data.__isCanvas) && (hitFill === 'path' || (hitFill === 'pixel' && !(data.__isAlphaPixelFill || data.__isCanvas)))) || hitFill === 'all'
+    const needHitFillPath = ((data.fill || data.__isCanvas) && (hitFill === 'path' || (hitFill === 'pixel' && !(data.__isAlphaPixelFill || data.__isCanvas)))) || hitFill === 'all' || forceHitFill
     if (needHitFillPath && this.__hitFill(inner)) return true
 
     const { hitStroke, __maxStrokeWidth: strokeWidth } = data

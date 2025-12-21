@@ -36,14 +36,6 @@
 
 也可直接安装 [leafer](https://leaferjs.com/ui/guide/install/leafer/start.md) 全量包, 会自动安装 `leafer-ui` 包和 `@leafer-in/*` 所有插件包。
 
-<!-- ### 场景包
-
-高效绘图场景，推荐直接安装更轻量的 [leafer-draw](https://leaferjs.com/ui/guide/install/draw/start.html) （50KB min+gzip）。
-
-游戏开发场景，推荐直接安装更省心的 [leafer-game](https://leaferjs.com/ui/guide/install/game/start.html)，已集成了游戏相关插件。
-
-图形编辑场景，推荐直接安装更省心的 [leafer-editor](https://leaferjs.com/ui/guide/install/editor/start.html)，已集成了图形编辑器相关插件。 -->
-
 ## 仓库组成
 
 [LeaferJS](https://github.com/leaferjs/LeaferJS) 主集成仓库，可直接运行代码。

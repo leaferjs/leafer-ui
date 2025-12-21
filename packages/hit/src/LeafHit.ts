@@ -20,7 +20,7 @@ leaf.hit = function (worldPoint: IPointData, hitRadius: number = 0): boolean {
     return this.isBranch ? Platform.getSelector(this).hitPoint({ ...worldRadiusPoint }, hitRadius, { target: this as unknown as IBranch }) : this.__hitWorld(worldRadiusPoint)
 }
 
-leaf.__hitWorld = function (point: IRadiusPointData): boolean {
+leaf.__hitWorld = function (point: IRadiusPointData, forceHitFill?: boolean): boolean {
     const data = this.__
     if (!data.hitSelf) return false
 
@@ -44,7 +44,7 @@ leaf.__hitWorld = function (point: IRadiusPointData): boolean {
         if (!layout.boundsChanged) layout.hitCanvasChanged = false
     }
 
-    return this.__hit(inner)
+    return this.__hit(inner, forceHitFill)
 }
 
 leaf.__hitFill = function (inner: IRadiusPointData): boolean { const h = this.__hitCanvas; return h && h.hitFill(inner, this.__.windingRule) }
