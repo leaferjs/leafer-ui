@@ -39,7 +39,6 @@ export class Ellipse<TInputData = IEllipseInputData> extends UI<TInputData> impl
             if (startAngle || endAngle) {
                 if (innerRadius < 1) ellipse(path, rx, ry, rx * innerRadius, ry * innerRadius, 0, startAngle, endAngle, false)
                 ellipse(path, rx, ry, rx, ry, 0, endAngle, startAngle, true)
-                if (innerRadius < 1) closePath(path)
             } else {
                 if (innerRadius < 1) {
                     ellipse(path, rx, ry, rx * innerRadius, ry * innerRadius)
@@ -48,20 +47,21 @@ export class Ellipse<TInputData = IEllipseInputData> extends UI<TInputData> impl
                 ellipse(path, rx, ry, rx, ry, 0, 360, 0, true)
             }
 
-            // fix node
-            if (Platform.ellipseToCurve) this.__.path = this.getPath(true)
-
         } else {
 
             if (startAngle || endAngle) {
                 moveTo(path, rx, ry)
                 ellipse(path, rx, ry, rx, ry, 0, startAngle, endAngle, false)
-                closePath(path)
             } else {
                 ellipse(path, rx, ry, rx, ry)
             }
 
         }
+
+        closePath(path)
+
+        // fix node
+        if (Platform.ellipseToCurve) this.__.path = this.getPath(true)
 
     }
 

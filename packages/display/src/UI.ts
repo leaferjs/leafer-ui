@@ -441,7 +441,7 @@ export class UI<TInputData = IUIInputData> extends Leaf<TInputData> implements I
     public getPath(curve?: boolean, pathForRender?: boolean): IPathCommandData {
         this.__layout.update()
         let path = pathForRender ? this.__.__pathForRender : this.__.path
-        if (!path) pen.set(path = []), this.__drawPathByBox(pen)
+        if (!path) pen.set(path = []), this.__drawPathByBox(pen, !pathForRender)
         return curve ? PathConvert.toCanvasData(path, true) : path
     }
 
@@ -476,19 +476,20 @@ export class UI<TInputData = IUIInputData> extends Leaf<TInputData> implements I
 
     public __drawPath(canvas: ILeaferCanvas): void {
         canvas.beginPath()
-        this.__drawPathByData(canvas, this.__.path)
+        this.__drawPathByData(canvas, this.__.path, true)
     }
 
-    public __drawPathByData(drawer: IPathDrawer, data: IPathCommandData): void {
-        data ? PathDrawer.drawPathByData(drawer, data) : this.__drawPathByBox(drawer)
+    public __drawPathByData(drawer: IPathDrawer, data: IPathCommandData, ignoreCornerRadius?: boolean): void {
+        data ? PathDrawer.drawPathByData(drawer, data) : this.__drawPathByBox(drawer, ignoreCornerRadius)
     }
 
-    public __drawPathByBox(drawer: IPathDrawer): void {
+    public __drawPathByBox(drawer: IPathDrawer, ignoreCornerRadius?: boolean): void {
         const { x, y, width, height } = this.__layout.boxBounds
-        if (this.__.cornerRadius) {
+        if (this.__.cornerRadius && !ignoreCornerRadius) {
             const { cornerRadius } = this.__
             drawer.roundRect(x, y, width, height, isNumber(cornerRadius) ? [cornerRadius] : cornerRadius) // 修复微信浏览器bug, 后续需进一步优化
         } else drawer.rect(x, y, width, height)
+        drawer.closePath()
     }
 
     public drawImagePlaceholder(_paint: ILeafPaint, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void {

@@ -423,8 +423,8 @@ export interface IUI extends IUIAttrData, IFillAttrData, IStrokeAttrData, ICorne
 
     load(): void
 
-    __drawPathByData(drawer: IPathDrawer, data: IPathCommandData): void
-    __drawPathByBox(drawer: IPathDrawer): void
+    __drawPathByData(drawer: IPathDrawer, data: IPathCommandData, ignoreCornerRadius?: boolean): void
+    __drawPathByBox(drawer: IPathDrawer, ignoreCornerRadius?: boolean): void
     __drawAfterFill?(canvas: ILeaferCanvas, options: IRenderOptions): void
     __drawContent?(canvas: ILeaferCanvas, options: IRenderOptions): void
 
