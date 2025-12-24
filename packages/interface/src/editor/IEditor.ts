@@ -153,6 +153,7 @@ export interface IEditorConfig extends IObject {
     select?: 'press' | 'tap'
     selectKeep?: boolean
     selectedStyle?: IUIInputData
+    selectedPathType?: 'path' | 'render-path'
     multipleSelect?: boolean
 
     boxSelect?: boolean
