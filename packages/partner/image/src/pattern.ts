@@ -11,10 +11,12 @@ const { getFloorScale } = MathHelper, { abs } = Math
 export function createPatternTask(paint: ILeafPaint, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void {
     if (!paint.patternTask) {
         paint.patternTask = ImageManager.patternTasker.add(async () => {
-            paint.patternTask = null
-            if (canvas.bounds.hit(ui.__nowWorld)) PaintImage.createPattern(paint, ui, canvas, renderOptions)
+            PaintImage.createPattern(paint, ui, canvas, renderOptions)
             ui.forceUpdate('surface')
-        }, 300)
+        }, 0, () => {
+            paint.patternTask = null
+            return canvas.bounds.hit(ui.__nowWorld)
+        })
     }
 }
 
