@@ -44,7 +44,7 @@ export class Leafer extends Group implements ILeafer {
 
     public transforming: boolean
 
-    public view: unknown
+    public get view(): unknown { return this.canvas && this.canvas.view }
 
     //  manager
     public canvas: ILeaferCanvas
@@ -128,7 +128,6 @@ export class Leafer extends Group implements ILeafer {
 
         if (this.isApp) this.__setApp()
         this.__checkAutoLayout()
-        this.view = canvas.view
 
         // interaction / manager
         if (!parentApp) {
@@ -466,7 +465,7 @@ export class Leafer extends Group implements ILeafer {
 
                     if (this.canvas) this.canvas.destroy()
 
-                    this.config.view = this.view = this.parentApp = null
+                    this.config.view = this.parentApp = null
                     if (this.userConfig) this.userConfig.view = null
 
                     super.destroy()
