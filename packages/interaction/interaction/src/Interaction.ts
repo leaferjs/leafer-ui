@@ -409,6 +409,10 @@ export class InteractionBase implements IInteraction {
         }
     }
 
+    public stopDragAnimate(): void {
+        this.dragger.stopAnimate()
+    }
+
 
     public updateDownData(data?: IPointerEvent, options?: IPickOptions, merge?: boolean): void {
         const { downData } = this

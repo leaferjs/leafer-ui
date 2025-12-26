@@ -52,6 +52,7 @@ export const InteractionHelper = {
             ctrlKey: e.ctrlKey,
             shiftKey: e.shiftKey,
             metaKey: e.metaKey,
+            time: Date.now(),
             buttons: isUndefined(e.buttons) ? 1 : (e.buttons === 0 ? pointerUpButtons : e.buttons), // touchEvent no button and buttons, set default
             origin: e
         } as IUIEvent

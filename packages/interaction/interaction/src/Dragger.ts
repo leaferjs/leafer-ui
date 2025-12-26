@@ -20,6 +20,8 @@ export class Dragger {
     public dragData: IDragEvent
     public downData: IPointerEvent
 
+    public dragDataList: IDragEvent[] = [] // 记录列表备用
+
     public draggableList: ILeafList
     public realDraggableList: ILeafList
     protected dragOverPath: ILeafList
@@ -104,6 +106,8 @@ export class Dragger {
         if (throughPath) this.dragData.throughPath = throughPath
         this.dragData.path = path
 
+        this.dragDataList.push(this.dragData)
+
         if (this.moving) {
             data.moving = true;
             (this.dragData as IMoveEvent).moveType = 'drag'
@@ -158,13 +162,13 @@ export class Dragger {
         this.dragEnterPath = path
     }
 
-    public dragEnd(data: IPointerEvent, speed?: number): void {
+    public dragEnd(data: IPointerEvent): void {
         if (!this.dragging && !this.moving) return
-        if (this.checkDragEndAnimate(data, speed)) return
+        if (this.checkDragEndAnimate(data)) return
         this.dragEndReal(data)
     }
 
-    protected dragEndReal(data?: IPointerEvent): void {
+    public dragEndReal(data?: IPointerEvent): void {
         const { interaction, downData, dragData } = this
         if (!data) data = dragData
         const { path, throughPath } = downData
@@ -212,6 +216,7 @@ export class Dragger {
 
     protected dragReset(): void {
         DragEvent.list = DragEvent.data = this.draggableList = this.dragData = this.downData = this.dragOverPath = this.dragEnterPath = null
+        this.dragDataList = []
     }
 
 
@@ -220,6 +225,8 @@ export class Dragger {
     public checkDragEndAnimate(_data: IPointerEvent, _speed?: number): boolean | number { return false }
 
     public animate(_func?: IFunction, _off?: 'off'): void { }  // dragEnd animation
+
+    public stopAnimate(): void { }
 
     public checkDragOut(_data: IPointerEvent): void { }
 

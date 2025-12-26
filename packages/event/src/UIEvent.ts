@@ -28,6 +28,8 @@ export class UIEvent extends Event implements IUIEvent {
     declare readonly current: ILeaf
     readonly bubbles: boolean = true
 
+    readonly time: number
+
     constructor(params: IUIEvent) {
         super(params.type)
         Object.assign(this, params)
