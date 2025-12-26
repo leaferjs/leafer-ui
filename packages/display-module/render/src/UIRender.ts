@@ -88,7 +88,7 @@ export const UIRender: IUIRenderModule = {
 
         } else {
 
-            if (data.__pathInputed) drawFast(this, canvas, options)
+            if (data.__pathForRender) drawFast(this, canvas, options)
             else this.__drawFast(canvas, options)
 
         }
