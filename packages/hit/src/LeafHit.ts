@@ -2,7 +2,7 @@ import { IRadiusPointData, ILeaferCanvas, IPointData, IBranch } from '@leafer/in
 import { Leaf, PointHelper, BoundsHelper, Platform } from '@leafer/core'
 
 
-const { toInnerRadiusPointOf, copy, setRadius } = PointHelper
+const { toInnerRadiusPointOf, copyRadiusPoint } = PointHelper
 const { hitRadiusPoint, hitPoint } = BoundsHelper
 const inner = {} as IRadiusPointData, worldRadiusPoint = {} as IRadiusPointData
 
@@ -11,8 +11,7 @@ const leaf = Leaf.prototype
 leaf.hit = function (worldPoint: IPointData, hitRadius: number = 0): boolean {
     this.updateLayout()
 
-    copy(worldRadiusPoint, worldPoint)
-    setRadius(worldRadiusPoint, hitRadius)
+    copyRadiusPoint(worldRadiusPoint, worldPoint, hitRadius)
 
     const world = this.__world
     if (hitRadius ? !hitRadiusPoint(world, worldRadiusPoint) : !hitPoint(world, worldRadiusPoint)) return false
@@ -28,8 +27,8 @@ leaf.__hitWorld = function (point: IRadiusPointData, forceHitFill?: boolean): bo
     const isSmall = world.width < 10 && world.height < 10
 
     if (data.hitRadius) {
-        copy(inner, point), point = inner
-        setRadius(point, data.hitRadius)
+        copyRadiusPoint(inner, point, data.hitRadius)
+        point = inner
     }
 
     toInnerRadiusPointOf(point, world, inner)
