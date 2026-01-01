@@ -104,7 +104,10 @@ LeaferJS 不仅致力打造前沿的 2D 和未来的 3D 引擎技术，更希望
 
 <p><h3 align="center">金牌赞助商</h3></p>
 <p style="display: flex;flex-wrap: wrap;justify-content: center;gap: 15px;">
-  <a target="_blank" href="https://xpai.design">
+    <a target="_blank" href="https://www.photiu.ai">
+        <img width="180" title="Photiu" src="https://www.leaferjs.com/image/sponsor/gold/photiu.png" loading="lazy" />
+    </a>
+     <a target="_blank" href="https://xpai.design">
         <img width="180" title="迅排设计" src="https://www.leaferjs.com/image/sponsor/gold/xp.jpg" loading="lazy" />
     </a>
     <a target="_blank" href="https://github.com/dromara/yft-design">
