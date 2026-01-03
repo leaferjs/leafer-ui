@@ -10,8 +10,6 @@
 
 📙 [全新动画、状态、过渡、游戏功能](https://leaferjs.com/ui/blog/2024-09-20.html)
 
-📘 [绝境中盛开，LeaferJS 的创业故事](https://leaferjs.com/ui/blog/2024-04-08.html)
-
 如果你觉得不错，请帮我们点个 [Star](https://github.com/leaferjs/leafer-ui) 🌟 ，让这个库被更多的人看见 ✨ ✨ ✨
 
 <div style="display:flex; gap: 12px">
