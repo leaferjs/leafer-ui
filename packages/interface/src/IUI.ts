@@ -54,8 +54,8 @@ export interface ILinkerPointData {
 }
 
 interface ILinkerAttrData {
-    startPoint?: ILinkerPointData | string
-    endPoint?: ILinkerPointData | string
+    startPoint?: ILinkerPointData | IUI | string
+    endPoint?: ILinkerPointData | IUI | string
 }
 export interface ILinkerData extends ILinkerAttrData, IArrowData { }
 export interface ILinkerInputData extends ILinkerAttrData, IArrowInputData { }
