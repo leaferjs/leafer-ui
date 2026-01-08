@@ -1,6 +1,6 @@
 # leafer-ui
 
-一款革新、好用的 Canvas 引擎, 轻松实现专业图形编辑。适用于图形编辑、小游戏、互动应用、组态软件、生成图片与短视频等场景。
+一款革新、好用的 Canvas 引擎, 革新的开发体验。适用于图形编辑、小游戏、互动应用、组态软件、生成图片与短视频等场景。
 
 [![LeaferJS](https://www.leaferjs.com/image/leaferjs.jpg?d=1126)](https://www.leaferjs.com)
 
