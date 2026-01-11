@@ -1,4 +1,4 @@
-import { IPointData, IPathCommandData, IWindingRule, IBlendMode, IExportFileType, IFourNumber, IAlign, IUnitPointData, IAxis, IAxisReverse, IFilter, IOptionSizeData, ISizeData, IGap, IPointGap, IScaleFixed, IDirection } from '@leafer/interface'
+import { IPointData, IPathCommandData, IWindingRule, IBlendMode, IExportFileType, IFourNumber, IAlign, IUnitPointData, IAxis, IAxisReverse, IFilter, IOptionSizeData, ISizeData, IGap, IPointGap, IScaleFixed, IDirection, IImageLOD } from '@leafer/interface'
 import { IColorString, IPaintString } from './IStringType'
 import { IStrokeStyle } from '../ICommonAttr'
 
@@ -73,6 +73,7 @@ export interface IImagePaint extends IPaintBase {
     type: "image"
 
     url: string
+    lod?: IImageLOD
 
     mode?: IImagePaintMode
     format?: IExportFileType

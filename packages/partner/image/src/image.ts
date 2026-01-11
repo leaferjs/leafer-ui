@@ -65,7 +65,8 @@ export function image(ui: IUI, attrName: string, paint: IImagePaint, boxBounds: 
                 ignoreRender(ui, false)
                 onLoadError(ui, event, error)
                 leafPaint.loadId = undefined
-            }
+            },
+            paint.lod && image.getThumbSize()
         )
 
         if (ui.placeholderColor) {
@@ -77,8 +78,6 @@ export function image(ui: IUI, attrName: string, paint: IImagePaint, boxBounds: 
                 }
             }, ui.placeholderDelay)
         }
-
-
 
     }
 
