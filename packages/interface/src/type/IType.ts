@@ -96,6 +96,7 @@ export interface IImagePaint extends IPaintBase {
 
     repeat?: IRepeat
     gap?: IGap | IPointGap
+    interlace?: number | IInterlace // 平铺图案交错排列
 
     changeful?: boolean // 会频繁变化，不生成图案（有特殊性能优化，一般用于游戏精灵、动图场景）
     sync?: boolean // 同步显示，不走任务列表生成图案
@@ -114,6 +115,10 @@ export interface IImageFilters {
 }
 export type IImagePaintMode = 'normal' | 'cover' | 'fit' | 'stretch' | 'clip' | 'repeat'
 export type IRepeat = boolean | 'x' | 'y' | IPointData
+export interface IInterlace {
+    type: IAxis
+    offset: number
+}
 
 // 描边
 export type IStrokeAlign = 'inside' | 'outside' | 'center'
