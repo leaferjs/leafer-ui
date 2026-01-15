@@ -66,7 +66,7 @@ export function image(ui: IUI, attrName: string, paint: IImagePaint, boxBounds: 
                 onLoadError(ui, event, error)
                 leafPaint.loadId = undefined
             },
-            paint.lod && image.getThumbSize()
+            paint.lod && image.getThumbSize(paint.lod)
         )
 
         if (ui.placeholderColor) {
