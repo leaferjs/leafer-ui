@@ -33,11 +33,13 @@ export class Ellipse<TInputData = IEllipseInputData> extends UI<TInputData> impl
         const rx = width / 2, ry = height / 2
 
         const path: number[] = this.__.path = []
+        let open: boolean
 
         if (innerRadius) {
 
             if (startAngle || endAngle) {
                 if (innerRadius < 1) ellipse(path, rx, ry, rx * innerRadius, ry * innerRadius, 0, startAngle, endAngle, false)
+                else open = true // 画弧线时，不能闭合路径
                 ellipse(path, rx, ry, rx, ry, 0, endAngle, startAngle, true)
             } else {
                 if (innerRadius < 1) {
@@ -58,7 +60,7 @@ export class Ellipse<TInputData = IEllipseInputData> extends UI<TInputData> impl
 
         }
 
-        closePath(path)
+        if (!open) closePath(path)
 
         // fix node
         if (Platform.ellipseToCurve) this.__.path = this.getPath(true)
