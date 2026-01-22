@@ -31,7 +31,7 @@ ui.__updateHitCanvas = function (): void {
         h.clear()
 
         ImageManager.patternLocked = true
-        this.__renderShape(h, { matrix: matrix.setWith(this.__world).scaleWith(1 / scale).invertWith().translate(-x, -y), ignoreFill: !isHitPixelFill, ignoreStroke: !isHitPixelStroke }) // 矩阵
+        this.__renderShape(h, { matrix: matrix.setWith(this.__world).scaleWith(1 / scale).invertWith().translate(-x, -y), snapshot: true, ignoreFill: !isHitPixelFill, ignoreStroke: !isHitPixelStroke }) // 矩阵
         ImageManager.patternLocked = false
         h.resetTransform()
 

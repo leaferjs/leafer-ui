@@ -7,9 +7,9 @@ import { PaintImage } from "@leafer-ui/draw"
 
 export function checkImage(paint: ILeafPaint, drawImage: boolean, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): boolean {
     const { scaleX, scaleY } = PaintImage.getImageRenderScaleData(paint, ui, canvas, renderOptions)
-    const { image, data, originPaint } = paint, { exporting } = renderOptions
+    const { image, data, originPaint } = paint, { exporting, snapshot } = renderOptions
 
-    if (!data || (paint.patternId === scaleX + '-' + scaleY && !exporting)) {
+    if (!data || (paint.patternId === scaleX + '-' + scaleY && !exporting) || snapshot) {
         return false // 生成图案中
     } else {
 
