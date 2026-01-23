@@ -8,7 +8,7 @@ const TextMode = 2 // text: 'ab  c'
 export function layoutChar(drawData: ITextDrawData, style: ITextData, width: number, _height: number): void {
 
     const { rows } = drawData
-    const { textAlign, paraIndent, letterSpacing } = style
+    const { textAlign, paraIndent, __letterSpacing } = style
 
     const justifyLast = width && textAlign.includes('both')  // 最后一行是否两端对齐
     const justify = justifyLast || (width && textAlign.includes('justify')) // 是否两端对齐文本
@@ -26,8 +26,8 @@ export function layoutChar(drawData: ITextDrawData, style: ITextData, width: num
                 if (justifyLetter) addLetterWidth = remainingWidth / (row.words.reduce((total, item) => total + item.data.length, 0) - 1) //  remainingWidth / （lettersLength - 1）
                 else addWordWidth = wordsLength > 1 ? remainingWidth / (wordsLength - 1) : 0
             }
-            mode = (letterSpacing || row.isOverflow || justifyLetter) ? CharMode : (addWordWidth ? WordMode : TextMode)
-            if (row.isOverflow && !letterSpacing) row.textMode = true
+            mode = (__letterSpacing || row.isOverflow || justifyLetter) ? CharMode : (addWordWidth ? WordMode : TextMode)
+            if (row.isOverflow && !__letterSpacing) row.textMode = true
 
             if (mode === TextMode) {
 
