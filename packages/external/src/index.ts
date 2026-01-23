@@ -1,6 +1,6 @@
 // Implemented in partner
 import { IPaintModule, IPaintImageModule, IPaintGradientModule, IEffectModule, ITextConvertModule, IExportModule, IColorConvertModule, IPathArrowModule, IStateModule, IUnitData, ITransitionModule, ITransitionFunction, IFilterModule } from "@leafer-ui/interface"
-import { Plugin, isObject } from '@leafer/core'
+import { Plugin, UnitConvertHelper } from '@leafer/core'
 import { hasTransparent } from './color'
 
 
@@ -10,12 +10,7 @@ export const ColorConvert = {
     hasTransparent
 } as IColorConvertModule
 
-export const UnitConvert = {
-    number(value: number | IUnitData, percentRefer?: number): number {
-        return isObject(value) ? (value.type === 'percent' ? value.value * percentRefer : value.value) : value
-    }
-}
-
+export const UnitConvert = UnitConvertHelper
 
 export const PathArrow = {} as IPathArrowModule
 

@@ -1,4 +1,4 @@
-import { IBlendMode, IDirection, ILeaferImage, IMatrixData, IPointData, IScaleFixed, ITaskItem } from '@leafer/interface'
+import { IBlendMode, IDirection, IInterlace, ILeaferImage, IMatrixData, IPointData, IScaleFixed, ITaskItem } from '@leafer/interface'
 
 import { IColorString } from './IStringType'
 import { IStrokeAlign, IStrokeJoin, IStrokeCap, IImagePaintMode, IImageFilters, IPaint } from './IType'
@@ -36,6 +36,7 @@ export interface ILeafPaintPatternData {
     filters?: IImageFilters
     mode?: IImagePaintMode
     repeat?: 'repeat' | 'repeat-x' | 'repeat-y'
+    interlace?: IInterlace
 }
 
 export type ILeafFill = ILeafPaint

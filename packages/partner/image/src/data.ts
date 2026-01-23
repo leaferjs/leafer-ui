@@ -1,5 +1,5 @@
 import { IBoundsData, IGap, ILeaferImage, IPointData, IPointGap, IScaleData } from '@leafer/interface'
-import { MatrixHelper, MathHelper, Bounds, AlignHelper, BoundsHelper, PointHelper, isObject, isString } from '@leafer/core'
+import { MatrixHelper, MathHelper, Bounds, AlignHelper, BoundsHelper, PointHelper, isObject, isString, isNumber } from '@leafer/core'
 
 import { IImagePaint, ILeafPaint, ILeafPaintPatternData } from '@leafer-ui/interface'
 import { PaintImage } from "@leafer-ui/draw"
@@ -19,7 +19,7 @@ export function getPatternData(paint: IImagePaint, box: IBoundsData, image: ILea
     if (paint.mode === 'strench' as string) paint.mode = 'stretch' // 兼容代码，后续可移除
 
     const { width, height } = image
-    const { opacity, mode, align, offset, scale, size, rotation, skew, clipSize, repeat, gap, filters } = paint
+    const { opacity, mode, align, offset, scale, size, rotation, skew, clipSize, repeat, gap, filters, interlace } = paint
     const sameBox = box.width === width && box.height === height
 
     const data: ILeafPaintPatternData = { mode }
@@ -89,6 +89,7 @@ export function getPatternData(paint: IImagePaint, box: IBoundsData, image: ILea
     if (opacity && opacity < 1) data.opacity = opacity
     if (filters) data.filters = filters
     if (repeat) data.repeat = isString(repeat) ? (repeat === 'x' ? 'repeat-x' : 'repeat-y') : 'repeat'
+    if (interlace) data.interlace = (isNumber(interlace) || interlace.type === 'percent') ? { type: 'x', offset: interlace } : interlace
     return data
 }
 

@@ -1,4 +1,4 @@
-import { IPointData, IPathCommandData, IWindingRule, IBlendMode, IExportFileType, IFourNumber, IAlign, IUnitPointData, IAxis, IAxisReverse, IFilter, IOptionSizeData, ISizeData, IGap, IPointGap, IScaleFixed, IDirection, IImageLOD } from '@leafer/interface'
+import { IPointData, IPathCommandData, IWindingRule, IBlendMode, IExportFileType, IFourNumber, IAlign, IUnitPointData, IAxis, IAxisReverse, IInterlace, IFilter, IOptionSizeData, ISizeData, IGap, IPointGap, IScaleFixed, IDirection, IImageLOD, IPercentData } from '@leafer/interface'
 import { IColorString, IPaintString } from './IStringType'
 import { IStrokeStyle } from '../ICommonAttr'
 
@@ -96,7 +96,7 @@ export interface IImagePaint extends IPaintBase {
 
     repeat?: IRepeat
     gap?: IGap | IPointGap
-    interlace?: number | IInterlace // 平铺图案交错排列
+    interlace?: number | IPercentData | IInterlace  // 平铺图案交错排列
 
     changeful?: boolean // 会频繁变化，不生成图案（有特殊性能优化，一般用于游戏精灵、动图场景）
     sync?: boolean // 同步显示，不走任务列表生成图案
@@ -115,10 +115,6 @@ export interface IImageFilters {
 }
 export type IImagePaintMode = 'normal' | 'cover' | 'fit' | 'stretch' | 'clip' | 'repeat'
 export type IRepeat = boolean | 'x' | 'y' | IPointData
-export interface IInterlace {
-    type: IAxis
-    offset: number
-}
 
 // 描边
 export type IStrokeAlign = 'inside' | 'outside' | 'center'

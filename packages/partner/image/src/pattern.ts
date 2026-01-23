@@ -49,7 +49,7 @@ export function createPattern(paint: ILeafPaint, ui: IUI, canvas: ILeaferCanvas,
                 scale(imageMatrix, 1 / scaleX, 1 / scaleY)
             }
 
-            const imageCanvas = image.getCanvas(width, height, data.opacity, data.filters, xGap, yGap, ui.leafer && ui.leafer.config.smooth)
+            const imageCanvas = image.getCanvas(width, height, data.opacity, data.filters, xGap, yGap, ui.leafer && ui.leafer.config.smooth, data.interlace)
             const pattern = image.getPattern(imageCanvas, data.repeat || (Platform.origin.noRepeat || 'no-repeat'), imageMatrix, paint)
 
             paint.style = pattern
