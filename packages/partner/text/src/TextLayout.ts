@@ -12,7 +12,7 @@ export function layoutText(drawData: ITextDrawData, style: ITextData): void {
     // verticalAlign
 
     if (__clipText && realHeight > height) {
-        realHeight = Math.max(height, __lineHeight)
+        realHeight = Math.max(style.__autoHeight ? realHeight : height, __lineHeight)
         if (countRows > 1) drawData.overflow = countRows
     } else if (height || autoSizeAlign) {
         switch (verticalAlign) {
