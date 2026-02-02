@@ -571,6 +571,7 @@ export type IUITag =
     | 'Robot'
     | 'GIF'
     | 'Video'
+    | (string & {})
 
 
 export interface IUIInputData extends IRectInputData, IEllipseInputData, IPolygonInputData, IStarInputData, ILineInputData, IPathInputData, ITextInputData, IImageInputData, IGroupInputData, IBoxInputData, IFrameInputData, IFlowInputData, IArrowInputData, IGIFInputData, IVideoInputData, IRobotInputData, IUIBaseInputData, IObject {
