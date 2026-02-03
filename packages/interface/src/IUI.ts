@@ -9,7 +9,7 @@ import {
     ITextStyleAttrData, ITextStyleInputData, ITextStyleComputedData,
     IStrokeComputedStyle
 } from './ICommonAttr'
-import { IOverflow } from './type/IType'
+import { IFill, IOverflow } from './type/IType'
 import { IAnimation, IAnimate, IKeyframe, IKeyframeId, IAnimateType } from './IAnimation'
 import { ILeafer } from './app/ILeafer'
 import { IEditorConfig } from './editor/IEditor'
@@ -309,6 +309,8 @@ export interface IImage extends IImageAttrData, IRect {
 }
 interface IImageAttrData {
     url?: string
+    foreground?: IFill
+    background?: IFill
 }
 export interface IImageData extends IImageAttrData, IRectData {
     __setImageFill(value: string): void
