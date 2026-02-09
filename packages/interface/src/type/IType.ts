@@ -66,6 +66,7 @@ export interface IStrokeGradientPaint extends IGradientPaint { }
 export interface IColorStop {
     offset: number
     color: IColor
+    selected?: boolean
 }
 
 // ---
