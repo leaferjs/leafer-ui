@@ -4,11 +4,12 @@ import { ITextCharData, ITextData, ITextDrawData, ITextRowData } from '@leafer-u
 
 
 export function clipText(drawData: ITextDrawData, style: ITextData, x: number, width: number): void {
-    if (!width) return
 
     const { rows, overflow } = drawData
     let { textOverflow } = style
-    rows.splice(overflow)
+    if (overflow) rows.splice(overflow)
+
+    if (!width) return
 
     if (textOverflow && textOverflow !== 'show') {
         if (textOverflow === 'hide') textOverflow = ''
