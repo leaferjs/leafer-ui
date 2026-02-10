@@ -52,10 +52,10 @@ export class UIData extends LeafData implements IUIData {
     protected _shadow?: IValue
     protected _innerShadow?: IValue
 
-    public get __autoWidth() { return !this._width }
-    public get __autoHeight() { return !this._height }
-    public get __autoSide() { return !this._width || !this._height }
-    public get __autoSize() { return !this._width && !this._height }
+    public get __autoWidth() { return this._width == null }
+    public get __autoHeight() { return this._height == null }
+    public get __autoSide() { return this._width == null || this._height == null }
+    public get __autoSize() { return this._width == null && this._height == null }
 
 
     protected setVisible(value: IBoolean) {
