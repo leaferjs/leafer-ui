@@ -1,7 +1,7 @@
 import { ILeaferImage, IString } from '@leafer/interface'
-import { boundsType, dataProcessor, registerUI, isArray, surfaceType } from '@leafer/core'
+import { boundsType, dataProcessor, registerUI, isArray } from '@leafer/core'
 
-import { IImage, IImageInputData, IImageData, IFill } from '@leafer-ui/interface'
+import { IImage, IImageInputData, IImageData } from '@leafer-ui/interface'
 import { ImageData } from '@leafer-ui/data'
 
 import { Rect } from './Rect'
@@ -17,12 +17,6 @@ export class Image<TInputData = IImageInputData> extends Rect<TInputData> implem
 
     @boundsType('')
     public url: IString
-
-    @surfaceType()
-    public foreground?: IFill
-
-    @surfaceType()
-    public background?: IFill
 
     public get ready(): boolean { const { image } = this; return image && image.ready }
 
