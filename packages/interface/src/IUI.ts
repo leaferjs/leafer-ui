@@ -93,19 +93,6 @@ export interface IVideoInputData extends IVideoAttrData, IRectInputData { }
 
 
 
-// GIF
-export interface IGIF extends IPlayerMethods, IRect {
-    __: IGIFData
-}
-
-interface IGIFAttrData {
-    url?: string
-}
-export interface IGIFData extends IGIFAttrData, IRectData { }
-export interface IGIFInputData extends IGIFAttrData, IRectInputData { }
-
-
-
 // Robot
 export interface IRobot extends IRobotAttrData, IPlayerMethods, IRect {
     __: IRobotData
@@ -571,12 +558,12 @@ export type IUITag =
     | 'Box'
     | 'Arrow'
     | 'Robot'
-    | 'GIF'
+    | 'Film'
     | 'Video'
     | (string & {})
 
 
-export interface IUIInputData extends IRectInputData, IEllipseInputData, IPolygonInputData, IStarInputData, ILineInputData, IPathInputData, ITextInputData, IImageInputData, IGroupInputData, IBoxInputData, IFrameInputData, IFlowInputData, IArrowInputData, IGIFInputData, IVideoInputData, IRobotInputData, IUIBaseInputData, IObject {
+export interface IUIInputData extends IRectInputData, IEllipseInputData, IPolygonInputData, IStarInputData, ILineInputData, IPathInputData, ITextInputData, IImageInputData, IGroupInputData, IBoxInputData, IFrameInputData, IFlowInputData, IArrowInputData, IVideoInputData, IRobotInputData, IUIBaseInputData, IObject {
     children?: IUIInputData[]
 }
 
