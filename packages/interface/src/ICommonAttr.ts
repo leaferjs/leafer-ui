@@ -53,7 +53,6 @@ export interface IStrokeInputData extends IStrokeStyle {
 export interface IStrokeStyle {
     strokeAlign?: IStrokeAlign
     strokeWidth?: IFourNumber | IStrokeWidthString
-    strokeWidthFixed?: IScaleFixed // 未来将移除，用 strokeScaleFixed 代替
     strokeScaleFixed?: IScaleFixed
     strokeCap?: IStrokeCap
     strokeJoin?: IStrokeJoin
@@ -73,7 +72,6 @@ export interface IStrokeComputedStyle {
     strokeAlign?: IStrokeAlign
     strokeWidth?: number
     strokeWidths?: number[]
-    strokeWidthFixed?: IScaleFixed // 未来将移除，用 strokeScaleFixed 代替
     strokeScaleFixed?: IScaleFixed
     strokeCap?: IStrokeCap
     strokeJoin?: IStrokeJoin

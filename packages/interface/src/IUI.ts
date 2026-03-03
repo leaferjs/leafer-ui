@@ -515,7 +515,7 @@ export interface IUIData extends IUIAttrData, IUIComputedData, ILeafData {
     __isFills?: boolean
     __isStrokes?: boolean
 
-    readonly __strokeWidth: number // 会受 strokeWidthFixed 影响
+    readonly __strokeWidth: number // 会受 strokeScaleFixed 影响
     readonly __maxStrokeWidth: number
     __hasMultiStrokeStyle?: number // 是否存在多个不同的描述样式（同时存储多个描边样式中的最大宽度用于运算）
     readonly __hasMultiPaint?: boolean
