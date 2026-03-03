@@ -259,7 +259,10 @@ export class UI<TInputData = IUIInputData> extends Leaf<TInputData> implements I
     public strokeWidth?: IFourNumber | IStrokeWidthString
 
     @strokeType(false)
-    public strokeWidthFixed?: IScaleFixed
+    public strokeWidthFixed?: IScaleFixed // 未来将移除，用 strokeScaleFixed 代替
+
+    // @leafer-in/scale-fixed will rewrite
+    public strokeScaleFixed?: IScaleFixed
 
     @strokeType('none')
     public strokeCap?: IStrokeCap

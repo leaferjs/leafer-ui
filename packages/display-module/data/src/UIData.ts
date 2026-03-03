@@ -140,15 +140,21 @@ export class UIData extends LeafData implements IUIData {
 
 
     public __getRealStrokeWidth(childStyle?: IStrokeComputedStyle): number {
-        let { strokeWidth, strokeWidthFixed } = this as IUIData
+        let { strokeWidth, strokeScaleFixed, strokeWidthFixed } = this as IUIData
         if (childStyle) {
             if (childStyle.strokeWidth) strokeWidth = childStyle.strokeWidth
+            if (!isUndefined(childStyle.strokeScaleFixed)) strokeScaleFixed = childStyle.strokeScaleFixed
             if (!isUndefined(childStyle.strokeWidthFixed)) strokeWidthFixed = childStyle.strokeWidthFixed
         }
-        if (strokeWidthFixed) {
-            const scale = this.__leaf.getClampRenderScale()
-            return scale > 1 ? strokeWidth / scale : strokeWidth
-        } else return strokeWidth
+
+        if (strokeWidthFixed) strokeScaleFixed = strokeWidthFixed
+
+        if (strokeScaleFixed) {
+            const { scaleX } = this.__leaf.getRenderScaleData(true, strokeScaleFixed, false)
+            if (scaleX !== 1) return strokeWidth * scaleX
+        }
+
+        return strokeWidth
     }
 
 
