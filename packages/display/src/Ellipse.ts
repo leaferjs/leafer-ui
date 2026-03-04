@@ -29,10 +29,10 @@ export class Ellipse<TInputData = IEllipseInputData> extends UI<TInputData> impl
 
     public __updatePath(): void {
 
-        const { width, height, innerRadius, startAngle, endAngle } = this.__
+        const data = this.__, { width, height, innerRadius, startAngle, endAngle } = data
         const rx = width / 2, ry = height / 2
 
-        const path: number[] = this.__.path = []
+        const path: number[] = data.path = []
         let open: boolean
 
         if (innerRadius) {
@@ -63,7 +63,7 @@ export class Ellipse<TInputData = IEllipseInputData> extends UI<TInputData> impl
         if (!open) closePath(path)
 
         // fix node
-        if (Platform.ellipseToCurve) this.__.path = this.getPath(true)
+        if (Platform.ellipseToCurve || data.__useArrow) data.path = this.getPath(true)
 
     }
 
