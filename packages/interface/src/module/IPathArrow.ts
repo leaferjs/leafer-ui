@@ -4,7 +4,9 @@ import { IUI } from '../IUI'
 
 export interface IPathArrowModule {
     list: IPathDataArrowMap
-    addArrows(ui: IUI): void
-    register(name: string, data: IPathDataArrow): void
+    fillList: IPathDataArrowMap
+    addArrows(ui: IUI, updateCache?: boolean): void
+    updateArrow(ui: IUI): void
+    register(name: string, data: IPathDataArrow, fillData?: IPathDataArrow): void
     get(name: string): IPathDataArrow
 }
