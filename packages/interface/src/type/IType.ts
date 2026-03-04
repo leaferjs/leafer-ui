@@ -129,6 +129,7 @@ export type IArrowStyle = IPathDataArrow | IArrowType | IArrowTypeData
 export interface IArrowTypeData {
     type: IArrowType
     scale?: number
+    rotation?: number
 }
 
 export interface IPathDataArrowMap {
@@ -140,6 +141,7 @@ export interface IPathDataArrow {
     offset?: IPathDataArrowOffset  // 箭头偏移距离，与末端对齐
     path: IPathCommandData
     dashPath?: IPathCommandData // 采用虚线时，需增加填充的内容
+    fill?: boolean // 是否进行fill，性能会差一点
 }
 
 export interface IPathDataArrowOffset {
