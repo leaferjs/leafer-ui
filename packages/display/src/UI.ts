@@ -458,6 +458,9 @@ export class UI<TInputData = IUIInputData> extends Leaf<TInputData> implements I
         return PathConvert.stringify(this.getPath(curve, pathForRender), floatLength)
     }
 
+    public asPath(curve?: boolean, pathForRender?: boolean): void {
+        this.path = this.getPath(curve, pathForRender)
+    }
 
     public load(): void {
         this.__.__computePaint() // 手动加载图片
@@ -470,17 +473,19 @@ export class UI<TInputData = IUIInputData> extends Leaf<TInputData> implements I
         }
     }
 
-    public __updateRenderPath(): void {
+    public __updateRenderPath(updateCache?: boolean): void {
         const data = this.__
         if (data.path) {
             data.__pathForRender = data.cornerRadius ? PathCorner.smooth(data.path, data.cornerRadius, data.cornerSmoothing) : data.path
-            if (data.__useArrow) PathArrow.addArrows(this)
+            if (data.__useArrow) PathArrow.addArrows(this, updateCache)
         } else data.__pathForRender && (data.__pathForRender = undefined)
     }
 
     public __drawRenderPath(canvas: ILeaferCanvas): void {
+        const data = this.__
         canvas.beginPath()
-        this.__drawPathByData(canvas, this.__.__pathForRender)
+        if (data.__useArrow) PathArrow.updateArrow(this)
+        this.__drawPathByData(canvas, data.__pathForRender)
     }
 
     public __drawPath(canvas: ILeaferCanvas): void {
