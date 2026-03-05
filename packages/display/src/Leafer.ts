@@ -72,6 +72,10 @@ export class Leafer extends Group implements ILeafer {
         // pixelSnap: false // 是否对齐像素，避免图片存在浮点坐标导致模糊
     }
 
+    // @leafer-in/find
+    public cacheIdMap?: boolean
+    public cacheInnerMap?: boolean
+
     public autoLayout?: IAutoBounds
     public lazyBounds: IBounds
 

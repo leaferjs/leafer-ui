@@ -49,7 +49,7 @@ export interface ILinker extends IArrow {
 }
 
 export interface ILinkerPointData {
-    id: string | IUI,
+    id?: string | IUI,
     direction?: IDirection4 | 'center'
     point?: IAround,
     offset?: IOptionPointData
