@@ -3,7 +3,7 @@ import { ILeaferCanvas, IRenderOptions, IBooleanMap, IBoundsData, ILeaferImage, 
 import { ILeafPaint, ILeafStrokePaint, ILeafPaintPatternData } from '../type/IComputedType'
 import { IUI, IUIData } from '../IUI'
 import { ICachedShape } from '../ICachedShape'
-import { IGradientPaint, IImagePaint, IPaintAttr } from '../type/IType'
+import { IGradientPaint, IImageFilters, IImagePaint, IPaintAttr } from '../type/IType'
 
 
 export interface IPaintModule {
@@ -44,6 +44,9 @@ export interface IPaintImageModule {
 
     createData(leafPaint: ILeafPaint, image: ILeaferImage, paint: IImagePaint, box: IBoundsData): void
     getPatternData(paint: IImagePaint, box: IBoundsData, image: ILeaferImage): ILeafPaintPatternData
+
+    //@leafer-in/image-filter will rewrite
+    applyFilter?(leafPaint: ILeafPaint, image: ILeaferImage, filter: IImageFilters, ui: IUI): void
 
     stretchMode(data: ILeafPaintPatternData, box: IBoundsData, scaleX: number, scaleY: number): void
     fillOrFitMode(data: ILeafPaintPatternData, box: IBoundsData, x: number, y: number, scaleX: number, scaleY: number, rotation: number): void

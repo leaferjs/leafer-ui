@@ -79,7 +79,7 @@ export interface IImagePaint extends IPaintBase, IFilmOptions {
     mode?: IImagePaintMode
     format?: IExportFileType
 
-    filters?: IImageFilters
+    filter?: IImageFilters
 
     padding?: IFourNumber
 
@@ -105,15 +105,25 @@ export interface IImagePaint extends IPaintBase, IFilmOptions {
 }
 
 export interface IStrokeImagePaint extends IImagePaint { }
-export interface IImageFilters {
-    exposure?: number // 曝光
-    contrast?: number // 对比度
-    saturation?: number // 饱和度
-    temperature?: number // 色温
-    tint?: number // 色调
-    highlights?: number // 高光
-    shadows?: number // 阴影
+
+export type IImageFilterType =
+    | 'exposure' // 曝光
+    | 'contrast' // 对比度
+    | 'saturation' // 饱和度
+    | 'temperature' // 色温
+    | 'tint' // 色调
+    | 'highlights' // 高光
+    | 'shadows' // 阴影
+    | (string & {})
+
+
+export interface IImageFilter {
+    type: IImageFilterType
+    value: number // -1 ~ 1
 }
+
+export type IImageFilters = IImageFilter[]
+
 export type IImagePaintMode = 'normal' | 'cover' | 'fit' | 'stretch' | 'clip' | 'repeat'
 export type IRepeat = boolean | 'x' | 'y' | IPointData
 

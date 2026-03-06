@@ -26,7 +26,7 @@ export function createPattern(paint: ILeafPaint, ui: IUI, canvas: ILeaferCanvas,
     if (paint.patternId !== id && !ui.destroyed) {
         if (!(Platform.image.isLarge(paint.image, scaleX, scaleY) && !paint.data.repeat)) {
 
-            const { image, data } = paint, { opacity, filters } = paint.originPaint as IImagePaint, { transform, gap } = data, fixScale = PaintImage.getPatternFixScale(paint, scaleX, scaleY)
+            const { image, data } = paint, { opacity } = paint.originPaint as IImagePaint, { transform, gap } = data, fixScale = PaintImage.getPatternFixScale(paint, scaleX, scaleY)
             let imageMatrix: IMatrixData, xGap: number, yGap: number, { width, height } = image
 
             if (fixScale) scaleX *= fixScale, scaleY *= fixScale
@@ -49,7 +49,7 @@ export function createPattern(paint: ILeafPaint, ui: IUI, canvas: ILeaferCanvas,
                 scale(imageMatrix, 1 / scaleX, 1 / scaleY)
             }
 
-            const imageCanvas = image.getCanvas(width, height, opacity, filters, xGap, yGap, ui.leafer && ui.leafer.config.smooth, data.interlace)
+            const imageCanvas = image.getCanvas(width, height, opacity, undefined, xGap, yGap, ui.leafer && ui.leafer.config.smooth, data.interlace)
             const pattern = image.getPattern(imageCanvas, data.repeat || (Platform.origin.noRepeat || 'no-repeat'), imageMatrix, paint)
 
             paint.style = pattern

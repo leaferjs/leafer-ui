@@ -108,6 +108,9 @@ function checkSizeAndCreateData(ui: IUI, attrName: string, paint: IImagePaint, i
         const clip = (transform && !transform.onlyScale) || data.path || data.cornerRadius
         if (clip || (opacity && opacity < 1) || blendMode) leafPaint.complex = clip ? 2 : true
     }
+
+    if (paint.filter) PaintImage.applyFilter(leafPaint, image, paint.filter, ui)
+
     return true
 }
 
