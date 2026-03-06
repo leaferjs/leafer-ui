@@ -565,6 +565,7 @@ export class UI<TInputData = IUIInputData> extends Leaf<TInputData> implements I
 
 
     public destroy(): void {
+        this.__.__willDestroy = true
         this.fill = this.stroke = null
         if (this.__animate) this.killAnimate()
         super.destroy()

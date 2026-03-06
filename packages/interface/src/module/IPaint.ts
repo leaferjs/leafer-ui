@@ -47,6 +47,7 @@ export interface IPaintImageModule {
 
     //@leafer-in/image-filter will rewrite
     applyFilter?(leafPaint: ILeafPaint, image: ILeaferImage, filter: IImageFilters, ui: IUI): void
+    recycleFilter?(image: ILeaferImage, ui: IUI): void
 
     stretchMode(data: ILeafPaintPatternData, box: IBoundsData, scaleX: number, scaleY: number): void
     fillOrFitMode(data: ILeafPaintPatternData, box: IBoundsData, x: number, y: number, scaleX: number, scaleY: number, rotation: number): void
