@@ -6,7 +6,7 @@ export { ILeafer } from './app/ILeafer'
 export {
     ILine, ILineInputData, ILineData,
     IArrow, IArrowInputData, IArrowData,
-    ILinker, ILinkerInputData, ILinkerData, ILinkerPointData,
+    ILinker, ILinkerInputData, ILinkerData, ILinkerPointData, ILinkerPointOptions, ILinkerComputedPointData, ILinkerPointType,
     IRect, IRectInputData, IRectData,
     IEllipse, IEllipseInputData, IEllipseData,
     IPolygon, IPolygonInputData, IPolygonData,

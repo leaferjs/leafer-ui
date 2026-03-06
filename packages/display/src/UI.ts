@@ -1,7 +1,7 @@
 import { ILeaferCanvas, IRenderOptions, IPathDrawer, IPathCommandData, IHitType, INumber, IBoolean, IString, IPathString, IExportFileType, IPointData, ICursorType, IMaskType, IEraserType, IWindingRule, IPathCreator, IFourNumber, IBoundsData, IFlowType, IGap, IFlowWrap, IAxis, IConstraint, IAutoBoxData, IFlowBoxType, IPointGap, IFlowAlign, IFlowAxisAlign, IFindCondition, IAutoSize, IRangeSize, IAlign, IUnitPointData, IObject, IScaleData, IUnitData, IPathCommandObject, ITransition, IFilter, IScaleFixed, IDragBoundsType, IPathCommandNode } from '@leafer/interface'
 import { Leaf, PathDrawer, surfaceType, dimType, dataType, positionType, scrollType, boundsType, pathType, scaleType, rotationType, opacityType, visibleType, sortType, maskType, dataProcessor, registerUI, useModule, rewrite, rewriteAble, UICreator, PathCorner, hitType, strokeType, PathConvert, eraserType, cursorType, autoLayoutType, pen, naturalBoundsType, pathInputType, MathHelper, Plugin, DataHelper, affectRenderBoundsType, isString, isNumber } from '@leafer/core'
 
-import { IUI, IShadowEffect, IBlurEffect, IStrokeAlign, IStrokeJoin, IStrokeCap, IBlendMode, IDashPatternString, IShadowString, IGrayscaleEffect, IUIData, IGroup, IStrokeWidthString, ICornerRadiusString, IUIInputData, IExportOptions, IExportResult, IFill, IStroke, IArrowStyle, IFindUIMethod, ILeafer, IEditorConfig, IEditorConfigFunction, IEditToolFunction, IKeyframe, IAnimation, IAnimate, IStates, IStateName, IAnimateType, IStateStyle, IColorString, IAnimateList, ILeafPaint } from '@leafer-ui/interface'
+import { IUI, IShadowEffect, IBlurEffect, IStrokeAlign, IStrokeJoin, IStrokeCap, IBlendMode, IDashPatternString, IShadowString, IGrayscaleEffect, IUIData, IGroup, IStrokeWidthString, ICornerRadiusString, IUIInputData, IExportOptions, IExportResult, IFill, IStroke, IArrowStyle, IFindUIMethod, ILeafer, IEditorConfig, IEditorConfigFunction, IEditToolFunction, IKeyframe, IAnimation, IAnimate, IStates, IStateName, IAnimateType, IStateStyle, IColorString, IAnimateList, ILeafPaint, ILinker } from '@leafer-ui/interface'
 import { effectType, zoomLayerType } from '@leafer-ui/decorator'
 
 import { UIData } from '@leafer-ui/data'
@@ -32,6 +32,10 @@ export class UI<TInputData = IUIInputData> extends Leaf<TInputData> implements I
     public get isFrame(): boolean { return false }
 
     declare public children?: IUI[]
+
+    // linker
+    public startLinker?: ILinker[]
+    public endLinker?: ILinker[]
 
     // ---
 

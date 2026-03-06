@@ -1,4 +1,4 @@
-import { ILeaf, ILeafComputedData, ILeafData, ILeafInputData, ILeaferCanvas, IRenderOptions, IExportOptions, IExportResult, IPathDrawer, IPointData, IPathCommandData, IBoundsData, IObject, IPathString, ILeaferImage, IPathCreator, IAnswer, IPickOptions, IPickResult, IValue, ICanvasContext2DSettings, IFourNumber, IFindCondition, IBoolean, ICanvasContext2D, IJSONOptions, IMatrixData, ISizeData, ITransition, IAround, IMultimediaType, IDirection4, IOptionPointData } from '@leafer/interface'
+import { ILeaf, ILeafComputedData, ILeafData, ILeafInputData, ILeaferCanvas, IRenderOptions, IExportOptions, IExportResult, IPathDrawer, IPointData, IPathCommandData, IBoundsData, IObject, IPathString, ILeaferImage, IPathCreator, IAnswer, IPickOptions, IPickResult, IValue, ICanvasContext2DSettings, IFourNumber, IFindCondition, IBoolean, ICanvasContext2D, IJSONOptions, IMatrixData, ISizeData, ITransition, IAround, IMultimediaType, IDirection4, IOptionPointData, IDirection } from '@leafer/interface'
 
 import {
     IFillAttrData, IFillInputData, IFillComputedData,
@@ -44,8 +44,16 @@ export interface IArrowInputData extends IArrowAttrData, ILineInputData { }
 
 
 // Linker
-export interface ILinker extends IArrow {
+export interface ILinker extends ILine {
     __: ILinkerData
+
+    startNode: IUI
+    endNode: IUI
+
+    startData: ILinkerComputedPointData
+    endData: ILinkerComputedPointData
+
+    createLinkerPoint(worldPoint: IPointData, node: IUI, options?: ILinkerPointOptions): ILinkerPointData
 }
 
 export interface ILinkerPointData {
@@ -55,12 +63,24 @@ export interface ILinkerPointData {
     offset?: IOptionPointData
 }
 
+export interface ILinkerPointOptions {
+    snapRadius?: number
+}
+
+export type ILinkerPointType = 'start' | 'end'
+
+export interface ILinkerComputedPointData {
+    auto: boolean
+    direction: IDirection
+    point: IPointData
+}
+
 interface ILinkerAttrData {
     startPoint?: ILinkerPointData | IUI | string
     endPoint?: ILinkerPointData | IUI | string
 }
-export interface ILinkerData extends ILinkerAttrData, IArrowData { }
-export interface ILinkerInputData extends ILinkerAttrData, IArrowInputData { }
+export interface ILinkerData extends ILinkerAttrData, ILineData { }
+export interface ILinkerInputData extends ILinkerAttrData, ILineInputData { }
 
 
 // Flow
@@ -426,6 +446,9 @@ export interface IUI extends IUIAttrData, IFillAttrData, IStrokeAttrData, ICorne
     animationOut?: IAnimation | IAnimation[]
 
     children?: IUI[]
+
+    startLinker?: ILinker[]
+    endLinker?: ILinker[]
 
     __box?: IUI // 背景box, 一般用于文本背景框
     __animate?: IAnimate
