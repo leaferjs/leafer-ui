@@ -9,7 +9,10 @@ export function effectType(defaultValue?: IValue) {
         set(value: IValue) {
             this.__setAttr(key, value)
             if (value) (this as IUI).__.__useEffect = true
-            this.__layout.renderChanged || this.__layout.renderChange()
+            const layout = this.__layout
+            layout.renderChanged || layout.renderChange()
+            layout.surfaceChange()
+
         }
     }))
 }
