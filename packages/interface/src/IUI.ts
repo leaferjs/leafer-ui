@@ -53,7 +53,9 @@ export interface ILinker extends ILine {
     startData: ILinkerComputedPointData
     endData: ILinkerComputedPointData
 
-    createLinkerPoint(worldPoint: IPointData, node: IUI, options?: ILinkerPointOptions): ILinkerPointData
+    createStartPoint(worldPoint: IPointData, node?: IUI, options?: ILinkerPointOptions): ILinkerPointData
+    createEndPoint(worldPoint: IPointData, node?: IUI, options?: ILinkerPointOptions): ILinkerPointData
+    createLinkerPoint(worldPoint: IPointData, node?: IUI, options?: ILinkerPointOptions): ILinkerPointData
 }
 
 export interface ILinkerPointData {
