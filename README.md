@@ -34,6 +34,16 @@
 
 也可直接安装 [leafer](https://leaferjs.com/ui/guide/install/leafer/start.md) 全量包, 会自动安装 `leafer-ui` 包和 `@leafer-in/*` 所有插件包。
 
+## AI
+
+[Leafer AI 知识库](https://github.com/leaferjs/ai-docs)
+
+[Skills - Context7](https://context7.com/leaferjs/ai-docs?tab=skills)
+
+[Ask AI - Context7](https://context7.com/leaferjs/ai-docs?tab=chat)
+
+[Ask AI - DeepWiki](https://deepwiki.com/leaferjs/ai-docs)
+
 ## 仓库组成
 
 [LeaferJS](https://github.com/leaferjs/LeaferJS) 主集成仓库，可直接运行代码。
