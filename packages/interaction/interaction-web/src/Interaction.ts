@@ -128,15 +128,10 @@ export class Interaction extends InteractionBase {
     }
 
     protected preventWindowPointer(e: UIEvent) {
-        // 在 shadow DOM 中，事件目标可能不是 canvas 本身
+        // 在微前端环境（如 wujie） shadow DOM 中，事件目标可能不是 canvas 本身
         // 使用 composedPath 检查事件路径中是否包含 canvas
-        if (this.downData) return false
-        if (e.target === this.view) return false
-        if (e.composedPath) {
-            const path = e.composedPath()
-            return !path.includes(this.view)
-        }
-        return true
+        if (this.downData || e.target === this.view) return false
+        return e.composedPath ? !e.composedPath().includes(this.view) : true
     }
 
     // key
