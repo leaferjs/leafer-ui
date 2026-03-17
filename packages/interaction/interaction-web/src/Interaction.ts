@@ -21,7 +21,10 @@ export class Interaction extends InteractionBase {
 
     protected viewEvents: IObject
     protected windowEvents: IObject
-    protected eventTarget: EventTarget
+
+    // 使用 ownerDocument 替代 window，以支持微前端环境（如 wujie）
+    // 在 wujie 中，ownerDocument 被代理到 shadow root，可以正常接收事件
+    protected get windowTarget(): EventTarget { const { view } = this; return (view && view.ownerDocument) || window }
 
     protected usePointer: boolean
     protected useMultiTouch: boolean
@@ -82,12 +85,10 @@ export class Interaction extends InteractionBase {
             view.addEventListener(name, viewEvents[name])
         }
 
-        // 使用 ownerDocument 替代 window，以支持微前端环境（如 wujie）
-        // 在 wujie 中，ownerDocument 被代理到 shadow root，可以正常接收事件
-        this.eventTarget = this.view.ownerDocument || window
+
         for (let name in windowEvents) {
             windowEvents[name] = windowEvents[name].bind(this)
-            this.eventTarget.addEventListener(name, windowEvents[name])
+            this.windowTarget.addEventListener(name, windowEvents[name])
         }
     }
 
@@ -101,9 +102,8 @@ export class Interaction extends InteractionBase {
             this.viewEvents = {}
         }
 
-        // 从 eventTarget（ownerDocument 或 window）移除事件监听
         for (let name in windowEvents) {
-            this.eventTarget.removeEventListener(name, windowEvents[name])
+            this.windowTarget.removeEventListener(name, windowEvents[name])
             this.windowEvents = {}
         }
     }
@@ -374,7 +374,6 @@ export class Interaction extends InteractionBase {
             super.destroy()
             this.view = null
             this.touches = null
-            this.eventTarget = null
         }
     }
 
