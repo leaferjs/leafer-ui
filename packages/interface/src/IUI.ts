@@ -609,6 +609,13 @@ export type IUITag =
     | 'Film'
     | 'Video'
     | (string & {})
+    | 'EllipseBox' // @leafer-in/box
+    | 'PolygonBox'
+    | 'StarBox'
+    | 'LineBox'
+    | 'PathBox'
+    | 'ImageBox'
+    | 'CanvasBox'
 
 
 export interface IUIInputData extends IRectInputData, IEllipseInputData, IPolygonInputData, IStarInputData, ILineInputData, IPathInputData, ITextInputData, IImageInputData, IGroupInputData, IBoxInputData, IFrameInputData, IFlowInputData, IArrowInputData, IVideoInputData, IRobotInputData, IUIBaseInputData, IObject {
