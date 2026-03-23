@@ -39,6 +39,8 @@ export interface IEditorBase extends IGroup, ISelectorProxy, ITransformTool {
     innerEditor?: IObject
     editMask: IUI
 
+    hasDimOthers?: boolean
+
     readonly targetLeafer: ILeafer
 
     select(target: IUI | IUI[]): void
