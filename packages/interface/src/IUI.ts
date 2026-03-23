@@ -411,6 +411,51 @@ export interface IBoxData extends IBoxAttrData, IGroupData { }
 export interface IBoxInputData extends IBoxAttrData, IGroupInputData { }
 
 
+
+// EllipseBox
+export interface IEllipseBox extends IEllipseAttrData, IBox {
+    __: IEllipseBoxData
+}
+export interface IEllipseBoxData extends IEllipseAttrData, IBoxData { }
+export interface IEllipseBoxInputData extends IEllipseAttrData, IBoxInputData { }
+
+
+// PolygonBox
+export interface IPolygonBox extends IPolygonAttrData, IBox {
+    __: IPolygonBoxData
+}
+export interface IPolygonBoxData extends IPolygonAttrData, IBoxData { }
+export interface IPolygonBoxInputData extends IPolygonAttrData, IBoxInputData { }
+
+
+// StarBox
+export interface IStarBox extends IStarAttrData, IBox {
+    __: IStarBoxData
+}
+export interface IStarBoxData extends IStarAttrData, IBoxData { }
+export interface IStarBoxInputData extends IStarAttrData, IBoxInputData { }
+
+// PathBox
+export interface IPathBox extends IBox {
+    __: IPathBoxData
+}
+export interface IPathBoxData extends IBoxData { }
+export interface IPathBoxInputData extends IBoxInputData { }
+
+// ImageBox
+export interface IImageBox extends IImageAttrData, IBox {
+    __: IImageBoxData
+    readonly ready: boolean
+    readonly image?: ILeaferImage
+}
+export interface IImageBoxData extends IImageAttrData, IBoxData {
+    readonly __urlType: IMultimediaType
+    __setImageFill(value: string): void
+}
+export interface IImageBoxInputData extends IImageAttrData, IBoxInputData { }
+
+
+
 // Group
 export interface IGroup extends IUI {
     __: IGroupData
@@ -428,6 +473,7 @@ export interface IGroup extends IUI {
 }
 export interface IGroupData extends IUIData { }
 export interface IGroupInputData extends IUIBaseInputData { }
+
 
 // UI
 export interface IUI extends IUIAttrData, IFillAttrData, IStrokeAttrData, ICornerRadiusAttrData, IEffectAttrData, ILeaf {
