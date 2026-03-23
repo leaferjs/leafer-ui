@@ -46,6 +46,8 @@ export class Box<TInputData = IBoxInputData> extends Group<TInputData> implement
     public scroller?: IScroller
     public hasScroller?: boolean
 
+    public get __useSelfBox() { return this.pathInputed }
+
     constructor(data?: TInputData) {
         super(data)
         this.__layout.renderChanged || this.__layout.renderChange()
@@ -66,7 +68,7 @@ export class Box<TInputData = IBoxInputData> extends Group<TInputData> implement
 
     // @leafer-in/flow will rewrite
     public __updateBoxBounds(_secondLayout?: boolean): void {
-        if (this.children.length && !this.pathInputed) {
+        if (this.children.length && !this.__useSelfBox) {
 
             const data = this.__
 
