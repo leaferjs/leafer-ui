@@ -1,5 +1,5 @@
 import { ILeaferCanvas, IRenderOptions, IScaleData } from '@leafer/interface'
-import { Platform, ResizeEvent } from '@leafer/core'
+import { Platform } from '@leafer/core'
 
 import { IUI, ILeafPaint, IImagePaint } from '@leafer-ui/interface'
 import { PaintImage } from "@leafer-ui/draw"
@@ -16,7 +16,7 @@ export function checkImage(paint: ILeafPaint, drawImage: boolean, ui: IUI, canva
         if (drawImage) {
             if (data.repeat) {
                 drawImage = false
-            } else if (!((originPaint as IImagePaint).changeful || paint.film || (Platform.name === 'miniapp' && ResizeEvent.isResizing(ui)) || exporting)) { //  小程序resize过程中直接绘制原图（绕过垃圾回收bug)
+            } else if (!((originPaint as IImagePaint).changeful || paint.film || Platform.name === 'miniapp' || exporting)) { //  小程序直接绘制原图（绕过垃圾回收bug)
                 drawImage = Platform.image.isLarge(image, scaleX, scaleY) || image.width * scaleX > 8096 || image.height * scaleY > 8096 // 非image类型的尽量绘制原图，大长图单边超过8096生成pattern会有问题
             }
         }
