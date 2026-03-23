@@ -417,6 +417,15 @@ export class InteractionBase implements IInteraction {
     }
 
 
+    public replaceDownTarget(target: ILeaf): void {
+        const { downData } = this
+        if (downData && target) {
+            const { path } = downData
+            path.remove(path.list[0])
+            path.addAt(target, 0)
+        }
+    }
+
     public updateDownData(data?: IPointerEvent, options?: IPickOptions, merge?: boolean): void {
         const { downData } = this
         if (!data && downData) data = downData
