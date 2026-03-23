@@ -142,6 +142,8 @@ export interface IEditorConfig extends IObject {
     around?: IAlign | IUnitPointData // 缩放、旋转、倾斜时围绕的中心点
     rotateAround?: IAlign | IUnitPointData // 单独设置旋转围绕的中心点，比 around 优先级高
     rotateGap?: number
+    arrowStep?: number // 方向键移动步长，默认为1
+    arrowFastStep?: number // 按住 shift 键的移动步长，默认为10
     lockRatio?: boolean | 'corner'
     dragLimitAnimate?: boolean | number // 限制拖动范围的元素，可在拖拽结束时进行动画归位，默认采用 app.config.pointer.dragLimitAnimate 的值
     ignorePixelSnap?: boolean
