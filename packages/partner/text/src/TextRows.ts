@@ -34,7 +34,7 @@ export function createRows(drawData: ITextDrawData, content: string, style: ITex
         startCharSize = charWidth = charSize = wordWidth = rowWidth = 0
         word = { data: [] }, row = { words: [] }
 
-        if (__letterSpacing) content = [...content] as any // 防止切分表情等多个字符组成的字符，转成数组字符是最安全的
+        content = [...content] as any // 防止切分表情等多个字符组成的字符，转成数组字符是最安全的，高性能的场景后续可以提供一个配置跳过此步骤
 
         for (let i = 0, len = content.length; i < len; i++) {
 
