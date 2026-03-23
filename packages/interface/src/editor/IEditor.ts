@@ -179,6 +179,8 @@ export interface IEditorConfig extends IObject {
     beforeRotate?: IEditorBeforeRotate
     beforeSkew?: IEditorBeforeSkew
 
+    beforeCopy?: IEditorBeforeCopy
+
     preventEditInner?: boolean // 仅阻止交互事件触发内部编辑
 
     textEditor?: IObject
@@ -242,6 +244,10 @@ export interface IEditorBeforeRotate {
 
 export interface IEditorBeforeSkew {
     (data: IEditorSkewData): ISkewData | boolean | void
+}
+
+export interface IEditorBeforeCopy {
+    (): boolean | void
 }
 
 
