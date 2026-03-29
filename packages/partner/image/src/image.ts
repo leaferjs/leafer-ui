@@ -1,5 +1,5 @@
 import { IBoundsData, IImageEvent, ILeaferImage, IObject } from '@leafer/interface'
-import { Bounds, BoundsHelper, ImageEvent, ImageManager } from '@leafer/core'
+import { Bounds, BoundsHelper, ImageEvent, ImageManager, LeafHelper } from '@leafer/core'
 
 import { IUI, IImagePaint, ILeafPaint } from '@leafer-ui/interface'
 import { PaintImage } from "@leafer-ui/draw"
@@ -86,6 +86,7 @@ export function image(ui: IUI, attrName: string, paint: IImagePaint, boxBounds: 
 
 
 function checkSizeAndCreateData(ui: IUI, attrName: string, paint: IImagePaint, image: ILeaferImage, leafPaint: ILeafPaint, boxBounds: IBoundsData): boolean {
+    let needUpdate = true
     const data = ui.__
 
     if (attrName === 'fill' && !data.__naturalWidth) {
@@ -93,11 +94,12 @@ function checkSizeAndCreateData(ui: IUI, attrName: string, paint: IImagePaint, i
         data.__naturalHeight = image.height / data.pixelRatio
         if (data.__autoSide) {
             ui.forceUpdate('width')
+            LeafHelper.updateBounds(ui) // 立即更新 boxBounds
             if (ui.__proxyData) {
                 ui.setProxyAttr('width', data.width)
                 ui.setProxyAttr('height', data.height)
             }
-            return false
+            needUpdate = false
         }
     }
 
@@ -111,7 +113,7 @@ function checkSizeAndCreateData(ui: IUI, attrName: string, paint: IImagePaint, i
 
     if (paint.filter) PaintImage.applyFilter(leafPaint, image, paint.filter, ui)
 
-    return true
+    return needUpdate
 }
 
 
