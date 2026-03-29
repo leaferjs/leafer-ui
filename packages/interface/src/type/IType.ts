@@ -57,6 +57,7 @@ export interface IGradientPaint extends IPaintBase {
     type: IGradientType
     from?: IAlign | IUnitPointData
     to?: IAlign | IUnitPointData
+    rotation?: number
     stretch?: number
     stops: IColorStop[] | IColorString[]
 }

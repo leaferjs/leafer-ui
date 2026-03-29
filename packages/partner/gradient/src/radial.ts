@@ -32,7 +32,7 @@ export function radialGradient(paint: IGradientPaint, box: IBoundsData): ILeafPa
 
 }
 
-export function getTransform(box: IBoundsData, from: IPointData, to: IPointData, stretch: number, rotate90: boolean): IMatrixData {
+export function getTransform(box: IBoundsData, from: IPointData, to: IPointData, stretch: number, rotate90?: boolean): IMatrixData {
     let transform: IMatrixData
     const { width, height } = box
 
