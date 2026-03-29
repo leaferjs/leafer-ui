@@ -54,6 +54,7 @@ export interface IEditorBase extends IGroup, ISelectorProxy, ITransformTool {
 
     setDimOthers(value: boolean | number): void
     setBright(value: boolean): void
+    cancelDimOthers(): void
 
     update(): void
     updateEditBox(): void
