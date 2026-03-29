@@ -67,6 +67,11 @@ export interface ILinkerPointData {
 
 export interface ILinkerPointOptions {
     snapRadius?: number
+    mode?:
+    | 'edge' // 自动吸附到元素包围盒边缘，默认模式
+    | 'four' // 自动吸附到元素包围盒上的4个方向
+    | 'auto' // 自动吸附到元素包围盒上，拖拽元素会自动更新最佳方向
+    | 'free' // 可以吸附到元素内部
 }
 
 export type ILinkerPointType = 'start' | 'end'
@@ -512,6 +517,7 @@ export interface IUI extends IUIAttrData, IFillAttrData, IStrokeAttrData, ICorne
     get<K extends keyof this>(name?: K[] | IUIInputData): IUIInputData
 
     createProxyData(): IUIInputData
+    clearProxyData(): void
 
     find(condition: number | string | IFindCondition | IFindUIMethod, options?: any): IUI[]
     findTag(tag: string | string[]): IUI[]

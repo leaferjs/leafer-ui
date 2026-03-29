@@ -436,6 +436,7 @@ export class UI<TInputData = IUIInputData> extends Leaf<TInputData> implements I
     }
 
     public createProxyData(): IUIInputData { return undefined }
+    public clearProxyData(): void { }
 
 
     // hit rewrite
