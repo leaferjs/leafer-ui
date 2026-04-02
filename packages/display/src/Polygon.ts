@@ -36,7 +36,7 @@ export class Polygon<TInputData = IPolygonInputData> extends UI<TInputData> impl
 
         if (data.points) {
 
-            drawPoints(path, data.points, data.curve, true)
+            drawPoints(path, data.points, data.curve, data.closed)
 
         } else {
 
