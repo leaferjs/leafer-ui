@@ -63,7 +63,7 @@ export class Ellipse<TInputData = IEllipseInputData> extends UI<TInputData> impl
         if (!open) closePath(path)
 
         // fix node
-        if (Platform.ellipseToCurve || data.__useArrow) data.path = this.getPath(true)
+        if (Platform.ellipseToCurve || data.__useArrow || data.cornerRadius) data.path = this.getPath(true)
 
     }
 
