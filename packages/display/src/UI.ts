@@ -339,7 +339,7 @@ export class UI<TInputData = IUIInputData> extends Leaf<TInputData> implements I
 
     // @leafer-in/motion-path rewrite
 
-    public motionPath?: boolean
+    public motionPath?: boolean | 'text-path'
 
     public motionPrecision?: INumber
 
