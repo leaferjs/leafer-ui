@@ -33,7 +33,7 @@ export const DragBoundsHelper = {
     },
 
     isInnerMode(content: IBoundsData, dragBounds: IBoundsData, dragBoundsType: IDragBoundsType, sideType: ISide): boolean {
-        return dragBoundsType === 'inner' || (dragBoundsType === 'auto' && content[sideType] > dragBounds[sideType])
+        return dragBoundsType === 'inner' || (dragBoundsType === 'auto' && float(content[sideType]) > float(dragBounds[sideType]))
     },
 
     getValidMove(content: IBoundsData, dragBounds: IBoundsData, dragBoundsType: IDragBoundsType, move: IPointData, change?: boolean): IPointData {

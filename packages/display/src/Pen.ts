@@ -72,7 +72,8 @@ export class Pen<TInputData = IPenInputData> extends Group<TInputData> implement
 
 
     public paint(): void {
-        if (!this.pathElement.__layout.boxChanged) this.pathElement.forceUpdate('path')
+        const { pathElement } = this
+        if (!pathElement.__layout.boxChanged) pathElement.forceUpdate('path')
     }
 
 }
