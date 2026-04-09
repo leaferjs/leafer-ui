@@ -129,6 +129,7 @@ export interface IPolygon extends IPolygonAttrData, IUI {
 }
 interface IPolygonAttrData {
     sides?: number
+    startAngle?: number
     points?: number[] | IPointData[]
     curve?: boolean | number
 }

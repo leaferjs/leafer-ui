@@ -1,5 +1,5 @@
 import { INumber, IPointData } from '@leafer/interface'
-import { PathCommandDataHelper, dataProcessor, pathType, registerUI, rewriteAble } from '@leafer/core'
+import { PathCommandDataHelper, dataProcessor, pathType, registerUI, rewriteAble, OneRadian } from '@leafer/core'
 
 import { IPolygon, IPolygonData, IPolygonInputData } from '@leafer-ui/interface'
 import { PolygonData } from '@leafer-ui/data'
@@ -22,6 +22,9 @@ export class Polygon<TInputData = IPolygonInputData> extends UI<TInputData> impl
     @pathType(3)
     public sides?: INumber
 
+    @pathType(0)
+    public startAngle?: INumber
+
     @pathType()
     public points?: number[] | IPointData[]
 
@@ -40,13 +43,19 @@ export class Polygon<TInputData = IPolygonInputData> extends UI<TInputData> impl
 
         } else {
 
-            const { width, height, sides } = data
+            const { width, height, sides, startAngle } = data
             const rx = width / 2, ry = height / 2
 
-            moveTo(path, rx, 0)
+            let startRadian = 0, radian: number
+
+            if (startAngle) {
+                startRadian = startAngle * OneRadian
+                moveTo(path, rx + rx * sin(startRadian), ry - ry * cos(startRadian))
+            } else moveTo(path, rx, 0)
 
             for (let i = 1; i < sides; i++) {
-                lineTo(path, rx + rx * sin((i * 2 * PI) / sides), ry - ry * cos((i * 2 * PI) / sides))
+                radian = (i * 2 * PI) / sides + startRadian
+                lineTo(path, rx + rx * sin(radian), ry - ry * cos(radian))
             }
 
             closePath(path)
