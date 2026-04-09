@@ -143,6 +143,7 @@ export interface IStar extends IStarAttrData, IUI {
 interface IStarAttrData {
     corners?: number
     innerRadius?: number
+    startAngle?: number
 }
 
 export interface IStarData extends IStarAttrData, IUIData { }

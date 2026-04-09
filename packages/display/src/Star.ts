@@ -1,5 +1,5 @@
 import { INumber } from '@leafer/interface'
-import { PathCommandDataHelper, dataProcessor, pathType, registerUI } from '@leafer/core'
+import { OneRadian, PathCommandDataHelper, dataProcessor, pathType, registerUI } from '@leafer/core'
 
 import { IStar, IStarData, IStarInputData } from '@leafer-ui/interface'
 import { StarData } from '@leafer-ui/data'
@@ -25,17 +25,26 @@ export class Star<TInputData = IStarInputData> extends UI<TInputData> implements
     @pathType(0.382)
     public innerRadius?: INumber
 
+    @pathType(0)
+    public startAngle?: INumber
 
     public __updatePath() {
 
-        const { width, height, corners, innerRadius } = this.__
+        const { width, height, corners, innerRadius, startAngle } = this.__
         const rx = width / 2, ry = height / 2
 
         const path: number[] = this.__.path = []
-        moveTo(path, rx, 0)
+
+        let startRadian = 0, radian: number
+
+        if (startAngle) {
+            startRadian = startAngle * OneRadian
+            moveTo(path, rx + rx * sin(startRadian), ry - ry * cos(startRadian))
+        } else moveTo(path, rx, 0)
 
         for (let i = 1; i < corners * 2; i++) {
-            lineTo(path, rx + (i % 2 === 0 ? rx : rx * innerRadius) * sin((i * PI) / corners), ry - (i % 2 === 0 ? ry : ry * innerRadius) * cos((i * PI) / corners))
+            radian = (i * PI) / corners + startRadian
+            lineTo(path, rx + (i % 2 === 0 ? rx : rx * innerRadius) * sin(radian), ry - (i % 2 === 0 ? ry : ry * innerRadius) * cos(radian))
         }
 
         closePath(path)
