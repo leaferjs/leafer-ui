@@ -1,10 +1,10 @@
 # leafer-ui
 
-一款革新、好用的 Canvas 引擎, 革新的开发体验。适用于图形编辑、小游戏、互动应用、组态软件、生成图片与短视频等场景。
+LeaferJS 是一款革新、好用的 Canvas 引擎，轻松实现图形交互与编辑。适用于AI 无限画布、AI 设计工具、图形编辑、小游戏、互动应用、工业可视化、生成图片与短视频等场景。
 
 [![LeaferJS](https://www.leaferjs.com/image/leaferjs.jpg?d=1126)](https://www.leaferjs.com)
 
-提供了丰富的 UI 绘图元素，和开箱即用的功能，如自动布局、图形编辑、SVG 导出等，方便与 PS、 Figma、Sketch 等产品进行对接。并为跨平台开发提供了统一的交互事件，如拖拽、旋转、缩放手势等。
+提供了丰富的 UI 绘图元素，和开箱即用的功能，如视窗控制、自动布局、图形编辑、SVG 导出等，方便与 PS、 Figma、Sketch 等产品进行对接。并为跨平台开发提供了统一的交互事件，如拖拽、旋转、缩放手势等。
 
 📗 [图文并茂、由浅入深的了解 LeaferJS](https://leaferjs.com/ui/blog/2024-07-09.html)
 
