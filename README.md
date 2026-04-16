@@ -14,7 +14,7 @@ LeaferJS 是一款革新、好用的 Canvas 引擎，轻松实现图形交互与
 
 <div style="display:flex; gap: 12px">
 <a target="_blank" href="https://github.com/leaferjs/leafer-ui" aria-label="github"  rel="noopener">
-  <img width="120" title="github" src="https://www.leaferjs.com/svg/github-stars.svg?d=20260317" />
+  <img width="120" title="github" src="https://www.leaferjs.com/svg/github-stars.svg?d=20260416" />
 </a>
 </div>
 
@@ -38,7 +38,7 @@ LeaferJS 是一款革新、好用的 Canvas 引擎，轻松实现图形交互与
 
 [Leafer AI 知识库](https://github.com/leaferjs/ai-docs)
 
-[Skills - Context7](https://context7.com/leaferjs/ai-docs?tab=skills)
+[MCP & Skills](https://context7.com/leaferjs/ai-docs?tab=skills)
 
 [Ask AI - Context7](https://context7.com/leaferjs/ai-docs?tab=chat)
 
