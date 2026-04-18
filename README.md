@@ -1,16 +1,142 @@
-# leafer-ui
+[English](./README.md) | [简体中文](./README-CN.md)
 
-LeaferJS 是一款革新、好用的 Canvas 引擎，轻松实现图形交互与编辑。适用于AI 无限画布、AI 设计工具、图形编辑、小游戏、互动应用、工业可视化、生成图片与短视频等场景。
+<br/>
 
-[![LeaferJS](https://www.leaferjs.com/image/leaferjs.jpg?d=1126)](https://www.leaferjs.com)
+# LeaferJS: An Easy-to-Use Canvas Engine
 
-提供了丰富的 UI 绘图元素，和开箱即用的功能，如视窗控制、自动布局、图形编辑、SVG 导出等，方便与 PS、 Figma、Sketch 等产品进行对接。并为跨平台开发提供了统一的交互事件，如拖拽、旋转、缩放手势等。
+Effortlessly build graphic interaction and editing — an infinite canvas engine for the AI era
 
-📗 [图文并茂、由浅入深的了解 LeaferJS](https://leaferjs.com/ui/blog/2024-07-09.html)
+Official Website: [leaferjs.com](https://www.leaferjs.com)
 
-📙 [全新动画、状态、过渡、游戏功能](https://leaferjs.com/ui/blog/2024-09-20.html)
+**👉 A Canvas engine that can handle 1 million graphics in the browser**
+**👉 The first Canvas core capable of building a “Figma-level editor”**
 
-如果你觉得不错，请帮我们点个 [Star](https://github.com/leaferjs/leafer-ui) 🌟 ，让这个库被更多的人看见 ✨ ✨ ✨
+<p align="center">
+  <a href="https://www.bilibili.com/video/BV1E56vBwEiB" target="_blank">
+    <img src="https://www.leaferjs.com/image/video/leaferjs.jpg?d=1126" />
+  </a>
+</p>
+<p align="center">
+<b>Extreme Performance · Ultra-Low Memory · DOM-like API · Graphic Editing · Cross-Platform · Zero Dependencies · Lightweight (70KB gzip)</b>
+</p>
+
+<div align="center">
+
+[![NPM Downloads](https://img.shields.io/npm/dm/leafer-ui?style=flat-square&color=32cd79)](https://www.npmjs.com/package/leafer-ui)
+[![GitHub Stars](https://img.shields.io/github/stars/leaferjs/leafer-ui?style=flat-square&label=Stars&color=ffd700)](https://github.com/leaferjs/leafer-ui/stargazers)
+[![GitHub Release](https://img.shields.io/github/v/release/leaferjs/leafer-ui)](https://github.com/leaferjs/leafer-ui/releases)
+[![GitHub License](https://img.shields.io/github/license/leaferjs/leafer-ui)](https://github.com/leaferjs/leafer-ui/blob/main/LICENSE)
+
+</div>
+
+## 🧐 Why Choose LeaferJS?
+
+In Web graphics development, developers often face a trade-off between **performance and usability**.
+
+**LeaferJS aims to eliminate this compromise.** Rebuilt from the ground up, it not only pushes the limits of Web rendering and interaction performance, but also pursues ultimate simplicity in developer experience. It is a standardized engine designed for productivity tools handling **large-scale, high-density, and massive-layer graphics**.
+
+## 🏗️ Why an Infinite Canvas Engine for the AI Era?
+
+With the explosion of AI-generated content, the challenge for graphics engines has shifted from **“how to render”** to **“how to organize and refine”**:
+
+- **⚡ Extreme Capacity:** Handles millions of interactive layers smoothly, perfectly accommodating massive AI-generated fragments.
+- **🤖 Semantic Editing:** A structured scene tree allows AI to manipulate graphics like the DOM, enabling true AI collaborative workflows.
+- **🛠️ Native Editor:** Built-in Editor plugin enables one-click access to industrial-grade editing features such as rotation, scaling, and multi-selection for AI-generated content.
+
+[Leafer AI Knowledge Base](https://github.com/leaferjs/ai-docs) | [MCP & Skills](https://context7.com/leaferjs/ai-docs?tab=skills) | [Ask AI](https://context7.com/leaferjs/ai-docs?tab=chat)
+
+## 🎨 Use Cases
+
+With its extreme performance and standardized capabilities, LeaferJS is an ideal foundation for:
+
+- 🤖 **AI Applications:** Infinite AI canvas, AI design tools, generative UI interactions.
+- 🛠️ **Productivity Tools:** Graphic editors, online design platforms (Figma/Canva-like), whiteboards, low-code engines.
+- 📊 **Industrial Visualization:** Large-scale node systems, flowcharts, asset monitoring, massive topology diagrams.
+- 🎬 **Digital Content Generation:** Batch image/poster generation, short video frame rendering (Node.js), interactive H5.
+- 🎮 **Interactive Applications:** Lightweight games, brand interactive apps, high-frequency data dashboards.
+
+## 🔥 Performance
+
+LeaferJS pushes the ceiling of Web graphics processing by approximately **10x**.
+
+| Test (1M Interactive Rectangles) | Traditional Canvas Libraries | **LeaferJS** | Improvement          |
+| :------------------------------- | :--------------------------- | :----------- | :------------------- |
+| **Initial Render Time**          | ~10–15 seconds               | **1.28s**    | **~10x faster 🎉**   |
+| **Memory Usage**                 | ~3GB (may crash browser)     | **320MB**    | **~10x lower**       |
+| **Drag FPS (single element)**    | 0–1 FPS                      | **60 FPS**   | **Perfectly smooth** |
+
+Test environment: 2K laptop screen / Chrome V143.0. Results are for reference only; actual performance depends on hardware.
+
+[Performance Details](https://www.leaferjs.com/#performance) | [Benchmark](https://benchmark.leaferjs.com/leafer/)
+
+## ⚡️ Core Capabilities
+
+- **🎨 Powerful Graphics System:** Complete scene tree supporting vector graphics, SVG paths, and pixel operations.
+- **🧠 Ultra-Fast Interaction:** Native support for drag, zoom, multi-touch, and millisecond-level hit testing.
+- **🛠️ Built-in Editor Support:** Integrated **Editor plugin** enabling **scale, rotate, move, multi-select** with one click.
+- **🧩 Modern Layout Engine:** Rare native **Flexbox layout** support in a Canvas engine — as natural as writing HTML.
+- **🎬 State-Driven Animation:** Built-in high-performance transitions and path animations for smooth dynamic interactions.
+- **🌍 Cross-Platform:** One codebase runs seamlessly on Web, Node.js, WeChat Mini Programs, and mobile H5.
+
+[Full Feature List](https://www.leaferjs.com/#different) | [Live Examples](https://www.leaferjs.com/examples/)
+
+## 🛠️ Quick Start
+
+```sh
+npm install leafer-ui
+
+# When using plugins, it is recommended to install core packages together
+# to avoid version mismatch issues
+npm install leafer-ui @leafer-ui/core @leafer-ui/draw
+```
+
+```ts
+import { Leafer, Rect } from 'leafer-ui'
+
+// Create an interactive app that adapts to the window
+const leafer = new Leafer({ view: window })
+
+// Create a draggable rectangle
+const rect = new Rect({
+  x: 100,
+  y: 100,
+  width: 200,
+  height: 200,
+  fill: '#32cd79',
+  draggable: true,
+})
+
+leafer.add(rect)
+```
+
+[Run Online Example](https://www.leaferjs.com/examples/#official%2Fstart%2Fcreate.ts) | [Editor Example](https://www.leaferjs.com/examples/#official%2Fplugin%2Feditor%2Fframe%2Ftransparent.ts)
+
+## 💼 Commercial Support & Sustainability
+
+There is a significant gap between “an engine” and “a mature product.” To ensure long-term maintenance of the open-source engine and help enterprises overcome complex development challenges, we’ve built a transparent and sustainable ecosystem:
+
+- **LeaferJS Forever Open Source (MIT):** Core features and foundational plugins remain open and free, ensuring developer freedom and control.
+- **[PxGrow](https://www.pxgrow.com/) Commercial Plugins (Optional):** Focused on solving **complex industrial scenarios**, including advanced editor suites, extreme performance optimizations, and complex graphic algorithms — saving months or even years of development time.
+- **Sustainable Growth:** All commercial revenue is reinvested into the open-source engine to ensure LeaferJS stays at the forefront of Web graphics technology.
+
+### LeaferJS Repository Overview
+
+| Repository    | Description                      | Link                                            |
+| :------------ | :------------------------------- | :---------------------------------------------- |
+| **LeaferJS**  | Main integration repo (runnable) | [GitHub](https://github.com/leaferjs/LeaferJS)  |
+| **leafer**    | Core engine                      | [GitHub](https://github.com/leaferjs/leafer)    |
+| **leafer-ui** | UI layer                         | [GitHub](https://github.com/leaferjs/leafer-ui) |
+| **leafer-in** | Official plugins                 | [GitHub](https://github.com/leaferjs/leafer-in) |
+| **leafer-x**  | Community plugins showcase       | [GitHub](https://github.com/leaferjs/leafer-x)  |
+| **test**      | Automated testing                | [GitHub](https://github.com/leaferjs/test)      |
+| **code**      | Example code                     | [GitHub](https://github.com/leaferjs/code)      |
+| **docs**      | Documentation                    | [GitHub](https://github.com/leaferjs/docs)      |
+
+## 🌟 Contribute: Five Years of Craftsmanship, Built from Passion
+
+LeaferJS is an original open-source engine refined over five years. Our mission is to standardize the **graphics system foundation**, so developers can focus on creativity rather than low-level implementation.
+
+**If you value originality and extreme performance, please give us a Star!**
 
 <div style="display:flex; gap: 12px">
 <a target="_blank" href="https://github.com/leaferjs/leafer-ui" aria-label="github"  rel="noopener">
@@ -18,97 +144,27 @@ LeaferJS 是一款革新、好用的 Canvas 引擎，轻松实现图形交互与
 </a>
 </div>
 
-## 快速入门
+- 🌟 **Star the repo:** Your support means everything.
+- 🐞 **Report issues:** Every issue helps us improve.
+- 🤝 **Join the community:** Explore the limits of Web graphics together.
 
-[1. 准备在线 Playground 环境](https://leaferjs.com/ui/guide/runtime.html)
+## Contribution Guide
 
-用于运行、练习后续的示例代码。
+When you use LeaferJS, you become part of this vibrant community — stepping into a growing “tech castle.” Only through collective participation can it truly flourish.
 
-[2. 学习 LeaferJS 快速入门教程](https://leaferjs.com/ui/guide/basic/app.html)
+[Code of Conduct](./contributor/CODE_OF_CONDUCT.md)
 
-跟随官网教程步骤（文档底部有下一步引导按钮）从浅到深的学习，动手调试每一段示例代码。
+[Commit Convention](./contributor/COMMIT_CONVENTION.md)
 
-## 快速安装
+[How to Ask Questions the Smart Way](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/main/README-zh_CN.md#%E6%8F%90%E9%97%AE%E7%9A%84%E6%99%BA%E6%85%A7)
 
-🚀 想马上在产品中使用，请安装 [leafer-ui](https://leaferjs.com/ui/guide/install/ui/start.html)（66KB min+gzip 零依赖），开始你的探索之旅。
+## Acknowledgements
 
-也可直接安装 [leafer](https://leaferjs.com/ui/guide/install/leafer/start.md) 全量包, 会自动安装 `leafer-ui` 包和 `@leafer-in/*` 所有插件包。
+[All code contributors](https://github.com/leaferjs/leafer-ui/graphs/contributors)
 
-## AI
+[All community contributors](https://www.leaferjs.com/ui/contribute/)
 
-[Leafer AI 知识库](https://github.com/leaferjs/ai-docs)
-
-[MCP & Skills](https://context7.com/leaferjs/ai-docs?tab=skills)
-
-[Ask AI - Context7](https://context7.com/leaferjs/ai-docs?tab=chat)
-
-[Ask AI - DeepWiki](https://deepwiki.com/leaferjs/ai-docs)
-
-## 仓库组成
-
-[LeaferJS](https://github.com/leaferjs/LeaferJS) 主集成仓库，可直接运行代码。
-
-[leafer](https://github.com/leaferjs/leafer) 核心仓库。
-
-[leafer-ui](https://github.com/leaferjs/leafer-ui) UI 仓库。
-
-[leafer-in](https://github.com/leaferjs/leafer-in) 插件仓库。
-
-[leafer-x](https://github.com/leaferjs/leafer-x) 社区插件提交仓库。
-
-[test](https://github.com/leaferjs/test) 自动化测试仓库。
-
-[code](https://github.com/leaferjs/code) 示例代码仓库。
-
-[docs](https://github.com/leaferjs/docs) 在线文档仓库。
-
-## 使命与愿景
-
-LeaferJS 不仅致力打造前沿的 2D 和未来的 3D 引擎技术，更希望创造一套简洁、开放、现代化的 UI 绘图标准，表现力丰富，便于 AI 理解，人类可视化使用，并为数字化产品开发提供跨平台、轻量化、高性能的运行时。
-
-让不同的软件之间能够沟通、协作、共享绘图数据，让数字化产品开发可以更快、更简单。
-
-通过不断革新的图形渲染技术、配套支持， 吸引更多的开发者加入使用，建立起一个开放的生态环境，沟通有无，互相从中受益，推动行业的快速发展。
-
-让开发者能够快速地构建 AI 时代的网页、应用、设计、画布、游戏和动画等可视化生产力工具，推动下一代本地优先的 Figma、Miro、Notion、Unity、Adobe、Canva、Webflow 等创新产品诞生，并激发更多创意技术和应用。
-
-![leaferjs](https://www.leaferjs.com/ui/svg/leaferjs.svg?d=013007)
-
-![覆盖场景](https://www.leaferjs.com/ui/image/blog/20241120/plan.jpg)
-
-这是一段漫长而又充满乐趣的旅程，我们正在年复一年、坚定地向这个目标持续前进，可以通过 [开发计划](https://www.leaferjs.com/ui/plan/) 了解更多信息。
-
-## 卓越文化
-
-我们追求慢慢打造出这样的团队与社区氛围:
-
-**真诚坚韧、追求卓越、热爱生活、与众不同、倾听、互帮互助、懂得取舍、不怕失败、结果导向**
-
-我们相信当一个人身心强健，对这个世界充满无限好奇的时候，会产生出源源不断的生命力和创造力，所以我们鼓励追求卓越与热爱生活，也许我们会因为健身、美食、旅行、摄影、音乐、写作、绘画、舞蹈、游戏等热爱而了解彼此，也许我们还会有自己的乐队、画展、读书会...
-
-我们要一起去攀登一座座别人从未到达过的高峰，同时我们也了解自己的能力边界，将聪明才智都聚焦到我们最感兴趣，也对用户最有价值的那个点上，在那里做出前人未曾有过的东西。
-
-我们知道成功并非一蹴而就，所以我们接纳路途中的失败、偶尔的躺平，只要拥有坚韧的气质和永不放弃的精神，从失败中吸取教训，不断成长，积累一个个小小的胜利，就一定会抵达目的地。
-
-希望我们能一起创办出 **一家像胖东来一样的新型互联网企业和社区，** 如果你喜欢这样的文化，欢迎阅读 [贡献指南](https://www.leaferjs.com/ui/contribute/guide.html)，可以一起参与进来。
-
-## 贡献指南
-
-当你使用 LeaferJS 时, 你就已成为了 这个充满活力的大家庭 的一员，踏入这座建设中的“技术城堡”。只有通过每位成员的热情参与与贡献，这座城堡才能逐步走向完善。
-
-[社区行为准则](./contributor/CODE_OF_CONDUCT.md)
-
-[代码提交规范](./contributor/COMMIT_CONVENTION.md)
-
-[提问的智慧](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/main/README-zh_CN.md#%E6%8F%90%E9%97%AE%E7%9A%84%E6%99%BA%E6%85%A7)
-
-## 致谢贡献者
-
-[每一位贡献代码的社区成员](https://github.com/leaferjs/leafer-ui/graphs/contributors)
-
-[每一位参与生态的社区成员](https://www.leaferjs.com/ui/contribute/)
-
-## 赞助商
+## Sponsors
 
 <p><h3 align="center">金牌赞助商</h3></p>
 <p style="display: flex;flex-wrap: wrap;justify-content: center;gap: 15px;">
