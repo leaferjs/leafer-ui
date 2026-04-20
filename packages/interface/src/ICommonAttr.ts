@@ -130,8 +130,8 @@ export interface ITextStyleComputedData {
     italic?: boolean
     textCase?: ITextCase
     textDecoration?: ITextDecoration
-    letterSpacing?: number
-    lineHeight?: number
+    letterSpacing?: number | IUnitData
+    lineHeight?: number | IUnitData
 
     paraIndent?: number
     paraSpacing?: number
