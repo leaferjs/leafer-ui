@@ -12,8 +12,8 @@ Official Website: [leaferjs.com](https://www.leaferjs.com)
 **👉 The first Canvas core capable of building a “Figma-level editor”**
 
 <p align="center">
-  <a href="https://www.bilibili.com/video/BV1E56vBwEiB" target="_blank">
-    <img src="https://www.leaferjs.com/image/video/leaferjs.jpg?d=1126" />
+  <a href="https://www.youtube.com/watch?v=bJ6fHMQdATs" target="_blank">
+    <img src="https://www.leaferjs.com/image/video/leaferjs-en.jpg" />
   </a>
 </p>
 <p align="center">
