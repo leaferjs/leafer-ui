@@ -13,6 +13,10 @@ export function stroke(stroke: string, ui: IUI, canvas: ILeaferCanvas, renderOpt
 
         Paint.strokeText(stroke, ui, canvas, renderOptions)
 
+    } else if (data.__pathForStroke) {
+
+        Paint.fillStroke(stroke, ui, canvas, renderOptions)
+
     } else {
 
         switch (data.strokeAlign) {

@@ -18,6 +18,7 @@ export const PaintModule: IPaintModule = {
 
     stroke,
     strokes,
+
     strokeText,
     drawTextStroke,
     drawStrokesStyle,

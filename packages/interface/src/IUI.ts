@@ -1,4 +1,4 @@
-import { ILeaf, ILeafComputedData, ILeafData, ILeafInputData, ILeaferCanvas, IRenderOptions, IExportOptions, IExportResult, IPathDrawer, IPointData, IPathCommandData, IBoundsData, IObject, IPathString, ILeaferImage, IPathCreator, IAnswer, IPickOptions, IPickResult, IValue, ICanvasContext2DSettings, IFourNumber, IFindCondition, IBoolean, ICanvasContext2D, IJSONOptions, IMatrixData, ISizeData, ITransition, IAround, IMultimediaType, IDirection4, IOptionPointData, IDirection } from '@leafer/interface'
+import { ILeaf, ILeafComputedData, ILeafData, ILeafInputData, ILeaferCanvas, IRenderOptions, IExportOptions, IExportResult, IPathDrawer, IPointData, IPathCommandData, IBoundsData, IObject, IPathString, ILeaferImage, IPathCreator, IAnswer, IPickOptions, IPickResult, IValue, ICanvasContext2DSettings, IFourNumber, IFindCondition, IBoolean, ICanvasContext2D, IJSONOptions, IMatrixData, ISizeData, ITransition, IAround, IMultimediaType, IDirection4, IOptionPointData, IDirection, IPathCommandDataWithWindingRule } from '@leafer/interface'
 
 import {
     IFillAttrData, IFillInputData, IFillComputedData,
@@ -621,7 +621,7 @@ export interface IUIData extends IUIAttrData, IUIComputedData, ILeafData {
     __blendLayer?: boolean
 
     __boxStroke?: boolean // box闭合描边，可不用计算miterLimit造成的渲染包围盒变化
-    __pathForStroke?: IPathCommandData // 笔触的填充路径，一般用于多个strokeWidth的矩形
+    __pathForStroke?: IPathCommandDataWithWindingRule // 笔触的填充路径，一般用于多个strokeWidth的矩形
 
     // text
     __font?: string
