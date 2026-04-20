@@ -621,6 +621,7 @@ export interface IUIData extends IUIAttrData, IUIComputedData, ILeafData {
     __blendLayer?: boolean
 
     __boxStroke?: boolean // box闭合描边，可不用计算miterLimit造成的渲染包围盒变化
+    __pathForStroke?: IPathCommandData // 笔触的填充路径，一般用于多个strokeWidth的矩形
 
     // text
     __font?: string
