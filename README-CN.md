@@ -17,7 +17,7 @@
   </a>
 </p>
 <p align="center">
-<b>极致性能 · 极低内存 · 类 DOM API · 图形编辑 · 跨平台 · 零依赖 · 轻量 (70KB gzip)</b>
+<b>极致性能 · 极低内存 · 类 DOM API · 图形编辑 · 跨平台 · 零依赖 · 轻量 (70KB min+gzip)</b>
 </p>
 
 <div align="center">

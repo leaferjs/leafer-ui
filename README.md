@@ -17,7 +17,7 @@ Official Website: [leaferjs.com](https://www.leaferjs.com)
   </a>
 </p>
 <p align="center">
-<b>Extreme Performance · Ultra-Low Memory · DOM-like API · Graphic Editing · Cross-Platform · Zero Dependencies · Lightweight (70KB gzip)</b>
+<b>Extreme Performance · Ultra-Low Memory · DOM-like API · Graphic Editing · Cross-Platform · Zero Dependencies · Lightweight (70KB min+gzip)</b>
 </p>
 
 <div align="center">

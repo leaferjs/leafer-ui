@@ -13,7 +13,7 @@
   "types": "types/index.d.ts",
   "unpkg": "dist/web.min.js",
   "jsdelivr": "dist/web.min.js",
-  "files": ["src","types","dist"],
+  "files": ["src","types","dist","README-CN.md"],
   "repository": {
     "type": "git",
     "url": "https://github.com/leaferjs/leafer-ui"
