@@ -59,11 +59,11 @@ With its extreme performance and standardized capabilities, LeaferJS is an ideal
 
 LeaferJS pushes the ceiling of Web graphics processing by approximately **10x**.
 
-| Test (1M Interactive Rectangles) | Traditional Canvas Libraries | **LeaferJS** | Improvement          |
-| :------------------------------- | :--------------------------- | :----------- | :------------------- |
-| **Initial Render Time**          | ~10–15 seconds               | **1.28s**    | **~10x faster 🎉**   |
-| **Memory Usage**                 | ~3GB (may crash browser)     | **320MB**    | **~10x lower**       |
-| **Drag FPS (single element)**    | 0–1 FPS                      | **60 FPS**   | **Perfectly smooth** |
+| Test (1M Interactive Rectangles) | Traditional Canvas Libraries | **LeaferJS** | Improvement       |
+| :------------------------------- | :--------------------------- | :----------- | :---------------- |
+| **Initial Render Time**          | ~9–15 seconds                | **1.28s**    | **~8x faster 🎉** |
+| **Memory Usage**                 | ~2-4GB (may crash browser)   | **320MB**    | **~8x lower**     |
+| **Drag FPS (single element)**    | 0–4 FPS                      | **60 FPS**   | **~15x faster**   |
 
 Test environment: 2K laptop screen / Chrome V143.0. Results are for reference only; actual performance depends on hardware.
 
