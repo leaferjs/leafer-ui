@@ -602,6 +602,7 @@ export interface IUIData extends IUIAttrData, IUIComputedData, ILeafData {
     __strokeWidthCache?: number // 一般用于固定线宽的箭头做缓存对比
     __hasMultiStrokeStyle?: number // 是否存在多个不同的描述样式（同时存储多个描边样式中的最大宽度用于运算）
     readonly __hasMultiPaint?: boolean
+    __hasStrokeSides?: number // 是否存在多边，存在时存储最大值
 
     __isAlphaPixelFill?: boolean // png / svg / webp
     __isAlphaPixelStroke?: boolean
@@ -630,6 +631,8 @@ export interface IUIData extends IUIAttrData, IUIComputedData, ILeafData {
     __needComputePaint?: boolean
     __computePaint(): void
     __getRealStrokeWidth(childStyle?: IStrokeComputedStyle): number
+
+    __checkComplex(): void
 
     __setPaint(attrName: 'fill' | 'stroke', value: IValue): void
     __removePaint(attrName: 'fill' | 'stroke', removeInput?: boolean): void

@@ -24,8 +24,8 @@ export const UIRender: IUIRenderModule = {
         }
 
         data.__checkSingle()
+        data.__checkComplex()
 
-        stintSet(data, '__complex', (data.__isFills || data.__isStrokes || data.cornerRadius || data.__useEffect) as boolean)
     },
 
     __drawFast(canvas: ILeaferCanvas, options: IRenderOptions): void {

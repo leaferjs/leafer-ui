@@ -22,7 +22,10 @@ export class UIData extends LeafData implements IUIData {
 
     public get __strokeWidth(): number { return this.__getRealStrokeWidth() }
 
-    public get __maxStrokeWidth(): number { const t = this as IUIData; return t.__hasMultiStrokeStyle ? Math.max(t.__hasMultiStrokeStyle, t.strokeWidth) : t.strokeWidth }
+    public get __maxStrokeWidth(): number {
+        const t = this as IUIData, strokeWidth = t.__hasStrokeSides || t.strokeWidth
+        return t.__hasMultiStrokeStyle ? Math.max(t.__hasMultiStrokeStyle, strokeWidth) : strokeWidth
+    }
 
     public __hasMultiStrokeStyle?: number // 是否存在多个不同的描述样式（同时存储多个描边样式中的最大宽度用于运算）
 
@@ -152,6 +155,11 @@ export class UIData extends LeafData implements IUIData {
         }
 
         return strokeWidth
+    }
+
+    public __checkComplex(): void {
+        const t = this as IUIData
+        stintSet(t, '__complex', (t.__isFills || t.__isStrokes || t.cornerRadius || t.__useEffect) as boolean)
     }
 
 
