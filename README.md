@@ -1,4 +1,4 @@
-[English](./README-EN.md) | 简体中文
+简体中文 | [English](./README-EN.md)
 
 <br/>
 
