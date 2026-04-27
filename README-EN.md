@@ -211,7 +211,13 @@ When you use LeaferJS, you become part of this vibrant community — stepping in
 
 <p><h3 align="center">Silver Sponsors</h3></p>
 <p style="display: flex;flex-wrap: wrap;justify-content: center;gap: 5px;">
-<a target="_blank" href="">
+    <a target="_blank" href="">
+        <img width="40" title="怜生" src="https://www.pxgrow.com/image/user/default/3.jpg" loading="lazy" />
+    </a>
+    <a target="_blank" href="https://pro.kuaitu.cc/">
+        <img width="40" title="快图设计" src="https://www.pxgrow.com/image/sponsor/user/72.jpg" loading="lazy" />
+    </a>
+    <a target="_blank" href="">
         <img width="40" title="black" src="https://api.pxgrow.com/uploads/avatar/249/AzA/4v/u.jpg" loading="lazy" />
     </a>
     <a target="_blank" href="">
@@ -258,9 +264,6 @@ When you use LeaferJS, you become part of this vibrant community — stepping in
     </a>
     <a target="_blank" href="">
         <img width="40" title="😊" src="https://www.pxgrow.com/image/sponsor/user/79.jpg" loading="lazy" />
-    </a>
-    <a target="_blank" href="https://pro.kuaitu.cc/">
-        <img width="40" title="快图设计" src="https://www.pxgrow.com/image/sponsor/user/72.jpg" loading="lazy" />
     </a>
     <a target="_blank" href="">
         <img width="40" title="ycteng" src="https://www.pxgrow.com/image/sponsor/user/purple.png" loading="lazy" />
