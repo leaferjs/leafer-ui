@@ -4,5 +4,7 @@ import { UIData } from "./UIData"
 
 
 export class StarData extends UIData implements IStarData {
-    get __boxStroke(): boolean { return !(this as IStarData).__pathInputed }
+
+    public get __boxStroke(): boolean { return !(this as IStarData).__pathInputed }
+
 }

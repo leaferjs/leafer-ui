@@ -11,4 +11,5 @@ export class LeaferData extends GroupData implements ILeaferData {
         canvasSizeAttrs.forEach(key => delete (data as IObject)[key])
         return data
     }
+
 }

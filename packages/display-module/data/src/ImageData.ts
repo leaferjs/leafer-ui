@@ -32,4 +32,5 @@ export class ImageData extends RectData implements IImageData {
         if (data.url) delete data.fill
         return data
     }
+
 }

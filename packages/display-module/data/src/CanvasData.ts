@@ -13,4 +13,5 @@ export class CanvasData extends RectData implements ICanvasData {
         data.url = (this.__leaf as ICanvas).canvas.toDataURL('image/png') as string
         return data
     }
+
 }
