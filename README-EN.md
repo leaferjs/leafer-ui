@@ -9,7 +9,7 @@ Effortlessly build graphic interaction and editing — an infinite canvas engine
 Official Website: [leaferjs.com](https://www.leaferjs.com)
 
 **👉 A Canvas engine that can handle 1 million graphics in the browser**  
-**👉 The first Canvas core capable of building a “Figma-level editor”**
+**👉 A Canvas core capable of building Figma-level editors**
 
 <p align="center">
   <a href="https://www.youtube.com/watch?v=bJ6fHMQdATs" target="_blank">
