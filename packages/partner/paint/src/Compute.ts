@@ -29,9 +29,9 @@ export function compute(attrName: IPaintAttr, ui: IUI): void {
         }
     }
 
-    (data as IObject)['_' + attrName] = leafPaints.length ? leafPaints : undefined
-
     if (leafPaints.length) {
+
+        (data as IObject)['_' + attrName] = leafPaints
 
         if (leafPaints.every(item => item.isTransparent)) {
             if (leafPaints.some(item => item.image)) isAlphaPixel = true
@@ -48,7 +48,10 @@ export function compute(attrName: IPaintAttr, ui: IUI): void {
         }
 
     } else {
-        data.__removePaint(attrName, false)
+
+        data.__removePaint(attrName, false);
+        (data as IObject)['_' + attrName] = ''
+
     }
 
 }
