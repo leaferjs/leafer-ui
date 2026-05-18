@@ -125,7 +125,7 @@ export interface IImageFilter {
 
 export type IImageFilters = IImageFilter[]
 
-export type IImagePaintMode = 'normal' | 'cover' | 'fit' | 'stretch' | 'clip' | 'repeat'
+export type IImagePaintMode = 'normal' | 'cover' | 'fit' | 'stretch' | 'clip' | 'repeat' | 'brush'
 export type IRepeat = boolean | 'x' | 'y' | IPointData
 
 // 描边
