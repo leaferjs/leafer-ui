@@ -211,7 +211,7 @@ export class UI<TInputData = IUIInputData> extends Leaf<TInputData> implements I
     public dragBounds?: IBoundsData | 'parent'
 
     @dataType('auto')
-    dragBoundsType?: IDragBoundsType
+    public dragBoundsType?: IDragBoundsType
 
 
     @dataType(false)

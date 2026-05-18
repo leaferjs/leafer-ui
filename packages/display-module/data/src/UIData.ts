@@ -111,7 +111,7 @@ export class UIData extends LeafData implements IUIData {
         const isStr = isString(value)
         if (isStr || (value && isObject(value[0]))) {
             this.__setInput('path', value)
-            this._path = isStr ? parse(value) : objectToCanvasData(value as IPathCommandObject[])
+            this._path = isStr ? parse(value, (this as IUIData).__useArrow) : objectToCanvasData(value as IPathCommandObject[])
         } else {
             if (this.__input) this.__removeInput('path')
             this._path = value as IPathCommandData
