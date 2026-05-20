@@ -33,6 +33,7 @@ export interface IPaintImageModule {
 
     film?(paint: ILeafPaint): void
     video?(paint: ILeafPaint): void
+    brush?(paint: ILeafPaint): void
 
     checkImage(paint: ILeafPaint, allowDraw: boolean, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): boolean // 返回true表示已进行了原生绘制
     drawImage(paint: ILeafPaint, imageScaleX: number, imageScaleY: number, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void

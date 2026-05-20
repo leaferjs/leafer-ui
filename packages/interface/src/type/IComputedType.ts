@@ -29,6 +29,7 @@ export interface ILeafPaint extends IFilmPlayOptions {
     originPaint?: IPaint // 原始paint对象
 
     film?: boolean // flim或video类型
+    brush?: any // 笔触刷子
 }
 
 export interface ILeafPaintPatternData {
