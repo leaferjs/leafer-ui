@@ -9,6 +9,8 @@ export function checkImage(paint: ILeafPaint, drawImage: boolean, ui: IUI, canva
     const { scaleX, scaleY } = PaintImage.getImageRenderScaleData(paint, ui, canvas, renderOptions), id = paint.film ? paint.nowIndex : scaleX + '-' + scaleY
     const { image, data, originPaint } = paint, { exporting, snapshot } = renderOptions
 
+    if (paint.brush) drawImage = true
+
     if (!data || (paint.patternId === id && !exporting) || snapshot) {
         return false // 生成图案中
     } else {
@@ -37,8 +39,8 @@ export function checkImage(paint: ILeafPaint, drawImage: boolean, ui: IUI, canva
 }
 
 export function drawImage(paint: ILeafPaint, imageScaleX: number, imageScaleY: number, ui: IUI, canvas: ILeaferCanvas, _renderOptions: IRenderOptions): void {
-    const { data, image, complex } = paint
-    let { width, height } = image
+    const { data, image, brush, complex } = paint
+    let { width, height } = image, view = brush || image
 
     if (complex) {
 
@@ -48,14 +50,14 @@ export function drawImage(paint: ILeafPaint, imageScaleX: number, imageScaleY: n
         blendMode && (canvas.blendMode = blendMode)
         opacity && (canvas.opacity *= opacity)
         transform && canvas.transform(transform)
-        image.render(canvas, 0, 0, width, height, ui, paint, imageScaleX, imageScaleY) // svg need size
+        view.render(canvas, 0, 0, width, height, ui, paint, imageScaleX, imageScaleY) // svg need size
         canvas.restore()
 
     } else {
 
         // 简单矩形
         if (data.scaleX) width *= data.scaleX, height *= data.scaleY
-        image.render(canvas, 0, 0, width, height, ui, paint, imageScaleX, imageScaleY)
+        view.render(canvas, 0, 0, width, height, ui, paint, imageScaleX, imageScaleY)
 
     }
 }
