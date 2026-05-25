@@ -17,7 +17,7 @@ export const UIBounds: IUIBoundsModule = {
             boxSpread = spread = strokeAlign === 'center' ? strokeWidth / 2 : strokeWidth
 
             if (!data.__boxStroke || data.__useArrow) {
-                const miterLimitAddWidth = data.__isLinePath ? 0 : 10 * spread  // =  Math.sin((miterLimit = 10) * OneRadian / 2) * Math.sqrt(strokeWidth) - width 后期需继续精确优化
+                const miterLimitAddWidth = data.__isLinePath ? 0 : (data.strokeJoin === 'miter' ? 10 : 1) * spread  // =  Math.sin((miterLimit = 10) * OneRadian / 2) * Math.sqrt(strokeWidth) - width 后期需继续精确优化
                 const storkeCapAddWidth = data.strokeCap === 'none' ? 0 : strokeWidth
                 spread += Math.max(miterLimitAddWidth, storkeCapAddWidth)
             }
