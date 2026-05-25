@@ -1,4 +1,4 @@
-import { IBlendMode, IDirection, IFilmPlayOptions, IInterlace, ILeaferImage, IMatrixData, IPointData, IScaleFixed, ITaskItem } from '@leafer/interface'
+import { IBlendMode, IDirection, IFilmPlayOptions, IInterlace, ILeaferImage, IMatrixData, IPointData, IScaleFixed, ITaskItem, ILeaf } from '@leafer/interface'
 
 import { IColorString } from './IStringType'
 import { IStrokeAlign, IStrokeJoin, IStrokeCap, IImagePaintMode, IPaint } from './IType'
@@ -29,7 +29,12 @@ export interface ILeafPaint extends IFilmPlayOptions {
     originPaint?: IPaint // 原始paint对象
 
     film?: boolean // flim或video类型
-    brush?: any // 笔触刷子
+    brush?: ILeafPaintBrush // 笔触刷子
+}
+
+export interface ILeafPaintBrush {
+    render(canvas: any, x: number, y: number, width: number, height: number, leaf: ILeaf, paint: any, imageScaleX: number, imageScaleY: number): void
+    destroy(): void
 }
 
 export interface ILeafPaintPatternData {

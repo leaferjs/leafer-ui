@@ -103,12 +103,14 @@ function checkSizeAndCreateData(ui: IUI, attrName: string, paint: IImagePaint, i
         }
     }
 
+    if (paint.mode === 'brush') PaintImage.brush(leafPaint)
+
     if (!leafPaint.data) {
         PaintImage.createData(leafPaint, image, paint, boxBounds)
 
-        const { transform } = leafPaint.data, { opacity, blendMode } = paint
-        const clip = (transform && !transform.onlyScale) || data.path || data.cornerRadius
-        if (clip || (opacity && opacity < 1) || blendMode) leafPaint.complex = clip ? 2 : true
+        const { transform } = leafPaint.data, { opacity } = paint
+        const clip = ((transform && !transform.onlyScale) || data.path || data.cornerRadius) && !leafPaint.brush
+        if (clip || (opacity && opacity < 1) || paint.blendMode) leafPaint.complex = clip ? 2 : true
     }
 
     if (paint.filter) PaintImage.applyFilter(leafPaint, image, paint.filter, ui)

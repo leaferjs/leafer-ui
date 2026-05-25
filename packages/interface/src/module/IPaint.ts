@@ -33,7 +33,6 @@ export interface IPaintImageModule {
 
     film?(paint: ILeafPaint): void
     video?(paint: ILeafPaint): void
-    brush?(paint: ILeafPaint): void
 
     checkImage(paint: ILeafPaint, allowDraw: boolean, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): boolean // 返回true表示已进行了原生绘制
     drawImage(paint: ILeafPaint, imageScaleX: number, imageScaleY: number, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void
@@ -55,6 +54,12 @@ export interface IPaintImageModule {
     fillOrFitMode(data: ILeafPaintPatternData, box: IBoundsData, x: number, y: number, scaleX: number, scaleY: number, rotation: number): void
     clipMode(data: ILeafPaintPatternData, box: IBoundsData, x: number, y: number, scaleX: number, scaleY: number, rotation: number, skew: IPointData, clipScaleX?: number, clipScaleY?: number): void
     repeatMode(data: ILeafPaintPatternData, box: IBoundsData, width: number, height: number, x: number, y: number, scaleX: number, scaleY: number, rotation: number, skew: IPointData, align: IAlign, freeTransform?: boolean): void
+
+    brush?(paint: ILeafPaint): void
+    addBrushScale?(scaleData: IScaleData, paint: ILeafPaint, ui: IUI): void
+    getBrushScale?(paint: ILeafPaint, ui: IUI): number
+    recycleBrush?(paint: ILeafPaint, ui: IUI): void
+
 }
 
 export interface IPaintGradientModule {

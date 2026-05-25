@@ -11,6 +11,7 @@ export function recycleImage(attrName: IPaintAttr, data: IUIData): IBooleanMap {
     if (isArray(paints)) {
 
         let paint: ILeafPaint, image: ILeaferImage, recycleMap: IBooleanMap, input: IImagePaint[], url: string
+        const ui = data.__leaf as IUI
 
         for (let i = 0, len = paints.length; i < len; i++) {
 
@@ -22,7 +23,8 @@ export function recycleImage(attrName: IPaintAttr, data: IUIData): IBooleanMap {
                 if (!recycleMap) recycleMap = {}
                 recycleMap[url] = true
                 ImageManager.recyclePaint(paint)
-                if (data.__willDestroy && image.parent) PaintImage.recycleFilter(image, data.__leaf as IUI)
+                if (paint.brush) PaintImage.recycleBrush(paint, ui)
+                if (data.__willDestroy && image.parent) PaintImage.recycleFilter(image, ui)
 
                 // stop load
                 if (image.loading) {

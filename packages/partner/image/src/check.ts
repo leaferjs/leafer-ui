@@ -7,12 +7,12 @@ import { PaintImage } from "@leafer-ui/draw"
 
 export function checkImage(paint: ILeafPaint, drawImage: boolean, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): boolean {
     const { scaleX, scaleY } = PaintImage.getImageRenderScaleData(paint, ui, canvas, renderOptions), id = paint.film ? paint.nowIndex : scaleX + '-' + scaleY
-    const { image, data, originPaint } = paint, { exporting, snapshot } = renderOptions
-
-    if (paint.brush) drawImage = true
+    const { image, brush, data, originPaint } = paint, { exporting, snapshot } = renderOptions
 
     if (!data || (paint.patternId === id && !exporting) || snapshot) {
-        return false // 生成图案中
+
+        if (!(brush && paint.style)) return false // 生成图案中
+
     } else {
 
         if (drawImage) {
@@ -28,14 +28,17 @@ export function checkImage(paint: ILeafPaint, drawImage: boolean, ui: IUI, canva
                 canvas.fillStyle = paint.style || '#000'
                 canvas.fill()
             }
-            PaintImage.drawImage(paint, scaleX, scaleY, ui, canvas, renderOptions) // 直接绘制图像，不生成图案
-            return true
         } else {
             if (!paint.style || (originPaint as IImagePaint).sync || exporting) PaintImage.createPattern(paint, ui, canvas, renderOptions)
             else PaintImage.createPatternTask(paint, ui, canvas, renderOptions)
-            return false
+
+            if (!(brush && paint.style)) return false
+
         }
     }
+
+    PaintImage.drawImage(paint, scaleX, scaleY, ui, canvas, renderOptions) // 直接绘制图像，不生成图案
+    return true
 }
 
 export function drawImage(paint: ILeafPaint, imageScaleX: number, imageScaleY: number, ui: IUI, canvas: ILeaferCanvas, _renderOptions: IRenderOptions): void {
@@ -64,6 +67,7 @@ export function drawImage(paint: ILeafPaint, imageScaleX: number, imageScaleY: n
 
 export function getImageRenderScaleData(paint: ILeafPaint, ui: IUI, canvas?: ILeaferCanvas, _renderOptions?: IRenderOptions): IScaleData {
     const scaleData = ui.getRenderScaleData(true, paint.originPaint.scaleFixed), { data } = paint
+    if (paint.brush) PaintImage.addBrushScale(scaleData, paint, ui)
     if (canvas) {
         const { pixelRatio } = canvas
         scaleData.scaleX *= pixelRatio

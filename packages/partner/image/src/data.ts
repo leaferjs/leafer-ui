@@ -66,6 +66,7 @@ export function getPatternData(paint: IImagePaint, box: IBoundsData, image: ILea
             }
             break
         case 'repeat':
+        case 'brush':
             if (!sameBox || scaleX || rotation || skew) PaintImage.repeatMode(data, box, width, height, tempImage.x, tempImage.y, scaleX, scaleY, rotation, skew, align, paint.freeTransform)
             if (!repeat) data.repeat = 'repeat'
             const count = isObject(repeat)
