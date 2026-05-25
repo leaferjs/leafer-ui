@@ -9,7 +9,7 @@ import { TextConvert, UnitConvert } from '@leafer-ui/external'
 import { UI } from './UI'
 
 
-const { copyAndSpread, includes, spread, setList } = BoundsHelper, { stintSet } = DataHelper
+const { copyAndSpread, includes, setList } = BoundsHelper, { stintSet } = DataHelper
 
 @registerUI()
 export class Text<TConstructorData = ITextInputData> extends UI<TConstructorData> implements IText {
