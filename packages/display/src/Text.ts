@@ -128,7 +128,6 @@ export class Text<TConstructorData = ITextInputData> extends UI<TConstructorData
         this.__updateTextDrawData() // layout text
 
         const { bounds: contentBounds } = data.__textDrawData
-        console.log(contentBounds)
         const b = layout.boxBounds
 
         layout.contentBounds = contentBounds
