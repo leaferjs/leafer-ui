@@ -140,7 +140,7 @@ LeaferJS is an original open-source engine refined over five years. Our mission 
 
 <div style="display:flex; gap: 12px">
 <a target="_blank" href="https://github.com/leaferjs/leafer-ui" aria-label="github"  rel="noopener">
-  <img width="120" title="github" src="https://www.leaferjs.com/svg/github-stars.svg?d=20260511" />
+  <img width="120" title="github" src="https://img.shields.io/github/stars/leaferjs/ui?style=social" />
 </a>
 </div>
 
