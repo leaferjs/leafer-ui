@@ -55,11 +55,11 @@ export interface IPaintImageModule {
     clipMode(data: ILeafPaintPatternData, box: IBoundsData, x: number, y: number, scaleX: number, scaleY: number, rotation: number, skew: IPointData, clipScaleX?: number, clipScaleY?: number): void
     repeatMode(data: ILeafPaintPatternData, box: IBoundsData, width: number, height: number, x: number, y: number, scaleX: number, scaleY: number, rotation: number, skew: IPointData, align: IAlign, freeTransform?: boolean): void
 
-    brush?(paint: ILeafPaint): void
+    brush?(paint: ILeafPaint, ui: IUI): void
     addBrushScale?(scaleData: IScaleData, paint: ILeafPaint, ui: IUI): void
     getBrushScale?(paint: ILeafPaint, ui: IUI): number
+    cacheBrush?(paint: ILeafPaint, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void
     recycleBrush?(paint: ILeafPaint, ui: IUI): void
-
 }
 
 export interface IPaintGradientModule {

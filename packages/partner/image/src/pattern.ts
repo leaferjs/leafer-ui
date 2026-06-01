@@ -54,9 +54,14 @@ export function createPattern(paint: ILeafPaint, ui: IUI, canvas: ILeaferCanvas,
             }
 
             const imageCanvas = image.getCanvas(width, height, opacity, undefined, xGap, yGap, ui.leafer && ui.leafer.config.smooth, data.interlace)
-            const pattern = brush ? imageCanvas : image.getPattern(imageCanvas, data.repeat || (Platform.origin.noRepeat || 'no-repeat'), imageMatrix, paint)
 
-            paint.style = pattern
+            if (brush) {
+                paint.style = imageCanvas
+                PaintImage.cacheBrush(paint, ui, canvas, renderOptions)
+            } else {
+                paint.style = image.getPattern(imageCanvas, data.repeat || (Platform.origin.noRepeat || 'no-repeat'), imageMatrix, paint)
+            }
+
             paint.patternId = id
 
         }
