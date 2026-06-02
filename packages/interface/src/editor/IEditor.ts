@@ -91,7 +91,7 @@ export interface ITransformTool {
     onSkew(e: IDragEvent): void
 
     move(x: number | IPointData, y?: number, transition?: ITransition): void
-    scaleOf(origin: IPointData | IAlign, scaleX: number, scaleY?: number | ITransition, resize?: boolean, transition?: ITransition): void
+    scaleOf(origin: IPointData | IAlign, scaleX: number, scaleY?: number | ITransition, resize?: boolean, transition?: ITransition, boundsType?: IBoundsType): void
     rotateOf(origin: IPointData | IAlign, rotation: number, transition?: ITransition): void
     skewOf(origin: IPointData | IAlign, skewX: number, skewY?: number, resize?: boolean, transition?: ITransition): void
 }
@@ -156,10 +156,11 @@ export interface IEditorConfig extends IObject {
     editBoxType?: IBoundsType
     hover?: boolean
     hoverStyle?: IUIInputData
+    hoverPathType?: 'path' | 'render-path' | 'box' | 'stroke'
     select?: 'press' | 'tap'
     selectKeep?: boolean
     selectedStyle?: IUIInputData
-    selectedPathType?: 'path' | 'render-path'
+    selectedPathType?: 'path' | 'render-path' | 'box' | 'stroke'
     multipleSelect?: boolean
 
     boxSelect?: boolean
