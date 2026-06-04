@@ -6,6 +6,7 @@ import { PenData } from '@leafer-ui/data'
 import { Group } from './Group'
 import { Path } from './Path'
 
+
 @useModule(PathCreator, ['set', 'path', 'paint'])
 @registerUI()
 export class Pen<TInputData = IPenInputData> extends Group<TInputData> implements IPen {
@@ -32,49 +33,37 @@ export class Pen<TInputData = IPenInputData> extends Group<TInputData> implement
         return this
     }
 
-    // svg and canvas
-
-    public beginPath(): Pen { return this }
-
-    public moveTo(_x: number, _y: number): Pen { return this }
-
-    public lineTo(_x: number, _y: number): Pen { return this }
-
-    public bezierCurveTo(_x1: number, _y1: number, _x2: number, _y2: number, _x: number, _y: number): Pen { return this }
-
-    public quadraticCurveTo(_x1: number, _y1: number, _x: number, _y: number): Pen { return this }
-
-    public closePath(): Pen { return this }
-
-
-    // canvas
-
-    public rect(_x: number, _y: number, _width: number, _height: number): Pen { return this }
-
-    public roundRect(_x: number, _y: number, _width: number, _height: number, _cornerRadius: number | number[]): Pen { return this }
-
-    public ellipse(_x: number, _y: number, _radiusX: number, _radiusY: number, _rotation?: number, _startAngle?: number, _endAngle?: number, _anticlockwise?: boolean): Pen { return this }
-
-    public arc(_x: number, _y: number, _radius: number, _startAngle?: number, _endAngle?: number, _anticlockwise?: boolean): Pen { return this }
-
-    public arcTo(_x1: number, _y1: number, _x2: number, _y2: number, _radius: number): Pen { return this }
-
-
-    // moveTo, then draw
-
-    public drawEllipse(_x: number, _y: number, _radiusX: number, _radiusY: number, _rotation?: number, _startAngle?: number, _endAngle?: number, _anticlockwise?: boolean): Pen { return this }
-
-    public drawArc(_x: number, _y: number, _radius: number, _startAngle?: number, _endAngle?: number, _anticlockwise?: boolean): Pen { return this }
-
-    public drawPoints(_points: number[] | IPointData[], _curve?: boolean | number, _close?: boolean): Pen { return this }
-
-    public clearPath(): Pen { return this } // = beginPath()
-
-
     public paint(): void {
         const { pathElement } = this
         if (!pathElement.__layout.boxChanged) pathElement.forceUpdate('path')
     }
+
+}
+
+export interface Pen {
+
+    // PathCreator rewrite
+
+    // svg and canvas
+    beginPath(): Pen
+    moveTo(x: number, y: number): Pen
+    lineTo(x: number, y: number): Pen
+    bezierCurveTo(x1: number, y1: number, x2: number, y2: number, x: number, y: number): Pen
+    quadraticCurveTo(x1: number, y1: number, x: number, y: number): Pen
+    closePath(): Pen
+
+    // canvas
+    rect(x: number, y: number, width: number, height: number): Pen
+    roundRect(x: number, y: number, width: number, height: number, cornerRadius: number | number[]): Pen
+    ellipse(x: number, y: number, radiusX: number, radiusY: number, rotation?: number, startAngle?: number, endAngle?: number, anticlockwise?: boolean): Pen
+    arc(x: number, y: number, radius: number, startAngle?: number, endAngle?: number, anticlockwise?: boolean): Pen
+    arcTo(x1: number, y1: number, x2: number, y2: number, radius: number): Pen
+
+    // moveTo, then draw
+    drawEllipse(x: number, y: number, radiusX: number, radiusY: number, rotation?: number, startAngle?: number, endAngle?: number, anticlockwise?: boolean): Pen
+    drawArc(x: number, y: number, radius: number, startAngle?: number, endAngle?: number, anticlockwise?: boolean): Pen
+    drawPoints(points: number[] | IPointData[], curve?: boolean | number, close?: boolean): Pen
+    clearPath(): Pen  // = beginPath()
 
 }
 
