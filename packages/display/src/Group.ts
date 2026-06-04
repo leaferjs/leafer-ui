@@ -70,12 +70,6 @@ export class Group<TInputData = IGroupInputData> extends UI<TInputData> implemen
         return data
     }
 
-
-    // hit rewrite
-
-    public pick(_hitPoint: IPointData, _options?: IPickOptions): IPickResult { return undefined }
-
-
     // add
 
     public addAt(child: IUI | IUI[] | IUIInputData | IUIInputData[], index: number): void {
@@ -90,16 +84,18 @@ export class Group<TInputData = IGroupInputData> extends UI<TInputData> implemen
         this.add(child, this.children.indexOf(before))
     }
 
+}
+
+export interface Group {
+
+    // hit rewrite
+    pick(hitPoint: IPointData, options?: IPickOptions): IPickResult
+
     // Branch rewrite
-
-    public add(_child: IUI | IUI[] | IUIInputData | IUIInputData[], _index?: number): void { }
-
-    public addMany(..._children: IUI[] | IUIInputData[]): void { }
-
-    public remove(_child?: IUI | number | string | IFindCondition | IFindUIMethod, _destroy?: boolean): void { }
-
-    public removeAll(_destroy?: boolean): void { }
-
-    public clear(): void { }
+    add(child: IUI | IUI[] | IUIInputData | IUIInputData[], index?: number): void
+    addMany(...children: IUI[] | IUIInputData[]): void
+    remove(child?: IUI | number | string | IFindCondition | IFindUIMethod, destroy?: boolean): void
+    removeAll(_destroy?: boolean): void
+    clear(): void
 
 }
