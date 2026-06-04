@@ -12,7 +12,7 @@ import { UI } from './UI'
 const { copyAndSpread, includes, setList } = BoundsHelper, { stintSet } = DataHelper
 
 @registerUI()
-export class Text<TConstructorData = ITextInputData> extends UI<TConstructorData> implements IText {
+export class Text<TInputData = ITextInputData> extends UI<TInputData> implements IText {
 
     public get __tag() { return 'Text' }
 
