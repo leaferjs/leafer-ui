@@ -219,24 +219,19 @@ export class Dragger {
         this.dragDataList = []
     }
 
-
-    // @leafer-in/viewport will rewrite
-
-    public checkDragEndAnimate(_data: IPointerEvent, _speed?: number): boolean | number { return false }
-
-    public animate(_func?: IFunction, _off?: 'off'): void { }  // dragEnd animation
-
-    public stopAnimate(): void { }
-
-    public checkDragOut(_data: IPointerEvent): void { }
-
-    public autoMoveOnDragOut(_data: IPointerEvent): void { }
-
-    public autoMoveCancel(): void { }
-
-    // ---
-
     public destroy(): void {
         this.dragReset()
     }
+}
+
+export interface Dragger {
+
+    // @leafer-in/viewport will rewrite
+    checkDragEndAnimate(data: IPointerEvent, speed?: number): boolean | number
+    animate(func?: IFunction, off?: 'off'): void   // dragEnd animation
+    stopAnimate(): void
+    checkDragOut(data: IPointerEvent): void
+    autoMoveOnDragOut(data: IPointerEvent): void
+    autoMoveCancel(): void
+
 }
