@@ -34,8 +34,16 @@ export const State = {
     set(): void { return Plugin.need('state') }
 } as unknown as IStateModule
 
+const transitionList = Object.create(null) as Record<string, ITransitionFunction>
+
 export const Transition = {
-    list: {},
-    register(attrName: string, fn: ITransitionFunction): void { Transition.list[attrName] = fn },
-    get(attrName: string): ITransitionFunction { return Transition.list[attrName] }
+    list: transitionList,
+    register(attrName: string, fn: ITransitionFunction): void {
+        if (attrName === '__proto__' || attrName === 'constructor' || attrName === 'prototype') return
+        Transition.list[attrName] = fn
+    },
+    get(attrName: string): ITransitionFunction {
+        if (attrName === '__proto__' || attrName === 'constructor' || attrName === 'prototype') return
+        return Transition.list[attrName]
+    }
 } as ITransitionModule
