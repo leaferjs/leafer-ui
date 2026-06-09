@@ -5,7 +5,7 @@ import { IUI, ILeafPaint } from '@leafer-ui/interface'
 import { Paint } from '@leafer-ui/draw'
 
 
-export function stroke(stroke: string, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void {
+export function stroke(stroke: string | ILeafPaint[], ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void {
     const data = ui.__
     if (!data.__strokeWidth) return
 
@@ -36,7 +36,7 @@ export function stroke(stroke: string, ui: IUI, canvas: ILeaferCanvas, renderOpt
 
 
 export function strokes(strokes: ILeafPaint[], ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void {
-    Paint.stroke(strokes as any, ui, canvas, renderOptions)
+    Paint.stroke(strokes, ui, canvas, renderOptions)
 }
 
 
