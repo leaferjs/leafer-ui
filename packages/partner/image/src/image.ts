@@ -1,7 +1,7 @@
 import { IBoundsData, IImageEvent, ILeaferImage, IObject } from '@leafer/interface'
 import { Bounds, BoundsHelper, ImageEvent, ImageManager, LeafHelper } from '@leafer/core'
 
-import { IUI, IImagePaint, ILeafPaint } from '@leafer-ui/interface'
+import { IUI, IImagePaint, ILeafPaint, IPaintAttr } from '@leafer-ui/interface'
 import { PaintImage } from "@leafer-ui/draw"
 
 
@@ -14,7 +14,7 @@ interface IImagePaintCache {
 let cache: IImagePaintCache, box = new Bounds()
 const { isSame } = BoundsHelper
 
-export function image(ui: IUI, attrName: string, paint: IImagePaint, boxBounds: IBoundsData, firstUse: boolean): ILeafPaint {
+export function image(ui: IUI, attrName: IPaintAttr, paint: IImagePaint, boxBounds: IBoundsData, firstUse: boolean): ILeafPaint {
     let leafPaint: ILeafPaint, event: IImageEvent
     const image = ImageManager.get(paint, paint.type)
 
@@ -85,7 +85,7 @@ export function image(ui: IUI, attrName: string, paint: IImagePaint, boxBounds: 
 }
 
 
-function checkSizeAndCreateData(ui: IUI, attrName: string, paint: IImagePaint, image: ILeaferImage, leafPaint: ILeafPaint, boxBounds: IBoundsData): boolean {
+function checkSizeAndCreateData(ui: IUI, attrName: IPaintAttr, paint: IImagePaint, image: ILeaferImage, leafPaint: ILeafPaint, boxBounds: IBoundsData): boolean {
     let needUpdate = true
     const data = ui.__
 
@@ -103,7 +103,7 @@ function checkSizeAndCreateData(ui: IUI, attrName: string, paint: IImagePaint, i
         }
     }
 
-    if (paint.mode === 'brush') PaintImage.brush(leafPaint, ui)
+    if (paint.mode === 'brush') PaintImage.brush(leafPaint, ui, attrName)
 
     if (!leafPaint.data) {
         PaintImage.createData(leafPaint, image, paint, boxBounds)

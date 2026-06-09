@@ -29,7 +29,7 @@ export interface IPaintModule {
 
 
 export interface IPaintImageModule {
-    image(ui: IUI, attrName: string, paint: IImagePaint, boxBounds: IBoundsData, firstUse: boolean): ILeafPaint
+    image(ui: IUI, attrName: IPaintAttr, paint: IImagePaint, boxBounds: IBoundsData, firstUse: boolean): ILeafPaint
 
     film?(paint: ILeafPaint): void
     video?(paint: ILeafPaint): void
@@ -55,7 +55,7 @@ export interface IPaintImageModule {
     clipMode(data: ILeafPaintPatternData, box: IBoundsData, x: number, y: number, scaleX: number, scaleY: number, rotation: number, skew: IPointData, clipScaleX?: number, clipScaleY?: number): void
     repeatMode(data: ILeafPaintPatternData, box: IBoundsData, width: number, height: number, x: number, y: number, scaleX: number, scaleY: number, rotation: number, skew: IPointData, align: IAlign, freeTransform?: boolean): void
 
-    brush?(paint: ILeafPaint, ui: IUI): void
+    brush?(paint: ILeafPaint, ui: IUI, attrName: IPaintAttr): void
     addBrushScale?(scaleData: IScaleData, paint: ILeafPaint, ui: IUI): void
     getBrushScale?(paint: ILeafPaint, ui: IUI): number
     cacheBrush?(paint: ILeafPaint, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void

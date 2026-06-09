@@ -57,7 +57,7 @@ export function compute(attrName: IPaintAttr, ui: IUI): void {
 }
 
 
-function getLeafPaint(attrName: string, paint: IPaint, ui: IUI): ILeafPaint {
+function getLeafPaint(attrName: IPaintAttr, paint: IPaint, ui: IUI): ILeafPaint {
     if (!isObject(paint) || paint.visible === false || paint.opacity === 0) return undefined
 
     let leafPaint: ILeafPaint

@@ -9,7 +9,7 @@ import {
     ITextStyleAttrData, ITextStyleInputData, ITextStyleComputedData,
     IStrokeComputedStyle
 } from './ICommonAttr'
-import { IFill, IOverflow } from './type/IType'
+import { IFill, IOverflow, IPaintAttr } from './type/IType'
 import { IAnimation, IAnimate, IKeyframe, IKeyframeId, IAnimateType } from './IAnimation'
 import { ILeafer } from './app/ILeafer'
 import { IEditorConfig } from './editor/IEditor'
@@ -634,8 +634,8 @@ export interface IUIData extends IUIAttrData, IUIComputedData, ILeafData {
 
     __checkComplex(): void
 
-    __setPaint(attrName: 'fill' | 'stroke', value: IValue): void
-    __removePaint(attrName: 'fill' | 'stroke', removeInput?: boolean): void
+    __setPaint(attrName: IPaintAttr, value: IValue): void
+    __removePaint(attrName: IPaintAttr, removeInput?: boolean): void
 }
 export interface IUIComputedData extends IUIAttrData, IFillComputedData, IBorderComputedData, IStrokeComputedData, ITextStyleComputedData, ICornerRadiusComputedData, IEffectComputedData, ILeafComputedData {
 

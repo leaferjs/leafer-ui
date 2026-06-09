@@ -1,7 +1,7 @@
 import { IBlendMode, IDirection, IFilmPlayOptions, IInterlace, ILeaferImage, IMatrixData, IPointData, IScaleFixed, ITaskItem, ILeaf, ILeaferCanvas } from '@leafer/interface'
 
 import { IColorString } from './IStringType'
-import { IStrokeAlign, IStrokeJoin, IStrokeCap, IImagePaintMode, IPaint } from './IType'
+import { IStrokeAlign, IStrokeJoin, IStrokeCap, IImagePaintMode, IPaint, IPaintAttr } from './IType'
 import { IPaintType } from './IType'
 import { IStrokeComputedStyle } from '../ICommonAttr'
 
@@ -33,6 +33,7 @@ export interface ILeafPaint extends IFilmPlayOptions {
 }
 
 export interface ILeafPaintBrush {
+    attrName: IPaintAttr
     cache?: ILeaferCanvas
     render(canvas: any, x: number, y: number, width: number, height: number, leaf: ILeaf, paint: any, imageScaleX: number, imageScaleY: number): void
     destroy(): void

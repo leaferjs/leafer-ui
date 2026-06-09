@@ -1,7 +1,7 @@
 import { INumber, IValue, IBoolean, IPathCommandData, IPathString, IPointData, IPathCommandObject, IObject, IFilter, IPathCommandNode } from '@leafer/interface'
 import { PathConvert, DataHelper, LeafData, Debug, isArray, isObject, isString, isUndefined } from '@leafer/core'
 
-import { IUI, IUIData, ILeafPaint, IStrokeComputedStyle } from '@leafer-ui/interface'
+import { IUI, IUIData, ILeafPaint, IStrokeComputedStyle, IPaintAttr } from '@leafer-ui/interface'
 import { Paint, PaintImage, ColorConvert } from '@leafer-ui/external'
 
 
@@ -163,7 +163,7 @@ export class UIData extends LeafData implements IUIData {
     }
 
 
-    public __setPaint(attrName: 'fill' | 'stroke', value: IValue): void {
+    public __setPaint(attrName: IPaintAttr, value: IValue): void {
         this.__setInput(attrName, value)
         const layout = this.__leaf.__layout
         layout.boxChanged || layout.boxChange()
@@ -175,7 +175,7 @@ export class UIData extends LeafData implements IUIData {
         }
     }
 
-    public __removePaint(attrName: 'fill' | 'stroke', removeInput?: boolean): void {
+    public __removePaint(attrName: IPaintAttr, removeInput?: boolean): void {
         if (removeInput) this.__removeInput(attrName)
         PaintImage.recycleImage(attrName, this)
         if (attrName === 'fill') {
