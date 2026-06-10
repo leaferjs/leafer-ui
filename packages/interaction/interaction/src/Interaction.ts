@@ -217,6 +217,23 @@ export class InteractionBase implements IInteraction {
         }
     }
 
+    // @leafer-in/viewport will rewrite:  transform viewport
+
+    public createTransformer(): void { }
+
+    public move(_data: IMoveEvent): void { }
+
+    public zoom(_data: IZoomEvent): void { }
+
+    public rotate(_data: IRotateEvent): void { }
+
+    public transformEnd(): void { }
+
+    public wheel(_data: IWheelEvent): void { }
+
+    public multiTouch(_data: IUIEvent, _list: IKeepTouchData[]): void { }
+
+    // ---
 
     // key
 
@@ -554,18 +571,5 @@ export class InteractionBase implements IInteraction {
             this.downData = this.overPath = this.enterPath = null
         }
     }
-
-}
-
-export interface InteractionBase {
-
-    // @leafer-in/viewport will rewrite:  transform viewport
-    createTransformer(): void
-    move(data: IMoveEvent): void
-    zoom(data: IZoomEvent): void
-    rotate(data: IRotateEvent): void
-    transformEnd(): void
-    wheel(data: IWheelEvent): void
-    multiTouch(data: IUIEvent, list: IKeepTouchData[]): void
 
 }
