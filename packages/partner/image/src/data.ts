@@ -66,8 +66,8 @@ export function getPatternData(paint: IImagePaint, box: IBoundsData, image: ILea
             }
             break
         case 'repeat':
-        case 'brush':
             if (!sameBox || scaleX || rotation || skew) PaintImage.repeatMode(data, box, width, height, tempImage.x, tempImage.y, scaleX, scaleY, rotation, skew, align, paint.freeTransform)
+        case 'brush':
             if (!repeat) data.repeat = 'repeat'
             const count = isObject(repeat)
             if (gap || count) data.gap = getGapData(gap, count && repeat, tempImage.width, tempImage.height, box)
@@ -78,7 +78,7 @@ export function getPatternData(paint: IImagePaint, box: IBoundsData, image: ILea
             if (scaleX) PaintImage.fillOrFitMode(data, box, tempImage.x, tempImage.y, scaleX, scaleY, rotation)
     }
 
-    if (!data.transform) {
+    if (!data.transform && mode !== 'brush') {
         if (box.x || box.y) translate(data.transform = get(), box.x, box.y)
     }
 
