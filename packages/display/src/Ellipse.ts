@@ -61,6 +61,7 @@ export class Ellipse<TInputData = IEllipseInputData> extends UI<TInputData> impl
             } else {
                 if (drawInnerEllipse) {
                     ellipse(path, rx, ry, rx * innerRadius, ry * innerRadius)
+                    closePath(path)
                     moveTo(path, width, ry)
                     outerStartAngle = 360
                     outerAnticlockwise = true
