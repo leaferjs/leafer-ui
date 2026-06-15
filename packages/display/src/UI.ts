@@ -515,7 +515,7 @@ export class UI<TInputData = IUIInputData> extends Leaf<TInputData> implements I
         return Plugin.need('animate')
     }
 
-    // create
+    public killAnimate(_type?: IAnimateType, _nextStyle?: IUIInputData): void { }
 
     // @leafer-in/export will rewrite
     public export(_filename: IExportFileType | string, _options?: IExportOptions | number | boolean): Promise<IExportResult> {
@@ -570,8 +570,5 @@ export interface UI {
 
     createProxyData(): IUIInputData
     clearProxyData(): void
-
-    // @leafer-in/animate rewrite
-    killAnimate(type?: IAnimateType, nextStyle?: IUIInputData): void
 
 }
