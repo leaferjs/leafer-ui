@@ -29,21 +29,22 @@ export class Ellipse<TInputData = IEllipseInputData> extends UI<TInputData> impl
 
     public __updatePath(): void {
 
-        const data = this.__, { width, height, innerRadius, startAngle, endAngle } = data
+        const data = this.__, { width, height, innerRadius, startAngle, endAngle, closed } = data
         const rx = width / 2, ry = height / 2
 
         const path: number[] = data.path = []
-        let close = true, hasAngle: boolean, closedAngle: boolean
+        let open: boolean, hasAngle: boolean, closedAngle: boolean
 
         if (startAngle || endAngle) hasAngle = true
         if (hasAngle) closedAngle = abs(endAngle - startAngle) === 360
 
         if (innerRadius) {
 
+            const drawInnerEllipse = innerRadius < 1 || closed
             let outerStartAngle = startAngle, outerEndAngle = endAngle, outerAnticlockwise: boolean
 
             if (hasAngle) {
-                if (innerRadius < 1) {
+                if (drawInnerEllipse) {
                     ellipse(path, rx, ry, rx * innerRadius, ry * innerRadius, 0, startAngle, endAngle)
                     if (closedAngle) {
                         set(tempPoint, width, ry)
@@ -55,10 +56,10 @@ export class Ellipse<TInputData = IEllipseInputData> extends UI<TInputData> impl
                     outerEndAngle = startAngle
                     outerAnticlockwise = true
                 } else {
-                    if (!closedAngle) close = false // 画弧线
+                    if (!closedAngle) open = true // 画弧线
                 }
             } else {
-                if (innerRadius < 1) {
+                if (drawInnerEllipse) {
                     ellipse(path, rx, ry, rx * innerRadius, ry * innerRadius)
                     moveTo(path, width, ry)
                     outerStartAngle = 360
@@ -81,7 +82,7 @@ export class Ellipse<TInputData = IEllipseInputData> extends UI<TInputData> impl
 
         }
 
-        if (close) closePath(path)
+        if (!open) closePath(path)
 
         // fix node
         if (Platform.ellipseToCurve || data.__useArrow || data.cornerRadius) data.path = this.getPath(true)
