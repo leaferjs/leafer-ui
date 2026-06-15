@@ -104,7 +104,7 @@ function checkSizeAndCreateData(ui: IUI, attrName: IPaintAttr, paint: IImagePain
         }
     }
 
-    if (paint.mode === 'brush') PaintImage.brush(leafPaint, ui, attrName)
+    if (paint.mode === 'brush') PaintImage.brush(ui, attrName, leafPaint)
 
     if (!leafPaint.data) {
         PaintImage.createData(leafPaint, image, paint, boxBounds)
