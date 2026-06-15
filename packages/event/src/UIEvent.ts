@@ -57,9 +57,9 @@ export class UIEvent extends Event implements IUIEvent {
     }
 
     // 兼容代码，未来可移除
-    public getInner(relative?: ILeaf): IPointData { return this.getInnerPoint(relative) }
-    public getLocal(relative?: ILeaf): IPointData { return this.getLocalPoint(relative) }
-    public getPage(): IPointData { return this.getPagePoint() }
+    protected getInner(relative?: ILeaf): IPointData { return this.getInnerPoint(relative) }
+    protected getLocal(relative?: ILeaf): IPointData { return this.getLocalPoint(relative) }
+    protected getPage(): IPointData { return this.getPagePoint() }
     // ---
 
     static changeName(oldName: string, newName: string): void {
