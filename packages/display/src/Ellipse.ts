@@ -75,7 +75,10 @@ export class Ellipse<TInputData = IEllipseInputData> extends UI<TInputData> impl
         } else {
 
             if (hasAngle) {
-                if (!closedAngle) moveTo(path, rx, ry)
+                if (!closedAngle) {
+                    if (!closed) open = true
+                    if (!open) moveTo(path, rx, ry)
+                }
                 ellipse(path, rx, ry, rx, ry, 0, startAngle, endAngle)
             } else {
                 ellipse(path, rx, ry, rx, ry)
