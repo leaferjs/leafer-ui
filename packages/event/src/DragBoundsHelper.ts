@@ -90,7 +90,13 @@ export const DragBoundsHelper = {
         } else { // outer 模式
 
             if (scale.x < 0) {
-                if (float(minX(content) - minX(dragBounds), 2) <= 0 || float(maxX(dragBounds) - maxX(content), 2) <= 0) tempContent.scaleOf(origin, correctScaleX = 1 / scale.x, 1) // 到达边界时阻止镜像
+                if (float(minX(content) - minX(dragBounds), 2) <= 0 || float(maxX(dragBounds) - maxX(content), 2) <= 0) {
+                    tempContent.scaleOf(origin, correctScaleX = 1 / scale.x, 1) // 到达边界时阻止镜像
+                    if (tempContent.width > 1) {
+                        correctScaleX *= 1 / tempContent.width
+                        tempContent.width = 1
+                    }
+                }
                 tempContent.unsign()
             }
 
@@ -124,7 +130,13 @@ export const DragBoundsHelper = {
         } else { // outer 模式
 
             if (scale.y < 0) {
-                if (float(minY(content) - minY(dragBounds), 2) <= 0 || float(maxY(dragBounds) - maxY(content), 2) <= 0) tempContent.scaleOf(origin, 1, correctScaleY = 1 / scale.y) // 到达边界时阻止镜像
+                if (float(minY(content) - minY(dragBounds), 2) <= 0 || float(maxY(dragBounds) - maxY(content), 2) <= 0) {
+                    tempContent.scaleOf(origin, 1, correctScaleY = 1 / scale.y) // 到达边界时阻止镜像
+                    if (tempContent.height > 1) {
+                        correctScaleY *= 1 / tempContent.height
+                        tempContent.height = 1
+                    }
+                }
                 tempContent.unsign()
             }
 
