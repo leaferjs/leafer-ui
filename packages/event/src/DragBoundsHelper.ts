@@ -71,8 +71,8 @@ export const DragBoundsHelper = {
         tempDragBounds.set(dragBounds)
         tempContent.set(content).scaleOf(origin, scale.x, scale.y)
 
-        const originLeftScale = (origin.x - content.x) / content.width, originRightScale = 1 - originLeftScale
-        const originTopScale = (origin.y - content.y) / content.height, originBottomScale = 1 - originTopScale
+        const originLeftScale = float((origin.x - content.x) / content.width), originRightScale = float(1 - originLeftScale)
+        const originTopScale = float((origin.y - content.y) / content.height), originBottomScale = float(1 - originTopScale)
 
         let correctScaleX = 1, correctScaleY = 1, aScale: number, bScale: number, aSize: number, bSize: number
 
@@ -90,7 +90,7 @@ export const DragBoundsHelper = {
         } else { // outer 模式
 
             if (scale.x < 0) {
-                if (float(minX(content) - minX(dragBounds)) <= 0 || float(maxX(dragBounds) - maxX(content)) <= 0) tempContent.scaleOf(origin, correctScaleX = 1 / scale.x, 1) // 到达边界时阻止镜像
+                if (float(minX(content) - minX(dragBounds), 2) <= 0 || float(maxX(dragBounds) - maxX(content), 2) <= 0) tempContent.scaleOf(origin, correctScaleX = 1 / scale.x, 1) // 到达边界时阻止镜像
                 tempContent.unsign()
             }
 
@@ -124,7 +124,7 @@ export const DragBoundsHelper = {
         } else { // outer 模式
 
             if (scale.y < 0) {
-                if (float(minY(content) - minY(dragBounds)) <= 0 || float(maxY(dragBounds) - maxY(content)) <= 0) tempContent.scaleOf(origin, 1, correctScaleY = 1 / scale.y) // 到达边界时阻止镜像
+                if (float(minY(content) - minY(dragBounds), 2) <= 0 || float(maxY(dragBounds) - maxY(content), 2) <= 0) tempContent.scaleOf(origin, 1, correctScaleY = 1 / scale.y) // 到达边界时阻止镜像
                 tempContent.unsign()
             }
 
