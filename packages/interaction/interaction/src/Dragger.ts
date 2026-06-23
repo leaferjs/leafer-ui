@@ -131,7 +131,7 @@ export class Dragger {
                 if (leaf.draggable) {
                     const axisDrag = isString(leaf.draggable)
                     const move = DragEvent.getValidMove(leaf, this.dragStartPoints[leaf.innerId], { x: totalX, y: totalY }, checkLimitMove || axisDrag)
-                    if (dragLimitAnimate && !axisDrag && isDragEnd) LeafHelper.animateMove(leaf, move, isNumber(dragLimitAnimate) ? dragLimitAnimate : 0.3)
+                    if (dragLimitAnimate && !axisDrag && isDragEnd) LeafHelper.animateMove(leaf, move, isNumber(dragLimitAnimate) ? dragLimitAnimate : 0.3, () => leaf.emit(DragEvent.ANIMATE))
                     else leaf.move(move)
                 }
             })
