@@ -36,13 +36,9 @@ export function createPattern(paint: ILeafPaint, ui: IUI, canvas: ILeaferCanvas,
             height *= scaleY
 
             // 平铺间距
-            if (gap) {
+            if (gap && !brush) {
                 xGap = gap.x * scaleX / abs(data.scaleX || 1)
                 yGap = gap.y * scaleY / abs(data.scaleY || 1)
-                if (brush) {
-                    const brushScale = PaintImage.getBrushScale(paint, ui)
-                    xGap /= brushScale, yGap /= brushScale
-                }
             }
 
             if (transform || scaleX !== 1 || scaleY !== 1) {
