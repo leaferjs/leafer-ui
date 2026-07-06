@@ -367,8 +367,7 @@ export class Interaction extends InteractionBase {
     public destroy(): void {
         if (this.view) {
             super.destroy()
-            this.view = null
-            this.touches = null
+            this.view = this.touches = null
         }
     }
 
