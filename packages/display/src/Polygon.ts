@@ -31,6 +31,7 @@ export class Polygon<TInputData = IPolygonInputData> extends UI<TInputData> impl
     @pathType(0)
     public curve?: boolean | number
 
+    public get isPointsMode(): boolean { return this.points && !this.pathInputed }
 
     public __updatePath(): void {
 

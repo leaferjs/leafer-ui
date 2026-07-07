@@ -34,6 +34,8 @@ export class Line<TInputData = ILineInputData> extends UI<TInputData> implements
     @pathType(false)
     declare public closed?: boolean
 
+    public get isPointsMode(): boolean { return this.points && !this.pathInputed }
+
     public get toPoint(): IPointData {
         const { width, rotation } = this.__
         const to: IPointData = getPointData()
