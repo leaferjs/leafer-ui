@@ -488,8 +488,8 @@ export class UI<TInputData = IUIInputData> extends Leaf<TInputData> implements I
 
     public __drawPath(canvas: ILeaferCanvas): void {
         const data = this.__ as ILineData
-        canvas.beginPath();
-        (this as IUI).isPointsMode ? PathDrawer.drawPathByPoints(canvas, data.points, data.closed) : this.__drawPathByData(canvas, data.path, true)
+        canvas.beginPath()
+        data.__usePointsMode ? PathDrawer.drawPathByPoints(canvas, data.points, data.closed) : this.__drawPathByData(canvas, data.path, true)
     }
 
     public __drawPathByData(drawer: IPathDrawer, data: IPathCommandData, ignoreCornerRadius?: boolean): void {
