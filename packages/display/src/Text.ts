@@ -114,7 +114,7 @@ export class Text<TInputData = ITextInputData> extends UI<TInputData> implements
 
         stintSet(data, '__padding', padding && MathHelper.fourNumber(padding))
         stintSet(data, '__clipText', textOverflow !== 'show' && !data.__autoSize)
-        stintSet(data, '__isCharMode', (width || height || data.__letterSpacing || (textCase !== 'none')) as boolean)
+        stintSet(data, '__isCharMode', (width || height || data.__letterSpacing || data.motionText || (textCase !== 'none')) as boolean)
 
         data.__textDrawData = TextConvert.getDrawData((data.__isPlacehold = data.placeholder && data.text === '') ? data.placeholder : data.text, this.__)
     }

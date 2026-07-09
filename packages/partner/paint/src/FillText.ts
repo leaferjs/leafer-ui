@@ -2,8 +2,12 @@ import { ILeaferCanvas, IRenderOptions } from '@leafer/interface'
 
 import { ITextRowData, IText } from '@leafer-ui/interface'
 
+import { Paint } from '@leafer-ui/external'
 
-export function fillText(ui: IText, canvas: ILeaferCanvas, _renderOptions: IRenderOptions): void {
+
+export function fillText(ui: IText, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void {
+
+    if (ui.motionText) return Paint.fillMotionText(ui, canvas, renderOptions)
 
     const data = ui.__, { rows, decorationY } = data.__textDrawData
     if (data.__isPlacehold && data.placeholderColor) canvas.fillStyle = data.placeholderColor
