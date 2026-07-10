@@ -22,6 +22,8 @@ export function getDrawData(content: string | number, style: ITextData): ITextDr
 
     const { __padding: padding } = style
 
+    if (style.motionText) width = height = 0
+
     if (padding) {
         if (width) x = padding[left], width -= (padding[right] + padding[left]), !width && (width = 0.01) // 防止变为自动宽度
         else if (!style.autoSizeAlign) x = padding[left]

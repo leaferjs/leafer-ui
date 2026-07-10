@@ -65,8 +65,12 @@ ui.__hit = function (inner: IRadiusPointData, forceHitFill?: boolean): boolean {
     const radiusWidth = inner.radiusX * 2
     let hitWidth = radiusWidth
 
+    let { strokeAlign } = data
+
+    if (data.motionText) hitWidth += data.fontSize / 2, strokeAlign = 'center' // 运动文本
+
     if (needHitStrokePath) {
-        switch (data.strokeAlign) {
+        switch (strokeAlign) {
             case 'inside':
                 hitWidth += strokeWidth * 2
                 if (!needHitFillPath && this.__hitFill(inner) && this.__hitStroke(inner, hitWidth)) return true

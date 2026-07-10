@@ -150,7 +150,7 @@ export class Text<TInputData = ITextInputData> extends UI<TInputData> implements
 
         if (italic) b.width += fontSize * 0.16 // 倾斜会导致文本的bounds增大
 
-        DataHelper.stintSet(this, 'isOverflow', !includes(b, contentBounds))
+        DataHelper.stintSet(this, 'isOverflow', !includes(b, contentBounds) && !data.motionText)
 
         if (this.isOverflow) setList(data.__textBoxBounds = {} as IBoundsData, [b, contentBounds]), layout.renderChanged = true
         else data.__textBoxBounds = b
