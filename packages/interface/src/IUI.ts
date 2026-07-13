@@ -642,7 +642,7 @@ export interface IUIComputedData extends IUIAttrData, IFillComputedData, IBorder
 
 }
 
-export interface IUIBaseInputData extends IUIAttrData, IFillInputData, IStrokeInputData, ITextStyleInputData, ICornerRadiusInputData, IEffectInputData, ILeafInputData {
+export interface IUIBaseInputData extends IUIAttrData, IFillInputData, IStrokeInputData, ITextStyleInputData, ICornerRadiusInputData, IEffectInputData, ILeafInputData, IObject {
     children?: IUIInputData[]
 }
 
@@ -677,7 +677,7 @@ export type IUITag =
     | 'CanvasBox'
 
 
-export interface IUIInputData extends IRectInputData, IEllipseInputData, IPolygonInputData, IStarInputData, ILineInputData, IPathInputData, ITextInputData, IImageInputData, IGroupInputData, IBoxInputData, IFrameInputData, IFlowInputData, IArrowInputData, IVideoInputData, IRobotInputData, IUIBaseInputData, IObject {
+export interface IUIInputData extends IRectInputData, IEllipseInputData, IPolygonInputData, IStarInputData, ILineInputData, IPathInputData, ITextInputData, IImageInputData, IGroupInputData, IBoxInputData, IFrameInputData, IFlowInputData, IArrowInputData, IVideoInputData, IRobotInputData, IUIBaseInputData {
     children?: IUIInputData[]
 }
 
