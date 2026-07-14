@@ -93,7 +93,7 @@ function checkSizeAndCreateData(ui: IUI, attrName: IPaintAttr, paint: IImagePain
         data.__naturalWidth = image.width / data.pixelRatio
         data.__naturalHeight = image.height / data.pixelRatio
         if (data.__autoSide) {
-            ui.forceUpdate('width')
+            ui.forceUpdate()
             LeafHelper.updateBounds(ui) // 立即更新 boxBounds，避免图片闪动
             ui.__layout.boundsChanged = true // fix(flow): 仍需要标记，以通知父级更新 bounds
             if (ui.__proxyData) {
