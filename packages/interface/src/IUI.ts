@@ -47,6 +47,9 @@ export interface IArrowInputData extends IArrowAttrData, ILineInputData { }
 export interface ILinker extends ILine {
     __: ILinkerData
 
+    startPoint?: ILinkerPointData
+    endPoint?: ILinkerPointData
+
     startNode: IUI
     endNode: IUI
 

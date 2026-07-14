@@ -113,6 +113,7 @@ export interface IEditorConfig extends IObject {
     point?: IEditPointInputData | IEditPointInputData[]
     middlePoint?: IEditPointInputData | IEditPointInputData[]
     resizeLine?: IEditPointInputData | IEditPointInputData[]
+    linkPoint?: IEditPointInputData | IEditPointInputData[]
 
     rect?: IBoxInputData
     rectThrough?: boolean // 是否穿透rect（穿透后，可以拾取到rect下面的元素，默认单选元素时穿透）
@@ -136,6 +137,7 @@ export interface IEditorConfig extends IObject {
     hideOnSmall?: boolean | number
     hideRotatePoints?: boolean // 是否隐藏透明的旋转控制点
     hideResizeLines?: boolean  // 是否隐藏透明的resize线条
+    hideLinkPoints?: boolean
 
     moveCursor?: ICursorType
     resizeCursor?: IImageCursor
@@ -291,6 +293,7 @@ export interface IEditBoxBase extends IGroup {
     resizePoints: IEditPoint[]
     rotatePoints: IEditPoint[]
     resizeLines: IEditPoint[]
+    linkPoints: IEditPoint[]
 
     enterPoint: IEditPoint
     dragPoint: IEditPoint // 正在拖拽的控制点

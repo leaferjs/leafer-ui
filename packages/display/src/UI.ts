@@ -220,6 +220,9 @@ export class UI<TInputData = IUIInputData> extends Leaf<TInputData> implements I
     @dataType(false)
     public editable?: IBoolean
 
+    // need rewrite
+    public linkable?: IBoolean
+
 
     // hit
     @hitType(true)
