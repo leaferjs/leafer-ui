@@ -164,6 +164,7 @@ export class Dragger {
 
     public dragEnd(data: IPointerEvent): void {
         if (!this.dragging && !this.moving) return
+        setTimeout(() => this.interaction.pointerMove(data)) // 多进行一次move, hover需要回归state状态
         if (this.checkDragEndAnimate(data)) return
         this.dragEndReal(data)
     }
