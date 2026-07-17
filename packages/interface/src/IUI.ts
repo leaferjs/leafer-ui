@@ -494,7 +494,8 @@ export interface IUI extends IUIAttrData, IFillAttrData, IStrokeAttrData, ICorne
     leafer?: ILeafer
     parent?: IGroup
     zoomLayer?: IGroup
-    readonly isFrame?: boolean
+    frame?: IFrame
+
     isOverflow?: boolean
     useFastShadow?: boolean // 将忽略 stroke 产生的阴影，只对单个 fill 有效
 
