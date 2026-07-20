@@ -58,7 +58,8 @@ ui.__hit = function (inner: IRadiusPointData, forceHitFill?: boolean): boolean {
     const needHitFillPath = ((data.fill || data.__isCanvas) && (hitFill === 'path' || (hitFill === 'pixel' && !(data.__isAlphaPixelFill || data.__isCanvas)))) || hitFill === 'all' || forceHitFill
     if (needHitFillPath && this.__hitFill(inner)) return true
 
-    const { hitStroke, __maxStrokeWidth: strokeWidth } = data
+    const { hitStroke, strokeScaleFixed } = data
+    const strokeWidth = data.__maxStrokeWidth * (strokeScaleFixed ? this.getRenderScaleData(true, strokeScaleFixed, false).scaleX : 1) // 考虑固定线宽的情况
     const needHitStrokePath = (data.stroke && (hitStroke === 'path' || (hitStroke === 'pixel' && !data.__isAlphaPixelStroke))) || hitStroke === 'all'
     if (!needHitFillPath && !needHitStrokePath) return false
 
