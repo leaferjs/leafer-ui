@@ -307,9 +307,12 @@ export interface IFilmInputData extends IFilmAttrData, IUIBaseInputData { }
 // Video
 export interface IVideo extends IVideoAttrData, IPlayerMethods, IImage {
     __: IVideoData
+    duration: number // 总时长
     currentTime: number // 当前播放进度 (秒)
     volume: number // 音量 0 ~1 
-    readonly ended: boolean
+
+    readonly paused: boolean
+    readonly ended: boolean // 是否播放结束
 }
 
 interface IPlayerMethods {

@@ -41,36 +41,35 @@ export class Ellipse<TInputData = IEllipseInputData> extends UI<TInputData> impl
         if (innerRadius) {
 
             const drawInnerEllipse = innerRadius < 1 || closed
-            let outerStartAngle = startAngle, outerEndAngle = endAngle, outerAnticlockwise: boolean
+            const innerRx = rx * innerRadius, innerRy = ry * innerRadius
 
             if (hasAngle) {
+
+                ellipse(path, rx, ry, rx, ry, 0, startAngle, endAngle)
+
                 if (drawInnerEllipse) {
-                    ellipse(path, rx, ry, rx * innerRadius, ry * innerRadius, 0, startAngle, endAngle)
                     if (closedAngle) {
-                        set(tempPoint, width, ry)
-                        set(tempCenter, rx, ry)
+                        closePath(path)
+                        set(tempPoint, rx + innerRx, ry), set(tempCenter, rx, ry)
                         rotate(tempPoint, endAngle, tempCenter, rx, ry)
                         moveTo(path, tempPoint.x, tempPoint.y)
                     }
-                    outerStartAngle = endAngle
-                    outerEndAngle = startAngle
-                    outerAnticlockwise = true
+                    ellipse(path, rx, ry, innerRx, innerRy, 0, endAngle, startAngle, true)
                 } else {
                     if (!closedAngle) open = true // 画弧线
                 }
-            } else {
-                if (drawInnerEllipse) {
-                    ellipse(path, rx, ry, rx * innerRadius, ry * innerRadius)
-                    closePath(path)
-                    moveTo(path, width, ry)
-                    outerStartAngle = 360
-                    outerAnticlockwise = true
-                } else {
-                    outerEndAngle = 360
-                }
-            }
 
-            ellipse(path, rx, ry, rx, ry, 0, outerStartAngle, outerEndAngle, outerAnticlockwise)
+            } else {
+
+                ellipse(path, rx, ry, rx, ry)
+
+                if (drawInnerEllipse) {
+                    closePath(path)
+                    moveTo(path, rx + innerRx, ry)
+                    ellipse(path, rx, ry, innerRx, innerRy, 0, 360, 0, true)
+                }
+
+            }
 
         } else {
 
