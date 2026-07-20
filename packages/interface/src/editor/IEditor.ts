@@ -165,7 +165,7 @@ export interface IEditorConfig extends IObject {
     selectedPathType?: 'path' | 'render-path' | 'box' | 'stroke'
     multipleSelect?: boolean
 
-    boxSelect?: boolean
+    boxSelect?: boolean | 'hit' | 'includes'
     continuousSelect?: boolean // 点击可以连续选择
     openInner?: 'double' | 'long' // 双击/长按打开内部
 
