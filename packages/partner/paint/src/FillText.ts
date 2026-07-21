@@ -2,7 +2,7 @@ import { ILeaferCanvas, IRenderOptions } from '@leafer/interface'
 
 import { ITextRowData, IText } from '@leafer-ui/interface'
 
-import { Paint } from '@leafer-ui/external'
+import { Paint } from '@leafer-ui/draw'
 
 
 export function fillText(ui: IText, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void {
