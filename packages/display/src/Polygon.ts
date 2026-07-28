@@ -1,4 +1,4 @@
-import { INumber, IPointData } from '@leafer/interface'
+import { INumber, IPointData, IPointsCurve } from '@leafer/interface'
 import { PathCommandDataHelper, dataProcessor, pathType, registerUI, rewriteAble, OneRadian } from '@leafer/core'
 
 import { IPolygon, IPolygonData, IPolygonInputData } from '@leafer-ui/interface'
@@ -29,7 +29,7 @@ export class Polygon<TInputData = IPolygonInputData> extends UI<TInputData> impl
     public points?: number[] | IPointData[]
 
     @pathType(0)
-    public curve?: boolean | number
+    public curve?: IPointsCurve
 
     public get isPointsMode(): boolean { return this.points && !this.pathInputed }
 
@@ -40,7 +40,7 @@ export class Polygon<TInputData = IPolygonInputData> extends UI<TInputData> impl
 
         if (data.points) {
 
-            drawPoints(path, data.points, data.curve, data.closed)
+            drawPoints(path, data.points, data.curve, data.closed, data)
 
         } else {
 

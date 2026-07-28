@@ -1,4 +1,4 @@
-import { IPointData, INumber } from '@leafer/interface'
+import { IPointData, INumber, IPointsCurve } from '@leafer/interface'
 import { PathCommandDataHelper, PointHelper, boundsType, pathType, affectStrokeBoundsType, dataProcessor, registerUI, getPointData } from '@leafer/core'
 
 import { ILine, ILineData, ILineInputData, IStrokeAlign } from '@leafer-ui/interface'
@@ -29,7 +29,7 @@ export class Line<TInputData = ILineInputData> extends UI<TInputData> implements
     public points?: number[] | IPointData[]
 
     @pathType(0)
-    public curve?: boolean | number
+    public curve?: IPointsCurve
 
     @pathType(false)
     declare public closed?: boolean
@@ -60,7 +60,7 @@ export class Line<TInputData = ILineInputData> extends UI<TInputData> implements
 
         if (data.points) {
 
-            drawPoints(path, data.points, data.curve, data.closed)
+            drawPoints(path, data.points, data.curve, data.closed, data)
 
         } else {
 

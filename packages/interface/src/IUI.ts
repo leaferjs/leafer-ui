@@ -1,4 +1,4 @@
-import { ILeaf, ILeafComputedData, ILeafData, ILeafInputData, ILeaferCanvas, IRenderOptions, IExportOptions, IExportResult, IPathDrawer, IPointData, IPathCommandData, IBoundsData, IObject, IPathString, ILeaferImage, IPathCreator, IAnswer, IPickOptions, IPickResult, IValue, ICanvasContext2DSettings, IFourNumber, IFindCondition, IBoolean, ICanvasContext2D, IJSONOptions, IMatrixData, ISizeData, ITransition, IAround, IMultimediaType, IDirection4, IOptionPointData, IDirection, IPathCommandDataWithWindingRule, IRotationPointData } from '@leafer/interface'
+import { ILeaf, ILeafComputedData, ILeafData, ILeafInputData, ILeaferCanvas, IRenderOptions, IExportOptions, IExportResult, IPathDrawer, IPointData, IPathCommandData, IBoundsData, IObject, IPathString, ILeaferImage, IPathCreator, IAnswer, IPickOptions, IPickResult, IValue, ICanvasContext2DSettings, IFourNumber, IFindCondition, IBoolean, ICanvasContext2D, IJSONOptions, IMatrixData, ISizeData, ITransition, IAround, IMultimediaType, IDirection4, IOptionPointData, IDirection, IPathCommandDataWithWindingRule, IRotationPointData, IPointsCurve } from '@leafer/interface'
 
 import {
     IFillAttrData, IFillInputData, IFillComputedData,
@@ -25,7 +25,7 @@ export interface ILine extends ILineAttrData, IUI {
 interface ILineAttrData {
     toPoint?: IPointData
     points?: number[] | IPointData[]
-    curve?: boolean | number
+    curve?: IPointsCurve
 }
 export interface ILineData extends ILineAttrData, IUIData { }
 export interface ILineInputData extends ILineAttrData, IUIBaseInputData { }
@@ -134,7 +134,7 @@ interface IPolygonAttrData {
     sides?: number
     startAngle?: number
     points?: number[] | IPointData[]
-    curve?: boolean | number
+    curve?: IPointsCurve
 }
 export interface IPolygonData extends IPolygonAttrData, IUIData { }
 export interface IPolygonInputData extends IPolygonAttrData, IUIBaseInputData { }

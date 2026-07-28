@@ -1,6 +1,6 @@
 import { PathCreator, dataProcessor, defineKey, registerUI, useModule } from '@leafer/core'
 
-import { IPenData, IPenInputData, IPathInputData, IPathCommandData, IPath, IPen, IPointData } from '@leafer-ui/interface'
+import { IPenData, IPenInputData, IPathInputData, IPathCommandData, IPath, IPen, IPointData, IObject } from '@leafer-ui/interface'
 import { PenData } from '@leafer-ui/data'
 
 import { Group } from './Group'
@@ -62,7 +62,7 @@ export interface Pen {
     // moveTo, then draw
     drawEllipse(x: number, y: number, radiusX: number, radiusY: number, rotation?: number, startAngle?: number, endAngle?: number, anticlockwise?: boolean): Pen
     drawArc(x: number, y: number, radius: number, startAngle?: number, endAngle?: number, anticlockwise?: boolean): Pen
-    drawPoints(points: number[] | IPointData[], curve?: boolean | number, close?: boolean): Pen
+    drawPoints(points: number[] | IPointData[], curve?: boolean | number, close?: boolean, options?: IObject): Pen
     clearPath(): Pen  // = beginPath()
 
 }
