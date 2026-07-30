@@ -324,6 +324,9 @@ export interface IEditBoxBase extends IGroup {
     getPointsStyle(): IBoxInputData[]
     getMiddlePointsStyle(): IBoxInputData[]
 
+    updateMoveCursor(): void
+    updatePointCursor(e: IUIEvent): void
+
     showView(): void
     hideView(): void
 
