@@ -1,4 +1,4 @@
-import { ILeaf, ILeafComputedData, ILeafData, ILeafInputData, ILeaferCanvas, IRenderOptions, IExportOptions, IExportResult, IPathDrawer, IPointData, IPathCommandData, IBoundsData, IObject, IPathString, ILeaferImage, IPathCreator, IAnswer, IPickOptions, IPickResult, IValue, ICanvasContext2DSettings, IFourNumber, IFindCondition, IBoolean, ICanvasContext2D, IJSONOptions, IMatrixData, ISizeData, ITransition, IAround, IMultimediaType, IDirection4, IOptionPointData, IDirection, IPathCommandDataWithWindingRule, IRotationPointData, IPointsCurve } from '@leafer/interface'
+import { ILeaf, ILeafComputedData, ILeafData, ILeafInputData, ILeaferCanvas, IRenderOptions, IExportOptions, IExportResult, IPathDrawer, IPointData, IPathCommandData, IBoundsData, IObject, IPathString, ILeaferImage, IPathCreator, IAnswer, IPickOptions, IPickResult, IValue, ICanvasContext2DSettings, IFourNumber, IFindCondition, IBoolean, ICanvasContext2D, IJSONOptions, IMatrixData, ISizeData, ITransition, IAround, IMultimediaType, IDirection4, IOptionPointData, IDirection, IPathCommandDataWithWindingRule, IRotationPointData, IPointsCurve, IOverflow } from '@leafer/interface'
 
 import {
     IFillAttrData, IFillInputData, IFillComputedData,
@@ -9,7 +9,7 @@ import {
     ITextStyleAttrData, ITextStyleInputData, ITextStyleComputedData,
     IStrokeComputedStyle
 } from './ICommonAttr'
-import { IFill, IOverflow, IPaintAttr } from './type/IType'
+import { IFill, IPaintAttr } from './type/IType'
 import { IAnimation, IAnimate, IKeyframe, IKeyframeId, IAnimateType } from './IAnimation'
 import { ILeafer } from './app/ILeafer'
 import { IEditorConfig } from './editor/IEditor'

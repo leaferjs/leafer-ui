@@ -236,6 +236,4 @@ export interface IEffect extends IFilter {
 
 }
 
-export type IOverflow = 'show' | 'hide' | 'scroll' | 'x-scroll' | 'y-scroll'
-
 export type ITextOverflow = 'show' | 'hide' | 'ellipsis' | (string & {})
