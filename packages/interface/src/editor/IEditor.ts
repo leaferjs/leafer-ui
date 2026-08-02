@@ -334,6 +334,9 @@ export interface IEditBoxBase extends IGroup {
     update(): void
     unload(): void
 
+    addBottomList(): void
+    removeBottomList(): void
+
     onArrow(e: IKeyEvent): void
     isHoldRotateKey(e: IUIEvent): boolean
 
