@@ -27,6 +27,14 @@ const cjkRangeList = [
     [0x2F00, 0x2FDF], // Kangxi Radicals
     [0x2FF0, 0x2FFF], // Ideographic Description Characters
     [0x3000, 0x303F], // CJK Symbols and Punctuation
+    [0x1100, 0x11FF], // Hangul Jamo
+    [0x3040, 0x309F], // Hiragana
+    [0x30A0, 0x30FF], // Katakana
+    [0x3100, 0x312F], // Bopomofo
+    [0x3130, 0x318F], // Hangul Compatibility Jamo
+    [0x3190, 0x319F], // Kanbun
+    [0x31A0, 0x31BF], // Bopomofo Extended
+    [0x31F0, 0x31FF], // Katakana Phonetic Extensions
     [0x31C0, 0x31EF], // CJK Strokes
     [0x3200, 0x32FF], // Enclosed CJK Letters and Months
     [0x3300, 0x33FF], // CJK Compatibility
@@ -36,7 +44,7 @@ const cjkRangeList = [
     [0x2F800, 0x2FA1F], // CJK Compatibility Ideographs Supplement
 ]
 
-const cjkReg = new RegExp(cjkRangeList.map(([start, end]) => `[\\u${start.toString(16)}-\\u${end.toString(16)}]`).join('|'))
+const cjkReg = new RegExp(cjkRangeList.map(([start, end]) => `[\\u{${start.toString(16)}}-\\u{${end.toString(16)}}]`).join('|'), 'u')
 
 function mapChar(str: string): IBooleanMap {
     const map: IBooleanMap = {}
