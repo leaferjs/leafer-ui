@@ -1,4 +1,4 @@
-import { ILeaferCanvas, IRenderOptions, IPathDrawer, IPathCommandData, IHitType, IHitThrough, INumber, IBoolean, IString, IPathString, IExportFileType, IPointData, ICursorType, IMaskType, IEraserType, IWindingRule, IPathCreator, IFourNumber, IBoundsData, IFlowType, IGap, IFlowWrap, IAxis, IConstraint, IAutoBoxData, IFlowBoxType, IPointGap, IFlowAlign, IFlowAxisAlign, IFindCondition, IAutoSize, IRangeSize, IObject, IScaleData, IUnitData, IPathCommandObject, ITransition, IFilter, IScaleFixed, IDragBoundsType, IPathCommandNode, IEditable, ILinkable, IAround, IPosition } from '@leafer/interface'
+import { ILeaferCanvas, IRenderOptions, IPathDrawer, IPathCommandData, IHitType, IHitThrough, INumber, IBoolean, IString, IPathString, IExportFileType, IPointData, ICursorType, IMaskType, IEraserType, IWindingRule, IPathCreator, IFourNumber, IBoundsData, IFlowType, IGap, IFlowWrap, IAxis, IConstraint, IAutoBoxData, IFlowBoxType, IPointGap, IFlowAlign, IFlowAxisAlign, IFindCondition, IAutoSize, IRangeSize, IObject, IScaleData, IUnitData, IPathCommandObject, ITransition, IFilter, IScaleFixed, IDragBoundsType, IPathCommandNode, IEditable, ILinkable, IAround, IPosition, IBoundsType } from '@leafer/interface'
 import { Leaf, PathDrawer, surfaceType, dimType, dataType, positionType, scrollType, boundsType, pathType, scaleType, rotationType, opacityType, visibleType, sortType, maskType, dataProcessor, registerUI, useModule, rewriteAble, UICreator, PathCorner, hitType, strokeType, PathConvert, eraserType, cursorType, autoLayoutType, pen, naturalBoundsType, pathInputType, MathHelper, Plugin, DataHelper, affectRenderBoundsType, isString, isNumber } from '@leafer/core'
 
 import { IUI, IShadowEffect, IBlurEffect, IStrokeAlign, IStrokeJoin, IStrokeCap, IBlendMode, IDashPatternString, IShadowString, IGrayscaleEffect, IUIData, IGroup, IStrokeWidthString, ICornerRadiusString, IUIInputData, IExportOptions, IExportResult, IFill, IStroke, IArrowStyle, IFindUIMethod, ILeafer, IEditorConfig, IEditorConfigFunction, IEditToolFunction, IKeyframe, IAnimation, IAnimate, IStates, IStateName, IAnimateType, IStateStyle, IColorString, IAnimateList, ILeafPaint, ILinker, IPathCommandDataWithRadius, ILineData, IFrame } from '@leafer-ui/interface'
@@ -463,7 +463,7 @@ export class UI<TInputData = IUIInputData> extends Leaf<TInputData> implements I
     public getPath(curve?: boolean, pathForRender?: boolean): IPathCommandData {
         this.__layout.update()
         let path = pathForRender ? this.__.__pathForRender : this.__.path
-        if (!path) pen.set(path = []), this.__drawPathByBox(pen, !pathForRender)
+        if (!path) pen.set(path = []), this.__drawPathByBox(pen, 'box', !pathForRender)
         return curve ? PathConvert.toCanvasData(path, true) : path
     }
 
@@ -510,11 +510,11 @@ export class UI<TInputData = IUIInputData> extends Leaf<TInputData> implements I
     }
 
     public __drawPathByData(drawer: IPathDrawer, data: IPathCommandData, ignoreCornerRadius?: boolean): void {
-        data ? PathDrawer.drawPathByData(drawer, data) : this.__drawPathByBox(drawer, ignoreCornerRadius)
+        data ? PathDrawer.drawPathByData(drawer, data) : this.__drawPathByBox(drawer, 'box', ignoreCornerRadius)
     }
 
-    public __drawPathByBox(drawer: IPathDrawer, ignoreCornerRadius?: boolean): void {
-        const { x, y, width, height } = this.__layout.boxBounds
+    public __drawPathByBox(drawer: IPathDrawer, boundsType: IBoundsType = 'box', ignoreCornerRadius?: boolean): void {
+        const { x, y, width, height } = this.__layout[(boundsType + 'Bounds') as 'boxBounds']
         if (this.__.cornerRadius && !ignoreCornerRadius) {
             const { cornerRadius } = this.__
             drawer.roundRect(x, y, width, height, isNumber(cornerRadius) ? [cornerRadius] : cornerRadius) // 修复微信浏览器bug, 后续需进一步优化
