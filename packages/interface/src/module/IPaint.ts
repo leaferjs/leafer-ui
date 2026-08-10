@@ -12,8 +12,8 @@ export interface IPaintModule {
     fill(fill: string, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void
     fills(fills: ILeafPaint[], ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void
 
-    fillPathOrText(ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void
-    fillText(ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void
+    fillPathOrText(ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions, complexPaint?: boolean): void
+    fillText(ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions, complexPaint?: boolean): void
     fillMotionText?(ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void
 
     stroke(stroke: string | ILeafPaint[], ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void

@@ -39,7 +39,7 @@ export function fills(fills: ILeafPaint[], ui: IUI, canvas: ILeaferCanvas, rende
                 if (scaleX !== 1) canvas.scale(scaleX, scaleY)
             }
             if (originPaint.blendMode) canvas.blendMode = originPaint.blendMode
-            fillPathOrText(ui, canvas, renderOptions)
+            fillPathOrText(ui, canvas, renderOptions, true)
             canvas.restore()
 
         } else {
@@ -58,6 +58,6 @@ export function fills(fills: ILeafPaint[], ui: IUI, canvas: ILeaferCanvas, rende
 }
 
 
-export function fillPathOrText(ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void {
-    ui.__.__font ? Paint.fillText(ui, canvas, renderOptions) : (ui.__.windingRule ? canvas.fill(ui.__.windingRule) : canvas.fill())
+export function fillPathOrText(ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions, complexPaint?: boolean): void {
+    ui.__.__font ? Paint.fillText(ui, canvas, renderOptions, complexPaint) : (ui.__.windingRule ? canvas.fill(ui.__.windingRule) : canvas.fill())
 }
