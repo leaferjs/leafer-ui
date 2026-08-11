@@ -22,7 +22,7 @@ Official Website: [leaferjs.com](https://www.leaferjs.com)
 
 <div align="center">
 
-[![NPM Downloads](https://img.shields.io/npm/dm/@leafer/core?style=flat-square&color=32cd79)](https://www.npmjs.com/package/@leafer/core)
+[![NPM Downloads](https://img.shields.io/npm/dm/@leafer-ui/draw?style=flat-square&color=32cd79)](https://www.npmjs.com/package/@leafer-ui/draw)
 [![GitHub Stars](https://img.shields.io/github/stars/leaferjs/leafer-ui?style=flat-square&label=Stars&color=ffd700)](https://github.com/leaferjs/leafer-ui/stargazers)
 [![GitHub Release](https://img.shields.io/github/v/release/leaferjs/leafer-ui)](https://github.com/leaferjs/leafer-ui/releases)
 [![GitHub License](https://img.shields.io/github/license/leaferjs/leafer-ui)](https://github.com/leaferjs/leafer-ui/blob/main/LICENSE)
