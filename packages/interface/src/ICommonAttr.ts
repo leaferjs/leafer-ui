@@ -110,6 +110,7 @@ export interface ITextStyleInputData {
     textCase?: ITextCase
     textDecoration?: ITextDecoration
     letterSpacing?: INumber | IUnitData
+    wordSpacing?: INumber | IUnitData
     lineHeight?: INumber | IUnitData
 
     paraIndent?: INumber
@@ -131,6 +132,7 @@ export interface ITextStyleComputedData {
     textCase?: ITextCase
     textDecoration?: ITextDecoration
     letterSpacing?: number | IUnitData
+    wordSpacing?: INumber | IUnitData
     lineHeight?: number | IUnitData
 
     paraIndent?: number

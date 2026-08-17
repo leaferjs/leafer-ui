@@ -68,6 +68,9 @@ export class Text<TInputData = ITextInputData> extends UI<TInputData> implements
     @boundsType(0)
     public letterSpacing?: INumber | IUnitData
 
+    @boundsType(0)
+    public wordSpacing?: INumber | IUnitData
+
     @boundsType({ type: 'percent', value: 1.5 } as IUnitData)
     public lineHeight?: INumber | IUnitData
 
