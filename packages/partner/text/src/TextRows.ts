@@ -21,13 +21,15 @@ export function createRows(drawData: ITextDrawData, content: string, style: ITex
     bounds = drawData.bounds
     findMaxWidth = !bounds.width && !style.autoSizeAlign
 
-    const { __letterSpacing, paraIndent, textCase } = style
+    const { paraIndent, textCase } = style
     const { canvas } = Platform, { width } = bounds
 
     if (style.__isCharMode) {
 
         const wrap = style.textWrap !== 'none'
         const breakAll = style.textWrap === 'break'
+        const letterSpacing = style.__letterSpacing
+        const wordSpacing = style.__wordSpacing
 
         paraStart = true
         lastCharType = null
@@ -55,9 +57,9 @@ export function createRows(drawData: ITextDrawData, content: string, style: ITex
                 if (charType === Letter && textCase !== 'none') char = getTextCase(char, textCase, !wordWidth)
 
                 charWidth = canvas.measureText(char).width
-                if (__letterSpacing) {
-                    if (__letterSpacing < 0) charSize = charWidth
-                    charWidth += __letterSpacing
+                if (letterSpacing) {
+                    if (letterSpacing < 0) charSize = charWidth
+                    charWidth += letterSpacing
                 }
 
                 langBreak = (charType === Single && (lastCharType === Single || lastCharType === Letter)) || (lastCharType === Single && charType !== After) // break  U字 文字 or 字U  字（  字*  exclude 字。
@@ -96,13 +98,13 @@ export function createRows(drawData: ITextDrawData, content: string, style: ITex
 
                     if (charType === Break) {
 
-                        if (char === ' ' && wordWidth) addWord()
+                        if (char === ' ' && wordWidth) addWord(wordSpacing)
                         addChar(char, charWidth)
                         addWord()
 
                     } else if (langBreak || afterBreak) {
 
-                        if (wordWidth) addWord()
+                        if (wordWidth) addWord(wordSpacing)
                         addChar(char, charWidth)
 
                     } else {
@@ -142,7 +144,11 @@ function addChar(char: string, width: number): void {
     wordWidth += width
 }
 
-function addWord(): void {
+function addWord(wordSpacing?: number): void {
+    if (wordSpacing) {
+        rowWidth += wordSpacing
+        word.addWidth = wordSpacing
+    }
     rowWidth += wordWidth
     word.width = wordWidth
     row.words.push(word)

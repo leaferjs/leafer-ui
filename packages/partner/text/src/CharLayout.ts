@@ -10,6 +10,7 @@ export function layoutChar(drawData: ITextDrawData, style: ITextData, width: num
     const { rows } = drawData
     const { textAlign, paraIndent } = style
     const useLetter = style.__letterSpacing || style.motionText
+    const wordSpacing = style.__wordSpacing
 
     const justifyLast = width && textAlign.includes('both')  // 最后一行是否两端对齐
     const justify = justifyLast || (width && textAlign.includes('justify')) // 是否两端对齐文本
@@ -27,7 +28,7 @@ export function layoutChar(drawData: ITextDrawData, style: ITextData, width: num
                 if (justifyLetter) addLetterWidth = remainingWidth / (row.words.reduce((total, item) => total + item.data.length, 0) - 1) //  remainingWidth / （lettersLength - 1）
                 else addWordWidth = wordsLength > 1 ? remainingWidth / (wordsLength - 1) : 0
             }
-            mode = (useLetter || row.isOverflow || justifyLetter) ? CharMode : (addWordWidth ? WordMode : TextMode)
+            mode = (useLetter || row.isOverflow || justifyLetter) ? CharMode : ((addWordWidth || wordSpacing) ? WordMode : TextMode)
             if (row.isOverflow && !useLetter) row.textMode = true
 
             if (mode === TextMode) {
@@ -54,6 +55,8 @@ export function layoutChar(drawData: ITextDrawData, style: ITextData, width: num
                         charX = toChar(word.data, charX, row.data, row.isOverflow, canJustify && addLetterWidth)
 
                     }
+
+                    if (word.addWidth) charX += word.addWidth
 
                     if (canJustify) {
                         isLastWord = index === wordsLength - 1

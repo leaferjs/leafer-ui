@@ -197,6 +197,7 @@ export interface ITextData extends ITextAttrData, ITextStyleComputedData, IUIDat
     __baseLine?: number
     __lineHeight?: number
     __letterSpacing?: number
+    __wordSpacing?: number
     __padding?: number[]
     __clipText?: boolean
     __isCharMode?: boolean
@@ -230,6 +231,7 @@ export interface ITextWordData {
     y?: number
     width?: number
     height?: number
+    addWidth?: number
     data?: ITextCharData[]
 }
 
