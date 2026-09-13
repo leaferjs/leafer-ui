@@ -8,7 +8,7 @@ Effortlessly build graphic interaction and editing — an infinite canvas engine
 
 Official Website: [leaferjs.com](https://www.leaferjs.com)
 
-Forest：[leafer.pro](https://www.leafer.pro)
+Forest: [leafer.pro](https://www.leafer.pro)
 
 **👉 A Canvas engine that can handle 1 million graphics in the browser**  
 **👉 A Canvas core capable of building Figma-level editors**

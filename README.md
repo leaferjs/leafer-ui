@@ -8,7 +8,7 @@
 
 官网: [leaferjs.com](https://www.leaferjs.com)
 
-森林：[leafer.pro](https://www.leafer.pro)
+森林: [leafer.pro](https://www.leafer.pro)
 
 **👉 在浏览器里 “跑得动 100 万个图形” 的 Canvas 引擎**  
 **👉 可以做 “Figma 级编辑器” 的 Canvas 内核**
