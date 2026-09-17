@@ -1,6 +1,6 @@
-import { IObject } from '@leafer/interface'
+import { IAxis, IObject } from '@leafer/interface'
 
 
 export interface IEditFlowConfig extends IObject {
-    fitChildren?: boolean
+    fitChildren?: boolean | IAxis
 }
