@@ -1,7 +1,7 @@
 import { ILeaferCanvas, IRenderOptions, IPathDrawer, IPathCommandData, IHitType, IHitThrough, INumber, IBoolean, IString, IPathString, IExportFileType, IPointData, ICursorType, IMaskType, IEraserType, IWindingRule, IPathCreator, IFourNumber, IBoundsData, IFlowType, IGap, IFlowWrap, IAxis, IConstraint, IAutoBoxData, IFlowBoxType, IPointGap, IFlowAlign, IFlowAxisAlign, IFindCondition, IAutoSize, IRangeSize, IObject, IScaleData, IUnitData, IPathCommandObject, ITransition, IFilter, IScaleFixed, IDragBoundsType, IPathCommandNode, IEditable, ILinkable, IAround, IPosition, IBoundsType } from '@leafer/interface'
 import { Leaf, PathDrawer, surfaceType, dimType, dataType, positionType, scrollType, boundsType, pathType, scaleType, rotationType, opacityType, visibleType, sortType, maskType, dataProcessor, registerUI, useModule, rewriteAble, UICreator, PathCorner, hitType, strokeType, PathConvert, eraserType, cursorType, autoLayoutType, pen, naturalBoundsType, pathInputType, MathHelper, Plugin, DataHelper, affectRenderBoundsType, isString, isNumber } from '@leafer/core'
 
-import { IUI, IShadowEffect, IBlurEffect, IStrokeAlign, IStrokeJoin, IStrokeCap, IBlendMode, IDashPatternString, IShadowString, IGrayscaleEffect, IUIData, IGroup, IStrokeWidthString, ICornerRadiusString, IUIInputData, IExportOptions, IExportResult, IFill, IStroke, IArrowStyle, IFindUIMethod, ILeafer, IEditorConfig, IEditorConfigFunction, IEditToolFunction, IKeyframe, IAnimation, IAnimate, IStates, IStateName, IAnimateType, IStateStyle, IColorString, IAnimateList, ILeafPaint, ILinker, IPathCommandDataWithRadius, ILineData, IFrame } from '@leafer-ui/interface'
+import { IUI, IShadowEffect, IBlurEffect, IStrokeAlign, IStrokeJoin, IStrokeCap, IBlendMode, IDashPatternString, IShadowString, IGrayscaleEffect, IUIData, IGroup, IStrokeWidthString, ICornerRadiusString, IUIInputData, IExportOptions, IExportResult, IFill, IStroke, IArrowStyle, IFindUIMethod, ILeafer, IEditFlowConfig, IEditorConfig, IEditorConfigFunction, IEditToolFunction, IKeyframe, IAnimation, IAnimate, IStates, IStateName, IAnimateType, IStateStyle, IColorString, IAnimateList, ILeafPaint, ILinker, IPathCommandDataWithRadius, ILineData, IFrame } from '@leafer-ui/interface'
 import { effectType, zoomLayerType } from '@leafer-ui/decorator'
 
 import { UIData } from '@leafer-ui/data'
@@ -410,6 +410,10 @@ export class UI<TInputData = IUIInputData> extends Leaf<TInputData> implements I
     public editOuter: string
 
     public editInner: string
+
+    // 预留扩展
+
+    public editFlowConfig?: IEditFlowConfig
 
 
     // 预留给用户使用的数据对象

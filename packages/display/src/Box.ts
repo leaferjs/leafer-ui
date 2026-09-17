@@ -66,7 +66,7 @@ export class Box<TInputData = IBoxInputData> extends Group<TInputData> implement
     public __updateRectBoxBounds(): void { }
 
 
-    // @leafer-in/flow will rewrite
+    // @leafer-in/flow will rewrite 需同步修改
     public __updateBoxBounds(_secondLayout?: boolean): void {
         if (this.children.length && !this.__useSelfBox) {
 

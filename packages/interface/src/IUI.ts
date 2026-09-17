@@ -16,6 +16,7 @@ import { IEditorConfig } from './editor/IEditor'
 import { IColorString } from './type/IStringType'
 import { IScroller, IScrollConfig } from './IScroller'
 import { ILeafPaint } from './type/IComputedType'
+import { IEditFlowConfig } from './editor/IFlow'
 
 // Line
 export interface ILine extends ILineAttrData, IUI {
@@ -602,6 +603,8 @@ interface IUIAttrData {
     editConfig?: IEditorConfig
     editOuter?: string
     editInner?: string
+
+    editFlowConfig?: IEditFlowConfig
 }
 
 export interface IFindUIMethod {
