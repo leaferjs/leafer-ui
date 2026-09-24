@@ -164,6 +164,7 @@ export interface IEditorConfig extends IObject {
     selectedStyle?: IUIInputData
     selectedPathType?: 'path' | 'render-path' | 'box' | 'stroke'
     multipleSelect?: boolean
+    skipNested?: boolean // 是否跳过互相嵌套的父子元素，只保留父级
 
     boxSelect?: boolean | 'hit' | 'includes'
     continuousSelect?: boolean // 点击可以连续选择
@@ -339,6 +340,8 @@ export interface IEditBoxBase extends IGroup {
 
     onArrow(e: IKeyEvent): void
     isHoldRotateKey(e: IUIEvent): boolean
+
+    getWidget(name: string): IObject
 
 }
 
