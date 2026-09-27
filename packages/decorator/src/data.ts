@@ -41,6 +41,15 @@ export function zoomLayerType() {
     }
 }
 
+export function frameType() {
+    return (target: IUI, key: string) => {
+        defineKey(target, key, {
+            set(_value: IUI) { },
+            get() { return this }
+        })
+    }
+}
+
 export function createAttr(defaultValue?: IValue) {
     return (target: IUI, key: string) => {
         defineKey(target, key, createDescriptor(key, defaultValue))

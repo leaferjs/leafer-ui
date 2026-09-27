@@ -2,6 +2,7 @@ import { dataProcessor, registerUI, affectRenderBoundsType, surfaceType } from '
 
 import { IFrame, IFrameData, IFrameInputData, IFill, IOverflow } from '@leafer-ui/interface'
 import { FrameData } from '@leafer-ui/data'
+import { frameType } from '@leafer-ui/decorator'
 
 import { Box } from './Box'
 
@@ -12,6 +13,9 @@ export class Frame<TInputData = IFrameInputData> extends Box<TInputData> impleme
     public get __tag() { return 'Frame' }
 
     public get isFrame(): boolean { return true }
+
+    @frameType()
+    declare public frame: IFrame
 
     @dataProcessor(FrameData)
     declare public __: IFrameData
