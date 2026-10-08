@@ -8,7 +8,9 @@ Effortlessly build graphic interaction and editing — an infinite canvas engine
 
 Official Website: [leaferjs.com](https://www.leaferjs.com)
 
-Forest: [leafer.pro](https://www.leafer.pro)
+Open Forest: [leafer.pro](https://www.leafer.pro)
+
+PxGrow: [pxgrow.com](https://www.pxgrow.com)
 
 **👉 A Canvas engine that can handle 1 million graphics in the browser**  
 **👉 A Canvas core capable of building Figma-level editors**
@@ -121,7 +123,11 @@ There is a significant gap between “an engine” and “a mature product.” T
 - **PxGrow Provides Optional Commercial Plugins:** Focused on solving complex challenges in **industrial-grade applications**, PxGrow offers professional editor suites, advanced graphics algorithms, and performance optimization capabilities, helping enterprises save months or even years of development time.
 - **A Virtuous Cycle with a Long-Term Vision:** Developers benefit from open source, enterprises gain efficiency through commercial capabilities, and commercial support continuously drives the growth and innovation of LeaferJS—creating an open, transparent, and sustainable ecosystem.
 
-### LeaferJS Repository Overview
+### Why Enterprises Choose LeaferJS × PxGrow
+
+[Online PPT · For Team Presentations & Technical Evaluation](https://www.pxgrow.com/en/presentation)
+
+## LeaferJS Repository Overview
 
 | Repository    | Description                      | Link                                            |
 | :------------ | :------------------------------- | :---------------------------------------------- |

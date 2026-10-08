@@ -6,9 +6,11 @@
 
 轻松实现图形交互与编辑，AI 时代的无限画布引擎
 
-官网: [leaferjs.com](https://www.leaferjs.com)
+开源官网: [leaferjs.com](https://www.leaferjs.com)
 
-森林: [leafer.pro](https://www.leafer.pro)
+开源森林: [leafer.pro](https://www.leafer.pro)
+
+PxGrow: [pxgrow.com](https://www.pxgrow.com)
 
 **👉 在浏览器里 “跑得动 100 万个图形” 的 Canvas 引擎**  
 **👉 可以做 “Figma 级编辑器” 的 Canvas 内核**
@@ -120,7 +122,11 @@ leafer.add(rect)
 - **[PxGrow](https://www.pxgrow.com/) 提供可选商业插件：** 专注于解决**工业级应用**中的复杂业务难题。包括专业编辑器套件、复杂图形算法与性能优化能力，帮助企业节省数月甚至数年的研发投入。
 - **良性循环与长期主义：** 开发者因开源受益，企业因商业能力提效，而商业支持又持续推动 LeaferJS 的发展与创新，形成开放、透明、可持续的发展循环。
 
-### LeaferJS 仓库组成一览表
+### 企业为什么选择 LeaferJS × PxGrow
+
+[在线 PPT · 适合团队演示与技术方案评估](https://www.pxgrow.com/presentation)
+
+## LeaferJS 仓库组成一览表
 
 | 仓库名称      | 功能描述                     | 开源地址                                        |
 | :------------ | :--------------------------- | :---------------------------------------------- |
