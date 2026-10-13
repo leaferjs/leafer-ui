@@ -4,7 +4,7 @@
 
 # LeaferJS：好用的 Canvas 引擎
 
-轻松实现图形交互与编辑，AI 时代的无限画布引擎
+轻松构建可交互、可编辑的图形应用，AI 时代的无限画布引擎
 
 开源官网: [leaferjs.com](https://www.leaferjs.com)
 

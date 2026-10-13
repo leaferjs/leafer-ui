@@ -4,7 +4,7 @@ English | [简体中文](./README.md)
 
 # LeaferJS: An Easy-to-Use Canvas Engine
 
-Effortlessly build graphic interaction and editing — an infinite canvas engine for the AI era
+Build interactive, editable graphics apps with ease — The Infinite Canvas Engine for the AI Era
 
 Official Website: [leaferjs.com](https://www.leaferjs.com)
 
