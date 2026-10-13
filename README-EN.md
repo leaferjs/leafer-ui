@@ -160,9 +160,9 @@ LeaferJS is an original open-source engine refined over five years. Our mission 
 
 When you use LeaferJS, you become part of this vibrant community — stepping into a growing “tech castle.” Only through collective participation can it truly flourish.
 
-[Code of Conduct](./contributor/CODE_OF_CONDUCT.md)
+[Code of Conduct](https://github.com/leaferjs/leafer-ui/blob/main/contributor/CODE_OF_CONDUCT.md)
 
-[Commit Convention](./contributor/COMMIT_CONVENTION.md)
+[Commit Convention](https://github.com/leaferjs/leafer-ui/blob/main/contributor/COMMIT_CONVENTION.md)
 
 [How to Ask Questions the Smart Way](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/main/README-zh_CN.md#%E6%8F%90%E9%97%AE%E7%9A%84%E6%99%BA%E6%85%A7)
 

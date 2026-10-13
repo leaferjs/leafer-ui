@@ -159,9 +159,9 @@ LeaferJS 是一个持续打磨了五年的原创开源引擎。我们致力于�
 
 当你使用 LeaferJS 时, 你就已成为了 这个充满活力的大家庭 的一员，踏入这座建设中的“技术城堡”。只有通过每位成员的热情参与与贡献，这座城堡才能逐步走向完善。
 
-[社区行为准则](./contributor/CODE_OF_CONDUCT.md)
+[社区行为准则](https://github.com/leaferjs/leafer-ui/blob/main/contributor/CODE_OF_CONDUCT.md)
 
-[代码提交规范](./contributor/COMMIT_CONVENTION.md)
+[代码提交规范](https://github.com/leaferjs/leafer-ui/blob/main/contributor/COMMIT_CONVENTION.md)
 
 [提问的智慧](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/main/README-zh_CN.md#%E6%8F%90%E9%97%AE%E7%9A%84%E6%99%BA%E6%85%A7)
 
