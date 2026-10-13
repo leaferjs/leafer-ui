@@ -47,7 +47,7 @@ PxGrow: [pxgrow.com](https://www.pxgrow.com)
 - **🤖 语义化编辑：** 结构化场景树让 AI 能像操作 DOM 一样操控图形，构建真正的 AI 协同工作流。
 - **🛠️ 原生编辑器：** 内置 Editor 插件，让AI 生成的内容一键获得精准旋转、缩放、多选等工业级编辑能力。
 
-[Leafer AI 知识库](https://github.com/leaferjs/ai-docs) | [MCP & Skills](https://context7.com/leaferjs/ai-docs?tab=skills) | [Ask AI](https://context7.com/leaferjs/ai-docs?tab=chat)
+[Skills & Leafer AI 知识库](https://github.com/leaferjs/ai-docs) | [MCP](https://context7.com/leaferjs/ai-docs?tab=skills) | [Ask AI](https://context7.com/leaferjs/ai-docs?tab=chat)
 
 ## 🎨 应用场景
 

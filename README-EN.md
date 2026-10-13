@@ -47,7 +47,7 @@ With the explosion of AI-generated content, the challenge for graphics engines h
 - **🤖 Semantic Editing:** A structured scene tree allows AI to manipulate graphics like the DOM, enabling true AI collaborative workflows.
 - **🛠️ Native Editor:** Built-in Editor plugin enables one-click access to industrial-grade editing features such as rotation, scaling, and multi-selection for AI-generated content.
 
-[Leafer AI Knowledge Base](https://github.com/leaferjs/ai-docs) | [MCP & Skills](https://context7.com/leaferjs/ai-docs?tab=skills) | [Ask AI](https://context7.com/leaferjs/ai-docs?tab=chat)
+[Skills & Leafer AI Knowledge Base](https://github.com/leaferjs/ai-docs) | [MCP](https://context7.com/leaferjs/ai-docs?tab=skills) | [Ask AI](https://context7.com/leaferjs/ai-docs?tab=chat)
 
 ## 🎨 Use Cases
 
