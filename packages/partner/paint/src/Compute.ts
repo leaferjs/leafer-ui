@@ -1,10 +1,10 @@
 import { DataHelper, isArray, isObject, isString, isUndefined } from '@leafer/core'
 
-import { IUI, IPaint, ILeafPaint, IRGB, IBooleanMap, IObject, IPaintAttr, IStrokeComputedStyle } from '@leafer-ui/interface'
+import { IUI, IPaint, ILeafPaint, IRGB, IBooleanMap, IObject, IPaintAttr, IStrokeComputedStyle, ILeafPaintMap } from '@leafer-ui/interface'
 import { ColorConvert, PaintImage, PaintGradient } from '@leafer-ui/draw'
 
 
-let recycleMap: IBooleanMap
+let recycleMap: IBooleanMap | ILeafPaintMap
 const { stintSet } = DataHelper, { hasTransparent } = ColorConvert
 
 export function compute(attrName: IPaintAttr, ui: IUI): void {
@@ -54,13 +54,15 @@ export function compute(attrName: IPaintAttr, ui: IUI): void {
 
     }
 
+    recycleMap = undefined
+
 }
 
 
 function getLeafPaint(attrName: IPaintAttr, paint: IPaint, ui: IUI): ILeafPaint {
     if (!isObject(paint) || paint.visible === false || paint.opacity === 0) return undefined
 
-    let leafPaint: ILeafPaint
+    let leafPaint: ILeafPaint, oldPaint: ILeafPaint
     const { boxBounds } = ui.__layout, { type } = paint
 
     switch (type) {
@@ -68,8 +70,9 @@ function getLeafPaint(attrName: IPaintAttr, paint: IPaint, ui: IUI): ILeafPaint 
         case 'film':
         case 'video':
             if (!paint.url) return undefined
-            leafPaint = PaintImage.image(ui, attrName, paint, boxBounds, !recycleMap || !recycleMap[paint.url])
-            if (type !== 'image') PaintImage[type](leafPaint)
+            oldPaint = recycleMap && recycleMap[paint.url] as ILeafPaint
+            leafPaint = PaintImage.image(ui, attrName, paint, boxBounds, oldPaint)
+            if (type !== 'image') PaintImage[type](leafPaint, oldPaint)
             break
         case 'linear':
             leafPaint = PaintGradient.linearGradient(paint, boxBounds)

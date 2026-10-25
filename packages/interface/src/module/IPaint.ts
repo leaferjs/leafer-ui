@@ -1,6 +1,6 @@
 import { ILeaferCanvas, IRenderOptions, IBooleanMap, IBoundsData, ILeaferImage, IAlign, IPointData, IMatrixData, IScaleData, IFunction, ITaskItem } from '@leafer/interface'
 
-import { ILeafPaint, ILeafStrokePaint, ILeafPaintPatternData } from '../type/IComputedType'
+import { ILeafPaint, ILeafStrokePaint, ILeafPaintPatternData, ILeafPaintMap } from '../type/IComputedType'
 import { IUI, IUIData } from '../IUI'
 import { ICachedShape } from '../ICachedShape'
 import { IGradientPaint, IImageFilters, IImagePaint, IPaintAttr } from '../type/IType'
@@ -30,15 +30,15 @@ export interface IPaintModule {
 
 
 export interface IPaintImageModule {
-    image(ui: IUI, attrName: IPaintAttr, paint: IImagePaint, boxBounds: IBoundsData, firstUse: boolean): ILeafPaint
+    image(ui: IUI, attrName: IPaintAttr, paint: IImagePaint, boxBounds: IBoundsData, oldPaint?: ILeafPaint): ILeafPaint
 
-    film?(paint: ILeafPaint): void
-    video?(paint: ILeafPaint): void
+    film?(paint: ILeafPaint, oldPaint?: ILeafPaint): void
+    video?(paint: ILeafPaint, oldPaint?: ILeafPaint): void
 
     checkImage(paint: ILeafPaint, allowDraw: boolean, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): boolean // 返回true表示已进行了原生绘制
     drawImage(paint: ILeafPaint, imageScaleX: number, imageScaleY: number, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void
     getImageRenderScaleData(paint: ILeafPaint, ui: IUI, canvas?: ILeaferCanvas, renderOptions?: IRenderOptions): IScaleData // 当前图片渲染的比例数据，必须马上分解使用
-    recycleImage(attrName: IPaintAttr, data: IUIData): IBooleanMap
+    recycleImage(attrName: IPaintAttr, data: IUIData): ILeafPaintMap
 
     createPatternTask(paint: ILeafPaint, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions): void
     createPattern(paint: ILeafPaint, ui: IUI, canvas: ILeaferCanvas, renderOptions: IRenderOptions, resolve?: IFunction, task?: ITaskItem): void

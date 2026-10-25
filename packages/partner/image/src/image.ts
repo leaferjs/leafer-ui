@@ -14,9 +14,9 @@ interface IImagePaintCache {
 let cache: IImagePaintCache, box = new Bounds()
 const { isSame } = BoundsHelper
 
-export function image(ui: IUI, attrName: IPaintAttr, paint: IImagePaint, boxBounds: IBoundsData, firstUse: boolean): ILeafPaint {
+export function image(ui: IUI, attrName: IPaintAttr, paint: IImagePaint, boxBounds: IBoundsData, oldPaint?: ILeafPaint): ILeafPaint {
     let leafPaint: ILeafPaint, event: IImageEvent
-    const image = ImageManager.get(paint, paint.type)
+    const image = ImageManager.get(paint, paint.type), firstUse = !oldPaint
 
     if (cache && paint === cache.paint && isSame(boxBounds, cache.boxBounds)) {
         leafPaint = cache.leafPaint

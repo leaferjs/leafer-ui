@@ -7,6 +7,10 @@ import { IStrokeComputedStyle } from '../ICommonAttr'
 
 export type ILeafPaintColor = IColorString | CanvasGradient | CanvasPattern
 
+export interface ILeafPaintMap {
+    [name: string]: ILeafPaint
+}
+
 export interface ILeafPaint extends IFilmPlayOptions {
     type?: IPaintType
     style?: ILeafPaintColor
