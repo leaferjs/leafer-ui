@@ -124,7 +124,7 @@ leafer.add(rect)
 
 ### 企业为什么选择 LeaferJS × PxGrow
 
-[在线 PPT · 适合团队演示与技术方案评估](https://www.pxgrow.com/presentation)
+[在线 PPT (适合团队演示) · LeaferJS 技术支持](https://www.pxgrow.com/#why)
 
 ## LeaferJS 仓库组成一览表
 

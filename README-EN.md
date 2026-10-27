@@ -125,7 +125,7 @@ There is a significant gap between “an engine” and “a mature product.” T
 
 ### Why Enterprises Choose LeaferJS × PxGrow
 
-[Online PPT · For Team Presentations & Technical Evaluation](https://www.pxgrow.com/en/presentation)
+[Online PPT (Ideal for Team Presentations) · LeaferJS Technical Support](https://www.pxgrow.com/#why)
 
 ## LeaferJS Repository Overview
 
