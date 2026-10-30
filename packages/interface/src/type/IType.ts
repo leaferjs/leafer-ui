@@ -133,6 +133,9 @@ export type IStrokeAlign = 'inside' | 'outside' | 'center'
 export type IStrokeCap = 'none' | 'round' | 'square'
 export type IStrokeJoin = 'bevel' | 'round' | 'miter'
 
+// 连线
+export type ILineType = 'straight' | 'polyline' | 'curve'
+
 // 箭头
 export type IArrowType = 'none' | 'angle' | 'angle-side' | 'arrow' | 'triangle' | 'triangle-flip' | 'circle' | 'circle-line' | 'square' | 'square-line' | 'diamond' | 'diamond-line' | 'mark' | (string & {})
 export type IArrowStyle = IPathDataArrow | IArrowType | IArrowTypeData
