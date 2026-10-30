@@ -588,6 +588,8 @@ export class UI<TInputData = IUIInputData> extends Leaf<TInputData> implements I
 
 export interface UI {
 
+    positionNode?: IUI
+
     reset(data?: IUIInputData): void
 
     createProxyData(): IUIInputData

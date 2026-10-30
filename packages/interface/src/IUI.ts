@@ -530,6 +530,8 @@ export interface IUI extends IUIAttrData, IFillAttrData, IStrokeAttrData, ICorne
     __box?: IUI // 背景box, 一般用于文本背景框
     __animate?: IAnimate
 
+    positionNode?: IUI
+
     readonly pen: IPathCreator
 
     reset(data?: IUIInputData): void
