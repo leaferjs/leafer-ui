@@ -4,7 +4,7 @@
 
 # LeaferJS：好用的 Canvas 引擎
 
-轻松构建可交互、可编辑的图形应用，AI 时代的无限画布引擎，[让每个人都能用 AI 创造自己的专业可视化软件](https://www.leaferjs.com/ui/blog/2026-11-02.html)
+轻松构建可交互、可编辑的图形应用，AI 时代的无限画布引擎
 
 开源官网: [leaferjs.com](https://www.leaferjs.com)
 
@@ -48,6 +48,8 @@ PxGrow: [pxgrow.com](https://www.pxgrow.com)
 - **🛠️ 原生编辑器：** 内置 Editor 插件，让AI 生成的内容一键获得精准旋转、缩放、多选等工业级编辑能力。
 
 [Skills & Leafer AI 知识库](https://github.com/leaferjs/ai-docs) | [MCP](https://context7.com/leaferjs/ai-docs?tab=skills) | [Ask AI](https://context7.com/leaferjs/ai-docs?tab=chat)
+
+[让每个人都能用 AI 创造自己的专业可视化软件](https://www.leaferjs.com/ui/blog/2026-11-02.html)
 
 ## 🎨 应用场景
 
