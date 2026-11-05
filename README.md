@@ -15,7 +15,7 @@ PxGrow: [pxgrow.com](https://www.pxgrow.com)
 **👉 在浏览器里 “跑得动 100 万个图形” 的 Canvas 引擎**  
 **👉 可以做 “Figma 级编辑器” 的 Canvas 内核**
 
-[👉 让每个人都能用 AI 创造自己的专业可视化软件](https://www.leaferjs.com/ui/blog/2026-11-02.html)
+[让每个人都能用 AI 创造自己的专业可视化软件](https://www.leaferjs.com/ui/blog/2026-11-02.html)
 
 <p align="center">
   <a href="https://www.bilibili.com/video/BV1E56vBwEiB" target="_blank">
