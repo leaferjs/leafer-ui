@@ -6,6 +6,8 @@ English | [简体中文](./README.md)
 
 Build interactive, editable graphics apps with ease — The Infinite Canvas Engine for the AI Era
 
+[Empower everyone to create their own professional graphics software with AI](https://www.leaferjs.com/ui/blog/2026-11-02.html)
+
 Official Website: [leaferjs.com](https://www.leaferjs.com)
 
 Open Forest: [leafer.pro](https://www.leafer.pro)
