@@ -122,12 +122,10 @@ leafer.add(rect)
 There is a significant gap between “an engine” and “a mature product.” To ensure long-term maintenance of the open-source engine and help enterprises overcome complex development challenges, we’ve built a transparent and sustainable ecosystem:
 
 - **LeaferJS is Permanently Open Source (MIT):** The core features and essential plugins will always remain open source and freely available, meeting the needs of the vast majority of projects. Developers can rely on a secure, controllable, and sustainable technology choice without worrying that core capabilities will become commercially restricted.
-- **PxGrow Provides Optional Commercial Plugins:** Focused on solving complex challenges in **industrial-grade applications**, PxGrow offers professional editor suites, advanced graphics algorithms, and performance optimization capabilities, helping enterprises save months or even years of development time.
+- **PxGrow Provides Optional Commercial Plugins:** Focused on solving complex challenges in **industrial-grade applications**, PxGrow offers professional editor suites, and performance optimization capabilities, helping enterprises save months or even years of development time.
 - **A Virtuous Cycle with a Long-Term Vision:** Developers benefit from open source, enterprises gain efficiency through commercial capabilities, and commercial support continuously drives the growth and innovation of LeaferJS—creating an open, transparent, and sustainable ecosystem.
 
-### Why Enterprises Choose LeaferJS × PxGrow
-
-[Online PPT (Ideal for Team Presentations) · LeaferJS Technical Support](https://www.pxgrow.com/#why)
+[Need Professional Technical Support?](https://www.pxgrow.com/#support)
 
 ## LeaferJS Repository Overview
 
@@ -142,23 +140,23 @@ There is a significant gap between “an engine” and “a mature product.” T
 | **code**      | Example code                     | [GitHub](https://github.com/leaferjs/code)      |
 | **docs**      | Documentation                    | [GitHub](https://github.com/leaferjs/docs)      |
 
-## 🌟 Contribute: Five Years of Craftsmanship, Built from Passion
+## 🌟 Five Years of Dedication, Staying True to Our Vision
 
-LeaferJS is an original open-source engine refined over five years. Our mission is to standardize the **graphics system foundation**, so developers can focus on creativity rather than low-level implementation.
+LeaferJS [started in 2021](https://www.leaferjs.com/ui/blog/2023-06-28.html) and is an original open-source graphics engine that has been continuously developed and refined for over five years. We are committed to standardizing the foundations of graphics systems, allowing developers to focus on product creativity rather than underlying implementations.
 
-**If you value originality and extreme performance, please give us a Star!**
+**If you support original innovation, please give us a Star!**
 
 <div style="display:flex; gap: 12px">
-<a target="_blank" href="https://github.com/leaferjs/leafer-ui" aria-label="github"  rel="noopener">
+<a target="_blank" href="https://github.com/leaferjs/leafer-ui" aria-label="github" rel="noopener">
   <img width="120" title="github" src="https://img.shields.io/github/stars/leaferjs/ui?style=social" />
 </a>
 </div>
 
-- 🌟 **Star the repo:** Your support means everything.
-- 🐞 **Report issues:** Every issue helps us improve.
-- 🤝 **Join the community:** Explore the limits of Web graphics together.
+- 🌟 **Star the Repository:** Your recognition means a lot to us.
+- 🐞 **Submit Feedback:** Every issue is an opportunity for us to improve.
+- 🤝 **Join the Community:** Explore the limits of Web graphics technology with fellow developers.
 
-## Contribution Guide
+## Contributing
 
 When you use LeaferJS, you become part of this vibrant community — stepping into a growing “tech castle.” Only through collective participation can it truly flourish.
 
