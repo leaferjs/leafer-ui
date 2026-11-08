@@ -139,11 +139,11 @@ leafer.add(rect)
 | **code**      | 示例代码仓库                 | [GitHub](https://github.com/leaferjs/code)      |
 | **docs**      | 在线文档仓库                 | [GitHub](https://github.com/leaferjs/docs)      |
 
-## 🌟 参与贡献：五年沉淀，始于初心
+## 🌟 五年打磨，初心不变
 
-LeaferJS 是一个持续打磨了五年的原创开源引擎。我们致力于把“图形系统底座”这件事标准化，让开发者专注产品创意，而非底层实现。
+LeaferJS [始于 2021 年](https://www.leaferjs.com/ui/blog/2023-06-28.html)，是一款历经五年持续研发与打磨的原创开源图形引擎。我们致力于把“图形系统底座”这件事标准化，让开发者专注产品创意，而非底层实现。
 
-**如果你支持原创、追求极致性能，请为我们点亮一颗 Star！**
+**如果你支持原创，请为我们点亮一颗 Star！**
 
 <div style="display:flex; gap: 12px">
 <a target="_blank" href="https://github.com/leaferjs/leafer-ui" aria-label="github"  rel="noopener">
@@ -155,7 +155,7 @@ LeaferJS 是一个持续打磨了五年的原创开源引擎。我们致力于�
 - 🐞 **提交反馈：** 每一个 Issue 都是我们进步的机会。
 - 🤝 **加入社区：** 与社区开发者共同探索 Web 图形技术的极限。
 
-## 贡献指南
+## 参与贡献
 
 当你使用 LeaferJS 时, 你就已成为了 这个充满活力的大家庭 的一员，踏入这座建设中的“技术城堡”。只有通过每位成员的热情参与与贡献，这座城堡才能逐步走向完善。
 
