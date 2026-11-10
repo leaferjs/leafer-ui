@@ -45,7 +45,7 @@ export interface IArrowInputData extends IArrowAttrData, ILineInputData { }
 
 
 // Linker
-export interface ILinker extends ILine {
+export interface ILinker extends ILinkerAttrData, ILine {
     __: ILinkerData
 
     startPoint?: ILinkerPointData
