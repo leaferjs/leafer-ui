@@ -165,6 +165,7 @@ export interface IEditorConfig extends IObject {
     selectedPathType?: 'path' | 'render-path' | 'box' | 'stroke'
     multipleSelect?: boolean
     skipNested?: boolean // 是否跳过互相嵌套的父子元素，只保留父级
+    multipleSelectLocked?: boolean // 是否能多选 locked 元素
 
     boxSelect?: boolean | 'hit' | 'includes'
     continuousSelect?: boolean // 点击可以连续选择

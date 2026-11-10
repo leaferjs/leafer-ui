@@ -42,7 +42,7 @@ export class Interaction extends InteractionBase {
     protected __listenEvents(): void {
         super.__listenEvents()
 
-        const view = this.view = this.canvas.eventView as HTMLDivElement // as HTMLCanvasElement
+        const view = this.view = this.canvas.view as HTMLCanvasElement
 
         // PointerEvent > TouchEvent > MouseEvent
         this.viewEvents = {
