@@ -521,7 +521,13 @@ export class UI<TInputData = IUIInputData> extends Leaf<TInputData> implements I
         const { x, y, width, height } = this.__layout[(boundsType + 'Bounds') as 'boxBounds']
         if (this.__.cornerRadius && !ignoreCornerRadius) {
             const { cornerRadius } = this.__
-            drawer.roundRect(x, y, width, height, isNumber(cornerRadius) ? [cornerRadius] : cornerRadius) // 修复微信浏览器bug, 后续需进一步优化
+            const radius = isNumber(cornerRadius) ? [cornerRadius] : cornerRadius
+            // roundRect 会在闭合后留下 (x, y) 零长度子路径，再 closePath 时 strokeCap 会在边上多出一个方块 #914
+            if ((drawer as ILeaferCanvas).context && width > 0 && height > 0 && !isString(radius)) {
+                drawRoundRect(drawer, x, y, width, height, radius)
+                return
+            }
+            drawer.roundRect(x, y, width, height, radius) // 修复微信浏览器bug, 后续需进一步优化
         } else drawer.rect(x, y, width, height)
         drawer.closePath()
     }
@@ -595,4 +601,32 @@ export interface UI {
     createProxyData(): IUIInputData
     clearProxyData(): void
 
+}
+
+function drawRoundRect(drawer: IPathDrawer, x: number, y: number, width: number, height: number, radius: number[]): void {
+    let [tl, tr, br, bl] = MathHelper.fourNumber(radius)
+    if (tl < 0) tl = 0
+    if (tr < 0) tr = 0
+    if (br < 0) br = 0
+    if (bl < 0) bl = 0
+
+    let scale = 1
+    const top = tl + tr, right = tr + br, bottom = br + bl, left = bl + tl
+    if (top > width) scale = Math.min(scale, width / top)
+    if (bottom > width) scale = Math.min(scale, width / bottom)
+    if (right > height) scale = Math.min(scale, height / right)
+    if (left > height) scale = Math.min(scale, height / left)
+    if (scale !== 1) tl *= scale, tr *= scale, br *= scale, bl *= scale
+
+    const x2 = x + width, y2 = y + height
+    drawer.moveTo(x + tl, y)
+    if (width - tl - tr > 1e-4) drawer.lineTo(x2 - tr, y)
+    if (tr > 1e-4) drawer.arc(x2 - tr, y + tr, tr, -Math.PI / 2, 0)
+    if (height - tr - br > 1e-4) drawer.lineTo(x2, y2 - br)
+    if (br > 1e-4) drawer.arc(x2 - br, y2 - br, br, 0, Math.PI / 2)
+    if (width - br - bl > 1e-4) drawer.lineTo(x + bl, y2)
+    if (bl > 1e-4) drawer.arc(x + bl, y2 - bl, bl, Math.PI / 2, Math.PI)
+    if (height - bl - tl > 1e-4) drawer.lineTo(x, y + tl)
+    if (tl > 1e-4) drawer.arc(x + tl, y + tl, tl, Math.PI, Math.PI * 1.5)
+    drawer.closePath()
 }
