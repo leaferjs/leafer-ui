@@ -134,6 +134,21 @@ export class Interaction extends InteractionBase {
         return (this.config.shadowDOM && e.composedPath) ? !e.composedPath().includes(this.view) : true
     }
 
+    // 文本编辑 DOM 挂在 App view 里，指针事件会冒泡到画布。
+    // 交给 Leafer 后，editable 文本会被当成编辑拖拽，无法在编辑框里框选文字。
+    protected isTextEditorEvent(e: Event): boolean {
+        let node = e.target as Node
+        const { view } = this
+        while (node && node !== view) {
+            if (node.nodeType === 1) {
+                const el = node as HTMLElement
+                if (el.isContentEditable || (el.classList && el.classList.contains('leafer-text-editor'))) return true
+            }
+            node = (node as HTMLElement).parentElement || node.parentNode
+        }
+        return false
+    }
+
     // key
     protected onKeyDown(e: KeyboardEvent): void {
         this.keyDown(KeyEventHelper.convert(e))
@@ -156,6 +171,7 @@ export class Interaction extends InteractionBase {
 
     // pointer
     protected onPointerDown(e: PointerEvent): void {
+        if (this.isTextEditorEvent(e)) return
         this.preventDefaultPointer(e)
 
         if (this.notPointer) return
@@ -188,6 +204,7 @@ export class Interaction extends InteractionBase {
 
     // mouse
     protected onMouseDown(e: MouseEvent): void {
+        if (this.isTextEditorEvent(e)) return
         this.preventDefaultPointer(e)
 
         if (this.notMouse) return
@@ -213,6 +230,7 @@ export class Interaction extends InteractionBase {
 
     // touch
     protected onTouchStart(e: TouchEvent): void {
+        if (this.isTextEditorEvent(e)) return
         const touch = PointerEventHelper.getTouch(e)
         const local = this.getLocal(touch, true)
         const { preventDefault } = this.config.touch
