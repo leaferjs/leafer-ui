@@ -6,7 +6,7 @@
 
 轻松构建可交互、可编辑的图形应用，AI 时代的无限画布引擎
 
-[让每个人都能用 AI 创造自己的专业图形软件](https://www.leaferjs.com/ui/blog/2026-11-02.html)
+[借助 AI Skills， 人人皆可创造](https://www.leaferjs.com/ai/)
 
 开源官网: [leaferjs.com](https://www.leaferjs.com)
 
@@ -49,7 +49,7 @@ PxGrow: [pxgrow.com](https://www.pxgrow.com)
 - **🤖 语义化编辑：** 结构化场景树让 AI 能像操作 DOM 一样操控图形，构建真正的 AI 协同工作流。
 - **🛠️ 原生编辑器：** 内置 Editor 插件，让AI 生成的内容一键获得精准旋转、缩放、多选等工业级编辑能力。
 
-[Skills & Leafer AI 知识库](https://github.com/leaferjs/ai-docs) | [MCP](https://context7.com/leaferjs/ai-docs?tab=skills) | [Ask AI](https://context7.com/leaferjs/ai-docs?tab=chat)
+[Skills](https://www.leaferjs.com/ai/#start) | [MCP](https://context7.com/leaferjs/ai-docs?tab=skills) | [Ask AI](https://context7.com/leaferjs/ai-docs?tab=chat)
 
 ## 🎨 应用场景
 
@@ -123,8 +123,6 @@ leafer.add(rect)
 - **LeaferJS 永久开源 (MIT)：** 核心功能和基础插件始终保持开源与自由，能够满足绝大多数项目需求，让开发者拥有安全、可控、可持续的技术选择，无需担心核心能力受到商业限制。
 - **[PxGrow](https://www.pxgrow.com/) 提供可选商业插件：** 专注于解决**工业级应用**中的复杂业务难题。包括专业编辑器套件与性能优化能力，帮助企业节省数月甚至数年的研发投入。
 - **良性循环与长期主义：** 开发者因开源受益，企业因商业能力提效，而商业支持又持续推动 LeaferJS 的发展与创新，形成开放、透明、可持续的发展循环。
-
-[需要专业技术支持？](https://www.pxgrow.com/#support)
 
 ## LeaferJS 仓库组成一览表
 

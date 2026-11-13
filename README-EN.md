@@ -6,7 +6,7 @@ English | [简体中文](./README.md)
 
 Build interactive, editable graphics apps with ease — The Infinite Canvas Engine for the AI Era
 
-[Empower everyone to create their own professional graphics software with AI](https://www.leaferjs.com/ui/blog/2026-11-02.html)
+[Everyone can create with AI Skills](https://www.leaferjs.com/ai/)
 
 Official Website: [leaferjs.com](https://www.leaferjs.com)
 
@@ -49,7 +49,7 @@ With the explosion of AI-generated content, the challenge for graphics engines h
 - **🤖 Semantic Editing:** A structured scene tree allows AI to manipulate graphics like the DOM, enabling true AI collaborative workflows.
 - **🛠️ Native Editor:** Built-in Editor plugin enables one-click access to industrial-grade editing features such as rotation, scaling, and multi-selection for AI-generated content.
 
-[Skills & Leafer AI Knowledge Base](https://github.com/leaferjs/ai-docs) | [MCP](https://context7.com/leaferjs/ai-docs?tab=skills) | [Ask AI](https://context7.com/leaferjs/ai-docs?tab=chat)
+[Skills](https://www.leaferjs.com/ai/#start) | [MCP](https://context7.com/leaferjs/ai-docs?tab=skills) | [Ask AI](https://context7.com/leaferjs/ai-docs?tab=chat)
 
 ## 🎨 Use Cases
 
@@ -124,8 +124,6 @@ There is a significant gap between “an engine” and “a mature product.” T
 - **LeaferJS is Permanently Open Source (MIT):** The core features and essential plugins will always remain open source and freely available, meeting the needs of the vast majority of projects. Developers can rely on a secure, controllable, and sustainable technology choice without worrying that core capabilities will become commercially restricted.
 - **PxGrow Provides Optional Commercial Plugins:** Focused on solving complex challenges in **industrial-grade applications**, PxGrow offers professional editor suites, and performance optimization capabilities, helping enterprises save months or even years of development time.
 - **A Virtuous Cycle with a Long-Term Vision:** Developers benefit from open source, enterprises gain efficiency through commercial capabilities, and commercial support continuously drives the growth and innovation of LeaferJS—creating an open, transparent, and sustainable ecosystem.
-
-[Need Professional Technical Support?](https://www.pxgrow.com/#support)
 
 ## LeaferJS Repository Overview
 
