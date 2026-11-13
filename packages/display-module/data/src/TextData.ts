@@ -26,6 +26,30 @@ export class TextData extends UIData implements ITextData {
     protected _fontWeight?: number
     protected _boxStyle?: IBackgroundBoxStyle
 
+    protected _editingHittable?: boolean
+    protected _editingHitSaved?: boolean
+
+    // editable 元素本身可拖拽。内部文本编辑时 InnerEditor 只关闭了 app.tree.hitChildren，
+    // 子 Leafer 上的文本仍会命中，拖拽会被编辑器占用，无法框选文字。
+    setTextEditing(value: boolean): void {
+        this._textEditing = value
+
+        const leaf = this.__leaf
+        if (!leaf || leaf.destroyed) return
+
+        if (value) {
+            if (!this._editingHitSaved) {
+                this._editingHittable = leaf.hittable !== false
+                this._editingHitSaved = true
+                leaf.hittable = false
+            }
+        } else if (this._editingHitSaved) {
+            this._editingHitSaved = false
+            leaf.hittable = this._editingHittable
+            this._editingHittable = undefined
+        }
+    }
+
     setFontWeight(value: IFontWeight): void {
         if (isString(value)) {
             this.__setInput('fontWeight', value)
