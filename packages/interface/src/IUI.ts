@@ -625,6 +625,7 @@ export interface IUIData extends IUIAttrData, IUIComputedData, ILeafData {
 
     readonly __strokeWidth: number // 会受 strokeScaleFixed 影响
     readonly __maxStrokeWidth: number
+    readonly __ignoreStrokeCap?: boolean // 绘制闭合图形可以忽略stokeCap，避免绘制roundRect时产生 bug
     __strokeWidthCache?: number // 一般用于固定线宽的箭头做缓存对比
     __hasMultiStrokeStyle?: number // 是否存在多个不同的描述样式（同时存储多个描边样式中的最大宽度用于运算）
     readonly __hasMultiPaint?: boolean

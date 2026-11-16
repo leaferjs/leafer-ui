@@ -27,6 +27,8 @@ export class UIData extends LeafData implements IUIData {
         return t.__hasMultiStrokeStyle ? Math.max(t.__hasMultiStrokeStyle, strokeWidth) : strokeWidth
     }
 
+    public get __ignoreStrokeCap(): boolean { return !this._path }
+
     public __hasMultiStrokeStyle?: number // 是否存在多个不同的描述样式（同时存储多个描边样式中的最大宽度用于运算）
 
     public get __hasMultiPaint(): boolean { const t = this as IUIData; return (t.fill && this.__useStroke) || (t.__isFills && t.fill.length > 1) || (t.__isStrokes && t.stroke.length > 1) || t.__useEffect } // fix: opacity
